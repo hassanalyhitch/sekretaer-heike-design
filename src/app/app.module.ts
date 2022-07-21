@@ -31,6 +31,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     LoginComponent,
     DashboardComponent
    ],
-  bootstrap:    [ AppComponent ]
+  bootstrap:    [ AppComponent ],
+  providers: [
+    {provide: APP_BASE_HREF, useValue: '/'}
+  ]
 })
 export class AppModule { }
