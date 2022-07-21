@@ -17,7 +17,7 @@
         <span>Let's Login</span>
       </div>
       
-      <form  class="d-flex flex-column w-100" > 
+      <form  class="d-flex flex-column w-100" #loginForm="ngForm" > 
         <div class="material-textfield mt-4">
           <input placeholder=" " type="text" [(ngModel)]="username" name="username" ngModel required/>
           <label>{{ 'login.username' | translate }}</label>
