@@ -1,5 +1,5 @@
 import { Component, VERSION } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core/lib/translate.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'my-sekretaer',
