@@ -1,0 +1,33 @@
+.main-wrapper{
+  height: 100vh;
+  background-color: #F2F2F2;
+  background-image: linear-gradient(to right, #F2F2F2 50% , #2C262D 50%);
+
+}
+
+.header-wrapper{
+  height: 22.5vh;
+  background-color: #2C262D;
+  background-image: linear-gradient(to right, #F2F2F2 50% , #2C262D 50%);
+}
+.header-content{
+  background-color: #F2F2F2;
+  border-radius: 0px 0px 45px 0px;
+}
+.form-wrapper{
+  height: 77.5vh;
+  background-color: #F2F2F2;
+  background-image: linear-gradient(to right, #F2F2F2 50% , #2C262D 50%);
+  margin-top: 0px !important;
+  padding: 0px !important;
+}
+.form-content{
+  background-color: #2C262D;
+  border-radius: 45px 0px 0px 0px;
+}
+.section-header{
+  color: #F2F2F2;
+  height: 45px;
+  font-size: 35px;
+  margin-top: 40px;
+}

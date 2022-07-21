@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500&display=swap');
 html,
 body {
-  background-color: #ebebeb; /*#e6ecf5; rgba(255, 250, 237, 1);*/
+  background-color: #F2F2F2; /*#e6ecf5; rgba(255, 250, 237, 1);*/
   min-height: 100%;
 }
 ::-webkit-scrollbar {

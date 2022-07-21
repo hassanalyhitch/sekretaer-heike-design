@@ -1,3 +1,5 @@
-p {
-  font-family: Lato;
+.main{
+  height: 100vh;
+  overflow: hidden;
+  background-color: #F2F2F2;
 }

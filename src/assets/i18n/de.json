@@ -1,0 +1,77 @@
+{
+  "login": {
+    "username": "Benutzer",
+    "password": "Passwort",
+    "stay": "Angemeldet bleiben?",
+    "signin": "Einloggen",
+    "header": "Eine neue Dimension der Kundenbetreuung.",
+    "subheader": "Die Makler-Zukunft hat begonnen.",
+    "catch-phrase": "Einfach. Schnell. Digital."
+  },
+  "nav": {
+    "insurance": "Versicherungen",
+    "inbox": "Posteingang",
+    "profile": "Profil",
+    "broker": "Mein Makler",
+    "settings": "Einstellungen",
+    "signout": "Ausloggen"
+  },
+  "insurance": {
+    "nav": {
+      "title": "Versicherungen"
+    },
+    "detail": {
+      "changename": "Namen ändern",
+      "hrtitle": "Dokumente",
+      "customername": "Versicherungsnehmer",
+      "startdate": "Startdatum",
+      "enddate": "Enddatum",
+      "insurancenumber": "Versicherungsnummer",
+      "companyname": "Versicherungsunternehmen",
+      "companybranch": "Versicherungsart",
+      "paymethod": "Zahlweise",
+      "price": "Preis",
+      "modaltitle": "Ordnernamen bearbeiten",
+      "current": "Aktueller Ordnername",
+      "newfolder": "Neuer Ordnername",
+      "save": "Speichern",
+      "welcome": "Willkommen",
+      "selectfolder": "Bitte wählen Sie einen Ordner aus."
+    }
+  },
+  "inbox": {
+    "nav": {
+      "title": "Benachrichtigungen",
+      "chat-title": "Chat",
+      "notif-title": "Benachrichtigungen",
+      "notif-text": "Du hast",
+      "notif-text2": "Benachrichtigungen",
+      "report-title": "Melde",
+      "report-text": "Schadenfall"
+    },
+    "chat": {
+      "title": "Chat",
+      "input-label": "Geben Sie eine Nachricht ein"
+    },
+    "notifications": {
+      "title": "Benachrichtigungen"
+    },
+    "report": {
+      "title": "Schadenfall melden"
+    }
+  },
+  "broker": {
+    "instruction": {
+      "title": "Sende eine Kurznachricht an deinen Makler",
+      "button": "Posteingang öffnen"
+    },
+    "instruction2": {
+      "title": "Füge deinem Google Kalender einen Termin hinzu",
+      "button": "Öffne deinen Google Kalender"
+    }
+  },
+  "profile": {},
+  "settings": {
+    "title": "Einstellungen"
+  }
+}

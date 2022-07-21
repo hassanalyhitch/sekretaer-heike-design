@@ -1,0 +1,80 @@
+{
+  "login":{
+    "username":"Username",
+    "password":"Password",
+    "stay":"Stay signed in ?",
+    "signin":"Sign in",
+    "header":"A new dimension in customer care.",
+    "subheader":"The brokerage future has begun.",
+    "catch-phrase":"Easy. Fast. Digital."
+  },
+  "nav": {
+      "insurance": "Insurance",
+      "inbox": "Inbox",
+      "profile": "Profile",
+      "broker": "Broker",
+      "settings": "Settings",
+      "signout": "Sign Out"
+  },
+  "insurance": {
+    "nav":{
+      "title":"Insurance Contracts"
+    },
+    "detail":{
+      "changename":"Change folder name",
+      "hrtitle":"Documents",
+      "customername":"Customer Name",
+      "startdate":"Start Date",
+      "enddate":"End Date",
+      "insurancenumber":"Insurance Number",
+      "companyname":"Company Name",
+      "companybranch":"Company Branch",
+      "paymethod":"Payment method",
+      "price":"Price",
+      "modaltitle":"Change Folder Name",
+      "current":"Current folder name :",
+      "newfolder":"New folder name :",
+      "save":"Save",
+      "welcome":" Welcome.",
+      "selectfolder":"Select a Folder."
+    }
+  },
+  "inbox":{
+    "nav":{
+      "title":"Inbox",
+      "chat-title":"Chat",
+      "notif-title":"Notifications",
+      "notif-text":"You have",
+      "notif-text2":"notifications",
+      "report-title":"Report",
+      "report-text":"Notification of Claim"
+    },
+    "chat":{
+      "title":"Chat",
+      "input-label":"Type a message"
+    },
+    "notifications":{
+      "title":"Notifications"
+    },
+    "report":{
+      "title":"Notification of Claim"
+    }
+  },
+  "broker":{
+    "instruction":{
+      "title":"Send a quick message to the Broker",
+      "button":"Open Inbox"
+    },
+    "instruction2":{
+      "title":"Add an event to your Calendar",
+      "button":"Open Google Calendar"
+    }
+  },
+  "profile":{
+
+  },
+  "settings":{
+    "title":"Settings"
+  }
+
+}

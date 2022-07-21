@@ -1,0 +1,66 @@
+<div class="main-wrapper w-100 d-flex flex-column ">
+
+  <div class="header-wrapper ">
+    <div class="header-content d-flex d-flex justify-content-center align-items-center w-100 h-100 ">
+      
+        <img
+        src="../assets/logo.svg"
+        alt="sekretaer_logo"
+        class="bg-white rounded-circle img-responsive mx-auto"
+        style="max-width:120px"
+      />
+    </div>
+  </div>
+  <div class="form-wrapper ">
+    <div class="form-content d-flex d-flex justify-content-center w-100 h-100 ">
+      <div class="section-header">
+        <span>Let's Login</span>
+      </div>
+      
+      <form  class="d-flex flex-column w-100" > 
+        <div class="material-textfield mt-4">
+          <input placeholder=" " type="text" [(ngModel)]="username" name="username" ngModel required/>
+          <label>{{ 'login.username' | translate }}</label>
+        </div>
+        <div class="material-textfield mt-4">
+          <input
+            placeholder=" "
+            type="password"
+            [(ngModel)]="password"
+            name="password"
+            ngModel
+            required
+          />
+          <label>{{ 'login.password' | translate }}</label>
+        </div>
+        <div class="row mt-4 w-100 ">
+          <div class="d-flex flex-column flex-wrap w-100 text-compliment">
+            <label for="checkbox-signin" class="my-auto">
+              <input
+                type="checkbox"
+                id="checkbox-signin"
+                name="checkbox-signin"
+                style="width:36px;"
+                ngModel
+              />
+              {{ 'login.stay' | translate }}
+            </label>
+          </div>
+        </div>
+        <div class="mt-3 w-100">
+          <button
+            id="sign-in-btn"
+            class="btn btn-primary w-100 py-2"
+            [disabled]="!(username.length > 1 && password.length > 1) && !loginForm.valid"
+            type="submit"
+            style="font-size:20px;"
+          >
+          {{ 'login.signin' | translate }}
+          </button>
+        </div>
+    </form>
+    
+    </div>
+  </div>
+  
+</div>
