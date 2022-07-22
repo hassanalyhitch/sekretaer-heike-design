@@ -15,6 +15,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SnackbarComponent } from './snackbar/snackbar.component';
 import { BottomNavComponent } from './bottom-nav/bottom-nav.component';
 import { HomeComponent } from './dashboard/home/home.component';
+import { FavouriteComponent } from './dashboard/favourite/favourite.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -25,9 +26,9 @@ const appRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   {
     path: 'dashboard',
-    component: DashboardComponent,
     children: [
       { path: '', component: HomeComponent },
+      { path: 'home', component: HomeComponent },
     //   { path: 'folder', component: DetailComponentComponent },
     //   { path: 'new-contract', component: NewContractComponent },
     //   // { path: '', redirectTo: 'insurance'}
@@ -52,7 +53,8 @@ const appRoutes: Routes = [
     LoginComponent,
     SnackbarComponent,
     DashboardComponent,
-    BottomNavComponent
+    BottomNavComponent,
+    FavouriteComponent
 
    ],
   bootstrap:    [ AppComponent ],
