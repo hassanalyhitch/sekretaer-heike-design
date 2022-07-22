@@ -31,12 +31,6 @@
   background-color: #F2F2F2;
   border-radius: 45px 0px 0px 0px;
 }
-.section-header{
-  color: #F2F2F2;
-  height: 45px;
-  font-size: 35px;
-  margin-top: 40px;
-}
 
 .bottom-links{
   position: absolute;
@@ -55,10 +49,6 @@
   border-radius: 7px;
   border: solid 2px white;
   transition: 0.4s ease-in;
-}
-.section-title{
-  font-weight: 500;
-  font-size: 22px;
 }
 
 
