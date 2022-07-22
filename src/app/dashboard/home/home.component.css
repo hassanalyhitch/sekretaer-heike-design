@@ -1,0 +1,18 @@
+
+.content-wrapper{
+  height: 92vh;
+  background-color: #F2F2F2;
+  background-image: linear-gradient(to right, #E5007E 50% , #F2F2F2 50%);
+  margin-top: 0px !important;
+  padding: 0px !important;
+}
+._content{
+  background-color: #F2F2F2;
+  border-radius: 45px 0px 0px 0px;
+}
+.section-header{
+  color: #F2F2F2;
+  height: 45px;
+  font-size: 35px;
+  margin-top: 40px;
+}

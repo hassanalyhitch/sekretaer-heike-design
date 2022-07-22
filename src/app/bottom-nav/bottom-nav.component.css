@@ -4,3 +4,8 @@
   color: white;
   border-radius: 0px 25px 0px 0px;
 }
+
+.bottom-nav a.active {
+  text-decoration: none;
+  color: #D60B51;
+}

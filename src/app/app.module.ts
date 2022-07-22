@@ -14,6 +14,7 @@ import { AuthInterceptorService } from './interceptors/auth-interceptor.service'
 import { RouterModule, Routes } from '@angular/router';
 import { SnackbarComponent } from './snackbar/snackbar.component';
 import { BottomNavComponent } from './bottom-nav/bottom-nav.component';
+import { HomeComponent } from './dashboard/home/home.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -24,13 +25,13 @@ const appRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   {
     path: 'dashboard',
-    component: AppComponent,
-    // children: [
-    //   { path: '', component: DetailPlaceholderComponent },
+    component: DashboardComponent,
+    children: [
+      { path: '', component: HomeComponent },
     //   { path: 'folder', component: DetailComponentComponent },
     //   { path: 'new-contract', component: NewContractComponent },
     //   // { path: '', redirectTo: 'insurance'}
-    // ],
+    ],
   }
 ];
 @NgModule({

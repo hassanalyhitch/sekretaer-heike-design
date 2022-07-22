@@ -56,5 +56,9 @@
   border: solid 2px white;
   transition: 0.4s ease-in;
 }
+.section-title{
+  font-weight: 500;
+  font-size: 22px;
+}
 
 
