@@ -42,6 +42,7 @@
 .forgot-password a {
   color: white;
   text-decoration: none;
+  width: fit-content;
 }
 .forgot-password a:hover {
   
@@ -59,7 +60,11 @@
 .snackbar-wrapper{
   position: absolute;
   bottom: 60px;
-
+  width: 80%;
+  background-color: #D60B51;
+  border-radius: 7px;
+  border: solid 2px white;
+  transition: 0.4s ease-in;
 }
 
 

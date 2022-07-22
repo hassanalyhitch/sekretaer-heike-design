@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-snackbar',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./snackbar.component.css']
 })
 export class SnackbarComponent implements OnInit {
+  @Input() msg:string ;
 
   constructor() { }
 

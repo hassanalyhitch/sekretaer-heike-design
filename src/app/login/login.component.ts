@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginData } from '../models/login.model';
 import { LoginService } from '../services/login.service';
@@ -19,7 +20,9 @@ export class LoginComponent implements OnInit {
   submitted: boolean = false;
   @Output('auth') authenticated = new EventEmitter<boolean>();
   @Output() lang = new EventEmitter<string>();
-  errorMessage = null;
+  @ViewChild('loginForm') loginForm: NgForm;
+  errorMessage:string = null;
+  errorStack:string [] = [];
 
   constructor(private http: HttpClient, private router: Router, private loginService: LoginService) { }
 
@@ -53,6 +56,7 @@ export class LoginComponent implements OnInit {
           console.log( 'display this error => '+this.errorMessage);
 
         }
+        this.errorStack.push(this.errorMessage);
         this.submitted = false;
       },
       complete: () => {
@@ -66,5 +70,6 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     this.errorMessage = null;
     this.validateUser(formData);
+    this.loginForm.reset();
   }
 }
