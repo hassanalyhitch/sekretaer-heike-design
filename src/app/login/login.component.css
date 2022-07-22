@@ -135,7 +135,7 @@ label {
   transform: translateY(-75%) scale(0.9);
 }
 
-.btn-login {
+.btn-login, .btn-login:focus:not(button[disabled]) {
   color: white;
   height: 50px !important;
   background-color: #E5007E !important;

@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   submitted: boolean = false;
   @Output('auth') authenticated = new EventEmitter<boolean>();
   @Output() lang = new EventEmitter<string>();
-  @ViewChild('loginForm') loginForm: NgForm;
+  @ViewChild('loginForm', { static: true }) loginForm: NgForm;
   errorMessage:string = null;
   errorStack:string [] = [];
 
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
           console.log( 'display this error => '+this.errorMessage);
 
         }
-        this.errorStack.push(this.errorMessage);
+        this.showSnackbar(this.errorMessage);
         this.submitted = false;
       },
       complete: () => {
@@ -65,11 +65,18 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  showSnackbar(error:string){
+
+    this.errorStack.push(this.errorMessage);
+    setInterval(()=>{
+      this.errorStack.pop();
+    }, 4000);
+  }
+
   onSubmit(formData: LoginData) {
     formData.loginType = 'customer';
     this.submitted = true;
     this.errorMessage = null;
     this.validateUser(formData);
-    this.loginForm.reset();
   }
 }
