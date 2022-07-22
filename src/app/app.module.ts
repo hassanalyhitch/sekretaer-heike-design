@@ -15,6 +15,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SnackbarComponent } from './snackbar/snackbar.component';
 import { BottomNavComponent } from './bottom-nav/bottom-nav.component';
 import { HomeComponent } from './dashboard/home/home.component';
+import { FavCardComponent } from './dashboard/fav-card/fav-card.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -52,8 +53,8 @@ const appRoutes: Routes = [
     LoginComponent,
     SnackbarComponent,
     DashboardComponent,
-    BottomNavComponent
-
+    BottomNavComponent,
+    FavCardComponent
    ],
   bootstrap:    [ AppComponent ],
   providers: [
