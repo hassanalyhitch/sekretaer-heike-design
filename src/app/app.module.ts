@@ -28,10 +28,7 @@ const appRoutes: Routes = [
     path: 'dashboard',
     children: [
       { path: '', component: HomeComponent },
-      { path: 'home', component: HomeComponent },
-    //   { path: 'folder', component: DetailComponentComponent },
-    //   { path: 'new-contract', component: NewContractComponent },
-    //   // { path: '', redirectTo: 'insurance'}
+      { path: 'home', component: HomeComponent }
     ],
   }
 ];
@@ -53,6 +50,7 @@ const appRoutes: Routes = [
     LoginComponent,
     SnackbarComponent,
     DashboardComponent,
+    HomeComponent,
     BottomNavComponent,
     FavItemComponent
    ],
