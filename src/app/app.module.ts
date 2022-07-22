@@ -12,6 +12,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './interceptors/auth-interceptor.service';
 import { RouterModule, Routes } from '@angular/router';
+import { SnackbarComponent } from './snackbar/snackbar.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -19,7 +20,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 }
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'insurance', pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   {
     path: 'dashboard',
     component: AppComponent,
@@ -47,7 +48,9 @@ const appRoutes: Routes = [
   declarations: [ 
     AppComponent,
     LoginComponent,
+    SnackbarComponent,
     DashboardComponent
+
    ],
   bootstrap:    [ AppComponent ],
   providers: [
