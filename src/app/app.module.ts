@@ -13,6 +13,7 @@ import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common
 import { AuthInterceptorService } from './interceptors/auth-interceptor.service';
 import { RouterModule, Routes } from '@angular/router';
 import { SnackbarComponent } from './snackbar/snackbar.component';
+import { BottomNavComponent } from './bottom-nav/bottom-nav.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -49,7 +50,8 @@ const appRoutes: Routes = [
     AppComponent,
     LoginComponent,
     SnackbarComponent,
-    DashboardComponent
+    DashboardComponent,
+    BottomNavComponent
 
    ],
   bootstrap:    [ AppComponent ],
