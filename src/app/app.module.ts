@@ -15,7 +15,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SnackbarComponent } from './snackbar/snackbar.component';
 import { BottomNavComponent } from './bottom-nav/bottom-nav.component';
 import { HomeComponent } from './dashboard/home/home.component';
-import { FavItemComponent } from './dashboard/fav-item/fav-item.component';
+import { FavItemComponent } from './dashboard/home/fav-item/fav-item.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
