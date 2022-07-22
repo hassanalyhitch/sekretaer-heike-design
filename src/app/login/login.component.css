@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500&display=swap');
 .main-wrapper{
-  height: 100vh;
+  font-family: 'Poppins';
+  height: 100%;
   background-color: #F2F2F2;
   background-image: linear-gradient(to right, #F2F2F2 50% , #2C262D 50%);
+  position: relative;
 
 }
 
@@ -25,9 +28,184 @@
   background-color: #2C262D;
   border-radius: 45px 0px 0px 0px;
 }
+.form-container{
+  padding-left: 45px !important;
+  padding-right: 45px !important;
+  margin-top: 45px;
+}
 .section-header{
   color: #F2F2F2;
   height: 45px;
   font-size: 35px;
   margin-top: 40px;
+}
+.forgot-password a {
+  color: white;
+  text-decoration: none;
+}
+.forgot-password a:hover {
+  
+  text-decoration: none;
+}
+.bottom-links{
+  position: absolute;
+  bottom: 0;
+  
+}
+.bottom-links a {
+  color: white;
+  text-decoration: none;
+}
+
+
+
+
+button,
+input,
+label {
+  font-family: 'Poppins';
+}
+
+.heading {
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 2.5em;
+  margin-top: 3em;
+}
+.sub-heading {
+  font-family: 'Poppins';
+  font-weight: 200;
+  font-size: 1.5em;
+  margin-bottom: 2.8em;
+}
+
+.material-textfield {
+  position: relative;
+  height: 50px;
+  width: 100%;
+}
+
+.material-textfield > label {
+  position: absolute;
+  font-size: 1rem;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #575756;
+  background-color: inherit;
+  padding: 0 0.3rem;
+  margin: 0 0.5rem;
+  transition: 0.1s ease-out;
+  transform-origin: left top;
+  pointer-events: none;
+}
+.material-textfield > input {
+  font-size: 1rem;
+  outline: none;
+  border: 1px solid #2C262D;
+  border-radius: 7px;
+  padding: 1rem 0.7rem;
+  width: 100%;
+  color: #575756;
+  background-color: white;
+  transition: 0.1s ease-out;
+}
+.material-textfield > input:focus {
+  border: 2px solid #E5007E;
+}
+.material-textfield > input:focus + label {
+  color: white;
+  background-color: inherit;
+  top: 0;
+  transform: translateY(-75%) scale(0.9);
+}
+.material-textfield > input:not(:placeholder-shown) + label {
+  color: white;
+  top: 0;
+  transform: translateY(-75%) scale(0.9);
+}
+
+.btn-login {
+  color: white;
+  height: 50px !important;
+  background-color: #E5007E !important;
+  border-color: #E5007E !important;
+  background-image: linear-gradient(131deg, #E5007E, #D60B51);
+  transition: 0.2s ease-out;
+}
+.btn-login:hover {
+  background-color: #E5007E !important;
+  border-color: #E5007E !important;
+}
+button[disabled] {
+  color: white;
+  cursor: default;
+}
+button[disabled]:hover {
+  border-color: white !important;
+  background-color: transparent;
+  cursor: default;
+}
+button[disabled]:hover#sign-in-btn {
+  color: white;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 56px;
+  height: 30px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #009ee2;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 30px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }
