@@ -41,8 +41,10 @@
   content: attr(chat-unread);
   background-color: #D60B51;
   border-radius: 50%;
-  width: 22px;
-  height: 22px;
+  width: fit-content;
+  min-width: 22px;
+  height: fit-content;
+  min-height: 22px;
   box-shadow: 0px 3px 3px #0000001A;
   backdrop-filter: blur(6.6px);
   -webkit-backdrop-filter: blur(6.6px);
