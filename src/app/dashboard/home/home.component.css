@@ -9,12 +9,7 @@
 ._content{
   background-color: #F2F2F2;
   border-radius: 45px 0px 0px 0px;
-}
-.section-header{
-  color: #F2F2F2;
-  height: 45px;
-  font-size: 35px;
-  margin-top: 40px;
+  overflow-y: scroll;
 }
 .fav-wrapper{
   overflow-x: scroll;
@@ -23,6 +18,87 @@
 .section-title{
   font-weight: 500;
   font-size: 22px;
+}
+.see-more a{
+  text-decoration: none;
+  color: #707070;
+}
+.section-quicklinks{
+  padding-right: 0.85rem;
+}
+.quick-fab{
+  height: 56px;
+  width: 56px;
+  border-radius: 50%;
+  border: solid 2px white;
+  background-color: #F2F2F2;
+  box-shadow: 0px 3px 3px #0000001A;
+  backdrop-filter: blur(6.6px);
+  -webkit-backdrop-filter: blur(6.6px);
+  position: relative;
+}
+.chat-quicky::after{
+  content: attr(chat-unread);
+  background-color: #D60B51;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  box-shadow: 0px 3px 3px #0000001A;
+  backdrop-filter: blur(6.6px);
+  -webkit-backdrop-filter: blur(6.6px);
+  color: white;
+  margin: 0 auto;
+  padding: 2px;
+  font-size: 12px;
+  top: 0px;
+  right: -6px;
+  position: absolute;
+}
+.quick-fab i {
+  font-size: 28px;
+}
+.quick-fab > span{
+  font-size: 28px;
+
+}
+.disabled{
+  box-shadow: none;
+  border: none;
+  background-color: #BFBFBF;
+  color: #707070;
+}
+.section-service{
+  height: 100%;
+  margin-bottom: 60px;
+  background-color: white;
+  border-radius: 0px 45px 0px 0px;
+  box-shadow: 0px 0px 3px #0000001A;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+}
+.service-card{
+  height: 120px;
+  background-color: white;
+  box-shadow: 0px 3px 3px #0000001A;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: solid 1px #f2f2f2;
+  position: relative;
+}
+.notification-card::after{
+  content: attr(notification-count);
+  background-color: #D60B51;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  box-shadow: 0px 3px 3px #0000001A;
+  backdrop-filter: blur(6.6px);
+  -webkit-backdrop-filter: blur(6.6px);
+  color: white;
+  top: 10px;
+  right: 10px;
+  position: absolute;
 }
 
 ::-webkit-scrollbar {
