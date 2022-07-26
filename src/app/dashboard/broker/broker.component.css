@@ -28,3 +28,11 @@
   margin-bottom: -76px;
   position: relative;
 }
+
+.broker-img{
+  height: 80%;
+  width: 80%;
+  object-position: center center;
+  position: absolute;
+  
+}
