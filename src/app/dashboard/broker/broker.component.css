@@ -1,0 +1,30 @@
+.content-wrapper{
+  height: 92vh;
+  background-color: #F2F2F2;
+  background-image: linear-gradient(to right, #E5007E 50% , #F2F2F2 50%);
+  margin-top: 0px !important;
+  padding: 0px !important;
+}
+._content{
+  background-color: #F2F2F2;
+  border-radius: 45px 0px 0px 0px;
+  overflow-y: scroll;
+}
+.section-broker{
+  position: relative;
+}
+.section-title{
+  text-shadow: none;
+  font-size: 22px;
+}
+.broker-card{
+  height: 250px;
+}
+.broker-icon{
+  border-radius: 50%;
+  width: 142px;
+  height:142px;
+  background-color: white;
+  margin-bottom: -76px;
+  position: relative;
+}
