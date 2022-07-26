@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent  {
   
-  authenticated: boolean = true;
+  authenticated: boolean = false;
   lang: string = 'en';
 
   constructor(private translate: TranslateService){

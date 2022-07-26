@@ -67,6 +67,18 @@
   transition: 0.4s ease-in;
 }
 
+.logo-container{
+  
+  overflow: hidden;
+  
+}
+.app-logo{
+  min-height: 8vh;
+  min-width: 8vh;
+  padding: 8px;
+  object-fit: contain;
+  object-position: center center;
+}
 
 
 
