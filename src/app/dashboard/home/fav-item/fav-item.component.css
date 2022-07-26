@@ -13,6 +13,7 @@
 }
 ._content{
   position: relative;
+  margin: 0px !important;
 }
 .small-picture{
   position: absolute;
@@ -48,16 +49,23 @@
 }
 
 .risk{
-  font-size: 16px;
-  font-weight: 400;
+  font-size: 18px;
+  font-weight: 500;
 }
 .branch{
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 500;
 
 }
 .price{
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
-
+}
+.date{
+  font-size: 15px;
+  font-weight: 300;
+}
+.company{
+  font-size: 15px;
+  font-weight: 300;
 }

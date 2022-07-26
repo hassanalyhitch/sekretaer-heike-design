@@ -16,7 +16,7 @@
 }
 
 .section-title{
-  font-weight: 500;
+  text-shadow: none;
   font-size: 22px;
 }
 .see-more a{
@@ -36,6 +36,7 @@
   backdrop-filter: blur(6.6px);
   -webkit-backdrop-filter: blur(6.6px);
   position: relative;
+  cursor: pointer;
 }
 .chat-quicky::after{
   content: attr(chat-unread);
@@ -61,7 +62,11 @@
 }
 .quick-fab > span{
   font-size: 28px;
-
+}
+.fab-label{
+  font-size: 11px !important;
+  position: absolute;
+  bottom: -24px;
 }
 .disabled{
   box-shadow: none;
@@ -87,6 +92,7 @@
   -webkit-backdrop-filter: blur(20px);
   border: solid 1px #f2f2f2;
   position: relative;
+  cursor: pointer;
 }
 .notification-card::after{
   content: attr(notification-count);

@@ -1,9 +1,9 @@
 <div class="content-wrapper w-100 ">
   <div class="_content d-flex d-flex flex-column align-items-center w-100 h-100 ">
 
-   <div class="section-fav w-100 d-flex flex-column pt-4 ">
-      <span class="section-title align-self-center"> FAVOURITES</span>
-      <div class="fav-wrapper d-flex flex-nowrap py-4 ">
+   <div class="section-fav w-100 d-flex flex-column pt-3 ">
+      <strong class="section-title align-self-center p-2"> FAVOURITES</strong>
+      <div class="fav-wrapper d-flex flex-nowrap pb-4 ">
       
         <app-fav-item></app-fav-item>
         <app-fav-item></app-fav-item>
@@ -16,18 +16,21 @@
       </div>
     </div>
     
-    <div class="section-quicklinks d-flex py-3 flex-nowrap justify-content-between w-100">
+    <div class="section-quicklinks mb-4 d-flex py-3 flex-nowrap justify-content-between w-100">
     
-      <div class="quick-fab d-flex mx-3 justify-content-center align-items-center">
+      <div class="quick-fab d-flex flex-column mx-3 justify-content-center align-items-center">
         <i class="material-icons">search</i>
+        <span class="text-center fab-label"> search</span>
       </div>
       
       <div class="quick-fab d-flex text-center justify-content-center chat-quicky" chat-unread="1" >
         <span class="material-icons align-self-center ">forum</span>
+        <span class="text-center fab-label"> chat</span>
       </div>
       
       <div class="quick-fab d-flex justify-content-center align-items-center">
         <i class="material-icons">fact_check</i>
+        <span class="text-center fab-label" style="bottom:-40px;"> insurance check</span>
       </div>
 
       <div class="quick-fab disabled d-flex justify-content-center align-items-center">
@@ -40,7 +43,7 @@
     </div>
 
     <div class="section-service d-flex flex-column p-3 w-100 ">
-      <span class="section-title align-self-center"> SERVICE</span>
+    <strong class="section-title align-self-center p-2"> SERVICE</strong>
       <div class="w-100 d-flex flex-wrap py-3 justify-content-center">
         <div class="service-card d-flex align-items-center justify-content-center m-2 col-5">
           <span class="p-2 text-center"> ADD (a document, a picture, etc)</span>
