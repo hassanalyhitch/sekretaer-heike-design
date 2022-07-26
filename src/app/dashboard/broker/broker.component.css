@@ -45,3 +45,12 @@
   color: #E5007E ;
   
 }
+.chat-bubble-link{
+  background-color: #284464;
+  width: 103px;
+  height: 103px;
+  border-radius: 50%;
+  color: white;
+  font-size: medium;
+  cursor: pointer;
+}
