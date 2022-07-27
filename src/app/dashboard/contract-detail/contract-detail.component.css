@@ -93,7 +93,6 @@ hr {
 }
 
 hr:after {
-  background: #fff;
   content: attr(data-content);
   position: relative;
   font-size: 20px;
