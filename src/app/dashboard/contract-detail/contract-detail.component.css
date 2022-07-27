@@ -10,3 +10,93 @@
   border-radius: 45px 0px 0px 0px;
   overflow-y: scroll;
 }
+
+.section-title{
+  text-shadow: none;
+  font-size: 22px;
+}
+.icon-container{
+  width: 50px;
+  background-color: #E5007E;
+  background-image: linear-gradient(141deg, #E5007E, #D60B51);
+  border-radius: 0px 0px 15px 0px;
+  height: 100%;
+  color: white;
+
+}
+._card-content{
+  position: relative;
+  margin: 0px !important;
+}
+.small-picture{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: 0px 0px 0px 12px;
+  overflow: hidden;
+  background-color: #f2f2f2;
+}
+.small-picture img {
+  object-fit: cover; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  width: 100%;
+  height: 100%;
+}
+.fav-btn{
+  position: absolute;
+  top: 4px;
+  right: 69px;
+  padding: 3px;
+  color: white;
+  background-color: #E5007E;
+  background-image: linear-gradient(141deg, #E5007E, #D60B51);
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+
+}
+.fav-btn i{
+  font-size: 16px;
+}
+
+.risk{
+  font-size: 18px;
+  font-weight: 500;
+}
+.branch{
+  font-size: 15px;
+  font-weight: 500;
+
+}
+.price{
+  font-size: 18px;
+  font-weight: 500;
+}
+.date{
+  font-size: 15px;
+  font-weight: 300;
+}
+.company, .type, .insurance-number{
+  font-size: 15px;
+  font-weight: 300;
+}
+
+hr {
+  border: none;
+  border-top: 3px double rgba(0, 0, 0, 0.1);
+  color: #333;
+  overflow: visible;
+  height: 5px;
+  margin-top: 36px !important;
+}
+
+hr:after {
+  background: #fff;
+  content: attr(data-content);
+  padding: 0 8px;
+  position: relative;
+  font-size: 20px;
+  top: -17px;
+}
