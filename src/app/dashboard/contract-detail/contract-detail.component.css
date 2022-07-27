@@ -95,7 +95,6 @@ hr {
 hr:after {
   background: #fff;
   content: attr(data-content);
-  padding: 0 8px;
   position: relative;
   font-size: 20px;
   top: -17px;
