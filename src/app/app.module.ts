@@ -34,11 +34,9 @@ const appRoutes: Routes = [
     path: 'dashboard',
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', component: HomeComponent, children:[
-          { path:'contract-detail', component:ContractDetailComponent}
-        ] 
-      },
-      { path: 'broker', component: BrokerComponent }
+      { path: 'home', component: HomeComponent },
+      { path: 'broker', component: BrokerComponent },
+      { path:'contract-detail', component:ContractDetailComponent}
     ],
   },
 ];
