@@ -21,6 +21,7 @@ import { BottomNavComponent } from './bottom-nav/bottom-nav.component';
 import { HomeComponent } from './dashboard/home/home.component';
 import { FavItemComponent } from './dashboard/home/fav-item/fav-item.component';
 import { BrokerComponent } from './dashboard/broker/broker.component';
+import { ContractDetailComponent } from './dashboard/contract-detail/contract-detail.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -36,7 +37,8 @@ const appRoutes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'broker', component: BrokerComponent }
     ],
-  }
+  },
+  { path:'contract-detail', component:ContractDetailComponent}
 ];
 @NgModule({
   imports:      [ 
@@ -60,7 +62,8 @@ const appRoutes: Routes = [
     HomeComponent,
     BottomNavComponent,
     FavItemComponent,
-    BrokerComponent
+    BrokerComponent,
+    ContractDetailComponent
    ],
   bootstrap:    [ AppComponent ],
   providers: [
