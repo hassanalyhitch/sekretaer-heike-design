@@ -5,9 +5,7 @@
       <strong class="section-title align-self-center p-2"> FAVOURITES</strong>
       <div class="fav-wrapper d-flex flex-nowrap pb-4 ">
       
-        <app-fav-item></app-fav-item>
-        <app-fav-item></app-fav-item>
-        <app-fav-item></app-fav-item>
+        <app-fav-item *ngFor="let favItem of favArr; let i = index" (click)="onFavContractClick(favItem)" ></app-fav-item>
         
       </div>
    
