@@ -14,7 +14,7 @@ export class ContractDetailComponent implements OnInit {
 
   constructor(
   private route: ActivatedRoute,
-  private router: Router, private translate:TranslateService ) {
+  private router: Router, private translate:TranslateService) {
     this.hrTitle = this.translate.instant('insurance.detail.hrtitle');
   
   }
