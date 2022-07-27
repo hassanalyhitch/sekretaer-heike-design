@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-contract-detail',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContractDetailComponent implements OnInit {
 
-  constructor() { }
+  @Input() index:string;
+
+  constructor(
+  private route: ActivatedRoute,
+  private router: Router ) { }
 
   ngOnInit() {
+    this.index = this.route.snapshot.paramMap.get('id');
   }
 
 }

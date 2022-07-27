@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   }
 
   onFavContractClick(favItem){
-    this.router.navigate(['dashboard/contract-detail']);
+    const favId = favItem ? favItem : null;
+    this.router.navigate(['dashboard/contract-detail', { id: favId }]);
   }
 }
