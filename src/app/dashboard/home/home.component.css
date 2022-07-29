@@ -122,3 +122,8 @@
   background: #009ee2;
   border-radius: 8px;
 }
+*{
+  scrollbar-width: 0px !important;
+  background: grey;
+
+}

@@ -4,7 +4,7 @@
   background-color: #F2F2F2;
 }
 *{
-  scrollbar-width: 0px;
+  scrollbar-width: 0px !important;
   background: grey;
 
 }
