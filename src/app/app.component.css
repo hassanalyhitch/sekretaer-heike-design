@@ -3,11 +3,7 @@
   overflow: hidden;
   background-color: #F2F2F2;
 }
-*{
-  scrollbar-width: 0px !important;
-  background: grey;
-
-}
+/* webkit browsers like chrome */
 ::-webkit-scrollbar {
   width: 0px;
   height: 0px;
@@ -20,4 +16,9 @@
 ::-webkit-scrollbar-thumb {
   background: #009ee2;
   border-radius: 8px;
+}
+/* for mozilla */
+*{
+  scrollbar-width: none !important;
+
 }

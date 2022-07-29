@@ -122,8 +122,8 @@
   background: #009ee2;
   border-radius: 8px;
 }
+/* for mozilla */
 *{
-  scrollbar-width: 0px !important;
-  background: grey;
+  scrollbar-width: none !important;
 
 }
