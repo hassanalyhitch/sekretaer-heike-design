@@ -23,6 +23,7 @@ import { FavItemComponent } from './dashboard/home/fav-item/fav-item.component';
 import { BrokerComponent } from './dashboard/broker/broker.component';
 import { ContractDetailComponent } from './dashboard/contract-detail/contract-detail.component';
 import { DocumentItemComponent } from './dashboard/document-item/document-item.component';
+import { ShortenTextPipe } from './pipes/shorten-text.pipe';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -65,7 +66,8 @@ const appRoutes: Routes = [
     FavItemComponent,
     BrokerComponent,
     ContractDetailComponent,
-    DocumentItemComponent
+    DocumentItemComponent,
+    ShortenTextPipe
    ],
   bootstrap:    [ AppComponent ],
   providers: [

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ContractData } from '../../../models/contract.model';
 
 @Component({
   selector: 'app-fav-item',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FavItemComponent implements OnInit {
 
+  @Input() contractItem: ContractData;
   constructor() { }
 
   ngOnInit() {
