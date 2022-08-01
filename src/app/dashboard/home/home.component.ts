@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
       next: (resp) => {
         this.favArr = [];
         //loop and assign data to folders array
-        console.table(resp);
+        // console.table(resp);
         if(Array.isArray(resp)){
           let index: number = 0;
 

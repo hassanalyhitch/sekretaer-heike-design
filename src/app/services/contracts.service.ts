@@ -20,7 +20,6 @@ export class ContractsService {
 
   emitSelectedFolder(contract:ContractData){
     this.selectedContract = contract;
-    console.log(this.selectedContract);
   }
 
 
