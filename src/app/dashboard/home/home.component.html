@@ -8,7 +8,7 @@
         <div class="d-flex justify-content-center m-4 w-100" *ngIf="favArrHasNoContent()" >
           You have no Favourite contracts
         </div>
-        <app-fav-item *ngFor="let favItem of favArr; let index = index" (click)="onFavContractClick(index+1)" [contractItem]="favItem" ></app-fav-item>
+        <app-fav-item *ngFor="let favItem of favArr; let index = index" (click)="onFavContractClick(index)" [contractItem]="favItem" ></app-fav-item>
         
       </div>
    

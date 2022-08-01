@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
     
     this.contractService.getContracts().subscribe({
       next: (resp) => {
+        this.favArr = [];
         //loop and assign data to folders array
         console.table(resp);
         if(Array.isArray(resp)){
@@ -48,7 +49,9 @@ export class HomeComponent implements OnInit {
               },
               isSelected: false
             };
-            item['isFavorite'] == 1 ? this.favArr.push(contract): "";
+            if(item['isFavorite'] === 1 ){
+              this.favArr.push(contract);
+            }
             index++;
           }
 
@@ -70,6 +73,8 @@ export class HomeComponent implements OnInit {
 
   onFavContractClick(favItem){
     let clickedContract: ContractData = this.favArr[favItem];
+    // console.log(clickedContract);
+    this.contractService.emitSelectedFolder(clickedContract);
     this.router.navigate(['dashboard/contract-detail', { id: clickedContract.details.Amsidnr }]);
   }
   favArrHasNoContent(){

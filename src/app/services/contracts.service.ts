@@ -6,20 +6,20 @@ import { ContractData } from '../models/contract.model';
 
 @Injectable({ providedIn: 'root' })
 export class ContractsService {
-  selectedFolder: ContractData;
+  selectedContract: ContractData;
   observer: Observer<ContractData>;
-  selectFolderObservable = new Observable((observer: Observer<ContractData>)=>{
+  selectObservable = new Observable((observer: Observer<ContractData>)=>{
     this.observer = observer;
-    this.observer.next(this.selectedFolder);
   });
 
 
   constructor(private http: HttpClient) {
   }
 
-  emitSelectedFolder(folder:ContractData){
-    this.selectedFolder = folder;
-    this.observer.next(folder);
+  emitSelectedFolder(contract:ContractData){
+    this.selectedContract = contract;
+    console.log(this.selectedContract)
+    this.observer.next(this.selectedContract);
   }
 
 
