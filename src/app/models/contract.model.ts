@@ -12,13 +12,13 @@ export interface ContractData {
     Paymethod: string,
     Branch: string,
     Risk: string,
-    isFav: number,
     docs: {
       category: string,
       docid: string,
       name: string,
       createdAt: string
-    }[]
+    }[],
+    isFav: number
   },
   isSelected: boolean
 }
