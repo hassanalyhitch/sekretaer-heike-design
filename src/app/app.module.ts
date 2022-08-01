@@ -24,6 +24,7 @@ import { BrokerComponent } from './dashboard/broker/broker.component';
 import { ContractDetailComponent } from './dashboard/contract-detail/contract-detail.component';
 import { DocumentItemComponent } from './dashboard/document-item/document-item.component';
 import { ShortenTextPipe } from './pipes/shorten-text.pipe';
+import { CurrencyFormatPipe } from './pipes/currency-format.pipe';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -67,7 +68,8 @@ const appRoutes: Routes = [
     BrokerComponent,
     ContractDetailComponent,
     DocumentItemComponent,
-    ShortenTextPipe
+    ShortenTextPipe,
+    CurrencyFormatPipe
    ],
   bootstrap:    [ AppComponent ],
   providers: [

@@ -8,11 +8,17 @@ export class ShortenTextPipe implements PipeTransform {
 
   transform(longName: string){
     let shortName:string;
-        if(longName.length > 27){
-          shortName = longName.substring(0, 28)+"...";
-        } else {
-          shortName = longName;
-        }
+    try{
+
+      if(longName.length > 17){
+        shortName = longName.substring(0, 18)+"...";
+      } else {
+        shortName = longName;
+      }
+
+    } catch(e){
+      console.log(e);
+    }
     return shortName;
   }
 
