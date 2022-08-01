@@ -44,11 +44,11 @@ export class HomeComponent implements OnInit {
                 Branch:  item['Branch'],
                 Risk:  item['Risk'],
                 docs: item['docs'],
-                isFav: item['isFavourite']
+                isFav: item['isFavorite']
               },
               isSelected: false
             };
-            this.favArr.push(contract);
+            item['isFavorite'] == 1 ? this.favArr.push(contract): "";
             index++;
           }
 
