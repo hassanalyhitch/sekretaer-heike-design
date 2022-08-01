@@ -4,7 +4,7 @@
     <div class="bg-white shadow-sm w-100 d-flex fav-item">
       <div class="d-flex w-100 ">
 
-        <div class="d-flex flex-column _card-content w-100 ">
+        <div class="d-flex flex-column _card-content w-100">
           <span class="risk px-2 mt-3 mb-1">{{contract.details.Risk}}</span>
           <span class="insurance-number px-2">{{contract.details.ContractNumber}} </span>
           <span class="branch mt-3 px-2 ">{{contract.details.Branch}}</span>
@@ -14,15 +14,15 @@
           <div class="d-flex align-items-end justify-content-between w-100 py-2 ">
             <div class="date d-flex align-items-end px-2">
               <span class="">Start: </span>
-              <span class="mx-2">25.05.2022</span>
+              <span class="mx-2">{{contract.details.StartDate}}</span>
             </div>
             <div class="date ml-auto px-1">
             <span class="">End: </span>
-            <span class="mx-2">25.05.2022</span>
+            <span class="mx-2">{{contract.details.EndDate}}</span>
             </div>
           </div>
           <div class="price align-self-end px-2 my-2">
-            <span class="amount">25 €</span>
+            <span class="amount">{{contract.details.YearlyPayment | currencyFormat}}</span>
             <span>/Jahr</span>
           </div>
     

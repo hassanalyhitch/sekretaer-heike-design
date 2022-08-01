@@ -8,18 +8,19 @@ import { ContractData } from '../models/contract.model';
 export class ContractsService {
   selectedContract: ContractData;
   observer: Observer<ContractData>;
-  selectObservable = new Observable((observer: Observer<ContractData>)=>{
-    this.observer = observer;
-  });
+  selectObservable: Observable<ContractData>; 
 
 
   constructor(private http: HttpClient) {
+    this.selectObservable = new Observable((observer: Observer<ContractData>)=>{
+      this.observer = observer;
+      this.observer.next(this.selectedContract);
+    });
   }
 
   emitSelectedFolder(contract:ContractData){
     this.selectedContract = contract;
-    console.log(this.selectedContract)
-    this.observer.next(this.selectedContract);
+    console.log(this.selectedContract);
   }
 
 
