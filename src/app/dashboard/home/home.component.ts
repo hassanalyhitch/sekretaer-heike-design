@@ -20,13 +20,14 @@ export class HomeComponent implements OnInit {
     this.contractService.getContracts().subscribe({
       next: (resp) => {
         //loop and assign data to folders array
-
+        console.table(resp);
         if(Array.isArray(resp)){
           let index: number = 0;
 
           for(let item of resp){
             //format date 
             item['Begin'] = formatDate(item['Begin'], "dd.MM.YYYY","en");
+            item['End'] = formatDate(item['End'], "dd.MM.YYYY","en");
             //
             let contract: ContractData = {
               id: index,
@@ -37,12 +38,13 @@ export class HomeComponent implements OnInit {
                 ContractNumber:  item['Contractnumber'],
                 Company:  item['Company'],
                 StartDate:  item['Begin'],
-                EndDate:  '',
+                EndDate:  item['End'],
                 YearlyPayment:  item['YearlyPayment'],
                 Paymethod:  item['PaymentMethod'],
                 Branch:  item['Branch'],
                 Risk:  item['Risk'],
-                docs: item['docs']
+                docs: item['docs'],
+                isFav: item['isFavourite']
               },
               isSelected: false
             };

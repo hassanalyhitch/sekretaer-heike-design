@@ -1,5 +1,5 @@
 .fav-item{
-  width: 314px;
+  width: 338px;
   height: 180px;
 }
 .icon-container{
@@ -51,6 +51,7 @@
 .risk{
   font-size: 18px;
   font-weight: 500;
+  min-height: 27px;
 }
 .branch{
   font-size: 15px;

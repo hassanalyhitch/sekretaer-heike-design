@@ -17,7 +17,7 @@ export class ShortenTextPipe implements PipeTransform {
       }
 
     } catch(e){
-      console.log(e);
+      console.log(e.message);
     }
     return shortName;
   }
