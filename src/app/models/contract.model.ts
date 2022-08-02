@@ -18,7 +18,7 @@ export interface ContractData {
       name: string,
       createdAt: string
     }[],
-    isFav: number
+    isFav: any
   },
   isSelected: boolean
 }

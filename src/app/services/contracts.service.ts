@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Observer, Subscription } from 'rxjs';
@@ -8,13 +9,65 @@ import { ContractData } from '../models/contract.model';
 export class ContractsService {
   selectedContract: ContractData;
   observer: Observer<ContractData>;
-  selectObservable: Observable<ContractData>; 
+  selectObservable: Observable<ContractData>;
+  userContractsArr: ContractData[]; 
 
 
   constructor(private http: HttpClient) {
     this.selectObservable = new Observable((observer: Observer<ContractData>)=>{
       this.observer = observer;
       this.observer.next(this.selectedContract);
+    });
+    this.getContracts().subscribe({
+      next: (resp) => {
+        this.userContractsArr = [];
+        //loop and assign data to folders array
+        console.log("Servicing => "+resp);
+        if(Array.isArray(resp)){
+          let index: number = 0;
+
+          for(let item of resp){
+            //format date 
+            item['Begin'] = formatDate(item['Begin'], "dd.MM.YYYY","en");
+            item['End'] = formatDate(item['End'], "dd.MM.YYYY","en");
+            //
+            let contract: ContractData = {
+              id: index,
+              details: {
+                Amsidnr: item['Amsidnr'],
+                CustomerAmsidnr:  item['CustomerAmsidnr'],
+                InsuranceId:  item['Contractnumber'],
+                ContractNumber:  item['Contractnumber'],
+                Company:  item['Company'],
+                StartDate:  item['Begin'],
+                EndDate:  item['End'],
+                YearlyPayment:  item['YearlyPayment'],
+                Paymethod:  item['PaymentMethod'],
+                Branch:  item['Branch'],
+                Risk:  item['Risk'],
+                docs: item['docs'],
+                isFav: item['isFavorite']
+              },
+              isSelected: false
+            };
+            this.userContractsArr.push(contract);
+            
+            index++;
+          }
+
+       } else {
+        //invalid token
+
+       }
+
+      },
+      error: (e) => {
+        console.log(e);
+        
+      },
+      complete: () => {
+        // console.info('complete')
+      }
     });
   }
 
@@ -32,5 +85,18 @@ export class ContractsService {
                     'Content-Type': 'application/json'
                 }),
         });
+  }
+
+  getContractDetails(Amsidnr: string){
+    let url = 'https://testapi.maxpool.de/api/v1/contracts/'+Amsidnr;
+    
+    return this.http.get(
+      url,
+      {
+          headers: new HttpHeaders({
+                  'accept': 'application/json',
+                  'Content-Type': 'application/json'
+              }),
+      });
   }
 }

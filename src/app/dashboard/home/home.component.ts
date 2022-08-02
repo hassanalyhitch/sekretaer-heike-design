@@ -12,63 +12,24 @@ import { ContractData } from '../../models/contract.model';
 export class HomeComponent implements OnInit {
 
   favArr:ContractData[] = [];
+  allContractsArr:ContractData[] = [];
 
   constructor(private router:Router, private contractService: ContractsService) { }
 
   ngOnInit() {
-    
     this.contractService.getContracts().subscribe({
-      next: (resp) => {
-        this.favArr = [];
-        //loop and assign data to folders array
-        // console.table(resp);
-        if(Array.isArray(resp)){
-          let index: number = 0;
-
-          for(let item of resp){
-            //format date 
-            item['Begin'] = formatDate(item['Begin'], "dd.MM.YYYY","en");
-            item['End'] = formatDate(item['End'], "dd.MM.YYYY","en");
-            //
-            let contract: ContractData = {
-              id: index,
-              details: {
-                Amsidnr: item['Amsidnr'],
-                CustomerAmsidnr:  item['CustomerAmsidnr'],
-                InsuranceId:  item['Contractnumber'],
-                ContractNumber:  item['Contractnumber'],
-                Company:  item['Company'],
-                StartDate:  item['Begin'],
-                EndDate:  item['End'],
-                YearlyPayment:  item['YearlyPayment'],
-                Paymethod:  item['PaymentMethod'],
-                Branch:  item['Branch'],
-                Risk:  item['Risk'],
-                docs: item['docs'],
-                isFav: item['isFavorite']
-              },
-              isSelected: false
-            };
-            if(item['isFavorite'] === 1 ){
-              this.favArr.push(contract);
-            }
-            index++;
+      complete: ()=>{
+        this.allContractsArr = this.contractService.userContractsArr;
+        this.allContractsArr.forEach((contract)=>{
+          
+          if(contract.details.isFav === 1 || contract.details.isFav === '1' ){
+            this.favArr.push(contract);
           }
-
-       } else {
-        //invalid token
-
-       }
-
-      },
-      error: (e) => {
-        console.log(e);
-        
-      },
-      complete: () => {
-        // console.info('complete')
+        });
+        console.log(this.favArr.length);
       }
     });
+    
   }
 
   onFavContractClick(favItem){

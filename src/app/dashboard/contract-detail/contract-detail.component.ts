@@ -26,6 +26,11 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     this.contractSub = contractService.selectObservable.subscribe({
       next:(contract)=>{
         this.contract = contract;
+        contractService.getContractDetails(this.contract.details.Amsidnr).subscribe({
+          next:(resp)=>{
+              console.log(resp);
+          }
+        });
       }
     });
   }
