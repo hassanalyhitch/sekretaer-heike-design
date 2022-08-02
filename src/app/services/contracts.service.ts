@@ -7,7 +7,25 @@ import { ContractData } from '../models/contract.model';
 
 @Injectable({ providedIn: 'root' })
 export class ContractsService {
-  selectedContract: ContractData;
+  selectedContract: ContractData = <ContractData>{
+    id: 0,
+    details: {
+      Amsidnr: "",
+      CustomerAmsidnr: "",
+      InsuranceId: "",
+      ContractNumber: "",
+      Company: "",
+      StartDate: "",
+      EndDate: "",
+      YearlyPayment: "",
+      Paymethod: "",
+      Branch: "",
+      Risk: "",
+      docs: [],
+      isFav: 0
+    },
+    isSelected: false
+  };
   observer: Observer<ContractData>;
   selectObservable: Observable<ContractData>;
   userContractsArr: ContractData[]; 
