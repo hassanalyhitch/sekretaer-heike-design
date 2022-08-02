@@ -15,25 +15,7 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
 
   @Input() index:string;
   hrTitle: string;
-  contract: ContractData = {
-    id: 0,
-    details: {
-      Amsidnr: "",
-      CustomerAmsidnr: "",
-      InsuranceId: "",
-      ContractNumber: "",
-      Company: "",
-      StartDate: "",
-      EndDate: "",
-      YearlyPayment: "",
-      Paymethod: "",
-      Branch: "",
-      Risk: "",
-      docs:[],
-      isFav: 0
-    },
-    isSelected: false
-  };
+  contract: ContractData = ;
   contractSub: Subscription;
 
   docArr: DocumentData[] = [];
@@ -41,6 +23,18 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
   constructor(
   private route: ActivatedRoute,
   private router: Router, private translate:TranslateService, private contractService: ContractsService) {
+
+    this.contract.details.Amsidnr = "";
+    this.contract.details.CustomerAmsidnr = "";
+    this.contract.details.InsuranceId =  "";
+    this.contract.details.ContractNumber =  "";
+    this.contract.details.Company =  "";
+    this.contract.details.StartDate =  "";
+    this.contract.details.EndDate =  "";
+    this.contract.details.YearlyPayment =  "";
+    this.contract.details.Paymethod =  "";
+    this.contract.details.Branch =  "";
+    this.contract.details.Risk = "";
 
     this.hrTitle = this.translate.instant('insurance.detail.hrtitle');
   
