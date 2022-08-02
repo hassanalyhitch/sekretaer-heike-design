@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { formatDate } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
+import { DocumentData } from '../../models/document.model';
 
 @Component({
   selector: 'app-document-item',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DocumentItemComponent implements OnInit {
 
+  @Input() doc: DocumentData;
   constructor() { }
 
   ngOnInit() {
+    if(this.doc){
+      console.log(this.doc);
+      if(this.doc.createdAt){
+        //format date 
+        this.doc.createdAt = formatDate(this.doc.createdAt, "dd.MM.YYYY","en");
+      }
+    }
   }
 
 }

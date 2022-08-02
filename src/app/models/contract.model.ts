@@ -1,3 +1,5 @@
+import { DocumentData } from "./document.model";
+
 export interface ContractData {
   id: number,
   details: {
@@ -12,12 +14,7 @@ export interface ContractData {
     Paymethod: string,
     Branch: string,
     Risk: string,
-    docs: {
-      category: string,
-      docid: string,
-      name: string,
-      createdAt: string
-    }[],
+    docs: DocumentData[],
     isFav: any
   },
   isSelected: boolean

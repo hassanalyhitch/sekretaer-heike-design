@@ -49,10 +49,7 @@
 
     </div>
 
-    <app-document-item></app-document-item>
-    <app-document-item></app-document-item>
-    <app-document-item></app-document-item>
-    <app-document-item></app-document-item>
+    <app-document-item *ngFor="let doc of docArr" [doc]=doc ></app-document-item>
     
   </div>
 
