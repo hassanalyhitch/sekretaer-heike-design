@@ -23,8 +23,8 @@ export class AuthInterceptorService implements HttpInterceptor {
         } else {
             //this user is not logged in and is manually writing a url address
             //redirect to home login screen 
-            // this.authReq = req.clone({url:''});
-            console.log(req.url);
+
+            // console.log(req.url);
             this.authReq = req.clone();
         }
 
