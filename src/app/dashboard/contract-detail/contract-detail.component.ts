@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { ContractData } from '../../models/contract.model';
+import { DocumentData } from '../../models/document.model';
 import { ContractsService } from '../../services/contracts.service';
 
 @Component({
@@ -14,8 +15,28 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
 
   @Input() index:string;
   hrTitle: string;
-  contract: ContractData;
+  contract: ContractData = {
+    id: 0,
+    details: {
+      Amsidnr: "",
+      CustomerAmsidnr: "",
+      InsuranceId: "",
+      ContractNumber: "",
+      Company: "",
+      StartDate: "",
+      EndDate: "",
+      YearlyPayment: "",
+      Paymethod: "",
+      Branch: "",
+      Risk: "",
+      docs:[],
+      isFav: 0
+    },
+    isSelected: false
+  };
   contractSub: Subscription;
+
+  docArr: DocumentData[] = [];
 
   constructor(
   private route: ActivatedRoute,
@@ -27,8 +48,13 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
       next:(contract)=>{
         this.contract = contract;
         contractService.getContractDetails(this.contract.details.Amsidnr).subscribe({
-          next:(resp)=>{
-              console.log(resp);
+          next:(resp:any)=>{
+              if(resp.hasOwnProperty('docs')){
+                for(let i=0; i<resp.docs.length; i++){
+                  this.docArr.push(resp.docs[i]);
+                }
+                console.log(this.docArr.length);
+              }
           }
         });
       }

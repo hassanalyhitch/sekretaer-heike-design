@@ -26,7 +26,6 @@ export class HomeComponent implements OnInit {
             this.favArr.push(contract);
           }
         });
-        console.log(this.favArr.length);
       }
     });
     
