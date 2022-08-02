@@ -15,7 +15,7 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
 
   @Input() index:string;
   hrTitle: string;
-  contract: ContractData = ;
+  contract: ContractData ;
   contractSub: Subscription;
 
   docArr: DocumentData[] = [];
