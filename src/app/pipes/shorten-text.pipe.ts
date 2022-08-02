@@ -6,12 +6,13 @@ import { Injectable } from '@angular/core';
 })
 export class ShortenTextPipe implements PipeTransform {
 
-  transform(longName: string){
+  transform(longName: string, length: number){
+    
     let shortName:string;
     try{
 
-      if(longName.length > 17){
-        shortName = longName.substring(0, 18)+"...";
+      if(longName.length > length){
+        shortName = longName.substring(0, length+1)+"...";
       } else {
         shortName = longName;
       }
