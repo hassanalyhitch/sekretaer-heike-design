@@ -14,7 +14,7 @@ export class DocumentItemComponent implements OnInit {
 
   ngOnInit() {
     if(this.doc){
-      console.log(this.doc);
+      // console.log(this.doc);
       if(this.doc.createdAt){
         //format date 
         this.doc.createdAt = formatDate(this.doc.createdAt, "dd.MM.YYYY","en");

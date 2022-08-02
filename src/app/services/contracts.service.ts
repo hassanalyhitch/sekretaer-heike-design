@@ -39,8 +39,8 @@ export class ContractsService {
     this.getContracts().subscribe({
       next: (resp) => {
         this.userContractsArr = [];
-        //loop and assign data to folders array
-        console.log("Servicing => "+resp);
+        
+        // console.log("Servicing => "+resp);
         if(Array.isArray(resp)){
           let index: number = 0;
 
