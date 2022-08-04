@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -53,6 +54,7 @@ const appRoutes: Routes = [
     MatTooltipModule,
     MatDialogModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
     RouterModule.forRoot(appRoutes),
     TranslateModule.forRoot({
       loader: {
