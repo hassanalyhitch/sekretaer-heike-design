@@ -74,4 +74,9 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     this.contractSub.unsubscribe();
   }
 
+  onDocumentClick(doc: DocumentData){
+
+    this.router.navigate(['dashboard/home/contract-detail/fileview', { id: doc.linkToDoc}],{ skipLocationChange: true });
+  }
+
 }
