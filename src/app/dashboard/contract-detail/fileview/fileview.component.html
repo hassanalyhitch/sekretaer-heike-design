@@ -1,0 +1,11 @@
+<mat-spinner *ngIf="!previewLoaded" color="accent" style="position:fixed;top:50%;left:45%;margin:auto auto;" [diameter]='40' ></mat-spinner>
+
+<div class="fileview-modal h-100 d-flex flex-column bg-white" style="z-index:100;">
+  <span class=" px-3 mb-3">{{fileName }} </span>
+  <embed
+    [src]="safeUrl" 
+    class="w-100 h-100 bg-white"
+    frameborder="0"
+    id="embedView"
+    />
+</div>

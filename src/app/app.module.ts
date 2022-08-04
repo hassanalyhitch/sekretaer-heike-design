@@ -25,6 +25,7 @@ import { ContractDetailComponent } from './dashboard/contract-detail/contract-de
 import { DocumentItemComponent } from './dashboard/document-item/document-item.component';
 import { ShortenTextPipe } from './pipes/shorten-text.pipe';
 import { CurrencyFormatPipe } from './pipes/currency-format.pipe';
+import { FileviewComponent } from './dashboard/contract-detail/fileview/fileview.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -42,6 +43,7 @@ const appRoutes: Routes = [
       { path: 'contract-detail', component:ContractDetailComponent}
     ],
   },
+  {path:'dashboard/home/contract-detail/fileview', component: FileviewComponent}
 ];
 @NgModule({
   imports:      [ 
@@ -49,6 +51,8 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule,
     MatTooltipModule,
+    MatDialogModule,
+    MatButtonModule,
     RouterModule.forRoot(appRoutes),
     TranslateModule.forRoot({
       loader: {
@@ -69,7 +73,8 @@ const appRoutes: Routes = [
     ContractDetailComponent,
     DocumentItemComponent,
     ShortenTextPipe,
-    CurrencyFormatPipe
+    CurrencyFormatPipe,
+    FileviewComponent
    ],
   bootstrap:    [ AppComponent ],
   providers: [
