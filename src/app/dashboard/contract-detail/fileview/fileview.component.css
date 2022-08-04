@@ -1,0 +1,22 @@
+
+.content-wrapper{
+  height: 92vh;
+  background-color: #F2F2F2;
+  background-image: linear-gradient(to right, #E5007E 50% , #F2F2F2 50%);
+  margin-top: 0px !important;
+  padding: 0px !important;
+}
+._content{
+  background-color: #F2F2F2;
+  border-radius: 45px 0px 0px 0px;
+  overflow-y: scroll;
+  position: relative;
+}
+._spinner{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+._spinner ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #D60B51;
+}

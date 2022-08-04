@@ -127,7 +127,9 @@ hr:after {
   position: absolute;
   bottom: -24px;
 }
-
+app-document-item{
+  cursor: pointer;
+}
 
 
 ::-webkit-scrollbar {

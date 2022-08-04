@@ -1,11 +1,18 @@
-<mat-spinner *ngIf="!previewLoaded" color="accent" style="position:fixed;top:50%;left:45%;margin:auto auto;" [diameter]='40' ></mat-spinner>
+<div class="content-wrapper w-100 ">
+  <div class="_content d-flex d-flex flex-column align-items-center w-100 h-100 ">
+    <div class="_spinner bg-success">
+      <mat-spinner *ngIf="!previewLoaded" color="accent" [diameter]='40' ></mat-spinner>
+    </div>
 
-<div class="fileview-modal h-100 d-flex flex-column bg-white" style="z-index:100;">
-  <span class=" px-3 mb-3">{{fileName }} </span>
-  <embed
-    [src]="safeUrl" 
-    class="w-100 h-100 bg-white"
-    frameborder="0"
-    id="embedView"
-    />
+    <div class="_fileview w-100 h-100 d-flex flex-column ">
+      <span class=" px-3 mb-3">{{fileName }} </span>
+      <embed
+        [src]="safeUrl" 
+        class="w-100 h-100 "
+        frameborder="0"
+        id="embedView"
+        />
+    </div>
+
+  </div>
 </div>
