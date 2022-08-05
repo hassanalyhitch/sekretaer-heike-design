@@ -18,5 +18,5 @@
   left: 50%;
 }
 ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
-  stroke: #000000;
+  stroke: #E5007E;
 }

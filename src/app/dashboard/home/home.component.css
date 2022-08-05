@@ -108,6 +108,9 @@
   right: 10px;
   position: absolute;
 }
+.app-fav-item{
+  cursor: pointer;
+}
 
 ::-webkit-scrollbar {
   width: 0px;

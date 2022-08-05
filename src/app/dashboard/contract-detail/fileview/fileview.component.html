@@ -1,6 +1,6 @@
 <div class="content-wrapper w-100 ">
   <div class="_content d-flex d-flex flex-column align-items-center w-100 h-100 ">
-    <div class="_spinner ">
+    <div class="_spinner " *ngIf="!previewLoaded">
       <mat-spinner  [diameter]='40' ></mat-spinner>
     </div>
 

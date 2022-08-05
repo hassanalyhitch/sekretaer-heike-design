@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
     let clickedContract: ContractData = this.favArr[favItem];
     // console.log(clickedContract);
     this.contractService.emitSelectedFolder(clickedContract);
-    this.router.navigate(['dashboard/contract-detail', { id: clickedContract.details.Amsidnr }]);
+    this.router.navigate(['dashboard/home/contract-detail', { id: clickedContract.details.Amsidnr }]);
   }
   favArrHasNoContent(){
     return this.favArr.length < 1 ? true : false ;

@@ -40,10 +40,10 @@ const appRoutes: Routes = [
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
-      { path: 'broker', component: BrokerComponent },
-      { path: 'contract-detail', component:ContractDetailComponent }
+      { path: 'broker', component: BrokerComponent }
     ],
   },
+  { path: 'dashboard/home/contract-detail', component:ContractDetailComponent },
   { path:'dashboard/home/contract-detail/fileview', component: FileviewComponent}
 ];
 @NgModule({
