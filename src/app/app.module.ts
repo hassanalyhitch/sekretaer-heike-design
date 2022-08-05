@@ -41,12 +41,10 @@ const appRoutes: Routes = [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
       { path: 'broker', component: BrokerComponent },
-      { path: 'contract-detail', component:ContractDetailComponent, children:[
-
-        {path:'fileview', component: FileviewComponent}
-      ]}
+      { path: 'contract-detail', component:ContractDetailComponent }
     ],
-  }
+  },
+  { path:'dashboard/home/contract-detail/fileview', component: FileviewComponent}
 ];
 @NgModule({
   imports:      [ 
