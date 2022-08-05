@@ -76,7 +76,7 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
 
   onDocumentClick(doc: DocumentData){
 
-    this.router.navigate(['dashboard/home/contract-detail/fileview', { id: doc.linkToDoc}],{ skipLocationChange: true });
+    this.router.navigate(['fileview', { id: doc.linkToDoc}],{ skipLocationChange: false, relativeTo: this.route });
   }
 
 }
