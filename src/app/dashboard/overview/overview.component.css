@@ -61,12 +61,12 @@ app-fav-item{
   margin-bottom: 10px;
 }
 .extra-cards{
-  display: none;
+  display: none !important;
   opacity: 0;
   transition-delay: 0.4s;
   padding-bottom: 80px;
 }
 .extra-cards.show{
-  display: block;
   opacity: 1;
+  display: flex !important;
 }
