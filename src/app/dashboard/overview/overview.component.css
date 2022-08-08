@@ -21,6 +21,7 @@
 }
 .collapse-insurance{
  color: #707070;
+ cursor: pointer;
 }
 .cards{
   min-height: 230px;
@@ -62,11 +63,12 @@ app-fav-item{
 }
 .extra-cards{
   display: none !important;
-  opacity: 0;
-  transition-delay: 0.4s;
+  opacity: 0 !important;
+  transition: all 0.4s;
   padding-bottom: 80px;
 }
 .extra-cards.show{
-  opacity: 1;
+  opacity: 1 !important;
+  transition: all 0.4s;
   display: flex !important;
 }
