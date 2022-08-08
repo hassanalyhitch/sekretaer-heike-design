@@ -27,6 +27,7 @@ import { DocumentItemComponent } from './dashboard/document-item/document-item.c
 import { ShortenTextPipe } from './pipes/shorten-text.pipe';
 import { CurrencyFormatPipe } from './pipes/currency-format.pipe';
 import { FileviewComponent } from './dashboard/contract-detail/fileview/fileview.component';
+import { OverviewComponent } from './dashboard/overview/overview.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -40,6 +41,7 @@ const appRoutes: Routes = [
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
+      { path: 'overview', component: OverviewComponent },
       { path: 'broker', component: BrokerComponent }
     ],
   },
@@ -76,7 +78,8 @@ const appRoutes: Routes = [
     DocumentItemComponent,
     ShortenTextPipe,
     CurrencyFormatPipe,
-    FileviewComponent
+    FileviewComponent,
+    OverviewComponent
    ],
   bootstrap:    [ AppComponent ],
   providers: [
