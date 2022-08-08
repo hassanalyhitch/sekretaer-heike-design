@@ -24,26 +24,49 @@
 }
 .cards{
   min-height: 230px;
+  height: 230px;
   width: 100%;
   position: relative;
-  height: fit-content;
 }
 .a_card{
   position: absolute;
-  left: 0px;
+  margin-bottom: 10px;
   transition: all 0.2s cubic-bezier(0.63, 0.15, 0.03, 1.12);
 }
 .card-1{
   z-index: 8;
   transform: translateY(30px);
+  transition-delay: 0.2s;
   opacity: 0.5;
 }
 .card-2{
   z-index: 9;
   transform: translateY(15px);
+  transition-delay: 0.1s;
   opacity: 1;
 }
 .card-3{
   z-index: 10;
   transform: translateY(0px);
+}
+.cards.transition .card-2{
+  transform: translateY(190px);
+  opacity: 1;
+}
+.cards.transition .card-1{
+  transform: translateY(380px);
+  opacity: 1;
+}
+app-fav-item{
+  margin-bottom: 10px;
+}
+.extra-cards{
+  display: none;
+  opacity: 0;
+  transition-delay: 0.4s;
+  padding-bottom: 80px;
+}
+.extra-cards.show{
+  display: block;
+  opacity: 1;
 }

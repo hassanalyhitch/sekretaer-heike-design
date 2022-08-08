@@ -4,17 +4,23 @@
       <strong class="section-title align-self-center p-2 "> MY SEKRETÄR</strong>
     </div>
 
-    <div class="section-insurance w-100 d-flex flex-column align-items-center bg-info">
-      <div class="collapse-insurance d-flex justify-content-center w-100 m-2">
-       Collapse <i class="material-icons mx-2">expand_less</i>
+    <div class="section-insurance w-100 d-flex flex-column align-items-center bg-">
+      <div class="collapse-insurance d-flex justify-content-center w-100 m-2 " *ngIf="!collapsed" (click)="collapse()" >
+       Collapse <i class="material-icons mx-2 collapse-icon">expand_less</i>
       </div>
-      <div class="cards w-100 d-flex flex-column justify-content-center align-items-center bg-primary">
+      <div class="cards w-100 d-flex flex-column align-items-center mt-1" id="cards" [ngClass]="{'transition':!collapsed}">
       
-        <app-fav-item class="a_card card-1" [contractItem]=allContractsArr[2] ></app-fav-item>
-        <app-fav-item class="a_card card-2" [contractItem]=allContractsArr[1]></app-fav-item>
-        <app-fav-item class="a_card card-3" [contractItem]=allContractsArr[0]></app-fav-item>
-
+        <app-fav-item class="a_card card-1" [contractItem]=allContractsArr[2] (click)="onCardClick()" *ngIf="showCard1" ></app-fav-item>
+        <app-fav-item class="a_card card-2" [contractItem]=allContractsArr[1] (click)="onCardClick()" *ngIf="showCard2"></app-fav-item>
+        <app-fav-item class="a_card card-3" [contractItem]=allContractsArr[0] (click)="onDefaultInsuranceCardClick()"></app-fav-item>
+        
+      </div>
+      <div class="w-100 d-flex flex-column align-items-center extra-cards bg-" id="extra-cards" [ngClass]="{'show':!collapsed}">
+        <app-fav-item *ngFor="let item of subsetArr" [contractItem]=item ></app-fav-item>
       </div>
     </div>
+
+    <hr>
+
   </div>
 </div>

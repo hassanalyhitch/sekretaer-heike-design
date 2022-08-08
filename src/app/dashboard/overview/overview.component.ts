@@ -10,24 +10,60 @@ import { ContractsService } from '../../services/contracts.service';
 })
 export class OverviewComponent implements OnInit {
 
-  favArr:ContractData[] = [];
+  subsetArr:ContractData[] = [];
   allContractsArr:ContractData[] = [];
+
+  showCard2:boolean = false;
+  showCard1:boolean = false;
+
+  collapsed:boolean = true;
 
   constructor(private router:Router, private contractService: ContractsService) { }
 
   ngOnInit() {
     this.contractService.getContracts().subscribe({
-      complete: ()=>{
+      next: ()=>{
         this.allContractsArr = this.contractService.userContractsArr;
-        this.allContractsArr.forEach((contract)=>{
-          
-          if(contract.details.isFav === 1 || contract.details.isFav === '1' ){
-            this.favArr.push(contract);
+
+        if(this.contractService.userContractsArr.length>3){
+          for(let i=3; i<this.contractService.userContractsArr.length; i++){
+            this.subsetArr.push(this.contractService.userContractsArr[i]);
           }
-        });
+        }
+        this.allContractsArr.length>1 ? this.showCard2 = true: this.showCard2 = false;
+        this.allContractsArr.length>2 ? this.showCard1 = true: this.showCard1 = false;
       }
     });
     
+  }
+
+  onCardClick(){
+
+  }
+
+  collapse(){
+    this.collapsed = true;
+    document.getElementById("cards").setAttribute("style","min-height:230px;height:230px;");
+    document.getElementById("extra-cards").setAttribute("style","transition-delay:0s;");
+  }
+
+  onDefaultInsuranceCardClick(){
+
+    if(this.allContractsArr.length==1){
+      //show detail page
+
+    } else if(this.allContractsArr.length==2){
+      //expand 2
+      this.collapsed = false;
+      document.getElementById("cards").setAttribute("style","min-height:380px;height:380px;");
+      document.getElementById("extra-cards").setAttribute("style","transition-delay:0.4s;");
+
+    } else {
+      //expand all
+      this.collapsed = false;
+      document.getElementById("cards").setAttribute("style","min-height:570px;height:570px;");
+      document.getElementById("extra-cards").setAttribute("style","transition-delay:0.4s;");
+    }
   }
 
 }
