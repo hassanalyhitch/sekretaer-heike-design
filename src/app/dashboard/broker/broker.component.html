@@ -11,7 +11,7 @@
 
         <div class=" d-flex flex-column p-4 mt-5 detail-section-1">
           <div class="d-flex pl-4">
-            <span class="section-detail-text mx-3"> Mr. Broker Name</span>
+            <span class="section-detail-text mx-3">{{brokerName}}</span>
           </div>
           <div class="d-flex">
             <i class="material-icons mx-3">call</i>
@@ -20,7 +20,7 @@
               matTooltipPosition="right">
               <span itemprop="telephone">
                 <a href="tel:+123456890" class="tel">
-                  +234567890
+                  {{brokerNumber}}
                 </a>
               </span>
             </span>
@@ -37,8 +37,7 @@
           </div>
           <div class="d-flex ">
             <i class="material-icons mx-3">location_pin</i>
-            <span class="section-detail-text"> Friedrich-Ebert-Damm 143
-            D - 22047 Hamburg</span>
+            <span class="section-detail-text">{{brokerStreet}}</span>
           </div>
         </div>
       </div>
@@ -50,6 +49,6 @@
         <span>Chat</span>
       </div>
     </div>
-   
+  
   </div>
 </div>
