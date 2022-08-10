@@ -8,7 +8,7 @@
     </div>
 
     <div class="section-insurance w-100 d-flex flex-column align-items-center bg-">
-      <div class="cards w-100 d-flex flex-column align-items-center mt-1 bg-info" id="cards" [ngClass]="{'transition':!collapsed}">
+      <div class="cards w-100 d-flex flex-column align-items-center mt-1 bg-" id="cards" [ngClass]="{'transition':!collapsed}">
       
         <app-fav-item class="a_card card-1" [contractItem]=allContractsArr[2] (click)="onCardClick()" *ngIf="showCard1" ></app-fav-item>
         <app-fav-item class="a_card card-2" [contractItem]=allContractsArr[1] (click)="onCardClick()" *ngIf="showCard2"></app-fav-item>

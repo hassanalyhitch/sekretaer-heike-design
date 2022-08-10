@@ -42,9 +42,10 @@ export class OverviewComponent implements OnInit {
   }
 
   collapse(){
-    this.collapsed = true;
     document.getElementById("cards").setAttribute("style","min-height:230px;height:230px;");
-    document.getElementById("extra-cards").setAttribute("style","transition: opacity 3s linear 2s;");
+    document.getElementById("extra-cards").setAttribute("style","transition: opacity 0s;");
+    setTimeout(()=>{this.collapsed = true;},200);
+    
   }
 
   onDefaultInsuranceCardClick(){
@@ -56,13 +57,13 @@ export class OverviewComponent implements OnInit {
       //expand 2
       this.collapsed = false;
       document.getElementById("cards").setAttribute("style","min-height:380px;height:380px;");
-      document.getElementById("extra-cards").setAttribute("style","opacity:1;transition: opacity 4s;");
+      document.getElementById("extra-cards").setAttribute("style","transition: opacity 4s;opacity:1;");
       
     } else {
       //expand all
       this.collapsed = false;
       document.getElementById("cards").setAttribute("style","min-height:570px;height:570px;");
-      document.getElementById("extra-cards").setAttribute("style","opacity:1;transition: opacity 4s;");
+      document.getElementById("extra-cards").setAttribute("style","transition: opacity 4s;opacity:1;");
     }
   }
 
