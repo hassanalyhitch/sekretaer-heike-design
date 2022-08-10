@@ -57,13 +57,17 @@ export class OverviewComponent implements OnInit {
       //expand 2
       this.collapsed = false;
       document.getElementById("cards").setAttribute("style","min-height:380px;height:380px;");
-      document.getElementById("extra-cards").setAttribute("style","transition: opacity 4s;opacity:1;");
+      setTimeout(()=>{
+        document.getElementById("extra-cards").setAttribute("style","transition: all 0.4s;opacity:1;");
+      },400);
       
     } else {
       //expand all
       this.collapsed = false;
       document.getElementById("cards").setAttribute("style","min-height:570px;height:570px;");
-      document.getElementById("extra-cards").setAttribute("style","transition: opacity 4s;opacity:1;");
+      setTimeout(()=>{
+        document.getElementById("extra-cards").setAttribute("style","transition: all 0.4s;opacity:1;");
+      },400);
     }
   }
 

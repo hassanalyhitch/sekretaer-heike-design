@@ -15,7 +15,7 @@
         <app-fav-item class="a_card card-3" [contractItem]=allContractsArr[0] (click)="onDefaultInsuranceCardClick()"></app-fav-item>
         
       </div>
-      <div class="w-100 d-flex flex-column align-items-center extra-cards bg-primary" id="extra-cards" [ngClass]="{'show':!collapsed}">
+      <div class="w-100 d-flex flex-column align-items-center extra-cards bg-" id="extra-cards" [ngClass]="{'show':!collapsed}">
         <app-fav-item *ngFor="let item of subsetArr" [contractItem]=item ></app-fav-item>
       </div>
       <span>---------------------------------------------------</span>
