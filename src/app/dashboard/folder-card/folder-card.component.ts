@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FolderData } from '../../models/folder.model';
 
 @Component({
   selector: 'app-folder-card',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FolderCardComponent implements OnInit {
 
+  @Input() folder:FolderData;
   constructor() { }
 
   ngOnInit() {

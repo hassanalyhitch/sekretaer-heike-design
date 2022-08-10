@@ -66,6 +66,7 @@
 }
 app-fav-item{
   margin-bottom: 10px;
+  cursor: pointer;
 }
 .extra-cards{
   display: none !important;

@@ -1,6 +1,6 @@
 .fav-item{
   width: 338px;
-  height: 180px;
+  height: 160px;
 }
 .icon-container{
   width: 50px;
@@ -33,27 +33,27 @@
 }
 .fav-btn{
   position: absolute;
-  top: 4px;
-  right: 47px;
+  top: 10px;
+  right: 10px;
   padding: 3px;
   color: white;
   background-color: #E5007E;
   background-image: linear-gradient(141deg, #E5007E, #D60B51);
   border-radius: 50%;
-  width: 22px;
-  height: 22px;
+  width: 32px;
+  height: 32px;
 
 }
 .fav-btn i{
-  font-size: 16px;
+  font-size: 22px;
 }
 
-.risk{
+.folder-name{
   font-size: 18px;
   font-weight: 500;
   min-height: 27px;
 }
-.branch{
+.folder-desc{
   font-size: 15px;
   font-weight: 500;
 

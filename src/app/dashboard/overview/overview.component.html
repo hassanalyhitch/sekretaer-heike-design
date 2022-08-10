@@ -24,8 +24,8 @@
 
         <div class="w-100 d-flex flex-wrap py-3 justify-content-center">
           
-          <app-fav-item class="" [contractItem]=allContractsArr[2] (click)="onCardClick()" *ngIf="showCard1" ></app-fav-item>
-          <app-folder-card></app-folder-card>
+          <app-folder-card class="my-2" *ngFor="let folder of foldersArr" [folder]=folder ></app-folder-card>
+
         </div>
     
       </div>
