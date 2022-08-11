@@ -10,13 +10,13 @@
     <div class="section-insurance w-100 d-flex flex-column align-items-center bg-">
       <div class="cards w-100 d-flex flex-column align-items-center mt-1 bg-" id="cards" [ngClass]="{'transition':!collapsed}">
       
-        <app-fav-item class="a_card card-1" [contractItem]=allContractsArr[2] (click)="onCardClick()" *ngIf="showCard1" ></app-fav-item>
-        <app-fav-item class="a_card card-2" [contractItem]=allContractsArr[1] (click)="onCardClick()" *ngIf="showCard2"></app-fav-item>
+        <app-fav-item class="a_card card-1" [contractItem]=allContractsArr[2] (click)="onCardClick(allContractsArr[2])" *ngIf="showCard1" ></app-fav-item>
+        <app-fav-item class="a_card card-2" [contractItem]=allContractsArr[1] (click)="onCardClick(allContractsArr[1])" *ngIf="showCard2"></app-fav-item>
         <app-fav-item class="a_card card-3" [contractItem]=allContractsArr[0] (click)="onDefaultInsuranceCardClick()"></app-fav-item>
         
       </div>
       <div class="w-100 d-flex flex-column align-items-center extra-cards bg-" id="extra-cards" [ngClass]="{'show':!collapsed}">
-        <app-fav-item *ngFor="let item of subsetArr" [contractItem]=item ></app-fav-item>
+        <app-fav-item *ngFor="let item of subsetArr" [contractItem]=item  (click)="onCardClick(item)"></app-fav-item>
       </div>
       
       <div class="section-folder d-flex flex-column p-3 w-100 ">

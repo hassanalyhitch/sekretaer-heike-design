@@ -41,15 +41,17 @@ export class OverviewComponent implements OnInit {
 
     this.folderService.getFolders().subscribe({
       next: ()=>{
-
         this.foldersArr = this.folderService.userFoldersArr;
       }
     });
     
   }
 
-  onCardClick(){
-
+  onCardClick(clickedContract){
+    
+    this.contractService.emitSelectedFolder(clickedContract);
+    this.router.navigate(['dashboard/home/contract-detail', { id: clickedContract.details.Amsidnr }]);
+    
   }
 
   collapse(){
@@ -61,25 +63,37 @@ export class OverviewComponent implements OnInit {
 
   onDefaultInsuranceCardClick(){
 
-    if(this.allContractsArr.length==1){
-      //show detail page
+    if(this.collapsed===false){
 
-    } else if(this.allContractsArr.length==2){
-      //expand 2
-      this.collapsed = false;
-      document.getElementById("cards").setAttribute("style","min-height:380px;height:380px;");
-      setTimeout(()=>{
-        document.getElementById("extra-cards").setAttribute("style","transition: all 0.4s;opacity:1;");
-      },10);
-      
+      this.contractService.emitSelectedFolder(this.allContractsArr[0]);
+      this.router.navigate(['dashboard/home/contract-detail', { id: this.allContractsArr[0].details.Amsidnr }]);
     } else {
-      //expand all
-      this.collapsed = false;
-      document.getElementById("cards").setAttribute("style","min-height:570px;height:570px;");
-      setTimeout(()=>{
-        document.getElementById("extra-cards").setAttribute("style","transition: all 0.4s;opacity:1;");
-      },10);
+
+        
+      if(this.allContractsArr.length==1){
+        //show detail page
+        this.contractService.emitSelectedFolder(this.allContractsArr[0]);
+        this.router.navigate(['dashboard/home/contract-detail', { id: this.allContractsArr[0].details.Amsidnr }]);
+
+      } else if(this.allContractsArr.length==2){
+        //expand 2
+        this.collapsed = false;
+        document.getElementById("cards").setAttribute("style","min-height:380px;height:380px;");
+        setTimeout(()=>{
+          document.getElementById("extra-cards").setAttribute("style","transition: all 0.4s;opacity:1;");
+        },10);
+        
+      } else {
+        //expand all
+        this.collapsed = false;
+        document.getElementById("cards").setAttribute("style","min-height:570px;height:570px;");
+        setTimeout(()=>{
+          document.getElementById("extra-cards").setAttribute("style","transition: all 0.4s;opacity:1;");
+        },10);
+      }
+
     }
+
   }
 
 }
