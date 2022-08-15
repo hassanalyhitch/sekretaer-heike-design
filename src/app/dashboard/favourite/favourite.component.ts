@@ -17,7 +17,7 @@ export class FavouriteComponent implements OnInit {
 
   ngOnInit() {
     this.contractService.getContracts().subscribe({
-      complete: ()=>{
+      next: ()=>{
         this.allContractsArr = this.contractService.userContractsArr;
         this.allContractsArr.forEach((contract)=>{
           
