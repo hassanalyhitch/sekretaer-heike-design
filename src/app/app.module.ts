@@ -20,7 +20,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SnackbarComponent } from './snackbar/snackbar.component';
 import { BottomNavComponent } from './bottom-nav/bottom-nav.component';
 import { HomeComponent } from './dashboard/home/home.component';
-import { FavItemComponent } from './dashboard/home/fav-item/fav-item.component';
+import { FavItemComponent } from './dashboard/fav-item/fav-item.component';
 import { BrokerComponent } from './dashboard/broker/broker.component';
 import { ContractDetailComponent } from './dashboard/contract-detail/contract-detail.component';
 import { DocumentItemComponent } from './dashboard/document-item/document-item.component';

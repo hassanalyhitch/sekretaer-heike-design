@@ -24,7 +24,9 @@ export class FavouriteComponent implements OnInit {
           if(contract.details.isFav === 1 || contract.details.isFav === '1' ){
             this.favArr.push(contract);
           }
+          
         });
+        console.log(this.favArr.length);
       }
     });
     
