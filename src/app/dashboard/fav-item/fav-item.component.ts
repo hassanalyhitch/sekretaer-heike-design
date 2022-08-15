@@ -8,7 +8,25 @@ import { ContractData } from '../../models/contract.model';
 })
 export class FavItemComponent implements OnInit {
 
-  @Input() contractItem: ContractData;
+  @Input() contractItem: ContractData = {
+    id: 0,
+    details: {
+      Amsidnr: "",
+      CustomerAmsidnr: "",
+      InsuranceId: "",
+      ContractNumber: "",
+      Company: "",
+      StartDate: "",
+      EndDate: "",
+      YearlyPayment: "",
+      Paymethod: "",
+      Branch: "",
+      Risk: "",
+      docs: [],
+      isFav: 1
+    },
+    isSelected: false
+  };
   constructor() { }
 
   ngOnInit() {

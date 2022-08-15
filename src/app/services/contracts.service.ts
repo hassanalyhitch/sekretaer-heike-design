@@ -28,7 +28,7 @@ export class ContractsService {
   };
   observer: Observer<ContractData>;
   selectObservable: Observable<ContractData>;
-  userContractsArr: ContractData[]; 
+  userContractsArr: ContractData[] = []; 
 
 
   constructor(private http: HttpClient) {

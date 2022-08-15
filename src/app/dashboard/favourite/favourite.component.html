@@ -1,16 +1,16 @@
 <div class="content-wrapper w-100 ">
-  <div class="_content d-flex d-flex flex-column align-items-center w-100 h-100 ">
+  <div class="_content d-flex d-flex flex-column align-items-center w-100 h-100 bg-">
 
-    <div class="section-fav w-100 d-flex flex-column pt-3 ">
+    <div class="section-fav w-100 d-flex flex-column pt-3 bg-">
         <strong class="section-title align-self-center p-2"> FAVOURITES</strong>
     </div>
-  </div>
-  <div class="fav-wrapper d-flex flex-nowrap pb-4 bg-info">
-        
-    <div class="d-flex justify-content-center m-4 w-100 bg-dark" *ngIf="favArrHasNoContent()" >
-      You have no Favourite contracts
+      
+    <div class="fav-wrapper d-flex flex-column p-4 bg-">
+          
+      <div class="d-flex justify-content-center m-4 w-100 bg-" *ngIf="favArrHasNoContent()" >
+        You have no Favourite contracts
+      </div>
+      <app-fav-item *ngFor="let favItem of favContractArr; let index = index" (click)="onFavContractClick(index)" [contractItem]="favItem" ></app-fav-item>
     </div>
-    <app-fav-item *ngFor="let favItem of favArr; let index = index" (click)="onFavContractClick(index)" [contractItem]="favItem" ></app-fav-item>
-    <app-fav-item></app-fav-item>
   </div>
 </div>

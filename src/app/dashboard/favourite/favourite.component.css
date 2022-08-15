@@ -9,16 +9,19 @@
 ._content{
   background-color: #F2F2F2;
   border-radius: 45px 0px 0px 0px;
+  padding-bottom: 60px;
   overflow-y: scroll;
 }
 .fav-wrapper{
-  /* overflow-x: scroll; */
-  height: 200px;
+  /* border:  solid 1px red; */
 }
 
 .section-title{
   text-shadow: none;
   font-size: 22px;
+}
+app-fav-item{
+  margin: 10px;
 }
 
 ::-webkit-scrollbar {

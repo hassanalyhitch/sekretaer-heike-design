@@ -10,7 +10,7 @@ import { ContractsService } from '../../services/contracts.service';
 })
 export class FavouriteComponent implements OnInit {
 
-  favArr:ContractData[] = [];
+  favContractArr:ContractData[] = [];
   allContractsArr:ContractData[] = [];
 
   constructor(private router:Router, private contractService: ContractsService) { }
@@ -22,23 +22,23 @@ export class FavouriteComponent implements OnInit {
         this.allContractsArr.forEach((contract)=>{
           
           if(contract.details.isFav === 1 || contract.details.isFav === '1' ){
-            this.favArr.push(contract);
+            this.favContractArr.push(contract);
           }
           
         });
-        console.log(this.favArr.length);
+        console.log(this.favContractArr.length);
       }
     });
     
   }
 
   onFavContractClick(favItem){
-    let clickedContract: ContractData = this.favArr[favItem];
+    let clickedContract: ContractData = this.favContractArr[favItem];
     // console.log(clickedContract);
     this.contractService.emitSelectedFolder(clickedContract);
     this.router.navigate(['dashboard/favourite/contract-detail', { id: clickedContract.details.Amsidnr }]);
   }
   favArrHasNoContent(){
-    return this.favArr.length < 1 ? true : false ;
+    return this.favContractArr.length < 1 ? true : false ;
   }
 }
