@@ -13,6 +13,7 @@
 }
 .fav-wrapper{
   /* overflow-x: scroll; */
+  height: 200px;
 }
 
 .section-title{

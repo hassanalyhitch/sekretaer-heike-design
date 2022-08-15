@@ -5,12 +5,12 @@
         <strong class="section-title align-self-center p-2"> FAVOURITES</strong>
     </div>
   </div>
-  <div class="fav-wrapper d-flex flex-nowrap pb-4 ">
+  <div class="fav-wrapper d-flex flex-nowrap pb-4 bg-info">
         
-    <div class="d-flex justify-content-center m-4 w-100" *ngIf="favArrHasNoContent()" >
+    <div class="d-flex justify-content-center m-4 w-100 bg-dark" *ngIf="favArrHasNoContent()" >
       You have no Favourite contracts
     </div>
     <app-fav-item *ngFor="let favItem of favArr; let index = index" (click)="onFavContractClick(index)" [contractItem]="favItem" ></app-fav-item>
-    
+    <app-fav-item></app-fav-item>
   </div>
 </div>

@@ -52,7 +52,7 @@ const appRoutes: Routes = [
   },
   { path: 'dashboard/home/contract-detail', component:ContractDetailComponent },
   { path: 'dashboard/favourite/contract-detail', component:ContractDetailComponent },
-  { path:'dashboard/home/contract-detail/fileview', component: FileviewComponent}
+  { path: 'dashboard/home/contract-detail/fileview', component: FileviewComponent}
 ];
 @NgModule({
   imports:      [ 
