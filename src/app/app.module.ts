@@ -30,6 +30,7 @@ import { FileviewComponent } from './dashboard/contract-detail/fileview/fileview
 import { OverviewComponent } from './dashboard/overview/overview.component';
 import { FolderCardComponent } from './dashboard/folder-card/folder-card.component';
 import { FavouriteComponent } from './dashboard/favourite/favourite.component';
+import { SettingsComponent } from './dashboard/settings/settings.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -45,7 +46,8 @@ const appRoutes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'overview', component: OverviewComponent },
       { path: 'broker', component: BrokerComponent },
-      { path: 'favourite', component: FavouriteComponent }
+      { path: 'favourite', component: FavouriteComponent },
+      { path: 'settings', component: SettingsComponent }
     ],
   },
   { path: 'dashboard/home/contract-detail', component:ContractDetailComponent },
@@ -84,7 +86,8 @@ const appRoutes: Routes = [
     FileviewComponent,
     OverviewComponent,
     FolderCardComponent,
-    FavouriteComponent
+    FavouriteComponent,
+    SettingsComponent
    ],
   bootstrap:    [ AppComponent ],
   providers: [
