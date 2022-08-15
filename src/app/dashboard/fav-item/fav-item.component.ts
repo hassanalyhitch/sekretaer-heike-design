@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ContractData } from '../../../models/contract.model';
+import { ContractData } from '../../models/contract.model';
 
 @Component({
   selector: 'app-fav-item',
