@@ -29,6 +29,7 @@ import { CurrencyFormatPipe } from './pipes/currency-format.pipe';
 import { FileviewComponent } from './dashboard/contract-detail/fileview/fileview.component';
 import { OverviewComponent } from './dashboard/overview/overview.component';
 import { FolderCardComponent } from './dashboard/folder-card/folder-card.component';
+import { FavouriteComponent } from './dashboard/favourite/favourite.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -43,7 +44,8 @@ const appRoutes: Routes = [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
       { path: 'overview', component: OverviewComponent },
-      { path: 'broker', component: BrokerComponent }
+      { path: 'broker', component: BrokerComponent },
+      { path: 'favourite', component: FavouriteComponent }
     ],
   },
   { path: 'dashboard/home/contract-detail', component:ContractDetailComponent },
@@ -81,7 +83,8 @@ const appRoutes: Routes = [
     CurrencyFormatPipe,
     FileviewComponent,
     OverviewComponent,
-    FolderCardComponent
+    FolderCardComponent,
+    FavouriteComponent
    ],
   bootstrap:    [ AppComponent ],
   providers: [
