@@ -34,11 +34,14 @@
 .bottom-links{
   position: absolute;
   bottom: 0;
-  
+  z-index: 60px;
 }
 .bottom-links a {
   color: white;
   text-decoration: none;
+}
+app-bottom-nav{
+  z-index: 60px;
 }
 .snackbar-wrapper{
   position: absolute;

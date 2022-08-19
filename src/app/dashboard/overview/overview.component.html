@@ -1,10 +1,10 @@
 <div class="content-wrapper w-100 ">
   <div class="_content d-flex d-flex flex-column w-100 h-100 bg-">
-    <div class=" w-100 d-flex flex-column pt-3 ">
-      <strong class="section-title align-self-center p-2 "> MY SEKRETÄR</strong>
-      <div class="collapse-insurance d-flex justify-content-center w-100 m-2 " *ngIf="!collapsed" (click)="collapse()" >
-       Collapse <i class="material-icons mx-2 collapse-icon">expand_less</i>
-      </div>
+    <div class="section-title w-100 d-flex justify-content-center pt-3 " (click)="collapse()">
+      <strong class=" align-self-center p-2 "> MY SEKRETÄR</strong>
+      <i class="material-icons mx-2 align-self-center collapse-icon" *ngIf="!collapsed">expand_less</i>
+      <i class="material-icons mx-2 align-self-center collapse-icon" *ngIf="collapsed">expand_more</i>
+     
     </div>
 
     <div class="section-insurance w-100 d-flex flex-column align-items-center bg-">

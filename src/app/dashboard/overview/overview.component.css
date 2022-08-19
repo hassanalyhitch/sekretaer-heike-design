@@ -17,6 +17,7 @@
 .section-title{
   text-shadow: none;
   font-size: 22px;
+  cursor: pointer;
 }
 .section-insurance{
   min-height: 280px;
