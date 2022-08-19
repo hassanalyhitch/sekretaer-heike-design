@@ -55,9 +55,14 @@ export class OverviewComponent implements OnInit {
   }
 
   collapse(){
-    document.getElementById("cards").setAttribute("style","min-height:230px;height:230px;");
-    document.getElementById("extra-cards").setAttribute("style","transition: opacity 0s;");
-    setTimeout(()=>{this.collapsed = true;},200);
+    if(this.collapsed){
+      this.onDefaultInsuranceCardClick();
+    } else {
+
+      document.getElementById("cards").setAttribute("style","min-height:230px;height:230px;");
+      document.getElementById("extra-cards").setAttribute("style","transition: opacity 0s;");
+      setTimeout(()=>{this.collapsed = true;},200);
+    }
     
   }
 
