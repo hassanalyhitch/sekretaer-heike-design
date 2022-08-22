@@ -16,11 +16,16 @@ export class OverviewComponent implements OnInit {
   allContractsArr:ContractData[] = [];
 
   foldersArr: FolderData[]=[];
+  folderSubsetArr: FolderData[]=[];
 
   showCard2:boolean = false;
   showCard1:boolean = false;
 
+  showFolderCard2:boolean = false;
+  showFolderCard1:boolean = false;
+
   collapsed:boolean = true;
+  collapsedFolders:boolean = true;
 
   constructor(private router:Router, private contractService: ContractsService, private folderService: FoldersService) { }
 
@@ -42,6 +47,13 @@ export class OverviewComponent implements OnInit {
     this.folderService.getFolders().subscribe({
       next: ()=>{
         this.foldersArr = this.folderService.userFoldersArr;
+        if(this.folderService.userFoldersArr.length>3){
+          for(let i=3; i<this.folderService.userFoldersArr.length; i++){
+            this.folderSubsetArr.push(this.folderService.userFoldersArr[i]);
+          }
+        }
+        this.foldersArr.length>1 ? this.showFolderCard2 = true: this.showFolderCard2 = false;
+        this.foldersArr.length>2 ? this.showFolderCard1 = true: this.showFolderCard1 = false;
       }
     });
     
@@ -52,6 +64,9 @@ export class OverviewComponent implements OnInit {
     this.contractService.emitSelectedFolder(clickedContract);
     this.router.navigate(['dashboard/home/contract-detail', { id: clickedContract.details.Amsidnr }]);
     
+  }
+  onFolderCardClick(clickedFolder){
+
   }
 
   collapse(){
@@ -64,6 +79,17 @@ export class OverviewComponent implements OnInit {
       setTimeout(()=>{this.collapsed = true;},200);
     }
     
+  }
+  collapseFolders(){
+
+    if(this.collapsedFolders){
+      this.onDefaultFolderCardClick();
+    } else {
+
+      document.getElementById("folders").setAttribute("style","min-height:230px;height:230px;");
+      document.getElementById("extra-folders").setAttribute("style","transition: opacity 0s;");
+      setTimeout(()=>{this.collapsedFolders = true;},200);
+    }
   }
 
   onDefaultInsuranceCardClick(){
@@ -99,6 +125,40 @@ export class OverviewComponent implements OnInit {
 
     }
 
+  }
+  
+  onDefaultFolderCardClick(){
+
+    if(this.collapsedFolders===false){
+
+      this.folderService.emitSelectedFolder(this.foldersArr[0]);
+      // this.router.navigate(['dashboard/home/contract-detail', { id: this.allContractsArr[0].details.Amsidnr }]);
+    } else {
+
+        
+      if(this.foldersArr.length==1){
+        //show detail page
+        this.folderService.emitSelectedFolder(this.foldersArr[0]);
+        // this.router.navigate(['dashboard/home/contract-detail', { id: this.allContractsArr[0].details.Amsidnr }]);
+
+      } else if(this.foldersArr.length==2){
+        //expand 2
+        this.collapsedFolders = false;
+        document.getElementById("folders").setAttribute("style","min-height:380px;height:380px;");
+        setTimeout(()=>{
+          document.getElementById("extra-folders").setAttribute("style","transition: all 0.4s;opacity:1;");
+        },10);
+        
+      } else {
+        //expand all
+        this.collapsedFolders = false;
+        document.getElementById("folders").setAttribute("style","min-height:570px;height:570px;");
+        setTimeout(()=>{
+          document.getElementById("extra-folders").setAttribute("style","transition: all 0.4s;opacity:1;");
+        },10);
+      }
+
+    }
   }
 
 }

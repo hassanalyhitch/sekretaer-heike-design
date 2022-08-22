@@ -36,6 +36,12 @@
   width: 100%;
   position: relative;
 }
+.folders{
+  min-height: 230px;
+  height: 230px;
+  width: 100%;
+  position: relative;
+}
 .a_card{
   position: absolute;
   margin-bottom: 10px;
@@ -65,6 +71,14 @@
   transform: translateY(380px);
   opacity: 1;
 }
+.folders.transition .card-2{
+  transform: translateY(190px);
+  opacity: 1;
+}
+.folders.transition .card-1{
+  transform: translateY(380px);
+  opacity: 1;
+}
 app-fav-item{
   margin-bottom: 10px;
   cursor: pointer;
@@ -76,6 +90,19 @@ app-fav-item{
   position: relative;
 }
 .extra-cards.show{
+  display: flex !important;
+}
+app-folder-card{
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.extra-folders{
+  display: none !important;
+  opacity: 0;
+  transition: opacity 0.4s;
+  position: relative;
+}
+.extra-folders.show{
   display: flex !important;
 }
 .section-folder{

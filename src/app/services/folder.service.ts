@@ -73,6 +73,9 @@ export class FoldersService {
     });
   }
 
+  emitSelectedFolder(folder:FolderData){
+    this.folder = folder;
+  }
   getFolders() {
     return this.http.get(
         'https://testapi.maxpool.de/api/v1/sekretaer/myfolders',
