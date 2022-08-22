@@ -11,3 +11,10 @@
   border-radius: 45px 0px 0px 0px;
   overflow-y: scroll;
 }
+.section-title{
+  text-shadow: none;
+  font-size: 22px;
+}
+.mark-as-read{
+  color: #707070;
+}
