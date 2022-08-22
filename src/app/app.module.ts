@@ -31,6 +31,7 @@ import { OverviewComponent } from './dashboard/overview/overview.component';
 import { FolderCardComponent } from './dashboard/folder-card/folder-card.component';
 import { FavouriteComponent } from './dashboard/favourite/favourite.component';
 import { SettingsComponent } from './dashboard/settings/settings.component';
+import { NotificationsComponent } from './dashboard/notifications/notifications.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -88,7 +89,8 @@ const appRoutes: Routes = [
     OverviewComponent,
     FolderCardComponent,
     FavouriteComponent,
-    SettingsComponent
+    SettingsComponent,
+    NotificationsComponent
    ],
   bootstrap:    [ AppComponent ],
   providers: [
