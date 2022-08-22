@@ -40,4 +40,8 @@ export class HomeComponent implements OnInit {
   favArrHasNoContent(){
     return this.favArr.length < 1 ? true : false ;
   }
+
+  onNotifClick(){
+    this.router.navigate(['dashboard/home/notifications']);
+  }
 }
