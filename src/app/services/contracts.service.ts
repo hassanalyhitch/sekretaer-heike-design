@@ -22,6 +22,7 @@ export class ContractsService {
       Branch: "",
       Risk: "",
       docs: [],
+      name: "",
       isFav: 0
     },
     isSelected: false
@@ -40,7 +41,8 @@ export class ContractsService {
       next: (resp) => {
         this.userContractsArr = [];
         
-        // console.log("Servicing => "+resp);
+        // console.log("Contract service => "+resp);
+        console.table(resp);
         if(Array.isArray(resp)){
           let index: number = 0;
 
@@ -64,6 +66,7 @@ export class ContractsService {
                 Branch:  item['Branch'],
                 Risk:  item['Risk'],
                 docs: item['docs'],
+                name: item['name'],
                 isFav: item['isFavorite']
               },
               isSelected: false

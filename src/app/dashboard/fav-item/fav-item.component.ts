@@ -23,6 +23,7 @@ export class FavItemComponent implements OnInit {
       Branch: "",
       Risk: "",
       docs: [],
+      name: "",
       isFav: 1
     },
     isSelected: false

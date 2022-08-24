@@ -15,6 +15,7 @@ export interface ContractData {
     Branch: string,
     Risk: string,
     docs: DocumentData[],
+    name: string,
     isFav: any
   },
   isSelected: boolean
