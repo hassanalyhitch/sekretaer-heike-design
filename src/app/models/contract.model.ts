@@ -16,6 +16,8 @@ export interface ContractData {
     Risk: string,
     docs: DocumentData[],
     name: string,
+    productSek: string,
+    tarif: string,
     isFav: any
   },
   isSelected: boolean

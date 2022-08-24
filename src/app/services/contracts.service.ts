@@ -23,6 +23,8 @@ export class ContractsService {
       Risk: "",
       docs: [],
       name: "",
+      productSek: "",
+      tarif: "",
       isFav: 0
     },
     isSelected: false
@@ -67,6 +69,8 @@ export class ContractsService {
                 Risk:  item['Risk'],
                 docs: item['docs'],
                 name: item['name'],
+                productSek: item['ProductSekretaer'],
+                tarif: item['tarif'],
                 isFav: item['isFavorite']
               },
               isSelected: false

@@ -5,12 +5,12 @@
       <div class="d-flex w-100 ">
 
         <div class="d-flex flex-column _card-content w-100">
-          <span class="risk px-2 mt-3 mb-1">{{contract.details.Risk}}</span>
+          <span class="risk px-2 mt-3 mb-1">{{contract.details.name}}</span>
           <span class="insurance-number px-2">{{contract.details.ContractNumber}} </span>
-          <span class="branch mt-3 px-2 ">{{contract.details.Branch}}</span>
+          <span class="branch mt-3 px-2 ">{{contract.details.productSek}}</span>
           <span class="company px-2">{{contract.details.Company}}</span>    
           
-          <span class="type px-2 mt-3 ">vollkasko versicherung</span>
+          <span class="type px-2 mt-3 ">{{contract.details.tarif }} </span>
           <div class="d-flex align-items-end justify-content-between w-100 py-2 ">
             <div class="date d-flex align-items-end px-2">
               <span class="">Start: </span>

@@ -24,6 +24,8 @@ export class FavItemComponent implements OnInit {
       Risk: "",
       docs: [],
       name: "",
+      productSek: "",
+      tarif: "",
       isFav: 1
     },
     isSelected: false
