@@ -19,7 +19,7 @@
               matTooltip="Click to make Phone Call"
               matTooltipPosition="right">
               <span itemprop="telephone">
-                <a href="tel:+123456890" class="tel">
+                <a [href]="telto" class="tel">
                   {{brokerNumber}}
                 </a>
               </span>
@@ -30,8 +30,8 @@
             <span class="section-detail-text w-100 " 
               matTooltip="Click to send Email"
               matTooltipPosition="right">
-                <a href="mailto:misterbrokeremail@company.com" class="email">
-                  misterbrokeremail@company.com
+                <a [href]="mailto" class="email">
+                  {{brokerEmail}}
                 </a>
             </span>
           </div>

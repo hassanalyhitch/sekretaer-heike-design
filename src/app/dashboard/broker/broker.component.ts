@@ -8,9 +8,12 @@ import { BrokerService } from '../../services/broker.service';
 })
 export class BrokerComponent implements OnInit {
 
-  brokerName:string="";
-  brokerNumber:string="";
-  brokerStreet:string="";
+  brokerName: string = "";
+  brokerNumber: string = "";
+  brokerStreet: string = "";
+  brokerEmail: string = "";
+  mailto: string = "mailto:";
+  telto: string = "tel:";
 
   constructor(private brokerService:BrokerService) { }
 
@@ -20,9 +23,12 @@ export class BrokerComponent implements OnInit {
 
         console.log(resp);
 
-        this.brokerName=resp.myBroker.V_NAME;
-        this.brokerNumber=resp.myBroker.V_TEL1;
-        this.brokerStreet=resp.myBroker.V_STRASSE;
+        this.brokerName = resp.myBroker.V_NAME;
+        this.brokerNumber = resp.myBroker.V_TEL1;
+        this.brokerStreet = resp.myBroker.V_STRASSE;
+        this.brokerEmail = resp.myBroker.V_EMAIL;
+        this.mailto = this.mailto + this.brokerEmail;
+        this.telto = this.telto + this.brokerNumber;
       },
       error:(e)=>{
         console.log(e);
