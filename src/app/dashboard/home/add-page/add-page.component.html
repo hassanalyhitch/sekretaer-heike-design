@@ -1,0 +1,22 @@
+<div class="content-wrapper w-100 ">
+  <div class="_content d-flex d-flex flex-column w-100 h-100 ">
+    <input type="file"  #fileDropRef id="fileDropRef" style="opacity: 0;">
+    <div class="fileDropRef"> <label for="fileDropRef"> Please select Document</label></div>
+    <select class="options">
+      <option *ngFor="let item of this.dataList;let i = index" value="{{item.code}}" [selected]="i == 0">
+          {{item.name}}
+      </option>
+    </select>       
+    <input type="text" name="enter name" placeholder="Enter Document Name"/>
+    <div class="share">
+        <input type="checkbox" id="broker" name="broker">
+        <label for="broker">Share with Broker</label>
+    </div>
+    <input type="text" name="select folder" placeholder="Please Select Insurance/Folder"/>
+    <input type="date" placeholder=" Opt.select document date" style="color:grey;"/>
+    <input type="text" name="select tags" placeholder="Enter Tags/select Tags"/>
+    <input type="textarea"  style="padding:30px;"placeholder="Notice">
+    <div class="btn">Save</div>
+  </div> 
+</div>
+
