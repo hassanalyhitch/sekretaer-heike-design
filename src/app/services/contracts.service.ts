@@ -44,7 +44,7 @@ export class ContractsService {
         this.userContractsArr = [];
         
         // console.log("Contract service => "+resp);
-        console.table(resp);
+        // console.table(resp);
         if(Array.isArray(resp)){
           let index: number = 0;
 

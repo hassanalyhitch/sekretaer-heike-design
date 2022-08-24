@@ -30,6 +30,8 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
       Branch: "",
       Risk: "",
       docs: [],
+      tarif: "",
+      productSek: "",
       isFav: 0
     },
     isSelected: false
@@ -53,7 +55,7 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
                 for(let i=0; i<resp.docs.length; i++){
                   this.docArr.push(resp.docs[i]);
                 }
-                console.log(this.docArr.length);
+                // console.log(this.docArr.length);
               }
           }
         });
