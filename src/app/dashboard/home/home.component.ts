@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ContractsService } from '../../services/contracts.service';
 import { formatDate } from '@angular/common';
 import { ContractData } from '../../models/contract.model';
+import { NotificationsService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-home',
@@ -13,8 +14,9 @@ export class HomeComponent implements OnInit {
 
   favArr:ContractData[] = [];
   allContractsArr:ContractData[] = [];
+  notifCount: number = 0;
 
-  constructor(private router:Router, private contractService: ContractsService) { }
+  constructor(private router:Router, private contractService: ContractsService, private notificationService: NotificationsService ) { }
 
   ngOnInit() {
     this.contractService.getContracts().subscribe({
@@ -28,7 +30,7 @@ export class HomeComponent implements OnInit {
         });
       }
     });
-    
+    this.notifCount = this.notificationService.notifCount;
   }
 
   onFavContractClick(favItem){

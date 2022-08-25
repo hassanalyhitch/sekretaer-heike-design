@@ -21,8 +21,17 @@ export class NotificationsService {
   observer: Observer<NotificationData>;
   selectObservable: Observable<NotificationData>;
   userNotificationsArr: NotificationData[]; 
+  notifCount: number = 0;
 
   constructor(private http: HttpClient) {
+    this.getNotifications().subscribe({
+      next:(resp)=>{
+        
+        if(Array.isArray(resp)){
+          this.notifCount = resp.length;
+        }
+      }
+    });
   }
  
   emitSelectedNotification(notification:NotificationData){
