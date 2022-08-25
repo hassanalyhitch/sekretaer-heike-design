@@ -27,3 +27,9 @@
 .more{
   cursor: pointer;
 }
+.dropstart::before{
+  content: "" !important;
+}
+.dropstart .dropdown-toggle::before {
+  border: none !important;
+}
