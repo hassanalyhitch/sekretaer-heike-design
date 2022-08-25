@@ -11,9 +11,25 @@ export class NotificationItemComponent implements OnInit {
   notifMessage:string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam";
   @Input() notification: NotificationData;
 
+  notifIcon:string = "";
+
   constructor() { }
 
   ngOnInit() {
+    switch(this.notification.assocType){
+      case "vamsidnr" : {
+        this.notifIcon = "/assets/contract-icon.svg";
+        break;
+      }
+      case "dms" : {
+        this.notifIcon = "/assets/doc-icon.svg";
+        break;
+      }
+      default: {
+        this.notifIcon = "/assets/doc-icon.svg";
+        break;
+      }
+    }
   }
 
 }

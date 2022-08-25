@@ -16,13 +16,18 @@ export class NotificationsComponent implements OnInit {
   constructor(private router:Router, private notifService: NotificationsService) { 
     this.notifService.getNotifications().subscribe({
       next:(resp)=>{
-        
+        console.table(resp);
         if(Array.isArray(resp)){
 
           for(let item of resp){
             //format date 
-            item['createdAt'] = formatDate(item['createdAt'], "dd.MM.YYYY","en");
-            item['readTime'] = formatDate(item['readTime'], "dd.MM.YYYY","en");
+            try{
+              item['createdAt'] = formatDate(item['createdAt'], "dd.MM.YYYY","en");
+              item['readTime'] = formatDate(item['readTime'], "dd.MM.YYYY","en");
+
+            } catch(e:any){
+              console.log(e.message);
+            }
             let notif: NotificationData = {
               notificationId: item['notificationId'],
               loginId: item['loginId'],
