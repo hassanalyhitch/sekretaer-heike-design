@@ -1,5 +1,6 @@
 import { formatDate } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DocumentData } from '../../models/document.model';
 
 @Component({
@@ -10,7 +11,7 @@ import { DocumentData } from '../../models/document.model';
 export class DocumentItemComponent implements OnInit {
 
   @Input() doc: DocumentData;
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     if(this.doc){
@@ -20,6 +21,10 @@ export class DocumentItemComponent implements OnInit {
         this.doc.createdAt = formatDate(this.doc.createdAt, "dd.MM.YYYY","en");
       }
     }
+  }
+  onDocumentClick(doc: DocumentData){
+
+    this.router.navigate(['dashboard/home/contract-detail/fileview', { id: doc.linkToDoc}],{ skipLocationChange: false });
   }
 
 }
