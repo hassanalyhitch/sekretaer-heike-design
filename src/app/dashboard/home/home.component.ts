@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ContractsService } from '../../services/contracts.service';
 import { formatDate } from '@angular/common';
@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   favArr:ContractData[] = [];
   allContractsArr:ContractData[] = [];
   notifCount: number = 0;
+  @ViewChild('notif', { static: false }) notif: ElementRef<HTMLElement>;
 
   constructor(private router:Router, private contractService: ContractsService, private notificationService: NotificationsService ) { }
 
@@ -30,7 +31,14 @@ export class HomeComponent implements OnInit {
         });
       }
     });
-    this.notifCount = this.notificationService.notifCount;
+    // this.notif.nativeElement.setAttribute("notification-count", this.notifCount+"");
+    this.notificationService.getNotifications().subscribe({
+      next:()=>{
+
+        this.notifCount = this.notificationService.notifCount;
+        document.getElementById('notif').setAttribute("notification-count", this.notifCount+"");
+      }
+    });
   }
 
   onFavContractClick(favItem){
