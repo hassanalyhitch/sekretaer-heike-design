@@ -57,7 +57,7 @@ const appRoutes: Routes = [
   { path: 'dashboard/home/notifications', component:NotificationsComponent },
   { path: 'dashboard/favourite/contract-detail', component:ContractDetailComponent },
   { path: 'dashboard/home/contract-detail/fileview', component: FileviewComponent},
-  { path: 'dashboard/home/addpage', component:AddPageComponent}
+  { path: 'dashboard/home/adddocument', component:AddPageComponent}
 
 ];
 @NgModule({

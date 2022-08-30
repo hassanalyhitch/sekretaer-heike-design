@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
     return this.favArr.length < 1 ? true : false ;
   }
   onAddPage(){
-    this.router.navigate(['dashboard/home/addpage']);
+    this.router.navigate(['dashboard/home/adddocument']);
   }
 
   onNotifClick(){
