@@ -57,4 +57,7 @@ export class HomeComponent implements OnInit {
   onNotifClick(){
     this.router.navigate(['dashboard/home/notifications']);
   }
+  onChatClick(){
+    this.router.navigate(['dashboard/home/chat']);
+  }
 }
