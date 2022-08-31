@@ -223,7 +223,7 @@ button:hover{
 .send-icon{
   transition: transform .3s; /* Apply the transition property. Enables the animation */
 }
-.send-icon:hover{
+button:hover .send-icon{
   transform: rotate(-0.1turn); /* Rotate if mouse is hovered */
 }
 
