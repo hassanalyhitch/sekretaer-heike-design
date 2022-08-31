@@ -16,6 +16,7 @@ export class NotificationItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.notification.info + " "+this.notification.customerAmsidnr);
     switch(this.notification.assocType){
       case "vamsidnr" : {
         this.notifIcon = "/assets/contract-icon.svg";

@@ -34,6 +34,7 @@ import { SettingsComponent } from './dashboard/settings/settings.component';
 import { NotificationsComponent } from './dashboard/notifications/notifications.component';
 import { NotificationItemComponent } from './dashboard/notifications/notification-item/notification-item.component';
 import { AddPageComponent } from './dashboard/home/add-page/add-page.component';
+import { ChatComponent } from './dashboard/chat/chat.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -57,7 +58,8 @@ const appRoutes: Routes = [
   { path: 'dashboard/home/notifications', component:NotificationsComponent },
   { path: 'dashboard/favourite/contract-detail', component:ContractDetailComponent },
   { path: 'dashboard/home/contract-detail/fileview', component: FileviewComponent},
-  { path: 'dashboard/home/adddocument', component:AddPageComponent}
+  { path: 'dashboard/home/adddocument', component:AddPageComponent},
+  { path: 'dashboard/home/chat', component:ChatComponent}
 
 ];
 @NgModule({
@@ -97,7 +99,8 @@ const appRoutes: Routes = [
     SettingsComponent,
     NotificationsComponent,
     NotificationItemComponent,
-    AddPageComponent
+    AddPageComponent,
+    ChatComponent
    ],
   bootstrap:    [ AppComponent ],
   providers: [
