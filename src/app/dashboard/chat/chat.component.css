@@ -81,6 +81,7 @@ img{
 .chat-texts{
   padding:0.5rem;
   overflow:auto;
+  scroll-behavior: smooth;
 }
 
 .text{

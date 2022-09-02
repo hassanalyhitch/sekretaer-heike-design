@@ -15,18 +15,23 @@ export class ChatComponent implements OnInit {
     const text = document.querySelectorAll(".text");
     let delay = 0;
     text.forEach((el:any)=>{
-      el.style.animation = "fade-in 0.4s ease forwards";
+      el.style.animation = "fade-in 0.1s ease forwards";
       el.style.animationDelay= delay +"s";
-      delay += 0.25;
+      delay += 0.1;
     });
-    this.scrollToBottom();
+
+    setTimeout(()=>{
+
+      this.scrollToBottom();
+    },1000);
   }
 
 
   scrollToBottom(): void {
     try {
-        document.getElementById('scrollChat').scrollTop = document.getElementById('scrollChat').scrollHeight;
-        // this.scrollChat.nativeElement.scrollTop = this.scrollChat.nativeElement.scrollHeight;
+      // let scrollHeight = document.getElementById('scrollChat').scrollHeight;
+      // document.getElementById('scrollChat').scrollTop = scrollHeight;
+        this.scrollChat.nativeElement.scrollTop = this.scrollChat.nativeElement.scrollHeight;
     } catch(err) { 
       console.log(err)
     }                 
