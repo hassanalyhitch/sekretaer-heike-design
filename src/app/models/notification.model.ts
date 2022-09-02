@@ -1,7 +1,7 @@
 export interface NotificationData {
 
   notificationId: number,
-  loginId: number,
+  customerLoginId: number,
   customerAmsidnr: string,
   createdAt: string,
   readTime: string,
@@ -9,6 +9,9 @@ export interface NotificationData {
   assocId: string,
   assocType2: string,
   assocId2: string,
-  info: string
+  infoText: string,
+  infoHeadline: string,
+  isRead: string,
+  links: string
  
 }

@@ -18,19 +18,18 @@ export class NotificationsComponent implements OnInit {
       next:(resp)=>{
         console.table(resp);
         if(Array.isArray(resp)){
-
+          resp.sort((a, b) => a.isRead.localeCompare(b.isRead))
           for(let item of resp){
             //format date 
             try{
               item['createdAt'] = formatDate(item['createdAt'], "dd.MM.YYYY","en");
-              item['readTime'] = formatDate(item['readTime'], "dd.MM.YYYY","en");
 
             } catch(e:any){
               console.log(e.message);
             }
             let notif: NotificationData = {
               notificationId: item['notificationId'],
-              loginId: item['loginId'],
+              customerLoginId: item['customerLoginId'],
               customerAmsidnr: item['customerAmsidnr'],
               createdAt: item['createdAt'],
               readTime: item['readTime'],
@@ -38,7 +37,10 @@ export class NotificationsComponent implements OnInit {
               assocId: item['assocId'],
               assocType2: item['assocType2'],
               assocId2: item['assocId2'],
-              info: item['info']
+              infoHeadline: item['infoHeadline'],
+              infoText: item['infoText'],
+              isRead: item['isRead'],
+              links: item['links']
             };
             this.allNotifsArr.push(notif);
           }

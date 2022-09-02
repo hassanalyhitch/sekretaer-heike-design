@@ -3,8 +3,8 @@
     <img class="icon" [src]="notifIcon" alt="">
   </div>
   <div class="d-flex flex-column m-2 w-100">
-    <div >
-    {{notification.info | shortenText: 50 }}
+    <div class="" [ngClass]="{'read': notification.isRead === '1'}">
+    {{notification.infoHeadline | shortenText: 50 }}
     </div>
   </div>
   <div class="more">

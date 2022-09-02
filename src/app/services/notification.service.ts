@@ -8,7 +8,7 @@ export class NotificationsService {
 
   notification: NotificationData = <NotificationData>{
     notificationId: 0,
-    loginId: 0,
+    customerLoginId: 0,
     customerAmsidnr: "",
     createdAt: "",
     readTime: "",
@@ -16,7 +16,10 @@ export class NotificationsService {
     assocId: "",
     assocType2: "",
     assocId2: "",
-    info: ""
+    infoHeadline: "",
+    infoText: "",
+    isRead: "",
+    links: ""
   };
   observer: Observer<NotificationData>;
   selectObservable: Observable<NotificationData>;
