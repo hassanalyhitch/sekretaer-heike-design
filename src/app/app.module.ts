@@ -37,6 +37,7 @@ import { NotificationItemComponent } from './dashboard/notifications/notificatio
 import { AddPageComponent } from './dashboard/home/add-page/add-page.component';
 import { ChatComponent } from './dashboard/chat/chat.component';
 import { FolderDetailComponent } from './dashboard/folder-detail/folder-detail.component';
+import { Uploader } from '@syncfusion/ej2-inputs';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {

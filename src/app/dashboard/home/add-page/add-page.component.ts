@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs';
 import { FolderData } from '../../../models/folder.model';
 import { FoldersService } from '../../../services/folder.service';
 import { ContractsService } from '../../../services/contracts.service';
-import { Uploader } from '@syncfusion/ej2-inputs';
 
 
 @Component({
@@ -39,6 +38,14 @@ export class AddPageComponent implements OnInit {
   fileName:string = "No file chosen";
   showFileName:boolean = false;
   count:number = 0;
+
+  public path: Object = {
+ 
+    saveUrl: 'https://aspnetmvc.syncfusion.com/services/api/uploadbox/Save',
+ 
+    removeUrl: 'https://aspnetmvc.syncfusion.com/services/api/uploadbox/Remove'
+ 
+  };
 
   constructor( private route:ActivatedRoute, private router:Router,private folderService:FoldersService,private contractService:ContractsService) {
 
@@ -118,15 +125,6 @@ export class AddPageComponent implements OnInit {
       allowSearchFilter: true
     };
     
-    let uploadObject: Uploader = new Uploader({
-      asyncSettings: {
-          saveUrl: 'https://testapi.maxpool.de/api/v1/sekretaer/myfolders',
-          removeUrl: 'https://testapi.maxpool.de/api/v1/sekretaer/myfolders'
-      }
-    });
-  
-    // render initialized Uploader
-    // uploadObject.appendTo('#fileDropRef');
   }
 
 

@@ -2,7 +2,6 @@
   <div class="_content d-flex d-flex flex-column w-100 h-100 ">
     <div class="fileDropRef"> <label for="fileDropRef"> Please select Document</label></div>
     <input type="file"  #fileDropRef multiple (change)="getFileName()"  id="fileDropRef" class="file-input" [ngClass]="{'d-none':!showFileName}" />
-  
     <!-- <select class="options">
       <option *ngFor="let item of this.dataList;let i = index" value="{{item.code}}" [selected]="i == 0">
           {{item.name}}
