@@ -126,7 +126,7 @@ export class AddPageComponent implements OnInit {
     });
   
     // render initialized Uploader
-    uploadObject.appendTo('#fileDropRef');
+    // uploadObject.appendTo('#fileDropRef');
   }
 
 

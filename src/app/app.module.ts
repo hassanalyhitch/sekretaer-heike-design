@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -73,6 +74,7 @@ const appRoutes: Routes = [
     MatDialogModule,
     MatButtonModule,
     MatProgressSpinnerModule,
+    NgMultiSelectDropDownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     TranslateModule.forRoot({
       loader: {
