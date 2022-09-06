@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { FolderData } from '../../../models/folder.model';
 import { FoldersService } from '../../../services/folder.service';
 import { ContractsService } from '../../../services/contracts.service';
+import { Uploader } from '@syncfusion/ej2-inputs';
 
 
 @Component({
@@ -117,7 +118,7 @@ export class AddPageComponent implements OnInit {
       allowSearchFilter: true
     };
     
-    let uploadObject: Uploader = new Uploader({
+    let uploadObject = new Uploader({
       asyncSettings: {
           saveUrl: 'https://testapi.maxpool.de/api/v1/sekretaer/myfolders',
           removeUrl: 'https://testapi.maxpool.de/api/v1/sekretaer/myfolders'
