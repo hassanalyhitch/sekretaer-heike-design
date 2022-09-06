@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { FolderData } from '../../../models/folder.model';
 import { FoldersService } from '../../../services/folder.service';
 import { ContractsService } from '../../../services/contracts.service';
+import { Uploader } from '@syncfusion/ej2-inputs';
 
 
 @Component({
