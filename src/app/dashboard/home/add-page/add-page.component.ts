@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnDestroy, OnInit,Input, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
 import { Router,Event, ActivatedRoute } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { Uploader } from '@syncfusion/ej2-inputs';
 import { Subscription } from 'rxjs';
 import { FolderData } from '../../../models/folder.model';
 import { FoldersService } from '../../../services/folder.service';
