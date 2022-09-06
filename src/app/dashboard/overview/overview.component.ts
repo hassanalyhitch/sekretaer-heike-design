@@ -46,10 +46,10 @@ export class OverviewComponent implements OnInit {
 
     this.folderService.getFolders().subscribe({
       next: ()=>{
-        this.foldersArr = this.folderService.userFoldersArr;
-        if(this.folderService.userFoldersArr.length>3){
-          for(let i=3; i<this.folderService.userFoldersArr.length; i++){
-            this.folderSubsetArr.push(this.folderService.userFoldersArr[i]);
+        this.foldersArr = this.folderService.userFolderArr;
+        if(this.folderService.userFolderArr.length>3){
+          for(let i=3; i<this.folderService.userFolderArr.length; i++){
+            this.folderSubsetArr.push(this.folderService.userFolderArr[i]);
           }
         }
         this.foldersArr.length>1 ? this.showFolderCard2 = true: this.showFolderCard2 = false;

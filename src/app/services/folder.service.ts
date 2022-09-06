@@ -2,13 +2,12 @@ import { formatDate } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Observer, Subscription } from 'rxjs';
-import { ContractData } from '../models/contract.model';
 import { FolderData } from '../models/folder.model';
 
 
 @Injectable({ providedIn: 'root' })
 export class FoldersService {
-  folder: FolderData = <FolderData>{
+  selectedFolder: FolderData = <FolderData>{
     id :  "",
     loginId :  "",
     customerAmsidnr :  "",
@@ -16,23 +15,27 @@ export class FoldersService {
     folderName :  "",
     createTime :  "",
     createdAt :  "",
-    subFolders : []
-  };
-  observer: Observer<FolderData>;
-  selectObservable: Observable<FolderData>;
-  userFoldersArr: FolderData[]; 
+    subFolders : [],
 
+    isSelected:false
+  };
+
+
+  observer: Observer<FolderData>
+  selectObservable:Observable<FolderData>;
+  userFolderArr:FolderData[] =[];
 
   constructor(private http: HttpClient) {
 
     this.selectObservable = new Observable((observer: Observer<FolderData>)=>{
       this.observer = observer;
-      this.observer.next(this.folder);
+      this.observer.next(this.selectedFolder);
     });
+
 
     this.getFolders().subscribe({
       next: (resp) => {
-        this.userFoldersArr = [];
+        this.userFolderArr = [];
         
         // console.log("Servicing => "+resp);
         if(Array.isArray(resp)){
@@ -50,9 +53,11 @@ export class FoldersService {
               ownerFolderId : item['ownerFolderId'],
               folderName : item['folderName'],
               createTime : item['createdAt'],
-              subFolders : []              
+              subFolders : [],
+              
+              isSelected:false
             };
-            this.userFoldersArr.push(folder);
+            this.userFolderArr.push(folder);
             
             index++;
           }
@@ -74,8 +79,9 @@ export class FoldersService {
   }
 
   emitSelectedFolder(folder:FolderData){
-    this.folder = folder;
+    this.selectedFolder = folder;
   }
+ 
   getFolders() {
     return this.http.get(
         'https://testapi.maxpool.de/api/v1/sekretaer/myfolders',
@@ -86,5 +92,16 @@ export class FoldersService {
                 }),
         });
   }
-
+  getFolderDetails(id:string){
+    let url =  'https://testapi.maxpool.de/api/v1/sekretaer/myfolders' + id;
+    return this.http.get(
+      url,
+      {
+        headers: new HttpHeaders({
+          'accept': 'application/json',
+          'Content-Type': 'application/json'
+      }),
+      
+      });
+  }
 }
