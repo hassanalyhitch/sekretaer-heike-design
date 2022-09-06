@@ -118,7 +118,7 @@ export class AddPageComponent implements OnInit {
       allowSearchFilter: true
     };
     
-    let uploadObject = new Uploader({
+    let uploadObject: Uploader = new Uploader({
       asyncSettings: {
           saveUrl: 'https://testapi.maxpool.de/api/v1/sekretaer/myfolders',
           removeUrl: 'https://testapi.maxpool.de/api/v1/sekretaer/myfolders'
