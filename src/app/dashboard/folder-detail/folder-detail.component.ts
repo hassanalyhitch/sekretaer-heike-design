@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FolderData } from '../../models/folder.model';
+import { FoldersService } from '../../services/folder.service';
 
 @Component({
   selector: 'app-folder-detail',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FolderDetailComponent implements OnInit {
 
-  constructor() { }
+  folder: FolderData;
+
+  constructor(private folderService: FoldersService) { }
 
   ngOnInit() {
+    console.log(this.folderService.selectedFolder);
+    this.folder = this.folderService.selectedFolder;
   }
 
 }

@@ -3,6 +3,34 @@
 
     <div class="section-setting w-100 d-flex flex-column pt-3 ">
         <strong class="section-title align-self-center p-2"> FOLDER</strong>
+
+        <div class="bg-white shadow mx-3 d-flex fav-item">
+        <div class="icon-container d-flex flex-column align-items-center ">
+          
+        </div>
+        <div class="d-flex w-100 ">
+          <div class="d-flex flex-column _content ml-auto w-100 bg-white">
+            <span class="risk px-2 mt-3 mb-1">{{folder.folderName}} </span>
+            <span class="branch mt-2 px-2 ">created on : {{folder.createdAt}}</span>
+      
+            <div class="d-flex align-items-end justify-content-between w-100 mt-auto py-2 ">
+              <div class="date d-flex align-items-end px-2">
+                <span class="mx-1">{{folder.subFolders.length}} Subfolders</span>
+              </div>
+            </div>
+      
+            <div class="small-picture">
+              <img class="w-100 img-responsive" src="https://images.unsplash.com/photo-1606759163253-094133091882?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt="">
+            </div>
+      
+            <div class="fav-btn d-flex align-items-center justify-content-center">
+              <i class="material-icons">star</i>
+            </div>
+      
+          </div>
+      
+        </div>
+      </div>
     </div>
   </div>
 </div>
