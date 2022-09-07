@@ -12,6 +12,18 @@ export class FolderCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.folder = {
+      id :  "",
+      loginId :  "",
+      customerAmsidnr :  "",
+      ownerFolderId :  "",
+      folderName :  "",
+      createTime :  "",
+      createdAt :  "",
+      subFolders : [],
+  
+      isSelected:false
+    };
   }
 
 }
