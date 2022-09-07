@@ -30,8 +30,8 @@
         <div class="w-100 d-flex flex-wrap py-3 justify-content-center">
               
           <div class="folders w-100 d-flex flex-column align-items-center mt-1 bg-" id="folders" [ngClass]="{'transition':!collapsedFolders}">
-            <app-folder-card class="a_card card-1" [folder]=foldersArr[2] (click)="onCardClick(allContractsArr[2])" *ngIf="showFolderCard1" ></app-folder-card>
-            <app-folder-card class="a_card card-2" [folder]=foldersArr[1] (click)="onCardClick(allContractsArr[1])" *ngIf="showFolderCard2"></app-folder-card>
+            <app-folder-card class="a_card card-1" [folder]=foldersArr[2] (click)="onFolderCardClick(foldersArr[2])" *ngIf="showFolderCard1" ></app-folder-card>
+            <app-folder-card class="a_card card-2" [folder]=foldersArr[1] (click)="onFolderCardClick(foldersArr[1])" *ngIf="showFolderCard2"></app-folder-card>
             <app-folder-card class="a_card card-3" [folder]=foldersArr[0] (click)="onDefaultFolderCardClick()"></app-folder-card>
           </div>
           <div class="w-100 d-flex flex-column align-items-center extra-folders bg-" id="extra-folders" [ngClass]="{'show':!collapsedFolders}">

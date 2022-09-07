@@ -67,6 +67,8 @@ export class OverviewComponent implements OnInit {
   }
   onFolderCardClick(clickedFolder){
 
+    this.folderService.emitSelectedFolder(clickedFolder);
+    this.router.navigate(['dashboard/home/folder-detail', { id: clickedFolder.details.Amsidnr }]);
   }
 
   collapse(){
