@@ -9,11 +9,9 @@ import { ContractData } from '../../models/contract.model';
 export class FavItemComponent implements OnInit {
 
   @Input() contractItem: ContractData ;
-  
-  constructor() { }
 
-  ngOnInit() {
-    this.contractItem = {
+  constructor() {
+    this.contractItem = <ContractData>{
       id: 0,
       details: {
         Amsidnr: "",
@@ -35,6 +33,10 @@ export class FavItemComponent implements OnInit {
       },
       isSelected: false
     };
+    this.contractItem.details.name = "";
+  }
+
+  ngOnInit() {
   }
 
 }

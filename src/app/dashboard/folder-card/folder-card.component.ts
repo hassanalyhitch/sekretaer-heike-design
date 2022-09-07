@@ -9,9 +9,8 @@ import { FolderData } from '../../models/folder.model';
 export class FolderCardComponent implements OnInit {
 
   @Input() folder:FolderData;
-  constructor() { }
-
-  ngOnInit() {
+  
+  constructor() { 
     this.folder = {
       id :  "",
       loginId :  "",
@@ -24,6 +23,9 @@ export class FolderCardComponent implements OnInit {
   
       isSelected:false
     };
+  }
+
+  ngOnInit() {
   }
 
 }
