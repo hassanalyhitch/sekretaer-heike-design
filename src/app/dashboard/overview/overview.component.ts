@@ -64,13 +64,13 @@ export class OverviewComponent implements OnInit {
   onCardClick(clickedContract){
     
     this.contractService.emitSelectedFolder(clickedContract);
-    this.router.navigate(['dashboard/home/contract-detail', { id: clickedContract.details.Amsidnr }]);
+    this.router.navigate(['dashboard/overview/contract-detail', { id: clickedContract.details.Amsidnr }]);
     
   }
   onFolderCardClick(clickedFolder){
 
     this.folderService.emitSelectedFolder(clickedFolder);
-    this.router.navigate(['dashboard/home/folder-detail', { id: clickedFolder.customerAmsidnr }]);
+    this.router.navigate(['dashboard/overview/folder-detail', { id: clickedFolder.customerAmsidnr }]);
   }
 
   collapse(){
@@ -101,14 +101,14 @@ export class OverviewComponent implements OnInit {
     if(this.collapsed===false){
 
       this.contractService.emitSelectedFolder(this.allContractsArr[0]);
-      this.router.navigate(['dashboard/home/contract-detail', { id: this.allContractsArr[0].details.Amsidnr }]);
+      this.router.navigate(['dashboard/overview/contract-detail', { id: this.allContractsArr[0].details.Amsidnr }]);
     } else {
 
         
       if(this.allContractsArr.length==1){
         //show detail page
         this.contractService.emitSelectedFolder(this.allContractsArr[0]);
-        this.router.navigate(['dashboard/home/contract-detail', { id: this.allContractsArr[0].details.Amsidnr }]);
+        this.router.navigate(['dashboard/overview/contract-detail', { id: this.allContractsArr[0].details.Amsidnr }]);
 
       } else if(this.allContractsArr.length==2){
         //expand 2
@@ -136,14 +136,14 @@ export class OverviewComponent implements OnInit {
     if(this.collapsedFolders===false){
 
       this.folderService.emitSelectedFolder(this.foldersArr[0]);
-      this.router.navigate(['dashboard/home/folder-detail', { id: this.foldersArr[0].customerAmsidnr }]);
+      this.router.navigate(['dashboard/overview/folder-detail', { id: this.foldersArr[0].customerAmsidnr }]);
     } else {
 
         
       if(this.foldersArr.length==1){
         //show detail page
         this.folderService.emitSelectedFolder(this.foldersArr[0]);
-        this.router.navigate(['dashboard/home/folder-detail', { id: this.foldersArr[0].customerAmsidnr }]);
+        this.router.navigate(['dashboard/overview/folder-detail', { id: this.foldersArr[0].customerAmsidnr }]);
 
       } else if(this.foldersArr.length==2){
         //expand 2

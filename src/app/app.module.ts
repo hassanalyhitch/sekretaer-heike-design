@@ -56,8 +56,8 @@ const appRoutes: Routes = [
       { path: 'settings', component: SettingsComponent }
     ],
   },
-  { path: 'dashboard/home/contract-detail', component:ContractDetailComponent },
-  { path: 'dashboard/home/folder-detail', component:FolderDetailComponent },
+  { path: 'dashboard/overview/contract-detail', component:ContractDetailComponent },
+  { path: 'dashboard/overview/folder-detail', component:FolderDetailComponent },
   { path: 'dashboard/home/notifications', component:NotificationsComponent },
   { path: 'dashboard/favourite/contract-detail', component:ContractDetailComponent },
   { path: 'dashboard/home/contract-detail/fileview', component: FileviewComponent},
