@@ -1,7 +1,9 @@
 import { formatDate } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DocumentData } from '../../models/document.model';
+import { RenameModalComponent } from '../rename-modal/rename-modal.component';
 
 @Component({
   selector: 'app-document-item',
@@ -11,7 +13,7 @@ import { DocumentData } from '../../models/document.model';
 export class DocumentItemComponent implements OnInit {
 
   @Input() doc: DocumentData;
-  constructor(private router: Router) { }
+  constructor(private router: Router,private matDialog: MatDialog) { }
 
   ngOnInit() {
     if(this.doc){
@@ -27,4 +29,18 @@ export class DocumentItemComponent implements OnInit {
     this.router.navigate(['dashboard/home/contract-detail/fileview', { id: doc.linkToDoc}],{ skipLocationChange: false });
   }
 
+
+  openModal(file) {
+    const dialogConfig = new MatDialogConfig();
+    // let passdata:string = '{"fileName": "'+this.file.name+'","fileUrl": "'+this.file.fileUrl+'"}';
+    let passdata:string = '{"fileName": "'+file.name+'","fileUrl": "'+file.docId+'"}';
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = false;
+    dialogConfig.id = 'modal-component';
+    dialogConfig.height = '80%';
+    dialogConfig.width = '90%';
+    dialogConfig.data = passdata;
+    // https://material.angular.io/components/dialog/overview
+    const modalDialog = this.matDialog.open(RenameModalComponent, dialogConfig);
+  }
 }

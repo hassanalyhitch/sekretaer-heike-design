@@ -37,6 +37,7 @@ import { NotificationItemComponent } from './dashboard/notifications/notificatio
 import { AddPageComponent } from './dashboard/home/add-page/add-page.component';
 import { ChatComponent } from './dashboard/chat/chat.component';
 import { FolderDetailComponent } from './dashboard/folder-detail/folder-detail.component';
+import { RenameModalComponent } from './dashboard/rename-modal/rename-modal.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -56,6 +57,7 @@ const appRoutes: Routes = [
       { path: 'settings', component: SettingsComponent }
     ],
   },
+  { path: 'dashboard/home/contract-detail', component:ContractDetailComponent },
   { path: 'dashboard/overview/contract-detail', component:ContractDetailComponent },
   { path: 'dashboard/overview/folder-detail', component:FolderDetailComponent },
   { path: 'dashboard/home/notifications', component:NotificationsComponent },
@@ -105,7 +107,8 @@ const appRoutes: Routes = [
     NotificationItemComponent,
     AddPageComponent,
     ChatComponent,
-    FolderDetailComponent
+    FolderDetailComponent,
+    RenameModalComponent
    ],
   bootstrap:    [ AppComponent ],
   providers: [

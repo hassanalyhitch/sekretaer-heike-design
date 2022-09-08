@@ -1,4 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
@@ -75,6 +76,5 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     this.contractSub.unsubscribe();
   }
-
 
 }
