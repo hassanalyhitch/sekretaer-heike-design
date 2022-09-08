@@ -17,6 +17,11 @@
 .section-title{
   text-shadow: none;
   font-size: 22px;
+}
+.title{
+  cursor: pointer;
+}
+.collapse-icon{
   cursor: pointer;
 }
 .section-insurance{
@@ -30,6 +35,27 @@
  color: #707070;
  cursor: pointer;
 }
+
+.quick-fab{
+  height: 46px;
+  width: 46px;
+  border-radius: 50%;
+  border: solid 1px white;
+  border-color: rgba(0,0,0,.05);
+  background-color: white;
+  color: #D60B51;
+  backdrop-filter: blur(6.6px);
+  -webkit-backdrop-filter: blur(6.6px);
+  position: relative;
+  cursor: pointer;
+}
+.quick-fab i {
+  font-size: 30px;
+}
+.quick-fab span{
+  font-size: 28px;
+}
+
 .cards{
   min-height: 230px;
   height: 230px;

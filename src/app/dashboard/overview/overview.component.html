@@ -1,10 +1,13 @@
 <div class="content-wrapper w-100 ">
   <div class="_content d-flex d-flex flex-column w-100 h-100 bg-">
-    <div class="section-title w-100 d-flex justify-content-center pt-3 " (click)="collapse()">
-      <strong class=" align-self-center p-2 "> MY SEKRETÄR</strong>
-      <i class="material-icons mx-2 align-self-center collapse-icon" *ngIf="!collapsed">expand_less</i>
-      <i class="material-icons mx-2 align-self-center collapse-icon" *ngIf="collapsed">expand_more</i>
+    <div class="section-title w-100 d-flex justify-content-center pt-3 pb-2" >
+      <strong class=" align-self-center p-2 title bg-" (click)="collapse()"> MY SEKRETÄR</strong>
+      <i class="material-icons mx-2 align-self-center collapse-icon bg-" *ngIf="!collapsed" (click)="collapse()">expand_less</i>
+      <i class="material-icons mx-2 align-self-center collapse-icon bg-" *ngIf="collapsed" (click)="collapse()">expand_more</i>
      
+      <div class="quick-fab shadow-sm d-flex flex-column mx-3 justify-content-center align-items-center">
+        <i class="material-icons">add</i>
+      </div>
     </div>
 
     <div class="section-insurance w-100 d-flex flex-column align-items-center bg-">
@@ -21,11 +24,14 @@
       </div>
       
       <div class="section-folder d-flex flex-column p-3 w-100 ">
-        <div class="section-title w-100 d-flex justify-content-center pt-3 " (click)="collapseFolders()">
-          <strong class=" align-self-center p-2 "> MY FOLDERS</strong>
-          <i class="material-icons mx-2 align-self-center collapse-icon" *ngIf="!collapsedFolders">expand_less</i>
-          <i class="material-icons mx-2 align-self-center collapse-icon" *ngIf="collapsedFolders">expand_more</i>
+        <div class="section-title w-100 d-flex justify-content-center pt-3 ">
+          <strong class=" align-self-center p-2 title " (click)="collapseFolders()"> MY FOLDERS</strong>
+          <i class="material-icons mx-2 align-self-center collapse-icon" (click)="collapseFolders()" *ngIf="!collapsedFolders">expand_less</i>
+          <i class="material-icons mx-2 align-self-center collapse-icon" (click)="collapseFolders()" *ngIf="collapsedFolders">expand_more</i>
         
+          <div class="quick-fab shadow-sm d-flex flex-column mx-3 justify-content-center align-items-center">
+            <i class="material-icons">add</i>
+          </div>
         </div>
 
         <div class="w-100 d-flex flex-wrap py-3 justify-content-center">
