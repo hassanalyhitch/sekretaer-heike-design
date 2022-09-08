@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { MatButtonModule } from '@angular/material/button';
@@ -72,6 +73,7 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     MatTooltipModule,
     MatDialogModule,
     MatButtonModule,
