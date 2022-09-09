@@ -45,6 +45,11 @@
 .share{
   justify-self: center;
 }
+app-upload-file{
+  margin:10px 15px;
+  border-radius: 7px;
+  border: none;
+}
 input{
   text-align: center;
   margin:10px 15px;
@@ -66,16 +71,13 @@ input{
   color:blue;
   background-color: #fff;
   border: 1px solid black;
+
 }
 
 .file-input::before {
   content: '';
   display: none;
   color:white !important;
-  background: linear-gradient(114deg, #E5007E, #D60B51);
-  border: 1px solid #999;
-  border-radius: 3px;
-  padding: 5px 8px;
   outline: none;
   white-space: nowrap;
   -webkit-user-select: none;
@@ -83,19 +85,30 @@ input{
   cursor: pointer;
   }
 
-  .file-input::-webkit-file-upload-button {
+.file-input::-webkit-file-upload-button {
   visibility: hidden;
+  display: none;
   }
-.fileDropRef{
+.fileUpload{
   text-align: center;
   color: grey;
-  margin:5px 15px;
+  margin:10px 15px;
   border-radius: 7px;
   border: none;
+  width: 93%;
   padding: 15px;
   background-color: #fff;
 }
-
+.Upload{
+    text-align: center;
+    color: grey;
+    margin:10px 15px;
+    border-radius: 7px;
+    border: none;
+    width: 93%;
+    padding: 15px;
+    background-color: #fff;
+}
 
 .btn{
   background-color: #E5007E;

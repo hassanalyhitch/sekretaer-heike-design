@@ -3,8 +3,13 @@ import { Router,Event, ActivatedRoute } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Subscription } from 'rxjs';
 import { FolderData } from '../../../models/folder.model';
-import { FoldersService } from '../../../services/folder.service';
 import { ContractsService } from '../../../services/contracts.service';
+import { FoldersService } from '../../../services/folder.service';
+import { HttpClient } from '@angular/common/http';
+import { FileUploadService } from '../../../services/file-upload.service';
+import { compileClassMetadata } from '@angular/compiler';
+import { UploadFileData } from '../../../models/upload-file.model';
+
 
 
 @Component({
@@ -13,56 +18,60 @@ import { ContractsService } from '../../../services/contracts.service';
   styleUrls: ['./add-page.component.css']
 })
 export class AddPageComponent implements OnInit {
-  
-  @ViewChild("fileDropRef",{static:true}) fileDropRef:ElementRef;
-  dropdownSettings:IDropdownSettings={};
-  @Input() index:String;
-  folders:FolderData =<FolderData>{
-  id : "",
-  loginId : "",
-  customerAmsidnr : "",
-  ownerFolderId : "",
-  folderName : "",
-  createTime :"",
-  createdAt : "",
-  subFolders : [],
-
-  isSelected:false
-  };
-
-  folderSub:Subscription;
-  folderArr: any[] = [];
-  contractArr: any[] = [];
-  dataArr: any[] = [];
-
-  fileName:string = "No file chosen";
-  showFileName:boolean = false;
+  selectedFile:File;
+  imagePreview:any;
+  onFileUpload(event){
+    this.selectedFile = event.target.files[0];
+  }
+  fileName:string ="No file chosen";
+  showFileName:boolean =false;
   count:number = 0;
+  fileUploader:any;
+ 
+    // const reader = new FileReader();
+    // reader.onload =() =>{
+    //   this.imagePreview = reader.result;
+    // };
+    // reader.readAsDataURL(this.selectedFile);
+  
+  
+  @ViewChild("selectFile",{static:true}) selectFile:ElementRef;
+   dropdownSettings:IDropdownSettings={};
+   @Input() index:String;
+   folders:FolderData =<FolderData>{
+    id : "",
+    loginId : "",
+    customerAmsidnr : "",
+    ownerFolderId : "",
+    folderName : "",
+    createTime :"",
+    createdAt : "",
+    subFolders : [],
 
-  public path: Object = {
- 
-    saveUrl: 'https://aspnetmvc.syncfusion.com/services/api/uploadbox/Save',
- 
-    removeUrl: 'https://aspnetmvc.syncfusion.com/services/api/uploadbox/Remove'
- 
-  };
+    isSelected:false
+   };
+  
+   folderSub:Subscription;
+   folderArr: any[] = [];
+   contractArr: any[] = [];
+   dataArr: any[] = [];
 
-  constructor( private route:ActivatedRoute, private router:Router,private folderService:FoldersService,private contractService:ContractsService) {
+   shortLink: string = "";
+   loading: boolean = false; // Flag variable
+   file: File = null;
+   successResponse:boolean = true;
+   postResponse:any;
+
+   uploadFileArr: UploadFileData [] =[];
+
+   constructor( private route:ActivatedRoute, private router:Router,private folderService:FoldersService,
+    private contractService:ContractsService,private http:HttpClient,private fileUploadService: FileUploadService,private httpClient:HttpClient) {
 
 
   }
 
 
-  getFileName () {
-    // let fileInput = document.getElementById('fileDropRef') as HTMLInputElement ;
-    let fileInput = this.fileDropRef.nativeElement as HTMLInputElement ;
-    this.fileName = fileInput.files.item(0).name;
-    this.fileName == "No file chosen" ? this.showFileName = false : this.showFileName = true;
 
-    // this.count ++;
-    // console.log (this.count+ " " +this.showFileName+ "= filename => " +this.fileName);
-    // alert('FileName: ' + fileInput.files.item(0).name+' FileType: ' + fileInput.files.item(0).type+' FileSize: ' + fileInput.files.item(0).size);
-  };
 
   ngOnInit() {
     this.folderSub = this.folderService.getFolders().subscribe({
@@ -91,12 +100,13 @@ export class AddPageComponent implements OnInit {
             next:(res) =>{
               
               if(Array.isArray(res)){
-                for(let item of res){
+                for(let cont of res){
+                  console.log(cont);
                   //
                   let contract: any = {
-                    id: item['id'],
-                    customerAmsidnr:  item['CustomerAmsidnr'],
-                    dataName : item['Risk'],
+                    id: cont['Contractnumber'],
+                    customerAmsidnr:  cont['CustomerAmsidnr'],
+                    dataName : cont['Risk'],
                     type : 'contract'
                     
                   };
@@ -106,6 +116,7 @@ export class AddPageComponent implements OnInit {
                 // this.dataArr.push(this.contractArr);
               this.dataArr = this.dataArr.concat(this.contractArr);
                 console.log(this.dataArr.length);
+                // console.table(this.dataArr);
               }
 
             }
@@ -122,12 +133,55 @@ export class AddPageComponent implements OnInit {
     this.dropdownSettings={
       idField: 'id',
       textField: 'dataName',
-      allowSearchFilter: true
+      allowSearchFilter: true,
+      limitSelection: 1,
+      enableCheckAll:false
     };
     
+  
+  
   }
+  getFileName(event){
+    this.file = event.target.files[0];
+    this.showFileName = true;
+    console.log(this.showFileName);
+    console.log(this.file);
 
+    let _file:UploadFileData ={
+      fileId : this.uploadFileArr.length +"",
+      fileName :this.file.name,
+      fileSize :this.file.size/1000000+ "MB",
+      fileType :this.file.type
+    }
 
+    this.uploadFileArr.push(_file);
+  }
+  onUploadFile() {
+    this.loading = !this.loading;
+    console.log(this.file);
+    this.fileUploadService.upload(this.file).subscribe(
+        (event: any) => {
+            if (typeof (event) === 'object') {
+
+                // Short link via api response
+                this.shortLink = event.link;
+
+                this.loading = false; 
+                
+            }
+          
+          }
+       
+    );
+        
+}
+removeFile(fileId){
+  console.log (fileId);
+  let removeIndex = fileId;
+  this.uploadFileArr = this.uploadFileArr.filter(function(value, index, arr){
+    return index != removeIndex;
+    });
+}
   
  
 

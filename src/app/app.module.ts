@@ -36,6 +36,7 @@ import { SettingsComponent } from './dashboard/settings/settings.component';
 import { NotificationsComponent } from './dashboard/notifications/notifications.component';
 import { NotificationItemComponent } from './dashboard/notifications/notification-item/notification-item.component';
 import { AddPageComponent } from './dashboard/home/add-page/add-page.component';
+import { UploadFileComponent } from './dashboard/home/add-page/upload-file/upload-file.component';
 import { ChatComponent } from './dashboard/chat/chat.component';
 import { FolderDetailComponent } from './dashboard/folder-detail/folder-detail.component';
 import { RenameModalComponent } from './dashboard/rename-modal/rename-modal.component';
@@ -108,6 +109,7 @@ const appRoutes: Routes = [
     NotificationsComponent,
     NotificationItemComponent,
     AddPageComponent,
+    UploadFileComponent,
     ChatComponent,
     FolderDetailComponent,
     RenameModalComponent
