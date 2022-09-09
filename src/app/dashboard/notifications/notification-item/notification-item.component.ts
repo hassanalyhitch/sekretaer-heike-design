@@ -17,18 +17,24 @@ export class NotificationItemComponent implements OnInit {
 
   ngOnInit() {
     
-    switch(this.notification.assocType){
-      case "vamsidnr" : {
-        this.notifIcon = "/assets/contract-icon.svg";
-        break;
-      }
-      case "dms" : {
-        this.notifIcon = "/assets/doc-icon.svg";
-        break;
-      }
-      default: {
-        this.notifIcon = "/assets/doc-icon.svg";
-        break;
+    if(this.notification.links.length > 0){
+
+      for(let i=0; i<this.notification.links.length; i++){
+
+        switch(this.notification.links[i].assocType){
+          case "vamsidnr" : {
+            this.notifIcon = "/assets/contract-icon.svg";
+            break;
+          }
+          case "dms" : {
+            this.notifIcon = "/assets/doc-icon.svg";
+            break;
+          }
+          default: {
+            this.notifIcon = "/assets/doc-icon.svg";
+            break;
+          }
+        }
       }
     }
   }

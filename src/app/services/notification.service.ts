@@ -7,19 +7,15 @@ import { NotificationData } from "../models/notification.model";
 export class NotificationsService {
 
   notification: NotificationData = <NotificationData>{
-    notificationId: 0,
-    customerLoginId: 0,
+    notificationId: "",
+    customerLoginId: "",
     customerAmsidnr: "",
     createdAt: "",
     readTime: "",
-    assocType: "",
-    assocId: "",
-    assocType2: "",
-    assocId2: "",
-    infoHeadline: "",
     infoText: "",
-    isRead: "",
-    links: ""
+    infoHeadline: "",
+    isRead: 0,
+    links: []
   };
   observer: Observer<NotificationData>;
   selectObservable: Observable<NotificationData>;

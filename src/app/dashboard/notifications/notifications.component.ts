@@ -33,12 +33,8 @@ export class NotificationsComponent implements OnInit {
               customerAmsidnr: item['customerAmsidnr'],
               createdAt: item['createdAt'],
               readTime: item['readTime'],
-              assocType: item['assocType'],
-              assocId: item['assocId'],
-              assocType2: item['assocType2'],
-              assocId2: item['assocId2'],
-              infoHeadline: item['infoHeadline'],
               infoText: item['infoText'],
+              infoHeadline: item['infoHeadline'],
               isRead: item['isRead'],
               links: item['links']
             };
