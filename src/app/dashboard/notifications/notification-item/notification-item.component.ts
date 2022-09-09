@@ -30,6 +30,10 @@ export class NotificationItemComponent implements OnInit {
             this.notifIcon = "/assets/doc-icon.svg";
             break;
           }
+          case "chat" : {
+            this.notifIcon = "/assets/chat-icon.svg";
+            break;
+          }
           default: {
             this.notifIcon = "/assets/doc-icon.svg";
             break;
@@ -37,6 +41,15 @@ export class NotificationItemComponent implements OnInit {
         }
       }
     }
+  }
+  contains(obj) {
+    let i = this.notification.links.length;
+    while (i--) {
+       if (this.notification.links[i].assocType === obj) {
+           return true;
+       }
+    }
+    return false;
   }
 
 }
