@@ -155,6 +155,7 @@ export class AddPageComponent implements OnInit {
     }
 
     this.uploadFileArr.push(_file);
+    this.selectFile.nativeElement.value = null;
   }
   onUploadFile() {
     this.loading = !this.loading;
@@ -175,11 +176,13 @@ export class AddPageComponent implements OnInit {
     );
         
 }
-removeFile(fileId){
-  console.log (fileId);
-  let removeIndex = fileId;
+removeFile(obj){
+  console.log (obj);
+  console.log(this.selectFile.nativeElement.files)
+  let removeIndex = obj.fileId;
   this.uploadFileArr = this.uploadFileArr.filter(function(value, index, arr){
-    return index != removeIndex;
+    console.log(value);
+    return (value.fileName != obj.fileName && value.fileId != obj.fileid);
     });
 }
   

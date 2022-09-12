@@ -10,13 +10,13 @@ import { UploadFileData } from '../../../../models/upload-file.model';
 export class UploadFileComponent implements OnInit {
 
   @Input() uploadFile:UploadFileData;
-  @Output() deleteFile = new EventEmitter <string>();
+  @Output() deleteFile = new EventEmitter <{}>();
   constructor() { }
 
   ngOnInit(): void {
   }
-  onDeleteFile(fileId){
-    this.deleteFile.emit(fileId);
+  onDeleteFile(fileId, fileName){
+    this.deleteFile.emit({fileId,fileName});
   }
 
 }

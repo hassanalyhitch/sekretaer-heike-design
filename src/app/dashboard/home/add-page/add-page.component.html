@@ -10,7 +10,7 @@
     <div>
             <div class="fileUpload"> <label for="selectFile">Please select Document</label></div>
             <input class="file-input d-none" type="file" 
-            #selectFile multiple (change)="getFileName($event)" id="selectFile"/>
+            #selectFile (change)="getFileName($event)" id="selectFile"/>
             
             
             <app-upload-file *ngFor="let uploadFile of uploadFileArr" [uploadFile]="uploadFile" (deleteFile)="removeFile($event)"></app-upload-file>
