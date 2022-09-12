@@ -1,0 +1,97 @@
+.section-title{
+  text-shadow: none;
+  font-size: 22px;
+}
+
+
+button,
+input,
+label {
+  font-family: 'Poppins';
+}
+
+.heading {
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 2.5em;
+  margin-top: 3em;
+}
+.sub-heading {
+  font-family: 'Poppins';
+  font-weight: 200;
+  font-size: 1.5em;
+  margin-bottom: 2.8em;
+}
+
+.material-textfield {
+  position: relative;
+  height: 50px;
+  width: 100%;
+}
+
+.material-textfield > label {
+  position: absolute;
+  font-size: 1rem;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #575756;
+  background-color: inherit;
+  padding: 0 0.3rem;
+  margin: 0 0.5rem;
+  transition: 0.1s ease-out;
+  transform-origin: left top;
+  pointer-events: none;
+}
+.material-textfield > input {
+  font-size: 1rem;
+  outline: none;
+  border: 1px solid #2C262D;
+  border-radius: 7px;
+  padding: 1rem 0.7rem;
+  width: 100%;
+  color: #575756;
+  background-color: white;
+  transition: 0.1s ease-out;
+}
+.material-textfield > input:focus {
+  border: 2px solid #E5007E;
+}
+.material-textfield > input:focus + label {
+  color: white;
+  background-color: inherit;
+  top: 0;
+  transform: translateY(-75%) scale(0.9);
+}
+.material-textfield > input:not(:placeholder-shown) + label {
+  color: white;
+  top: 0;
+  transform: translateY(-75%) scale(0.9);
+}
+
+.btn-login, .btn-login:focus:not(button[disabled]) {
+  color: white;
+  height: 50px !important;
+  background-color: #E5007E !important;
+  border-color: #E5007E !important;
+  background-image: linear-gradient(131deg, #E5007E, #D60B51);
+  transition: 0.1s ease-out;
+}
+.btn-login:hover {
+  background-color: #E5007E !important;
+  background-image: linear-gradient(131deg, #D8D3E8, #EBC3CD);
+  color: #2C262D;
+  border: none;
+}
+button[disabled] {
+  color: white;
+  cursor: default;
+}
+button[disabled]:hover {
+  border-color: white !important;
+  background-color: transparent;
+  cursor: default;
+}
+button[disabled]:hover#sign-in-btn {
+  color: white;
+}

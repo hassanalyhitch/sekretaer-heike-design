@@ -8,9 +8,25 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class RenameModalComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA)public data:any) { }
+  dataObj:{
+    docName: string,
+    docid: string
+  };
+  documentName: string = "";
+  newDocName: string= "";
+  constructor(@Inject(MAT_DIALOG_DATA)public data:any) { 
+
+    this.dataObj = JSON.parse(this.data);
+    this.documentName = this.dataObj.docName;
+    
+
+  }
 
   ngOnInit() {
+  }
+  
+  onSubmit(formData: any) {
+  
   }
 
 }
