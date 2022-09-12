@@ -1,45 +1,45 @@
 
 <div class="content-wrapper w-100 ">
-<div class="_content d-flex flex-column w-100 h-100 ">
-  
-  <!-- <select class="options">
-    <option *ngFor="let item of this.dataList;let i = index" value="{{item.code}}" [selected]="i == 0">
-        {{item.name}}
-    </option>
-  </select>        -->
-  <div>
-          <div class="fileUpload"> <label for="selectFile">Please select Document</label></div>
-          <input class="file-input d-none" type="file" 
-          #selectFile multiple (change)="getFileName($event)" id="selectFile"/>
-          
-          
-          <app-upload-file *ngFor="let uploadFile of uploadFileArr" [uploadFile]="uploadFile" (deleteFile)="removeFile($event)"></app-upload-file>
-          <!-- <button class="fileUpload" (click)="selectFile.click()">Please select Folder</button> -->
-          <!-- <button class="Upload" (click)="onUploadFile()">Upload</button> -->
-  </div>
+  <div class="_content d-flex flex-column w-100 h-100 ">
+    
+    <!-- <select class="options">
+      <option *ngFor="let item of this.dataList;let i = index" value="{{item.code}}" [selected]="i == 0">
+          {{item.name}}
+      </option>
+    </select>        -->
+    <div>
+            <div class="fileUpload"> <label for="selectFile">Please select Document</label></div>
+            <input class="file-input d-none" type="file" 
+            #selectFile multiple (change)="getFileName($event)" id="selectFile"/>
+            
+            
+            <app-upload-file *ngFor="let uploadFile of uploadFileArr" [uploadFile]="uploadFile" (deleteFile)="removeFile($event)"></app-upload-file>
+            <!-- <button class="fileUpload" (click)="selectFile.click()">Please select Folder</button> -->
+            <!-- <button class="Upload" (click)="onUploadFile()">Upload</button> -->
+    </div>
 
 <!--Flag variable is used here-->
-      <!-- <div class="container" *ngIf="loading">
-          <h3>Loading ...</h3>
-      </div> -->
-    
+        <!-- <div class="container" *ngIf="loading">
+            <h3>Loading ...</h3>
+        </div> -->
+      
 
-  <!-- <input type="text" name="enter name" placeholder="Enter Document Name"/> -->
-  <div class="share">
-      <input type="checkbox" id="broker" name="broker">
-      <label for="broker">Share with Broker</label>
-  </div>
-  <div class="selectfolder">
-      <ng-multiselect-dropdown
-      [settings]="dropdownSettings"
-      [data]="dataArr"
-      >
-    </ng-multiselect-dropdown>
-  </div>
-      <input type="date" placeholder=" Opt.select document date" style="color:grey;"/>
-      <input type="text" name="select tags" placeholder="Enter Tags/select Tags"/>
-      <input type="textarea"  style="padding:30px;"placeholder="Notice">
-  <div class="btn" (click)="onUploadFile()">Save</div>
-</div> 
+    <!-- <input type="text" name="enter name" placeholder="Enter Document Name"/> -->
+    <div class="share">
+        <input type="checkbox" id="broker" name="broker">
+        <label for="broker">Share with Broker</label>
+    </div>
+    <div class="selectfolder">
+        <ng-multiselect-dropdown
+        [settings]="dropdownSettings"
+        [data]="dataArr"
+        >
+      </ng-multiselect-dropdown>
+    </div>
+        <input type="date" placeholder=" Opt.select document date" style="color:grey;"/>
+        <input type="text" name="select tags" placeholder="Enter Tags/select Tags"/>
+        <input type="textarea"  style="padding:30px;"placeholder="Notice">
+    <div class="btn" (click)="onUploadFile()">Save</div>
+  </div> 
 </div>
 
