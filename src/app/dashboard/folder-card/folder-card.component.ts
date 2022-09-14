@@ -8,7 +8,7 @@ import { FolderData } from '../../models/folder.model';
 })
 export class FolderCardComponent implements OnInit {
 
-  @Input() folder:FolderData = {
+  @Input() folder:FolderData = <FolderData>{
     id :  "",
     loginId :  "",
     customerAmsidnr :  "",
@@ -19,14 +19,14 @@ export class FolderCardComponent implements OnInit {
     subFolders : [],
     docs: [],
     isSelected:false
-  };;
+  };
 
   constructor() { 
     
+    this.folder.folderName = " ";
   }
 
   ngOnInit() {
-    this.folder.folderName = " ";
   }
 
 }
