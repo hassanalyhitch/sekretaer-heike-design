@@ -13,10 +13,13 @@
             <span class="risk px-2 mt-3 mb-1">{{folder.folderName}} </span>
             <span class="branch mt-2 px-2 ">created on : {{folder.createdAt}}</span>
       
-            <div class="d-flex align-items-end justify-content-between w-100 mt-auto py-2 ">
-              <div class="date d-flex align-items-end px-2">
-                <span class="mx-1">{{folder.subFolders.length}} Subfolders</span>
-              </div>
+            <div class="d-flex flex-column align-items-start justify-content-between w-100 mt-auto py-2 ">
+            <div class="date d-flex align-items-end px-2">
+              <span class="mx-1">{{folder.docs.length}} Documents</span>
+            </div>
+            <div class="date d-flex align-items-end px-2">
+              <span class="mx-1">{{folder.subFolders.length}} Subfolders</span>
+            </div>
             </div>
       
             <div class="small-picture">
@@ -32,6 +35,7 @@
         </div>
       </div>
 
+      <hr class="mx-1" id="folder-hr" data-content="" />
       <hr class="mx-1" id="docu-hr" data-content="" />
     </div>
   </div>

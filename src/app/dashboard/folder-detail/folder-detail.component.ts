@@ -12,17 +12,23 @@ export class FolderDetailComponent implements OnInit {
 
   folder: FolderData;
   hrTitle: string;
+  hrTitle2: string;
 
   constructor(private folderService: FoldersService, private translate:TranslateService) { }
 
   ngOnInit() {
     console.log(this.folderService.selectedFolder);
     this.hrTitle = this.translate.instant('insurance.detail.hrtitle');
+    this.hrTitle2 = this.translate.instant('insurance.folder-detail.subfolder');
+
     const wholeDocTemplate = document.getElementsByClassName('section-folderdetail').item(0) as HTMLElement | null;
     if (wholeDocTemplate != null) {
+      document.getElementById("folder-hr").setAttribute('data-content', this.hrTitle2);
       document.getElementById("docu-hr").setAttribute('data-content', this.hrTitle);
     } 
+
     this.folder = this.folderService.selectedFolder;
+
   }
 
 }

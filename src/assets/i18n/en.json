@@ -75,6 +75,9 @@
   },
   "settings":{
     "title":"Settings"
+  },
+  "folder-detail":{
+    "subfolder":"Sub-folder"
   }
 
 }
