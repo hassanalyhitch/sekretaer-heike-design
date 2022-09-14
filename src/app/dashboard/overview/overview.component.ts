@@ -13,9 +13,43 @@ import { FoldersService } from '../../services/folder.service';
 export class OverviewComponent implements OnInit {
 
   subsetArr:ContractData[] = [];
-  allContractsArr:ContractData[] = this.contractService.userContractsArr;
+  allContractsArr:ContractData[] = [{
+    id: 0,
+    details: {
+      Amsidnr: "",
+      CustomerAmsidnr: "",
+      InsuranceId: "",
+      ContractNumber: "",
+      Company: "",
+      StartDate: "",
+      EndDate: "",
+      YearlyPayment: "",
+      Paymethod: "",
+      Branch: "",
+      Risk: "",
+      docs: [],
+      name: "",
+      productSek: "",
+      tarif: "",
+      isFav: 1
+    },
+    isSelected: false
+  }
+];
 
-  foldersArr: FolderData[] = this.folderService.userFolderArr;
+  foldersArr: FolderData[] = [{
+    id :  "",
+    loginId :  "",
+    customerAmsidnr :  "",
+    ownerFolderId :  "",
+    folderName :  "",
+    createTime :  "",
+    createdAt :  "",
+    subFolders : [],
+    docs: [],
+    isSelected:false
+  }
+];
   folderSubsetArr: FolderData[] = [];
 
   showCard2:boolean = false;

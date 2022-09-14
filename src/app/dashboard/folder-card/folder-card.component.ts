@@ -23,7 +23,6 @@ export class FolderCardComponent implements OnInit {
 
   constructor() { 
     
-    this.folder.folderName = " ";
   }
 
   ngOnInit() {

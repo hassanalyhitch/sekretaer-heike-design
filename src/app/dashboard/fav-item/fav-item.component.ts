@@ -32,8 +32,6 @@ export class FavItemComponent implements OnInit {
   };
 
   constructor() {
-    
-    this.contractItem.details.name = "";
   }
 
   ngOnInit() {
