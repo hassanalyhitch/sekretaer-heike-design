@@ -6,7 +6,8 @@
 
 button,
 input,
-label {
+label,
+* {
   font-family: 'Poppins';
 }
 
@@ -38,7 +39,6 @@ label {
   color: #575756;
   background-color: inherit;
   padding: 0 0.3rem;
-  margin: 0 0.5rem;
   transition: 0.1s ease-out;
   transform-origin: left top;
   pointer-events: none;
@@ -58,13 +58,13 @@ label {
   border: 2px solid #E5007E;
 }
 .material-textfield > input:focus + label {
-  color: white;
+  color: rgba(0,0,0,.87);
   background-color: inherit;
   top: 0;
   transform: translateY(-75%) scale(0.9);
 }
 .material-textfield > input:not(:placeholder-shown) + label {
-  color: white;
+  color: rgba(0,0,0,.87);
   top: 0;
   transform: translateY(-75%) scale(0.9);
 }
