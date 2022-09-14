@@ -37,7 +37,7 @@ export class FoldersService {
       next: (resp) => {
         this.userFolderArr = [];
         
-        // console.log("Servicing => "+resp);
+        console.table(resp);
         if(Array.isArray(resp)){
           let index: number = 0;
 

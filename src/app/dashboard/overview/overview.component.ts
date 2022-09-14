@@ -39,7 +39,7 @@ export class OverviewComponent implements OnInit {
             this.subsetArr.push(this.contractService.userContractsArr[i]);
           }
         }
-        console.log(this.allContractsArr);
+        // console.log(this.allContractsArr);
         this.allContractsArr.length>1 ? this.showCard2 = true: this.showCard2 = false;
         this.allContractsArr.length>2 ? this.showCard1 = true: this.showCard1 = false;
       }
@@ -53,7 +53,7 @@ export class OverviewComponent implements OnInit {
             this.folderSubsetArr.push(this.folderService.userFolderArr[i]);
           }
         }
-        console.log(this.foldersArr);
+        // console.log(this.foldersArr);
         this.foldersArr.length>1 ? this.showFolderCard2 = true: this.showFolderCard2 = false;
         this.foldersArr.length>2 ? this.showFolderCard1 = true: this.showFolderCard1 = false;
       }
