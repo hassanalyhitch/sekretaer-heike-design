@@ -7,7 +7,8 @@ export interface FolderData {
   folderName : string,
   createTime : string,
   createdAt : string,
-  subFolders : [],
+  subFolders : any[],
+  docs: any[],
 
   isSelected:boolean
 }

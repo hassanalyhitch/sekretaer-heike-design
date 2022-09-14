@@ -53,8 +53,8 @@ export class FoldersService {
               ownerFolderId : item['ownerFolderId'],
               folderName : item['folderName'],
               createTime : item['createdAt'],
-              subFolders : [],
-              
+              subFolders : ['subFolders'],
+              docs : item['docs'],
               isSelected:false
             };
             this.userFolderArr.push(folder);

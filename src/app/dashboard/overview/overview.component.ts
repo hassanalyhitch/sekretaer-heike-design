@@ -46,7 +46,7 @@ export class OverviewComponent implements OnInit {
     });
 
     this.folderService.getFolders().subscribe({
-      next: ()=>{
+      next: (resp)=>{
         this.foldersArr = this.folderService.userFolderArr;
         if(this.folderService.userFolderArr.length>3){
           for(let i=3; i<this.folderService.userFolderArr.length; i++){
