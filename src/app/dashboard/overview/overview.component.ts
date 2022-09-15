@@ -104,7 +104,7 @@ export class OverviewComponent implements OnInit {
   onFolderCardClick(clickedFolder){
 
     this.folderService.emitSelectedFolder(clickedFolder);
-    this.router.navigate(['dashboard/overview/folder-detail', { id: clickedFolder.customerAmsidnr }]);
+    this.router.navigate(['dashboard/overview/folder-detail', { id: clickedFolder.id }]);
   }
 
   collapse(){
@@ -170,14 +170,14 @@ export class OverviewComponent implements OnInit {
     if(this.collapsedFolders===false){
 
       this.folderService.emitSelectedFolder(this.foldersArr[0]);
-      this.router.navigate(['dashboard/overview/folder-detail', { id: this.foldersArr[0].customerAmsidnr }]);
+      this.router.navigate(['dashboard/overview/folder-detail', { id: this.foldersArr[0].id }]);
     } else {
 
         
       if(this.foldersArr.length==1){
         //show detail page
         this.folderService.emitSelectedFolder(this.foldersArr[0]);
-        this.router.navigate(['dashboard/overview/folder-detail', { id: this.foldersArr[0].customerAmsidnr }]);
+        this.router.navigate(['dashboard/overview/folder-detail', { id: this.foldersArr[0].id }]);
 
       } else if(this.foldersArr.length==2){
         //expand 2

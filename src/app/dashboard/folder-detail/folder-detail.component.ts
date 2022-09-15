@@ -32,10 +32,11 @@ export class FolderDetailComponent implements OnInit {
 
   }
   
-  onFolderCardClick(clickedFolder){
-
+  onFolderCardClick(clickedFolder: FolderData){
+    console.log("open - > "+clickedFolder.id+" "+clickedFolder.folderName);
     this.folderService.emitSelectedFolder(clickedFolder);
-    this.router.navigate(['dashboard/overview/folder-detail', { id: clickedFolder.customerAmsidnr }]);
+    this.router.navigate(['dashboard/overview/folder-detail', { id: clickedFolder.id }]);
+    this.folder = this.folderService.selectedFolder;
   }
 
 }

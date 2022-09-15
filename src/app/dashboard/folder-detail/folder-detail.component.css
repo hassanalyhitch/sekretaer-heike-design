@@ -109,6 +109,9 @@ hr:after {
   font-size: 20px;
   top: -17px;
 }
+app-folder-card, app-document-item{
+  cursor: pointer;
+}
 
 ::-webkit-scrollbar {
   width: 0px;
