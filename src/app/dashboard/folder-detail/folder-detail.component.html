@@ -35,8 +35,16 @@
         </div>
       </div>
 
+<!-- subfolders -->
       <hr class="mx-1" id="folder-hr" data-content="" />
+
+      <app-folder-card class="a_card align-self-center" (click)="onFolderCardClick(subfolder)" *ngFor="let subfolder of folder.subFolders" [folder]=subfolder  ></app-folder-card>
+
+<!-- documents -->
       <hr class="mx-1" id="docu-hr" data-content="" />
+
+      <app-document-item *ngFor="let doc of folder.docs" [doc]=doc ></app-document-item>
+
     </div>
   </div>
 </div>

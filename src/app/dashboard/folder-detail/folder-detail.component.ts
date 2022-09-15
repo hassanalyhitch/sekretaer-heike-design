@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { FolderData } from '../../models/folder.model';
 import { FoldersService } from '../../services/folder.service';
@@ -14,12 +15,12 @@ export class FolderDetailComponent implements OnInit {
   hrTitle: string;
   hrTitle2: string;
 
-  constructor(private folderService: FoldersService, private translate:TranslateService) { }
+  constructor(private router:Router, private folderService: FoldersService, private translate:TranslateService) { }
 
   ngOnInit() {
     console.log(this.folderService.selectedFolder);
     this.hrTitle = this.translate.instant('insurance.detail.hrtitle');
-    this.hrTitle2 = this.translate.instant('insurance.folder-detail.subfolder');
+    this.hrTitle2 = this.translate.instant('folder-detail.subfolder');
 
     const wholeDocTemplate = document.getElementsByClassName('section-folderdetail').item(0) as HTMLElement | null;
     if (wholeDocTemplate != null) {
@@ -29,6 +30,12 @@ export class FolderDetailComponent implements OnInit {
 
     this.folder = this.folderService.selectedFolder;
 
+  }
+  
+  onFolderCardClick(clickedFolder){
+
+    this.folderService.emitSelectedFolder(clickedFolder);
+    this.router.navigate(['dashboard/overview/folder-detail', { id: clickedFolder.customerAmsidnr }]);
   }
 
 }

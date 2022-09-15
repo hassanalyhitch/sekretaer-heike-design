@@ -53,7 +53,7 @@ export class FoldersService {
               ownerFolderId : item['ownerFolderId'],
               folderName : item['folderName'],
               createTime : item['createdAt'],
-              subFolders : ['subFolders'],
+              subFolders : item['subFolders'],
               docs : item['docs'],
               isSelected:false
             };

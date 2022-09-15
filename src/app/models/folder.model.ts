@@ -1,3 +1,4 @@
+import { DocumentData } from "./document.model";
 
 export interface FolderData {
   id : string,
@@ -7,8 +8,8 @@ export interface FolderData {
   folderName : string,
   createTime : string,
   createdAt : string,
-  subFolders : any[],
-  docs: any[],
+  subFolders : FolderData[],
+  docs: DocumentData[],
 
   isSelected:boolean
 }
