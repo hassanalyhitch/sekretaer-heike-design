@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ContractData } from '../../models/contract.model';
 import { FolderData } from '../../models/folder.model';
 import { ContractsService } from '../../services/contracts.service';
 import { FoldersService } from '../../services/folder.service';
+import { RenameModalComponent } from '../rename-modal/rename-modal.component';
 
 @Component({
   selector: 'app-overview',
@@ -61,7 +63,7 @@ export class OverviewComponent implements OnInit {
   collapsed:boolean = true;
   collapsedFolders:boolean = true;
 
-  constructor(private router:Router, private contractService: ContractsService, private folderService: FoldersService) { }
+  constructor(private router:Router, private contractService: ContractsService, private folderService: FoldersService,private matDialog: MatDialog) { }
 
   ngOnInit() {
     this.contractService.getContracts().subscribe({
@@ -199,5 +201,18 @@ export class OverviewComponent implements OnInit {
     }
   }
  
+  addNewFolder(){
+    const dialogConfig = new MatDialogConfig();
+    // let passdata:string = '{"docName": "'+file.name+'","docId": "'+file.docId+'"}';
+    let passdata:string = '{"docName": "'+"file.name"+'","docId": "'+"file.docId"+'"}';
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = false;
+    dialogConfig.id = 'modal-component';
+    // dialogConfig.height = '80%';
+    // dialogConfig.width = '90%';
+    dialogConfig.data = passdata;
+    // https://material.angular.io/components/dialog/overview
+    const modalDialog = this.matDialog.open(RenameModalComponent, dialogConfig);
+  }
 
 }
