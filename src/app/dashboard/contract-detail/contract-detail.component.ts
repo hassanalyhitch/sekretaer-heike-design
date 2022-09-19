@@ -50,6 +50,7 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
   
     this.contractSub = contractService.selectObservable.subscribe({
       next:(contract)=>{
+        // console.log(contract);
         this.contract = contract;
         contractService.getContractDetails(this.contract.details.Amsidnr).subscribe({
           next:(resp:any)=>{
@@ -57,7 +58,7 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
                 for(let i=0; i<resp.docs.length; i++){
                   this.docArr.push(resp.docs[i]);
                 }
-                // console.log(this.docArr.length);
+                // console.table(this.docArr);
               }
           }
         });

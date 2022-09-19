@@ -23,14 +23,20 @@ export class HomeComponent implements OnInit {
     this.contractService.getContracts().subscribe({
       complete: ()=>{
         this.allContractsArr = this.contractService.userContractsArr;
+        // console.log('all_________________________________________________');
+        // console.table(this.allContractsArr);
         this.allContractsArr.forEach((contract)=>{
           
           if(contract.details.isFav === 1 || contract.details.isFav === '1' ){
             this.favArr.push(contract);
           }
         });
+        
+        // console.log('fav_________________________________________________');
+        // console.table(this.favArr);
       }
     });
+    
     // this.notif.nativeElement.setAttribute("notification-count", this.notifCount+"");
     this.notificationService.getNotifications().subscribe({
       next:()=>{

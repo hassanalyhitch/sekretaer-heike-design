@@ -4,12 +4,13 @@ import { tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 
-export class RenameContractService {
+export class RenameDocumentService {
 
   constructor(private http: HttpClient) {}
 
-  rename(vamsidnr, data) {
-    let url = 'https://testapi.maxpool.de/api/v1/contracts/'+vamsidnr+'/rename';
+  rename(systemId , fileId , data) {
+    console.log(data);
+    let url = 'https://testapi.maxpool.de/api/v1/dms/'+systemId+'/'+fileId+'/rename';
     return this.http.put(url, data, {
       headers: new HttpHeaders({
         'accept': 'application/json',
