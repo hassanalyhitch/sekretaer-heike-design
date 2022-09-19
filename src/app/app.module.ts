@@ -40,6 +40,7 @@ import { UploadFileComponent } from './dashboard/home/add-page/upload-file/uploa
 import { ChatComponent } from './dashboard/chat/chat.component';
 import { FolderDetailComponent } from './dashboard/folder-detail/folder-detail.component';
 import { RenameModalComponent } from './dashboard/rename-modal/rename-modal.component';
+import { NewFolderComponent } from './dashboard/new-folder/new-folder.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -112,7 +113,8 @@ const appRoutes: Routes = [
     UploadFileComponent,
     ChatComponent,
     FolderDetailComponent,
-    RenameModalComponent
+    RenameModalComponent,
+    NewFolderComponent
    ],
   bootstrap:    [ AppComponent ],
   providers: [

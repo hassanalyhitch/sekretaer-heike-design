@@ -5,6 +5,7 @@ import { ContractData } from '../../models/contract.model';
 import { FolderData } from '../../models/folder.model';
 import { ContractsService } from '../../services/contracts.service';
 import { FoldersService } from '../../services/folder.service';
+import { NewFolderComponent } from '../new-folder/new-folder.component';
 import { RenameModalComponent } from '../rename-modal/rename-modal.component';
 
 @Component({
@@ -212,7 +213,7 @@ export class OverviewComponent implements OnInit {
     // dialogConfig.width = '90%';
     dialogConfig.data = passdata;
     // https://material.angular.io/components/dialog/overview
-    const modalDialog = this.matDialog.open(RenameModalComponent, dialogConfig);
+    const modalDialog = this.matDialog.open(NewFolderComponent, dialogConfig);
   }
 
 }
