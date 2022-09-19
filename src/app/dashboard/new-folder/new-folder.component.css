@@ -1,6 +1,7 @@
 .section-title{
   text-shadow: none;
   font-size: 22px;
+  min-width: 300px;
 }
 
 
