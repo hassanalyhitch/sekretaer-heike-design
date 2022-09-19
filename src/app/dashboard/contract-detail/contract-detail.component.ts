@@ -92,4 +92,11 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     const modalDialog = this.matDialog.open(RenameContractComponent, dialogConfig);
   }
 
+  markFav(contract){
+    this.contractService.makeContractFavourite(contract.details.Amsidnr).subscribe();
+  }
+  unmarkFav(contract){
+    this.contractService.deleteContractFavourite(contract.details.Amsidnr).subscribe();
+  }
+
 }

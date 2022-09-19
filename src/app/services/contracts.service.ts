@@ -1,7 +1,7 @@
 import { formatDate } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Observer, Subscription } from 'rxjs';
+import { Observable, Observer, Subscription, tap } from 'rxjs';
 import { ContractData } from '../models/contract.model';
 
 
@@ -124,4 +124,38 @@ export class ContractsService {
               }),
       });
   }
+
+  makeContractFavourite(contractId){
+    let data = "{'type': 'contract','item_identifier': "+contractId+"}";
+
+    return this.http.post('https://testapi.maxpool.de/api/v1/sekretaer/favorites', data, {
+      headers: new HttpHeaders({
+        'accept': 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    }).pipe(
+      tap((resp)=>{
+        
+          console.log(resp);
+          
+      })
+    );
+  }
+
+  deleteContractFavourite(contractId){
+    let url = 'https://testapi.maxpool.de/api/v1/sekretaer/favorites/'+contractId;
+    return this.http.delete(url, {
+      headers: new HttpHeaders({
+        'accept': 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    }).pipe(
+      tap((resp)=>{
+        
+          console.log(resp);
+          
+      })
+    );
+  }
+
 }

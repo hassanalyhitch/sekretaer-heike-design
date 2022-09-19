@@ -9,8 +9,8 @@
         <i class="material-icons dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" >more_vert</i>
       
         <ul class="dropdown-menu shadow">
-          <li><span class="dropdown-item" href="" *ngIf="contract.details.isFav=='0'">Mark as favourite</span></li>
-          <li><span class="dropdown-item" href="" *ngIf="contract.details.isFav=='1'">Unmark as favourite</span></li>
+          <li><span class="dropdown-item" href="" *ngIf="contract.details.isFav=='0'" (click)="markFav(contract)" >Mark as favourite</span></li>
+          <li><span class="dropdown-item" href="" *ngIf="contract.details.isFav=='1'" (click)="unmarkFav(contract)" >Unmark as favourite</span></li>
           <li><span class="dropdown-item" href="" (click)="openModal(contract)" >Rename</span></li>
         </ul>
       </div>
