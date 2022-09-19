@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
@@ -72,7 +72,8 @@ const appRoutes: Routes = [
 
 ];
 @NgModule({
-  imports:      [ 
+  imports:      [
+    ReactiveFormsModule, 
     BrowserModule,
     FormsModule,
     HttpClientModule,

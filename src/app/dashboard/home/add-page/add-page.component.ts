@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit,Input, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit,Input, ViewChild, ElementRef } from '@angular/core';
 import { Router,Event, ActivatedRoute } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Subscription } from 'rxjs';
@@ -7,9 +7,8 @@ import { ContractsService } from '../../../services/contracts.service';
 import { FoldersService } from '../../../services/folder.service';
 import { HttpClient } from '@angular/common/http';
 import { FileUploadService } from '../../../services/file-upload.service';
-import { compileClassMetadata } from '@angular/compiler';
 import { UploadFileData } from '../../../models/upload-file.model';
-
+import { FormGroup,FormBuilder,AbstractControl,Validators, FormControl } from '@angular/forms';
 
 
 @Component({
@@ -20,21 +19,16 @@ import { UploadFileData } from '../../../models/upload-file.model';
 export class AddPageComponent implements OnInit {
   selectedFile:File;
   imagePreview:any;
-  onFileUpload(event){
-    this.selectedFile = event.target.files[0];
-  }
   fileName:string ="No file chosen";
   showFileName:boolean =false;
   count:number = 0;
   fileUploader:any;
+
+  form:FormGroup;
+  submitted = false;
+
+  dropDownIsHidden:boolean= true;
  
-    // const reader = new FileReader();
-    // reader.onload =() =>{
-    //   this.imagePreview = reader.result;
-    // };
-    // reader.readAsDataURL(this.selectedFile);
-  
-  
   @ViewChild("selectFile",{static:true}) selectFile:ElementRef;
    dropdownSettings:IDropdownSettings={};
    @Input() index:String;
@@ -61,19 +55,16 @@ export class AddPageComponent implements OnInit {
    file: File = null;
    successResponse:boolean = true;
    postResponse:any;
-
    uploadFileArr: UploadFileData [] =[];
-
-   constructor( private route:ActivatedRoute, private router:Router,private folderService:FoldersService,
-    private contractService:ContractsService,private http:HttpClient,private fileUploadService: FileUploadService,private httpClient:HttpClient) {
-
+  
+constructor( private route:ActivatedRoute, private router:Router,private folderService:FoldersService,
+private contractService:ContractsService,private http:HttpClient,private fileUploadService: FileUploadService,
+private httpClient:HttpClient,private formBuilder:FormBuilder) {
 
   }
 
-
-
-
   ngOnInit() {
+   
     this.folderSub = this.folderService.getFolders().subscribe({
       next: (resp) => {
         
@@ -134,13 +125,42 @@ export class AddPageComponent implements OnInit {
       idField: 'id',
       textField: 'dataName',
       allowSearchFilter: true,
-      limitSelection: 1,
-      enableCheckAll:false
+      singleSelection:true,
+      enableCheckAll:false,
+      closeDropDownOnSelection:true
     };
     
-  
-  
+    this.form =this.formBuilder.group({
+      namefile:['',Validators.required],
+      date:['',Validators.required]
+      
+    
+    });
+
   }
+ 
+  onMultiSelectClick(){
+
+    let dropDownElement = document.getElementsByClassName('dropdown-list')[0] as HTMLElement;
+
+      // console.log('-------------------------------------------------------------------------------');
+      // console.log (dropDownElement.hidden);
+      
+      this.dropDownIsHidden = (dropDownElement.hidden);
+  }
+
+  get f():{[key:string]:AbstractControl}{
+    return this.form.controls;
+  }
+ 
+  onSubmit():void{
+    this.submitted = true;
+    if (this.form.invalid){
+      return;
+    }
+    console.log(JSON.stringify(this.form.value,null,2));
+  }
+
   getFileName(event){
     this.file = event.target.files[0];
     this.showFileName = true;
@@ -157,6 +177,7 @@ export class AddPageComponent implements OnInit {
     this.uploadFileArr.push(_file);
     this.selectFile.nativeElement.value = null;
   }
+
   onUploadFile() {
     this.loading = !this.loading;
     console.log(this.file);
@@ -175,23 +196,24 @@ export class AddPageComponent implements OnInit {
        
     );
         
-}
-removeFile(obj){
-  console.log (obj);
-  console.log(this.selectFile.nativeElement.files)
-  let removeIndex = obj.fileId;
-  this.uploadFileArr = this.uploadFileArr.filter(function(value, index, arr){
+  }
+
+  removeFile(obj){
+    console.log (obj);
+    console.log(this.selectFile.nativeElement.files)
+    let removeIndex = obj.fileId;
+    this.uploadFileArr = this.uploadFileArr.filter(function(value, index, arr){
     console.log(value);
     return (value.fileName != obj.fileName && value.fileId != obj.fileid);
     });
-}
-  
- 
+
+  }
 
   ngOnDestroy(){
     this.folderSub.unsubscribe();
   }
-  onSelect(folder:FolderData){
-    // this.featureSelected.emit(feature);
+
+  onFileUpload(event){
+    this.selectedFile = event.target.files[0];
   }
 }

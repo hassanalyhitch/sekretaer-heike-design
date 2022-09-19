@@ -17,6 +17,6 @@ export class UploadFileComponent implements OnInit {
   }
   onDeleteFile(fileId, fileName){
     this.deleteFile.emit({fileId,fileName});
-  }
+    }
 
 }

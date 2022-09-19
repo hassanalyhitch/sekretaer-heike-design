@@ -10,7 +10,14 @@
   background-color: #F2F2F2;
   border-radius: 45px 0px 0px 0px;
   overflow-y: scroll;
-  
+  padding-bottom: 80px;
+}
+.allowScroll{
+  overflow-y: scroll !important;
+
+}
+.disableScroll{
+  overflow-y: hidden !important;
 }
 .options{
   text-align: center;
@@ -46,6 +53,7 @@
   justify-self: center;
 }
 app-upload-file{
+  margin:10px 15px;
   border-radius: 7px;
   border: none;
 }
@@ -97,6 +105,7 @@ input{
   width: 93%;
   padding: 15px;
   background-color: #fff;
+  cursor: pointer;
 }
 .Upload{
     text-align: center;
@@ -113,5 +122,9 @@ input{
   background-color: #E5007E;
   color: #ffff;
   margin: 0px 15px 0px 400px;
+}
+.error-message{
+  text-align: center;
+  color:red;
 }
 
