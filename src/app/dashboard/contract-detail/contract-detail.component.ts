@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { ContractData } from '../../models/contract.model';
 import { DocumentData } from '../../models/document.model';
 import { ContractsService } from '../../services/contracts.service';
+import { RenameContractComponent } from '../rename-contract/rename-contract.component';
 
 @Component({
   selector: 'app-contract-detail',
@@ -42,7 +43,7 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
   docArr: DocumentData[] = [];
 
   constructor(
-  private route: ActivatedRoute,
+  private route: ActivatedRoute,private matDialog: MatDialog,
   private router: Router, private translate:TranslateService, private contractService: ContractsService) {
 
     this.hrTitle = this.translate.instant('insurance.detail.hrtitle');
@@ -75,6 +76,20 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     this.contractSub.unsubscribe();
+  }
+  
+  openModal(file) {
+    const dialogConfig = new MatDialogConfig();
+    // let passdata:string = '{"fileName": "'+this.file.name+'","fileUrl": "'+this.file.fileUrl+'"}';
+    let passdata:string = '{"docName": "'+file.name+'","docId": "'+file.docId+'"}';
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = false;
+    dialogConfig.id = 'renamecontract-modal-component';
+    // dialogConfig.height = '80%';
+    // dialogConfig.width = '90%';
+    dialogConfig.data = passdata;
+    // https://material.angular.io/components/dialog/overview
+    const modalDialog = this.matDialog.open(RenameContractComponent, dialogConfig);
   }
 
 }
