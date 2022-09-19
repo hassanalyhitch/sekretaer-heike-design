@@ -10,8 +10,8 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class RenameContractComponent implements OnInit {
 
   dataObj:{
-    docName: string,
-    docid: string
+    contractName: string,
+    contractId: string
   };
   documentName: string = "";
   newContractName: string= "";
@@ -19,11 +19,12 @@ export class RenameContractComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA)public data:any) { 
 
     this.dataObj = JSON.parse(this.data);
-    this.documentName = this.dataObj.docName;
+    this.documentName = this.dataObj.contractName;
     
 
   }
   ngOnInit() {
+    alert(this.data);
   }
 
   onSubmit(formData: any) {

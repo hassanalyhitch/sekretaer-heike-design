@@ -81,7 +81,7 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
   openModal(file) {
     const dialogConfig = new MatDialogConfig();
     // let passdata:string = '{"fileName": "'+this.file.name+'","fileUrl": "'+this.file.fileUrl+'"}';
-    let passdata:string = '{"docName": "'+file.name+'","docId": "'+file.docId+'"}';
+    let passdata:string = '{"contractName": "'+file.details.name+'","contractId": "'+file.details.Amsidnr+'"}';
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = 'renamecontract-modal-component';
