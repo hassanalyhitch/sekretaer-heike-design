@@ -3,14 +3,11 @@
   
     <div class="d-flex flex-column w-100">
       <strong class="section-title align-self-center p-2 m-2"> New Folder</strong>
-      <div class="align-items-center w-100">
-        Folder Name :<br />
-        {{ documentName }}
-      </div>
+      
       <form (ngSubmit)= "onSubmit(saveForm.value)" class="d-flex flex-column mt-4" #saveForm="ngForm" > 
         <div class="material-textfield mb-1">
-          <input placeholder=" " type="text" [(ngModel)]="newDocName" name="newDocName" ngModel required/>
-          <label>New document name</label>
+          <input placeholder=" " type="text" [(ngModel)]="newFolderName" name="newFolderName" ngModel required/>
+          <label>New folder name</label>
         </div>
         <div class="mt-5 w-100">
           <button

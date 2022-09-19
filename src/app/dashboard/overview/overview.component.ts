@@ -204,14 +204,14 @@ export class OverviewComponent implements OnInit {
  
   addNewFolder(){
     const dialogConfig = new MatDialogConfig();
-    // let passdata:string = '{"docName": "'+file.name+'","docId": "'+file.docId+'"}';
-    let passdata:string = '{"docName": "'+"file.name"+'","docId": "'+"file.docId"+'"}';
+    
+    // let passdata:string = '{"docName": "'+"file.name"+'","docId": "'+"file.docId"+'"}';
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
-    dialogConfig.id = 'modal-component';
+    dialogConfig.id = 'newfolder-modal-component';
     // dialogConfig.height = '80%';
     // dialogConfig.width = '90%';
-    dialogConfig.data = passdata;
+    // dialogConfig.data = passdata;
     // https://material.angular.io/components/dialog/overview
     const modalDialog = this.matDialog.open(NewFolderComponent, dialogConfig);
   }
