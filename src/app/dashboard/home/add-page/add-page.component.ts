@@ -28,7 +28,7 @@ export class AddPageComponent implements OnInit {
   submitted = false;
 
   dropDownIsHidden:boolean= true;
-  selectedItems: any;
+  selectedItems: [];
  
   @ViewChild("selectFile",{static:true}) selectFile:ElementRef;
    dropdownSettings:IDropdownSettings={};
@@ -54,10 +54,12 @@ export class AddPageComponent implements OnInit {
       customerAmsidnr: string,
       dataName : string,
       type: string
-    }[] = [{id: '',
-      customerAmsidnr: '',
-      dataName : '',
-      type: ''}];
+    }[] = [
+      { id: '',
+        customerAmsidnr: '',
+        dataName : '',
+        type: ''}
+      ];
 
    shortLink: string = "";
    loading: boolean = false; // Flag variable
@@ -78,12 +80,7 @@ private httpClient:HttpClient,private formBuilder:FormBuilder) {
       idField: 'id',
       textField: 'dataName',
       allowSearchFilter: true,
-      singleSelection:true,
-      enableCheckAll:false,
-      closeDropDownOnSelection:true,
-      limitSelection: 1,
-      noDataAvailablePlaceholderText: 'Loading, please wait',
-      noFilteredDataAvailablePlaceholderText: 'Not found',
+      limitSelection: 1
     };
 
     this.folderSub = this.folderService.getFolders().subscribe({
@@ -104,7 +101,7 @@ private httpClient:HttpClient,private formBuilder:FormBuilder) {
             this.folderArr.push(folder);
             
           }
-          console.log(this.dataArr.length);
+          // console.log(this.dataArr.length);
           
           this.dataArr = this.folderArr;
 
@@ -127,8 +124,8 @@ private httpClient:HttpClient,private formBuilder:FormBuilder) {
                 } 
                 // this.dataArr.push(this.contractArr);
               this.dataArr = this.dataArr.concat(this.contractArr);
-                console.log(this.dataArr.length);
-                console.table(this.dataArr);
+                // console.log(this.dataArr.length);
+                // console.table(this.dataArr);
               }
 
             }
@@ -161,8 +158,14 @@ private httpClient:HttpClient,private formBuilder:FormBuilder) {
   onMultiSelectClick(){
 
     let dropDownElement = document.getElementsByClassName('dropdown-list')[0] as HTMLElement;
-      
     this.dropDownIsHidden = (dropDownElement.hidden);
+
+    console.log(this.selectedItems);
+    
+    if(this.selectedItems != undefined && this.selectedItems.length>0){
+      dropDownElement.hidden = true;
+      console.log('hide it !');
+    }
   }
 
   get f():{[key:string]:AbstractControl}{

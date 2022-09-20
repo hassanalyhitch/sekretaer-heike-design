@@ -19,6 +19,8 @@
                 [settings]="dropdownSettings"
                 [data]="dataArr"
                 [(ngModel)]="selectedItems"
+                (click)="onMultiSelectClick()"
+                [ngModelOptions]="{standalone: true}"
                 >
               </ng-multiselect-dropdown>
           </div>
