@@ -73,6 +73,23 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     if (wholeDocTemplate != null) {
       document.getElementById("docu-hr").setAttribute('data-content', this.hrTitle);
     } 
+
+    this.matDialog.afterAllClosed.subscribe({
+      next:()=>{
+        console.log('closed dialogs in next');
+        this.contractService.getContractDetails(this.contract.details.Amsidnr).subscribe({
+          next:(resp:any)=>{
+              if(resp.hasOwnProperty('docs')){
+                this.docArr = [];
+                for(let i=0; i<resp.docs.length; i++){
+                  this.docArr.push(resp.docs[i]);
+                }
+                // console.table(this.docArr);
+              }
+          }
+        });
+      }
+    });
   }
 
   ngOnDestroy(){

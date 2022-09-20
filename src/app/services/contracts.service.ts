@@ -39,6 +39,11 @@ export class ContractsService {
       this.observer = observer;
       this.observer.next(this.selectedContract);
     });
+    this._init();
+  }
+
+  _init(){
+
     this.getContracts().subscribe({
       next: (resp) => {
         this.userContractsArr = [];
@@ -98,6 +103,7 @@ export class ContractsService {
 
   emitSelectedFolder(contract:ContractData){
     this.selectedContract = contract;
+    this.observer.next(contract);
   }
 
 
@@ -109,8 +115,55 @@ export class ContractsService {
                     'accept': 'application/json',
                     'Content-Type': 'application/json'
                 }),
-        });
-  }
+        }).pipe(
+            tap((resp)=>{
+              
+              this.userContractsArr = [];
+              
+              // console.log("Contract service => "+resp);
+              // console.table(resp);
+              if(Array.isArray(resp)){
+                let index: number = 0;
+
+                for(let item of resp){
+                  //format date 
+                  item['Begin'] = formatDate(item['Begin'], "dd.MM.YYYY","en");
+                  item['End'] = formatDate(item['End'], "dd.MM.YYYY","en");
+                  //
+                  let contract: ContractData = {
+                    id: index,
+                    details: {
+                      Amsidnr: item['Amsidnr'],
+                      CustomerAmsidnr:  item['CustomerAmsidnr'],
+                      InsuranceId:  item['Contractnumber'],
+                      ContractNumber:  item['Contractnumber'],
+                      Company:  item['Company'],
+                      StartDate:  item['Begin'],
+                      EndDate:  item['End'],
+                      YearlyPayment:  item['YearlyPayment'],
+                      Paymethod:  item['PaymentMethod'],
+                      Branch:  item['Branch'],
+                      Risk:  item['Risk'],
+                      docs: item['docs'],
+                      name: item['name'],
+                      productSek: item['ProductSekretaer'],
+                      tarif: item['tarif'],
+                      isFav: item['isFavorite']
+                    },
+                    isSelected: false
+                  };
+                  this.userContractsArr.push(contract);
+                  
+                  index++;
+                }
+
+              } else {
+                //invalid token
+
+              }
+            })
+          );
+    }
 
   getContractDetails(Amsidnr: string){
     let url = 'https://testapi.maxpool.de/api/v1/contracts/'+Amsidnr;

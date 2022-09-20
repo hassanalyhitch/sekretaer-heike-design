@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { RenameDocumentService } from '../../services/rename-doc.service';
 import { Location } from '@angular/common';
 
@@ -17,7 +17,7 @@ export class RenameModalComponent implements OnInit {
   };
   documentName: string = "";
   newDocName: string= "";
-  constructor(@Inject(MAT_DIALOG_DATA)public data:any, private renameDocService: RenameDocumentService, private _location: Location) { 
+  constructor(@Inject(MAT_DIALOG_DATA)public data:any, private renameDocService: RenameDocumentService, private _location: Location,private dialogRef: MatDialogRef<RenameModalComponent>) { 
 
     this.dataObj = JSON.parse(this.data);
     this.documentName = this.dataObj.docName;
@@ -32,7 +32,7 @@ export class RenameModalComponent implements OnInit {
   onSubmit(formData: any) {
     this.renameDocService.rename(this.dataObj.systemId, this.dataObj.docid, formData).subscribe({
       complete:()=>{ 
-        this._location.back();
+        this.dialogRef.close();
       }
     });
   }
