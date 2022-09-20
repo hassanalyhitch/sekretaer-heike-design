@@ -55,8 +55,13 @@ export class ContractsService {
 
           for(let item of resp){
             //format date 
+            try{
+
             item['Begin'] = formatDate(item['Begin'], "dd.MM.YYYY","en");
             item['End'] = formatDate(item['End'], "dd.MM.YYYY","en");
+            }catch(error){
+              console.log(error.message);
+            }
             //
             let contract: ContractData = {
               id: index,

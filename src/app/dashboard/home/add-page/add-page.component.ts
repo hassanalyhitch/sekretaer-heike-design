@@ -28,6 +28,7 @@ export class AddPageComponent implements OnInit {
   submitted = false;
 
   dropDownIsHidden:boolean= true;
+  selectedItems: any;
  
   @ViewChild("selectFile",{static:true}) selectFile:ElementRef;
    dropdownSettings:IDropdownSettings={};
@@ -48,7 +49,15 @@ export class AddPageComponent implements OnInit {
    folderSub:Subscription;
    folderArr: any[] = [];
    contractArr: any[] = [];
-   dataArr: any[] = [];
+   dataArr: {
+      id: String,
+      customerAmsidnr: string,
+      dataName : string,
+      type: string
+    }[] = [{id: '',
+      customerAmsidnr: '',
+      dataName : '',
+      type: ''}];
 
    shortLink: string = "";
    loading: boolean = false; // Flag variable
@@ -65,6 +74,18 @@ private httpClient:HttpClient,private formBuilder:FormBuilder) {
 
   ngOnInit() {
    
+    this.dropdownSettings={
+      idField: 'id',
+      textField: 'dataName',
+      allowSearchFilter: true,
+      singleSelection:true,
+      enableCheckAll:false,
+      closeDropDownOnSelection:true,
+      limitSelection: 1,
+      noDataAvailablePlaceholderText: 'Loading, please wait',
+      noFilteredDataAvailablePlaceholderText: 'Not found',
+    };
+
     this.folderSub = this.folderService.getFolders().subscribe({
       next: (resp) => {
         
@@ -92,10 +113,10 @@ private httpClient:HttpClient,private formBuilder:FormBuilder) {
               
               if(Array.isArray(res)){
                 for(let cont of res){
-                  console.log(cont);
+                  // console.log(cont);
                   //
                   let contract: any = {
-                    id: cont['Contractnumber'],
+                    id: cont['Amsidnr'],
                     customerAmsidnr:  cont['CustomerAmsidnr'],
                     dataName : cont['Risk'],
                     type : 'contract'
@@ -107,7 +128,7 @@ private httpClient:HttpClient,private formBuilder:FormBuilder) {
                 // this.dataArr.push(this.contractArr);
               this.dataArr = this.dataArr.concat(this.contractArr);
                 console.log(this.dataArr.length);
-                // console.table(this.dataArr);
+                console.table(this.dataArr);
               }
 
             }
@@ -121,14 +142,6 @@ private httpClient:HttpClient,private formBuilder:FormBuilder) {
       }
     });
 
-    this.dropdownSettings={
-      idField: 'id',
-      textField: 'dataName',
-      allowSearchFilter: true,
-      singleSelection:true,
-      enableCheckAll:false,
-      closeDropDownOnSelection:true
-    };
     
     this.form =this.formBuilder.group({
       namefile:['',Validators.required],
@@ -137,16 +150,19 @@ private httpClient:HttpClient,private formBuilder:FormBuilder) {
     
     });
 
+    this.form = new FormGroup({
+      fileupload: new FormControl(),
+      nametags: new FormControl(),
+      date: new FormControl()
+    });
+
   }
  
   onMultiSelectClick(){
 
     let dropDownElement = document.getElementsByClassName('dropdown-list')[0] as HTMLElement;
-
-      // console.log('-------------------------------------------------------------------------------');
-      // console.log (dropDownElement.hidden);
       
-      this.dropDownIsHidden = (dropDownElement.hidden);
+    this.dropDownIsHidden = (dropDownElement.hidden);
   }
 
   get f():{[key:string]:AbstractControl}{

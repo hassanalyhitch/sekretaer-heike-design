@@ -18,7 +18,7 @@
               <ng-multiselect-dropdown
                 [settings]="dropdownSettings"
                 [data]="dataArr"
-                (click)="onMultiSelectClick()"
+                [(ngModel)]="selectedItems"
                 >
               </ng-multiselect-dropdown>
           </div>

@@ -37,13 +37,13 @@ export class FoldersService {
       next: (resp) => {
         this.userFolderArr = [];
         
-        console.table(resp);
+        // console.table(resp);
         if(Array.isArray(resp)){
           let index: number = 0;
 
           for(let item of resp){
             //format date 
-            item['createdAt'] = formatDate(item['createdAt'], "dd.MM.YYYY","en");
+            // item['createdAt'] = formatDate(item['createdAt'], "dd.MM.YYYY","en");
             //
             let folder: FolderData = {
               id: item['id'],
