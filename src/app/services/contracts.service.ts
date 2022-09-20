@@ -108,7 +108,7 @@ export class ContractsService {
 
   emitSelectedFolder(contract:ContractData){
     this.selectedContract = contract;
-    this.observer.next(contract);
+    // this.observer.next(contract);
   }
 
 
