@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { FolderData } from '../../models/folder.model';
@@ -15,6 +15,9 @@ export class FolderDetailComponent implements OnInit {
   hrTitle: string;
   hrTitle2: string;
 
+  parentNav: string = '';
+  currentNav: string = '';
+
   constructor(private router:Router, private folderService: FoldersService, private translate:TranslateService) { }
 
   ngOnInit() {
@@ -29,7 +32,7 @@ export class FolderDetailComponent implements OnInit {
     } 
 
     this.folder = this.folderService.selectedFolder;
-
+    this.currentNav = this.folder.folderName;
   }
   
   onFolderCardClick(clickedFolder: FolderData){
