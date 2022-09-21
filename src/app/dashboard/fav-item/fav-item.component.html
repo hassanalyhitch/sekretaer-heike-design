@@ -23,7 +23,8 @@
         <img class="w-100 img-responsive" src="https://images.unsplash.com/photo-1606759163253-094133091882?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt="">
       </div>
 
-      <div class="fav-btn d-flex align-items-center justify-content-center">
+      <div class=" fav-btn d-flex align-items-center justify-content-center"
+       [ngClass]="{'isFav': contractItem.details.isFav == '1', 'notFav': contractItem.details.isFav == '0'}" >
         <i class="material-icons">star</i>
       </div>
 
