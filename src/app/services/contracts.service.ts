@@ -188,7 +188,7 @@ export class ContractsService {
   }
 
   makeContractFavourite(contractId){
-    let data = "{'type': 'contract','item_identifier': "+contractId+"}";
+    let data = '{"type": "contract","item_identifier": "'+contractId+'"}';
 
     return this.http.post('https://testapi.maxpool.de/api/v1/sekretaer/favorites', data, {
       headers: new HttpHeaders({
