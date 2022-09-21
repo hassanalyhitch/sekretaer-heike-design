@@ -133,8 +133,12 @@ app-folder-card, app-document-item{
   animation-iteration-count: 1;
   color: #D60B51;
 }
+.quick-fab:hover{
+  border: solid 2.5px rgba(0, 0, 0, 0.2);
+}
 .map{
   color: rgba(0, 0, 0, 0.5);
+  font-size: small;
 }
 
 ::-webkit-scrollbar {

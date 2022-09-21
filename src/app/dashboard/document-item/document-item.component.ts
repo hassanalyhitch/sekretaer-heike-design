@@ -19,8 +19,13 @@ export class DocumentItemComponent implements OnInit {
     if(this.doc){
       // console.log(this.doc);
       if(this.doc.createdAt){
-        //format date 
-        this.doc.createdAt = formatDate(this.doc.createdAt, "dd.MM.YYYY","en");
+        try{
+          //format date 
+          this.doc.createdAt = formatDate(this.doc.createdAt, "dd.MM.YYYY","en");
+
+        } catch(error){
+
+        }
       }
     }
   }
