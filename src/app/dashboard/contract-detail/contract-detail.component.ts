@@ -84,7 +84,8 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
                 for(let i=0; i<resp.docs.length; i++){
                   this.docArr.push(resp.docs[i]);
                 }
-                // console.table(this.docArr);
+                console.log(resp);
+                this.contract.details.name = resp.name;
               }
           }
         });
@@ -110,11 +111,20 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     const modalDialog = this.matDialog.open(RenameContractComponent, dialogConfig);
   }
 
-  markFav(contract){
-    this.contractService.makeContractFavourite(contract.details.Amsidnr).subscribe();
+  markFav(contract: ContractData){
+    this.contractService.makeContractFavourite(contract.details.favoriteId).subscribe({
+      next:(resp)=>{
+        console.log(resp);
+        console.log(contract.details.favoriteId);
+      },
+      error:(resp)=>{
+        console.log(resp);
+        console.log(contract.details.favoriteId);
+      }
+    });
   }
-  unmarkFav(contract){
-    this.contractService.deleteContractFavourite(contract.details.Amsidnr).subscribe();
+  unmarkFav(contract: ContractData){
+    this.contractService.deleteContractFavourite(contract.details.favoriteId).subscribe();
   }
 
 }

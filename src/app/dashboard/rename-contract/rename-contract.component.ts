@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { RenameContractService } from '../../services/rename-contract.service';
 import { Location } from '@angular/common';
 
@@ -18,7 +18,7 @@ export class RenameContractComponent implements OnInit {
   documentName: string = "";
   newContractName: string= "";
 
-  constructor(@Inject(MAT_DIALOG_DATA)public data:any, private renameService: RenameContractService,private _location: Location) { 
+  constructor(@Inject(MAT_DIALOG_DATA)public data:any, private renameService: RenameContractService,private dialogRef: MatDialogRef<RenameContractComponent>) { 
 
     this.dataObj = JSON.parse(this.data);
     this.documentName = this.dataObj.contractName;
@@ -33,7 +33,7 @@ export class RenameContractComponent implements OnInit {
     console.log(formData);
     this.renameService.rename(this.dataObj.contractId , formData).subscribe({
       complete:()=>{ 
-        this._location.back();
+        this.dialogRef.close();
       }
     });
   }

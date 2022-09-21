@@ -19,6 +19,7 @@ export interface ContractData {
     productSek: string,
     tarif: string,
     isFav: any
+    favoriteId: string
   },
   isSelected: boolean
 }

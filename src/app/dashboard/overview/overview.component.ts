@@ -34,7 +34,8 @@ export class OverviewComponent implements OnInit {
       name: "",
       productSek: "",
       tarif: "",
-      isFav: 1
+      isFav: 1,
+      favoriteId: ""
     },
     isSelected: false
   }

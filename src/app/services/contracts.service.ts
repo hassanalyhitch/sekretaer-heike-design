@@ -25,7 +25,8 @@ export class ContractsService {
       name: "",
       productSek: "",
       tarif: "",
-      isFav: 0
+      isFav: 0,
+      favoriteId: ""
     },
     isSelected: false
   };
@@ -81,7 +82,8 @@ export class ContractsService {
                 name: item['name'],
                 productSek: item['ProductSekretaer'],
                 tarif: item['tarif'],
-                isFav: item['isFavorite']
+                isFav: item['isFavorite'],
+                favoriteId: item['favoriteId']
               },
               isSelected: false
             };
@@ -153,7 +155,9 @@ export class ContractsService {
                       name: item['name'],
                       productSek: item['ProductSekretaer'],
                       tarif: item['tarif'],
-                      isFav: item['isFavorite']
+                      isFav: item['isFavorite'],
+                      favoriteId: item['favoriteId']
+                      
                     },
                     isSelected: false
                   };
@@ -194,7 +198,7 @@ export class ContractsService {
     }).pipe(
       tap((resp)=>{
         
-          console.log(resp);
+          console.log(data);
           
       })
     );
@@ -210,7 +214,7 @@ export class ContractsService {
     }).pipe(
       tap((resp)=>{
         
-          console.log(resp);
+          console.log(url);
           
       })
     );
