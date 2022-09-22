@@ -1,11 +1,11 @@
 <div class="content-wrapper w-100 ">
   <div class="_content d-flex d-flex flex-column align-items-center w-100 h-100 ">
 
-    <div class="section-folderdetail w-100 d-flex flex-column pt-3 ">
-      <strong class="section-title align-self-center p-2"> FOLDER</strong>
+    <div class="section-folderdetail w-100 d-flex flex-column pt-4 ">
+      <strong class="section-title align-self-center bg-"> FOLDER</strong>
 
-      <div class="d-flex flex-row align-items-center w-100 map px-3 my-2">
-        <div class="quick-fab d-flex justify-content-center align-items-center mx-2">
+      <div class="d-flex flex-row align-items-center w-100 map px-3 mt-1 mb-3 bg-">
+        <div class="quick-fab d-flex justify-content-center align-items-center mx-2" (click)="onBackNavClick()" >
           <i class="material-icons p-2 ">arrow_back_ios</i>
         </div>
         <span class="parent">{{parentNav}}/</span><span class="current">{{currentNav}}</span>
@@ -45,7 +45,7 @@
 <!-- subfolders -->
       <hr class="mx-1" id="folder-hr" data-content="" />
 
-      <app-folder-card class="a_card align-self-center" (click)="onFolderCardClick(subfolder)" *ngFor="let subfolder of folder.subFolders" [folder]=subfolder  ></app-folder-card>
+      <app-folder-card class="a_card align-self-center" (click)="onFolderCardClick(subfolder, i)" *ngFor="let subfolder of folder.subFolders; let i = index " [folder]=subfolder  ></app-folder-card>
 
 <!-- documents -->
       <hr class="mx-1" id="docu-hr" data-content="" />
