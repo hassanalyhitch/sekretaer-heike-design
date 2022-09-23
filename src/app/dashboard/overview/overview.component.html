@@ -23,7 +23,7 @@
         <app-fav-item *ngFor="let item of subsetArr" [contractItem]=item  (click)="onCardClick(item)"></app-fav-item>
       </div>
       
-      <div class="section-folder d-flex flex-column p-3 w-100 ">
+      <div class="section-folder d-flex flex-column p-3 w-100 bg-white">
         <div class="section-title w-100 d-flex justify-content-center pt-3 ">
           <strong class=" align-self-center p-2 title " (click)="collapseFolders()"> MY FOLDERS</strong>
           <i class="material-icons mx-2 align-self-center collapse-icon" (click)="collapseFolders()" *ngIf="!collapsedFolders">expand_less</i>

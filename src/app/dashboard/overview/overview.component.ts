@@ -68,6 +68,13 @@ export class OverviewComponent implements OnInit {
   constructor(private router:Router, private contractService: ContractsService, private folderService: FoldersService,private matDialog: MatDialog) { }
 
   ngOnInit() {
+
+    this._init();
+    
+  }
+
+  _init(){
+
     this.contractService.getContracts().subscribe({
       next: ()=>{
         this.allContractsArr = this.contractService.userContractsArr;
@@ -96,7 +103,7 @@ export class OverviewComponent implements OnInit {
         this.foldersArr.length>2 ? this.showFolderCard1 = true: this.showFolderCard1 = false;
       }
     });
-    
+
   }
 
   onCardClick(clickedContract){
@@ -215,6 +222,12 @@ export class OverviewComponent implements OnInit {
     // dialogConfig.data = passdata;
     // https://material.angular.io/components/dialog/overview
     const modalDialog = this.matDialog.open(NewFolderComponent, dialogConfig);
+    
+    this.matDialog.getDialogById('newfolder-modal-component').afterClosed().subscribe({
+      next:()=>{
+        this._init();
+      }
+    });
   }
 
 }
