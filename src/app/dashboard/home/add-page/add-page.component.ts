@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit,Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit,Input, ViewChild, ElementRef, Injectable } from '@angular/core';
 import { Router,Event, ActivatedRoute } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Subscription } from 'rxjs';
@@ -9,12 +9,15 @@ import { HttpClient } from '@angular/common/http';
 import { FileUploadService } from '../../../services/file-upload.service';
 import { UploadFileData } from '../../../models/upload-file.model';
 import { FormGroup,FormBuilder,AbstractControl,Validators, FormControl } from '@angular/forms';
+import { formatDate } from '@angular/common';
+import { FileSizePipe } from '../../../pipes/filesize.pipe';
 
 
 @Component({
   selector: 'app-add-page',
   templateUrl: './add-page.component.html',
-  styleUrls: ['./add-page.component.css']
+  styleUrls: ['./add-page.component.css'],
+  providers:[FileSizePipe]
 })
 export class AddPageComponent implements OnInit {
   selectedFile:File;
@@ -67,13 +70,18 @@ export class AddPageComponent implements OnInit {
    successResponse:boolean = true;
    postResponse:any;
    uploadFileArr: UploadFileData [] =[];
-  
-constructor( private route:ActivatedRoute, private router:Router,private folderService:FoldersService,
+   
+   dateFormat ="yyyy-MM-dd";
+   language="en";
+
+    constructor( private route:ActivatedRoute, private router:Router,private folderService:FoldersService,
 private contractService:ContractsService,private http:HttpClient,private fileUploadService: FileUploadService,
-private httpClient:HttpClient,private formBuilder:FormBuilder) {
+private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePipe:FileSizePipe,private builder:FormBuilder) {
+ 
 
   }
 
+  
   ngOnInit() {
    
     this.dropdownSettings={
@@ -143,8 +151,6 @@ private httpClient:HttpClient,private formBuilder:FormBuilder) {
     this.form =this.formBuilder.group({
       namefile:['',Validators.required],
       date:['',Validators.required]
-      
-    
     });
 
     this.form = new FormGroup({
@@ -153,6 +159,13 @@ private httpClient:HttpClient,private formBuilder:FormBuilder) {
       date: new FormControl()
     });
 
+    this.form = this.builder.group({
+      today:new FormControl(this.formatFormDate(new Date()))
+    });
+
+  }
+  formatFormDate(date:Date){
+    return formatDate(date, this.dateFormat, this.language);
   }
  
   onMultiSelectClick(){
@@ -189,10 +202,13 @@ private httpClient:HttpClient,private formBuilder:FormBuilder) {
     let _file:UploadFileData ={
       fileId : this.uploadFileArr.length +"",
       fileName :this.file.name,
-      fileSize :this.file.size/1000000+ "MB",
+
+
+      fileSize :this.fileSizePipe.transform(this.file.size,'MB'),
+      
       fileType :this.file.type
     }
-
+    this.uploadFileArr = [];
     this.uploadFileArr.push(_file);
     this.selectFile.nativeElement.value = null;
   }

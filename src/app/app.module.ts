@@ -42,6 +42,8 @@ import { FolderDetailComponent } from './dashboard/folder-detail/folder-detail.c
 import { RenameModalComponent } from './dashboard/rename-modal/rename-modal.component';
 import { NewFolderComponent } from './dashboard/new-folder/new-folder.component';
 import { RenameContractComponent } from './dashboard/rename-contract/rename-contract.component';
+import { FileSizePipe } from './pipes/filesize.pipe';
+
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -117,7 +119,8 @@ const appRoutes: Routes = [
     FolderDetailComponent,
     RenameModalComponent,
     NewFolderComponent,
-    RenameContractComponent
+    RenameContractComponent,
+    FileSizePipe
    ],
   bootstrap:    [ AppComponent ],
   providers: [

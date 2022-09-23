@@ -50,20 +50,14 @@
 }
 
 .share{
-  justify-self: center;
+   margin: 0px 15px;
 }
 app-upload-file{
   margin:10px 15px;
   border-radius: 7px;
   border: none;
 }
-input{
-  text-align: center;
-  margin:10px 15px;
-  border-radius: 7px;
-  border: none;
-  padding: 15px;
-}
+
 .selectfolder{
   text-align: center;
   color: grey;
