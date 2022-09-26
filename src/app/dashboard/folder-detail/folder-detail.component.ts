@@ -5,6 +5,8 @@ import { Subscription } from 'rxjs';
 import { FolderData } from '../../models/folder.model';
 import { FoldersService } from '../../services/folder.service';
 import { Location } from '@angular/common';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { RenameContractComponent } from '../rename-contract/rename-contract.component';
 
 @Component({
   selector: 'app-folder-detail',
@@ -25,7 +27,7 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
   routeListener: Subscription;
   visitedFolderArray:FolderData[] = [];
 
-  constructor(private router:Router, private route:ActivatedRoute, private folderService: FoldersService, private translate:TranslateService, private _location: Location) { }
+  constructor(private router:Router, private route:ActivatedRoute, private folderService: FoldersService,private matDialog: MatDialog, private translate:TranslateService, private _location: Location) { }
 
   ngOnInit() {
     console.log(this.folderService.selectedFolder);
@@ -97,4 +99,47 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     this._location.back();
   }
 
+  markFav(folder: FolderData){
+    this.folderService.makeFolderFavourite(folder.id).subscribe({
+      next:(resp:any)=>{
+        console.log(resp);
+        this.folder.favoriteId = resp.id;
+        this.folder.isFavorite = 1;
+      },
+      error:(resp)=>{
+        console.log(resp);
+        console.log(folder.customerAmsidnr);
+      }
+    });
+  }
+  unmarkFav(folder: FolderData){
+    this.folderService.deleteFolderFavourite(folder.favoriteId).subscribe({
+      next:(resp:any)=>{
+        console.log(resp);
+        this.folder.isFavorite = 0;
+      },
+      error:(resp)=>{
+        console.log(resp);
+        console.log(folder.favoriteId);
+      }
+    });
+  }
+
+  toggleFav(folder: FolderData){
+    this.folder.isFavorite == 1 ? this.unmarkFav(folder) : this.markFav(folder);
+  }
+    
+  openModal(folder: FolderData) {
+    const dialogConfig = new MatDialogConfig();
+    // let passdata:string = '{"fileName": "'+this.file.name+'","fileUrl": "'+this.file.fileUrl+'"}';
+    let passdata:string = '{"contractName": "'+folder.folderName+'","contractId": "'+folder.id+'"}';
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = false;
+    dialogConfig.id = 'renamecontract-modal-component';
+    // dialogConfig.height = '80%';
+    // dialogConfig.width = '90%';
+    dialogConfig.data = passdata;
+    // https://material.angular.io/components/dialog/overview
+    const modalDialog = this.matDialog.open(RenameContractComponent, dialogConfig);
+  }
 }

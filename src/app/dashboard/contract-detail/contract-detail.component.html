@@ -45,7 +45,8 @@
           </div>
     
           <div class="fav-btn d-flex align-items-center justify-content-center"
-          [ngClass]="{'isFav': contract.details.isFav == '1', 'notFav': contract.details.isFav == '0'}">
+          [ngClass]="{'isFav': contract.details.isFav == '1', 'notFav': contract.details.isFav == '0'}"
+          (click)="toggleFav(contract)" >
             <i class="material-icons">star</i>
           </div>
     

@@ -113,6 +113,15 @@ app-folder-card, app-document-item{
   cursor: pointer;
 }
 
+.dropstart {
+  cursor: pointer;
+}
+.dropstart::before{
+  content: "" !important;
+}
+.dropstart .dropdown-toggle::before {
+  border: none !important;
+}
 .quick-fab{
   height: 3rem;
   width: 3rem;

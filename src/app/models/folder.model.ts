@@ -10,6 +10,8 @@ export interface FolderData {
   createdAt : string,
   subFolders : FolderData[],
   docs: DocumentData[],
+  isFavorite: number,
+  favoriteId: string,
 
   isSelected:boolean
 }

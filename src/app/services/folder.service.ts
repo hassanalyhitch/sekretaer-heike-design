@@ -1,7 +1,7 @@
 import { formatDate } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Observer, Subscription } from 'rxjs';
+import { Observable, Observer, Subscription, tap } from 'rxjs';
 import { FolderData } from '../models/folder.model';
 
 
@@ -16,6 +16,8 @@ export class FoldersService {
     createTime :  "",
     createdAt :  "",
     subFolders : [],
+    isFavorite: 0,
+    favoriteId: "",
 
     isSelected:false
   };
@@ -37,7 +39,7 @@ export class FoldersService {
       next: (resp) => {
         this.userFolderArr = [];
         
-        // console.table(resp);
+        console.table(resp);
         if(Array.isArray(resp)){
           let index: number = 0;
 
@@ -55,6 +57,8 @@ export class FoldersService {
               createTime : item['createdAt'],
               subFolders : item['subFolders'],
               docs : item['docs'],
+              isFavorite: item['isFavorite'],
+              favoriteId: item['favoriteId'],
               isSelected:false
             };
             this.userFolderArr.push(folder);
@@ -103,5 +107,38 @@ export class FoldersService {
       }),
       
       });
+  }
+  
+  makeFolderFavourite(folderId){
+    let data = '{"type": "folder","item_identifier": "'+folderId+'"}';
+
+    return this.http.post('https://testapi.maxpool.de/api/v1/sekretaer/favorites', data, {
+      headers: new HttpHeaders({
+        'accept': 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    }).pipe(
+      tap((resp)=>{
+        
+          console.log(data);
+          
+      })
+    );
+  }
+
+  deleteFolderFavourite(favId){
+    let url = 'https://testapi.maxpool.de/api/v1/sekretaer/favorites/'+favId;
+    return this.http.delete(url, {
+      headers: new HttpHeaders({
+        'accept': 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    }).pipe(
+      tap((resp)=>{
+        
+          console.log(url);
+          
+      })
+    );
   }
 }

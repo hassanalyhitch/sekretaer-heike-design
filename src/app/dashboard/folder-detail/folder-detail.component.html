@@ -2,7 +2,21 @@
   <div class="_content d-flex d-flex flex-column align-items-center w-100 h-100 ">
 
     <div class="section-folderdetail w-100 d-flex flex-column pt-4 ">
-      <strong class="section-title align-self-center bg-"> FOLDER</strong>
+      <div class="d-flex align-items-center justify-content-between bg-">
+        <span></span>
+        <strong class="section-title align-self-center bg-"> FOLDER</strong>
+  
+        <div class="ml-auto btn-group dropstart align-self-center">
+            
+          <i class="material-icons dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" >more_vert</i>
+        
+          <ul class="dropdown-menu shadow">
+            <li><span class="dropdown-item" href="" *ngIf="folder.isFavorite==0" (click)="markFav(folder)" >Mark as favourite</span></li>
+            <li><span class="dropdown-item" href="" *ngIf="folder.isFavorite==1" (click)="unmarkFav(folder)" >Unmark as favourite</span></li>
+            <li><span class="dropdown-item" href="" (click)="openModal(folder)" >Rename</span></li>
+          </ul>
+        </div>
+      </div>
 
       <div class="d-flex flex-row align-items-center w-100 map px-3 mt-1 mb-3 bg-">
         <div class="quick-fab d-flex justify-content-center align-items-center mx-2" (click)="onBackNavClick()" >

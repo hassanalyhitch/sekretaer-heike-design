@@ -137,4 +137,8 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     });
   }
 
+  toggleFav(contract: ContractData){
+    this.contract.details.isFav == "1" ? this.unmarkFav(contract) : this.markFav(contract);
+  }
+
 }

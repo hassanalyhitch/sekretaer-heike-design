@@ -51,6 +51,8 @@ export class OverviewComponent implements OnInit {
     createdAt :  "",
     subFolders : [],
     docs: [],
+    isFavorite: 0,
+    favoriteId: "",
     isSelected:false
   }
 ];
