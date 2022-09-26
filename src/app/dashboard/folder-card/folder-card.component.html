@@ -7,7 +7,8 @@
       <span class="folder-name px-2 mt-3 mb-1">{{folder.folderName }}</span>
       <span class="folder-desc px-2 ">folder description</span>
 
-      <div class="fav-btn d-flex align-items-center justify-content-center">
+      <div class="fav-btn d-flex align-items-center justify-content-center"
+      [ngClass]="{'isFav': folder.isFavorite == 1, 'notFav': folder.isFavorite == 0}" >
         <i class="material-icons">star</i>
       </div>
 

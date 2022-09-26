@@ -89,22 +89,26 @@ export class OverviewComponent implements OnInit {
         // console.log(this.allContractsArr);
         this.allContractsArr.length>1 ? this.showCard2 = true: this.showCard2 = false;
         this.allContractsArr.length>2 ? this.showCard1 = true: this.showCard1 = false;
+      },
+      complete:()=>{
+
+        this.folderService.getFolders().subscribe({
+          next: (resp)=>{
+            this.foldersArr = this.folderService.userFolderArr;
+            if(this.folderService.userFolderArr.length>3){
+              for(let i=3; i<this.folderService.userFolderArr.length; i++){
+                this.folderSubsetArr.push(this.folderService.userFolderArr[i]);
+              }
+            }
+            // console.log(this.foldersArr);
+            this.foldersArr.length>1 ? this.showFolderCard2 = true: this.showFolderCard2 = false;
+            this.foldersArr.length>2 ? this.showFolderCard1 = true: this.showFolderCard1 = false;
+          }
+        });
       }
+      
     });
 
-    this.folderService.getFolders().subscribe({
-      next: (resp)=>{
-        this.foldersArr = this.folderService.userFolderArr;
-        if(this.folderService.userFolderArr.length>3){
-          for(let i=3; i<this.folderService.userFolderArr.length; i++){
-            this.folderSubsetArr.push(this.folderService.userFolderArr[i]);
-          }
-        }
-        // console.log(this.foldersArr);
-        this.foldersArr.length>1 ? this.showFolderCard2 = true: this.showFolderCard2 = false;
-        this.foldersArr.length>2 ? this.showFolderCard1 = true: this.showFolderCard1 = false;
-      }
-    });
 
   }
 
