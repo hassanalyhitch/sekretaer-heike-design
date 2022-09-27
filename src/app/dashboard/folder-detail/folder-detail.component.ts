@@ -76,6 +76,7 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     this.mainFolder = this.folder; 
     this.visitedFolderArray.push(this.mainFolder);
 
+
   }
 
   ngOnDestroy(){
@@ -135,11 +136,25 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     let passdata:string = '{"folderName": "'+folder.folderName+'","folderId": "'+folder.id+'"}';
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
-    dialogConfig.id = 'renamecontract-modal-component';
+    dialogConfig.id = 'renamefolder-modal-component';
     // dialogConfig.height = '80%';
     // dialogConfig.width = '90%';
     dialogConfig.data = passdata;
     // https://material.angular.io/components/dialog/overview
     const modalDialog = this.matDialog.open(RenameFolderComponent, dialogConfig);
+    
+    this.matDialog.getDialogById('renamefolder-modal-component').afterClosed().subscribe({
+      next:()=>{
+
+        // this.currentNav = resp.folderName;
+        // this.folder.folderName = resp.foldername;
+        
+         this.folder = this.folderService.selectedFolder;
+         this.currentNav = this.folder.folderName;
+      },
+      error:(resp)=>{
+        console.log(resp);
+      }
+    });
   }
 }

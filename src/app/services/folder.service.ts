@@ -133,7 +133,7 @@ export class FoldersService {
   }
   
   rename(folderId, data) {
-    let url = 'https://testapi.maxpool.de/api/v1/contracts/'+folderId;
+    let url = 'https://testapi.maxpool.de/api/v1/sekretaer/myfolders/'+folderId;
     return this.http.put(url, data, {
       headers: new HttpHeaders({
         'accept': 'application/json',
@@ -141,8 +141,22 @@ export class FoldersService {
       }),
     }).pipe(
       tap((resp)=>{
-        
         console.log(resp);
+        let folder: FolderData = {
+          id: resp['id'],
+          loginId : resp['loginId'],
+          customerAmsidnr:  resp['customerAmsidnr'],
+          createdAt:  resp['createdAt'],         
+          ownerFolderId : resp['ownerFolderId'],
+          folderName : resp['folderName'],
+          createTime : resp['createdAt'],
+          subFolders : resp['subFolders'],
+          docs : resp['docs'],
+          isFavorite: resp['isFavorite'],
+          favoriteId: resp['favoriteId'],
+          isSelected: true
+        }
+        this.emitSelectedFolder(folder);
       })
     );
   }
