@@ -6,7 +6,7 @@ import { FolderData } from '../../models/folder.model';
 import { FoldersService } from '../../services/folder.service';
 import { Location } from '@angular/common';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { RenameContractComponent } from '../rename-contract/rename-contract.component';
+import { RenameFolderComponent } from '../rename-folder/rename-folder.component';
 
 @Component({
   selector: 'app-folder-detail',
@@ -140,6 +140,6 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     // dialogConfig.width = '90%';
     dialogConfig.data = passdata;
     // https://material.angular.io/components/dialog/overview
-    const modalDialog = this.matDialog.open(RenameContractComponent, dialogConfig);
+    const modalDialog = this.matDialog.open(RenameFolderComponent, dialogConfig);
   }
 }

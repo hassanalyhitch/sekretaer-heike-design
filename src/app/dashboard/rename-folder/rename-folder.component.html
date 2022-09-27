@@ -1,0 +1,30 @@
+<div >
+  <div class="col-md-12 col-12 px-4">
+
+    <div class="d-flex flex-column w-100">
+      <strong class="section-title align-self-center p-2 m-2"> Rename Contract</strong>
+      <div class="align-items-center w-100">
+        Contract Name :<br />
+        {{ documentName }}
+      </div>
+      <form (ngSubmit)= "onSubmit(saveForm.value)" class="d-flex flex-column mt-4" #saveForm="ngForm" > 
+        <div class="material-textfield mb-1">
+          <input placeholder=" " type="text" [(ngModel)]="newContractName" name="name" ngModel required/>
+          <label>New contract name</label>
+        </div>
+        <div class="mt-5 w-100">
+          <button
+            id="save-btn"
+            class="btn btn-login w-100 py-2"
+            [disabled]="!saveForm.valid"
+            type="submit"
+            style="font-size:20px;"
+          >
+            SAVE
+          </button>
+        </div>
+        </form>
+    </div>
+  </div>
+
+</div>

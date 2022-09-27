@@ -131,4 +131,19 @@ export class FoldersService {
       })
     );
   }
+  
+  rename(vamsidnr, data) {
+    let url = 'https://testapi.maxpool.de/api/v1/contracts/'+vamsidnr+'/rename';
+    return this.http.put(url, data, {
+      headers: new HttpHeaders({
+        'accept': 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    }).pipe(
+      tap((resp)=>{
+        
+        console.log(resp);
+      })
+    );
+  }
 }
