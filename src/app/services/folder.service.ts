@@ -132,7 +132,7 @@ export class FoldersService {
     );
   }
   
-  rename(folderid, data) {
+  rename(folderId, data) {
     let url = 'https://testapi.maxpool.de/api/v1/contracts/'+folderId;
     return this.http.put(url, data, {
       headers: new HttpHeaders({
