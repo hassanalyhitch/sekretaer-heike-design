@@ -10,16 +10,16 @@ import { FoldersService } from '../../services/folder.service';
 export class RenameFolderComponent implements OnInit {
 
   dataObj:{
-    contractName: string,
-    contractId: string
+    folderName: string,
+    folderId: string
   };
   documentName: string = "";
-  newContractName: string= "";
+  newFolderName: string= "";
 
   constructor(@Inject(MAT_DIALOG_DATA)public data:any, private folderService: FoldersService,private dialogRef: MatDialogRef<RenameFolderComponent>) { 
 
     this.dataObj = JSON.parse(this.data);
-    this.documentName = this.dataObj.contractName;
+    this.documentName = this.dataObj.folderName;
     
   }
 
@@ -29,7 +29,7 @@ export class RenameFolderComponent implements OnInit {
 
   onSubmit(formData: any) {
     console.log(formData);
-    this.folderService.rename(this.dataObj.contractId , formData).subscribe({
+    this.folderService.rename(this.dataObj.folderId , formData).subscribe({
       complete:()=>{ 
         this.dialogRef.close();
       }

@@ -132,7 +132,7 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
   openModal(folder: FolderData) {
     const dialogConfig = new MatDialogConfig();
     // let passdata:string = '{"fileName": "'+this.file.name+'","fileUrl": "'+this.file.fileUrl+'"}';
-    let passdata:string = '{"contractName": "'+folder.folderName+'","contractId": "'+folder.id+'"}';
+    let passdata:string = '{"folderName": "'+folder.folderName+'","folderId": "'+folder.id+'"}';
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = 'renamecontract-modal-component';

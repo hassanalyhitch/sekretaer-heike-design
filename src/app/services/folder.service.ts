@@ -132,8 +132,8 @@ export class FoldersService {
     );
   }
   
-  rename(vamsidnr, data) {
-    let url = 'https://testapi.maxpool.de/api/v1/contracts/'+vamsidnr+'/rename';
+  rename(folderid, data) {
+    let url = 'https://testapi.maxpool.de/api/v1/contracts/'+folderId;
     return this.http.put(url, data, {
       headers: new HttpHeaders({
         'accept': 'application/json',
