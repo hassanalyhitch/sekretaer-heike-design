@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ContractData } from '../../models/contract.model';
+import { FolderData } from '../../models/folder.model';
 import { ContractsService } from '../../services/contracts.service';
+import { FoldersService } from '../../services/folder.service';
 
 @Component({
   selector: 'app-favourite',
@@ -12,8 +14,11 @@ export class FavouriteComponent implements OnInit {
 
   favContractArr:ContractData[] = [];
   allContractsArr:ContractData[] = [];
+  
+  favFoldersArr: FolderData[] = [];
+  allFoldersArr: FolderData[] = [];
 
-  constructor(private router:Router, private contractService: ContractsService) { }
+  constructor(private router:Router, private contractService: ContractsService, private folderService: FoldersService) { }
 
   ngOnInit() {
     this.contractService.getContracts().subscribe({
@@ -27,6 +32,22 @@ export class FavouriteComponent implements OnInit {
           
         });
         console.log(this.favContractArr.length);
+      },
+      complete:()=>{
+        
+        this.folderService.getFolders().subscribe({
+          next: (resp)=>{
+
+            this.allFoldersArr = this.folderService.userFolderArr;
+            this.allFoldersArr.forEach((folder)=>{
+              if(folder.isFavorite === 1 ){
+                this.favFoldersArr.push(folder);
+              }
+            
+            });
+                    
+          }
+        });
       }
     });
     
@@ -38,7 +59,15 @@ export class FavouriteComponent implements OnInit {
     this.contractService.emitSelectedFolder(clickedContract);
     this.router.navigate(['dashboard/favourite/contract-detail', { id: clickedContract.details.Amsidnr }]);
   }
-  favArrHasNoContent(){
-    return this.favContractArr.length < 1 ? true : false ;
+
+  onFolderCardClick(clickedFolder){
+
+    this.folderService.emitSelectedFolder(clickedFolder);
+    this.router.navigate(['dashboard/overview/folder-detail', { id: clickedFolder.id }]);
   }
+
+  favArrHasNoContent(){
+    return (this.favContractArr.length < 1 && this.favFoldersArr.length < 1 ) ? true : false ;
+  }
+
 }
