@@ -141,4 +141,7 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     this.contract.details.isFav == "1" ? this.unmarkFav(contract) : this.markFav(contract);
   }
 
+  onAddPage(){
+    this.router.navigate(['dashboard/home/adddocument']);
+  }
 }
