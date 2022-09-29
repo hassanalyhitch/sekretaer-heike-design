@@ -51,14 +51,19 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
             
             if(this.visitedFolderArray[i].id == this.route.snapshot.params['id']){
               
+              //..has been visited but data may have changed, show the old and request for new data
               this.folderService.emitSelectedFolder(this.visitedFolderArray[i]);
               this.folder = this.folderService.selectedFolder;
-
+              
+              //set parentName, which shows at the top of the page
               for(let x=0; x<this.visitedFolderArray.length; x++){
                 if(this.visitedFolderArray[x].id == this.folder.ownerFolderId){
                   this.parentNav = this.visitedFolderArray[x].folderName;
                 }
               }
+
+              //http request here
+
             }
           }
         } 
