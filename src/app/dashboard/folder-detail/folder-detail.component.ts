@@ -7,6 +7,7 @@ import { FoldersService } from '../../services/folder.service';
 import { Location } from '@angular/common';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { RenameFolderComponent } from '../rename-folder/rename-folder.component';
+import { NewFolderComponent } from '../new-folder/new-folder.component';
 
 @Component({
   selector: 'app-folder-detail',
@@ -86,16 +87,16 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     this.visitedFolderArray = [];
   }
   
-  onFolderCardClick(clickedFolder: FolderData, index){
+  onFolderCardClick(clickedFolder: FolderData){
     this.folderService.emitSelectedFolder(clickedFolder);
 
     this.visitedFolderArray.push(clickedFolder);
     this.parentFolder = this.folder;
     this.hasParent = true;
 
-
     this.router.navigate(['/dashboard/overview/folder-detail', { id: clickedFolder.id }]);
   }
+
   onBackNavClick(){
     this._location.back();
   }
@@ -154,6 +155,27 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
       },
       error:(resp)=>{
         console.log(resp);
+      }
+    });
+  }
+  
+  addNewFolder(){
+    const dialogConfig = new MatDialogConfig();
+    
+    let passdata:string = '{"parentFolderId": "'+this.folder.id+'"}';
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = false;
+    dialogConfig.id = 'newfolder-modal-component';
+    // dialogConfig.height = '80%';
+    // dialogConfig.width = '90%';
+    dialogConfig.data = passdata;
+    const modalDialog = this.matDialog.open(NewFolderComponent, dialogConfig);
+    
+    this.matDialog.getDialogById('newfolder-modal-component').afterClosed().subscribe({
+      next:()=>{
+        
+         this.folder = this.folderService.selectedFolder;
+         this.onFolderCardClick(this.folder);
       }
     });
   }

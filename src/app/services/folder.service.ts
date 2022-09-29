@@ -160,4 +160,36 @@ export class FoldersService {
       })
     );
   }
+  
+  addNewFolder( folderName:string, parentFolderId:string = "0" ) {
+    let data = '{"parentFolderId": "'+parentFolderId+'", "name": "'+folderName+'" }' ;
+
+    let url = 'https://testapi.maxpool.de/api/v1/sekretaer/myfolders';
+    return this.http.post(url, data, {
+      headers: new HttpHeaders({
+        'accept': 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    }).pipe(
+      tap((resp)=>{
+        
+        console.log(resp);
+        let folder: FolderData = {
+          id: resp['id'],
+          loginId : resp['loginId'],
+          customerAmsidnr:  resp['customerAmsidnr'],
+          createdAt:  resp['createdAt'],         
+          ownerFolderId : resp['ownerFolderId'],
+          folderName : resp['folderName'],
+          createTime : resp['createdAt'],
+          subFolders : resp['subFolders'],
+          docs : resp['docs'],
+          isFavorite: resp['isFavorite'],
+          favoriteId: resp['favoriteId'],
+          isSelected: true
+        }
+        this.emitSelectedFolder(folder);
+      })
+    );
+  }
 }

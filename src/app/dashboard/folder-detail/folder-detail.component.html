@@ -60,12 +60,26 @@
 
 <!-- subfolders -->
       <hr class="mx-1" id="folder-hr" data-content="" />
-
-      <app-folder-card class="a_card align-self-center" (click)="onFolderCardClick(subfolder, i)" *ngFor="let subfolder of folder.subFolders; let i = index " [folder]=subfolder  ></app-folder-card>
+      <div class="d-flex section-title align-self-center align-items-center mb-3">
+        <span> Add Sub-folder </span>
+      
+        <div class="_fab d-flex flex-column mx-3 justify-content-center align-items-center" (click)="addNewFolder()">
+          <i class="material-icons">add</i>
+        </div>
+  
+      </div>
+      <app-folder-card class="a_card align-self-center m-2" (click)="onFolderCardClick(subfolder)" *ngFor="let subfolder of folder.subFolders; let i = index " [folder]=subfolder  ></app-folder-card>
 
 <!-- documents -->
       <hr class="mx-1" id="docu-hr" data-content="" />
-
+      <div class="d-flex section-title align-self-center align-items-center mb-3">
+        <span> Add new Document </span>
+      
+        <div class="_fab d-flex flex-column mx-3 justify-content-center align-items-center">
+          <i class="material-icons">add</i>
+        </div>
+  
+      </div>
       <app-document-item *ngFor="let doc of folder.docs" [doc]=doc ></app-document-item>
 
     </div>
