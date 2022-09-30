@@ -1,19 +1,20 @@
 .uploadFileItem{
-  margin-right: 15px;
-  margin-left: 15px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-}
-
-.e-file-delete-btn{
-  width: 48px;
-  height: 48px;
-}
-.e-file-delete-btn:hover{
-  width: 48px;
-  height: 48px;
-  background-color: rgba(0,0,0,.12);
-  border-color: rgba(0,0,0,0);
-  border-radius: 50%;
-  box-shadow: 0 0 0 rgb(0 0 0 / 0%);
-  cursor:pointer;
-}
+  margin: 10px 15px;
+   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+   border-radius: 7px;
+ }
+ 
+ .e-file-delete-btn{
+   width: 48px;
+   height: 48px;
+ }
+ .e-file-delete-btn:hover{
+   width: 48px;
+   height: 48px;
+   background-color: rgba(0,0,0,.12);
+   border-color: rgba(0,0,0,0);
+   border-radius: 50%;
+   box-shadow: 0 0 0 rgb(0 0 0 / 0%);
+   cursor:pointer;
+ }
+ 

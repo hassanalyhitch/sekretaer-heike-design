@@ -235,5 +235,10 @@ export class OverviewComponent implements OnInit {
       }
     });
   }
+  
+  onAddContract(){
+    this.router.navigate(['dashboard/overview/new-contract']);
+  }
+
 
 }

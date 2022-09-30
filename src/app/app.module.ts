@@ -44,6 +44,7 @@ import { NewFolderComponent } from './dashboard/new-folder/new-folder.component'
 import { RenameContractComponent } from './dashboard/rename-contract/rename-contract.component';
 import { FileSizePipe } from './pipes/filesize.pipe';
 import { RenameFolderComponent } from './dashboard/rename-folder/rename-folder.component';
+import { NewContractComponent } from './dashboard/overview/new-contract/new-contract.component';
 
 
 // AoT requires an exported function for factories
@@ -71,7 +72,9 @@ const appRoutes: Routes = [
   { path: 'dashboard/favourite/contract-detail', component:ContractDetailComponent },
   { path: 'dashboard/home/contract-detail/fileview', component: FileviewComponent},
   { path: 'dashboard/home/adddocument', component:AddPageComponent},
-  { path: 'dashboard/home/chat', component:ChatComponent}
+  { path: 'dashboard/home/chat', component:ChatComponent},  
+  { path:'dashboard/overview/new-contract',component:NewContractComponent}
+
 
 ];
 @NgModule({
@@ -122,7 +125,8 @@ const appRoutes: Routes = [
     NewFolderComponent,
     RenameContractComponent,
     FileSizePipe,
-    RenameFolderComponent
+    RenameFolderComponent,
+    NewContractComponent
    ],
   bootstrap:    [ AppComponent ],
   providers: [
