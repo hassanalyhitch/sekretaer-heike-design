@@ -31,7 +31,7 @@ export class AddPageComponent implements OnInit {
   submitted = false;
 
   dropDownIsHidden:boolean= true;
-  selectedItems: [];
+  selectedItems = [];
  
   @ViewChild("selectFile",{static:true}) selectFile:ElementRef;
    dropdownSettings:IDropdownSettings={};
@@ -73,6 +73,7 @@ export class AddPageComponent implements OnInit {
    
    dateFormat ="yyyy-MM-dd";
    language="en";
+   dropDownForm:FormGroup;
 
     constructor( private route:ActivatedRoute, private router:Router,private folderService:FoldersService,
 private contractService:ContractsService,private http:HttpClient,private fileUploadService: FileUploadService,
@@ -90,6 +91,14 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
       allowSearchFilter: true,
       limitSelection: 1
     };
+
+    this.selectedItems = [
+      { item_id: 3, item_text: 'Item3'  },
+      { item_id: 4,item_text: 'Item4' }
+    ];
+    this.dropDownForm = this.builder.group({
+      myItems: [this.selectedItems]
+    });
 
     this.folderSub = this.folderService.getFolders().subscribe({
       next: (resp) => {
