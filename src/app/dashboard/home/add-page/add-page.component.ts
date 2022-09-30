@@ -34,7 +34,7 @@ export class AddPageComponent implements OnInit {
   selectedItems = [];
  
   @ViewChild("selectFile",{static:true}) selectFile:ElementRef;
-   dropdownSettings:IDropdownSettings={};
+   dropdownSettings = {};
    @Input() index:String;
    folders:FolderData =<FolderData>{
     id : "",
@@ -88,17 +88,27 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
     this.dropdownSettings={
       idField: 'id',
       textField: 'dataName',
+      singleSelection: true,
+      enableCheckAll: true,
+      selectAllText: 'Select All',
+      unSelectAllText: 'Unselect All',
       allowSearchFilter: true,
-      limitSelection: 1
+      limitSelection: -1,
+      clearSearchFilter: true,
+      maxHeight: 197,
+      itemsShowLimit: 3,
+      searchPlaceholderText: 'Search',
+      noDataAvailablePlaceholderText: 'No data available',
+      closeDropDownOnSelection: true,
+      showSelectedItemsAtTop: false,
+      defaultOpen: false,
+      
     };
 
     this.selectedItems = [
-      { item_id: 3, item_text: 'Item3'  },
-      { item_id: 4,item_text: 'Item4' }
+      { id: 3, dataName: 'Item3'  },
+      { id: 4, dataName: 'Item4' }
     ];
-    this.dropDownForm = this.builder.group({
-      myItems: [this.selectedItems]
-    });
 
     this.folderSub = this.folderService.getFolders().subscribe({
       next: (resp) => {
@@ -141,7 +151,7 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
                 } 
                 // this.dataArr.push(this.contractArr);
               this.dataArr = this.dataArr.concat(this.contractArr);
-                // console.log(this.dataArr.length);
+                console.log(this.dataArr.length);
                 // console.table(this.dataArr);
               }
 
@@ -159,18 +169,18 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
     
     this.form =this.formBuilder.group({
       namefile:['',Validators.required],
-      date:['',Validators.required]
-    });
-
-    this.form = new FormGroup({
+      date:['',Validators.required],
       fileupload: new FormControl(),
-      nametags: new FormControl(),
-      date: new FormControl()
-    });
-
-    this.form = this.builder.group({
+      // myItems: [this.selectedItems],
       today:new FormControl(this.formatFormDate(new Date()))
     });
+
+    // this.form = new FormGroup({
+    //   fileupload: new FormControl(),
+    //   nametags: new FormControl(),
+    //   date: new FormControl()
+    // });
+
 
   }
   formatFormDate(date:Date){
@@ -182,7 +192,7 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
     let dropDownElement = document.getElementsByClassName('dropdown-list')[0] as HTMLElement;
     this.dropDownIsHidden = (dropDownElement.hidden);
 
-    console.log(this.selectedItems);
+    // console.log(this.selectedItems);
     
     if(this.selectedItems != undefined && this.selectedItems.length>0){
       dropDownElement.hidden = true;

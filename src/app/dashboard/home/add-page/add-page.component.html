@@ -19,17 +19,13 @@
 
       <div class="form-group">
         <div class="selectfolder">
-          <form [formGroup]="dropDownForm">
               <ng-multiselect-dropdown
                 [settings]="dropdownSettings"
                 [data]="dataArr"
-                [(ngModel)]="selectedItems"
-                (click)="onMultiSelectClick()"
-                formControlName="myItems"
+                (onSelect)="onMultiSelectClick()"
 
                 >
               </ng-multiselect-dropdown>
-          </form>
         </div>
       </div>
 
