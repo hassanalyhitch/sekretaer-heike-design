@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnDestroy, OnInit,Input, ViewChild, ElementRef, Injectable } from '@angular/core';
 import { Router,Event, ActivatedRoute } from '@angular/router';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
+// import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Subscription } from 'rxjs';
 import { FolderData } from '../../../models/folder.model';
 import { ContractsService } from '../../../services/contracts.service';
