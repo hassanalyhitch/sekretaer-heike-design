@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnDestroy, OnInit,Input, ViewChild, ElementRef, Injectable } from '@angular/core';
 import { Router,Event, ActivatedRoute } from '@angular/router';
-// import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Subscription } from 'rxjs';
 import { FolderData } from '../../../models/folder.model';
 import { ContractsService } from '../../../services/contracts.service';
@@ -106,8 +106,7 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
     };
 
     this.selectedItems = [
-      { id: 3, dataName: 'Item3'  },
-      { id: 4, dataName: 'Item4' }
+      { id: '30007', dataName: 'default selected'  }
     ];
 
     this.folderSub = this.folderService.getFolders().subscribe({
@@ -171,7 +170,7 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
       namefile:['',Validators.required],
       date:['',Validators.required],
       fileupload: new FormControl(),
-      // myItems: [this.selectedItems],
+      myItems: [this.selectedItems],
       today:new FormControl(this.formatFormDate(new Date()))
     });
 

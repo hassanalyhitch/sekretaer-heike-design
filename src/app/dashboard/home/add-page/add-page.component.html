@@ -19,13 +19,14 @@
 
       <div class="form-group">
         <div class="selectfolder">
-              <!-- <ng-multiselect-dropdown
+              <ng-multiselect-dropdown
                 [settings]="dropdownSettings"
                 [data]="dataArr"
                 (onSelect)="onMultiSelectClick()"
-
+                formControlName="myItems"
+                [disabled] = "true"
                 >
-              </ng-multiselect-dropdown> -->
+              </ng-multiselect-dropdown>
         </div>
       </div>
 
