@@ -10,11 +10,11 @@
   <div class="more">
     <div class="more-icon">
             
-      <div class="btn-group dropstart">
+      <div class="btn-group dropstart" [ngClass]="{'d-none': (contains('info') && notification.isRead === '1')||(contains('chat') && notification.isRead === '1')}" >
           
         <i class="material-icons  dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" >more_horiz</i>
         
-        <ul class="dropdown-menu shadow" >
+        <ul class="dropdown-menu shadow">
           <li><span class="dropdown-item" href="" *ngIf="contains('vamsidnr')">Open contract</span></li>
           <li><span class="dropdown-item" href="" *ngIf="contains('dms')">Open document</span></li>
           <li><span class="dropdown-item" href="" *ngIf="contains('docid')">Open document</span></li>

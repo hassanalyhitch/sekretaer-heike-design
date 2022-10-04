@@ -45,6 +45,7 @@ import { RenameContractComponent } from './dashboard/rename-contract/rename-cont
 import { FileSizePipe } from './pipes/filesize.pipe';
 import { RenameFolderComponent } from './dashboard/rename-folder/rename-folder.component';
 import { NewContractComponent } from './dashboard/overview/new-contract/new-contract.component';
+import { NotificationModalComponent } from './dashboard/notifications/notification-modal/notification-modal.component';
 
 
 // AoT requires an exported function for factories
@@ -126,7 +127,8 @@ const appRoutes: Routes = [
     RenameContractComponent,
     FileSizePipe,
     RenameFolderComponent,
-    NewContractComponent
+    NewContractComponent,
+    NotificationModalComponent
    ],
   bootstrap:    [ AppComponent ],
   providers: [
