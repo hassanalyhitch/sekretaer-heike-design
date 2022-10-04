@@ -23,7 +23,7 @@ export class NotificationsService {
   notifCount: number = 0;
 
   constructor(private http: HttpClient) {
-    this.getNotifications().subscribe({
+    this.getUnreadNotifications().subscribe({
       next:(resp)=>{
         
         if(Array.isArray(resp)){
