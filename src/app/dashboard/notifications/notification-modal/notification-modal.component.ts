@@ -11,5 +11,8 @@ export class NotificationModalComponent implements OnInit {
 
   ngOnInit() {
   }
+  
+  onCloseModal(){
 
+  }
 }
