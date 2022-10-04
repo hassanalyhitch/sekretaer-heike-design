@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, Observer } from "rxjs";
+import { Observable, Observer, tap } from "rxjs";
 import { NotificationData } from "../models/notification.model";
 
 @Injectable({ providedIn: 'root' })
@@ -39,6 +39,19 @@ export class NotificationsService {
 
   getNotifications() {
     return this.http.get(
+      'https://testapi.maxpool.de/api/v1/sekretaer/notifications',
+      {
+          headers: new HttpHeaders({
+                  'accept': 'application/json',
+                  'Content-Type': 'application/json'
+              }),
+      }
+    );
+
+  }
+
+  getUnreadNotifications() {
+    return this.http.get(
       'https://testapi.maxpool.de/api/v1/sekretaer/notifications/unread',
       {
           headers: new HttpHeaders({
@@ -49,5 +62,24 @@ export class NotificationsService {
     );
 
   }
+  
+  markAsRead(notificationId){
+    let url ='https://testapi.maxpool.de/api/v1/sekretaer/notifications/'+notificationId+'/mark/read';
+
+    return this.http.put(url, {
+      headers: new HttpHeaders({
+        'accept': 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    }).pipe(
+      tap((resp)=>{
+        
+          console.log(resp);
+          
+      })
+    );
+  }
+
+  
 
 }

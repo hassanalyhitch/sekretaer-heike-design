@@ -6,7 +6,7 @@ export interface NotificationData{
   readTime: string,
   infoText: string,
   infoHeadline: string,
-  isRead: number,
+  isRead: any,
   links:
     {
       assocType: string,

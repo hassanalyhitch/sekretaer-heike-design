@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
     });
     
     // this.notif.nativeElement.setAttribute("notification-count", this.notifCount+"");
-    this.notificationService.getNotifications().subscribe({
+    this.notificationService.getUnreadNotifications().subscribe({
       next:()=>{
 
         this.notifCount = this.notificationService.notifCount;

@@ -124,6 +124,7 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
       }
     });
   }
+  
   unmarkFav(contract: ContractData){
     this.contractService.deleteContractFavourite(contract.details.favoriteId).subscribe({
       next:(resp:any)=>{

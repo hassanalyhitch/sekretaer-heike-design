@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NotificationData } from '../../../models/notification.model';
+import { NotificationsService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-notification-item',
@@ -13,7 +14,7 @@ export class NotificationItemComponent implements OnInit {
 
   notifIcon:string = "";
 
-  constructor() { }
+  constructor(private notificationService: NotificationsService) { }
 
   ngOnInit() {
     
@@ -34,6 +35,10 @@ export class NotificationItemComponent implements OnInit {
             this.notifIcon = "/assets/chat-icon.svg";
             break;
           }
+          case "info" : {
+            this.notifIcon = "/assets/info-icon.svg";
+            break;
+          }
           default: {
             this.notifIcon = "/assets/doc-icon.svg";
             break;
@@ -42,6 +47,7 @@ export class NotificationItemComponent implements OnInit {
       }
     }
   }
+
   contains(obj) {
     let i = this.notification.links.length;
     while (i--) {
@@ -50,6 +56,20 @@ export class NotificationItemComponent implements OnInit {
        }
     }
     return false;
+  }
+
+  markAsRead(notificationId){
+    this.notificationService.markAsRead(notificationId).subscribe({
+      next:()=>{
+
+      },
+      error:()=>{
+
+      },
+      complete:()=>{
+
+      }
+    });
   }
 
 }
