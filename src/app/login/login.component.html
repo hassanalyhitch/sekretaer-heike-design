@@ -1,30 +1,43 @@
-<div class="main-wrapper w-100 d-flex flex-column ">
-
-  <div class="header-wrapper ">
-    <div class="header-content d-flex d-flex justify-content-center align-items-center w-100 h-100 ">
-      
+<div class="main-wrapper w-100 d-flex flex-column">
+  <div class="header-wrapper">
+    <div
+      class="header-content d-flex d-flex justify-content-center align-items-center w-100 h-100"
+    >
       <div class="logo-container align-self-center">
         <img
           src="../assets/logo.svg"
           alt="sekretaer_logo"
           class="app-logo shadow-sm"
-          style="max-width:120px"
+          style="max-width: 120px"
         />
-    </div>
+      </div>
     </div>
   </div>
 
-  <div class="form-wrapper ">
-    <div class="form-content d-flex d-flex flex-column align-items-center w-100 h-100 ">
+  <div class="form-wrapper">
+    <div
+      class="form-content d-flex d-flex flex-column align-items-center w-100 h-100"
+    >
       <div class="section-header">
-        <span>Let's Login</span>
+        <span>{{ "login.title_login" | translate }}</span>
       </div>
 
-      <div class="form-container w-100">         
-        <form (ngSubmit)= "onSubmit(loginForm.value)" class="d-flex flex-column" #loginForm="ngForm" > 
+      <div class="form-container w-100">
+        <form
+          (ngSubmit)="onSubmit(loginForm.value)"
+          class="d-flex flex-column"
+          #loginForm="ngForm"
+        >
           <div class="material-textfield mb-1">
-            <input placeholder=" " type="text" [(ngModel)]="username" name="username" ngModel required/>
-            <label>{{ 'login.username' | translate }}</label>
+            <input
+              placeholder=" "
+              type="text"
+              [(ngModel)]="username"
+              name="username"
+              ngModel
+              required
+            />
+            <label>{{ "login.username" | translate }}</label>
           </div>
           <div class="material-textfield mt-4 mb-1">
             <input
@@ -35,48 +48,45 @@
               ngModel
               required
             />
-            <label>{{ 'login.password' | translate }}</label>
+            <label>{{ "login.password" | translate }}</label>
           </div>
           <div class="mt-5 w-100">
             <button
               id="sign-in-btn"
               class="btn btn-login w-100 py-2"
-              [disabled]="!(username.length > 1 && password.length > 1) && !loginForm.valid"
+              [disabled]="
+                !(username.length > 1 && password.length > 1) &&
+                !loginForm.valid
+              "
               type="submit"
-              style="font-size:20px;"
+              style="font-size: 20px"
             >
-            {{ 'login.signin' | translate }}
+              {{ "login.btn_login" | translate }}
             </button>
           </div>
           <div class="row forgot-password mt-3">
             <a class="" href="">
-              <span>
-                Forgot your password?
-              </span>
+              <span>{{ "login.forgot_password" | translate }}</span>
             </a>
           </div>
         </form>
       </div>
-      
-    
     </div>
   </div>
 
-  <div class="snackbar-wrapper p-2 mx-5 align-self-center shadow-lg" *ngFor="let error of errorStack" >
-    <app-snackbar [msg] = "error" ></app-snackbar>
+  <div
+    class="snackbar-wrapper p-2 mx-5 align-self-center shadow-lg"
+    *ngFor="let error of errorStack"
+  >
+    <app-snackbar [msg]="error"></app-snackbar>
   </div>
 
-  <div class="d-flex justify-content-evenly bottom-links w-100 my-2 py-2 ">
+  <div class="d-flex justify-content-evenly bottom-links w-100 my-2 py-2">
     <a href="">
-      <span>
-        Privacy policy
-      </span>
+      <span>{{ "login.privacy_policy" | translate }}</span>
     </a>
     <a href="">
-      <span>
-        Terms & Conditions
-      </span>
+      <span>{{ "login.terms" | translate }}</span>
     </a>
   </div>
-  
 </div>

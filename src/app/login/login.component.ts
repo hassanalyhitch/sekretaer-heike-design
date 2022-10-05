@@ -1,41 +1,48 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
-import { LoginData } from '../models/login.model';
-import { LoginService } from '../services/login.service';
+import { HttpClient } from "@angular/common/http";
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  ViewChild,
+} from "@angular/core";
+import { NgForm } from "@angular/forms";
+import { Router } from "@angular/router";
+import { LoginData } from "../models/login.model";
+import { LoginService } from "../services/login.service";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.css"],
 })
 export class LoginComponent implements OnInit {
-
   userInput = {};
   buttonDisabled = true;
 
-  username = '';
-  password = '';
+  username = "";
+  password = "";
   submitted: boolean = false;
-  @Output('auth') authenticated = new EventEmitter<boolean>();
+  @Output("auth") authenticated = new EventEmitter<boolean>();
   @Output() lang = new EventEmitter<string>();
-  @ViewChild('loginForm', { static: true }) loginForm: NgForm;
-  errorMessage:string = null;
-  errorStack:string [] = [];
+  @ViewChild("loginForm", { static: true }) loginForm: NgForm;
+  errorMessage: string = null;
+  errorStack: string[] = [];
 
-  constructor(private http: HttpClient, private router: Router, private loginService: LoginService) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private loginService: LoginService
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   validateUser(formData: LoginData) {
-      
     this.loginService.login(formData).subscribe({
       next: (resp) => {
-        
-        if(resp.hasOwnProperty("token")){
+        if (resp.hasOwnProperty("token")) {
           this.authenticated.emit(true);
+          this.lang.emit(this.loginService.lang);
 
           //reset route
           // this.router.navigateByUrl('/insurance');
@@ -43,38 +50,36 @@ export class LoginComponent implements OnInit {
       },
       error: (e) => {
         console.log(e);
-        if(e.hasOwnProperty("name") && e.hasOwnProperty("statusText")){
-          this.errorMessage = " "+e.name+" -> "+e.statusText;
-          console.log( 'display this error => '+this.errorMessage);
+        if (e.hasOwnProperty("name") && e.hasOwnProperty("statusText")) {
+          this.errorMessage = " " + e.name + " -> " + e.statusText;
+          console.log("display this error => " + this.errorMessage);
         }
 
-        if(e.error.hasOwnProperty('msg')){
+        if (e.error.hasOwnProperty("msg")) {
           this.errorMessage = e.error.msg;
-          console.log( 'display this error => '+this.errorMessage);
-        } else if(e.error.hasOwnProperty('message')){
-          this.errorMessage = e.error.msg;
-          console.log( 'display this error => '+this.errorMessage);
-
+          console.log("display this error => " + this.errorMessage);
+        } else if (e.error.hasOwnProperty("message")) {
+          this.errorMessage = e.error.message;
+          console.log("display this error => " + this.errorMessage);
         }
         this.showSnackbar(this.errorMessage);
         this.submitted = false;
       },
       complete: () => {
         // console.info('complete')
-      }
+      },
     });
   }
 
-  showSnackbar(error:string){
-
+  showSnackbar(error: string) {
     this.errorStack.push(this.errorMessage);
-    setInterval(()=>{
+    setInterval(() => {
       this.errorStack.pop();
     }, 4000);
   }
 
   onSubmit(formData: LoginData) {
-    formData.loginType = 'customer';
+    formData.loginType = "customer";
     this.submitted = true;
     this.errorMessage = null;
     this.validateUser(formData);

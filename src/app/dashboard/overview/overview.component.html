@@ -1,7 +1,9 @@
 <div class="content-wrapper w-100 ">
   <div class="_content d-flex d-flex flex-column w-100 h-100 bg-">
     <div class="section-title w-100 d-flex justify-content-center pt-3 pb-2" >
-      <strong class=" align-self-center p-2 title bg-" (click)="collapse()"> MY SEKRETÄR</strong>
+      <strong class=" align-self-center p-2 title bg-" (click)="collapse()"> 
+        {{ "overview.title_my_sekretar" | translate }}
+      </strong>
       <i class="material-icons mx-2 align-self-center collapse-icon bg-" *ngIf="!collapsed" (click)="collapse()">expand_less</i>
       <i class="material-icons mx-2 align-self-center collapse-icon bg-" *ngIf="collapsed" (click)="collapse()">expand_more</i>
      
@@ -25,7 +27,7 @@
       
       <div class="section-folder d-flex flex-column p-3 w-100 bg-white">
         <div class="section-title w-100 d-flex justify-content-center pt-3 ">
-          <strong class=" align-self-center p-2 title " (click)="collapseFolders()"> MY FOLDERS</strong>
+          <strong class=" align-self-center p-2 title " (click)="collapseFolders()"> {{ "overview.title_my_folders" | translate }}</strong>
           <i class="material-icons mx-2 align-self-center collapse-icon" (click)="collapseFolders()" *ngIf="!collapsedFolders">expand_less</i>
           <i class="material-icons mx-2 align-self-center collapse-icon" (click)="collapseFolders()" *ngIf="collapsedFolders">expand_more</i>
         
