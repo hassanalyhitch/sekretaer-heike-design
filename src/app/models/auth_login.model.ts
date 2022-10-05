@@ -1,4 +1,4 @@
-import { AuthLoginConfig } from "./auth_login_config";
+import { AuthLoginConfig } from "./auth_login_config.model";
 
 export interface AuthLogin {
   token: string;

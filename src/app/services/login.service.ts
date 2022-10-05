@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { tap } from "rxjs";
-import { AuthLogin } from "../models/auth_login";
+import { AuthLogin } from "../models/auth_login.model";
 import { LoginData } from "../models/login.model";
 
 @Injectable({ providedIn: "root" })

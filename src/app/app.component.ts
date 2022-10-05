@@ -17,7 +17,8 @@ export class AppComponent  {
     translate.setDefaultLang('en');
 
     const browserLang = translate.getBrowserLang();
-    translate.use(browserLang.match(/en|de/) ? 'de' : 'en');
+    console.log(browserLang);
+    translate.use(browserLang.match(/en|de/) ? browserLang : 'en');
   }
 
   setLang(lang: string){
