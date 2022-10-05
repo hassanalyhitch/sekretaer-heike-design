@@ -1,78 +1,32 @@
 {
+  "home": {
+    "title_home": "FAVORITEN",
+    "title_service": "DIENSTLEISTUNGEN",
+    "title_see_more": "MEHR SEHEN",
+    "message_no_favourite_contracts": "You have no Favourite contracts",
+    "search_fab": "Search",
+    "chat_fab": "Chat",
+    "insurance_check_fab": "Insurance Check",
+    "service_card_add": "ADD (a document, a picture, etc)",
+    "service_card_notifications": "Notifications",
+    "service_card_notification_of_claim": "Notification of Claim",
+    "service_card_call_your_broker": "Call your Broker"
+  },
+  "overview": {
+    "title_my_sekretar": "MY SEKRETÄR",
+    "title_my_folders": "MY FOLDERS"
+  },
   "login": {
+    "title_login": "Lassen Sie uns einloggen",
+    "btn_login": "Einloggen",
     "username": "Benutzer",
     "password": "Passwort",
-    "stay": "Angemeldet bleiben?",
-    "signin": "Einloggen",
-    "header": "Eine neue Dimension der Kundenbetreuung.",
-    "subheader": "Die Makler-Zukunft hat begonnen.",
-    "catch-phrase": "Einfach. Schnell. Digital."
+    "forgot_password": "Forgot your Password?",
+    "privacy_policy": "Privacy Policy",
+    "terms": "Terms & Conditions"
   },
-  "nav": {
-    "insurance": "Versicherungen",
-    "inbox": "Posteingang",
-    "profile": "Profil",
-    "broker": "Mein Makler",
-    "settings": "Einstellungen",
-    "signout": "Ausloggen"
-  },
-  "insurance": {
-    "nav": {
-      "title": "Versicherungen"
-    },
-    "detail": {
-      "changename": "Namen ändern",
-      "hrtitle": "Dokumente",
-      "customername": "Versicherungsnehmer",
-      "startdate": "Startdatum",
-      "enddate": "Enddatum",
-      "insurancenumber": "Versicherungsnummer",
-      "companyname": "Versicherungsunternehmen",
-      "companybranch": "Versicherungsart",
-      "paymethod": "Zahlweise",
-      "price": "Preis",
-      "modaltitle": "Ordnernamen bearbeiten",
-      "current": "Aktueller Ordnername",
-      "newfolder": "Neuer Ordnername",
-      "save": "Speichern",
-      "welcome": "Willkommen",
-      "selectfolder": "Bitte wählen Sie einen Ordner aus."
-    }
-  },
-  "inbox": {
-    "nav": {
-      "title": "Benachrichtigungen",
-      "chat-title": "Chat",
-      "notif-title": "Benachrichtigungen",
-      "notif-text": "Du hast",
-      "notif-text2": "Benachrichtigungen",
-      "report-title": "Melde",
-      "report-text": "Schadenfall"
-    },
-    "chat": {
-      "title": "Chat",
-      "input-label": "Geben Sie eine Nachricht ein"
-    },
-    "notifications": {
-      "title": "Benachrichtigungen"
-    },
-    "report": {
-      "title": "Schadenfall melden"
-    }
-  },
-  "broker": {
-    "instruction": {
-      "title": "Sende eine Kurznachricht an deinen Makler",
-      "button": "Posteingang öffnen"
-    },
-    "instruction2": {
-      "title": "Füge deinem Google Kalender einen Termin hinzu",
-      "button": "Öffne deinen Google Kalender"
-    }
-  },
-  "profile": {},
-  "settings": {
-    "title": "Einstellungen"
+  "settings":{
+    "title":"Settings"
   },
   "folder-detail":{
     "subfolder":"Sub-folders"

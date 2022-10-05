@@ -1,77 +1,29 @@
 {
-  "login":{
-    "username":"Username",
-    "password":"Password",
-    "stay":"Stay signed in ?",
-    "signin":"LOG IN",
-    "header":"A new dimension in customer care.",
-    "subheader":"The brokerage future has begun.",
-    "catch-phrase":"Easy. Fast. Digital."
+  "home": {
+    "title_home": "FAVOURITES",
+    "title_service": "SERVICES",
+    "title_see_more": "SEE MORE",
+    "message_no_favourite_contracts": "You have no Favourite contracts",
+    "search_fab": "Search",
+    "chat_fab": "Chat",
+    "insurance_check_fab": "Insurance Check",
+    "service_card_add": "ADD (a document, a picture, etc)",
+    "service_card_notifications": "Notifications",
+    "service_card_notification_of_claim": "Notification of Claim",
+    "service_card_call_your_broker": "Call your Broker"
   },
-  "nav": {
-      "insurance": "Insurance",
-      "inbox": "Inbox",
-      "profile": "Profile",
-      "broker": "Broker",
-      "settings": "Settings",
-      "signout": "Sign Out"
+  "overview": {
+    "title_my_sekretar": "MY SEKRETÄR",
+    "title_my_folders": "MY FOLDERS"
   },
-  "insurance": {
-    "nav":{
-      "title":"Insurance Contracts"
-    },
-    "detail":{
-      "changename":"Change folder name",
-      "hrtitle":"Documents",
-      "customername":"Customer Name",
-      "startdate":"Start Date",
-      "enddate":"End Date",
-      "insurancenumber":"Insurance Number",
-      "companyname":"Company Name",
-      "companybranch":"Company Branch",
-      "paymethod":"Payment method",
-      "price":"Price",
-      "modaltitle":"Change Folder Name",
-      "current":"Current folder name :",
-      "newfolder":"New folder name :",
-      "save":"Save",
-      "welcome":" Welcome.",
-      "selectfolder":"Select a Folder."
-    }
-  },
-  "inbox":{
-    "nav":{
-      "title":"Inbox",
-      "chat-title":"Chat",
-      "notif-title":"Notifications",
-      "notif-text":"You have",
-      "notif-text2":"notifications",
-      "report-title":"Report",
-      "report-text":"Notification of Claim"
-    },
-    "chat":{
-      "title":"Chat",
-      "input-label":"Type a message"
-    },
-    "notifications":{
-      "title":"Notifications"
-    },
-    "report":{
-      "title":"Notification of Claim"
-    }
-  },
-  "broker":{
-    "instruction":{
-      "title":"Send a quick message to the Broker",
-      "button":"Open Inbox"
-    },
-    "instruction2":{
-      "title":"Add an event to your Calendar",
-      "button":"Open Google Calendar"
-    }
-  },
-  "profile":{
-
+  "login": {
+    "title_login": "Let's Login",
+    "btn_login": "LOG IN",
+    "username": "Username",
+    "password": "Password",
+    "forgot_password": "Forgot your Password?",
+    "privacy_policy": "Privacy Policy",
+    "terms": "Terms & Conditions"
   },
   "settings":{
     "title":"Settings"
@@ -79,5 +31,4 @@
   "folder-detail":{
     "subfolder":"Sub-folders"
   }
-
 }
