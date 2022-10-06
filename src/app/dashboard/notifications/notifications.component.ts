@@ -4,7 +4,6 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { NotificationData } from '../../models/notification.model';
 import { NotificationsService } from '../../services/notification.service';
-import { NotificationModalComponent } from './notification-modal/notification-modal.component';
 
 @Component({
   selector: 'app-notifications',
@@ -15,7 +14,7 @@ export class NotificationsComponent implements OnInit {
 
   allNotifsArr:NotificationData[] = [];
 
-  constructor(private router:Router, private notifService: NotificationsService, private matDialog: MatDialog) { 
+  constructor(private router:Router, private notifService: NotificationsService) { 
     this.notifService.getNotifications().subscribe({
       next:(resp)=>{
         console.table(resp);
@@ -52,16 +51,4 @@ export class NotificationsComponent implements OnInit {
   ngOnInit() {
   }
 
-  openModal(notification: NotificationData) {
-    const dialogConfig = new MatDialogConfig();
-    let passdata:string = '{"notification": "'+notification+'"}';
-    // The user can't close the dialog by clicking outside its body
-    dialogConfig.disableClose = false;
-    dialogConfig.id = 'notification-modal-component';
-    dialogConfig.height = '90%';
-    dialogConfig.width = '90%';
-    dialogConfig.data = passdata;
-    // https://material.angular.io/components/dialog/overview
-    const modalDialog = this.matDialog.open(NotificationModalComponent, dialogConfig);
-  }
 }
