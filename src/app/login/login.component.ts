@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
     this.errorStack.push(this.errorMessage);
     setInterval(() => {
       this.errorStack.pop();
-    }, 4000);
+    }, 8000);
   }
 
   onSubmit(formData: LoginData) {
