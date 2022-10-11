@@ -7,7 +7,7 @@
       <span class=" mark-as-read px-2">{{ 'notifications.mark_all_as_read' | translate }}</span>
     </div>
     <div class="w-100 d-flex flex-column">
-    <app-notification-item *ngFor="let notif of allNotifsArr; let i = index;" [notification]="notif" (click)="openModal(notif)" ></app-notification-item>
+    <app-notification-item *ngFor="let notif of allNotifsArr; let i = index;" [notification]="notif" ></app-notification-item>
     </div>
   </div>
 </div>
