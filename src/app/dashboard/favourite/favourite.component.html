@@ -1,20 +1,20 @@
 <div class="content-wrapper w-100 ">
-  <div class="_content d-flex d-flex flex-column align-items-center w-100 h-100 bg-">
+<div class="_content d-flex d-flex flex-column align-items-center w-100 h-100 bg-">
 
-    <div class="section-fav w-100 d-flex flex-column pt-3 bg-">
-        <strong class="section-title align-self-center p-2"> FAVOURITES</strong>
+  <div class="section-fav w-100 d-flex flex-column pt-3 bg-">
+      <strong class="section-title align-self-center p-2">{{ 'favourites.title' | translate }}</strong>
+  </div>
+    
+  <div class="fav-wrapper d-flex flex-column p-4 bg-">
+        
+    <div class="d-flex justify-content-center m-4 w-100 bg-" *ngIf="favArrHasNoContent()" >
+      {{ 'favourites.no_favourites' | translate }}
     </div>
-      
-    <div class="fav-wrapper d-flex flex-column p-4 bg-">
-          
-      <div class="d-flex justify-content-center m-4 w-100 bg-" *ngIf="favArrHasNoContent()" >
-        You have no favourite Contracts or Folders
-      </div>
-      <app-fav-item *ngFor="let favItem of favContractArr; let index = index" (click)="onFavContractClick(index)" [contractItem]="favItem" ></app-fav-item>
-      
-      <div class="w-100 d-flex flex-column align-items-center extra-folders bg-" id="extra-folders" >
-        <app-folder-card *ngFor="let item of favFoldersArr" [folder]=item  (click)="onFolderCardClick(item)"></app-folder-card>
-      </div>
+    <app-fav-item *ngFor="let favItem of favContractArr; let index = index" (click)="onFavContractClick(index)" [contractItem]="favItem" ></app-fav-item>
+    
+    <div class="w-100 d-flex flex-column align-items-center extra-folders bg-" id="extra-folders" >
+      <app-folder-card *ngFor="let item of favFoldersArr" [folder]=item  (click)="onFolderCardClick(item)"></app-folder-card>
     </div>
   </div>
+</div>
 </div>

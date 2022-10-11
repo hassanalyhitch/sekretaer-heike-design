@@ -31,9 +31,10 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
   constructor(private router:Router, private route:ActivatedRoute, private folderService: FoldersService,private matDialog: MatDialog, private translate:TranslateService, private _location: Location) { }
 
   ngOnInit() {
-    console.log(this.folderService.selectedFolder);
-    this.hrTitle = this.translate.instant('insurance.detail.hrtitle');
+    console.log(this.folderService.selectedFolder);    
+    this.hrTitle = this.translate.instant('folder-detail.documents');
     this.hrTitle2 = this.translate.instant('folder-detail.subfolder');
+
 
     const wholeDocTemplate = document.getElementsByClassName('section-folderdetail').item(0) as HTMLElement | null;
     if (wholeDocTemplate != null) {

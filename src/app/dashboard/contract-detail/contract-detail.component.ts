@@ -46,7 +46,7 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
   private route: ActivatedRoute,private matDialog: MatDialog,
   private router: Router, private translate:TranslateService, private contractService: ContractsService) {
 
-    this.hrTitle = this.translate.instant('insurance.detail.hrtitle');
+    this.hrTitle = this.translate.instant('contract_detail.title_documents');
   
     this.contractSub = contractService.selectObservable.subscribe({
       next:(contract)=>{

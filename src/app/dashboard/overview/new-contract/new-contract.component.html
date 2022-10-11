@@ -1,8 +1,8 @@
 <div class="content-wrapper w-100 ">
 <div class="_content d-flex flex-column w-100 h-100 ">
-  <p style="text-align:center ;font-size: large;"><b>NEW CONTRACT</b></p>
+  <p style="text-align:center ;font-size: large;"><b>{{ 'overview.new_contract.title_new_contract' | translate }}</b></p>
   <div class="branch-select">
-    <p>Please Select Branch</p>
+    <p>{{ 'overview.new_contract.title_select_branch' | translate }}</p>
     <!-- <div *ngFor ="let branch of branches" -->
         <!-- <input type="checkbox" name="company" style="margin:1px;" [(ngModel)]="branchSelected">
                 {{branch.getBranch()}},
@@ -26,14 +26,14 @@
                 <div class="companies">
                     <div *ngIf="branchSelected=='radio1'">
                         <select name="branchdropdown" form="companies">
-                            <option value="selection"> Please Select Company</option>
+                            <option value="selection">{{ 'overview.new_contract.title_select_company' | translate }}</option>
                             <option value="Dutch">Dutch</option>
                             <option value="Hamburg">Hamburg</option>
                         </select> 
                     </div>
                     <div  *ngIf="branchSelected=='radio2'">
                         <select name="branchdropdown" form="companies">
-                            <option value="selection"> Please Select Company</option>
+                            <option value="selection">{{ 'overview.new_contract.title_select_company' | translate }}</option>
                             <option value="Munich">Munich</option>
                             <option value="Dortmund">Dortmund</option>
                             <option value="Berlin">Berlin</option>
@@ -41,7 +41,7 @@
                     </div>
                     <div  *ngIf="branchSelected=='radio3'">
                         <select name="branchdropdown" form="companies">
-                            <option value="selection"> Please Select Company</option>
+                            <option value="selection">{{ 'overview.new_contract.title_select_company' | translate }}</option>
                             <option value="Jena">Jena</option>
                             <option value="Ulm">Ulm</option>
                             <option value="Krefeld">Krefeld</option>
@@ -49,13 +49,13 @@
                     </div>
                 </div>
                 <div class="broker">
-                    <p>Did you wish for your broker to take care of this?</p>
+                    <p>{{ 'overview.new_contract.title_dialog' | translate }}</p>
                     <!-- <input type="radio" value="yes" name="customRadio" class="custom-control-input"[(ngModel)]="optionSelected">
                     <span>Yes</span>
                     <input type="radio"  value="No"name="customRadio" class="custom-control-input"[(ngModel)]="optionSelected">
                     <span>No</span> -->
-                    <div class="btn btn-primary" (click)="onOptionSelected(true)">No</div>
-                  <div  class="btn btn-primary"(click)="onOptionSelected(false)">Yes</div>
+                    <div class="btn btn-primary" (click)="onOptionSelected(true)">{{ 'overview.new_contract.dialog_btn_no' | translate }}</div>
+                  <div  class="btn btn-primary"(click)="onOptionSelected(false)">{{ 'overview.new_contract.dialog_btn_yes' | translate }}</div>
                 
                 </div>
 
@@ -64,30 +64,30 @@
                         <div class="form-group">
                             <input ngModel [required]="optionSelected" type="text" placeholder="DD/MM/YYYY" 
                             pattern=(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4} class="form-control" id="begin" name="begin"/>
-                            <label for="begin" class="form-label">Begin Date</label>
+                            <label for="begin" class="form-label">{{ 'overview.new_contract.text_input_label_begin_date' | translate }}</label>
                         </div>
                         <div class="form-group">
                             <input  ngModel [required]="optionSelected" type="text" placeholder="DD/MM/YYYY" pattern=(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4} class="form-control" id="end" name="end"/>
-                            <label for="end"  class="form-label">End Date</label>
+                            <label for="end"  class="form-label">{{ 'overview.new_contract.text_input_label_end_date' | translate }}</label>
                         </div>
                         <div class="form-group">
                             <input ngModel [required]="optionSelected" type="text" placeholder="Payment Method"  class="form-control" id="payment" name="payment" />
-                            <label for="payment"  class="form-label">Payment Method</label>
+                            <label for="payment"  class="form-label">{{ 'overview.new_contract.text_input_label_payment_method' | translate }}</label>
                         </div>
                         <div class="form-group">
                             <input  ngModel [required]="optionSelected"  type="text" placeholder="Amount" class="form-control" id="Amount" name="Amount"/>
-                            <label for="Amount"  class="form-label">Amount</label>
+                            <label for="Amount"  class="form-label">{{ 'overview.new_contract.text_input_label_amount' | translate }}</label>
                         </div>
                         <div class="form-group">
                                 <input ngModel [required]="optionSelected" type="text" placeholder="Risk" class="form-control" id="Risk" name="Risk"/>
-                                <label for="Risk" class="form-label">Risk</label>
+                                <label for="Risk" class="form-label">{{ 'overview.new_contract.text_input_label_risk' | translate }}</label>
                         </div>
                         <div class="form-group">
                             <input ngModel [required]="optionSelected" type="text" placeholder="Contract Number" class="form-control" id="Contract" name="Contract"/>
-                            <label for="Contract" class="form-label">Contract Number</label>
+                            <label for="Contract" class="form-label">{{ 'overview.new_contract.text_input_label_contract_number' | translate }}</label>
                         </div>
 
-                        <button class="btn btn-primary" type="submit" style="background-color:#E5007E;" [disabled]="!contractForm.valid">Submit</button>
+                        <button class="btn btn-primary" type="submit" style="background-color:#E5007E;" [disabled]="!contractForm.valid">{{ 'overview.new_contract.submit_button_label' | translate }}</button>
 
                     </form>
 

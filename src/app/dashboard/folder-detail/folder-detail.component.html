@@ -1,87 +1,87 @@
 <div class="content-wrapper w-100 ">
-  <div class="_content d-flex d-flex flex-column align-items-center w-100 h-100 ">
+<div class="_content d-flex d-flex flex-column align-items-center w-100 h-100 ">
 
-    <div class="section-folderdetail w-100 d-flex flex-column pt-4 ">
-      <div class="d-flex align-items-center justify-content-between bg-">
-        <span></span>
-        <strong class="section-title align-self-center bg-"> FOLDER</strong>
-  
-        <div class="ml-auto btn-group dropstart align-self-center">
-            
-          <i class="material-icons dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" >more_vert</i>
-        
-          <ul class="dropdown-menu shadow">
-            <li><span class="dropdown-item" href="" *ngIf="folder.isFavorite==0" (click)="markFav(folder)" >Mark as favourite</span></li>
-            <li><span class="dropdown-item" href="" *ngIf="folder.isFavorite==1" (click)="unmarkFav(folder)" >Unmark as favourite</span></li>
-            <li><span class="dropdown-item" href="" (click)="openModal(folder)" >Rename</span></li>
-          </ul>
-        </div>
-      </div>
+  <div class="section-folderdetail w-100 d-flex flex-column pt-4 ">
+    <div class="d-flex align-items-center justify-content-between bg-">
+      <span></span>
+      <strong class="section-title align-self-center bg-">{{ 'folder-detail.title' | translate }}</strong>
 
-      <div class="d-flex flex-row align-items-center w-100 map px-3 mt-1 mb-3 bg-">
-        <div class="quick-fab d-flex justify-content-center align-items-center mx-2" (click)="onBackNavClick()" >
-          <i class="material-icons p-2 ">arrow_back_ios</i>
-        </div>
-        <span class="parent">{{parentNav}}/</span><span class="current">{{currentNav}}</span>
-      </div>
-
-      <div class="bg-white align-self-center shadow mx-3 d-flex fav-item">
-        <div class="icon-container d-flex flex-column align-items-center ">
+      <div class="ml-auto btn-group dropstart align-self-center">
           
-        </div>
-        <div class="d-flex w-100 ">
-          <div class="d-flex flex-column _content ml-auto w-100 bg-white">
-            <span class="risk px-2 mt-3 mb-1">{{folder.folderName}} </span>
-            <span class="branch mt-2 px-2 ">created on : {{folder.createdAt}}</span>
+        <i class="material-icons dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" >more_vert</i>
       
-            <div class="d-flex flex-column align-items-start justify-content-between w-100 mt-auto py-2 ">
-            <div class="date d-flex align-items-end px-2">
-              <span class="mx-1">{{folder.docs.length}} Documents</span>
-            </div>
-            <div class="date d-flex align-items-end px-2">
-              <span class="mx-1">{{folder.subFolders.length}} Subfolders</span>
-            </div>
-            </div>
-      
-            <div class="small-picture">
-              <img class="w-100 img-responsive" src="https://images.unsplash.com/photo-1606759163253-094133091882?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt="">
-            </div>
-      
-            <div class="fav-btn d-flex align-items-center justify-content-center"
-            [ngClass]="{'isFav': folder.isFavorite == 1, 'notFav': folder.isFavorite == 0}"
-            (click)="toggleFav(folder)" >
-              <i class="material-icons">star</i>
-            </div>
-      
-          </div>
-      
-        </div>
+        <ul class="dropdown-menu shadow">
+          <li><span class="dropdown-item" href="" *ngIf="folder.isFavorite==0" (click)="markFav(folder)" >{{ 'folder-detail.folder_side_menu_item_1' | translate }}</span></li>
+          <li><span class="dropdown-item" href="" *ngIf="folder.isFavorite==1" (click)="unmarkFav(folder)" >{{ 'folder-detail.folder_side_menu_item_2' | translate }}</span></li>
+          <li><span class="dropdown-item" href="" (click)="openModal(folder)" >{{ 'folder-detail.folder_side_menu_item_3' | translate }}</span></li>
+        </ul>
       </div>
+    </div>
+
+    <div class="d-flex flex-row align-items-center w-100 map px-3 mt-1 mb-3 bg-">
+      <div class="quick-fab d-flex justify-content-center align-items-center mx-2" (click)="onBackNavClick()" >
+        <i class="material-icons p-2 ">arrow_back_ios</i>
+      </div>
+      <span class="parent">{{parentNav}}/</span><span class="current">{{currentNav}}</span>
+    </div>
+
+    <div class="bg-white align-self-center shadow mx-3 d-flex fav-item">
+      <div class="icon-container d-flex flex-column align-items-center ">
+        
+      </div>
+      <div class="d-flex w-100 ">
+        <div class="d-flex flex-column _content ml-auto w-100 bg-white">
+          <span class="risk px-2 mt-3 mb-1">{{folder.folderName}} </span>
+          <span class="branch mt-2 px-2 ">{{ 'folder-detail.created_on' | translate }} : {{folder.createdAt}}</span>
+    
+          <div class="d-flex flex-column align-items-start justify-content-between w-100 mt-auto py-2 ">
+          <div class="date d-flex align-items-end px-2">
+            <span class="mx-1">{{folder.docs.length}} {{ 'folder-detail.documents' | translate }}</span>
+          </div>
+          <div class="date d-flex align-items-end px-2">
+            <span class="mx-1">{{folder.subFolders.length}} {{ 'folder-detail.sub_folders' | translate }}</span>
+          </div>
+          </div>
+    
+          <div class="small-picture">
+            <img class="w-100 img-responsive" src="https://images.unsplash.com/photo-1606759163253-094133091882?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt="">
+          </div>
+    
+          <div class="fav-btn d-flex align-items-center justify-content-center"
+          [ngClass]="{'isFav': folder.isFavorite == 1, 'notFav': folder.isFavorite == 0}"
+          (click)="toggleFav(folder)" >
+            <i class="material-icons">star</i>
+          </div>
+    
+        </div>
+    
+      </div>
+    </div>
 
 <!-- subfolders -->
-      <hr class="mx-1" id="folder-hr" data-content="" />
-      <div class="d-flex section-title align-self-center align-items-center mb-3">
-        <span> Add Sub-folder </span>
-      
-        <div class="_fab d-flex flex-column mx-3 justify-content-center align-items-center" (click)="addNewFolder()">
-          <i class="material-icons">add</i>
-        </div>
-  
+    <hr class="mx-1" id="folder-hr" data-content="" />
+    <div class="d-flex section-title align-self-center align-items-center mb-3">
+      <span>{{ 'folder-detail.add_subfolder' | translate }}</span>
+    
+      <div class="_fab d-flex flex-column mx-3 justify-content-center align-items-center" (click)="addNewFolder()">
+        <i class="material-icons">add</i>
       </div>
-      <app-folder-card class="a_card align-self-center m-2" (click)="onFolderCardClick(subfolder)" *ngFor="let subfolder of folder.subFolders; let i = index " [folder]=subfolder  ></app-folder-card>
-
-<!-- documents -->
-      <hr class="mx-1" id="docu-hr" data-content="" />
-      <div class="d-flex section-title align-self-center align-items-center mb-3">
-        <span> Add new Document </span>
-      
-        <div class="_fab d-flex flex-column mx-3 justify-content-center align-items-center">
-          <i class="material-icons">add</i>
-        </div>
-  
-      </div>
-      <app-document-item *ngFor="let doc of folder.docs" [doc]=doc ></app-document-item>
 
     </div>
+    <app-folder-card class="a_card align-self-center m-2" (click)="onFolderCardClick(subfolder)" *ngFor="let subfolder of folder.subFolders; let i = index " [folder]=subfolder  ></app-folder-card>
+
+<!-- documents -->
+    <hr class="mx-1" id="docu-hr" data-content="" />
+    <div class="d-flex section-title align-self-center align-items-center mb-3">
+      <span>{{ 'folder-detail.add_new_document' | translate }}</span>
+    
+      <div class="_fab d-flex flex-column mx-3 justify-content-center align-items-center">
+        <i class="material-icons">add</i>
+      </div>
+
+    </div>
+    <app-document-item *ngFor="let doc of folder.docs" [doc]=doc ></app-document-item>
+
   </div>
+</div>
 </div>
