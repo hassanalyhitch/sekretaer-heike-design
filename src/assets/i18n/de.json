@@ -1,34 +1,112 @@
 {
   "home": {
     "title_home": "FAVORITEN",
-    "title_service": "DIENSTLEISTUNGEN",
-    "title_see_more": "MEHR SEHEN",
-    "message_no_favourite_contracts": "You have no Favourite contracts",
-    "search_fab": "Search",
+    "title_service": "SERVICES",
+    "title_see_more": "mehr anzeigen",
+    "message_no_favourite_contracts": "Es gibt keine Favoriten",
+    "search_fab": "Suche",
     "chat_fab": "Chat",
     "insurance_check_fab": "Insurance Check",
-    "service_card_add": "ADD (a document, a picture, etc)",
-    "service_card_notifications": "Notifications",
-    "service_card_notification_of_claim": "Notification of Claim",
-    "service_card_call_your_broker": "Call your Broker"
+    "service_card_add": "Dokument hinzufügen",
+    "service_card_notifications": "Benachrichtigungen",
+    "service_card_notification_of_claim": "Schaden melden",
+    "service_card_call_your_broker": "Makler anrufen"
   },
   "overview": {
     "title_my_sekretar": "MY SEKRETÄR",
-    "title_my_folders": "MY FOLDERS"
+    "title_my_folders": "Meine Ordner",
+    "new_contract": {
+      "title_new_contract": "Versicherung hinzufügen",
+      "title_select_branch": "Please Select Branch",
+      "title_select_company": "Please Select Company",
+      "title_dialog": "Did you wish for your broker to take care of this?",
+      "dialog_btn_yes": "Ja",
+      "dialog_btn_no": "Nein",
+      "text_input_label_begin_date": "Beginn",
+      "text_input_label_end_date": "Ablauf",
+      "text_input_label_payment_method": "Zahlweise",
+      "text_input_label_amount" : "Prämie",
+      "text_input_label_risk" : "Risko",
+      "text_input_label_contract_number": "Versicherungsscheinnummer",
+      "submit_button_label": "Speichern"
+    },
+    "new_folder_dialog": {
+      "title": "NEW FOLDER",
+      "text_input_label": "Ordnername",
+      "btn_save_label": "Speichern"
+    }
+  },
+  "contract_detail": {
+    "title_main" : "INSURANCE",
+    "title_documents": "Dokumente",
+    "title_add_new_document": "Neues Dokument",
+    "contract_start_date_label": "Beginn",
+    "contract_end_date_label": "Ablauf",
+    "contract_yearly_payment_label": "jährlich",
+    "insurance_side_menu_item_1": "Als Favorit markieren",
+    "insurance_side_menu_item_2": "Als Favorit löschen",
+    "insurance_side_menu_item_3": "Umbenennen",
+    "document_side_menu_item_1" : "Dokument öffnen",
+    "document_side_menu_item_2" : "Dokument umbennen"
   },
   "login": {
-    "title_login": "Lassen Sie uns einloggen",
-    "btn_login": "Einloggen",
-    "username": "Benutzer",
-    "password": "Passwort",
+    "title_login": "Let's Login",
+    "btn_login": "LOG IN",
+    "username": "Username",
+    "password": "Password",
     "forgot_password": "Forgot your Password?",
     "privacy_policy": "Privacy Policy",
     "terms": "Terms & Conditions"
   },
   "settings":{
-    "title":"Settings"
+    "title":"SETTINGS"
   },
   "folder-detail":{
-    "subfolder":"Sub-folders"
+    "subfolder":"Unterordner",
+    "title": "Inhalt",
+    "folder_side_menu_item_1": "Als Favorit markieren",
+    "folder_side_menu_item_2": "Als Favorit löschen",
+    "folder_side_menu_item_3": "Umbenennen",
+    "created_on": "Created On",
+    "documents": "Documents",
+    "sub_folders": "Sub-folders",
+    "add_subfolder" : "Add Sub-Folder",
+    "add_new_document": "Add new Document"
+  },
+  "favourites": {
+    "title": "FAVOURITES",
+    "no_favourites" : "You have no favourite Contracts or Folders"
+  },
+  "broker":{
+    "title": "MY BROKER"
+  },
+  "chat" : {
+    "title": "CHAT"
+  },
+  "notifications": {
+    "title": "NOTIFICATIONS",
+    "mark_all_as_read": "Mark all as Read",
+    "notification_item": {
+      "open_contract":"Open Contract",
+      "open_document": "Open Document",
+      "mark_as_read": "Mark as Read"
+    },
+    "notification_modal": {
+      "title": "Notification Title",
+      "content": "Notification content",
+      "mark_as_read": "Mark as Read"
+    }
+  },
+  "rename_contract": {
+    "title" : "Rename Contract",
+    "sub_title_name": "Contract Name",
+    "text_input_label" : "New Contract Name",
+    "btn_save_label": "SAVE"
+  },
+  "rename_folder": {
+    "title" : "Rename Folder",
+    "sub_title_name": "Folder Name",
+    "text_input_label" : "New Folder Name",
+    "btn_save_label": "SAVE"
   }
 }

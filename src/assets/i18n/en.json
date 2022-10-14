@@ -14,7 +14,40 @@
   },
   "overview": {
     "title_my_sekretar": "MY SEKRETÄR",
-    "title_my_folders": "MY FOLDERS"
+    "title_my_folders": "MY FOLDERS",
+    "new_contract": {
+      "title_new_contract": "NEW CONTRACT",
+      "title_select_branch": "Please Select Branch",
+      "title_select_company": "Please Select Company",
+      "title_dialog": "Did you wish for your broker to take care of this?",
+      "dialog_btn_yes": "Yes",
+      "dialog_btn_no": "No",
+      "text_input_label_begin_date": "Begin Date",
+      "text_input_label_end_date": "End Date",
+      "text_input_label_payment_method": "Payment Method",
+      "text_input_label_amount" : "Amount",
+      "text_input_label_risk" : "Risk",
+      "text_input_label_contract_number": "Contract Number",
+      "submit_button_label": "Submit"
+    },
+    "new_folder_dialog": {
+      "title": "NEW FOLDER",
+      "text_input_label": "New folder name",
+      "btn_save_label": "SAVE"
+    }
+  },
+  "contract_detail": {
+    "title_main" : "INSURANCE",
+    "title_documents": "Documents",
+    "title_add_new_document": "Add new Document",
+    "contract_start_date_label": "Start",
+    "contract_end_date_label": "End",
+    "contract_yearly_payment_label": "Year",
+    "insurance_side_menu_item_1": "Mark as Favourite",
+    "insurance_side_menu_item_2": "Unmark as Favourite",
+    "insurance_side_menu_item_3": "Rename",
+    "document_side_menu_item_1" : "Open Document",
+    "document_side_menu_item_2" : "Rename Document"
   },
   "login": {
     "title_login": "Let's Login",
@@ -26,9 +59,54 @@
     "terms": "Terms & Conditions"
   },
   "settings":{
-    "title":"Settings"
+    "title":"SETTINGS"
   },
   "folder-detail":{
-    "subfolder":"Sub-folders"
+    "subfolder":"Sub-folders",
+    "title": "FOLDER CONTENT",
+    "folder_side_menu_item_1": "Mark as Favourite",
+    "folder_side_menu_item_2": "Unmark as Favourite",
+    "folder_side_menu_item_3": "Rename",
+    "created_on": "Created On",
+    "documents": "Documents",
+    "sub_folders": "Sub-folders",
+    "add_subfolder" : "Add Sub-Folder",
+    "add_new_document": "Add new Document"
+  },
+  "favourites": {
+    "title": "FAVOURITES",
+    "no_favourites" : "You have no favourite Contracts or Folders"
+  },
+  "broker":{
+    "title": "MY BROKER"
+  },
+  "chat" : {
+    "title": "CHAT"
+  },
+  "notifications": {
+    "title": "NOTIFICATIONS",
+    "mark_all_as_read": "Mark all as Read",
+    "notification_item": {
+      "open_contract":"Open Contract",
+      "open_document": "Open Document",
+      "mark_as_read": "Mark as Read"
+    },
+    "notification_modal": {
+      "title": "Notification Title",
+      "content": "Notification content",
+      "mark_as_read": "Mark as Read"
+    }
+  },
+  "rename_contract": {
+    "title" : "Rename Contract",
+    "sub_title_name": "Contract Name",
+    "text_input_label" : "New Contract Name",
+    "btn_save_label": "SAVE"
+  },
+  "rename_folder": {
+    "title" : "Rename Folder",
+    "sub_title_name": "Folder Name",
+    "text_input_label" : "New Folder Name",
+    "btn_save_label": "SAVE"
   }
 }
