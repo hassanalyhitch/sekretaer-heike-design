@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit,Input, ViewChild, ElementRef, Injectable } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit,Input, ViewChild, ElementRef, Injectable,DoCheck, SimpleChanges } from '@angular/core';
 import { Router,Event, ActivatedRoute } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Subscription } from 'rxjs';
@@ -11,6 +11,7 @@ import { UploadFileData } from '../../../models/upload-file.model';
 import { FormGroup,FormBuilder,AbstractControl,Validators, FormControl } from '@angular/forms';
 import { formatDate } from '@angular/common';
 import { FileSizePipe } from '../../../pipes/filesize.pipe';
+import { ThisReceiver } from '@angular/compiler';
 
 
 @Component({
@@ -19,9 +20,8 @@ import { FileSizePipe } from '../../../pipes/filesize.pipe';
   styleUrls: ['./add-page.component.css'],
   providers:[FileSizePipe]
 })
-export class AddPageComponent implements OnInit {
+export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
   selectedFile:File;
-  imagePreview:any;
   fileName:string ="No file chosen";
   showFileName:boolean =false;
   count:number = 0;
@@ -29,7 +29,6 @@ export class AddPageComponent implements OnInit {
 
   form:FormGroup;
   submitted = false;
-
   dropDownIsHidden:boolean= true;
   selectedItems = [];
  
@@ -63,7 +62,8 @@ export class AddPageComponent implements OnInit {
         dataName : '',
         type: ''}
       ];
-
+      
+  uploadedFiles:UploadFileData[] =[];
    shortLink: string = "";
    loading: boolean = false; // Flag variable
    file: File = null;
@@ -74,6 +74,9 @@ export class AddPageComponent implements OnInit {
    dateFormat ="yyyy-MM-dd";
    language="en";
    dropDownForm:FormGroup;
+   dropdownDisabled:boolean = false;
+   
+   typeSelected:string='';
 
     constructor( private route:ActivatedRoute, private router:Router,private folderService:FoldersService,
 private contractService:ContractsService,private http:HttpClient,private fileUploadService: FileUploadService,
@@ -105,10 +108,59 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
       
     };
 
-    this.selectedItems = [
-      { id: '30007', dataName: 'default selected'  }
-    ];
+    
+      switch (this.route.snapshot.params['type']){
+        case "folder": {
+          let selectedItem = {
+            id:this.folderService.selectedFolder.id,
+            dataName:this.folderService.selectedFolder.folderName
+          };
+          let folder: any = {
+            id: this.folderService.selectedFolder['id'],
+            customerAmsidnr:this.folderService.selectedFolder['customerAmsidnr'],
+            dataName :this.folderService.selectedFolder['folderName'],
+            type: 'folder'
+          };
+          this.dataArr.push(folder);
 
+
+          this.selectedItems.push(selectedItem);
+          this.typeSelected = 'folder';
+
+          this.dropdownDisabled =true;
+
+          break;
+        }
+        case "contract" :{
+
+
+          break;
+        }
+        default:{
+        this.getDropdownData();
+    
+          break;
+        }
+      }
+    
+    this.form =this.formBuilder.group({
+      // namefile:['',Validators.required],
+      // date:['',Validators.required],
+      // file: new FormControl(),
+      myItems: [this.selectedItems],
+      // today:new FormControl(this.formatFormDate(new Date()))
+    });
+
+    // this.form = new FormGroup({
+    //   fileupload: new FormControl(),
+    //   nametags: new FormControl(),
+    //   date: new FormControl()
+    // });
+
+
+  }
+
+  getDropdownData(){
     this.folderSub = this.folderService.getFolders().subscribe({
       next: (resp) => {
         
@@ -154,7 +206,16 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
                 // console.table(this.dataArr);
               }
 
+            },
+            complete:()=>{
+              for(let x=0;x<this.dataArr.length;x++){
+                if(this.selectedItems[0].id == this.dataArr[x].id){
+                  this.typeSelected = this.dataArr[x].type;
+                }
+              }
+            
             }
+
           });
 
         } else {
@@ -164,24 +225,8 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
 
       }
     });
-
-    
-    this.form =this.formBuilder.group({
-      namefile:['',Validators.required],
-      date:['',Validators.required],
-      fileupload: new FormControl(),
-      myItems: [this.selectedItems],
-      today:new FormControl(this.formatFormDate(new Date()))
-    });
-
-    // this.form = new FormGroup({
-    //   fileupload: new FormControl(),
-    //   nametags: new FormControl(),
-    //   date: new FormControl()
-    // });
-
-
   }
+
   formatFormDate(date:Date){
     return formatDate(date, this.dateFormat, this.language);
   }
@@ -197,19 +242,50 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
       dropDownElement.hidden = true;
       console.log('hide it !');
     }
+    if (this.selectedItems.length>0){
+      for(let x=0;x<this.dataArr.length;x++){
+        if(this.selectedItems[0].id == this.dataArr[x].id){
+          this.typeSelected = this.dataArr[x].type;
+        }
+      }
+    }
   }
 
-  get f():{[key:string]:AbstractControl}{
-    return this.form.controls;
-  }
+  // get f():{[key:string]:AbstractControl}{
+  //   return this.form.controls;
+  // }
+
+  // onChange(event){
+  //   this.file = event.target.files[0];
+  // }
  
-  onSubmit():void{
-    this.submitted = true;
-    if (this.form.invalid){
-      return;
+ onSubmit(form){
+  form.file =this.file;
+  let fileObj = {'file':this.file};
+  switch (this.typeSelected){
+    case 'folder':{
+      this.folderSub = this.fileUploadService.addFolderFile(form,this.selectedItems[0].id)
+      .subscribe({
+        next:(resp)=>{
+          console.log(resp);
+
+        },
+        error:(e)=>{
+          console.log('AddPageComponent');
+          console.log(e);
+        }
+      }
+
+      )
+
+      break;
     }
-    console.log(JSON.stringify(this.form.value,null,2));
+    case 'contract':{
+      break;
+    }
   }
+
+ }
 
   getFileName(event){
     this.file = event.target.files[0];
@@ -224,32 +300,14 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
 
       fileSize :this.fileSizePipe.transform(this.file.size,'MB'),
       
-      fileType :this.file.type
+     fileType  :this.file.type
     }
     this.uploadFileArr = [];
     this.uploadFileArr.push(_file);
     this.selectFile.nativeElement.value = null;
   }
 
-  onUploadFile() {
-    this.loading = !this.loading;
-    console.log(this.file);
-    this.fileUploadService.upload(this.file).subscribe(
-        (event: any) => {
-            if (typeof (event) === 'object') {
 
-                // Short link via api response
-                this.shortLink = event.link;
-
-                this.loading = false; 
-                
-            }
-          
-          }
-       
-    );
-        
-  }
 
   removeFile(obj){
     console.log (obj);
@@ -257,9 +315,22 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
     let removeIndex = obj.fileId;
     this.uploadFileArr = this.uploadFileArr.filter(function(value, index, arr){
     console.log(value);
-    return (value.fileName != obj.fileName && value.fileId != obj.fileid);
+    return (value.fileName != obj.fileName && value.fileId != obj.docid);
     });
 
+  }
+
+  ngDoCheck():void{
+
+    // console.log('selectedItems.length> '+this.selectedItems.length);
+    if (this.selectedItems.length>0){
+      for(let x=0;x<this.dataArr.length;x++){
+        if(this.selectedItems[0].id == this.dataArr[x].id){
+          this.typeSelected = this.dataArr[x].type;
+        }
+      }
+    }
+  
   }
 
   ngOnDestroy(){

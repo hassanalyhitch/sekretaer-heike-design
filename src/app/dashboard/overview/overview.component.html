@@ -1,14 +1,15 @@
 <div class="content-wrapper w-100 ">
   <div class="_content d-flex d-flex flex-column w-100 h-100 bg-">
-    <div class="section-title w-100 d-flex justify-content-center pt-3 pb-2" >
-      <strong class=" align-self-center p-2 title bg-" (click)="collapse()"> 
-        {{ "overview.title_my_sekretar" | translate }}
-      </strong>
-      <i class="material-icons mx-2 align-self-center collapse-icon bg-" *ngIf="!collapsed" (click)="collapse()">expand_less</i>
-      <i class="material-icons mx-2 align-self-center collapse-icon bg-" *ngIf="collapsed" (click)="collapse()">expand_more</i>
-     
-      <div class="quick-fab shadow-sm d-flex flex-column mx-3 justify-content-center align-items-center" (click)="onAddContract()">
-        <i class="material-icons">add</i>
+    
+    <div class="position-relative mb-5">
+      <div class="position-absolute top-0 start-0"></div>
+      <div class="position-absolute top-0 start-50 translate-middle-x">
+        <strong class="align-self-center p-2 title" (click)="collapse()">
+          {{ "overview.title_my_sekretar" | translate }}
+        </strong>
+      </div>
+      <div class="position-absolute top-0 end-0">
+        <img class="filter-icon" (click)="onAddContract()" src="/assets/icon_filter_dark.svg">
       </div>
     </div>
 
@@ -25,14 +26,17 @@
         <app-fav-item *ngFor="let item of subsetArr" [contractItem]=item  (click)="onCardClick(item)"></app-fav-item>
       </div>
       
-      <div class="section-folder d-flex flex-column p-3 w-100 bg-white">
-        <div class="section-title w-100 d-flex justify-content-center pt-3 ">
-          <strong class=" align-self-center p-2 title " (click)="collapseFolders()"> {{ "overview.title_my_folders" | translate }}</strong>
-          <i class="material-icons mx-2 align-self-center collapse-icon" (click)="collapseFolders()" *ngIf="!collapsedFolders">expand_less</i>
-          <i class="material-icons mx-2 align-self-center collapse-icon" (click)="collapseFolders()" *ngIf="collapsedFolders">expand_more</i>
-        
-          <div class="quick-fab shadow-sm d-flex flex-column mx-3 justify-content-center align-items-center" (click)="addNewFolder()" >
-            <i class="material-icons">add</i>
+      <div class="section-folder d-flex flex-column p-4 w-100 bg-white">
+      
+        <div class="position-relative w-100 d-flex flex-wrap py-3 justify-content-center mb-5">
+          <div class="position-absolute top-0 start-0"></div>
+          <div class="position-absolute top-0 start-50 translate-middle-x">
+            <strong class="align-self-center p-2 title" (click)="collapseFolders()">
+              {{ "overview.title_my_folders" | translate }}
+            </strong>
+          </div>
+          <div class="position-absolute top-0 end-0">
+            <img class="filter-icon" (click)="addNewFolder()" src="/assets/icon_filter_dark.svg">
           </div>
         </div>
 

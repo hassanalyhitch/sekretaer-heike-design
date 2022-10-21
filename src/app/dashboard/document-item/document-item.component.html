@@ -1,22 +1,14 @@
-<div class="d-flex w-100 document-item bg-light my-1 p-1">
-<div class="document-icon ">
-  <img class="icon" src="/assets/doc-icon.svg" alt="">
-</div>
-<div class="d-flex flex-column my-2 w-100" (click)="onDocumentClick(doc)">
-  <span class="name px-2">{{doc.name | shortenText: 20 }}</span>
-  <span class="date px-2">{{doc.createdAt}}</span>
-</div>
-<div class="more bg-">
-  <div class="more-icon">      
-  <div class="btn-group dropstart">
-      
-    <i class="material-icons  dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" >more_horiz</i>
-    
-    <ul class="dropdown-menu shadow">
-      <li><span class="dropdown-item" href="" (click)="onDocumentClick(doc)">{{ 'contract_detail.document_side_menu_item_1' | translate }}</span></li>
-      <li><span class="dropdown-item" href="" (click)="openModal(doc)">{{ 'contract_detail.document_side_menu_item_2' | translate }}</span></li>
-    </ul>
+<div class="bg-white shadow d-flex document-item" (click)="onDocumentClick(doc)">
+  <div class="icon-container d-flex flex-column">
+      <img class="doc-icon" src="/assets/icon_document.svg" alt="">
   </div>
+  <div class="d-flex justify-content-between w-100 bg-">
+      <div class="d-flex flex-column _content bg-">
+          <span class="fw-bold px-2 mt-3 mb-1">{{doc.name | shortenText: 20 }}</span>
+          <span class="fw-normal px-2 ">{{doc.createdAt}}</span>
+      </div>
+      <div class="d-flex justify-content-center align-items-center p-2 bg-" >
+          <img class="doc-broker-icon" src="/assets/icon_broker.svg">
+      </div>
   </div>
-</div>
 </div>

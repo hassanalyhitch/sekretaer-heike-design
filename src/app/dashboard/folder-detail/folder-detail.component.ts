@@ -17,8 +17,8 @@ import { NewFolderComponent } from '../new-folder/new-folder.component';
 export class FolderDetailComponent implements OnInit, OnDestroy {
 
   folder: FolderData;
-  hrTitle: string;
-  hrTitle2: string;
+  //hrTitle: string;
+  //hrTitle2: string;
 
   parentNav: string = '';
   currentNav: string = '';
@@ -28,19 +28,24 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
   routeListener: Subscription;
   visitedFolderArray:FolderData[] = [];
 
-  constructor(private router:Router, private route:ActivatedRoute, private folderService: FoldersService,private matDialog: MatDialog, private translate:TranslateService, private _location: Location) { }
+  constructor(
+    private router:Router, 
+    private route:ActivatedRoute, 
+    private folderService: FoldersService,
+    private matDialog: MatDialog, 
+    private translate:TranslateService, 
+    private _location: Location) { }
 
   ngOnInit() {
-    console.log(this.folderService.selectedFolder);    
-    this.hrTitle = this.translate.instant('folder-detail.documents');
-    this.hrTitle2 = this.translate.instant('folder-detail.subfolder');
+    console.table(this.folderService.selectedFolder);    
+    //this.hrTitle = this.translate.instant('folder-detail.documents');
+    //this.hrTitle2 = this.translate.instant('folder-detail.subfolder');
 
-
-    const wholeDocTemplate = document.getElementsByClassName('section-folderdetail').item(0) as HTMLElement | null;
-    if (wholeDocTemplate != null) {
-      document.getElementById("folder-hr").setAttribute('data-content', this.hrTitle2);
-      document.getElementById("docu-hr").setAttribute('data-content', this.hrTitle);
-    } 
+    // const wholeDocTemplate = document.getElementsByClassName('section-folderdetail').item(0) as HTMLElement | null;
+    // if (wholeDocTemplate != null) {
+    //   document.getElementById("folder-hr").setAttribute('data-content', this.hrTitle2);
+    //   document.getElementById("docu-hr").setAttribute('data-content', this.hrTitle);
+    // } 
 
     this.routeListener = this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {

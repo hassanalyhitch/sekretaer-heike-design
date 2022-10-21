@@ -37,8 +37,8 @@
     }
   },
   "contract_detail": {
-    "title_main" : "INSURANCE",
-    "title_documents": "Dokumente",
+    "title_main" : "INSURANCE DETAILS",
+    "title_documents": "Insurance dokumentes",
     "title_add_new_document": "Neues Dokument",
     "contract_start_date_label": "Beginn",
     "contract_end_date_label": "Ablauf",
@@ -62,8 +62,9 @@
     "title":"SETTINGS"
   },
   "folder-detail":{
-    "subfolder":"Unterordner",
+    "subfolder":"My Sub-Folders",
     "title": "Inhalt",
+    "date_filter_label":"Date",
     "folder_side_menu_item_1": "Als Favorit markieren",
     "folder_side_menu_item_2": "Als Favorit löschen",
     "folder_side_menu_item_3": "Umbenennen",
@@ -78,7 +79,8 @@
     "no_favourites" : "You have no favourite Contracts or Folders"
   },
   "broker":{
-    "title": "MY BROKER"
+    "title": "MY BROKER",
+    "name_label": "NAME"
   },
   "chat" : {
     "title": "CHAT"

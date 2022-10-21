@@ -37,8 +37,8 @@
     }
   },
   "contract_detail": {
-    "title_main" : "INSURANCE",
-    "title_documents": "Documents",
+    "title_main" : "INSURANCE DETAILS",
+    "title_documents": "Insurance documents",
     "title_add_new_document": "Add new Document",
     "contract_start_date_label": "Start",
     "contract_end_date_label": "End",
@@ -62,13 +62,14 @@
     "title":"SETTINGS"
   },
   "folder-detail":{
-    "subfolder":"Sub-folders",
-    "title": "FOLDER CONTENT",
+    "subfolder":"My Sub-Folders",
+    "title": "MY FOLDERS",
+    "date_filter_label":"Date",
     "folder_side_menu_item_1": "Mark as Favourite",
     "folder_side_menu_item_2": "Unmark as Favourite",
     "folder_side_menu_item_3": "Rename",
     "created_on": "Created On",
-    "documents": "Documents",
+    "documents": "My Documents",
     "sub_folders": "Sub-folders",
     "add_subfolder" : "Add Sub-Folder",
     "add_new_document": "Add new Document"
@@ -78,7 +79,8 @@
     "no_favourites" : "You have no favourite Contracts or Folders"
   },
   "broker":{
-    "title": "MY BROKER"
+    "title": "MY BROKER",
+    "name_label": "NAME"
   },
   "chat" : {
     "title": "CHAT"

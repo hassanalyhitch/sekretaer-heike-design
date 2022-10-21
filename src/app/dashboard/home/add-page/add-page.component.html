@@ -1,16 +1,16 @@
 <div class="content-wrapper w-100 ">
 <div class="_content d-flex flex-column w-100 h-100 " [ngClass]="{'allowScroll' :dropDownIsHidden, 'disableScroll':!dropDownIsHidden}">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" >
+  <form [formGroup]="form"  (ngSubmit)= "onSubmit(addPageForm.value)" #addPageForm="ngForm" >
       <div>
         <label for="selectFile" class="fileUpload" >Please select Document</label>
         <input class="file-input d-none" type="file" 
-        #selectFile  (change)="getFileName($event)" id="selectFile" formControlName="fileupload" required/>
+        #selectFile  (change)="getFileName($event)" id="selectFile" name="file" required/>
         
           <app-upload-file *ngFor="let uploadFile of uploadFileArr" [uploadFile]="uploadFile" (deleteFile)="removeFile($event)"></app-upload-file>
       
       </div>
 
-      <input type="textarea"  placeholder="Enter Document Name" class="fileUpload">
+      <input type="textarea"  placeholder="Enter Document Name" name="namefile" class="fileUpload">
 
       <!-- <div class="share">
           <input type="checkbox" id="broker" name="broker">
@@ -23,30 +23,27 @@
                 [settings]="dropdownSettings"
                 [data]="dataArr"
                 (onSelect)="onMultiSelectClick()"
-                formControlName="myItems"
-                [disabled] = "true"
+                name="myItems"
+                formControlName = "myItems"
+                [disabled] = "dropdownDisabled"
                 >
               </ng-multiselect-dropdown>
         </div>
       </div>
 
       <div class ="form-group">
-          <input  type="date"  formControlName="today" class="form-control" class="fileUpload"
-          placeholder=" Opt.select document date" style="color:grey;" 
-          [ngClass]="{ 'is-invalid': submitted && f.date.errors }"/>
-              <div *ngIf="submitted && f.date.errors" class="invalid-feedback" class="error-message">
-                <div *ngIf="f.date.errors.required">Date is required!</div>
-              </div>
+          <input  type="date"  name="today" class="form-control" class="fileUpload"
+          placeholder=" Opt.select document date" style="color:grey;" >
       </div>
       <!-- <div class="fileUpload">
         <app-tags-input></app-tags-input>
       </div> -->
     
 
-      <input type="textarea"  style="padding:30px;"placeholder="Notice" class="fileUpload">
+      <input type="textarea"  style="padding:30px;"placeholder="Notice" name="notice" class="fileUpload">
       
       <div class="save">
-            <button type="submit" class="submit" (click)="onUploadFile()"> Save</button>
+            <button type="submit" class="submit" > Save</button>
       </div>
   </form>
 </div> 

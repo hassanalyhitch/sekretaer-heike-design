@@ -1,35 +1,66 @@
-.document-icon{
-  width: 60px;
-  max-width: 60px;
-  min-height: 60px;
-  max-height: 60px;
-  border-radius: 7px;
-  background-color: #D60B51;
+.document-item{
+  height: 85px;
 }
-.icon{
-  width: 100%;
-  height: 100%;
-  border: none;
-  object-fit: contain;
-  object-position: center center;
-}
-.name{
-  color: #2C262D;
-}
-.material-icons{
-  font-size: 34px;
-}
-.date{
-  font-size: 15px;
-  font-weight: 300;
+.doc-icon{
+  width: 40%;
+  height: 40%;
 }
 
-.more{
+.doc-broker-icon{
+  color: #D60B51;
+  width: 50px;
+  height: 50px;
+}
+.icon-container{
+  width: 15%;
+  background-color: #e0046e;
+  background-image: linear-gradient(141deg,#E5007E,#D60B51);
+  border-radius: 0 0 25px;
+  height: 100%;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+}
+._content{
+  margin: 0px !important;
+}
+.small-picture{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 58px;
+  height: 58px;
+  border-radius: 0px 0px 0px 12px;
+  overflow: hidden;
+  background-color: #f2f2f2;
+}
+.small-picture img {
+  object-fit: cover; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  width: 100%;
+  height: 100%;
+}
+.fav-btn{
+  position: absolute;
+  top: 4px;
+  right: 20px;
+  padding: 3px;
+  color: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
+
 }
-.dropstart::before{
-  content: "" !important;
+
+.isFav{
+  background-color: #E5007E;
 }
-.dropstart .dropdown-toggle::before {
-  border: none !important;
+.notFav{
+  background-color: #707070 !important;
 }
+
+.fav-btn i{
+  font-size: 22px;
+}
+

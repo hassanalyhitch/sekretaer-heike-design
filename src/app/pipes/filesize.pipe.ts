@@ -6,10 +6,11 @@ import {Pipe,PipeTransform} from '@angular/core';
 export class FileSizePipe implements PipeTransform {
     transform(size:number,extension:string) {
         const fileSize =size/1024;
+        const fileMegaSize = fileSize/1024;
         if (fileSize<=1024){
-            return(fileSize+'Kb');
+            return(fileSize.toFixed(2)+'Kb');
         }else{
-            return (fileSize /(1024) +'Mb');
+            return (fileMegaSize.toFixed(2) +'Mb');
         }
        
         

@@ -1,0 +1,38 @@
+<div class="folder-bg-transparent">
+  
+  <div class="folder-top shadow-sm">
+    <span></span>
+  </div>
+
+  <div class="content bg-white shadow">
+    <div class="folder-bg">
+    
+      <div class="d-flex justify-content-start ms-2">
+        <div class="p-2">
+          <div class="d-flex flex-column">
+            <div class="fs-6">{{folder.folderName}}</div>
+          </div>
+        </div>
+        <div class="ms-auto p-2">
+          <div class="d-flex fav-btn align-items-center justify-content-center"
+            [ngClass]="{'isFav': folder.isFavorite == 1, 'notFav': folder.isFavorite == 0}" >
+            <i class="material-icons">star</i>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-start ms-2">
+        <div class="p-2">
+          <div class="d-flex flex-column">
+            <div class="fw-bold">Folder description</div>
+          </div>
+        </div>
+        <div class="ms-auto p-2">
+          <span class="fw-bold">13</span>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+</div>

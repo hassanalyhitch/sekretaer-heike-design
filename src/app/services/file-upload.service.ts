@@ -1,27 +1,33 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {HttpClient,HttpHeaders} from '@angular/common/http';
+import {Observable,tap} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class FileUploadService {
     
-  // API url
-  baseApiUrl = "https://testapi.maxpool.de/api/v1/sekretaer/myfolders"
+  
     
   constructor(private http:HttpClient) { }
   
-  // Returns an observable
-  upload(file):Observable<any> {
-  
-      // Create form data
-      const formData = new FormData(); 
-        
-      // Store form name as "file" with file data
-      formData.append("file", file, file.name);
-        
-      // Make http post request over api
-      // with formData as req
-      return this.http.post(this.baseApiUrl, formData)
-  }
+    // Returns an observable
+    addFolderFile(uploadedFile:any,folderId:string) {
+    
+      let url = 'https://testapi.maxpool.de/api/v1/sekretaer/myfolders/' + folderId +'/upload';
+    
+      return this.http.post(url,uploadedFile,{
+        headers: new HttpHeaders({
+          'accept': 'application/json',
+          'Content-Type': 'multipart/form-data'
+        }),
+      }).pipe(
+        tap((resp)=>{
+          
+            console.log(resp);
+            
+        })
+      );
+    }
 }
+
+
