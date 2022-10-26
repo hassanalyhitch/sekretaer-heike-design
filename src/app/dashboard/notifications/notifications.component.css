@@ -18,6 +18,7 @@
 .mark-as-read{
   color: #707070;
   cursor: pointer;
+  margin-right: 30px;
 }
 app-notification-item{
   cursor: pointer;

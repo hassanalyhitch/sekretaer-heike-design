@@ -4,10 +4,10 @@
     <strong class="section-title align-self-center mt-4 mb-3">{{ 'notifications.title' | translate }}</strong>
 
     <div class="w-100 d-flex flex-row justify-content-end py-2 bg-">
-      <span class=" mark-as-read px-2">{{ 'notifications.mark_all_as_read' | translate }}</span>
+      <span class=" mark-as-read ">{{ 'notifications.mark_all_as_read' | translate }}</span>
     </div>
     <div class="w-100 d-flex flex-column">
-    <app-notification-item *ngFor="let notif of allNotifsArr; let i = index;" [notification]="notif" ></app-notification-item>
+      <app-notification-item *ngFor="let notif of allNotifsArr; let i = index;" [notification]="notif" ></app-notification-item>
     </div>
   </div>
 </div>

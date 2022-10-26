@@ -26,11 +26,11 @@ export class NotificationItemComponent implements OnInit {
 
         switch(this.notification.links[i].assocType){
           case "vamsidnr" : {
-            this.notifIcon = "/assets/contract-icon.svg";
+            this.notifIcon = "/assets/icon_document.svg";
             break;
           }
           case "dms" : {
-            this.notifIcon = "/assets/doc-icon.svg";
+            this.notifIcon = "/assets/icon_pdf.svg";
             break;
           }
           case "chat" : {
@@ -42,7 +42,7 @@ export class NotificationItemComponent implements OnInit {
             break;
           }
           default: {
-            this.notifIcon = "/assets/doc-icon.svg";
+            this.notifIcon = "/assets/icon_document.svg";
             break;
           }
         }
@@ -76,7 +76,7 @@ export class NotificationItemComponent implements OnInit {
   
   openModal(notification: NotificationData) {
     const dialogConfig = new MatDialogConfig();
-    let passdata:string = '{"notification": "'+notification+'"}';
+    let passdata:string = JSON.stringify(this.notification);
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = 'notification-modal-component';
