@@ -10,7 +10,7 @@
         </div>
   
         <div class="p-2">
-          <span class="fs-4 fw-bold word-spacing">{{ 'contract_detail.test_key' | translate }}</span>
+          <span class="fs-4 fw-bold word-spacing">{{ 'contract_detail.title_main' | translate }}</span>
         </div>
   
         <div class="p-2">
@@ -109,9 +109,14 @@
   
     </div>
   
-    <app-document-item class="m-1" *ngFor="let doc of docArr" [doc]=doc ></app-document-item>
   
-    <div class="m-1"></div>
+    <div class="d-flex my-2 _document" *ngFor="let doc of docArr">
+      <app-document-item class="w-100" [doc]=doc ></app-document-item>
+    
+      <div class=" edit-rename p-2 d-flex align-self-center justify-content-center align-items-center bg-white d-">
+          <i class="material-icons">mode_edit</i>
+      </div>
+    </div>
     
   </div>
   

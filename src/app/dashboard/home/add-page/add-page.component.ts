@@ -30,7 +30,7 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
   form:FormGroup;
   submitted = false;
   dropDownIsHidden:boolean= true;
-  selectedItems = [];
+  selectedItems;
  
   @ViewChild("selectFile",{static:true}) selectFile:ElementRef;
    dropdownSettings = {};
@@ -103,7 +103,7 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
       searchPlaceholderText: 'Search',
       noDataAvailablePlaceholderText: 'No data available',
       closeDropDownOnSelection: true,
-      showSelectedItemsAtTop: false,
+      showSelectedItemsAtTop: true,
       defaultOpen: false,
       
     };
@@ -323,7 +323,7 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
   ngDoCheck():void{
 
     // console.log('selectedItems.length> '+this.selectedItems.length);
-    if (this.selectedItems.length>0){
+    if (this.selectedItems != undefined && this.selectedItems.length>0){
       for(let x=0;x<this.dataArr.length;x++){
         if(this.selectedItems[0].id == this.dataArr[x].id){
           this.typeSelected = this.dataArr[x].type;

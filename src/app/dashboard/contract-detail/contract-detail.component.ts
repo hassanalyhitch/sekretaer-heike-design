@@ -40,6 +40,7 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     isSelected: false
   };
   contractSub: Subscription;
+  documents:any = document.getElementsByClassName('_document');
 
   docArr: DocumentData[] = [];
 
@@ -64,6 +65,13 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
                 }
                 // console.table(this.docArr);
               }
+              if(this.docArr.length>0){
+                
+                this.swipeLeft();
+              }
+          },
+          complete:()=>{
+            
           }
         });
       }
@@ -90,10 +98,16 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
         });
       }
     });
+
   }
 
   ngOnDestroy(){
     this.contractSub.unsubscribe();
+
+    for (let element of this.documents) {
+      // element.removeEventListener("mouseup", endSwipe);
+      // element.removeEventListener('mousemove', detectMouse); 
+    }
   }
   
   openModal(file) {
@@ -148,4 +162,86 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
   onBackNavClick(){
     this._location.back();
   }
+
+  
+  swipeLeft(){
+      
+    // var list = document.getElementsByClassName('task-list')[0];
+    
+    var mouseOrigin;
+    var isSwiping = false;
+    var mouseRelease;
+    var currentTask: HTMLElement;
+    var swipeMargin=80;
+    var originalClassList;
+    
+    // Array.prototype.forEach.call(documents, function addSwipe(element){
+    //   element.addEventListener('mousedown', startSwipe); 
+    // });
+
+    for (let element of this.documents) {
+      console.log(this.documents.length);
+      element.addEventListener('mousedown', (evt)=>{
+        
+        mouseOrigin = evt.screenX;
+        currentTask = evt.target;
+        isSwiping = true;
+        originalClassList = evt.target.classList.value;
+        
+      });
+      
+      element.addEventListener('mouseup', endSwipe);
+      element.addEventListener('mousemove', detectMouse); 
+    }
+    
+
+    /* 
+      Defined events on document so that a drag or release outside of target 
+      could be handled easily 
+    */
+    
+    
+    //ENDSWIPE
+    function endSwipe(evt){
+      var completedTask;    
+      console.log(currentTask);
+      if( currentTask.classList.contains("completing") ){
+        currentTask.classList.remove("completing");
+        currentTask.classList.add("completed");
+        // list.appendChild(currentTask);
+      }
+      else if( currentTask.classList.contains("deleting") ){
+        currentTask.remove();     
+        alert("swiped left");
+        console.log("swiped left"); 
+      }      
+      
+      mouseOrigin = null;
+      isSwiping = false;     
+      currentTask.style.margin = "0";
+      currentTask = null;
+    }
+    
+    //DETECTMOUSE
+    function detectMouse(evt){
+      var currentMousePosition = evt.screenX;
+      var swipeDifference = Math.abs(mouseOrigin - currentMousePosition)
+      
+      if(isSwiping && currentTask && (swipeDifference > swipeMargin) ){ 
+        if( (swipeDifference-swipeMargin) <= swipeMargin ){
+          //no change, allows user to take no action
+          currentTask.classList.remove("completing");
+          currentTask.classList.remove("deleting");
+          currentTask.style.margin = "0";
+        }
+        else if( mouseOrigin > currentMousePosition ){
+          //swipe left        
+          currentTask.classList.remove("completing");
+          currentTask.classList.add("deleting");
+          currentTask.style.marginLeft = -swipeDifference+"px";
+        }
+      }
+    }  
+    
+  };
 }
