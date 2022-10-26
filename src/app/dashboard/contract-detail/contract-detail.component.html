@@ -1,118 +1,119 @@
 <div class="content-wrapper w-100 ">
-<div class="_content d-flex px-3 flex-column w-100 h-100 ">
-  <div class="">
-    <span></span>
-
-    <div class="d-flex justify-content-between mb-2">
-
-      <div class="d-flex justify-content-center align-items-center" (click)="onBackNavClick()">
-        <i class="material-icons p-2 ">arrow_back_ios</i>
-      </div>
-
-      <div class="p-2">
-        <span class="fs-4 fw-bold word-spacing">{{ 'contract_detail.title_main' | translate }}</span>
-      </div>
-
-      <div class="p-2">
-        <div class="ml-auto btn-group dropstart align-self-center">
-          <img class="filter-icon" data-bs-toggle="dropdown" aria-expanded="false" src="/assets/icon_filter_dark.svg">
-          <ul class="dropdown-menu shadow">
-            <li><span class="dropdown-item" href="" *ngIf="contract.details.isFav=='0'" (click)="markFav(contract)" >{{ 'contract_detail.insurance_side_menu_item_1' | translate }}</span></li>
-            <li><span class="dropdown-item" href="" *ngIf="contract.details.isFav=='1'" (click)="unmarkFav(contract)" >{{ 'contract_detail.insurance_side_menu_item_2' | translate }}</span></li>
-            <li><span class="dropdown-item" href="" (click)="openModal(contract)" >{{ 'contract_detail.insurance_side_menu_item_3' | translate }}</span></li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="bg-white shadow-sm w-100 d-flex fav-item">
-    <div class="d-flex w-100 ">
-
-      <div class="d-flex flex-column _card-content w-100">
-        <span class="risk px-2 mt-3 mb-1">{{contract.details.name}}</span>
-
-        <span class="branch mt-3 px-2 ">{{contract.details.productSek}}</span>
-        <span class="company px-2">{{contract.details.Company}}</span> 
-
-        <div class="d-flex align-items-end px-2">
-          <span class="type mt-3">{{ 'contract_detail.contract_tariff_label' | translate }}:</span>
-          <span class="mx-1">{{contract.details.tarif }}</span>
-        </div>
-
-        <div class="d-flex align-items-end px-2">
-          <span class="type">{{ 'contract_detail.contract_number_label' | translate }}:</span>
-          <span class="mx-1">{{contract.details.ContractNumber}}</span>
-        </div>
-           
-        <div class="d-flex align-items-end justify-content-between w-100 py-2 ">
-          <div class="date d-flex align-items-end px-2">
-            <span class="">{{ 'contract_detail.contract_start_date_label' | translate }}: </span>
-            <span class="mx-2 fw-bold">{{contract.details.StartDate}}</span>
-          </div>
-          <div class="date ml-auto px-1">
-          <span class="">{{ 'contract_detail.contract_end_date_label' | translate }}: </span>
-          <span class="mx-2 fw-bold">{{contract.details.EndDate}}</span>
-          </div>
-        </div>
-
-        <div class="price align-self-end px-2 my-2">
-          <span class="amount">{{contract.details.YearlyPayment | currencyFormat}}</span>
-          <span>/{{ 'contract_detail.contract_yearly_payment_label' | translate }}</span>
-        </div>
-
-        <!-- <div class="d-flex align-items-end justify-content-between w-100 py-2 ">
-          <div class="date d-flex align-items-end px-2">
-            <span class="mx-2 fw-normal active-contract">Aktiver Vertrag</span>
-          </div>
-          <div class="date ml-auto px-1">
-            <span class="per-month-contract-label fw-bold">{{contract.details.YearlyPayment | currencyFormat}}</span>
-            <span class="per-month-contract-label fw-bold">/{{ 'contract_detail.contract_monthly_payment_label' | translate }}</span>
-          </div>
-        </div> -->
+  <div class="_content d-flex px-3 flex-column w-100 h-100 ">
+    <div class="">
+      <span></span>
   
-        <div class="small-picture">
-          <img class="w-100 img-responsive" src="https://images.unsplash.com/photo-1606759163253-094133091882?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt="">
+      <div class="d-flex justify-content-between mb-2">
+  
+        <div class="d-flex justify-content-center align-items-center" (click)="onBackNavClick()">
+          <i class="material-icons p-2 ">arrow_back_ios</i>
         </div>
   
-        <div class="fav-btn d-flex align-items-center justify-content-center"
-        [ngClass]="{'isFav': contract.details.isFav == '1', 'notFav': contract.details.isFav == '0'}"
-        (click)="toggleFav(contract)" >
-          <i class="material-icons fav-size-icon">star</i>
+        <div class="p-2">
+          <span class="fs-4 fw-bold word-spacing">{{ 'contract_detail.title_main' | translate }}</span>
+        </div>
+  
+        <div class="p-2">
+          <div class="ml-auto btn-group dropstart align-self-center">
+            <img class="filter-icon" data-bs-toggle="dropdown" aria-expanded="false" src="/assets/icon_filter_dark.svg">
+            <ul class="dropdown-menu shadow">
+              <li><span class="dropdown-item" href="" *ngIf="contract.details.isFav=='0'" (click)="markFav(contract)" >{{ 'contract_detail.insurance_side_menu_item_1' | translate }}</span></li>
+              <li><span class="dropdown-item" href="" *ngIf="contract.details.isFav=='1'" (click)="unmarkFav(contract)" >{{ 'contract_detail.insurance_side_menu_item_2' | translate }}</span></li>
+              <li><span class="dropdown-item" href="" (click)="openModal(contract)" >{{ 'contract_detail.insurance_side_menu_item_3' | translate }}</span></li>
+            </ul>
+          </div>
         </div>
   
       </div>
   
     </div>
-  </div>
-
-  <div class="d-flex bd-highlight mb-2 mt-5">
-    <div class="p-2 bd-highlight">
-      <p class="text-muted">{{ 'contract_detail.title_documents' | translate }}</p>
-    </div>
-    <div class="ms-auto p-2 bd-highlight">
-      <p class="text-muted">
-        {{ 'folder-detail.date_filter_label' | translate }}
-        <img class="filter-icon" src="/assets/icon_date_filter.svg">
-      </p>
-    </div>
-  </div>
-
-  <div class="d-flex section-title align-self-center align-items-center mb-2">
-    <span>{{ 'contract_detail.title_add_new_document' | translate }}</span>
   
-    <div class="quick-fab d-flex flex-column mx-3 justify-content-center align-items-center" (click)="onAddPage()">
-      <i class="material-icons">add</i>
+    <div class="bg-white shadow-sm w-100 d-flex fav-item">
+      <div class="d-flex w-100 ">
+  
+        <div class="d-flex flex-column _card-content w-100">
+          <span class="risk px-2 mt-3 mb-1">{{contract.details.name}}</span>
+  
+          <span class="branch mt-3 px-2 ">{{contract.details.productSek}}</span>
+          <span class="company px-2">{{contract.details.Company}}</span> 
+  
+          <div class="d-flex align-items-end px-2">
+            <span class="type mt-3">{{ 'contract_detail.contract_tariff_label' | translate }}:</span>
+            <span class="mx-1">{{contract.details.tarif }}</span>
+          </div>
+  
+          <div class="d-flex align-items-end px-2">
+            <span class="type">{{ 'contract_detail.contract_number_label' | translate }}:</span>
+            <span class="mx-1">{{contract.details.ContractNumber}}</span>
+          </div>
+             
+          <div class="d-flex align-items-end justify-content-between w-100 py-2 ">
+            <div class="date d-flex align-items-end px-2">
+              <span class="">{{ 'contract_detail.contract_start_date_label' | translate }}: </span>
+              <span class="mx-2 fw-bold">{{contract.details.StartDate}}</span>
+            </div>
+            <div class="date ml-auto px-1">
+            <span class="">{{ 'contract_detail.contract_end_date_label' | translate }}: </span>
+            <span class="mx-2 fw-bold">{{contract.details.EndDate}}</span>
+            </div>
+          </div>
+  
+          <div class="price align-self-end px-2 my-2">
+            <span class="amount">{{contract.details.YearlyPayment | currencyFormat}}</span>
+            <span>/{{ 'contract_detail.contract_yearly_payment_label' | translate }}</span>
+          </div>
+  
+          <!-- <div class="d-flex align-items-end justify-content-between w-100 py-2 ">
+            <div class="date d-flex align-items-end px-2">
+              <span class="mx-2 fw-normal active-contract">Aktiver Vertrag</span>
+            </div>
+            <div class="date ml-auto px-1">
+              <span class="per-month-contract-label fw-bold">{{contract.details.YearlyPayment | currencyFormat}}</span>
+              <span class="per-month-contract-label fw-bold">/{{ 'contract_detail.contract_monthly_payment_label' | translate }}</span>
+            </div>
+          </div> -->
+    
+          <div class="small-picture">
+            <img class="w-100 img-responsive" src="https://images.unsplash.com/photo-1606759163253-094133091882?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt="">
+          </div>
+    
+          <div class="fav-btn d-flex align-items-center justify-content-center"
+          [ngClass]="{'isFav': contract.details.isFav == '1', 'notFav': contract.details.isFav == '0'}"
+          (click)="toggleFav(contract)" >
+            <i class="material-icons fav-size-icon">star</i>
+          </div>
+    
+        </div>
+    
+      </div>
     </div>
-
+  
+    <div class="d-flex bd-highlight mb-2 mt-5">
+      <div class="p-2 bd-highlight">
+        <p class="text-muted">{{ 'contract_detail.title_documents' | translate }}</p>
+      </div>
+      <div class="ms-auto p-2 bd-highlight">
+        <p class="text-muted">
+          {{ 'folder-detail.date_filter_label' | translate }}
+          <img class="filter-icon" src="/assets/icon_date_filter.svg">
+        </p>
+      </div>
+    </div>
+  
+    <div class="d-flex section-title align-self-center align-items-center mb-2">
+      <span>{{ 'contract_detail.title_add_new_document' | translate }}</span>
+    
+      <div class="quick-fab d-flex flex-column mx-3 justify-content-center align-items-center" (click)="onAddPage()">
+        <i class="material-icons">add</i>
+      </div>
+  
+    </div>
+  
+    <app-document-item class="m-1" *ngFor="let doc of docArr" [doc]=doc ></app-document-item>
+  
+    <div class="m-1"></div>
+    
   </div>
-
-  <app-document-item class="m-1" *ngFor="let doc of docArr" [doc]=doc ></app-document-item>
-
-  <div class="m-1"></div>
   
 </div>
-
-</div>
+  
