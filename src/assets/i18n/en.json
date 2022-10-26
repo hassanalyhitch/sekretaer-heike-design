@@ -55,7 +55,8 @@
     "insurance_side_menu_item_2": "Unmark as Favourite",
     "insurance_side_menu_item_3": "Rename",
     "document_side_menu_item_1" : "Open Document",
-    "document_side_menu_item_2" : "Rename Document"
+    "document_side_menu_item_2" : "Rename Document",
+    "test_key":"test value"
   },
   "login": {
     "title_login": "Let's Login",
