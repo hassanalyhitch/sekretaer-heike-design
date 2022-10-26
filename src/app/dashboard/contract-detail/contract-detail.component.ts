@@ -40,7 +40,7 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     isSelected: false
   };
   contractSub: Subscription;
-  documents:any = document.getElementsByClassName('_document');
+  documents:any ;
 
   docArr: DocumentData[] = [];
 
@@ -66,7 +66,8 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
                 // console.table(this.docArr);
               }
               if(this.docArr.length>0){
-                
+                this.documents = document.getElementsByClassName('_document');
+                console.log(this.documents.length);
                 this.swipeLeft();
               }
           },
@@ -104,10 +105,6 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     this.contractSub.unsubscribe();
 
-    for (let element of this.documents) {
-      // element.removeEventListener("mouseup", endSwipe);
-      // element.removeEventListener('mousemove', detectMouse); 
-    }
   }
   
   openModal(file) {
@@ -180,7 +177,6 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     // });
 
     for (let element of this.documents) {
-      console.log(this.documents.length);
       element.addEventListener('mousedown', (evt)=>{
         
         mouseOrigin = evt.screenX;
