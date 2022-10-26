@@ -7,6 +7,7 @@ import { ContractData } from '../../models/contract.model';
 import { DocumentData } from '../../models/document.model';
 import { ContractsService } from '../../services/contracts.service';
 import { RenameContractComponent } from '../rename-contract/rename-contract.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-contract-detail',
@@ -16,7 +17,7 @@ import { RenameContractComponent } from '../rename-contract/rename-contract.comp
 export class ContractDetailComponent implements OnInit, OnDestroy {
 
   @Input() index:string;
-  hrTitle: string;
+  
   contract: ContractData = <ContractData>{
     id: 0,
     details: {
@@ -43,10 +44,13 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
   docArr: DocumentData[] = [];
 
   constructor(
-  private route: ActivatedRoute,private matDialog: MatDialog,
-  private router: Router, private translate:TranslateService, private contractService: ContractsService) {
+    private route: ActivatedRoute,
+    private matDialog: MatDialog,
+    private router: Router, 
+    private translate:TranslateService,
+    private contractService: ContractsService,
+    private _location: Location) {
 
-    this.hrTitle = this.translate.instant('contract_detail.title_documents');
   
     this.contractSub = contractService.selectObservable.subscribe({
       next:(contract)=>{
@@ -68,11 +72,6 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.index = this.route.snapshot.paramMap.get('id');
-
-    const wholeDocTemplate = document.getElementsByClassName('_card-content').item(0) as HTMLElement | null;
-    if (wholeDocTemplate != null) {
-      document.getElementById("docu-hr").setAttribute('data-content', this.hrTitle);
-    } 
 
     this.matDialog.afterAllClosed.subscribe({
       next:()=>{
@@ -144,5 +143,9 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
 
   onAddPage(){
     this.router.navigate(['dashboard/home/adddocument']);
+  }
+
+  onBackNavClick(){
+    this._location.back();
   }
 }

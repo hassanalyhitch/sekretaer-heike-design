@@ -34,15 +34,23 @@
       "title": "NEW FOLDER",
       "text_input_label": "Ordnername",
       "btn_save_label": "Speichern"
+    },
+    "new_sub_folder_dialog": {
+      "title": "NEW SUB FOLDER",
+      "text_input_label": "Name",
+      "btn_save_label": "SAVE"
     }
   },
   "contract_detail": {
     "title_main" : "INSURANCE DETAILS",
     "title_documents": "Insurance dokumentes",
     "title_add_new_document": "Neues Dokument",
+    "contract_tariff_label": "Tariff",
+    "contract_number_label": "Contract Number",
     "contract_start_date_label": "Beginn",
     "contract_end_date_label": "Ablauf",
-    "contract_yearly_payment_label": "jährlich",
+    "contract_yearly_payment_label": "jahr",
+    "contract_monthly_payment_label" : "Month",
     "insurance_side_menu_item_1": "Als Favorit markieren",
     "insurance_side_menu_item_2": "Als Favorit löschen",
     "insurance_side_menu_item_3": "Umbenennen",

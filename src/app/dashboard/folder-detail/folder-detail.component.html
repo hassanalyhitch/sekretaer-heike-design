@@ -1,87 +1,87 @@
 <div class="content-wrapper w-100 ">
-<div class="_content d-flex flex-column align-items-center w-100 h-100">
-
-  <div class="section-folderdetail w-100 d-flex flex-column pt-4 ">
-  
-    <div class="d-flex justify-content-between mb-2">
-
-      <div class="d-flex justify-content-center align-items-center" (click)="onBackNavClick()" >
-        <i class="material-icons p-2 ">arrow_back_ios</i>
-      </div>
-
-      <div class="p-2">
-        <span class="fs-4 fw-bold">{{ 'folder-detail.title' | translate }}</span>
-      </div>
-
-      <div class="p-2">
-        <div class="ml-auto btn-group dropstart align-self-center">
-          <img class="filter-icon" data-bs-toggle="dropdown" aria-expanded="false" src="/assets/icon_filter_dark.svg">
-          <ul class="dropdown-menu shadow">
-            <li><span class="dropdown-item" href="" *ngIf="folder.isFavorite==0" (click)="markFav(folder)" >{{ 'folder-detail.folder_side_menu_item_1' | translate }}</span></li>
-            <li><span class="dropdown-item" href="" *ngIf="folder.isFavorite==1" (click)="unmarkFav(folder)" >{{ 'folder-detail.folder_side_menu_item_2' | translate }}</span></li>
-            <li><span class="dropdown-item" href="" (click)="openModal(folder)" >{{ 'folder-detail.folder_side_menu_item_3' | translate }}</span></li>
-          </ul>
+    <div class="_content d-flex flex-column align-items-center w-100 h-100">
+    
+      <div class="section-folderdetail w-100 d-flex flex-column pt-3 px-3">
+      
+        <div class="d-flex justify-content-between mb-2">
+    
+          <div class="d-flex justify-content-center align-items-center" (click)="onBackNavClick()" >
+            <i class="material-icons p-2 ">arrow_back_ios</i>
+          </div>
+    
+          <div class="p-2">
+            <span class="text-sub-title-4">{{ 'folder-detail.title' | translate }}</span>
+          </div>
+    
+          <div class="p-2">
+            <div class="ml-auto btn-group dropstart align-self-center">
+              <img class="filter-icon" data-bs-toggle="dropdown" aria-expanded="false" src="/assets/icon_filter_dark.svg">
+              <ul class="dropdown-menu shadow">
+                <li><span class="dropdown-item" href="" *ngIf="folder.isFavorite==0" (click)="markFav(folder)" >{{ 'folder-detail.folder_side_menu_item_1' | translate }}</span></li>
+                <li><span class="dropdown-item" href="" *ngIf="folder.isFavorite==1" (click)="unmarkFav(folder)" >{{ 'folder-detail.folder_side_menu_item_2' | translate }}</span></li>
+                <li><span class="dropdown-item" href="" (click)="openModal(folder)" >{{ 'folder-detail.folder_side_menu_item_3' | translate }}</span></li>
+              </ul>
+            </div>
+          </div>
+    
         </div>
-      </div>
-
-    </div>
+        
+        <div class="d-flex justify-content-start ms-2">
+          <span class="text-sub-title-3">{{folder.folderName}} </span>
+        </div>
     
-    <div class="d-flex justify-content-start ms-2">
-      <span class="fw-bold">{{folder.folderName}} </span>
-    </div>
-
-    <!-- documents -->
-
-    <div class="d-flex bd-highlight mb-3">
-      <div class="p-2 bd-highlight">
-        <p class="text-muted">{{ 'folder-detail.documents' | translate }}</p>
-      </div>
-      <div class="ms-auto p-2 bd-highlight">
-        <p class="text-muted">
-          {{ 'folder-detail.date_filter_label' | translate }}
-          <img class="filter-icon" src="/assets/icon_date_filter.svg">
-        </p>
-      </div>
-    </div>
-
-    <div class="d-flex section-title align-self-center align-items-center mb-3">
-      <span>{{ 'folder-detail.add_new_document' | translate }}</span>
+        <!-- documents -->
     
-      <div class="_fab d-flex flex-column mx-3 justify-content-center align-items-center">
-        <i class="material-icons">add</i>
-      </div>
-
-    </div>
-
-    <app-document-item class="m-1" *ngFor="let doc of folder.docs" [doc]=doc ></app-document-item>
-
-    <!-- subfolders -->
-
-    <br/><br/>
-
-    <div class="d-flex bd-highlight mb-3">
-      <div class="p-2 bd-highlight">
-        <p class="text-muted">{{ 'folder-detail.subfolder' | translate }}</p>
-      </div>
-      <div class="ms-auto p-2 bd-highlight">
-        <p class="text-muted">
-          {{ 'folder-detail.date_filter_label' | translate }}
-          <img class="filter-icon" src="/assets/icon_date_filter.svg">
-        </p>
-      </div>
-    </div>
-
-    <div class="d-flex section-title align-self-center align-items-center mb-3">
-      <span>{{ 'folder-detail.add_subfolder' | translate }}</span>
+        <div class="d-flex bd-highlight mb-2">
+          <div class="p-2 bd-highlight">
+            <p class="text-sub-title-2">{{ 'folder-detail.documents' | translate }}</p>
+          </div>
+          <div class="ms-auto p-2 bd-highlight">
+            <p class="text-sub-title-2">
+              {{ 'folder-detail.date_filter_label' | translate }}
+              <img class="filter-icon" src="/assets/icon_date_filter.svg">
+            </p>
+          </div>
+        </div>
     
-      <div class="_fab d-flex flex-column mx-3 justify-content-center align-items-center" (click)="addNewFolder()">
-        <i class="material-icons">add</i>
+        <div class="d-flex align-self-center align-items-center mb-2">
+          <!-- <span class="text-sub-title-1">{{ 'folder-detail.add_new_document' | translate }}</span>
+          <div class="_fab d-flex flex-column mx-3 justify-content-center align-items-center">
+            <i class="material-icons">add</i>
+          </div> -->
+    
+          <button class="btn btn-lg btn-add">{{ 'folder-detail.add_new_document' | translate }}</button>
+    
+        </div>
+    
+        <app-document-item class="m-1" *ngFor="let doc of folder.docs" [doc]=doc ></app-document-item>
+    
+        <!-- subfolders -->
+    
+        <br/><br/>
+    
+        <div class="d-flex bd-highlight mb-2">
+          <div class="p-2 bd-highlight">
+            <p class="text-sub-title-2">{{ 'folder-detail.subfolder' | translate }}</p>
+          </div>
+          <div class="ms-auto p-2 bd-highlight">
+            <p class="text-sub-title-2">
+              {{ 'folder-detail.date_filter_label' | translate }}
+              <img class="filter-icon" src="/assets/icon_date_filter.svg">
+            </p>
+          </div>
+        </div>
+    
+        <div class="d-flex align-self-center align-items-center mb-2">
+          
+          <div class="d-flex flex-column mx-3 justify-content-center align-items-center" (click)="addNewFolder()">
+            <button class="btn btn-lg btn-add">{{ 'folder-detail.add_subfolder' | translate }}</button>
+          </div>
+    
+        </div>
+    
+        <app-sub-folder-card class="align-self-center m-2" (click)="onFolderCardClick(subfolder)" *ngFor="let subfolder of folder.subFolders; let i = index " [folder]=subfolder  ></app-sub-folder-card>
+    
       </div>
-
     </div>
-
-    <app-sub-folder-card class="a_card align-self-center m-2" (click)="onFolderCardClick(subfolder)" *ngFor="let subfolder of folder.subFolders; let i = index " [folder]=subfolder  ></app-sub-folder-card>
-
-  </div>
-</div>
-</div>
+    </div>

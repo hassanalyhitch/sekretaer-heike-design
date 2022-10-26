@@ -1,7 +1,13 @@
 .fav-item{
-  width: 338px;
-  height: 180px;
+  width: 400px;
+  height: 160px;
 }
+
+.doc-icon{
+  width: 40%;
+  height: 40%;
+}
+
 .icon-container{
   width: 50px;
   background-color: #E5007E;
@@ -48,7 +54,7 @@
   background-color: #E5007E;
 }
 .notFav{
-  background-color: #707070 !important;
+  background-color: #000000 !important;
 }
 
 .risk{

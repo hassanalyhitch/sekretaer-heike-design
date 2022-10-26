@@ -2,6 +2,29 @@
   width: 20px;
   height: 20px;
 }
+.btn-add{
+ background-color: #D60B51;
+ color: #ffffff;
+}
+
+.text-sub-title-1{
+  font-size: 15px;
+}
+.text-sub-title-2{
+  font-size: 15px;
+  color: #848484;
+}
+.text-sub-title-3{
+  font-size: 18px;
+  color: #2C262D;
+  font-weight: bold;
+}
+.text-sub-title-4{
+  font-size: 18px;
+  color: #2C262D;
+  font-weight: bold;
+  letter-spacing: 4px;
+}
 .content-wrapper{
   height: 92vh;
   background-color: #F2F2F2;
@@ -146,8 +169,8 @@ app-folder-card, app-document-item{
   cursor: pointer;
 }
 ._fab{
-  height: 3rem;
-  width: 3rem;
+  height: 1.5rem;
+  width: 1.5rem;
   border-radius: 50%;
   border: solid 1px rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.5);

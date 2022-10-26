@@ -1,29 +1,42 @@
-<div >
-<div class="col-md-12 col-12 px-4">
+<div>
+<div class="col-md-12 col-12 px-1">
 
   <div class="d-flex flex-column w-100">
-    <strong class="section-title align-self-center p-2 m-2">{{ 'rename_contract.title' | translate }}</strong>
-    <div class="align-items-center w-100">
-      {{ 'rename_folder.sub_title_name' | translate }}:<br />
-      {{ documentName }}
+
+    <div class="d-flex justify-content-end px-1 mt-1">
+      <img class="icon-close" (click)="closeDialog()" src="/assets/icon_close.svg">
     </div>
-    <form (ngSubmit)= "onSubmit(saveForm.value)" class="d-flex flex-column mt-4" #saveForm="ngForm" > 
-      <div class="material-textfield mb-1">
+
+    <span class="d-flex justify-content-start px-1 mb-1">{{ 'rename_contract.title' | translate }}</span>
+
+    <div class="d-flex justify-content-start px-1 mt-1">
+      <span class="name-title">{{ 'rename_folder.sub_title_name' | translate }}:</span>
+      <span class="mx-1 fw-bold">{{ documentName }}</span>
+    </div>
+
+    <form (ngSubmit)= "onSubmit(saveForm.value)" #saveForm="ngForm" >
+
+      <div class="material-textfield mb-1 d-flex justify-content-center px-1 mt-3">
         <input placeholder=" " type="text" [(ngModel)]="newFolderName" name="name" ngModel required/>
-        <label>{{ 'rename_folder.text_input_label' | translate }}</label>
+        <label class="d-flex justify-content-center mx-2 px-2">{{ 'rename_folder.text_input_label' | translate }}</label>
       </div>
-      <div class="mt-5 w-100">
+
+      <div class="d-flex justify-content-start px-1 mt-3">
+        <span class=""><img class="broker-icon" src="/assets/icon_broker.svg"></span>
+        <span class="mx-2 d-flex justify-content-center mt-2">Show broker name</span>
+      </div>
+
+      <div class="mt-3 w-100">
         <button
           id="save-btn"
-          class="btn btn-login w-100 py-2"
+          class="btn btn-save w-100 py-2"
           [disabled]="!saveForm.valid"
-          type="submit"
-          style="font-size:20px;"
-        >
-        {{ 'rename_folder.btn_save_label' | translate }}
+          type="submit">{{ 'rename_folder.btn_save_label' | translate }}
         </button>
       </div>
-      </form>
+
+    </form>
+
   </div>
 </div>
 

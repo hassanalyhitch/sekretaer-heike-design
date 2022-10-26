@@ -32,7 +32,12 @@
     },
     "new_folder_dialog": {
       "title": "NEW FOLDER",
-      "text_input_label": "New folder name",
+      "text_input_label": "Name",
+      "btn_save_label": "SAVE"
+    },
+    "new_sub_folder_dialog": {
+      "title": "NEW SUB FOLDER",
+      "text_input_label": "Name",
       "btn_save_label": "SAVE"
     }
   },
@@ -40,9 +45,12 @@
     "title_main" : "INSURANCE DETAILS",
     "title_documents": "Insurance documents",
     "title_add_new_document": "Add new Document",
+    "contract_tariff_label": "Tariff",
+    "contract_number_label": "Contract Number",
     "contract_start_date_label": "Start",
     "contract_end_date_label": "End",
     "contract_yearly_payment_label": "Year",
+    "contract_monthly_payment_label" : "Month",
     "insurance_side_menu_item_1": "Mark as Favourite",
     "insurance_side_menu_item_2": "Unmark as Favourite",
     "insurance_side_menu_item_3": "Rename",
@@ -100,14 +108,14 @@
     }
   },
   "rename_contract": {
-    "title" : "Rename Contract",
-    "sub_title_name": "Contract Name",
-    "text_input_label" : "New Contract Name",
+    "title" : "Rename Document",
+    "sub_title_name": "Name",
+    "text_input_label" : "New Document Name",
     "btn_save_label": "SAVE"
   },
   "rename_folder": {
     "title" : "Rename Folder",
-    "sub_title_name": "Folder Name",
+    "sub_title_name": "Name",
     "text_input_label" : "New Folder Name",
     "btn_save_label": "SAVE"
   }

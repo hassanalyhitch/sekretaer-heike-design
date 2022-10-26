@@ -149,9 +149,12 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = 'renamefolder-modal-component';
-    // dialogConfig.height = '80%';
-    // dialogConfig.width = '90%';
+    dialogConfig.height = '350px';
+    dialogConfig.width = '350px';
     dialogConfig.data = passdata;
+
+    dialogConfig.panelClass = 'bg-dialog-color';
+    
     // https://material.angular.io/components/dialog/overview
     const modalDialog = this.matDialog.open(RenameFolderComponent, dialogConfig);
     
@@ -177,9 +180,10 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = 'newfolder-modal-component';
-    // dialogConfig.height = '80%';
-    // dialogConfig.width = '90%';
+    dialogConfig.height = '350px';
+    dialogConfig.width = '350px';
     dialogConfig.data = passdata;
+    dialogConfig.panelClass = 'bg-dialog-color';
     const modalDialog = this.matDialog.open(NewFolderComponent, dialogConfig);
     
     this.matDialog.getDialogById('newfolder-modal-component').afterClosed().subscribe({

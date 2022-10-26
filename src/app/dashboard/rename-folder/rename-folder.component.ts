@@ -35,4 +35,8 @@ export class RenameFolderComponent implements OnInit {
       }
     });
   }
+
+  closeDialog(){
+    this.dialogRef.close();
+  }
 }
