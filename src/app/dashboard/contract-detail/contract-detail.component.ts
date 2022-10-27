@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, AfterViewInit, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -41,6 +41,10 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
   };
   contractSub: Subscription;
   documents:any ;
+  swipedLeft: boolean = false;
+
+  
+  @ViewChildren('documentItem') documentItemList: QueryList<ElementRef>;
 
   docArr: DocumentData[] = [];
 
@@ -65,11 +69,6 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
                 }
                 // console.table(this.docArr);
               }
-              if(this.docArr.length>0){
-                this.documents = document.getElementsByClassName('_document');
-                console.log(this.documents.length);
-                this.swipeLeft();
-              }
           },
           complete:()=>{
             
@@ -80,6 +79,8 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    
+    console.log("on view init");
     this.index = this.route.snapshot.paramMap.get('id');
 
     this.matDialog.afterAllClosed.subscribe({
@@ -161,6 +162,19 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
   }
 
   
+  ngAfterViewInit(){
+    console.log("afterViewInit "+this.docArr.length);
+    this.documentItemList.changes.subscribe({
+        next:(t) => {
+            if(this.docArr.length>0){
+              console.log("after view init "+this.documentItemList.length);
+              this.swipeLeft();
+            }
+          }
+      }
+    );
+  }
+
   swipeLeft(){
       
     // var list = document.getElementsByClassName('task-list')[0];
@@ -168,54 +182,60 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     var mouseOrigin;
     var isSwiping = false;
     var mouseRelease;
-    var currentTask: HTMLElement;
-    var swipeMargin=80;
+    var currentTask;
+    var swipeMargin=40;
     var originalClassList;
     
     // Array.prototype.forEach.call(documents, function addSwipe(element){
     //   element.addEventListener('mousedown', startSwipe); 
     // });
 
-    for (let element of this.documents) {
-      element.addEventListener('mousedown', (evt)=>{
-        
-        mouseOrigin = evt.screenX;
-        currentTask = evt.target;
-        isSwiping = true;
-        originalClassList = evt.target.classList.value;
-        
-      });
-      
-      element.addEventListener('mouseup', endSwipe);
-      element.addEventListener('mousemove', detectMouse); 
-    }
+    this.documentItemList.forEach((element)=> {
+      element.nativeElement.addEventListener('mousedown', evt => startSwipe(evt, element));
+       
+    });
     
+    this.documentItemList.forEach((element)=> {
+      element.nativeElement.addEventListener('mousemove', detectMouse);
+      element.nativeElement.addEventListener('mouseup', endSwipe);
+    });
 
     /* 
       Defined events on document so that a drag or release outside of target 
       could be handled easily 
     */
+   //STARTSWIPE
+    function startSwipe(evt, element){ 
+      mouseOrigin = evt.screenX;
+      currentTask = element.nativeElement;
+      isSwiping = true;
+      originalClassList = evt.target.classList.value;
+    }
     
     
     //ENDSWIPE
     function endSwipe(evt){
-      var completedTask;    
-      console.log(currentTask);
-      if( currentTask.classList.contains("completing") ){
-        currentTask.classList.remove("completing");
-        currentTask.classList.add("completed");
-        // list.appendChild(currentTask);
-      }
-      else if( currentTask.classList.contains("deleting") ){
-        currentTask.remove();     
-        alert("swiped left");
-        console.log("swiped left"); 
-      }      
       
-      mouseOrigin = null;
-      isSwiping = false;     
-      currentTask.style.margin = "0";
-      currentTask = null;
+      console.log(currentTask.classList); 
+        if(currentTask.classList.contains("swipingRight") ){
+          currentTask.classList.remove("swipingRight");
+          currentTask.classList.remove("swipingLeft");
+          this.swipedLeft = false;
+          // list.appendChild(currentTask);
+        }
+        else if(currentTask.classList.contains("swipingLeft") ){
+          // currentTask.remove();     
+          console.log("swipe end"); 
+          currentTask.classList.remove("swipingLeft");
+          this.swipedLeft = true;
+          console.log(currentTask.classList); 
+        }      
+        
+        mouseOrigin = null;
+        isSwiping = false;     
+        currentTask.style.margin = "0";
+        currentTask = null;
+
     }
     
     //DETECTMOUSE
@@ -224,16 +244,15 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
       var swipeDifference = Math.abs(mouseOrigin - currentMousePosition)
       
       if(isSwiping && currentTask && (swipeDifference > swipeMargin) ){ 
-        if( (swipeDifference-swipeMargin) <= swipeMargin ){
+        if( (swipeDifference-swipeMargin) < swipeMargin ){
           //no change, allows user to take no action
-          currentTask.classList.remove("completing");
-          currentTask.classList.remove("deleting");
+          currentTask.classList.remove("swipingLeft");
           currentTask.style.margin = "0";
         }
         else if( mouseOrigin > currentMousePosition ){
           //swipe left        
-          currentTask.classList.remove("completing");
-          currentTask.classList.add("deleting");
+          console.log("swiping left");
+          currentTask.classList.add("swipingLeft");
           currentTask.style.marginLeft = -swipeDifference+"px";
         }
       }
