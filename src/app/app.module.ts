@@ -102,6 +102,7 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatProgressSpinnerModule,
     MatSlideToggleModule,
+    HammerModule,
     NgMultiSelectDropDownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     TranslateModule.forRoot({
