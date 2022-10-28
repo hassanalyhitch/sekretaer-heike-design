@@ -17,6 +17,7 @@ import { DocumentData } from '../../models/document.model';
 import { ContractsService } from '../../services/contracts.service';
 import { RenameContractComponent } from '../rename-contract/rename-contract.component';
 import { Location } from '@angular/common';
+import { RenameModalComponent } from '../rename-modal/rename-modal.component';
 
 @Component({
   selector: 'app-contract-detail',
@@ -191,6 +192,20 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
         }
       },
     });
+  }
+
+  renameFileModal(file) {
+    const dialogConfig = new MatDialogConfig();
+    // let passdata:string = '{"fileName": "'+this.file.name+'","fileUrl": "'+this.file.fileUrl+'"}';
+    let passdata:string = '{"docName": "'+file.name+'","docid": "'+file.docid+'","systemId": "'+file.systemId+'"}';
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = false;
+    dialogConfig.id = 'modal-component';
+    // dialogConfig.height = '80%';
+    // dialogConfig.width = '90%';
+    dialogConfig.data = passdata;
+    // https://material.angular.io/components/dialog/overview
+    const renameFileDialog = this.matDialog.open(RenameModalComponent, dialogConfig);
   }
 
   onSwipe(evt, doc: DocumentData) {
