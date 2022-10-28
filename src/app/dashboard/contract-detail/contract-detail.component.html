@@ -110,7 +110,7 @@
     </div>
   
   
-    <div class="d-flex my-2 documentItem" #documentItem *ngFor="let doc of docArr">
+    <div class="d-flex my-2 documentItem" #documentItem (swipe)="onSwipe($event)" *ngFor="let doc of docArr">
       <app-document-item class="w-100" [doc]=doc ></app-document-item>
     
       <div class=" edit-rename p-2 d-flex align-self-center justify-content-center align-items-center bg-white " [ngClass]="{'d-none':!swipedLeft}" >

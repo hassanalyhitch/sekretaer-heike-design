@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -49,11 +49,20 @@ import { RenameFolderComponent } from './dashboard/rename-folder/rename-folder.c
 import { NewContractComponent } from './dashboard/overview/new-contract/new-contract.component';
 import { NotificationModalComponent } from './dashboard/notifications/notification-modal/notification-modal.component';
 import { SubFolderCardComponent } from './dashboard/sub-folder-card/sub-folder-card.component';
+// particular imports for hammer
 
+import * as Hammer from 'hammerjs';
+import {HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
+}
+@Injectable()
+export class MyHammerConfig extends HammerGestureConfig {
+  overrides = <any> {
+    swipe: { direction: Hammer.DIRECTION_ALL },
+  };
 }
 
 const appRoutes: Routes = [
@@ -138,7 +147,11 @@ const appRoutes: Routes = [
   bootstrap:    [ AppComponent ],
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'},
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true},
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: MyHammerConfig,
+    }
   ]
 })
 export class AppModule { }

@@ -186,138 +186,144 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
       next: (t) => {
         if (this.docArr.length > 0) {
           console.log('after view init ' + this.documentItemList.length);
-          this.swipeLeft();
+          // this.swipeLeft();
         }
       },
     });
   }
 
-  swipeLeft() {
-    // var list = document.getElementsByClassName('task-list')[0];
-
-    var mouseOrigin;
-    var isSwiping = false;
-    var mouseRelease;
-    var currentTask;
-    var swipeMargin = 40;
-    var originalClassList;
-    let mainClass = this;
-    let touchstartX = 0;
-    var touchstartY = 0;
-    var touchendX = 0;
-    var touchendY = 0;
-
-    // Array.prototype.forEach.call(documents, function addSwipe(element){
-    //   element.addEventListener('mousedown', startSwipe);
-    // });
-
-    this.documentItemList.forEach((element) => {
-      element.nativeElement.addEventListener('mousedown', (evt) =>
-        startSwipe(evt, element)
-      );
-      element.nativeElement.addEventListener(
-        'touchstart',
-        function (event) {
-          touchstartX = event.screenX;
-          touchstartY = event.screenY;
-          console.log('touch start');
-        },
-        false
-      );
-    });
-
-    this.documentItemList.forEach((element) => {
-      element.nativeElement.addEventListener('mousemove', detectMouse);
-      element.nativeElement.addEventListener('mouseup', endSwipe);
-
-      element.nativeElement.addEventListener(
-        'touchend',
-        function (event) {
-          touchendX = event.screenX;
-          touchendY = event.screenY;
-          handleGesture();
-        },
-        false
-      );
-    });
-
-    // touch swipe
-
-    function handleGesture() {
-      var swiped = 'swiped: ';
-      if (touchendX < touchstartX) {
-        console.log(swiped + 'left!');
-      }
-      if (touchendX > touchstartX) {
-        console.log(swiped + 'right!');
-      }
-      if (touchendY < touchstartY) {
-        console.log(swiped + 'down!');
-      }
-      if (touchendY > touchstartY) {
-        console.log(swiped + 'up!');
-      }
-      if (touchendY == touchstartY) {
-        console.log('tap!');
-      }
-    }
-
-    //STARTSWIPE
-    function startSwipe(evt, element) {
-      mouseOrigin = evt.screenX;
-      currentTask = element.nativeElement;
-      isSwiping = true;
-      originalClassList = evt.target.classList.value;
-    }
-
-    //ENDSWIPE
-    function endSwipe(evt) {
-      console.log(currentTask);
-      if (currentTask.classList.contains('swipingRight')) {
-        currentTask.classList.remove('swipingRight');
-        currentTask.classList.remove('swipingLeft');
-        mainClass.swipedLeft = false;
-        currentTask.style.marginLeft = 0 + 'px';
-        currentTask.style.marginRight = 0 + 'px';
-        // list.appendChild(currentTask);
-      } else if (currentTask.classList.contains('swipingLeft')) {
-        // currentTask.remove();
-        console.log('swipe end');
-        currentTask.classList.remove('swipingLeft');
-        currentTask.classList.remove('swipingRight');
-        mainClass.swipedLeft = true;
-        currentTask.style.marginLeft = -swipeMargin + 'px';
-        currentTask.style.marginRight = swipeMargin + 'px';
-      }
-
-      mouseOrigin = null;
-      isSwiping = false;
-      currentTask.style.margin = '0';
-      currentTask = null;
-    }
-
-    //DETECTMOUSE
-    function detectMouse(evt) {
-      var currentMousePosition = evt.screenX;
-      var swipeDifference = Math.abs(mouseOrigin - currentMousePosition);
-
-      if (isSwiping && currentTask && swipeDifference > swipeMargin) {
-        if (swipeDifference - swipeMargin < swipeMargin) {
-          //swiping right
-          console.log('swiping right');
-          currentTask.classList.remove('swipingLeft');
-          currentTask.classList.add('swipingRight');
-          currentTask.style.marginLeft = swipeDifference + 'px';
-          currentTask.style.marginRight = -swipeDifference + 'px';
-        } else if (mouseOrigin > currentMousePosition) {
-          //swipe left
-          console.log('swiping left');
-          currentTask.classList.remove('swipingRight');
-          currentTask.classList.add('swipingLeft');
-          currentTask.style.marginLeft = -swipeDifference + 'px';
-          currentTask.style.marginRight = swipeDifference + 'px';
-        }
-      }
-    }
+  onSwipe(evt) {
+    const swipeDirection = Math.abs(evt.deltaX) > 40 ? (evt.deltaX > 0 ? 'right' : 'left'):'';
+    
+    console.log('swiped '+swipeDirection);
   }
+
+  // swipeLeft() {
+  //   // var list = document.getElementsByClassName('task-list')[0];
+
+  //   var mouseOrigin;
+  //   var isSwiping = false;
+  //   var mouseRelease;
+  //   var currentTask;
+  //   var swipeMargin = 40;
+  //   var originalClassList;
+  //   let mainClass = this;
+  //   let touchstartX = 0;
+  //   var touchstartY = 0;
+  //   var touchendX = 0;
+  //   var touchendY = 0;
+
+  //   // Array.prototype.forEach.call(documents, function addSwipe(element){
+  //   //   element.addEventListener('mousedown', startSwipe);
+  //   // });
+
+  //   this.documentItemList.forEach((element) => {
+  //     element.nativeElement.addEventListener('mousedown', (evt) =>
+  //       startSwipe(evt, element)
+  //     );
+  //     element.nativeElement.addEventListener(
+  //       'touchstart',
+  //       function (event) {
+  //         touchstartX = event.screenX;
+  //         touchstartY = event.screenY;
+  //         console.log('touch start');
+  //       },
+  //       false
+  //     );
+  //   });
+
+  //   this.documentItemList.forEach((element) => {
+  //     element.nativeElement.addEventListener('mousemove', detectMouse);
+  //     element.nativeElement.addEventListener('mouseup', endSwipe);
+
+  //     element.nativeElement.addEventListener(
+  //       'touchend',
+  //       function (event) {
+  //         touchendX = event.screenX;
+  //         touchendY = event.screenY;
+  //         handleGesture();
+  //       },
+  //       false
+  //     );
+  //   });
+
+  //   // touch swipe
+
+  //   function handleGesture() {
+  //     var swiped = 'swiped: ';
+  //     if (touchendX < touchstartX) {
+  //       console.log(swiped + 'left!');
+  //     }
+  //     if (touchendX > touchstartX) {
+  //       console.log(swiped + 'right!');
+  //     }
+  //     if (touchendY < touchstartY) {
+  //       console.log(swiped + 'down!');
+  //     }
+  //     if (touchendY > touchstartY) {
+  //       console.log(swiped + 'up!');
+  //     }
+  //     if (touchendY == touchstartY) {
+  //       console.log('tap!');
+  //     }
+  //   }
+
+  //   //STARTSWIPE
+  //   function startSwipe(evt, element) {
+  //     mouseOrigin = evt.screenX;
+  //     currentTask = element.nativeElement;
+  //     isSwiping = true;
+  //     originalClassList = evt.target.classList.value;
+  //   }
+
+  //   //ENDSWIPE
+  //   function endSwipe(evt) {
+  //     console.log(currentTask);
+  //     if (currentTask.classList.contains('swipingRight')) {
+  //       currentTask.classList.remove('swipingRight');
+  //       currentTask.classList.remove('swipingLeft');
+  //       mainClass.swipedLeft = false;
+  //       currentTask.style.marginLeft = 0 + 'px';
+  //       currentTask.style.marginRight = 0 + 'px';
+  //       // list.appendChild(currentTask);
+  //     } else if (currentTask.classList.contains('swipingLeft')) {
+  //       // currentTask.remove();
+  //       console.log('swipe end');
+  //       currentTask.classList.remove('swipingLeft');
+  //       currentTask.classList.remove('swipingRight');
+  //       mainClass.swipedLeft = true;
+  //       currentTask.style.marginLeft = -swipeMargin + 'px';
+  //       currentTask.style.marginRight = swipeMargin + 'px';
+  //     }
+
+  //     mouseOrigin = null;
+  //     isSwiping = false;
+  //     currentTask.style.margin = '0';
+  //     currentTask = null;
+  //   }
+
+  //   //DETECTMOUSE
+  //   function detectMouse(evt) {
+  //     var currentMousePosition = evt.screenX;
+  //     var swipeDifference = Math.abs(mouseOrigin - currentMousePosition);
+
+  //     if (isSwiping && currentTask && swipeDifference > swipeMargin) {
+  //       if (swipeDifference - swipeMargin < swipeMargin) {
+  //         //swiping right
+  //         console.log('swiping right');
+  //         currentTask.classList.remove('swipingLeft');
+  //         currentTask.classList.add('swipingRight');
+  //         currentTask.style.marginLeft = swipeDifference + 'px';
+  //         currentTask.style.marginRight = -swipeDifference + 'px';
+  //       } else if (mouseOrigin > currentMousePosition) {
+  //         //swipe left
+  //         console.log('swiping left');
+  //         currentTask.classList.remove('swipingRight');
+  //         currentTask.classList.add('swipingLeft');
+  //         currentTask.style.marginLeft = -swipeDifference + 'px';
+  //         currentTask.style.marginRight = swipeDifference + 'px';
+  //       }
+  //     }
+  //   }
+  // }
 }
