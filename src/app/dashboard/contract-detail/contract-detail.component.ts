@@ -193,11 +193,14 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
 
     this.documentItemList.forEach((element)=> {
       element.nativeElement.addEventListener('mousedown', evt => startSwipe(evt, element));
+      element.nativeElement.addEventListener('touchstart', evt => startSwipe(evt, element));
        
     });
     
     this.documentItemList.forEach((element)=> {
       element.nativeElement.addEventListener('mousemove', detectMouse);
+      element.nativeElement.addEventListener('touchmove', detectMouse);
+      element.nativeElement.addEventListener('touchend', endSwipe);
       element.nativeElement.addEventListener('mouseup', endSwipe);
     });
 
