@@ -185,6 +185,7 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     var currentTask;
     var swipeMargin=40;
     var originalClassList;
+    let mainClass = this;
     
     // Array.prototype.forEach.call(documents, function addSwipe(element){
     //   element.addEventListener('mousedown', startSwipe); 
@@ -216,19 +217,23 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     //ENDSWIPE
     function endSwipe(evt){
       
-      console.log(currentTask.classList); 
+      console.log(currentTask); 
         if(currentTask.classList.contains("swipingRight") ){
           currentTask.classList.remove("swipingRight");
           currentTask.classList.remove("swipingLeft");
-          this.swipedLeft = false;
+          mainClass.swipedLeft = false;
+          currentTask.style.marginLeft = 0+"px";
+          currentTask.style.marginRight = 0+"px";
           // list.appendChild(currentTask);
         }
         else if(currentTask.classList.contains("swipingLeft") ){
           // currentTask.remove();     
           console.log("swipe end"); 
           currentTask.classList.remove("swipingLeft");
-          this.swipedLeft = true;
-          console.log(currentTask.classList); 
+          currentTask.classList.remove("swipingRight");
+          mainClass.swipedLeft = true;
+          currentTask.style.marginLeft = -swipeMargin+"px";
+          currentTask.style.marginRight = swipeMargin+"px";
         }      
         
         mouseOrigin = null;
@@ -245,15 +250,20 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
       
       if(isSwiping && currentTask && (swipeDifference > swipeMargin) ){ 
         if( (swipeDifference-swipeMargin) < swipeMargin ){
-          //no change, allows user to take no action
+          //swiping right
+          console.log("swiping right");
           currentTask.classList.remove("swipingLeft");
-          currentTask.style.margin = "0";
+          currentTask.classList.add("swipingRight");
+          currentTask.style.marginLeft = swipeDifference+"px";
+          currentTask.style.marginRight = -swipeDifference+"px";
         }
         else if( mouseOrigin > currentMousePosition ){
           //swipe left        
           console.log("swiping left");
+          currentTask.classList.remove("swipingRight");
           currentTask.classList.add("swipingLeft");
           currentTask.style.marginLeft = -swipeDifference+"px";
+          currentTask.style.marginRight = swipeDifference+"px";
         }
       }
     }  

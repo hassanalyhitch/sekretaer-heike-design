@@ -113,7 +113,7 @@
     <div class="d-flex my-2 documentItem" #documentItem *ngFor="let doc of docArr">
       <app-document-item class="w-100" [doc]=doc ></app-document-item>
     
-      <div class=" edit-rename p-2 d-flex align-self-center justify-content-center align-items-center bg-white " [ngClass]="{'d-none':swipedLeft==false}" >
+      <div class=" edit-rename p-2 d-flex align-self-center justify-content-center align-items-center bg-white " [ngClass]="{'d-none':!swipedLeft}" >
           <i class="material-icons">mode_edit</i>
       </div>
     </div>
