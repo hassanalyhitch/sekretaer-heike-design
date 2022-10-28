@@ -110,10 +110,10 @@
     </div>
   
   
-    <div class="d-flex my-2 documentItem" (swipe)="onSwipe($event)" *ngFor="let doc of docArr">
-      <app-document-item class="w-100" [doc]=doc ></app-document-item>
+    <div class="d-flex my-2 documentItem" *ngFor="let doc of docArr; let i = index"  (swipe)="onSwipe($event, doc)">
+      <app-document-item class="w-100"  [ngClass]="{'swipedLeft':doc.swipedLeft}" [doc]=doc ></app-document-item>
     
-      <div class=" edit-rename p-2 d-flex align-self-center justify-content-center align-items-center bg-white " [ngClass]="{'d-none':!swipedLeft}" >
+      <div class=" edit-rename p-2 d-flex align-self-center justify-content-center align-items-center bg-white " [ngClass]="{'d-none':!doc.swipedLeft}" >
           <i class="material-icons">mode_edit</i>
       </div>
     </div>

@@ -98,6 +98,7 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
               if (resp.hasOwnProperty('docs')) {
                 this.docArr = [];
                 for (let i = 0; i < resp.docs.length; i++) {
+                  resp.docs.swipedLeft = false;
                   this.docArr.push(resp.docs[i]);
                 }
                 // console.log(resp);
@@ -192,10 +193,21 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     });
   }
 
-  onSwipe(evt) {
+  onSwipe(evt, doc: DocumentData) {
     const swipeDirection = Math.abs(evt.deltaX) > 40 ? (evt.deltaX > 0 ? 'right' : 'left'):'';
     
     console.log('swiped '+swipeDirection);
+    switch(swipeDirection){
+      case 'left':{
+        doc.swipedLeft = true;
+        break;
+      }
+      case 'right':{
+
+        doc.swipedLeft = false;
+        break;
+      }
+    }
   }
 
   // swipeLeft() {
