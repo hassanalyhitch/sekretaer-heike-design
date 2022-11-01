@@ -2,9 +2,9 @@ import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { NgForm } from '@angular/forms';
 import { BranchData } from '../../../models/branch.model';
-import { BranchService } from 'src/app/services/branch.service';
-import { CompanyData } from 'src/app/models/company.model';
-import { CompanyService } from 'src/app/services/company.service';
+import { BranchService } from '../../../services/branch.service';
+import { CompanyData } from '../../../models/company.model';
+import { CompanyService } from '../../../services/company.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({

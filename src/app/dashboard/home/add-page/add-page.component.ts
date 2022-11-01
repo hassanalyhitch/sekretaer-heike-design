@@ -11,8 +11,8 @@ import { UploadFileData } from '../../../models/upload-file.model';
 import { FormGroup,FormBuilder,AbstractControl,Validators, FormControl, NgForm } from '@angular/forms';
 import { formatDate } from '@angular/common';
 import { FileSizePipe } from '../../../pipes/filesize.pipe';
-import { FileNameData } from 'src/app/models/file-name.model';
 import { ThisReceiver } from '@angular/compiler';
+import { FileNameData } from '../../../models/file-name.model';
 
 
 @Component({
