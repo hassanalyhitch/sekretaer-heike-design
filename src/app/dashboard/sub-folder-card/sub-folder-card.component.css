@@ -1,100 +1,100 @@
 .folder-bg{
-    border-top-right-radius: 15px;
-    width: 338px;
-    height: 100px;
-  }
-  .folder-bg-transparent{
-    margin-bottom: 10px;
-    background-color: transparent !important;
-    /* position: relative; */
-  }
-  .content{
-    margin-top: -30px;
-    border-top: solid 4px #D60B51;
-    border-top-right-radius: 15px;
-  }
-  .folder-top{
-    width: 110px;
-    height: 50px;
-    background-image: linear-gradient(141deg, #E5007E, #D60B51);
-    border-radius: 0px 25px 10px 0px;
-  }
-  .folder-bg-dark-pink{
-    top: 40px;
-    border-top-right-radius: 15px;
-    background-color: #E5007E;
-    background-image: linear-gradient(141deg, #E5007E, #D60B51);
-    width: 338px;
-    height: 170px;
-  }
-  .icon-container{
-    width: 50px;
-    background-color: #E5007E;
-    background-image: linear-gradient(141deg, #E5007E, #D60B51);
-    border-radius: 0px 0px 15px 0px;
-    height: 100%;
-    color: white;
-  
-  }
-  ._content{
-    position: relative;
-    margin: 0px !important;
-  }
-  .small-picture{
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 58px;
-    height: 58px;
-    border-radius: 0px 0px 0px 12px;
-    overflow: hidden;
-    background-color: #f2f2f2;
-  }
-  .small-picture img {
-    object-fit: cover; /* Do not scale the image */
-    object-position: center; /* Center the image within the element */
-    width: 100%;
-    height: 100%;
-  }
-  .fav-btn{
-    color: white;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-  
-  }
-  
-  .isFav{
-    background-color: #E5007E;
-  }
-  .notFav{
-    background-color: #000000 !important;
-  }
-  
-  .fav-btn i{
-    font-size: 18px;
-  }
-  
-  .folder-name{
-    font-size: 18px;
-    font-weight: 500;
-    min-height: 27px;
-  }
-  .folder-desc{
-    font-size: 15px;
-    font-weight: 500;
-  
-  }
-  .price{
-    font-size: 18px;
-    font-weight: 500;
-  }
-  .date{
-    font-size: 15px;
-    font-weight: 300;
-  }
-  .company{
-    font-size: 15px;
-    font-weight: 300;
-  }
+  border-top-right-radius: 15px;
+  width: 360px;
+  height: 100px;
+}
+.folder-bg-transparent{
+  margin-bottom: 10px;
+  background-color: transparent !important;
+  /* position: relative; */
+}
+.content{
+  margin-top: -30px;
+  border-top: solid 4px #D60B51;
+  border-top-right-radius: 15px;
+}
+.folder-top{
+  width: 110px;
+  height: 50px;
+  background-image: linear-gradient(141deg, #E5007E, #D60B51);
+  border-radius: 0px 25px 10px 0px;
+}
+.folder-bg-dark-pink{
+  top: 40px;
+  border-top-right-radius: 15px;
+  background-color: #E5007E;
+  background-image: linear-gradient(141deg, #E5007E, #D60B51);
+  width: 338px;
+  height: 170px;
+}
+.icon-container{
+  width: 50px;
+  background-color: #E5007E;
+  background-image: linear-gradient(141deg, #E5007E, #D60B51);
+  border-radius: 0px 0px 15px 0px;
+  height: 100%;
+  color: white;
+
+}
+._content{
+  position: relative;
+  margin: 0px !important;
+}
+.small-picture{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 58px;
+  height: 58px;
+  border-radius: 0px 0px 0px 12px;
+  overflow: hidden;
+  background-color: #f2f2f2;
+}
+.small-picture img {
+  object-fit: cover; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  width: 100%;
+  height: 100%;
+}
+.fav-btn{
+  color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+
+}
+
+.isFav{
+  background-color: #E5007E;
+}
+.notFav{
+  background-color: #000000 !important;
+}
+
+.fav-btn i{
+  font-size: 18px;
+}
+
+.folder-name{
+  font-size: 18px;
+  font-weight: 500;
+  min-height: 27px;
+}
+.folder-desc{
+  font-size: 15px;
+  font-weight: 500;
+
+}
+.price{
+  font-size: 18px;
+  font-weight: 500;
+}
+.date{
+  font-size: 15px;
+  font-weight: 300;
+}
+.company{
+  font-size: 15px;
+  font-weight: 300;
+}

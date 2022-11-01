@@ -15,18 +15,18 @@ export class HomeComponent implements OnInit {
   favArr: ContractData[] = [];
   allContractsArr: ContractData[] = [];
   notifCount: number = 0;
-  chatCheck: number = 0;
-  insuranceCheck: number = 0;
-
-  isChatFabEnabled: boolean = false;
+  isNotificationCountText: boolean = false;
+  
+  //chatCheck: number = 0;
+  //insuranceCheck: number = 0;
+  //isChatFabEnabled: boolean = false;
 
   @ViewChild("notif", { static: false }) notif: ElementRef<HTMLElement>;
 
   constructor(
     private router: Router,
     private contractService: ContractsService,
-    private notificationService: NotificationsService,
-    private loginService: LoginService
+    private notificationService: NotificationsService
   ) {}
 
   ngOnInit() {
@@ -50,20 +50,32 @@ export class HomeComponent implements OnInit {
     this.notificationService.getNotifications().subscribe({
       next: () => {
         this.notifCount = this.notificationService.notifCount;
-        document
-          .getElementById("notif")
-          .setAttribute("notification-count", this.notifCount + "");
+        if(this.notifCount < 8){
+
+          this.isNotificationCountText = false;
+
+          // document
+          // .getElementById("notif")
+          // .setAttribute("notification-count", this.notifCount + "");
+
+        } else if(this.notifCount > 8){
+
+          this.isNotificationCountText = true;
+
+        }
+        
       },
     });
 
-    this.chatCheck = this.loginService.chatCheck;
-    this.insuranceCheck = this.loginService.insuranceCheck;
+    // this.chatCheck = this.loginService.chatCheck;
+    // this.insuranceCheck = this.loginService.insuranceCheck;
 
-    if (this.chatCheck > 0) {
-      this.isChatFabEnabled = true;
-    } else if (this.chatCheck === 0) {
-      this.isChatFabEnabled = false;
-    }
+    // if (this.chatCheck > 0) {
+    //   this.isChatFabEnabled = true;
+    // } else if (this.chatCheck === 0) {
+    //   this.isChatFabEnabled = false;
+    // }
+    
   }
 
   onFavContractClick(favItem) {

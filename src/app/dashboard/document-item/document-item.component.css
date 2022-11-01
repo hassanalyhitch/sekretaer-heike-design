@@ -1,5 +1,6 @@
 .document-item{
-  height: 85px;
+  height: 63px;
+  width: 100%;
 }
 .doc-icon{
   width: 40%;
@@ -15,7 +16,7 @@
   width: 15%;
   background-color: #e0046e;
   background-image: linear-gradient(141deg,#E5007E,#D60B51);
-  border-radius: 0 0 25px;
+  border-radius: 0 0 15px;
   height: 100%;
   color: #fff;
   align-items: center;

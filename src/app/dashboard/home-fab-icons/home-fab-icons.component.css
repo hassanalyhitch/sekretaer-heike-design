@@ -1,0 +1,49 @@
+.section-quicklinks{
+    padding-right: 0.85rem;
+}
+
+.fab-label{
+    font-size: 11px !important;
+    position: absolute;
+    bottom: -24px;
+}
+
+.quick-fab{
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    border: solid 2px white;
+    background-color: #F2F2F2;
+    box-shadow: 0px 3px 3px #0000001A;
+    backdrop-filter: blur(6.6px);
+    -webkit-backdrop-filter: blur(6.6px);
+    position: relative;
+    cursor: pointer;
+}
+
+.chat-quicky::after{
+    content: attr(chat-unread);
+    background-color: #D60B51;
+    border-radius: 50%;
+    width: fit-content;
+    min-width: 22px;
+    height: fit-content;
+    min-height: 22px;
+    box-shadow: 0px 3px 3px #0000001A;
+    backdrop-filter: blur(6.6px);
+    -webkit-backdrop-filter: blur(6.6px);
+    color: white;
+    margin: 0 auto;
+    padding: 2px;
+    font-size: 12px;
+    top: 0px;
+    right: -6px;
+    position: absolute;
+}
+
+.disabled{
+    box-shadow: none;
+    border: none;
+    background-color: #BFBFBF;
+    color: #707070;
+}

@@ -2,9 +2,10 @@ import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { NgForm } from '@angular/forms';
 import { BranchData } from '../../../models/branch.model';
-import { CompanyData } from '../../../models/company.model';
+import { BranchService } from 'src/app/services/branch.service';
+import { CompanyData } from 'src/app/models/company.model';
+import { CompanyService } from 'src/app/services/company.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { BranchService } from '../../../services/branch.service';
 
 @Component({
   selector: 'app-new-contract',
@@ -41,7 +42,7 @@ selectedCompanies:any;
 @ViewChild("selectFile",{static:true}) selectFile:ElementRef;
 branchSettings = {}; 
 companySettings ={};
-  constructor(private branchService: BranchService) { 
+  constructor(private branchService:BranchService) { 
 
   }
  
@@ -51,7 +52,7 @@ this.branchSettings = {
   itemsShowLimit: 3,
   idField: 'Branch2MasterId',
   textField: 'displayNameSEKRETAER',
-  singleSelection: true,
+  singleSelection: false,
   enableCheckAll: true,
   selectAllText: 'Select All',
   unSelectAllText: 'Unselect All',

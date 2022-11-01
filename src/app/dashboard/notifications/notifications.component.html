@@ -1,36 +1,13 @@
 <div class="content-wrapper w-100 ">
-  <div class="_content d-flex flex-column align-items-center w-100 h-100 bg-">
+  <div class="_content d-flex d-flex flex-column align-items-center w-100 h-100 bg-">
     
     <strong class="section-title align-self-center mt-4 mb-3">{{ 'notifications.title' | translate }}</strong>
 
     <div class="w-100 d-flex flex-row justify-content-end py-2 bg-">
-      <span class=" mark-as-read ">{{ 'notifications.mark_all_as_read' | translate }}</span>
+      <span class=" mark-as-read px-2">{{ 'notifications.mark_all_as_read' | translate }}</span>
     </div>
-
-    <div class="search_input_container d-flex w-100 py-2">
-      <div class="_input_group w-100 d-flex" >
-        <i class="material-icons p-2">search</i>
-        <input type="text " class="search_input w-100" [(ngModel)]="searchValue" (ngModelChange)="filterSearch(searchValue)" placeholder="Search" />
-      </div>
-    </div>
-
-    <div class=" w-100 d-flex justify-content-between mb-1 bg-" style="padding-left:30px;padding-right:30px;">
-      <div class="d-flex justify-content-center py-2" style="cursor:pointer;" (click)="sortByType()" >
-        Type
-        <i class="material-icons align-items-center" style="transform: rotate(90deg);" >code</i>
-      </div>
-      <div class="d-flex justify-content-center p-2" style="cursor:pointer;" (click)="sortByTitle()">
-        Title
-        <i class="material-icons align-items-center" style="transform: rotate(90deg);" >code</i>
-      </div>
-      <div class="d-flex justify-content-center align-self-end py-2" style="cursor:pointer;"  (click)="sortByDate()">
-        Date
-        <i class="material-icons align-items-center" style="transform: rotate(90deg);" >code</i>
-      </div>
-    </div>
-
     <div class="w-100 d-flex flex-column">
-      <app-notification-item *ngFor="let notif of allNotifsArr; let i = index;" [notification]="notif" ></app-notification-item>
+    <app-notification-item *ngFor="let notif of allNotifsArr; let i = index;" [notification]="notif" ></app-notification-item>
     </div>
   </div>
 </div>

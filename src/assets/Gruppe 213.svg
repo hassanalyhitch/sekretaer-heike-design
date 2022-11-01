@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="281" height="166" viewBox="0 0 281 166">
+  <g id="Gruppe_213" data-name="Gruppe 213" transform="translate(-61 -525)">
+    <g id="Rechteck_99" data-name="Rechteck 99" transform="translate(61 525)" fill="#fff" stroke="#fff" stroke-width="1" opacity="0.85">
+      <rect width="281" height="166" rx="7" stroke="none"/>
+      <rect x="0.5" y="0.5" width="280" height="165" rx="6.5" fill="none"/>
+    </g>
+    <g id="Gruppe_163" data-name="Gruppe 163" transform="translate(156.448 557.205)" opacity="0.084">
+      <path id="Ausschluss_3" data-name="Ausschluss 3" d="M91.1,68.389H0V0H91.1V68.389Z" fill="none" stroke="#2b262d" stroke-width="5"/>
+      <g id="Gruppe_154" data-name="Gruppe 154" transform="translate(24.124 13.717)">
+        <circle id="Ellipse_19" data-name="Ellipse 19" cx="13.95" cy="13.95" r="13.95" transform="translate(0 15.943)" fill="#2c262d"/>
+        <g id="Polygon_7" data-name="Polygon 7" transform="translate(7.971)" fill="none">
+          <path d="M17.936,0,35.871,31.886H0Z" stroke="none"/>
+          <path d="M 17.93570327758789 10.19865226745605 L 8.549238204956055 26.88570022583008 L 27.32216453552246 26.88570022583008 L 17.93570327758789 10.19865226745605 M 17.93570518493652 0 L 35.87140655517578 31.88570022583008 L -3.814697265625e-06 31.88570022583008 L 17.93570518493652 0 Z" stroke="none" fill="#2b262d"/>
+        </g>
+      </g>
+    </g>
+    <text id="Dokument_Bild_Hochaden" data-name="Dokument/Bild Hochaden" transform="translate(121 654)" fill="#848484" font-size="15" font-family="Oscine-Regular, Oscine"><tspan x="0" y="0">Dokument/Bild Hochaden</tspan></text>
+  </g>
+</svg>

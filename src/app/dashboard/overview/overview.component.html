@@ -1,15 +1,18 @@
 <div class="content-wrapper w-100 ">
-  <div class="_content d-flex d-flex flex-column w-100 h-100 bg-">
-    
-    <div class="position-relative mb-5">
-      <div class="position-absolute top-0 start-0"></div>
-      <div class="position-absolute top-0 start-50 translate-middle-x">
-        <strong class="align-self-center p-2 title" (click)="collapse()">
+  <div class="_content d-flex flex-column w-100 h-100 bg-">
+
+    <!-- new top line -->
+    <div class="d-flex justify-content-between mb-2 px-4 pt-3">
+      <div class="d-flex"></div>
+      <div class="p-2">
+        <span class="section-title align-self-center" (click)="collapse()">
           {{ "overview.title_my_sekretar" | translate }}
-        </strong>
+        </span>
       </div>
-      <div class="position-absolute top-0 end-0">
-        <img class="filter-icon" (click)="onAddContract()" src="/assets/icon_filter_dark.svg">
+      <div class="p-2">
+        <div class="ml-auto btn-group dropstart align-self-center">
+          <img class="filter-icon" (click)="onAddContract()" src="/assets/icon_filter_dark.svg">
+        </div>
       </div>
     </div>
 
@@ -28,16 +31,23 @@
       
       <div class="section-folder d-flex flex-column p-4 w-100 bg-white">
       
-        <div class="position-relative w-100 d-flex flex-wrap py-3 justify-content-center mb-5">
-          <div class="position-absolute top-0 start-0"></div>
-          <div class="position-absolute top-0 start-50 translate-middle-x">
-            <strong class="align-self-center p-2 title" (click)="collapseFolders()">
+        <!-- new line -->
+        <div class="d-flex justify-content-between mb-2 px-2 pt-2">
+
+          <div class="d-flex"></div>
+    
+          <div class="p-2">
+            <span class="section-title align-self-center" (click)="collapseFolders()">
               {{ "overview.title_my_folders" | translate }}
-            </strong>
+            </span>
           </div>
-          <div class="position-absolute top-0 end-0">
-            <img class="filter-icon" (click)="addNewFolder()" src="/assets/icon_filter_dark.svg">
+    
+          <div class="p-2">
+            <div class="ml-auto btn-group dropstart align-self-center">
+              <img class="filter-icon" (click)="addNewFolder()" src="/assets/icon_filter_dark.svg">
+            </div>
           </div>
+    
         </div>
 
         <div class="w-100 d-flex flex-wrap py-3 justify-content-center">

@@ -2,6 +2,15 @@
   width: 20px;
   height: 20px;
 }
+
+.section-folder-detail{
+  min-height: 280px;
+  height: inherit;
+  position: relative;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
 .btn-add{
  background-color: #D60B51;
  color: #ffffff;

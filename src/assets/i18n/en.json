@@ -7,10 +7,11 @@
     "search_fab": "Search",
     "chat_fab": "Chat",
     "insurance_check_fab": "Insurance Check",
-    "service_card_add": "ADD (a document, a picture, etc)",
-    "service_card_notifications": "Notifications",
-    "service_card_notification_of_claim": "Notification of Claim",
-    "service_card_call_your_broker": "Call your Broker"
+    "service_card_add_title": "ADD",
+    "service_card_add_sub_title": "(a document, a picture, etc)",
+    "service_card_notifications": "INBOX",
+    "service_card_notification_of_claim": "NOTIFICATION OF CLAIM",
+    "service_card_call_your_broker": "CALL YOUR BROKER"
   },
   "overview": {
     "title_my_sekretar": "MY SEKRETÄR",
@@ -55,8 +56,7 @@
     "insurance_side_menu_item_2": "Unmark as Favourite",
     "insurance_side_menu_item_3": "Rename",
     "document_side_menu_item_1" : "Open Document",
-    "document_side_menu_item_2" : "Rename Document",
-    "test_key":"test value"
+    "document_side_menu_item_2" : "Rename Document"
   },
   "login": {
     "title_login": "Let's Login",
@@ -119,5 +119,8 @@
     "sub_title_name": "Name",
     "text_input_label" : "New Folder Name",
     "btn_save_label": "SAVE"
+  },
+  "add_document": {
+    "title" : "Add a document e.g picture"
   }
 }

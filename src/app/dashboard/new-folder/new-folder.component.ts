@@ -11,6 +11,7 @@ export class NewFolderComponent implements OnInit {
 
  
   newFolderName: string= "";
+  
 
   constructor(@Inject(MAT_DIALOG_DATA)public data:any, private folderService: FoldersService, private dialogRef: MatDialogRef<NewFolderComponent>) { 
     this.data = JSON.parse(this.data);
@@ -19,7 +20,7 @@ export class NewFolderComponent implements OnInit {
 
   ngOnInit() {
   }
-  
+
   onSubmit(formData: any) {
     console.log(this.newFolderName, this.data.parentFolderId);
     this.folderService.addNewFolder(this.newFolderName, this.data.parentFolderId).subscribe({
@@ -35,6 +36,9 @@ export class NewFolderComponent implements OnInit {
       }
     });
     
+  }
+  closeWindow(){
+   this.dialogRef.close();
   }
 
 }

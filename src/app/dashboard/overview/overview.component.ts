@@ -223,8 +223,10 @@ export class OverviewComponent implements OnInit {
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = 'newfolder-modal-component';
-    // dialogConfig.height = '80%';
-    // dialogConfig.width = '90%';
+    dialogConfig.height ='400px';
+    dialogConfig.width = '300px';
+  
+    dialogConfig.panelClass ='bg-dialog-folder';
     // dialogConfig.data = passdata;
     // https://material.angular.io/components/dialog/overview
     const modalDialog = this.matDialog.open(NewFolderComponent, dialogConfig);

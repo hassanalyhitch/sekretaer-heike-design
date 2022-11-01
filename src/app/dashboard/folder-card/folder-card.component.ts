@@ -21,11 +21,12 @@ export class FolderCardComponent implements OnInit {
     isSelected:false
   };
 
-  constructor() { 
-    
-  }
+  docNumber: number = 0;
+
+  constructor() {}
 
   ngOnInit() {
+    this.docNumber = this.folder.docs.length;
   }
 
 }

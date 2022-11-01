@@ -1,20 +1,18 @@
 
-  <div class="col-md-8 col-lg-4 col-12 w-sm-100 m-auto h-100 d-flex flex-column align-items-center">
+  <div class="col-md-8 col-lg-4 col-12 m-auto h-100 d-flex flex-column align-items-center shadow-sm bg-light">
     
-  <div class="w-100 d-flex justify-content-end ">
-    <div class="quick-fab d-flex ml-auto justify-content-center align-items-center " (click)="onCloseModal()" >
+  <div class="w-100 p-2 m-2 d-flex justify-content-end ">
+    <div class="quick-fab d-flex ml-auto justify-content-center align-items-center mx-2" (click)="onCloseModal()" >
       <i class="material-icons p-2 ">close</i>
     </div>
   </div>
   
   <div class="w-100 p-2 m-2 title bg-white">
-    <!-- {{ 'notifications.notification_modal.title' | translate }} -->
-    {{notification.infoHeadline}}
+    {{ 'notifications.notification_modal.title' | translate }}
   </div>
 
   <div class="w-100 p-2 m-2 bg-white">
-    <!-- {{ 'notifications.notification_modal.content' | translate }} -->
-    {{notification.infoText}}
+    {{ 'notifications.notification_modal.content' | translate }}
   </div>
 
   <div class="mt-auto m-2 p-2 bg-danger">

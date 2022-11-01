@@ -1,0 +1,38 @@
+<div class="d-flex flex-row w-100 px-2">
+
+    <div class="quick-fab mx-3 d-flex flex-column justify-content-center align-items-center">
+        <i class="material-icons">search</i>
+        <span class="text-center fab-label">{{"home.search_fab" | translate}}</span>
+    </div>
+
+    <div *ngIf="isChatFabEnabled"
+        class="quick-fab d-flex mx-3 text-center justify-content-center chat-quicky"
+        chat-unread="1"
+        (click)="onChatClick()">
+        <img class="align-self-center" src="/assets/icon_chart_new.svg">
+        <span class="text-center fab-label">{{"home.chat_fab" | translate}}</span>
+    </div>
+
+    <div *ngIf="!isChatFabEnabled"
+        class="quick-fab d-flex mx-3 text-center justify-content-center"
+        (click)="onOpenBrokerPage()">
+        <img class="align-self-center" src="/assets/icon_chart_new.svg">
+        <span class="text-center fab-label">{{"home.chat_fab" | translate}}</span>
+    </div>
+
+    <div class="quick-fab d-flex mx-3 justify-content-center align-items-center"
+        [ngClass]="{ disabled: insuranceCheck == 0 }">
+        <i class="material-icons">fact_check</i>
+        <span class="text-center fab-label" style="bottom: -40px">
+          {{ "home.insurance_check_fab" | translate }}</span>
+    </div>
+
+    <div class="quick-fab mx-3 disabled d-flex justify-content-center align-items-center">
+        <i class="material-icons">compare</i>
+    </div>
+
+    <div class="quick-fab mx-3 disabled d-flex justify-content-center align-items-center">
+        <i class="material-icons d-none">search</i>
+    </div>
+
+</div>

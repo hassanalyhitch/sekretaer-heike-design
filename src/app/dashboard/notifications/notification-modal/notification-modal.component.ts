@@ -1,6 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { NotificationData } from '../../../models/notification.model';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-notification-modal',
@@ -9,15 +7,9 @@ import { NotificationData } from '../../../models/notification.model';
 })
 export class NotificationModalComponent implements OnInit {
 
-  notification: NotificationData;
-
-  constructor(@Inject(MAT_DIALOG_DATA)public data:any,private dialogRef: MatDialogRef<NotificationModalComponent>) { 
-
-  }
+  constructor() { }
 
   ngOnInit() {
-    this.notification = JSON.parse(this.data);
-
   }
   
   onCloseModal(){

@@ -1,15 +1,57 @@
+@import
+url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+* {
+  font-size: 14px;
+}
 .section-title{
   text-shadow: none;
-  font-size: 22px;
-  min-width: 300px;
+  font-size: 18px;
+  font-weight: bold;
 }
-
 
 button,
 input,
 label,
 * {
   font-family: 'Poppins';
+}
+.close-button{
+  position:relative;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+.add-folder{
+  background-color: #ffff;
+  border-radius:5px;
+  padding:7px 0px;
+}
+
+.folder-name{
+  border:none;
+  outline:none;
+  border-radius:5px;
+  padding: 9px 2px;
+  margin:3px 0px 10px 0px;
+}
+.categories{
+  border:none;
+  outline:none;
+  border-radius: 5px;
+  padding:7px;
+  margin:3px 0px 3px 0px;
+}
+.btn-categories{
+  background-color:#ffff;
+  border:none;
+  outline:none;
+  border-radius:5px;
+  margin:2px 0px;
+  padding:9px;
+  float: left;
+  cursor: pointer;
+}
+.switch{
+  float: right;
 }
 
 .heading {

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35">
+  <g id="Gruppe_218" data-name="Gruppe 218" transform="translate(-283 -157)">
+    <rect id="Rechteck_96" data-name="Rechteck 96" width="35" height="35" rx="10" transform="translate(283 157)" fill="#f2f2f2"/>
+    <g id="Gruppe_198" data-name="Gruppe 198" transform="translate(290 167)">
+      <g id="Gruppe_197" data-name="Gruppe 197" transform="translate(3.06 11.491) rotate(-40)">
+        <path id="Pfad_99" data-name="Pfad 99" d="M13.95,5.8H3.408L.586,3.975a1.281,1.281,0,0,1,0-2.153L3.408,0H13.95Z" transform="translate(0 0.056)" fill="none" stroke="#2c262d" stroke-width="1.5"/>
+        <path id="Pfad_101" data-name="Pfad 101" d="M0,0H2.88a.842.842,0,0,1,.842.842V4.956A.842.842,0,0,1,2.88,5.8H0Z" transform="translate(14.154 0)" fill="#fff" stroke="#2c262d" stroke-width="1.5"/>
+      </g>
+      <line id="Linie_27" data-name="Linie 27" x1="5.895" transform="translate(0 14.231)" fill="none" stroke="#2c262d" stroke-linecap="round" stroke-width="1.5"/>
+    </g>
+  </g>
+</svg>

@@ -1,127 +1,118 @@
 <div class="content-wrapper w-100">
-  <div
-    class="_content d-flex d-flex flex-column align-items-center w-100 h-100"
-  >
-    <div class="section-fav w-100 d-flex flex-column pt-3">
-      <strong class="section-title align-self-center p-2">
-        {{ "home.title_home" | translate }}</strong
-      >
+  <div class="_content d-flex flex-column w-100 h-100">
+
+    <div class="d-flex justify-content-between mb-2 px-4 pt-3 w-100">
+      <div class="d-flex"></div>
+      <div class="p-2">
+        <span class="section-title align-self-center">{{ "home.title_home" | translate }}</span>
+      </div>
+      <div class="p-2">
+        <div class="ml-auto btn-group dropstart align-self-center">
+          <img class="filter-icon" src="/assets/icon_filter_dark.svg">
+        </div>
+      </div>
+    </div>
+
+    <div class="section-home">
+      <!-- favourite items -->
       <div class="fav-wrapper d-flex flex-nowrap pb-4">
-        <div
-          class="d-flex justify-content-center m-4 w-100"
-          *ngIf="favArrHasNoContent()"
-        >
+        <div class="d-flex justify-content-center m-4 w-100" *ngIf="favArrHasNoContent()">
           {{ "home.message_no_favourite_contracts" | translate }}
         </div>
-        <app-fav-item
-          *ngFor="let favItem of favArr; let index = index"
-          (click)="onFavContractClick(index)"
-          [contractItem]="favItem"
-        ></app-fav-item>
-      </div>
 
+        <app-fav-item 
+          *ngFor="let favItem of favArr; let index = index" 
+          (click)="onFavContractClick(index)" 
+          [contractItem]="favItem">
+        </app-fav-item>
+
+      </div>
+      
+      <!-- see more link-->
       <div class="d-flex px-3 see-more">
-        <a href="">{{ "home.title_see_more" | translate }}> </a>
-      </div>
-    </div>
-
-    <div
-      class="section-quicklinks mb-4 d-flex p-3 flex-nowrap justify-content-between w-100"
-    >
-      <div
-        class="quick-fab d-flex flex-column justify-content-center align-items-center"
-      >
-        <i class="material-icons">search</i>
-        <span class="text-center fab-label">{{
-          "home.search_fab" | translate
-        }}</span>
+        <a href="">{{ "home.title_see_more" | translate }} > </a>
       </div>
 
-      <div
-        *ngIf="isChatFabEnabled"
-        class="quick-fab d-flex text-center justify-content-center chat-quicky"
-        chat-unread="1"
-        (click)="onChatClick()"
-      >
-        <span class="material-icons align-self-center">forum</span>
-        <span class="text-center fab-label">{{
-          "home.chat_fab" | translate
-        }}</span>
+      <!-- Home icons fabs-->
+      <div class="home-icon-fabs d-flex px-3 mt-2">
+        <app-home-fab-icons> </app-home-fab-icons>
       </div>
 
-      <div
-        *ngIf="!isChatFabEnabled"
-        class="quick-fab d-flex text-center justify-content-center"
-        (click)="onOpenBrokerPage()"
-      >
-        <span class="material-icons align-self-center">forum</span>
-        <span class="text-center fab-label">{{
-          "home.chat_fab" | translate
-        }}</span>
-      </div>
+      <div class="d-flex flex-column w-100 h-100">
+        <div class="section-service d-flex flex-column mt-1 p-3 w-100">
 
-      <div
-        class="quick-fab d-flex justify-content-center align-items-center"
-        [ngClass]="{ disabled: insuranceCheck == 0 }"
-      >
-        <i class="material-icons">fact_check</i>
-        <span class="text-center fab-label" style="bottom: -40px">
-          {{ "home.insurance_check_fab" | translate }}</span
-        >
-      </div>
+          <div class="d-flex justify-content-between mb-2 px-3">
 
-      <div
-        class="quick-fab disabled d-flex justify-content-center align-items-center"
-      >
-        <i class="material-icons">compare</i>
-      </div>
+            <div class="d-flex"></div>
+      
+            <div class="p-2">
+              <span class="section-title align-self-center">{{ "home.title_service" | translate }}</span>
+            </div>
+      
+            <div class="p-2">
+              <div class="ml-auto btn-group dropstart justify-content-center align-self-center">
+                <img class="filter-icon" src="/assets/icon_filter_dark.svg">
+              </div>
+            </div>
+      
+          </div>
 
-      <div
-        class="quick-fab disabled d-flex justify-content-center align-items-center"
-      >
-        <i class="material-icons d-none">search</i>
-      </div>
-    </div>
+          <!-- new grid -->
+          <div class="container mb-4">
+            <div class="row g-2">
 
-    <div class="section-service d-flex flex-column p-3 w-100">
-      <strong class="section-title align-self-center p-2">
-        {{ "home.title_service" | translate }}</strong
-      >
-      <div class="w-100 d-flex flex-wrap py-3 justify-content-center">
-        <div
-          class="service-card d-flex align-items-center justify-content-center m-2 col-5"
-        >
-          <span class="p-2 text-center" (click)="onAddPage()">
-            {{ "home.service_card_add" | translate }}</span
-          >
-        </div>
-        <div
-          class="service-card d-flex align-items-center justify-content-center m-2 col-5"
-          (click)="onNotifClick()"
-        >
-          <span
-            class="p-2 text-center notification-card"
-            #notif
-            id="notif"
-            [attr.notification-count]="notifCount"
-            >{{ "home.service_card_notifications" | translate }}</span
-          >
-        </div>
-        <div
-          class="service-card d-flex align-items-center justify-content-center m-2 col-5"
-        >
-          <span class="p-2 text-center">
-            {{ "home.service_card_notification_of_claim" | translate }}</span
-          >
-        </div>
-        <div
-          class="service-card d-flex align-items-center justify-content-center m-2 col-5"
-        >
-          <span class="p-2 text-center">{{
-            "home.service_card_call_your_broker" | translate
-          }}</span>
+              <div class="col-6">
+                <div class="p-3 bg-white service-card">
+                  <div class="d-flex flex-column align-items-center mt-2" (click)="onAddPage()">
+                    <span class="p-2 fw-bold card-text-title">{{ "home.service_card_add_title" | translate }}</span>
+                    <span class="p-2 card-text-subtitle">{{ "home.service_card_add_sub_title" | translate }}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="p-3 bg-white service-card">
+                  <div class="d-flex flex-column align-items-center mt-4 position-relative" (click)="onNotifClick()">
+                    <span class="fw-bold card-text-title align-items-center p-2">
+                      {{ "home.service_card_notifications" | translate }}
+                    </span>
+                    
+                    <span *ngIf="isNotificationCountText" class="position-absolute top-0 start-100 translate-middle bg-new-notify-icon">
+                      9+
+                      <span class="visually-hidden">unread messages</span>
+                    </span>
+
+                    <span *ngIf="!isNotificationCountText" class="position-absolute top-0 start-100 translate-middle bg-new-notify-icon">
+                      {{ notifCount }}
+                    <span class="visually-hidden">unread messages</span>
+                  </span>
+                    
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="p-3 bg-white service-card">
+                  <div class="d-flex flex-column align-items-center mt-4">
+                    <span class="fw-bold card-text-title">{{ "home.service_card_notification_of_claim" | translate }}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="p-3 bg-white service-card">
+                  <div class="d-flex flex-column align-items-center mt-4">
+                    <span class="fw-bold card-text-title">{{"home.service_card_call_your_broker" | translate}}</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
+
   </div>
 </div>

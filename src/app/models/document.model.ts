@@ -5,5 +5,4 @@ export interface DocumentData {
   linkToDoc: string;
   name: string;
   systemId: string;
-  swipedLeft?:boolean;
 }

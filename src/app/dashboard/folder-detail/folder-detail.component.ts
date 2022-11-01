@@ -125,6 +125,7 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
       }
     });
   }
+
   unmarkFav(folder: FolderData){
     this.folderService.deleteFolderFavourite(folder.favoriteId).subscribe({
       next:(resp:any)=>{
@@ -153,8 +154,7 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     dialogConfig.width = '350px';
     dialogConfig.data = passdata;
 
-    dialogConfig.panelClass = 'bg-dialog-color';
-    
+    dialogConfig.panelClass = 'bg-dialog-folder';
     // https://material.angular.io/components/dialog/overview
     const modalDialog = this.matDialog.open(RenameFolderComponent, dialogConfig);
     
@@ -180,10 +180,10 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = 'newfolder-modal-component';
-    dialogConfig.height = '350px';
+    dialogConfig.height = '400px';
     dialogConfig.width = '350px';
     dialogConfig.data = passdata;
-    dialogConfig.panelClass = 'bg-dialog-color';
+    dialogConfig.panelClass = 'bg-dialog-folder';
     const modalDialog = this.matDialog.open(NewFolderComponent, dialogConfig);
     
     this.matDialog.getDialogById('newfolder-modal-component').afterClosed().subscribe({
@@ -193,5 +193,9 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
          this.onFolderCardClick(this.folder);
       }
     });
+  }
+
+  onAddDocument(){
+    this.router.navigate(['dashboard/home/adddocument',{type:'contract'}]);
   }
 }

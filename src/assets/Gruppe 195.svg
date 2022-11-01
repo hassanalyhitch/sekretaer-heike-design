@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="154" height="41" viewBox="0 0 154 41">
+  <g id="Gruppe_195" data-name="Gruppe 195" transform="translate(-35 -569)">
+    <text id="Show_my_broker" data-name="Show my broker" transform="translate(87 596.286)" fill="#2c262d" font-size="15" font-family="Oscine-Regular, Oscine"><tspan x="0" y="0">Show my broker</tspan></text>
+    <circle id="Ellipse_20" data-name="Ellipse 20" cx="20.5" cy="20.5" r="20.5" transform="translate(35 569)" fill="#fff"/>
+    <g id="Gruppe_185" data-name="Gruppe 185" transform="translate(45.964 574.286)">
+      <g id="Gruppe_73" data-name="Gruppe 73" transform="translate(0)">
+        <g id="Gruppe_13" data-name="Gruppe 13" transform="translate(2.281 1.172)">
+          <path id="Pfad_2" data-name="Pfad 2" d="M5.661,3.039c2.471,0,5.452,1.443,5.777,6.387s-2.966,8.687-5.777,8.74S-.571,14.688-.206,9.426,3.19,3.039,5.661,3.039Z" transform="translate(1.251 -3.039)" fill="#2c262d"/>
+          <path id="Pfad_3" data-name="Pfad 3" d="M.746,0c.435,0,.871.494.871,1.539s-.256,2-1.045,2.011S.04,2.584.04,1.539.311,0,.746,0Z" transform="translate(12.125 5.704) rotate(7)" fill="#2c262d"/>
+          <path id="Pfad_4" data-name="Pfad 4" d="M.746,3.55c.435,0,.871-.494.871-1.539S1.361.006.572,0,.04.966.04,2.011.311,3.55.746,3.55Z" transform="translate(2.038 9.227) rotate(173)" fill="#2c262d"/>
+        </g>
+        <path id="Rechteck_27" data-name="Rechteck 27" d="M.688,0H2.752A.688.688,0,0,1,3.44.688v0A1.032,1.032,0,0,1,2.408,1.72H1.032A1.032,1.032,0,0,1,0,.688v0A.688.688,0,0,1,.688,0Z" transform="translate(7.739 17.133)" fill="#2c262d"/>
+        <g id="Gruppe_12" data-name="Gruppe 12" transform="translate(0 17.65)">
+          <path id="Differenzmenge_1" data-name="Differenzmenge 1" d="M16,9.373H3.24A4,4,0,0,1,.9,8.7,2.007,2.007,0,0,1,0,7.079V6.792a8.977,8.977,0,0,1,.314-2.43A6.29,6.29,0,0,1,1.3,2.312,5.444,5.444,0,0,1,3.008.8a6.985,6.985,0,0,1,2.5-.8L9.62,7.165,13.73,0a5.746,5.746,0,0,1,4.461,2.41,8.425,8.425,0,0,1,1.049,4.664A2.006,2.006,0,0,1,18.386,8.7,3.958,3.958,0,0,1,16,9.373Z" transform="translate(0 0)" fill="#2c262d"/>
+          <path id="Pfad_6" data-name="Pfad 6" d="M-1,0H1.208L.892,7.254H-.685Z" transform="translate(9.516 0.541)" fill="#2c262d"/>
+        </g>
+        <path id="Pfad_7" data-name="Pfad 7" d="M3.382.034A4.7,4.7,0,0,0,.1,2.055c-.576.9,1.437-.517,2.484-.718S4.9,1.224,4.986.863s.663.314.663.314A2.107,2.107,0,0,0,3.382.034Z" transform="matrix(0.998, -0.07, 0.07, 0.998, 4.49, 1.192)" fill="#2c262d"/>
+        <path id="Pfad_8" data-name="Pfad 8" d="M1148.24,2283.323" transform="translate(-1135.908 -2283.323)" fill="none" stroke="#707070" stroke-width="1"/>
+        <rect id="Rechteck_28" data-name="Rechteck 28" width="3.44" height="0.86" transform="translate(12.899 23.153)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>

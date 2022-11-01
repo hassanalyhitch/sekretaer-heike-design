@@ -1,4 +1,7 @@
-
+.filter-icon{
+  width: 20px;
+  height: 20px;
+}
 .content-wrapper{
   height: 92vh;
   background-color: #F2F2F2;
@@ -9,18 +12,36 @@
 ._content{
   background-color: #F2F2F2;
   border-radius: 45px 0px 0px 0px;
+  height: inherit;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.section-home{
+  /* min-height: 300px; */
+  height: inherit;
+  position: relative;
   overflow-y: scroll;
 }
+
 .fav-wrapper{
   overflow-x: scroll;
+}
+
+.home-icon-fabs{
+  overflow-x: scroll;
+  min-height: 100px;
 }
 
 .section-title{
   text-shadow: none;
   font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 4px;
 }
 .see-more a{
   text-decoration: none;
+  font-size: 12px;
   color: #707070;
 }
 .section-quicklinks{
@@ -91,23 +112,45 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: solid 1px #f2f2f2;
-  position: relative;
   cursor: pointer;
 }
 .notification-card::after{
   content: attr(notification-count);
+    background-color: #D60B51;
+    border-radius: 50%;
+    width: fit-content;
+    min-width: 30px;
+    height: fit-content;
+    min-height: 30px;
+    box-shadow: 0px 3px 3px #0000001A;
+    backdrop-filter: blur(6.6px);
+    -webkit-backdrop-filter: blur(6.6px);
+    color: white;
+    margin: 0 auto;
+    padding: 10px;
+    font-size: 12px;
+    top: 10px;
+    right: -5px;
+    position: absolute;
+}
+
+.bg-new-notify-icon{
   background-color: #D60B51;
   border-radius: 50%;
-  width: 22px;
-  height: 22px;
+  width: fit-content;
+  height: fit-content;
   box-shadow: 0px 3px 3px #0000001A;
   backdrop-filter: blur(6.6px);
   -webkit-backdrop-filter: blur(6.6px);
   color: white;
+  margin: 0 auto;
+  padding: 6px;
+  font-size: 14px;
   top: 10px;
-  right: 10px;
+  right: 5px;
   position: absolute;
 }
+
 .app-fav-item{
   cursor: pointer;
 }
@@ -129,4 +172,13 @@
 *{
   scrollbar-width: none !important;
 
+}
+
+.card-text-title{
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+
+.card-text-subtitle{
+  font-size: 12px;
 }

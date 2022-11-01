@@ -4,20 +4,26 @@
             <form (ngSubmit)= "onSubmit(contractForm.value)" class="d-flex flex-column" #contractForm="ngForm">
                 <p style="text-align:center ;font-size: large;"><b>NEW CONTRACT</b></p>
                 <p style="text-align:center;">Please Select Branch</p>
-                <ng-multiselect-dropdown
+                <div class="folders-selected">
+                    <ng-multiselect-dropdown
                     [settings]="branchSettings"
                     [data]="dataArr"
                     (onSelect)="onBranchSelected($event)"
                     [(ngModel)]="selectedBranches">
                 </ng-multiselect-dropdown>
+                </div>
+               
                 
                 <p style="text-align:center;">Please Select Company</p>
-                <ng-multiselect-dropdown
-                [settings]="companySettings"
-                [data]="companyArr"
-                (onSelect)="onCompanySelected($event)"
-                [(ngModel)]="selectedCompanies">
-                </ng-multiselect-dropdown>
+                <div class="companies-selected">
+                    <ng-multiselect-dropdown
+                    [settings]="companySettings"
+                    [data]="companyArr"
+                    (onSelect)="onCompanySelected($event)"
+                    [(ngModel)]="selectedCompanies">
+                    </ng-multiselect-dropdown>
+                </div>
+               
                 
                 <div class="broker">
                     <p> Did you wish for your broker to take care of this?</p>

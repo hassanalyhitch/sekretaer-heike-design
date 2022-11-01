@@ -21,7 +21,10 @@
 .section-title{
   text-shadow: none;
   font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 4px;
 }
+
 .title{
   cursor: pointer;
 }

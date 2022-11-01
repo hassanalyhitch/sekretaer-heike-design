@@ -8,9 +8,10 @@ import { FoldersService } from '../../../services/folder.service';
 import { HttpClient } from '@angular/common/http';
 import { FileUploadService } from '../../../services/file-upload.service';
 import { UploadFileData } from '../../../models/upload-file.model';
-import { FormGroup,FormBuilder,AbstractControl,Validators, FormControl } from '@angular/forms';
+import { FormGroup,FormBuilder,AbstractControl,Validators, FormControl, NgForm } from '@angular/forms';
 import { formatDate } from '@angular/common';
 import { FileSizePipe } from '../../../pipes/filesize.pipe';
+import { FileNameData } from 'src/app/models/file-name.model';
 import { ThisReceiver } from '@angular/compiler';
 
 
@@ -26,13 +27,16 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
   showFileName:boolean =false;
   count:number = 0;
   fileUploader:any;
+  fileDoc:any;
 
   form:FormGroup;
   submitted = false;
   dropDownIsHidden:boolean= true;
-  selectedItems;
+  selectedItems = [];
+  dropDownList = [];
  
   @ViewChild("selectFile",{static:true}) selectFile:ElementRef;
+  @ViewChild("addPageForm",{static:true}) addPageForm:NgForm;
    dropdownSettings = {};
    @Input() index:String;
    folders:FolderData =<FolderData>{
@@ -48,6 +52,7 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
     isSelected:false
    };
   
+   placeholderValue:string ='Current Folder';
    folderSub:Subscription;
    folderArr: any[] = [];
    contractArr: any[] = [];
@@ -56,14 +61,9 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
       customerAmsidnr: string,
       dataName : string,
       type: string
-    }[] = [
-      { id: '',
-        customerAmsidnr: '',
-        dataName : '',
-        type: ''}
-      ];
+    }[] = [];
       
-  uploadedFiles:UploadFileData[] =[];
+ 
    shortLink: string = "";
    loading: boolean = false; // Flag variable
    file: File = null;
@@ -75,9 +75,12 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
    language="en";
    dropDownForm:FormGroup;
    dropdownDisabled:boolean = false;
+  
+
    
    typeSelected:string='';
-
+    myItems =[];
+    pickdate:any;
     constructor( private route:ActivatedRoute, private router:Router,private folderService:FoldersService,
 private contractService:ContractsService,private http:HttpClient,private fileUploadService: FileUploadService,
 private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePipe:FileSizePipe,private builder:FormBuilder) {
@@ -88,27 +91,27 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
   
   ngOnInit() {
    
-    this.dropdownSettings={
-      idField: 'id',
-      textField: 'dataName',
-      singleSelection: true,
+    this.dropdownSettings = {
+      idField:'id',
+      textField:'dataName',
+      singleSelection:false,
       enableCheckAll: true,
       selectAllText: 'Select All',
       unSelectAllText: 'Unselect All',
       allowSearchFilter: true,
-      limitSelection: -1,
+      limitSelection: 1,
       clearSearchFilter: true,
       maxHeight: 197,
-      itemsShowLimit: 3,
+      itemsShowLimit: 1,
       searchPlaceholderText: 'Search',
       noDataAvailablePlaceholderText: 'No data available',
       closeDropDownOnSelection: true,
-      showSelectedItemsAtTop: true,
-      defaultOpen: false,
-      
+      showSelectedItemsAtTop: false,
+      defaultOpen:false,
     };
+   
 
-    
+  
       switch (this.route.snapshot.params['type']){
         case "folder": {
           let selectedItem = {
@@ -127,7 +130,7 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
           this.selectedItems.push(selectedItem);
           this.typeSelected = 'folder';
 
-          this.dropdownDisabled =true;
+          this.dropdownDisabled = true;
 
           break;
         }
@@ -142,7 +145,10 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
           break;
         }
       }
-    
+      this.selectedItems = [
+        { id: '30007', dataName: 'default selected'  }
+      ];
+  
     this.form =this.formBuilder.group({
       // namefile:['',Validators.required],
       // date:['',Validators.required],
@@ -158,6 +164,26 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
     // });
 
 
+  }
+  addNewFile(fileData:FileNameData, folder_Id: string){
+
+    console.log(fileData);
+
+    console.log('addNewFile selected f->'+folder_Id);
+
+    this.fileUploadService.addFolderFile(fileData,folder_Id).subscribe({
+      next:(resp)=>{
+        console.log(resp);
+
+      },
+      error:(e)=>{
+        console.log('AddPageComponent');
+        console.log(e);
+      },
+      complete:()=>{
+        console.log('Success');
+      }
+    })
   }
 
   getDropdownData(){
@@ -231,17 +257,22 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
     return formatDate(date, this.dateFormat, this.language);
   }
  
-  onMultiSelectClick(){
+  onItemSelected(selectedItem:any){
+
+    console.log(selectedItem);
+
+    this.selectedItems.push(selectedItem);
 
     let dropDownElement = document.getElementsByClassName('dropdown-list')[0] as HTMLElement;
     this.dropDownIsHidden = (dropDownElement.hidden);
 
-    // console.log(this.selectedItems);
+    console.log(this.selectedItems);
     
     if(this.selectedItems != undefined && this.selectedItems.length>0){
       dropDownElement.hidden = true;
       console.log('hide it !');
     }
+
     if (this.selectedItems.length>0){
       for(let x=0;x<this.dataArr.length;x++){
         if(this.selectedItems[0].id == this.dataArr[x].id){
@@ -249,6 +280,7 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
         }
       }
     }
+
   }
 
   // get f():{[key:string]:AbstractControl}{
@@ -259,31 +291,25 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
   //   this.file = event.target.files[0];
   // }
  
- onSubmit(form){
-  form.file =this.file;
-  let fileObj = {'file':this.file};
+ 
+ onSubmit(fileData:FileNameData){
+  fileData.doc_file = this.file;
+  
   switch (this.typeSelected){
     case 'folder':{
-      this.folderSub = this.fileUploadService.addFolderFile(form,this.selectedItems[0].id)
-      .subscribe({
-        next:(resp)=>{
-          console.log(resp);
-
-        },
-        error:(e)=>{
-          console.log('AddPageComponent');
-          console.log(e);
-        }
-      }
-
-      )
-
+     this.addNewFile(fileData,this.selectedItems[0].id);
       break;
     }
     case 'contract':{
       break;
     }
   }
+
+  console.table(fileData);
+
+  console.table(this.typeSelected);
+
+  console.log('folder id -> ' +this.selectedItems[0].id);
 
  }
 
@@ -294,6 +320,7 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
     console.log(this.file);
 
     let _file:UploadFileData ={
+      doc_file:this.file,
       fileId : this.uploadFileArr.length +"",
       fileName :this.file.name,
 
@@ -323,7 +350,7 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
   ngDoCheck():void{
 
     // console.log('selectedItems.length> '+this.selectedItems.length);
-    if (this.selectedItems != undefined && this.selectedItems.length>0){
+    if (this.selectedItems.length>0){
       for(let x=0;x<this.dataArr.length;x++){
         if(this.selectedItems[0].id == this.dataArr[x].id){
           this.typeSelected = this.dataArr[x].type;

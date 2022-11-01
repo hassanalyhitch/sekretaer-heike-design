@@ -1,4 +1,4 @@
-import { Injectable, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -49,20 +49,13 @@ import { RenameFolderComponent } from './dashboard/rename-folder/rename-folder.c
 import { NewContractComponent } from './dashboard/overview/new-contract/new-contract.component';
 import { NotificationModalComponent } from './dashboard/notifications/notification-modal/notification-modal.component';
 import { SubFolderCardComponent } from './dashboard/sub-folder-card/sub-folder-card.component';
-// particular imports for hammer
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { HomeFabIconsComponent } from './dashboard/home-fab-icons/home-fab-icons.component';
 
-import * as Hammer from 'hammerjs';
-import {HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
-}
-@Injectable()
-export class MyHammerConfig extends HammerGestureConfig {
-  overrides = <any> {
-    swipe: { direction: Hammer.DIRECTION_ALL },
-  };
 }
 
 const appRoutes: Routes = [
@@ -86,7 +79,8 @@ const appRoutes: Routes = [
   { path: 'dashboard/home/contract-detail/fileview', component: FileviewComponent},
   { path: 'dashboard/home/adddocument', component:AddPageComponent},
   { path: 'dashboard/home/chat', component:ChatComponent},  
-  { path:'dashboard/overview/new-contract',component:NewContractComponent}
+  { path: 'dashboard/overview/new-contract',component:NewContractComponent},
+  {path:  'privacy-policy',component:PrivacyPolicyComponent}
 
 
 ];
@@ -102,7 +96,6 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatProgressSpinnerModule,
     MatSlideToggleModule,
-    HammerModule,
     NgMultiSelectDropDownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     TranslateModule.forRoot({
@@ -143,16 +136,14 @@ const appRoutes: Routes = [
     RenameFolderComponent,
     NewContractComponent,
     NotificationModalComponent,
-    SubFolderCardComponent
+    SubFolderCardComponent,
+    PrivacyPolicyComponent,
+    HomeFabIconsComponent
    ],
   bootstrap:    [ AppComponent ],
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'},
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true},
-    {
-      provide: HAMMER_GESTURE_CONFIG,
-      useClass: MyHammerConfig,
-    }
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
   ]
 })
 export class AppModule { }

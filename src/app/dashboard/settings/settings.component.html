@@ -1,12 +1,68 @@
 <div class="content-wrapper w-100 ">
-<div class="_content d-flex d-flex flex-column align-items-center w-100 h-100 ">
+  <div class="_content d-flex d-flex flex-column align-items-center w-100 h-100 ">
 
-  <div class="section-setting w-100 d-flex flex-column pt-3 ">
-      <strong class="section-title align-self-center p-2">{{ 'settings.title' | translate }}</strong>
-  </div>
+    <div class="section-setting w-100 mt-2">
+      <strong class="section-title">{{ 'settings.title' | translate }}</strong>
+        <div class="inquiries"><img src="\assets\Gruppe 223.svg"></div>
+    </div>
 
-  <div>
     <!-- <mat-slide-toggle>Change Language to English</mat-slide-toggle> -->
+    
+      <div class="card d-flex flex-column mt-2 mb-2" >
+          <ul class="title">PERSONAL DETAILS</ul>
+          <ul>
+            <img  src="\assets\Gruppe 218.svg"/>
+            <span class="ms-3">push notifications</span> 
+            <img class="caret-options" src="\assets\Pfad 103.svg">
+          </ul>
+          <ul>
+            <img src="\assets\Gruppe 218.svg"/>
+            <span class="ms-3">
+            collapse insurance
+            </span>
+            <img class="caret-options"src="\assets\Pfad 103.svg">
+          </ul>
+          <ul>
+            <img src="\assets\Gruppe 218.svg"/>
+            <span class="ms-3">  Folder</span> 
+            <img class="caret-options" src="\assets\Pfad 103.svg">
+          </ul>
+      </div>
+      <div class="card d-flex flex-column mt-2 mb-2" >
+          <ul class="title">SETTINGS</ul>
+          <ul>
+            <img src="\assets\Gruppe 218.svg">
+            <span class="ms-3">language</span>
+            <img class="caret-options" src="\assets\Pfad 103.svg">
+          </ul>
+          <ul>
+            <img src="\assets\Gruppe 218.svg">
+            <span class="ms-3">your data</span>
+            <img class="caret-options" src="\assets\Pfad 103.svg">
+          </ul>
+          <ul>
+            <img src="\assets\Gruppe 218.svg">
+            <span class="ms-1">change your password</span>
+            <img class="caret-options" src="\assets\Pfad 103.svg">
+          </ul>
+      </div>
+      <div class="official-card d-flex flex-column mt-2 mb-2" >
+          <ul class="title">OFFICIAL</ul>
+          <ul>
+            <img src="\assets\Gruppe 218.svg">
+            <span class="ms-3">Terms & Conditions</span>
+            <img class="caret-options" src="\assets\Pfad 103.svg"
+            (click)=" onPolicySelect()"
+            >
+          </ul>
+          <ul>
+            <img src="\assets\Gruppe 218.svg">
+            <span class="ms-3">Privacy Policy</span>
+            <img class="caret-options" src="\assets\Pfad 103.svg" 
+            (click)=" onPolicySelect()"
+            >
+          </ul>
+      </div>
+      
   </div>
-</div>
 </div>

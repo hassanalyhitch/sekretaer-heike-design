@@ -29,6 +29,14 @@
   background-color: #fff;
   cursor: pointer;
 }
+.companies-selected{
+  background-color: #fff;
+  border-radius: 5px;
+}
+.folders-selected{
+  background-color: #fff;
+  border-radius:5px;
+}
 
 .btn{
   background-color: #F2F2F2;

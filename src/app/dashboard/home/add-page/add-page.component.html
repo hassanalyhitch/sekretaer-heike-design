@@ -1,51 +1,48 @@
 <div class="content-wrapper w-100 ">
-<div class="_content d-flex flex-column w-100 h-100 " [ngClass]="{'allowScroll' :dropDownIsHidden, 'disableScroll':!dropDownIsHidden}">
-  <form [formGroup]="form"  (ngSubmit)= "onSubmit(addPageForm.value)" #addPageForm="ngForm" >
-      <div>
-        <label for="selectFile" class="fileUpload" >Please select Document</label>
-        <input class="file-input d-none" type="file" 
-        #selectFile  (change)="getFileName($event)" id="selectFile" name="file" required/>
-        
-          <app-upload-file *ngFor="let uploadFile of uploadFileArr" [uploadFile]="uploadFile" (deleteFile)="removeFile($event)"></app-upload-file>
-      
-      </div>
-
-      <input type="textarea"  placeholder="Enter Document Name" name="namefile" class="fileUpload">
-
-      <!-- <div class="share">
-          <input type="checkbox" id="broker" name="broker">
-          <label for="broker" style="padding:0px 2px;">Share with Broker</label>
-      </div> -->
-
-      <div class="form-group">
-        <div class="selectfolder">
-              <ng-multiselect-dropdown
-                [settings]="dropdownSettings"
-                [data]="dataArr"
-                (onSelect)="onMultiSelectClick()"
-                name="myItems"
-                formControlName = "myItems"
-                [disabled] = "dropdownDisabled"
-                >
-              </ng-multiselect-dropdown>
+  <div class="_content d-flex flex-column w-100 h-100 " [ngClass]="{'allowScroll' :dropDownIsHidden, 'disableScroll':!dropDownIsHidden}">
+    <form  (ngSubmit)="onSubmit(addPageForm.value)" #addPageForm="ngForm">
+      <p div class="assignment">{{ "add_document.title" | translate }}:</p>
+        <div>
+            <label for="selectFile" class="selectDocument" >
+              <img src="\assets\upload-snippet.png"><br>
+              <span>Upload document/Image</span>
+            </label>
+            <input 
+              class="file-input d-none" 
+              type="file" 
+              accept="application/pdf"
+              #selectFile  
+              (change)="getFileName($event)" 
+              id="selectFile" 
+              [(ngModel)]="file"
+              name="file"
+              ngModel
+              required/>
+            
+            <app-upload-file class="fileUpload"*ngFor="let uploadFile of uploadFileArr" [uploadFile]="uploadFile" (deleteFile)="removeFile($event)"></app-upload-file>
         </div>
-      </div>
-
-      <div class ="form-group">
-          <input  type="date"  name="today" class="form-control" class="fileUpload"
-          placeholder=" Opt.select document date" style="color:grey;" >
-      </div>
-      <!-- <div class="fileUpload">
-        <app-tags-input></app-tags-input>
-      </div> -->
-    
-
-      <input type="textarea"  style="padding:30px;"placeholder="Notice" name="notice" class="fileUpload">
+            <p class="assignment">Assign:</p>
+            <input type="date"  id="pickdate" placeholder="Date" class="fileUpload">
+            <input type="text"  placeholder="Class"  class="fileUpload">
+        <div class="folderSection">
+          <div class="fileUpload">
+                <ng-multiselect-dropdown
+                  [placeholder]="placeholderValue"
+                  [settings]="dropdownSettings"
+                  [data]="dataArr"
+                  (onSelect)="onItemSelected($event)"
+                  name="myItems"
+                  formControlName="myItems"
+                  ngModel 
+                  [disabled]="dropdownDisabled"
+                  >
+                </ng-multiselect-dropdown>
+          </div>
+        </div>
+            <div class="share"><img src="\assets\Gruppe 195.svg"></div>
       
-      <div class="save">
-            <button type="submit" class="submit" > Save</button>
-      </div>
-  </form>
-</div> 
+            <button type="submit" class="submit" >UPLOAD</button>
+    </form>
+  </div> 
 </div>
 

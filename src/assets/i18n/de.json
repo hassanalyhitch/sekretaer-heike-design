@@ -7,8 +7,9 @@
     "search_fab": "Suche",
     "chat_fab": "Chat",
     "insurance_check_fab": "Insurance Check",
-    "service_card_add": "Dokument hinzufügen",
-    "service_card_notifications": "Benachrichtigungen",
+    "service_card_add_title": "ADD",
+    "service_card_add_sub_title": "(a document, a picture, etc)",
+    "service_card_notifications": "INBOX",
     "service_card_notification_of_claim": "Schaden melden",
     "service_card_call_your_broker": "Makler anrufen"
   },
@@ -77,7 +78,7 @@
     "folder_side_menu_item_2": "Als Favorit löschen",
     "folder_side_menu_item_3": "Umbenennen",
     "created_on": "Created On",
-    "documents": "Documents",
+    "documents": "My Documents",
     "sub_folders": "Sub-folders",
     "add_subfolder" : "Add Sub-Folder",
     "add_new_document": "Add new Document"
