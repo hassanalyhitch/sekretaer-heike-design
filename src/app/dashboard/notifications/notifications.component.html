@@ -10,20 +10,20 @@
     <div class="search_input_container d-flex w-100 py-2">
       <div class="_input_group w-100 d-flex" >
         <i class="material-icons p-2">search</i>
-        <input type="text " class="search_input w-100" [(ngModel)]="searchValue" placeholder="Search" />
+        <input type="text " class="search_input w-100" [(ngModel)]="searchValue" (ngModelChange)="filterSearch(searchValue)" placeholder="Search" />
       </div>
     </div>
 
     <div class=" w-100 d-flex justify-content-between mb-1 bg-" style="padding-left:30px;padding-right:30px;">
-      <div class="d-flex justify-content-center py-2" style="cursor:pointer;" >
+      <div class="d-flex justify-content-center py-2" style="cursor:pointer;" (click)="sortByType()" >
         Type
         <i class="material-icons align-items-center" style="transform: rotate(90deg);" >code</i>
       </div>
-      <div class="d-flex justify-content-center p-2" style="cursor:pointer;">
+      <div class="d-flex justify-content-center p-2" style="cursor:pointer;" (click)="sortByTitle()">
         Title
         <i class="material-icons align-items-center" style="transform: rotate(90deg);" >code</i>
       </div>
-      <div class="d-flex justify-content-center align-self-end py-2" style="cursor:pointer;">
+      <div class="d-flex justify-content-center align-self-end py-2" style="cursor:pointer;"  (click)="sortByDate()">
         Date
         <i class="material-icons align-items-center" style="transform: rotate(90deg);" >code</i>
       </div>
