@@ -109,7 +109,6 @@
   
     </div>
   
-  
     <div class="d-flex my-2 documentItem" *ngFor="let doc of docArr; let i = index"  (swipe)="onSwipe($event, doc)">
       <app-document-item class="w-100"  [ngClass]="{'swipedLeft':doc.swipedLeft}" [doc]=doc ></app-document-item>
     

@@ -13,6 +13,7 @@ import { NotificationsService } from '../../services/notification.service';
 export class NotificationsComponent implements OnInit {
 
   allNotifsArr:NotificationData[] = [];
+  searchValue = "";
 
   constructor(private router:Router, private notifService: NotificationsService) { 
     this.notifService.getNotifications().subscribe({
