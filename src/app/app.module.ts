@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -51,11 +51,21 @@ import { NotificationModalComponent } from './dashboard/notifications/notificati
 import { SubFolderCardComponent } from './dashboard/sub-folder-card/sub-folder-card.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { HomeFabIconsComponent } from './dashboard/home-fab-icons/home-fab-icons.component';
+// particular imports for hammer
+
+import * as Hammer from 'hammerjs';
+import {HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
 
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
+}
+@Injectable()
+export class MyHammerConfig extends HammerGestureConfig {
+  overrides = <any> {
+    swipe: { direction: Hammer.DIRECTION_ALL },
+  };
 }
 
 const appRoutes: Routes = [
@@ -96,6 +106,7 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatProgressSpinnerModule,
     MatSlideToggleModule,
+    HammerModule,
     NgMultiSelectDropDownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     TranslateModule.forRoot({
@@ -143,7 +154,11 @@ const appRoutes: Routes = [
   bootstrap:    [ AppComponent ],
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'},
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true},
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: MyHammerConfig,
+    }
   ]
 })
 export class AppModule { }
