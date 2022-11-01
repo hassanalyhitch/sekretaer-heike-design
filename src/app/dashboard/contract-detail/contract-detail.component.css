@@ -6,31 +6,7 @@
   padding: 0px !important;
 }
 
-._content{
-  background-color: #F2F2F2;
-  border-radius: 45px 0px 0px 0px;
-  height: inherit;
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-
-.section-content{
-  min-height: 280px;
-  height: inherit;
-  position: relative;
-  overflow-y: scroll;
-  overflow-x: hidden; 
-}
-
-.btn-add{
-  background-color: #D60B51;
-  color: #ffffff;
- }
-
-.section-title{
-  text-shadow: none;
-  font-size: 17px;
-  font-weight: bold;
+.word-spacing{
   letter-spacing: 4px;
 }
 
@@ -47,6 +23,17 @@
   height: 20px;
 }
 
+._content{
+  background-color: #F2F2F2;
+  border-radius: 45px 0px 0px 0px;
+  overflow-y: scroll;
+  padding-bottom: 75px;
+}
+
+.section-title{
+  text-shadow: none;
+  font-size: 22px;
+}
 .icon-container{
   width: 50px;
   background-color: #E5007E;
@@ -178,6 +165,17 @@ app-document-item{
 .dropstart .dropdown-toggle::before {
   border: none !important;
 }
+
+.edit-rename{
+  width: 52px;
+  height: 42px;
+  border-radius: 8px;
+  margin-left: 10px !important;
+}
+ .swipedLeft{
+  margin-left: -52px !important;
+}
+
 
 ::-webkit-scrollbar {
   width: 0px;
