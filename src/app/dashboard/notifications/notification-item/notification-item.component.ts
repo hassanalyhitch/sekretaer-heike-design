@@ -20,7 +20,7 @@ export class NotificationItemComponent implements OnInit {
 
   ngOnInit() {
     
-    if(this.notification.links.length > 0){
+    if(this.notification.links != null && this.notification.links.length > 0){
 
       for(let i=0; i<this.notification.links.length; i++){
 

@@ -7,21 +7,4 @@
     {{notification.infoHeadline | shortenText: 50 }}
     </div>
   </div>
-  <div class="more">
-    <div class="more-icon">
-            
-      <div class="btn-group dropstart" [ngClass]="{'d-none': (contains('info') && notification.isRead === '1')||(contains('chat') && notification.isRead === '1')}" >
-          
-        <i class="material-icons  dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" >more_horiz</i>
-        
-        <ul class="dropdown-menu shadow">
-          <li><span class="dropdown-item" href="" *ngIf="contains('vamsidnr')">{{ 'notifications.notification_item.open_contract' | translate }}</span></li>
-          <li><span class="dropdown-item" href="" *ngIf="contains('dms')">{{ 'notifications.notification_item.open_document' | translate }}</span></li>
-          <li><span class="dropdown-item" href="" *ngIf="contains('docid')">{{ 'notifications.notification_item.open_document' | translate }}</span></li>
-          <li><span class="dropdown-item" href="" *ngIf="notification.isRead === '0'" (click)="markAsRead(notification.notificationId)" >{{ 'notifications.notification_item.mark_as_read' | translate }}</span></li>
-        </ul>
-      </div>
-
-    </div>
-  </div>
 </div>

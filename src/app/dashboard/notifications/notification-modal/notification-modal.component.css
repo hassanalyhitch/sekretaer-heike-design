@@ -27,6 +27,22 @@
 .quick-fab:hover{
   border: solid 2.5px rgba(0, 0, 0, 0.2);
 }
+.notif-action{
+    cursor: pointer;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    background-color: #E5007E !important;
+    border-color: #E5007E !important;
+    border: solid 2px;
+    border-radius: 8px;
+    background-image: linear-gradient(131deg, #E5007E, #D60B51);
+    transition: 0.1s ease-out; 
+}
+.notif-action:hover{
+    transform: scale(1.15);
+}
+
 @-webkit-keyframes swing
 {
     15%
