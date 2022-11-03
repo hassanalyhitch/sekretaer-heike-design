@@ -18,6 +18,7 @@ import { ContractsService } from '../../services/contracts.service';
 import { RenameContractComponent } from '../rename-contract/rename-contract.component';
 import { Location } from '@angular/common';
 import { RenameModalComponent } from '../rename-modal/rename-modal.component';
+import { DownloadService } from '../../services/download-file.service';
 
 @Component({
   selector: 'app-contract-detail',
@@ -62,7 +63,8 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     private router: Router,
     private translate: TranslateService,
     private contractService: ContractsService,
-    private _location: Location
+    private _location: Location,
+    private downloadService: DownloadService
   ) {
     this.contractSub = contractService.selectObservable.subscribe({
       next: (contract) => {
@@ -223,6 +225,21 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
         break;
       }
     }
+  }
+  onClick(doc: DocumentData){
+    console.log('tap !');
+    this.downloadService.getDownloadFile(doc.linkToDoc).subscribe({
+      next:(resp:any)=>{
+        try{
+          var file = new Blob([resp]);
+          var fileURL = URL.createObjectURL(file);
+          window.open(fileURL);
+
+        } catch(e){
+          console.log(e);
+        }
+      }
+    });
   }
 
 }

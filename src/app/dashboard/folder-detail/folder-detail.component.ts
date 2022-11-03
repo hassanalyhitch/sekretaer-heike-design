@@ -8,6 +8,9 @@ import { Location } from '@angular/common';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { RenameFolderComponent } from '../rename-folder/rename-folder.component';
 import { NewFolderComponent } from '../new-folder/new-folder.component';
+import { DocumentData } from '../../models/document.model';
+import { RenameModalComponent } from '../rename-modal/rename-modal.component';
+import { DownloadService } from '../../services/download-file.service';
 
 @Component({
   selector: 'app-folder-detail',
@@ -34,7 +37,8 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     private folderService: FoldersService,
     private matDialog: MatDialog, 
     private translate:TranslateService, 
-    private _location: Location) { }
+    private _location: Location,
+    private downloadService: DownloadService) { }
 
   ngOnInit() {
     console.table(this.folderService.selectedFolder);    
@@ -197,5 +201,52 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
 
   onAddDocument(){
     this.router.navigate(['dashboard/home/adddocument',{type:'contract'}]);
+  }
+  
+  renameFileModal(file) {
+    const dialogConfig = new MatDialogConfig();
+    // let passdata:string = '{"fileName": "'+this.file.name+'","fileUrl": "'+this.file.fileUrl+'"}';
+    let passdata:string = '{"docName": "'+file.name+'","docid": "'+file.docid+'","systemId": "'+file.systemId+'"}';
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = false;
+    dialogConfig.id = 'modal-component';
+    // dialogConfig.height = '80%';
+    // dialogConfig.width = '90%';
+    dialogConfig.data = passdata;
+    // https://material.angular.io/components/dialog/overview
+    const renameFileDialog = this.matDialog.open(RenameModalComponent, dialogConfig);
+  }
+
+  onSwipe(evt, doc: DocumentData) {
+    const swipeDirection = Math.abs(evt.deltaX) > 40 ? (evt.deltaX > 0 ? 'right' : 'left'):'';
+    
+    console.log('swiped '+swipeDirection);
+    switch(swipeDirection){
+      case 'left':{
+        doc.swipedLeft = true;
+        break;
+      }
+      case 'right':{
+
+        doc.swipedLeft = false;
+        break;
+      }
+    }
+  }
+
+  onClick(doc: DocumentData){
+    console.log('tap !');
+    this.downloadService.getDownloadFile(doc.linkToDoc).subscribe({
+      next:(resp:any)=>{
+        try{
+          var file = new Blob([resp]);
+          var fileURL = URL.createObjectURL(file);
+          window.open(fileURL);
+
+        } catch(e){
+          console.log(e);
+        }
+      }
+    });
   }
 }

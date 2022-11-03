@@ -209,6 +209,16 @@ app-folder-card, app-document-item{
   font-size: small;
 }
 
+.edit-rename{
+  width: 52px;
+  height: 42px;
+  border-radius: 8px;
+  margin-left: 10px !important;
+}
+ .swipedLeft{
+  margin-left: -52px !important;
+}
+
 ::-webkit-scrollbar {
   width: 0px;
   height: 0px;

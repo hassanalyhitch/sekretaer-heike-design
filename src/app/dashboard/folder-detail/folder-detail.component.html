@@ -46,8 +46,16 @@
         <div class="d-flex align-self-center align-items-center mb-2">
           <button class="btn btn-lg btn-add">{{ 'folder-detail.add_new_document' | translate }}</button>
         </div>
-    
-        <app-document-item class="m-1" *ngFor="let doc of folder.docs" [doc]=doc ></app-document-item>
+        
+        <div class="d-flex my-2 documentItem"  *ngFor="let doc of folder.docs; let i = index"  (swipe)="onSwipe($event, doc)" (tap)="onClick(doc)" >
+          <app-document-item class="w-100 m-1"  [ngClass]="{'swipedLeft':doc.swipedLeft}" [doc]=doc ></app-document-item>
+      
+          <div class=" edit-rename p-2 d-flex align-self-center justify-content-center align-items-center bg-white "
+            [ngClass]="{'d-none':!doc.swipedLeft}"
+            (click)= "renameFileModal(doc)" >
+              <i class="material-icons">mode_edit</i>
+          </div>
+        </div>
     
         <!-- subfolders -->
         <div class="d-flex pt-3 mb-1">
