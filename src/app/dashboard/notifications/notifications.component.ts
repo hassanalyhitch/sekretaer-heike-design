@@ -90,37 +90,41 @@ export class NotificationsComponent implements OnInit {
   }
 
   sortByType(){
-    this.sortTypeByAsc = !this.sortTypeByAsc;
+    
     if(this.sortTypeByAsc){
       this.ascType = this.allNotifsArr.sort((a, b) => a.links[0].assocType.localeCompare(b.links[0].assocType));
       this.allNotifsArr = this.ascType;
+      this.sortTypeByAsc = !this.sortTypeByAsc;
     } else {
       this.descType = this.allNotifsArr.sort((a, b) => a.links[0].assocType.localeCompare(b.links[0].assocType)).reverse();
       this.allNotifsArr = this.descType;
+      this.sortTypeByAsc = !this.sortTypeByAsc;
 
     }
   }
 
   sortByTitle(){
-    this.sortTitleByAsc = !this.sortTitleByAsc;
     if(this.sortTitleByAsc){
       this.ascTitle = this.allNotifsArr.sort((a, b) => a.infoHeadline.localeCompare(b.infoHeadline));
       this.allNotifsArr = this.ascTitle;
+      this.sortTitleByAsc = !this.sortTitleByAsc;
     } else {
       this.descTitle = this.allNotifsArr.sort((a, b) => a.infoHeadline.localeCompare(b.infoHeadline)).reverse();
       this.allNotifsArr = this.descTitle;
+      this.sortTitleByAsc = !this.sortTitleByAsc;
 
     }
   }
 
   sortByDate(){
-    this.sortDateByAsc = !this.sortDateByAsc;
     if(this.sortDateByAsc){
       this.ascDate = this.allNotifsArr.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
       this.allNotifsArr = this.ascDate;
+      this.sortDateByAsc = !this.sortDateByAsc;
     } else {
       this.descDate = this.allNotifsArr.sort((a, b) => a.createdAt.localeCompare(b.createdAt)).reverse();
       this.allNotifsArr = this.descDate;
+      this.sortDateByAsc = !this.sortDateByAsc;
 
     }
   }

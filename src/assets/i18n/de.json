@@ -97,6 +97,9 @@
   "notifications": {
     "title": "NOTIFICATIONS",
     "mark_all_as_read": "Mark all as Read",
+    "sort_type":"Type",
+    "sort_name":"Title",
+    "sort_date":"Date",
     "notification_item": {
       "open_contract":"Open Contract",
       "open_document": "Open Document",

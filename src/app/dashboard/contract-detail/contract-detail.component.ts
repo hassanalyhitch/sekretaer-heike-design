@@ -52,6 +52,10 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
   contractSub: Subscription;
   documents: any;
   swipedLeft: boolean = false;
+  
+  ascDate:DocumentData[] = [];
+  descDate:DocumentData[] = [];
+  sortDateByAsc:boolean = true;
 
   @ViewChildren('documentItem') documentItemList: QueryList<ElementRef>;
 
@@ -226,6 +230,7 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
       }
     }
   }
+
   onClick(doc: DocumentData){
     console.log('tap !');
     this.downloadService.getDownloadFile(doc.linkToDoc).subscribe({
@@ -240,6 +245,19 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
         }
       }
     });
+  }
+
+  sortByDate(){
+    
+    if(this.sortDateByAsc){
+      this.ascDate = this.docArr.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+      this.docArr = this.ascDate;
+      this.sortDateByAsc = !this.sortDateByAsc;
+    } else {
+      this.descDate = this.docArr.sort((a, b) => a.createdAt.localeCompare(b.createdAt)).reverse();
+      this.docArr = this.descDate;
+      this.sortDateByAsc = !this.sortDateByAsc;
+    }
   }
 
 }

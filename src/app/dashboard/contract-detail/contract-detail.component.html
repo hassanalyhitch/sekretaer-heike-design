@@ -90,7 +90,7 @@
       <div class="p-2 bd-highlight">
         <p class="text-muted">{{ 'contract_detail.title_documents' | translate }}</p>
       </div>
-      <div class="ms-auto p-2 bd-highlight">
+      <div class="ms-auto p-2 bd-highlight" (click)="sortByDate()" style="cursor:pointer;">
         <p class="text-muted">
           {{ 'folder-detail.date_filter_label' | translate }}
           <img class="filter-icon" src="/assets/icon_date_filter.svg">
