@@ -22,8 +22,14 @@ export class SubFolderCardComponent implements OnInit{
     isSelected:false
   };
 
+  docNumber: number = 0;
+  isFolderFavorite: number = 0;
+
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.docNumber = this.folder.docs.length;
+    this.isFolderFavorite = this.folder.isFavorite;
+  }
 
 }

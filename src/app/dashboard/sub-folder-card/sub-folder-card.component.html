@@ -15,7 +15,7 @@
         </div>
         <div class="ms-auto p-2">
           <div class="d-flex fav-btn align-items-center justify-content-center"
-            [ngClass]="{'isFav': folder.isFavorite == 1, 'notFav': folder.isFavorite == 0}" >
+          [ngClass]="{'isFav': isFolderFavorite == 1, 'notFav': isFolderFavorite == 0}" >
             <i class="material-icons">star</i>
           </div>
         </div>
@@ -28,7 +28,7 @@
           </div>
         </div>
         <div class="ms-auto p-2">
-          <span class="fw-bold">13</span>
+          <span class="fw-bold">{{ docNumber }} Documents</span>
         </div>
       </div>
       

@@ -25,8 +25,8 @@
 
 .section-title{
   text-shadow: none;
-  font-size: 22px;
-  letter-spacing: 4px;
+  font-size: 20px;
+  letter-spacing: 2.5px;
 }
 app-fav-item, app-folder-card{
   margin: 10px;

@@ -68,7 +68,18 @@
     "terms": "Terms & Conditions"
   },
   "settings":{
-    "title":"SETTINGS"
+    "main_title":"SETTINGS",
+    "sub_title_1": "PERSONAL DETAILS",
+    "sub_title_1_1": "Push Notifications",
+    "sub_title_1_2": "Collapse Insurance",
+    "sub_title_1_3": "Collapse Folder",
+    "sub_title_2": "SETTINGS",
+    "sub_title_2_1": "Language",
+    "sub_title_2_2": "Your Data",
+    "sub_title_2_3": "Change Your Password",
+    "sub_title_3": "OFFICIAL",
+    "sub_title_3_1": "Terms & Conditions",
+    "sub_title_3_2": "Privacy Policy"
   },
   "folder-detail":{
     "subfolder":"My Sub-Folders",
@@ -122,5 +133,8 @@
     "sub_title_name": "Folder Name",
     "text_input_label" : "New Folder Name",
     "btn_save_label": "SAVE"
+  },
+  "add_document": {
+    "title" : "Add a document e.g picture"
   }
 }

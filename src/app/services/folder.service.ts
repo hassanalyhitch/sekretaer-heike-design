@@ -161,7 +161,7 @@ export class FoldersService {
     );
   }
   
-  addNewFolder( folderName:string, parentFolderId:string = "0" ) {
+  addNewFolder( folderName:string, parentFolderId:string) {
     let data = '{"parentFolderId": "'+parentFolderId+'", "name": "'+folderName+'" }' ;
 
     let url = 'https://testapi.maxpool.de/api/v1/sekretaer/myfolders';

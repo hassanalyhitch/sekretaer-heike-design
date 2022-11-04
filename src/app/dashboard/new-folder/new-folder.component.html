@@ -1,10 +1,9 @@
-<div >
 <div class="col-md-12 col-12 px-2">
 
   <div class="d-flex flex-column w-100">
-    <!-- <strong class="section-title align-self-center p-2 m-2">{{ 'overview.new_folder_dialog.title' | translate }}</strong> -->
+  
     
-    <form (ngSubmit)= "onSubmit(saveForm.value)" class="d-flex flex-column mt-2" #saveForm="ngForm" > 
+    <form (ngSubmit)="onSubmit(saveForm.value)" class="d-flex flex-column " #saveForm="ngForm" > 
       <!-- <div class="material-textfield mb-1">
         <input placeholder=" " type="text" [(ngModel)]="newFolderName" name="newFolderName" ngModel required/>
         <label>{{ 'overview.new_folder_dialog.text_input_label' | translate }}</label>
@@ -20,40 +19,35 @@
         {{ 'overview.new_folder_dialog.btn_save_label' | translate }}
         </button>
       </div> -->
-
-      <div class="d-flex justify-content-between w-100 mb-1">
-        <div class="p-2"></div>
-        <div class="p-2">
-          <span class="align-self-center px-3 section-title">
-            {{ 'overview.new_folder_dialog.title' | translate }}
-          </span>
-        </div>
-        <div class="p-2">
-          <div class="close-button mb-2" (click)="closeWindow()">
-            <div class="position-absolute top-0 end-0">
-              <img src="\assets\icons8-close-24.png"/>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- <div class="close-button position-relative" (click)="closeWindow()">
+        <div class="position-absolute top-0 end-0"><img src="\assets\icons8-close-24.png"/></div></div> -->
     
-      <span>ADD:</span>
-      <div class="btn-categories">
-        <input style="outline:none; border:none;" type="text" placeholder="New folder"/>
-        <img class="switch" src="\assets\Add.svg">
-      </div>
-      <span>CLASSIFY:</span>
-      <div class="btn-categories">A-Z <img class="switch" src="\assets\switch.svg"></div>
-      <div class="btn-categories">Date<img class="switch" src="\assets\switch.svg"></div>
-      <div class="btn-categories">etc...<img class="switch" src="\assets\switch.svg"></div>
-  
-      <button id="save-btn" class="btn btn-login w-100 py-2" type="submit" [disabled]="!saveForm.valid"
-        style="font-size:20px;margin-top:20px;">
-          {{ 'overview.new_folder_dialog.btn_save_label' | translate }}
-      </button>
+        <label class="section-title justify-content-center mb-2">{{ 'overview.new_folder_dialog.title' | translate }}</label>
+        <input style="outline:none; border:none;height:50px;" type="text" placeholder="Folder Name" [(ngModel)]="newFolderName" name="newFolderName" ngModel required/>
+    
+        <!-- <img  class="switch" src="\assets\icons8-plus-math-22.png"> -->
+      <!-- <span class="pt-2 pb-1">CLASSIFY:</span> -->
+        <!-- <div class="btn-categories">A-Z <img class="switch"src="\assets\switch.svg"(click)="onFetchFolders()"></div>
+        <div class="btn-categories">Date<img class="switch"src="\assets\switch.svg"></div>
+        <div class="btn-categories">etc...<img class="switch" src="\assets\switch.svg"></div> -->
+      <!-- <div class="d-flex search-btn">
+        <img src="\assets\icons8-search-24.png">
+        <input class="search-box" type="search" name="focus" placeholder="Search..." id="search-input" value="">
+      </div> -->
 
+      <div class="w-100">
+        <button
+        id="save-btn"
+        class="btn btn-login w-100 py-2"
+        [disabled]="!saveForm.valid"
+        type="submit"
+        style="font-size:20px;margin-top:20px;"
+        >
+        {{ 'overview.new_folder_dialog.btn_save_label' | translate }}
+        </button>
+      </div>
+      
     </form>
   </div>
 </div>
 
-</div>

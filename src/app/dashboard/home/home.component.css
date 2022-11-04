@@ -28,16 +28,24 @@
   overflow-x: scroll;
 }
 
-.home-icon-fabs{
+/* Hide scrollbar for Chrome, Safari and Opera */
+.home-icon-fabs::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.home-icon-fabs {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
   overflow-x: scroll;
   min-height: 100px;
 }
 
 .section-title{
   text-shadow: none;
-  font-size: 22px;
   font-weight: bold;
-  letter-spacing: 4px;
+  font-size: 20px;
+  letter-spacing: 2.5px;
 }
 .see-more a{
   text-decoration: none;

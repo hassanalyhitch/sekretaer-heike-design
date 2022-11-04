@@ -145,9 +145,9 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
           break;
         }
       }
-      this.selectedItems = [
-        { id: '30007', dataName: 'default selected'  }
-      ];
+      // this.selectedItems = [
+      //   { id: '30007', dataName: 'default selected'  }
+      // ];
   
     this.form =this.formBuilder.group({
       // namefile:['',Validators.required],

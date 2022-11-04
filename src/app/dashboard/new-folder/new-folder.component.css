@@ -5,20 +5,21 @@ url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
 }
 .section-title{
   text-shadow: none;
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 20px;
+  
 }
 
-button,
 input,
-label,
 * {
   font-family: 'Poppins';
+  border-radius: 5px;
+ 
+
 }
 .close-button{
-  position:relative;
-  margin-bottom: 5px;
+  margin:0px 1px 20px 120px;
   cursor: pointer;
+  
 }
 .add-folder{
   background-color: #ffff;
@@ -42,16 +43,37 @@ label,
 }
 .btn-categories{
   background-color:#ffff;
+  width:100%;
   border:none;
   outline:none;
   border-radius:5px;
   margin:2px 0px;
-  padding:9px;
+  padding:9px 5px;
   float: left;
   cursor: pointer;
 }
 .switch{
   float: right;
+}
+.add-btn{
+  padding-right:4px;
+}
+.search-btn{
+  background-color: #E5007E !important;
+  background-image: linear-gradient(131deg, #D8D3E8, #EBC3CD);
+  border:none;
+  outline:none;
+  border-radius:5px;
+  margin:8px 0px;
+  padding:9px;
+  float: left;
+  cursor: pointer;
+  border: 2px solid #ffff;
+}
+.search-box{
+  outline:none;
+  border:none;
+  background-image: linear-gradient(131deg, #D8D3E8, #EBC3CD);
 }
 
 .heading {

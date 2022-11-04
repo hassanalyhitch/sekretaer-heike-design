@@ -223,7 +223,7 @@ export class OverviewComponent implements OnInit {
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = 'newfolder-modal-component';
-    dialogConfig.height ='400px';
+    dialogConfig.height ='210px';
     dialogConfig.width = '300px';
   
     dialogConfig.panelClass ='bg-dialog-folder';

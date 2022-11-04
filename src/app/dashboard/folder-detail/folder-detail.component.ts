@@ -200,7 +200,7 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
   }
 
   onAddDocument(){
-    this.router.navigate(['dashboard/home/adddocument',{type:'contract'}]);
+    this.router.navigate(['dashboard/home/adddocument',{type:'folder'}]);
   }
   
   renameFileModal(file) {

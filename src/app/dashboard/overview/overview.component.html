@@ -44,7 +44,13 @@
     
           <div class="p-2">
             <div class="ml-auto btn-group dropstart align-self-center">
-              <img class="filter-icon" (click)="addNewFolder()" src="/assets/icon_filter_dark.svg">
+              <img class="filter-icon" data-bs-toggle="dropdown" aria-expanded="false" src="/assets/icon_filter_dark.svg">
+              <ul class="dropdown-menu shadow">
+                <li><span class="dropdown-item" href=""  (click)="addNewFolder()">Add new Folder</span></li>
+                <li><span class="dropdown-item" href="">Sort by  A-Z</span></li>
+                <li><span class="dropdown-item" href="">Sort by Date</span></li>
+              </ul>
+             
             </div>
           </div>
     
