@@ -51,6 +51,7 @@ import { NotificationModalComponent } from './dashboard/notifications/notificati
 import { SubFolderCardComponent } from './dashboard/sub-folder-card/sub-folder-card.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { HomeFabIconsComponent } from './dashboard/home-fab-icons/home-fab-icons.component';
+import { SearchPageComponent } from './dashboard/search-page/search-page.component';
 // particular imports for hammer
 
 import * as Hammer from 'hammerjs';
@@ -89,6 +90,7 @@ const appRoutes: Routes = [
   { path: 'dashboard/home/contract-detail/fileview', component: FileviewComponent},
   { path: 'dashboard/home/adddocument', component:AddPageComponent},
   { path: 'dashboard/home/chat', component:ChatComponent},  
+  { path: 'dashboard/home/search', component:SearchPageComponent},  
   { path: 'dashboard/overview/new-contract',component:NewContractComponent},
   {path:  'privacy-policy',component:PrivacyPolicyComponent}
 
@@ -149,7 +151,8 @@ const appRoutes: Routes = [
     NotificationModalComponent,
     SubFolderCardComponent,
     PrivacyPolicyComponent,
-    HomeFabIconsComponent
+    HomeFabIconsComponent,
+    SearchPageComponent,
    ],
   bootstrap:    [ AppComponent ],
   providers: [
