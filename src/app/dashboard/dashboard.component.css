@@ -55,13 +55,12 @@ app-bottom-nav{
 .logo-container{
   width:8vh;
   max-width: 8vh;
-  border-radius: 50%;
   overflow: hidden;
   
 }
 .app-logo{
-  height: 8vh;
-  width: 8vh;
+  height: 48px;
+  width: 48px;
   padding: 8px;
   object-fit: contain;
   object-position: center center;
