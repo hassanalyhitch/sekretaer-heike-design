@@ -136,5 +136,8 @@
   },
   "add_document": {
     "title" : "Add a document e.g picture"
+  },
+  "search":{
+    "title":"SEARCH"
   }
 }

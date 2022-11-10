@@ -1,12 +1,45 @@
 <div class="content-wrapper w-100 ">
-  <div class="_content d-flex flex-column align-items-center w-100 h-100 bg-">
+<div class="_content d-flex flex-column align-items-center w-100 h-100 bg-">
 
-    <div class="d-flex justify-content-center mb-2 px-4 pt-3">
-        <strong class="section-title align-self-center p-2">{{ 'search.title' | translate }}</strong>
+  <strong class="section-title align-self-center mt-4 mb-3">{{ 'search.title' | translate }}</strong>
+
+  <div class="search_input_container d-flex w-100 bg-">
+    <div class="_input_group w-100 d-flex m- bg-" >
+      <i class="material-icons p-2">search</i>
+      <input type="text " class="search_input w-100" [(ngModel)]="searchValue" (ngModelChange)="filterSearch(searchValue)" placeholder="Search" />
+      
     </div>
-    <p>
-      seach-page works!
-
-    </p>
+    
+    <div class="ml-auto btn-group dropstart align-self-center m-2 p-2 bg-">
+      <img class="filter-icon" src="/assets/icon_filter_dark.svg">
+    </div>
   </div>
+
+
+  <!-- insurances -->
+
+  <div class="d-flex flex-column w-100 bg-" *ngIf="insuranceResArr.length>0" >
+    <p class="text-center"> Insurances</p>
+  </div>
+
+  <!-- folders -->
+
+  <div class="d-flex flex-column w-100 bg-" *ngIf="folderResArr.length>0" >
+    <p class="text-center"> Folders</p>
+  </div>
+  <!-- documents -->
+
+  <div class="d-flex flex-column w-100 bg-" *ngIf="documentResArr.length>0" >
+    <p class="text-center"> Insurances</p>
+  </div>
+  
+  <p class="text-center m-auto" *ngIf="searchValue==''" >
+    Search across Insurance Contracts, Folders and Documents
+  </p>
+
+  <div class="searching-status m-auto" *ngIf="searchValue!=''" >
+    <mat-spinner [diameter]="40" [color]="color"></mat-spinner>
+  </div>
+
+</div>
 </div>
