@@ -18,27 +18,42 @@
 
   <!-- insurances -->
 
-  <div class="d-flex flex-column w-100 bg-" *ngIf="insuranceResArr.length>0" >
-    <p class="text-center"> Insurances</p>
+  <div class="d-flex flex-column w-100 bg-" *ngIf="contractsResArr.length>0" >
+    <p class="text-center m-3"> Insurances</p>
+    <div class="w-100 d-flex flex-column align-items-center extra-cards bg-" >
+      <app-fav-item *ngFor="let item of contractsResArr" [contractItem]=item  (click)="onContractClick(item)"></app-fav-item>
+    </div>
   </div>
 
   <!-- folders -->
 
-  <div class="d-flex flex-column w-100 bg-" *ngIf="folderResArr.length>0" >
-    <p class="text-center"> Folders</p>
+  <div class="d-flex flex-column w-100 bg-" *ngIf="foldersResArr.length>0" >
+    <p class="text-center m-3"> Folders</p>
+    <div class="w-100 d-flex flex-column align-items-center extra-folders bg-"  >
+      <app-folder-card *ngFor="let item of foldersResArr" [folder]=item  (click)="onFolderCardClick(item)"></app-folder-card>
+    </div>
   </div>
   <!-- documents -->
 
-  <div class="d-flex flex-column w-100 bg-" *ngIf="documentResArr.length>0" >
-    <p class="text-center"> Insurances</p>
+  <div class="d-flex flex-column w-100 bg-" *ngIf="documentsResArr.length>0" >
+    <p class="text-center m-3"> Documents</p>
+    <div class="d-flex my-2 documentItem" *ngFor="let doc of documentsResArr; let i = index"  (swipe)="onSwipe($event, doc)" (tap)="onDocClick(doc)"  >
+      <app-document-item class="w-100"  [ngClass]="{'swipedLeft':doc.swipedLeft}" [doc]=doc ></app-document-item>
+    
+      <div class=" edit-rename p-2 d-flex align-self-center justify-content-center align-items-center bg-white "
+       [ngClass]="{'d-none':!doc.swipedLeft}"
+       (click)= "renameFileModal(doc)" >
+          <i class="material-icons">mode_edit</i>
+      </div>
+    </div>
   </div>
   
   <p class="text-center m-auto" *ngIf="searchValue==''" >
     Search across Insurance Contracts, Folders and Documents
   </p>
 
-  <div class="searching-status m-auto" *ngIf="searchValue!=''" >
-    <mat-spinner [diameter]="40" [color]="color"></mat-spinner>
+  <div class="searching-status m-auto" *ngIf="searchValue!='' && !resultExists" >
+    <mat-spinner [diameter]="40"></mat-spinner>
   </div>
 
 </div>
