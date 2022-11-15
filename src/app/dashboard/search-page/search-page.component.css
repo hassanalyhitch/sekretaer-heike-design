@@ -37,3 +37,12 @@
 .searching-status ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
   stroke:  #D60B51;
 }
+.edit-rename{
+  width: 52px;
+  height: 42px;
+  border-radius: 8px;
+  margin-left: 10px !important;
+}
+ .swipedLeft{
+  margin-left: -52px !important;
+}

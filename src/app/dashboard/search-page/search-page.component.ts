@@ -50,6 +50,7 @@ export class SearchPageComponent implements OnInit {
     
     this.matDialog.afterAllClosed.subscribe({
       next: () => {
+        this.searchValue = "";
         this.resultExists = false;
         this.contractsResArr = [];
         this.foldersResArr = [];
@@ -115,6 +116,9 @@ export class SearchPageComponent implements OnInit {
 
   onDocClick(doc: DocumentData){
     console.log('tap !');
+    if(!doc.swipedLeft){
+      
+    }
     this.downloadService.getDownloadFile(doc.linkToDoc).subscribe({
       next:(resp:any)=>{
         try{
