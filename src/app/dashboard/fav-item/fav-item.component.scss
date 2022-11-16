@@ -2,8 +2,8 @@
 @import "~bootstrap/scss/bootstrap.scss";
 .fav-item{
   /* width: 319px; */
-  height: 140px; 
-  @include rfs(8.75rem, height);
+  @include rfs(22.2rem, height);
+  min-height: 140px !important; 
 }
 ._content{
   font-family: oscine, sans-serif;
