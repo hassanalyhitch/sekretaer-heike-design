@@ -1,17 +1,17 @@
 @import url('https://use.typekit.net/myb7tas.css');
-.filter-icon{
+.filter-icon {
   width: 20px;
   height: 20px;
 }
-.content-wrapper{
+.content-wrapper {
   height: 92vh;
-  background-color: #F2F2F2;
-  background-image: linear-gradient(to right, #E5007E 50% , #F2F2F2 50%);
+  background-color: #f2f2f2;
+  background-image: linear-gradient(to right, #e5007e 50%, #f2f2f2 50%);
   margin-top: 0px !important;
   padding: 0px !important;
 }
-._content{
-  background-color: #F2F2F2;
+._content {
+  background-color: #f2f2f2;
   border-radius: 45px 0px 0px 0px;
   height: inherit;
   overflow-y: scroll;
@@ -19,14 +19,14 @@
   font-family: oscine, sans-serif;
 }
 
-.section-home{
+.section-home {
   /* min-height: 300px; */
   height: inherit;
   position: relative;
   overflow-y: scroll;
 }
 
-.fav-wrapper{
+.fav-wrapper {
   overflow-x: scroll;
 }
 
@@ -37,47 +37,47 @@
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .home-icon-fabs {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
   overflow-x: scroll;
   min-height: 100px;
 }
 
-.section-title{
+.section-title {
   text-shadow: none;
   font-weight: bold;
   font-size: 20px;
   letter-spacing: 2.5px;
 }
-.see-more a{
+.see-more a {
   text-decoration: none;
   font-size: 12px;
   color: #707070;
 }
-.section-quicklinks{
+.section-quicklinks {
   padding-right: 0.85rem;
 }
-.quick-fab{
+.quick-fab {
   height: 56px;
   width: 56px;
   border-radius: 50%;
   border: solid 2px white;
-  background-color: #F2F2F2;
-  box-shadow: 0px 3px 3px #0000001A;
+  background-color: #f2f2f2;
+  box-shadow: 0px 3px 3px #0000001a;
   backdrop-filter: blur(6.6px);
   -webkit-backdrop-filter: blur(6.6px);
   position: relative;
   cursor: pointer;
 }
-.chat-quicky::after{
+.chat-quicky::after {
   content: attr(chat-unread);
-  background-color: #D60B51;
+  background-color: #d60b51;
   border-radius: 50%;
   width: fit-content;
   min-width: 22px;
   height: fit-content;
   min-height: 22px;
-  box-shadow: 0px 3px 3px #0000001A;
+  box-shadow: 0px 3px 3px #0000001a;
   backdrop-filter: blur(6.6px);
   -webkit-backdrop-filter: blur(6.6px);
   color: white;
@@ -91,65 +91,64 @@
 .quick-fab i {
   font-size: 28px;
 }
-.quick-fab > span{
+.quick-fab > span {
   font-size: 28px;
 }
-.fab-label{
+.fab-label {
   font-size: 11px !important;
   position: absolute;
   bottom: -24px;
 }
-.disabled{
+.disabled {
   box-shadow: none;
   border: none;
-  background-color: #BFBFBF;
+  background-color: #bfbfbf;
   color: #707070;
 }
-.section-service{
+.section-service {
   height: 100%;
-  margin-bottom: 60px;
+  padding-bottom: 60px;
   background-color: white;
   border-radius: 0px 45px 0px 0px;
-  box-shadow: 0px 0px 3px #0000001A;
+  box-shadow: 0px 0px 3px #0000001a;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-
 }
-.service-card{
+.service-card {
   height: 120px;
   background-color: white;
-  box-shadow: 0px 3px 3px #0000001A;
+  box-shadow: 0px 3px 3px #0000001a;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: solid 1px #f2f2f2;
   cursor: pointer;
 }
-.notification-card::after{
+.notification-card::after {
   content: attr(notification-count);
-    background-color: #D60B51;
-    border-radius: 50%;
-    width: fit-content;
-    min-width: 30px;
-    height: fit-content;
-    min-height: 30px;
-    box-shadow: 0px 3px 3px #0000001A;
-    backdrop-filter: blur(6.6px);
-    -webkit-backdrop-filter: blur(6.6px);
-    color: white;
-    margin: 0 auto;
-    padding: 10px;
-    font-size: 12px;
-    top: 10px;
-    right: -5px;
-    position: absolute;
+  background-color: #d60b51;
+  border-radius: 50%;
+  width: fit-content;
+  min-width: 30px;
+  height: fit-content;
+  min-height: 30px;
+  box-shadow: 0px 3px 3px #0000001a;
+  backdrop-filter: blur(6.6px);
+  -webkit-backdrop-filter: blur(6.6px);
+  color: white;
+  margin: 0 auto;
+  padding: 10px;
+  font-size: 12px;
+  top: 10px;
+  right: -5px;
+  position: absolute;
 }
 
-.bg-new-notify-icon{
-  background-color: #D60B51;
+.bg-new-notify-icon {
+  background-color: #d60b51;
   border-radius: 50%;
   width: fit-content;
   height: fit-content;
-  box-shadow: 0px 3px 3px #0000001A;
+  box-shadow: 0px 3px 3px #0000001a;
   backdrop-filter: blur(6.6px);
   -webkit-backdrop-filter: blur(6.6px);
   color: white;
@@ -161,7 +160,7 @@
   position: absolute;
 }
 
-.app-fav-item{
+.app-fav-item {
   cursor: pointer;
 }
 
@@ -179,16 +178,15 @@
   border-radius: 8px;
 }
 /* for mozilla */
-*{
+* {
   scrollbar-width: none !important;
-
 }
 
-.card-text-title{
+.card-text-title {
   font-size: 16px;
   letter-spacing: 2px;
 }
 
-.card-text-subtitle{
+.card-text-subtitle {
   font-size: 12px;
 }
