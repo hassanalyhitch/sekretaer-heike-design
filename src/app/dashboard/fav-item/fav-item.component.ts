@@ -4,7 +4,7 @@ import { ContractData } from '../../models/contract.model';
 @Component({
   selector: 'app-fav-item',
   templateUrl: './fav-item.component.html',
-  styleUrls: ['./fav-item.component.css']
+  styleUrls: ['./fav-item.component.scss']
 })
 export class FavItemComponent implements OnInit {
 
