@@ -1,9 +1,11 @@
 @import url('https://use.typekit.net/myb7tas.css');
 @import "~bootstrap/scss/bootstrap.scss";
 .fav-item{
-  /* width: 319px; */
+  // min-width: 319px;
   @include rfs(22.2rem, height);
   min-height: 140px !important; 
+  max-height: 250px !important;
+  background-color: white;
 }
 ._content{
   font-family: oscine, sans-serif;
