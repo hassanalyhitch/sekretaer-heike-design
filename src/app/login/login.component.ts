@@ -5,6 +5,7 @@ import {
   Output,
   EventEmitter,
   ViewChild,
+  Input,
 } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
@@ -28,6 +29,12 @@ export class LoginComponent implements OnInit {
   @ViewChild("loginForm", { static: true }) loginForm: NgForm;
   errorMessage: string = null;
   errorStack: string[] = [];
+
+  @Input() privacy_policy: boolean = false;
+  @Output() onShowPrivacyPolicy = new EventEmitter<boolean>();
+
+  @Input() terms_and_conditions: boolean = false;
+  @Output() onShowTermsAndConditions = new EventEmitter<boolean>();
 
   constructor(
     private http: HttpClient,
@@ -84,4 +91,15 @@ export class LoginComponent implements OnInit {
     this.errorMessage = null;
     this.validateUser(formData);
   }
+
+  onPolicySelected() { 
+    this.privacy_policy = true;
+    this.onShowPrivacyPolicy.emit(this.privacy_policy); 
+  }
+
+  onTermsAndConditionSelected() { 
+    this.terms_and_conditions = true;
+    this.onShowTermsAndConditions.emit(this.terms_and_conditions); 
+  }
+  
 }

@@ -1,7 +1,11 @@
+
+@import url('https://use.typekit.net/myb7tas.css');
 .section-quicklinks{
     padding-right: 0.85rem;
 }
-
+._content{
+    font-family: oscine, sans-serif;
+}
 .fab-label{
     font-size: 11px !important;
     position: absolute;

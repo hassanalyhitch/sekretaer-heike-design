@@ -1,17 +1,21 @@
 <div class="content-wrapper w-100 ">
     <div class="_content d-flex flex-column w-100 h-100 ">
         <div  class="form-container">
-            <form (ngSubmit)= "onSubmit(contractForm.value)" class="d-flex flex-column" #contractForm="ngForm">
+            <form (ngSubmit)="onSubmit(contractForm.value)" class="d-flex flex-column" #contractForm="ngForm">
                 <p style="text-align:center ;font-size: large;"><b>NEW CONTRACT</b></p>
                 <p style="text-align:center;">Please Select Branch</p>
-                <div class="folders-selected">
+                
+                <div class="branches-selected">
                     <ng-multiselect-dropdown
                     [settings]="branchSettings"
                     [data]="dataArr"
+                    [(ngModel)]="selectedBranches"
                     (onSelect)="onBranchSelected($event)"
-                    [(ngModel)]="selectedBranches">
+                   >
                 </ng-multiselect-dropdown>
                 </div>
+             
+                
                
                 
                 <p style="text-align:center;">Please Select Company</p>
@@ -23,8 +27,11 @@
                     [(ngModel)]="selectedCompanies">
                     </ng-multiselect-dropdown>
                 </div>
-               
-                
+
+                   
+                  
+            
+         
                 <div class="broker">
                     <p> Did you wish for your broker to take care of this?</p>
                     <div class="d-sm-row-flex">

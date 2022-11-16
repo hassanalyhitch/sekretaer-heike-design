@@ -1,4 +1,4 @@
-
+@import url('https://use.typekit.net/myb7tas.css');
 .content-wrapper{
   height: 92vh;
   background-color: #F2F2F2;
@@ -10,11 +10,13 @@
   background-color: #F2F2F2;
   border-radius: 45px 0px 0px 0px;
   overflow-y: scroll;
+  font-family: oscine, sans-serif;
 }
 .section-title{
   text-shadow: none;
   font-size: 20px;
   letter-spacing: 2.5px;
+  font-family:oscine, sans-serif;
 }
 .mark-as-read{
   color: #707070;

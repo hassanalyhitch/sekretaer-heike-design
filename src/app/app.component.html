@@ -1,6 +1,19 @@
 <div class="main d-flex flex-column w-100 ">
-  <div class="col-md-12 col-lg-3 col-xl-3 col-12 col-sm-6 align-self-center shadow">
-    <app-login (auth)="authenticated = $event" *ngIf="!authenticated" (lang)="setLang($event)" ></app-login>
+  <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4 col-xxl-4 col-12 align-self-center shadow">
+
+    <app-login 
+      (auth)="authenticated = $event" 
+      *ngIf="!authenticated && !show_privacy_policy && !show_terms_and_conditions"
+      (onShowPrivacyPolicy)="showPrivacyPolicy($event)"
+      (onShowTermsAndConditions)="showTerms($event)" 
+      (lang)="setLang($event)" >
+    </app-login>
+
     <app-dashboard *ngIf="authenticated"></app-dashboard>
+
+    <div *ngIf="!authenticated && show_privacy_policy || !authenticated && show_terms_and_conditions">
+      <router-outlet></router-outlet>
+    </div>
+
   </div>
 </div>

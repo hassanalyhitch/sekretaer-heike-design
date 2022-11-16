@@ -1,8 +1,11 @@
+@import url('https://use.typekit.net/myb7tas.css');
 .fav-item{
-  width: 319px;
-  height: 145px;
+  /* width: 319px; */
+  height: 140px;
 }
-
+._content{
+  font-family: oscine, sans-serif;
+}
 .doc-icon{
   width: 40%;
   height: 40%;

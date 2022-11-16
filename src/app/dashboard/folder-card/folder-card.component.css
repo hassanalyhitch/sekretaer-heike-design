@@ -1,7 +1,8 @@
+@import url('https://use.typekit.net/myb7tas.css');
 .folder-bg{
   border-top-right-radius: 15px;
-  width: 314px;
-  height: 147px;
+  /* width: 314px;
+  height: 147px; */
 }
 .folder-bg-transparent{
   margin-bottom: 10px;
@@ -12,6 +13,7 @@
   margin-top: -30px;
   border-top: solid 4px #D60B51;
   border-top-right-radius: 15px;
+  font-family: oscine, sans-serif;
 }
 .folder-top{
   width: 110px;

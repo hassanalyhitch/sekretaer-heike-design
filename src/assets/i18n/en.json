@@ -40,6 +40,13 @@
       "title": "NEW SUB FOLDER",
       "text_input_label": "Name",
       "btn_save_label": "SAVE"
+    },
+    "option_menu": {
+      "title_new_contract" : "Add New Contract",
+      "title_new_folder"   : "Add New Folder",
+      "sort_by_date"       : "Sort by Date",
+      "sort_by_a_to_z"     : "Sort by A-Z",
+      "search"             : "Search"
     }
   },
   "contract_detail": {
@@ -135,9 +142,20 @@
     "btn_save_label": "SAVE"
   },
   "add_document": {
-    "title" : "Add a document e.g picture"
+    "main_title":"ADD DOCUMENT",
+    "title" : "Add a document e.g picture",
+    "sub_title_1":"Upload document/Image",
+    "sub_title_2":"Assign",
+    "placeholder":"Current Folder",
+    "submit_button_label": "UPLOAD"
   },
   "search":{
     "title":"SEARCH"
+  },
+  "privacy_policy":{
+    "title" : "Privacy Policy"
+  },
+  "terms_conditions":{
+    "title" : "Terms & Conditions"
   }
 }

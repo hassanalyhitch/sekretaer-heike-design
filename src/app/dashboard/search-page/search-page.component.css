@@ -1,3 +1,4 @@
+@import url('https://use.typekit.net/myb7tas.css');
 .content-wrapper{
   height: 92vh;
   background-color: #F2F2F2;
@@ -12,6 +13,7 @@
   overflow-y: scroll;
   overflow-x: hidden;
   padding-bottom: 60px;
+  font-family: oscine, sans-serif;
 }
 .search_input_container{
   padding-left: 30px !important;
@@ -45,4 +47,8 @@
 }
  .swipedLeft{
   margin-left: -52px !important;
+}
+app-fav-item, app-folder-card, app-document-item{
+  margin: 10px;
+  cursor: pointer;
 }

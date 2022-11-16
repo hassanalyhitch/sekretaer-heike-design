@@ -5,16 +5,18 @@
         <strong class="section-title align-self-center p-2">{{ 'favourites.title' | translate }}</strong>
     </div>
       
-    <div class="fav-wrapper d-flex flex-column p-3 bg-">
+    <div class="fav-wrapper w-100 d-flex flex-column align-items-center p-3 bg-">
           
       <div class="d-flex justify-content-center m-4 w-100 bg-" *ngIf="favArrHasNoContent()" >
         {{ 'favourites.no_favourites' | translate }}
       </div>
 
-      <app-fav-item *ngFor="let favItem of favContractArr; let index = index" (click)="onFavContractClick(index)" [contractItem]="favItem" ></app-fav-item>
+      <div class="w-100 d-flex flex-column align-items-center extra-folders bg-">
+        <app-fav-item class="w-100" *ngFor="let favItem of favContractArr; let index = index" (click)="onFavContractClick(index)" [contractItem]="favItem" ></app-fav-item>
+      </div>
       
       <div class="w-100 d-flex flex-column align-items-center extra-folders bg-" id="extra-folders" >
-        <app-folder-card *ngFor="let item of favFoldersArr" [folder]=item  (click)="onFolderCardClick(item)"></app-folder-card>
+        <app-folder-card class="col-12" *ngFor="let item of favFoldersArr" [folder]=item  (click)="onFolderCardClick(item)"></app-folder-card>
       </div>
 
     </div>

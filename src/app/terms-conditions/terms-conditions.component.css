@@ -1,0 +1,71 @@
+@import url('https://use.typekit.net/myb7tas.css');
+.section-content{
+    height: 100vh;
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-bottom: 180px;
+    padding-top: 200px;
+    background-image: linear-gradient(#F2F2F2,#EDCFD6);
+  }
+  
+  .close-btn{
+    background-image: linear-gradient(131deg, #E5007E, #D60B51);
+    border-color: #E5007E !important;
+    width: 80%;
+    color: #ffff;
+    border-radius:7px;
+    border: none;
+    padding:9px 5px;
+    cursor: pointer;
+    display: block;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:16px;
+    font-size: 20px;
+    letter-spacing: 2.5px;
+  }
+  
+  .section-title{
+    text-shadow: none;
+    font-weight: bold;
+    font-size: 15px;
+    letter-spacing: 2.5px;
+  }
+  
+  .text-content{
+    font-size: medium;
+    font-family:oscine, sans-serif;
+  }
+  
+  .main-wrapper{
+    font-size: medium;
+    font-family:oscine, sans-serif;
+    height: 100%;
+    position: relative;
+  }
+  
+  .header-wrapper{
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    min-height: 100px;
+    background: rgba(226, 226, 226, 0.075);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(9.7px);
+    -webkit-backdrop-filter: blur(9.7px);
+    /* border: 1px solid rgba(218, 216, 216, 0.3); */
+  }
+  
+  .app-logo{
+    height: 100px;
+    width: 122.5px;
+    margin-top: 40.6px;
+    margin-left: 151px;
+    margin-right: 151px;
+    margin-bottom: 30.9px;
+    /* padding: 8px;
+    object-fit: contain;
+    object-position: center center; */
+  }
+   

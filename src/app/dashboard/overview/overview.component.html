@@ -17,16 +17,19 @@
     </div>
 
     <div class="section-insurance w-100 d-flex flex-column align-items-center bg-">
-      <div class="cards w-100 d-flex flex-column align-items-center mt-1 bg-" id="cards" [ngClass]="{'transition':!collapsed}">
-      
-        <app-fav-item class="a_card card-1" [contractItem]=allContractsArr[2] (click)="onCardClick(allContractsArr[2])" *ngIf="showCard1" ></app-fav-item>
-        <app-fav-item class="a_card card-2" [contractItem]=allContractsArr[1] (click)="onCardClick(allContractsArr[1])" *ngIf="showCard2"></app-fav-item>
-        <app-fav-item class="a_card card-3" [contractItem]=allContractsArr[0] (click)="onDefaultInsuranceCardClick()"></app-fav-item>
+
+      <div class="w-100 d-flex flex-wrap p-3 py-3 justify-content-center">
+
+        <div class="cards bg- w-100 d-flex flex-column align-items-center mt-1" id="cards" [ngClass]="{'transition':!collapsed}">
+          <app-fav-item class="a_card card-1 col-12" [contractItem]=allContractsArr[2] (click)="onCardClick(allContractsArr[2])" *ngIf="showCard1" ></app-fav-item>
+          <app-fav-item class="a_card card-2 col-12" [contractItem]=allContractsArr[1] (click)="onCardClick(allContractsArr[1])" *ngIf="showCard2"></app-fav-item>
+          <app-fav-item class="a_card card-3 col-12" [contractItem]=allContractsArr[0] (click)="onDefaultInsuranceCardClick()"></app-fav-item>
+        </div>
         
-      </div>
-      
-      <div class="w-100 d-flex flex-column align-items-center extra-cards bg-" id="extra-cards" [ngClass]="{'show':!collapsed}">
-        <app-fav-item *ngFor="let item of subsetArr" [contractItem]=item  (click)="onCardClick(item)"></app-fav-item>
+        <div class="w-100 d-flex flex-column align-items-center extra-cards" id="extra-cards" [ngClass]="{'show':!collapsed}">
+          <app-fav-item class="col-12" *ngFor="let item of subsetArr" [contractItem]=item  (click)="onCardClick(item)"></app-fav-item>
+        </div>
+
       </div>
       
       <div class="section-folder d-flex flex-column p-4 w-100 bg-white">
@@ -46,9 +49,10 @@
             <div class="ml-auto btn-group dropstart align-self-center">
               <img class="filter-icon" data-bs-toggle="dropdown" aria-expanded="false" src="/assets/icon_filter_dark.svg">
               <ul class="dropdown-menu shadow">
-                <li><span class="dropdown-item" href=""  (click)="addNewFolder()">Add new Folder</span></li>
-                <li><span class="dropdown-item" href="">Sort by  A-Z</span></li>
-                <li><span class="dropdown-item" href="">Sort by Date</span></li>
+                <li><span class="dropdown-item" href="" (click)="addNewFolder()">{{ "overview.option_menu.title_new_folder" | translate }}</span></li>
+                <li><span class="dropdown-item" href="">{{ "overview.option_menu.search" | translate }}</span></li>
+                <li><span class="dropdown-item" href="">{{ "overview.option_menu.sort_by_a_to_z" | translate }}</span></li>
+                <li><span class="dropdown-item" href="">{{ "overview.option_menu.sort_by_date" | translate }}</span></li>
               </ul>
              
             </div>
@@ -59,12 +63,12 @@
         <div class="w-100 d-flex flex-wrap py-3 justify-content-center">
               
           <div class="folders w-100 d-flex flex-column align-items-center mt-1 bg-" id="folders" [ngClass]="{'transition':!collapsedFolders}">
-            <app-folder-card class="a_card card-1" [folder]=foldersArr[2] (click)="onFolderCardClick(foldersArr[2])" *ngIf="showFolderCard1" ></app-folder-card>
-            <app-folder-card class="a_card card-2" [folder]=foldersArr[1] (click)="onFolderCardClick(foldersArr[1])" *ngIf="showFolderCard2"></app-folder-card>
-            <app-folder-card class="a_card card-3" [folder]=foldersArr[0] (click)="onDefaultFolderCardClick()"></app-folder-card>
+            <app-folder-card class="a_card card-1 col-12" [folder]=foldersArr[2] (click)="onFolderCardClick(foldersArr[2])" *ngIf="showFolderCard1" ></app-folder-card>
+            <app-folder-card class="a_card card-2 col-12" [folder]=foldersArr[1] (click)="onFolderCardClick(foldersArr[1])" *ngIf="showFolderCard2"></app-folder-card>
+            <app-folder-card class="a_card card-3 col-12" [folder]=foldersArr[0] (click)="onDefaultFolderCardClick()"></app-folder-card>
           </div>
           <div class="w-100 d-flex flex-column align-items-center extra-folders bg-" id="extra-folders" [ngClass]="{'show':!collapsedFolders}">
-            <app-folder-card *ngFor="let item of folderSubsetArr" [folder]=item  (click)="onFolderCardClick(item)"></app-folder-card>
+            <app-folder-card class="col-12" *ngFor="let item of folderSubsetArr" [folder]=item  (click)="onFolderCardClick(item)"></app-folder-card>
           </div>
 
         </div>

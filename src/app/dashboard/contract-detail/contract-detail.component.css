@@ -1,3 +1,4 @@
+@import url('https://use.typekit.net/myb7tas.css');
 .content-wrapper{
   height: 92vh;
   background-color: #F2F2F2;
@@ -7,6 +8,7 @@
 }
 
 ._content{
+  font-family: oscine, sans-serif;
   background-color: #F2F2F2;
   border-radius: 45px 0px 0px 0px;
   height: inherit;

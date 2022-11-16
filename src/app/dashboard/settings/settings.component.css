@@ -1,3 +1,4 @@
+@import url('https://use.typekit.net/myb7tas.css');
 .content-wrapper{
   height: 92vh;
   background-color: #F2F2F2;
@@ -32,6 +33,7 @@
   font-weight: bold;
   font-size: 20px;
   letter-spacing: 2.5px;
+  font-family: oscine, sans-serif;
 }
 
 .inquiries{
@@ -76,7 +78,7 @@
   box-shadow: 0 0px 0px #00000030, 0 0px 4px #0000003b;
   padding-top:20px;
   border:none;
-  font-family:'Poppins';
+  font-family:oscine, sans-serif;
   border-radius:0px 0px 25px 0px;
 }
 
@@ -85,7 +87,7 @@
   box-shadow: 0 0px 0px #00000030, 0 0px 4px #0000003b;
   padding-top:20px;
   border:none;
-  font-family:'Poppins';
+  font-family:oscine, sans-serif;
   border-radius:0px 0px 25px 0px;
 }
 .title{

@@ -18,26 +18,26 @@
 
   <!-- insurances -->
 
-  <div class="d-flex flex-column w-100 bg-" *ngIf="contractsResArr.length>0" >
+  <div class="d-flex flex-column w-100 px-3 bg-" *ngIf="contractsResArr.length>0" >
     <p class="text-center m-3"> Insurances</p>
     <div class="w-100 d-flex flex-column align-items-center extra-cards bg-" >
-      <app-fav-item *ngFor="let item of contractsResArr" [contractItem]=item  (click)="onContractClick(item)"></app-fav-item>
+      <app-fav-item class="col-12" *ngFor="let item of contractsResArr" [contractItem]=item  (click)="onContractClick(item)"></app-fav-item>
     </div>
   </div>
 
   <!-- folders -->
 
-  <div class="d-flex flex-column w-100 bg-" *ngIf="foldersResArr.length>0" >
+  <div class="d-flex flex-column w-100 px-3 bg-" *ngIf="foldersResArr.length>0" >
     <p class="text-center m-3"> Folders</p>
     <div class="w-100 d-flex flex-column align-items-center extra-folders bg-"  >
-      <app-folder-card *ngFor="let item of foldersResArr" [folder]=item  (click)="onFolderCardClick(item)"></app-folder-card>
+      <app-folder-card class="col-12" *ngFor="let item of foldersResArr" [folder]=item  (click)="onFolderCardClick(item)"></app-folder-card>
     </div>
   </div>
   <!-- documents -->
 
-  <div class="d-flex flex-column w-100 bg-" *ngIf="documentsResArr.length>0" >
+  <div class="d-flex flex-column px-3 pb-4 w-100 bg-" *ngIf="documentsResArr.length>0" >
     <p class="text-center m-3"> Documents</p>
-    <div class="d-flex my-2 documentItem" *ngFor="let doc of documentsResArr; let i = index"  (swipe)="onSwipe($event, doc)"  >
+    <div class="d-flex my-2 documentItem " *ngFor="let doc of documentsResArr; let i = index"  (swipe)="onSwipe($event, doc)"  >
       <app-document-item class="w-100"  [ngClass]="{'swipedLeft':doc.swipedLeft}" [doc]=doc  (tap)="onDocClick(doc)" ></app-document-item>
     
       <div class=" edit-rename p-2 d-flex align-self-center justify-content-center align-items-center bg-white "

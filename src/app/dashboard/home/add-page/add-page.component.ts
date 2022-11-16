@@ -52,7 +52,7 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
     isSelected:false
    };
   
-   placeholderValue:string ='Current Folder';
+ 
    folderSub:Subscription;
    folderArr: any[] = [];
    contractArr: any[] = [];

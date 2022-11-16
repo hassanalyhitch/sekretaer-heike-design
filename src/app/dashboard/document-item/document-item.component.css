@@ -1,3 +1,4 @@
+@import url('https://use.typekit.net/myb7tas.css');
 .document-item{
   height: 85px;
 }
@@ -5,7 +6,9 @@
   width: 40%;
   height: 40%;
 }
-
+._content{
+  font-family: oscine, sans-serif;
+}
 .doc-broker-icon{
   color: #D60B51;
   width: 50px;

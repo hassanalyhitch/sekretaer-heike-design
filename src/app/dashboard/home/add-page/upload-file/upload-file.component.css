@@ -1,20 +1,28 @@
+@import url('https://use.typekit.net/myb7tas.css');
+._content{
+  font-family: oscine, sans-serif;
+}
 .uploadFileItem{
   margin: 10px 15px;
    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
    border-radius: 7px;
+   padding-left:4px;
+   padding-right:4px;
  }
  
  .e-file-delete-btn{
    width: 48px;
    height: 48px;
+   padding:10px;
  }
  .e-file-delete-btn:hover{
    width: 48px;
    height: 48px;
+   align-items: center;
+   padding:10px;
    background-color: rgba(0,0,0,.12);
    border-color: rgba(0,0,0,0);
    border-radius: 50%;
-   box-shadow: 0 0 0 rgb(0 0 0 / 0%);
    cursor:pointer;
  }
  

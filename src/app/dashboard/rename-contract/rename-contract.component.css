@@ -1,3 +1,4 @@
+@import url('https://use.typekit.net/myb7tas.css');
 .section-title{
   text-shadow: none;
   font-size: 20px;
@@ -9,17 +10,17 @@ button,
 input,
 label,
 * {
-  font-family: 'Poppins';
+  font-family: oscine, sans-serif;
 }
 
 .heading {
-  font-family: 'Poppins';
+  font-family: oscine, sans-serif;
   font-weight: 500;
   font-size: 2.5em;
   margin-top: 3em;
 }
 .sub-heading {
-  font-family: 'Poppins';
+  font-family: oscine, sans-serif;
   font-weight: 200;
   font-size: 1.5em;
   margin-bottom: 2.8em;
@@ -45,6 +46,7 @@ label,
   pointer-events: none;
 }
 .material-textfield > input {
+  font-family: oscine, sans-serif;
   font-size: 1rem;
   outline: none;
   border: 1px solid #2C262D;

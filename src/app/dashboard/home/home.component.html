@@ -16,15 +16,19 @@
     <div class="section-home">
       <!-- favourite items -->
       <div class="fav-wrapper d-flex flex-nowrap pb-4">
+
         <div class="d-flex justify-content-center m-4 w-100" *ngIf="favArrHasNoContent()">
           {{ "home.message_no_favourite_contracts" | translate }}
         </div>
 
-        <app-fav-item 
-          *ngFor="let favItem of favArr; let index = index" 
-          (click)="onFavContractClick(index)" 
-          [contractItem]="favItem">
-        </app-fav-item>
+        <div class="d-flex w-100 px-3">
+          <app-fav-item
+            class="col-12 px-1" 
+            *ngFor="let favItem of favArr; let index = index" 
+            (click)="onFavContractClick(index)" 
+            [contractItem]="favItem">
+          </app-fav-item>
+        </div>
 
       </div>
       

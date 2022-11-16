@@ -1,11 +1,28 @@
 <div class="content-wrapper w-100 ">
-  <div class="_content d-flex flex-column w-100 h-100 " [ngClass]="{'allowScroll' :dropDownIsHidden, 'disableScroll':!dropDownIsHidden}">
+  <div class="_content d-flex flex-column w-100 h-100 "
+  [ngClass]="{'allowScroll' :dropDownIsHidden, 'disableScroll':!dropDownIsHidden}"
+  >
+  
+
+  <!--section header -->
+  <div class="d-flex justify-content-between mb-2 px-4 pt-3 w-100">
+    <div class="d-flex"></div>
+    <div class="p-2">
+      <span class="section-title d-flex justify-content-center">{{ 'add_document.main_title' | translate }}</span>
+    </div>
+    <div class="p-2">
+    </div>
+  </div>
+
+
+  <!--contains main content -->
+  <div class="main-content align-items-center px-1 w-100">
     <form  (ngSubmit)="onSubmit(addPageForm.value)" #addPageForm="ngForm">
       <p div class="assignment">{{ "add_document.title" | translate }}:</p>
         <div>
             <label for="selectFile" class="selectDocument" >
               <img src="\assets\upload-snippet.png"><br>
-              <span>Upload document/Image</span>
+              <span>{{ 'add_document.sub_title_1' | translate }}</span>
             </label>
             <input 
               class="file-input d-none" 
@@ -21,13 +38,13 @@
             
             <app-upload-file class="fileUpload"*ngFor="let uploadFile of uploadFileArr" [uploadFile]="uploadFile" (deleteFile)="removeFile($event)"></app-upload-file>
         </div>
-            <p class="assignment">Assign:</p>
+            <p class="assignment">{{ 'add_document.sub_title_2' | translate }}</p>
             <input type="date"  id="pickdate" placeholder="Date" class="fileUpload">
             <input type="text"  placeholder="Class"  class="fileUpload">
         <div class="folderSection">
           <div class="fileUpload">
                 <ng-multiselect-dropdown
-                  [placeholder]="placeholderValue"
+                  [placeholder]="'add_document.placeholder' | translate "
                   [settings]="dropdownSettings"
                   [data]="dataArr"
                   (onSelect)="onItemSelected($event)"
@@ -41,8 +58,11 @@
         </div>
             <div class="share"><img src="\assets\Gruppe 195.svg"></div>
       
-            <button type="submit" class="submit" >UPLOAD</button>
+            <button type="submit" class="submit" >{{ 'add_document.submit_button_label' | translate }}</button>
     </form>
-  </div> 
+  </div>
+  
+  
+</div> 
 </div>
 

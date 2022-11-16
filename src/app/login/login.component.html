@@ -82,10 +82,11 @@
   </div>
 
   <div class="d-flex justify-content-evenly bottom-links w-100 my-2 py-2">
-    <a href="">
+    <a  (click)="onPolicySelected()">
       <span>{{ "login.privacy_policy" | translate }}</span>
     </a>
-    <a href="">
+
+    <a  (click)="onTermsAndConditionSelected()">
       <span>{{ "login.terms" | translate }}</span>
     </a>
   </div>

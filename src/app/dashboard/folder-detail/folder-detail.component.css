@@ -1,3 +1,4 @@
+@import url('https://use.typekit.net/myb7tas.css');
 .filter-icon{
   width: 20px;
   height: 20px;
@@ -46,6 +47,7 @@
   border-radius: 45px 0px 0px 0px;
   overflow-y: scroll;
   padding-bottom: 80px;
+  font-family: oscine, sans-serif;
 }
 .fav-wrapper{
   overflow-x: scroll;

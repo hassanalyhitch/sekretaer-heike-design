@@ -1,16 +1,15 @@
-<div class="folder-bg-transparent">
-  
+<div class="w-100 folder-bg-transparent">
   <div class="folder-top shadow-sm">
     <span></span>
   </div>
 
   <div class="content bg-white shadow">
-    <div class="folder-bg">
+    <div class="folder-bg w-100">
     
       <div class="d-flex justify-content-start ms-2">
         <div class="p-2">
           <div class="d-flex flex-column">
-            <div class="fs-6">{{folder.folderName}}</div>
+            <div class="fs-6">{{folder.folderName | shortenText: 20}}</div>
             <div class="fw-bold">folder description</div>
           </div>
         </div>

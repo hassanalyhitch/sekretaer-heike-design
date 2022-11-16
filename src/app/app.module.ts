@@ -10,6 +10,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input'
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -52,8 +56,9 @@ import { SubFolderCardComponent } from './dashboard/sub-folder-card/sub-folder-c
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { HomeFabIconsComponent } from './dashboard/home-fab-icons/home-fab-icons.component';
 import { SearchPageComponent } from './dashboard/search-page/search-page.component';
-// particular imports for hammer
+import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
 
+// particular imports for hammer
 import * as Hammer from 'hammerjs';
 import {HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
 
@@ -92,7 +97,8 @@ const appRoutes: Routes = [
   { path: 'dashboard/home/chat', component:ChatComponent},  
   { path: 'dashboard/home/search', component:SearchPageComponent},  
   { path: 'dashboard/overview/new-contract',component:NewContractComponent},
-  {path:  'privacy-policy',component:PrivacyPolicyComponent}
+  { path: 'privacy-policy',component:PrivacyPolicyComponent},
+  { path: 'terms-and-conditions', component:TermsConditionsComponent}
 
 
 ];
@@ -108,6 +114,10 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatProgressSpinnerModule,
     MatSlideToggleModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSelectModule,
     HammerModule,
     NgMultiSelectDropDownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
@@ -153,6 +163,7 @@ const appRoutes: Routes = [
     PrivacyPolicyComponent,
     HomeFabIconsComponent,
     SearchPageComponent,
+    TermsConditionsComponent
    ],
   bootstrap:    [ AppComponent ],
   providers: [

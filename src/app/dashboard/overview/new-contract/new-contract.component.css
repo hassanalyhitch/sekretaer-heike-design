@@ -1,3 +1,4 @@
+@import url('https://use.typekit.net/myb7tas.css');
 .content-wrapper{
   overflow: hidden;
   height: 92vh;
@@ -11,7 +12,10 @@
   border-radius: 45px 0px 0px 0px;
   overflow-y: scroll;
   padding-bottom: 80px;
+  font-family:oscine, sans-serif;
 }
+
+
 .broker{
   padding:12px 45px !important;
   background-color: #fff;
@@ -33,7 +37,7 @@
   background-color: #fff;
   border-radius: 5px;
 }
-.folders-selected{
+.branches-selected{
   background-color: #fff;
   border-radius:5px;
 }
@@ -60,6 +64,7 @@ button:focus{
   padding-right: 45px !important;
   margin-top: 25px;
   width: 100%;
+  font-family:oscine, sans-serif;
 }
 .form-group{
   position: relative;
@@ -110,4 +115,8 @@ button:focus{
 
 .form-control::placeholder{
   color: transparent; 
+}
+
+.example-full-width {
+  width: 100%;
 }

@@ -1,11 +1,14 @@
 import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
-import { NgForm } from '@angular/forms';
 import { BranchData } from '../../../models/branch.model';
 import { BranchService } from '../../../services/branch.service';
 import { CompanyData } from '../../../models/company.model';
 import { CompanyService } from '../../../services/company.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
+
+
 
 @Component({
   selector: 'app-new-contract',
@@ -30,60 +33,64 @@ export class NewContractComponent implements OnInit {
 
 branches:BranchData[] = [];
 companies:CompanyData[]=[];
-branchSelected:string;
 name='company';
 showcontract:string;
+branchSelected:string;
 BrokerForm:FormGroup;
 optionSelected:boolean=true;
 Branch2MasterId:any;
 selectedBranches:any;
 selectedCompanies:any;
+// ------------------------------
+
+formGroup:FormGroup;
+
  
 @ViewChild("selectFile",{static:true}) selectFile:ElementRef;
-branchSettings = {}; 
-companySettings ={};
+branchSettings ={}; 
+companySettings = {};
   constructor(private branchService:BranchService) { 
 
   }
- 
+
   ngOnInit(): void {
      
 this.branchSettings = {
-  itemsShowLimit: 3,
-  idField: 'Branch2MasterId',
-  textField: 'displayNameSEKRETAER',
-  singleSelection: false,
-  enableCheckAll: true,
-  selectAllText: 'Select All',
-  unSelectAllText: 'Unselect All',
-  allowSearchFilter: true,
-  limitSelection: -1,
-  clearSearchFilter: true,
-  maxHeight: 197,
-  searchPlaceholderText: 'Search',
-  noDataAvailablePlaceholderText: 'No data available',
-  closeDropDownOnSelection: true,
-  showSelectedItemsAtTop: false,
-  defaultOpen: false,
+    itemsShowLimit: 1,
+    idField: 'Branch2MasterId',
+    textField: 'displayNameSEKRETAER',
+    singleSelection:false,
+    enableCheckAll: false,
+    selectAllText: 'Select All',
+    unSelectAllText: 'Unselect All',
+    allowSearchFilter: true,
+    limitSelection: 1,
+    clearSearchFilter: true,
+    maxHeight: 197,
+    searchPlaceholderText: 'Search',
+    noDataAvailablePlaceholderText: 'No data available',
+    closeDropDownOnSelection: true,
+    showSelectedItemsAtTop:true,
+    defaultOpen: false,
   
 };
 this.companySettings = {
-  itemsShowLimit: 3,
-  idField: 'MATCHCODE',
-  textField: 'displayName',
-  singleSelection: true,
-  enableCheckAll: true,
-  selectAllText: 'Select All',
-  unSelectAllText: 'Unselect All',
-  allowSearchFilter: true,
-  limitSelection: -1,
-  clearSearchFilter: true,
-  maxHeight: 197,
-  searchPlaceholderText: 'Search',
-  noDataAvailablePlaceholderText: 'No data available',
-  closeDropDownOnSelection: true,
-  showSelectedItemsAtTop: false,
-  defaultOpen: false,
+    itemsShowLimit: 1,
+    idField: 'MATCHCODE',
+    textField: 'displayName',
+    singleSelection: false,
+    enableCheckAll: true,
+    selectAllText: 'Select All',
+    unSelectAllText: 'Unselect All',
+    allowSearchFilter: true,
+    limitSelection: 1,
+    clearSearchFilter: true,
+    maxHeight: 197,
+    searchPlaceholderText: 'Search',
+    noDataAvailablePlaceholderText: 'No data available',
+    closeDropDownOnSelection: true,
+    showSelectedItemsAtTop: true,
+    defaultOpen: false,
   
 };
 
@@ -128,11 +135,57 @@ this.companySettings = {
         //console.info('complete')
       }
     });
-  
-    
   }
+
+      
+
+      // getBranchOptions(){
+      //   this.branchService.getBranchName().subscribe(  {
+      //   next:(resp) =>{
+      //     this.branches =[];
+      //   if (Array.isArray(resp)){
+
+      //     let index:number =0;
+
+      //     for(let item of resp){
+      //       if (item['name'] == null){
+      //         item['name']= '';
+      //       }
+              
+  
+      //       let branch:BranchData ={
+      //         Branch2MasterId:item['Branch2MasterId'],
+      //         displayNameMAXOFFICE:item ['displayNameMAXOFFICE'],
+      //         displayNameSEKRETAER:item ['displayNameSEKRETAER'],
+      //         displayNameDIMAS:item['displayNameDIMAS'],
+      //         name:item['name'],
+      //         displayName:item['displayName']
+      //       };
+      //       this.branches.push(branch);
+
+      //       index ++;
+      //     }
+
+      //   }
+
+      //   this.dataArr = this.branches;
+      //   console.log(this.dataArr);
+      // },
+      // error:(e)=>{
+      //   console.log(e);
+      // },
+      // complete:()=>{
+      //   //console.info('complete')
+      // }
+      //   }
+      //   );
+      // }
+
+   
+
+
   onBranchSelected(item:any){
-    console.log(item);
+    console.log('---- ------------------------------------------------------------------------------------------');
     this.branchService.getCompany(item.Branch2MasterId).subscribe({
       next:(resp)=> {
        
@@ -142,7 +195,7 @@ this.companySettings = {
           let index:number =0;
 
           for(let item of resp){
-            let company:CompanyData ={
+            let company:CompanyData = {
               MATCHCODE:item ['MATCHCODE'],
               displayName: item['displayName']
             };
@@ -170,7 +223,7 @@ this.companySettings = {
   }
 
   showContracts(){
-    this.showcontract=this.branchSelected;
+    this.showcontract = this.branchSelected;
   }
 
   onSubmit(formData:any){
@@ -180,7 +233,6 @@ this.companySettings = {
 
   onOptionSelected(option:boolean){
     this.optionSelected = option;
-
     console.log(this.optionSelected);
   }
 

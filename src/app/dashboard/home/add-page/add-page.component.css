@@ -1,5 +1,5 @@
+@import url('https://use.typekit.net/myb7tas.css');
 .content-wrapper{
-  overflow: hidden;
   height: 92vh;
   background-color: #F2F2F2;
   background-image: linear-gradient(to right, #E5007E 50% , #F2F2F2 50%);
@@ -9,9 +9,21 @@
 ._content{
   background-color: #F2F2F2;
   border-radius: 45px 0px 0px 0px;
+  height: inherit;
   overflow-y: scroll;
-  padding-bottom: 80px;
+  overflow-x: hidden;
+  padding-bottom: 60px;
+  font-family: oscine, sans-serif;
 }
+
+.main-content{
+  min-height: 270px;
+  height: inherit;
+  position: relative;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-bottom: 40px;
+  }
 .allowScroll{
   overflow-y: scroll !important;
 
@@ -38,8 +50,12 @@
 .share{
 margin:15px 0px 10px  49px;
 }
-
-
+.section-title{
+  text-shadow: none;
+  font-weight: bold;
+  font-size: 20px;
+  letter-spacing: 2.5px;
+}
 /* .selectfolder{
   text-align: center;
   color: grey;
@@ -85,7 +101,7 @@ margin:15px 0px 10px  49px;
   padding: 15px;
   background-color: #fff;
   cursor: pointer;
-  font-family:'Oscine-Regular, Oscine';
+  font-family:oscine, sans-serif;
   font-size: 17px;
   color:#707070;
   font-style: normal;
@@ -106,13 +122,13 @@ margin:15px 0px 10px  49px;
   width: 80%;
   padding:25px;
   cursor: pointer;
-  font-family:'Oscine-Regular, Oscine';
+  font-family:oscine, sans-serif;
   font-size: 17px;
   color:#707070;
   font-style: normal;
 }
 .assignment{
-  font-family:'Oscine-Regular, Oscine';
+  font-family:oscine, sans-serif;
   font-size: 17px;
   margin-left:49px;
   color:#707070;
@@ -129,7 +145,7 @@ margin:15px 0px 10px  49px;
   border: none;
   padding:10px 5px;
   cursor: pointer;
-  font-family:'Oscine';
+  font-family:oscine, sans-serif;
   display: block;
   margin-top:25px;
   margin-left:auto;

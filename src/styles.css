@@ -15,10 +15,22 @@ body {
 }
 .multiselect-dropdown .dropdown-btn .selected-item:hover {
   box-shadow: none !important;
-
 }
 .multiselect-dropdown .dropdown-btn {
   border: none !important;
+}  
+
+.multiselect-dropdown .dropdown-btn .selected-item{
+  border:1px solid #E5007E !important;
+  margin-right: 30px !important;
+  background: #E5007E !important;
+  padding: 0 8px !important;
+  color: #fff !important;
+  border-radius: 2px !important;
+  float: left !important;
+  display: flex !important;
+  max-width: 200px !important;
+  max-height: fit-content !important;
 }
 
 .bg-dialog-folder .mat-dialog-container{
@@ -29,5 +41,5 @@ body {
   backdrop-filter: blur(9.7px);
   -webkit-backdrop-filter: blur(9.7px);
   border: 1px solid rgba(218, 216, 216, 0.3);
-
 }
+
