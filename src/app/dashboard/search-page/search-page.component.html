@@ -37,7 +37,7 @@
 
   <div class="d-flex flex-column px-3 pb-4 w-100 bg-" *ngIf="documentsResArr.length>0" >
     <p class="text-center m-3"> Documents</p>
-    <div class="d-flex my-2 documentItem " *ngFor="let doc of documentsResArr; let i = index"  (swipe)="onSwipe($event, doc)"  >
+    <div class="d-flex documentItem " *ngFor="let doc of documentsResArr; let i = index"  (swipe)="onSwipe($event, doc)"  >
       <app-document-item class="w-100"  [ngClass]="{'swipedLeft':doc.swipedLeft}" [doc]=doc  (tap)="onDocClick(doc)" ></app-document-item>
     
       <div class=" edit-rename p-2 d-flex align-self-center justify-content-center align-items-center bg-white "
