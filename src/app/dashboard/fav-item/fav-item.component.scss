@@ -1,7 +1,8 @@
 @import url('https://use.typekit.net/myb7tas.css');
 .fav-item{
   /* width: 319px; */
-  height: 140px;
+  height: 140px; 
+  @include rfs(8.75rem, height);
 }
 ._content{
   font-family: oscine, sans-serif;
