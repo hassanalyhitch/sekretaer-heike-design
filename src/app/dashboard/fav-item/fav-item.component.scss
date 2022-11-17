@@ -3,7 +3,7 @@
 .fav-item{
   // min-width: 319px;
   @include rfs(22.2rem, height);
-  min-height: 140px !important; 
+  min-height: 144px !important; 
   max-height: 250px !important;
   background-color: white;
 }
@@ -15,8 +15,18 @@
   height: 40%;
 }
 
+.icon{
+  @include font-size(2rem);
+  @include rfs(2rem, width);
+  @include rfs(2rem, height);
+  max-width: 28px;
+  max-height: 28px;
+}
+
 .icon-container{
-  width: 50px;
+  @include rfs(8rem, width);
+  min-width: 50px;
+  max-width: 82px;
   background-color: #E5007E;
   background-image: linear-gradient(141deg, #E5007E, #D60B51);
   border-radius: 0px 0px 15px 0px;
@@ -32,10 +42,13 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 58px;
-  height: 58px;
+  min-width: 58px;
+  min-height: 58px;
+  max-width: 93px;
+  max-height: 93px;
+  @include rfs(8rem, width);
+  @include rfs(8rem, height);
   border-radius: 0px 0px 0px 12px;
-  overflow: hidden;
   background-color: #f2f2f2;
 }
 .small-picture img {
@@ -43,19 +56,24 @@
   object-position: center; /* Center the image within the element */
   width: 100%;
   height: 100%;
+  border-radius: 0px 0px 0px 12px;
 }
 .fav-btn{
   position: absolute;
   top: 4px;
-  right: 47px;
+  left: -1rem;
+  // @include rfs(6.5rem, right);
   padding: 3px;
   color: white;
   border-radius: 50%;
-  width: 22px;
-  height: 22px;
+  min-width: 22px;
+  min-height: 22px;
+  @include rfs(2.5rem, width);
+  @include rfs(2.5rem, height);
 }
 .fav-btn i{
   font-size: 16px;
+  @include font-size(2rem);
 }
 .isFav{
   background-color: #E5007E;
@@ -66,23 +84,28 @@
 
 .risk{
   font-size: 18px;
+  @include font-size(2rem);
   font-weight: 500;
   min-height: 27px;
 }
 .branch{
   font-size: 15px;
+  @include font-size(1.25rem);
   font-weight: 500;
 
 }
 .price{
   font-size: 15px;
+  @include font-size(1.25rem);
   font-weight: 500;
 }
 .date{
   font-size: 15px;
+  @include font-size(1.25rem);
   font-weight: 300;
 }
 .company{
   font-size: 15px;
+  @include font-size(1.3rem);
   font-weight: 300;
 }
