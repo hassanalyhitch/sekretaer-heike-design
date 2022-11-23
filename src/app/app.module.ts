@@ -61,6 +61,7 @@ import { TermsConditionsComponent } from './terms-conditions/terms-conditions.co
 // particular imports for hammer
 import * as Hammer from 'hammerjs';
 import {HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 // AoT requires an exported function for factories
@@ -98,7 +99,8 @@ const appRoutes: Routes = [
   { path: 'dashboard/home/search', component:SearchPageComponent},  
   { path: 'dashboard/overview/new-contract',component:NewContractComponent},
   { path: 'privacy-policy',component:PrivacyPolicyComponent},
-  { path: 'terms-and-conditions', component:TermsConditionsComponent}
+  { path: 'terms-and-conditions', component:TermsConditionsComponent},
+  { path: 'forgot-password', component:ForgotPasswordComponent},
 
 
 ];
@@ -163,7 +165,8 @@ const appRoutes: Routes = [
     PrivacyPolicyComponent,
     HomeFabIconsComponent,
     SearchPageComponent,
-    TermsConditionsComponent
+    TermsConditionsComponent,
+    ForgotPasswordComponent
    ],
   bootstrap:    [ AppComponent ],
   providers: [

@@ -15,27 +15,40 @@
 
     <div class="section-home">
       <!-- favourite items -->
-      <div class="fav-wrapper d-flex flex-nowrap pb-4">
+      <div class="fav-wrapper d-flex flex-nowrap pb-4" id="fav-wrapper">
 
         <div class="d-flex justify-content-center m-4 w-100" *ngIf="favArrHasNoContent()">
           {{ "home.message_no_favourite_contracts" | translate }}
         </div>
 
         <div class="d-flex w-100 px-3">
-          <app-fav-item
-            class="col-12 px-1" 
-            *ngFor="let favItem of favArr; let index = index" 
-            (click)="onFavContractClick(index)" 
-            [contractItem]="favItem">
-          </app-fav-item>
+          <div 
+          *ngFor="let favItem of favArr; let index = index"
+          class="col-12 px-1"
+          [id]="favItem.id"
+          #contracts>
+              <app-fav-item
+              (click)="onFavContractClick(index)"
+              [contractItem]="favItem">
+            </app-fav-item>
+          </div>
         </div>
 
       </div>
       
       <!-- see more link-->
-      <div class="d-flex px-3 see-more">
-        <a href="">{{ "home.title_see_more" | translate }} > </a>
+      <div class="d-flex flex-row px-3 justify-content-between see-more">
+        <a  href="">{{ "home.title_see_more" | translate }} > </a>
+          <!-- indicators -->
+          <div class="d-flex align-self-center line_container">
+            <div class="m-1 border flex-fill line_item"
+              *ngFor="let line of lineObjectArr;let index = index"
+              (click)="scrollToContract(index)"
+              [ngClass]="{'isActive':line.isActive}">
+            </div>
+          </div>
       </div>
+    
 
       <!-- Home icons fabs-->
       <div class="home-icon-fabs d-flex px-3 mt-2">
@@ -64,49 +77,72 @@
           <!-- new grid -->
           <div class="container mb-4">
             <div class="row g-2">
-
               <div class="col-6">
-                <div class="p-3 bg-white service-card">
-                  <div class="d-flex flex-column align-items-center mt-2" (click)="onAddPage()">
-                    <span class="p-2 fw-bold card-text-title">{{ "home.service_card_add_title" | translate }}</span>
-                    <span class="p-2 card-text-subtitle">{{ "home.service_card_add_sub_title" | translate }}</span>
+                <div class="p-3 bg-white add_page-card">
+                  <img class="service-icon" src="\assets\Gruppe 230.svg">
+                  <div class="d-flex flex-column " (click)="onAddPage()">
+                    <span class="mt-4 fw-bold card-text-title">{{ "home.service_card_add_title" | translate }}</span>
+                  
+                    
+                        
+                        <div class="d-flex align-items-center">
+                          <span class="card-text-subtitle">{{ "home.service_card_add_sub_title" | translate }}
+                          <i class="material-icons">chevron_right</i>
+                      </span>
+                        </div>
+                   
+                   
                   </div>
                 </div>
               </div>
 
               <div class="col-6">
-                <div class="p-3 bg-white service-card">
-                  <div class="d-flex flex-column align-items-center mt-4 position-relative" (click)="onNotifClick()">
-                    <span class="fw-bold card-text-title align-items-center p-2">
-                      {{ "home.service_card_notifications" | translate }}
-                    </span>
-                    
-                    <span *ngIf="isNotificationCountText" class="position-absolute top-0 start-100 translate-middle bg-new-notify-icon">
-                      9+
-                      <span class="visually-hidden">unread messages</span>
-                    </span>
-
-                    <span *ngIf="!isNotificationCountText" class="position-absolute top-0 start-100 translate-middle bg-new-notify-icon">
-                      {{ notifCount }}
+                <div class="p-3 bg-white inbox-card">
+                  <span *ngIf="isNotificationCountText" class="position-absolute top-0 end-0  bg-new-notify-icon">
+                    9+
                     <span class="visually-hidden">unread messages</span>
                   </span>
-                    
+
+                  <span *ngIf="!isNotificationCountText" class="position-absolute top-0 end-0 bg-new-notify-icon">
+                    {{ notifCount }}
+                  <span class="visually-hidden">unread messages</span>
+                </span>
+                  <img class="service-icon" src="\assets\Gruppe 234.svg">
+                  <div class="d-flex flex-column mt-4 position-relative" (click)="onNotifClick()">
+                    <span class="fw-bold card-text-title ">
+                      {{ "home.service_card_notifications" | translate }}
+                    </span>
+                    <div class="d-flex align-items-center">
+                      <span class="card-text-subtitle"> 
+                        {{ "home.service_card_inbox_sub_title" | translate }}
+                        <i class="material-icons">chevron_right</i>
+                      </span>
+                    </div>
+                  
                   </div>
                 </div>
               </div>
 
               <div class="col-6">
-                <div class="p-3 bg-white service-card">
-                  <div class="d-flex flex-column align-items-center mt-4">
-                    <span class="fw-bold card-text-title">{{ "home.service_card_notification_of_claim" | translate }}</span>
+                <div class="p-3 bg-white claim-card">
+                  <img class="service-icon" src="\assets\Gruppe 239.svg">
+                  <div class="d-flex flex-column">
+                    <span class="mt-4 fw-bold card-text-title">{{ "home.service_card_notification_of_claim" | translate }}</span>
+                    <div class="d-flex align-items-center">
+                      <span class="card-text-subtitle">
+                        {{"home.service_card_file_submit_sub_title" | translate }}
+                        <i class="material-icons">chevron_right</i>
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
 
               <div class="col-6">
-                <div class="p-3 bg-white service-card">
-                  <div class="d-flex flex-column align-items-center mt-4">
-                    <span class="fw-bold card-text-title">{{"home.service_card_call_your_broker" | translate}}</span>
+                <div class="p-3 bg-white broker-card">
+                  <img class="service-icon" src="\assets\Gruppe 241.svg">
+                  <div class="d-flex flex-column">
+                    <span class="mt-4 fw-bold card-text-title">{{"home.service_card_call_your_broker" | translate}}</span>
                   </div>
                 </div>
               </div>
@@ -114,9 +150,11 @@
             </div>
           </div>
 
+          <!-- end of new grid -->
         </div>
       </div>
     </div>
 
   </div>
 </div>
+

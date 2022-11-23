@@ -1,17 +1,14 @@
 @import url('https://use.typekit.net/myb7tas.css');
-* {
-  font-size: 14px;
-  font-family: oscine, sans-serif;
-}
+
 .section-title{
   text-shadow: none;
   font-size: 20px;
+  font-weight: bold;
 }
 ._content{
   font-family: oscine, sans-serif;
 }
-input,
-* {
+input{
   font-family: oscine, sans-serif;
   border-radius: 5px;
 }
@@ -158,4 +155,14 @@ button[disabled]:hover {
 }
 button[disabled]:hover#sign-in-btn {
   color: white;
+}
+
+.fav-btn i{
+  font-size: 16px;
+  background-color: #848484;
+  padding: 3px;
+  color: white;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
 }

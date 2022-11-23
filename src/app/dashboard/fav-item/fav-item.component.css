@@ -1,39 +1,17 @@
 @import url('https://use.typekit.net/myb7tas.css');
-
-.folder-bg{
-  border-top-right-radius: 15px;
-  width: 360px;
-  height: 100px;
+.fav-item{
+  /* width: 319px; */
+  height: 140px;
 }
-
-.text-content{
+._content{
   font-family: oscine, sans-serif;
-} 
+  color: #2C262D;
+}
+.doc-icon{
+  width: 40%;
+  height: 40%;
+}
 
-.folder-bg-transparent{
-  margin-bottom: 10px;
-  background-color: transparent !important;
-  /* position: relative; */
-}
-.content{
-  margin-top: -30px;
-  border-top: solid 4px #D60B51;
-  border-top-right-radius: 15px;
-}
-.folder-top{
-  width: 110px;
-  height: 50px;
-  background-image: linear-gradient(141deg, #E5007E, #D60B51);
-  border-radius: 0px 25px 10px 0px;
-}
-.folder-bg-dark-pink{
-  top: 40px;
-  border-top-right-radius: 15px;
-  background-color: #E5007E;
-  background-image: linear-gradient(141deg, #E5007E, #D60B51);
-  width: 338px;
-  height: 170px;
-}
 .icon-container{
   width: 50px;
   background-color: #E5007E;
@@ -64,14 +42,18 @@
   height: 100%;
 }
 .fav-btn{
+  position: absolute;
+  top: 4px;
+  right: 47px;
+  padding: 3px;
   color: white;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-
+  width: 22px;
+  height: 22px;
 }
-
+.fav-btn i{
+  font-size: 16px;
+}
 .isFav{
   background-color: #E5007E;
 }
@@ -79,29 +61,25 @@
   background-color: #000000 !important;
 }
 
-.fav-btn i{
+.risk{
   font-size: 18px;
-}
-
-.folder-name{
-  font-size: 18px;
-  font-weight: 500;
+  font-weight: bold;
   min-height: 27px;
 }
-.folder-desc{
+.branch{
   font-size: 15px;
-  font-weight: 500;
+  font-weight: bold;
 
 }
 .price{
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: bold;
 }
 .date{
   font-size: 15px;
-  font-weight: 300;
+  font-weight: bold;
 }
 .company{
   font-size: 15px;
-  font-weight: 300;
+  font-weight: 500;
 }

@@ -3,15 +3,16 @@
 
     <app-login 
       (auth)="authenticated = $event" 
-      *ngIf="!authenticated && !show_privacy_policy && !show_terms_and_conditions"
+      *ngIf="!authenticated && !show_privacy_policy && !show_terms_and_conditions && !show_forgot_password"
       (onShowPrivacyPolicy)="showPrivacyPolicy($event)"
-      (onShowTermsAndConditions)="showTerms($event)" 
+      (onShowTermsAndConditions)="showTerms($event)"
+      (onShowForgotPassword)="showForgotPassword($event)" 
       (lang)="setLang($event)" >
     </app-login>
 
     <app-dashboard *ngIf="authenticated"></app-dashboard>
 
-    <div *ngIf="!authenticated && show_privacy_policy || !authenticated && show_terms_and_conditions">
+    <div *ngIf="!authenticated && show_privacy_policy || !authenticated && show_terms_and_conditions || !authenticated && show_forgot_password">
       <router-outlet></router-outlet>
     </div>
 

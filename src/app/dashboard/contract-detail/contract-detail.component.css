@@ -107,17 +107,17 @@
 
 .risk{
   font-size: 18px;
-  font-weight: 500;
+  font-weight: bold;
   width: 78%;
 }
 .branch{
   font-size: 15px;
-  font-weight: 500;
+  font-weight: bold;
 
 }
 .price{
   font-size: 18px;
-  font-weight: 500;
+  font-weight: bold;
 }
 .date{
   font-size: 15px;

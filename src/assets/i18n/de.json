@@ -32,9 +32,9 @@
       "submit_button_label": "Speichern"
     },
     "new_folder_dialog": {
-      "title": "NEW FOLDER",
-      "text_input_label": "Ordnername",
-      "btn_save_label": "Speichern"
+      "title": "Neuer Ordner",
+      "text_input_label": "Ordnernamen",
+      "btn_save_label": "Sparen"
     },
     "new_sub_folder_dialog": {
       "title": "NEW SUB FOLDER",

@@ -2,6 +2,13 @@
 
   <div class="d-flex flex-column w-100">
   
+    <div class="position-relative">
+      <div class="fav-btn position-absolute top-0 end-0" (click)="closeDialog()">
+        <i class="material-icons">clear</i>
+      </div>
+    </div>
+
+    <strong class="section-title align-self-center p-2 m-2">{{ 'overview.new_folder_dialog.title' | translate }}</strong>
     
     <form (ngSubmit)="onSubmit(saveForm.value)" class="d-flex flex-column " #saveForm="ngForm" > 
       <!-- <div class="material-textfield mb-1">
@@ -22,8 +29,10 @@
       <!-- <div class="close-button position-relative" (click)="closeWindow()">
         <div class="position-absolute top-0 end-0"><img src="\assets\icons8-close-24.png"/></div></div> -->
     
-        <label class="section-title justify-content-center mb-2">{{ 'overview.new_folder_dialog.title' | translate }}</label>
-        <input style="outline:none; border:none;height:50px;" type="text" placeholder="Folder Name" [(ngModel)]="newFolderName" name="newFolderName" ngModel required/>
+        <div class="material-textfield mb-1">
+          <input placeholder=" " type="text" [(ngModel)]="newFolderName" name="newFolderName" ngModel required/>
+          <label>{{ 'overview.new_folder_dialog.text_input_label' | translate }}</label>
+        </div>
     
         <!-- <img  class="switch" src="\assets\icons8-plus-math-22.png"> -->
       <!-- <span class="pt-2 pb-1">CLASSIFY:</span> -->

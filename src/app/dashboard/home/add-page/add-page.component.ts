@@ -130,7 +130,7 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
           this.selectedItems.push(selectedItem);
           this.typeSelected = 'folder';
 
-          this.dropdownDisabled = true;
+          this.dropdownDisabled = false;
 
           break;
         }
@@ -361,7 +361,7 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
   }
 
   ngOnDestroy(){
-    this.folderSub.unsubscribe();
+    // this.folderSub.unsubscribe();
   }
 
   onFileUpload(event){

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="27" height="32.5" viewBox="0 0 27 32.5">
+  <g id="Gruppe_239" data-name="Gruppe 239" transform="translate(-47 -591)">
+    <g id="Gruppe_238" data-name="Gruppe 238" transform="translate(0 1.609)">
+      <g id="Rechteck_130" data-name="Rechteck 130" transform="translate(74 596.891) rotate(90)" fill="none" stroke="#2c262d" stroke-width="1.5">
+        <rect width="25" height="19.756" rx="2" stroke="none"/>
+        <rect x="0.75" y="0.75" width="23.5" height="18.256" rx="1.25" fill="none"/>
+      </g>
+    </g>
+    <g id="Gruppe_237" data-name="Gruppe 237">
+      <circle id="Ellipse_24" data-name="Ellipse 24" cx="10" cy="10" r="10" transform="translate(47 591)" fill="#fff"/>
+      <g id="Gruppe_236" data-name="Gruppe 236" transform="translate(50 594)">
+        <circle id="Ellipse_23" data-name="Ellipse 23" cx="0.821" cy="0.821" r="0.821" transform="translate(6.179 6.179)" fill="#2c262d"/>
+        <g id="Gruppe_235" data-name="Gruppe 235">
+          <line id="Linie_37" data-name="Linie 37" y1="2.464" transform="translate(7)" fill="none" stroke="#2c262d" stroke-linecap="round" stroke-width="1.5"/>
+          <line id="Linie_38" data-name="Linie 38" y1="2.464" transform="translate(7 11.536)" fill="none" stroke="#2c262d" stroke-linecap="round" stroke-width="1.5"/>
+          <line id="Linie_39" data-name="Linie 39" y1="2.464" transform="translate(14 7) rotate(90)" fill="none" stroke="#2c262d" stroke-linecap="round" stroke-width="1.5"/>
+          <line id="Linie_40" data-name="Linie 40" y1="2.464" transform="translate(2.464 7) rotate(90)" fill="none" stroke="#2c262d" stroke-linecap="round" stroke-width="1.5"/>
+          <line id="Linie_41" data-name="Linie 41" y1="2.464" transform="translate(12.196 1.804) rotate(45)" fill="none" stroke="#2c262d" stroke-linecap="round" stroke-width="1.5"/>
+          <line id="Linie_42" data-name="Linie 42" y1="2.464" transform="translate(3.546 10.454) rotate(45)" fill="none" stroke="#2c262d" stroke-linecap="round" stroke-width="1.5"/>
+          <line id="Linie_43" data-name="Linie 43" y1="2.464" transform="translate(12.196 12.196) rotate(135)" fill="none" stroke="#2c262d" stroke-linecap="round" stroke-width="1.5"/>
+          <line id="Linie_44" data-name="Linie 44" y1="2.464" transform="translate(3.546 3.546) rotate(135)" fill="none" stroke="#2c262d" stroke-linecap="round" stroke-width="1.5"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

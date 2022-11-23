@@ -13,6 +13,7 @@ export class AppComponent  implements OnInit{
   lang: string = 'en';
   show_privacy_policy: boolean = false;
   show_terms_and_conditions: boolean = false;
+  show_forgot_password: boolean = false;
 
   constructor(private translate: TranslateService, private router: Router, private activatedRoute: ActivatedRoute){
 
@@ -34,6 +35,9 @@ export class AppComponent  implements OnInit{
         if(this.router.url != "/terms-and-conditions"){
           this.show_terms_and_conditions = false;
         }
+        if(this.router.url != "/forgot-password"){
+          this.show_forgot_password = false;
+        }
       }
     })
   }
@@ -46,6 +50,11 @@ export class AppComponent  implements OnInit{
   showTerms(event){
     this.show_terms_and_conditions = event;
     this.router.navigate(['terms-and-conditions']);
+  }
+
+  showForgotPassword(event){
+    this.show_forgot_password = event;
+    this.router.navigate(['forgot-password']);
   }
 
   setLang(lang: string){

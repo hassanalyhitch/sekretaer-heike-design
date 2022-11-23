@@ -9,6 +9,8 @@
     "insurance_check_fab": "Insurance Check",
     "service_card_add_title": "ADD",
     "service_card_add_sub_title": "(a document, a picture, etc)",
+    "service_card_inbox_sub_title":"View",
+    "service_card_file_submit_sub_title":"File Submit",
     "service_card_notifications": "INBOX",
     "service_card_notification_of_claim": "NOTIFICATION OF CLAIM",
     "service_card_call_your_broker": "CALL YOUR BROKER"
@@ -38,16 +40,22 @@
     },
     "new_sub_folder_dialog": {
       "title": "NEW SUB FOLDER",
-      "text_input_label": "Name",
+      "text_input_label": "Folder Name",
       "btn_save_label": "SAVE"
     },
-    "option_menu": {
-      "title_new_contract" : "Add New Contract",
+    "folder_menu": {
       "title_new_folder"   : "Add New Folder",
       "sort_by_date"       : "Sort by Date",
       "sort_by_a_to_z"     : "Sort by A-Z",
-      "search"             : "Search"
+      "search"             : "Search Folders"
+    },
+    "contract_menu": {
+      "title_new_contract" : "Add New Contract",
+      "sort_by_date"       : "Sort by Date",
+      "sort_by_a_to_z"     : "Sort by A-Z",
+      "search"             : "Search Contracts"
     }
+
   },
   "contract_detail": {
     "title_main" : "INSURANCE DETAILS",
@@ -67,12 +75,16 @@
   },
   "login": {
     "title_login": "Let's Login",
+    "title_forgot_password" : "Reset Your Password",
     "btn_login": "LOG IN",
+    "btn_reset_password": "RESET PASSWORD",
+    "btn_back": "BACK",
     "username": "Username",
     "password": "Password",
     "forgot_password": "Forgot your Password?",
     "privacy_policy": "Privacy Policy",
-    "terms": "Terms & Conditions"
+    "terms": "Terms & Conditions",
+    "email": "Email"
   },
   "settings":{
     "main_title":"SETTINGS",
@@ -107,7 +119,9 @@
   },
   "broker":{
     "title": "MY BROKER",
-    "name_label": "NAME"
+    "inbox_label": "Inbox",
+    "call_label": "Call",
+    "email_label": "Email"
   },
   "chat" : {
     "title": "CHAT"
@@ -159,3 +173,4 @@
     "title" : "Terms & Conditions"
   }
 }
+

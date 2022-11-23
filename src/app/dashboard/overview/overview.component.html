@@ -11,7 +11,13 @@
       </div>
       <div class="p-2">
         <div class="ml-auto btn-group dropstart align-self-center">
-          <img class="filter-icon" (click)="onAddContract()" src="/assets/icon_filter_dark.svg">
+          <img class="filter-icon" data-bs-toggle="dropdown" aria-expanded="false" src="/assets/icon_filter_dark.svg">
+          <ul class="dropdown-menu shadow">
+            <li><span class="dropdown-item" (click)="onAddContract()">{{"overview.contract_menu.title_new_contract" | translate }}</span></li>
+            <li><span class="dropdown-item">{{"overview.contract_menu.search" | translate }}</span></li>
+            <li><span class="dropdown-item"(click)="sortByContractTitle()">{{ "overview.contract_menu.sort_by_a_to_z" | translate }}</span></li>
+            <li><span class="dropdown-item"(click)="sortByContractDate()">{{ "overview.contract_menu.sort_by_date" | translate }}</span></li>
+          </ul>
         </div>
       </div>
     </div>
@@ -49,12 +55,11 @@
             <div class="ml-auto btn-group dropstart align-self-center">
               <img class="filter-icon" data-bs-toggle="dropdown" aria-expanded="false" src="/assets/icon_filter_dark.svg">
               <ul class="dropdown-menu shadow">
-                <li><span class="dropdown-item" href="" (click)="addNewFolder()">{{ "overview.option_menu.title_new_folder" | translate }}</span></li>
-                <li><span class="dropdown-item" href="">{{ "overview.option_menu.search" | translate }}</span></li>
-                <li><span class="dropdown-item" href="">{{ "overview.option_menu.sort_by_a_to_z" | translate }}</span></li>
-                <li><span class="dropdown-item" href="">{{ "overview.option_menu.sort_by_date" | translate }}</span></li>
+                <li><span class="dropdown-item" (click)="addNewFolder()">{{ "overview.folder_menu.title_new_folder" | translate }}</span></li>
+                <li><span class="dropdown-item" >{{ "overview.folder_menu.search" | translate }}</span></li>
+                <li><span class="dropdown-item"(click)="sortByFolderTitle()">{{ "overview.folder_menu.sort_by_a_to_z" | translate }}</span></li>
+                <li><span class="dropdown-item" (click)="sortByFolderDate()">{{ "overview.folder_menu.sort_by_date" | translate }}</span></li>
               </ul>
-             
             </div>
           </div>
     

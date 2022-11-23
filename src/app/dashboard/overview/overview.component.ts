@@ -67,6 +67,23 @@ export class OverviewComponent implements OnInit {
   collapsed:boolean = true;
   collapsedFolders:boolean = true;
 
+  sortContractTitleByAsc:boolean = true;
+  ascendContractTitle:ContractData[] =[];
+  descendContractTitle:ContractData[]= [];
+
+  sortContractDateByAsc:boolean = true;
+  ascendContractDate:ContractData[] =[];
+  descendContractDate:ContractData[] =[];
+
+  sortFolderTitleByAsc:boolean = true;
+  ascendFolderTitle:FolderData[]=[];
+  descendFolderTitle:FolderData[] =[];
+ 
+ 
+  sortFolderDateByAsc:boolean = true;
+  ascendFolderDate:FolderData[] =[];
+  descendFolderDate:FolderData[] =[];
+
   constructor(private router:Router, private contractService: ContractsService, private folderService: FoldersService,private matDialog: MatDialog) { }
 
   ngOnInit() {
@@ -219,15 +236,15 @@ export class OverviewComponent implements OnInit {
   addNewFolder(){
     const dialogConfig = new MatDialogConfig();
     
-    // let passdata:string = '{"docName": "'+"file.name"+'","docId": "'+"file.docId"+'"}';
+    let passdata:string = '{"parentFolderId": 0 }';
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = 'newfolder-modal-component';
-    dialogConfig.height ='210px';
-    dialogConfig.width = '300px';
+    //dialogConfig.height ='210px';
+    dialogConfig.width = '350px';
   
     dialogConfig.panelClass ='bg-dialog-folder';
-    // dialogConfig.data = passdata;
+    dialogConfig.data = passdata;
     // https://material.angular.io/components/dialog/overview
     const modalDialog = this.matDialog.open(NewFolderComponent, dialogConfig);
     
@@ -240,6 +257,107 @@ export class OverviewComponent implements OnInit {
   
   onAddContract(){
     this.router.navigate(['dashboard/overview/new-contract']);
+  }
+  sortByContractTitle(){
+    if(this.sortContractTitleByAsc){
+      this.ascendContractTitle = this.allContractsArr.sort((a,b) =>a.details.name.localeCompare(b.details.name));
+
+      this.allContractsArr =this.ascendContractTitle;
+      if(this.allContractsArr.length>3){
+        this.subsetArr = [];
+        for(let i=3; i<this.allContractsArr.length; i++){
+          this.subsetArr.push(this.allContractsArr[i]);
+        }
+      }
+    this.sortContractTitleByAsc = !this.sortContractDateByAsc;
+    }else
+    {
+      this.descendContractTitle = this.allContractsArr.sort((a,b) =>a.details.name.localeCompare(b.details.name)).reverse();
+      this.allContractsArr = this.descendContractTitle;
+      if(this.allContractsArr.length>3){
+        this.subsetArr = [];
+        for(let i=3; i<this.allContractsArr.length; i++){
+          this.subsetArr.push(this.allContractsArr[i]);
+        }
+      }
+      this.sortContractTitleByAsc = !this.sortContractTitleByAsc;
+    }
+
+  }
+
+  sortByContractDate(){
+    if(this.sortContractDateByAsc){
+      this.ascendContractDate = this.allContractsArr.sort((a,b)=>a.details.EndDate.localeCompare(b.details.EndDate));
+      this.allContractsArr = this.ascendContractDate;
+        if(this.allContractsArr.length>3){
+          this.subsetArr=[];
+          for(let i=3; i<this.allContractsArr.length; i++){
+            this.subsetArr.push(this.allContractsArr[i]);
+          }
+        }
+      this.sortContractDateByAsc = !this.sortContractDateByAsc;
+    }else{
+      this.descendContractDate = this.allContractsArr.sort((a,b)=>a.details.EndDate.localeCompare(b.details.EndDate)).reverse();
+      this.allContractsArr = this.descendContractDate;
+        if(this.allContractsArr.length>3){
+          this.subsetArr =[];
+          for(let i=3;i<this.allContractsArr.length;i++){
+            this.subsetArr.push(this.allContractsArr[i]);
+          }
+        }
+      this.sortContractDateByAsc =!this.sortContractDateByAsc;
+    }
+
+  }
+
+  sortByFolderTitle(){
+    if (this.sortFolderTitleByAsc){
+     this.ascendFolderTitle = this.foldersArr.sort((a,b) =>a.folderName.localeCompare(b.folderName));
+     this.folderSubsetArr = this.ascendFolderTitle;
+     
+     if(this.foldersArr.length>3){
+      this.folderSubsetArr = [];
+      for(let i=3; i<this.foldersArr.length; i++){
+        this.folderSubsetArr.push(this.foldersArr[i]);
+      }
+    }
+     this.sortFolderTitleByAsc =!this.sortFolderTitleByAsc;
+   }else{
+     this.descendFolderTitle = this.foldersArr.sort((a,b)=>a.folderName.localeCompare(b.folderName)).reverse();
+     this.folderSubsetArr = this.descendFolderTitle;
+     if(this.foldersArr.length>3){
+      this.folderSubsetArr = [];
+      for(let i=3; i<this.foldersArr.length; i++){
+        this.folderSubsetArr.push(this.foldersArr[i]);
+      }
+    }
+     this.sortFolderTitleByAsc = !this.sortFolderTitleByAsc;
+   }
+ 
+   }
+
+   sortByFolderDate(){
+    if (this.sortFolderDateByAsc){
+      this.ascendFolderDate = this.foldersArr.sort((a,b)=>a.createdAt.localeCompare(b.createdAt));
+      this.folderSubsetArr = this.ascendFolderDate;
+      if(this.foldersArr.length>3){
+       this.folderSubsetArr = [];
+       for(let i=3; i<this.foldersArr.length; i++){
+         this.folderSubsetArr.push(this.foldersArr[i]);
+       }
+     }
+      this.sortFolderDateByAsc =!this.sortFolderDateByAsc;
+    }else{
+      this.descendFolderDate = this.foldersArr.sort((a,b)=>a.createdAt.localeCompare(b.createdAt)).reverse();
+      this.folderSubsetArr = this.descendFolderDate;
+      if(this.foldersArr.length>3){
+       this.folderSubsetArr = [];
+       for(let i=3; i<this.foldersArr.length; i++){
+         this.folderSubsetArr.push(this.foldersArr[i]);
+       }
+     }
+      this.sortFolderDateByAsc = !this.sortFolderDateByAsc;
+    }
   }
 
 

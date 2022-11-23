@@ -9,18 +9,17 @@ import { FoldersService } from '../../services/folder.service';
 })
 export class NewFolderComponent implements OnInit {
 
- 
   newFolderName: string= "";
 
-  
-
-  constructor(@Inject(MAT_DIALOG_DATA)public data:any, private folderService: FoldersService, private dialogRef: MatDialogRef<NewFolderComponent>) { 
-    this.data = JSON.parse(this.data);
+  constructor(@Inject(MAT_DIALOG_DATA)public data:any, 
+    private folderService: FoldersService, 
+    private dialogRef: MatDialogRef<NewFolderComponent>) { 
+      this.data = JSON.parse(this.data);
 
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
+
   onFetchFolders(){
     this.folderService.getFolders().subscribe ({
       next:(resp) =>{
@@ -38,21 +37,45 @@ export class NewFolderComponent implements OnInit {
 
   onSubmit(formData: any) {
     //console.log(this.newFolderName, this.data.parentFolderId);
-    this.folderService.addNewFolder(this.newFolderName, "0").subscribe({
-      next:(resp)=>{
-        console.log(resp);
-        this.dialogRef.close();
-      },
-      error:(resp)=>{
-        console.log(resp);
-      },
-      complete:()=>{
-        
-      }
-    });
+
+    //create a sub folder
+    if (this.data.parentFolderId > 0){
+
+      console.log('New Subfolder '+this.newFolderName + ' '+this.data.parentFolderId);
+
+      this.folderService.addNewFolder(this.newFolderName, this.data.parentFolderId).subscribe({
+        next:(resp)=>{
+          console.log(resp);
+          this.dialogRef.close();
+          
+        },
+        error:(resp)=>{
+          console.log(resp);
+        },
+        complete:()=>{}
+      });
+      
+    //create a parent folder
+    } else if (this.data.parentFolderId == 0){
+
+      console.log('New Parent folder '+this.newFolderName + ' '+this.data.parentFolderId);
+
+      this.folderService.addNewFolder(this.newFolderName, "0").subscribe({
+        next:(resp)=>{
+          console.log(resp);
+          this.dialogRef.close();
+        },
+        error:(resp)=>{
+          console.log(resp);
+        },
+        complete:()=>{}
+      });
+
+    }
     
   }
-  closeWindow(){
+
+  closeDialog(){
    this.dialogRef.close();
   }
 

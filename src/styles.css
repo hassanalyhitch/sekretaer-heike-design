@@ -1,6 +1,5 @@
 /* Add application styles & imports to this file! */
-// @import '~bootstrap/dist/css/bootstrap.min.css';
-@import "~bootstrap/scss/bootstrap.scss";
+@import '~bootstrap/dist/css/bootstrap.min.css';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500&display=swap');
 html,
 body {

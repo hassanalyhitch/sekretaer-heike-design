@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="29.492" height="23.032" viewBox="0 0 29.492 23.032">
+  <g id="Gruppe_230" data-name="Gruppe 230" transform="translate(-34 -469.772)">
+    <path id="Pfad_113" data-name="Pfad 113" d="M11.811,1.488H2.6A1.115,1.115,0,0,0,1.487,2.6V21.9A1.115,1.115,0,0,0,2.6,23.02H15.787A1.115,1.115,0,0,0,16.9,21.9V6.579Z" transform="translate(45.84 469.034)" fill="none" stroke="#2c262d" stroke-width="1.5"/>
+    <g id="Ellipse_22" data-name="Ellipse 22" transform="translate(34 473)" fill="#fff" stroke="#2c262d" stroke-width="1.5">
+      <circle cx="8.5" cy="8.5" r="8.5" stroke="none"/>
+      <circle cx="8.5" cy="8.5" r="7.75" fill="none"/>
+    </g>
+    <path id="Pfad_114" data-name="Pfad 114" d="M21.56,1.68l4.5,4.5H22.675A1.115,1.115,0,0,1,21.56,5.066Zm0-1.41A1.41,1.41,0,0,0,20.15,1.68V5.066a2.528,2.528,0,0,0,2.525,2.525h3.386a1.41,1.41,0,0,0,1-2.406l-4.5-4.5a1.408,1.408,0,0,0-1-.413" transform="translate(36.017 469.676)" fill="#2c262d"/>
+    <g id="Gruppe_229" data-name="Gruppe 229" transform="translate(-344.285 42.675) rotate(45)">
+      <g id="Gruppe_231" data-name="Gruppe 231" transform="translate(0.025 -0.707)">
+        <line id="Linie_16" data-name="Linie 16" x2="4.95" y2="4.95" transform="translate(581.32 35.03)" fill="none" stroke="#2c262d" stroke-linecap="round" stroke-width="1.5"/>
+        <line id="Linie_17" data-name="Linie 17" x1="5" y2="5" transform="translate(581.345 35.005)" fill="none" stroke="#2c262d" stroke-linecap="round" stroke-width="1.5"/>
+      </g>
+    </g>
+  </g>
+</svg>

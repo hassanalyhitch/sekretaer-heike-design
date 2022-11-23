@@ -57,11 +57,11 @@
 }
 
 .tel{
-  color: #E5007E ;
+  color: #050505 ;
   text-decoration: none;
 }
 .email{
-  color: #E5007E ;
+  color: #050505 ;
   word-break: break-all;
   white-space: normal;
 }
@@ -85,4 +85,31 @@
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
   overflow-x: scroll;
+}
+
+.text-title{
+  text-shadow: none;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.text-content{
+  text-shadow: none;
+  font-size: 16px;
+}
+
+/* For Medium Mobile (375px) */
+@media screen and (max-width: 375px){
+
+  .text-title{
+    text-shadow: none;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  
+  .text-content{
+    text-shadow: none;
+    font-size: 12px;
+  }
+
 }

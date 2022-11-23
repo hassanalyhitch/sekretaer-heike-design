@@ -36,6 +36,9 @@ export class LoginComponent implements OnInit {
   @Input() terms_and_conditions: boolean = false;
   @Output() onShowTermsAndConditions = new EventEmitter<boolean>();
 
+  @Input() forgot_password: boolean = false;
+  @Output() onShowForgotPassword = new EventEmitter<boolean>();
+
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -100,6 +103,11 @@ export class LoginComponent implements OnInit {
   onTermsAndConditionSelected() { 
     this.terms_and_conditions = true;
     this.onShowTermsAndConditions.emit(this.terms_and_conditions); 
+  }
+
+  onForgotPasswordSelected(){
+    this.forgot_password = true;
+    this.onShowForgotPassword.emit(this.forgot_password);
   }
   
 }

@@ -134,7 +134,8 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     dialogConfig.disableClose = false;
     dialogConfig.id = 'renamecontract-modal-component';
     // dialogConfig.height = '80%';
-    // dialogConfig.width = '90%';
+    dialogConfig.width = '350px';
+    dialogConfig.panelClass = 'bg-dialog-folder';
     dialogConfig.data = passdata;
     // https://material.angular.io/components/dialog/overview
     const modalDialog = this.matDialog.open(
@@ -208,7 +209,8 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     dialogConfig.disableClose = false;
     dialogConfig.id = 'modal-component';
     // dialogConfig.height = '80%';
-    // dialogConfig.width = '90%';
+    dialogConfig.width = '350px';
+    dialogConfig.panelClass = 'bg-dialog-folder';
     dialogConfig.data = passdata;
     // https://material.angular.io/components/dialog/overview
     const renameFileDialog = this.matDialog.open(RenameModalComponent, dialogConfig);

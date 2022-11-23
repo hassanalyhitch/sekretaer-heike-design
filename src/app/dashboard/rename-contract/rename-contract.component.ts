@@ -38,4 +38,8 @@ export class RenameContractComponent implements OnInit {
     });
   }
 
+  closeDialog(){
+    this.dialogRef.close();
+  }
+
 }

@@ -1,11 +1,16 @@
-<div class="col-md-12 col-12 px-4">
+<div class="col-md-12 col-12 px-1">
 
   <div class="d-flex flex-column w-100">
-    <div class="align-self-center">
-      <strong class="text-title mb-1">
-        <h3>{{ 'rename_folder.title' | translate }}</h3>
-      </strong>
+
+    <div class="position-relative">
+      <div class="fav-btn position-absolute top-0 end-0" (click)="closeDialog()">
+        <i class="material-icons">clear</i>
+      </div>
     </div>
+    
+    <strong class="text-title align-self-center p-2 m-2">
+      {{ 'rename_folder.title' | translate }}
+    </strong>
 
     <div class="align-items-center w-100">
       {{ 'rename_folder.sub_title_name' | translate }}:<br />

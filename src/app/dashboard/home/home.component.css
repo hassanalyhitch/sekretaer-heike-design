@@ -3,6 +3,25 @@
   width: 20px;
   height: 20px;
 }
+.service-icon{
+  width: 40px;
+  height: 40px;
+}
+.slide-icon{
+  width:40px;
+  height:40px;
+}
+.arrow-right-icon{
+  width:4px;
+  height:4px;
+}
+.material-icons{
+  line-height:normal !important;
+  font-size:10px !important; 
+}
+.slide-icons{
+  float:right;
+}
 .content-wrapper {
   height: 92vh;
   background-color: #f2f2f2;
@@ -28,6 +47,11 @@
 
 .fav-wrapper {
   overflow-x: scroll;
+  
+}
+.contractContainer{
+  width:auto;
+  border:5px solid green;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -114,14 +138,45 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 }
-.service-card {
-  height: 120px;
+.add_page-card{
+  height: 140px;
   background-color: white;
-  box-shadow: 0px 3px 3px #0000001a;
+  box-shadow: 0 0 20px #00000033;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: solid 1px #f2f2f2;
   cursor: pointer;
+  border-radius: 20px 0px 0px 0px;
+}
+.inbox-card{
+  height: 140px;
+  background-color: white;
+  box-shadow: 0 0 20px #00000033;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: solid 1px #f2f2f2;
+  cursor: pointer;
+  border-radius:0px 20px 0px 0px ;
+}
+.claim-card{
+  height: 140px;
+  background-color: white;
+  box-shadow:0 0 20px #00000033;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: solid 1px #f2f2f2;
+  cursor: pointer;
+  border-radius: 0px 0px 0px 20px;
+}
+.broker-card{
+  height: 140px;
+  background-color: white;
+  box-shadow: 0 0 20px #00000033;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: solid 1px #f2f2f2;
+  cursor: pointer;
+  border-radius: 0px 0px 20px 0px;
 }
 .notification-card::after {
   content: attr(notification-count);
@@ -152,8 +207,8 @@
   backdrop-filter: blur(6.6px);
   -webkit-backdrop-filter: blur(6.6px);
   color: white;
-  margin: 0 auto;
-  padding: 6px;
+  margin: 8px;
+  padding: 5px;
   font-size: 14px;
   top: 10px;
   right: 5px;
@@ -189,4 +244,28 @@
 
 .card-text-subtitle {
   font-size: 12px;
+}
+.g-2, .gy-2 {
+  --bs-gutter-y: .4rem !important;
+}
+.g-2, .gx-2 {
+  --bs-gutter-x: .4rem !important;
+}
+.line_container{
+  width: 50%;
+  max-width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+.line_item{
+  cursor: pointer;
+  background-color:#848484;
+  min-width: 1rem;
+  height: 4px;
+}
+.line_item:hover{
+  background-color: #707070;
+}
+.isActive{
+  background-color: #d60b51;
 }

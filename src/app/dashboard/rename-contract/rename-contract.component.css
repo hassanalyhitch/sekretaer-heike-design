@@ -3,13 +3,13 @@
   text-shadow: none;
   font-size: 20px;
   letter-spacing: 2.5px;
+  font-family: oscine, sans-serif;
 }
 
 
 button,
 input,
-label,
-* {
+label{
   font-family: oscine, sans-serif;
 }
 
@@ -97,4 +97,14 @@ button[disabled]:hover {
 }
 button[disabled]:hover#sign-in-btn {
   color: white;
+}
+
+.fav-btn i{
+  font-size: 16px;
+  background-color: #848484;
+  padding: 3px;
+  color: white;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
 }

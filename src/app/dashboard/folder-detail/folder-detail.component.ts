@@ -154,7 +154,7 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = 'renamefolder-modal-component';
-    dialogConfig.height = '350px';
+    //dialogConfig.height = '350px';
     dialogConfig.width = '350px';
     dialogConfig.data = passdata;
 
@@ -184,7 +184,7 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = 'newfolder-modal-component';
-    dialogConfig.height = '400px';
+    //dialogConfig.height = '400px';
     dialogConfig.width = '350px';
     dialogConfig.data = passdata;
     dialogConfig.panelClass = 'bg-dialog-folder';
@@ -200,7 +200,7 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
   }
 
   onAddDocument(){
-    this.router.navigate(['dashboard/home/adddocument']);
+    this.router.navigate(['dashboard/home/adddocument',{type:'folder'}]);
   }
   
   renameFileModal(file) {
@@ -211,7 +211,8 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     dialogConfig.disableClose = false;
     dialogConfig.id = 'modal-component';
     // dialogConfig.height = '80%';
-    // dialogConfig.width = '90%';
+    dialogConfig.width = '350px';
+    dialogConfig.panelClass = 'bg-dialog-folder';
     dialogConfig.data = passdata;
     // https://material.angular.io/components/dialog/overview
     const renameFileDialog = this.matDialog.open(RenameModalComponent, dialogConfig);
