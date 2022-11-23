@@ -96,12 +96,12 @@
 }
 .price{
   font-size: 15px;
-  @include font-size(1rem);
+  @include font-size(1.25rem);
   font-weight: 500;
 }
 .date{
   font-size: 15px;
-  @include font-size(1rem);
+  @include font-size(1.25rem);
   font-weight: 300;
 }
 .company{
