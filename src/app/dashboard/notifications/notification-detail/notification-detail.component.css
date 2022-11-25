@@ -1,0 +1,26 @@
+@import url('https://use.typekit.net/myb7tas.css');
+.content-wrapper{
+  height: 92vh;
+  background-color: #F2F2F2;
+  background-image: linear-gradient(to right, #E5007E 50% , #F2F2F2 50%);
+  margin-top: 0px !important;
+  padding: 0px !important;
+}
+
+._content{
+  font-family: oscine, sans-serif;
+  background-color: #F2F2F2;
+  border-radius: 45px 0px 0px 0px;
+  height: inherit;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.section-content{
+  min-height: 280px;
+  height: inherit;
+  position: relative;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-bottom: 75px; 
+}

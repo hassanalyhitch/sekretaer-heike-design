@@ -62,6 +62,7 @@ import { TermsConditionsComponent } from './terms-conditions/terms-conditions.co
 import * as Hammer from 'hammerjs';
 import {HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { NotificationDetailComponent } from './dashboard/notifications/notification-detail/notification-detail.component';
 
 
 // AoT requires an exported function for factories
@@ -166,7 +167,8 @@ const appRoutes: Routes = [
     HomeFabIconsComponent,
     SearchPageComponent,
     TermsConditionsComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    NotificationDetailComponent
    ],
   bootstrap:    [ AppComponent ],
   providers: [
