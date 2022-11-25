@@ -15,7 +15,7 @@ export class NotificationItemComponent implements OnInit {
   notifMessage:string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam";
   @Input() notification: NotificationData;
 
-  notifIcon:string = "";
+  notifIcon:string = "/assets/icon_document.svg";
 
   constructor(
     private router: Router,private notificationService: NotificationsService, private matDialog: MatDialog) { }

@@ -70,7 +70,7 @@ export class NotificationsComponent implements OnInit {
         }
       },
       complete:()=>{
-        console.log(this.allNotifsArr.length);
+        // console.table(this.allNotifsArr);
       }
     });
     //a copy to avoid unneccesary network requests
@@ -93,33 +93,42 @@ export class NotificationsComponent implements OnInit {
   }
 
   sortByType(){
-    
+    console.log("sortByType");
     if(this.sortTypeByAsc){
-      this.ascType = this.allNotifsArr.sort((a, b) => a.links[0].assocType.localeCompare(b.links[0].assocType));
-      this.allNotifsArr = this.ascType;
+      this.allNotifsArr.sort((a, b) => {
+        if(a.links === null||b.links === null){
+          return 1;
+        } else {
+        return a.links[0].assocType.localeCompare(b.links[0].assocType);}
+      });
       this.sortTypeByAsc = !this.sortTypeByAsc;
     } else {
-      this.descType = this.allNotifsArr.sort((a, b) => a.links[0].assocType.localeCompare(b.links[0].assocType)).reverse();
-      this.allNotifsArr = this.descType;
+      this.allNotifsArr.reverse();
       this.sortTypeByAsc = !this.sortTypeByAsc;
 
     }
   }
 
   sortByTitle(){
+    console.log("sortByTitle");
     if(this.sortTitleByAsc){
-      this.ascTitle = this.allNotifsArr.sort((a, b) => a.infoHeadline.localeCompare(b.infoHeadline));
-      this.allNotifsArr = this.ascTitle;
+      this.allNotifsArr.sort((a, b) => {
+        console.log(a.infoHeadline);
+        if(a.infoHeadline === null || b.infoHeadline === null){
+          return 1;
+        }
+        return a.infoHeadline.localeCompare(b.infoHeadline);
+      });
       this.sortTitleByAsc = !this.sortTitleByAsc;
     } else {
-      this.descTitle = this.allNotifsArr.sort((a, b) => a.infoHeadline.localeCompare(b.infoHeadline)).reverse();
-      this.allNotifsArr = this.descTitle;
+      this.allNotifsArr.reverse();
       this.sortTitleByAsc = !this.sortTitleByAsc;
 
     }
   }
 
   sortByDate(){
+    console.log("sortByDate");
     if(this.sortDateByAsc){
       this.ascDate = this.allNotifsArr.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
       this.allNotifsArr = this.ascDate;
