@@ -1,9 +1,9 @@
 <div class="_content d-flex notif-item shadow-sm bg-light">
-  <div class="d-flex justify-content-center notif-icon p-1" (click)="openModal(notification)">
+  <div class="d-flex justify-content-center notif-icon p-1" (click)="onNotificationClick(notification)">
     <img class="icon align-self-center" [src]="notifIcon" alt="">
   </div>
   <div class="d-flex flex-column w-100">
-    <div class="h-100 bg- p-2" [ngClass]="{'read': notification.isRead === '1'}"  (click)="openModal(notification)" >
+    <div class="h-100 bg- p-2" [ngClass]="{'read': notification.isRead === '1'}"  (click)="onNotificationClick(notification)" >
     {{notification.infoHeadline | shortenText: 50 }}
     </div>
   </div>

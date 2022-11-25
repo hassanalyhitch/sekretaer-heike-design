@@ -2,7 +2,7 @@
   <div class="_content d-flex flex-column w-100 h-100 px-2">
 
     <!-- new top line -->
-    <div class="d-flex justify-content-between mb-2 pt-3">
+    <div class="d-flex justify-content-center mb-2 pt-3">
       <div class="p-2">
         <span class="section-title align-self-center">
           <strong class="section-title align-self-center mt-4 mb-3">{{ 'notifications.title' | translate }}</strong>
@@ -10,8 +10,39 @@
       </div>
     </div>
 
-    <p>
-      notification-detail works!
-    </p>
+    <div class="_content col-12 w-sm-100 d-flex flex-column">
+    
+      <div class="w-100 p-2 m-2 title bg-white">
+      {{ 'notifications.notification_item.open_contract' | translate }} {{notification.createdAt}}
+      </div>
+
+      <div class="w-100 p-2 m-2 title bg-white">
+        <!-- {{ 'notifications.notification_modal.title' | translate }} -->
+        {{notification.infoHeadline}}
+      </div>
+    
+      <div class="w-100 p-2 m-2 bg-white">
+        <!-- {{ 'notifications.notification_modal.content' | translate }} -->
+        {{notification.infoText}}
+      </div>
+        
+      <div class=" notif-action p-2 m-2 mt-3" *ngIf="contains('vamsidnr')">{{ 'notifications.notification_item.open_contract' | translate }}</div>
+          
+      <div class=" notif-action p-2 m-2 mt-3" *ngIf="contains('dms')">{{ 'notifications.notification_item.open_document' | translate }}</div>
+          
+      <div class=" notif-action p-2 m-2 mt-3" *ngIf="contains('docid')">{{ 'notifications.notification_item.open_document' | translate }}</div>
+          
+      <div class="d-flex mb-2 p-2 m-2 pt-3" (click)="onBackNavClick()">
+        <div class="d-flex" (click)="onBackNavClick()">
+          <i class="material-icons p-2 ">arrow_back_ios</i>
+        </div>
+        <div class="py-2">
+          <span class="section-title align-self-center">
+            Go back
+          </span>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>

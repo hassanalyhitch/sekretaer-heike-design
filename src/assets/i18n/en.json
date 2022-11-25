@@ -141,6 +141,11 @@
       "title": "Notification Title",
       "content": "Notification content",
       "mark_as_read": "Mark as Read"
+    },
+    "notification-detail":{
+      "title": "NOTIFICATIONS",
+      "back": "Go back",
+      "from": "Message from"
     }
   },
   "rename_contract": {

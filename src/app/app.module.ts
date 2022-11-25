@@ -93,6 +93,7 @@ const appRoutes: Routes = [
   { path: 'dashboard/overview/contract-detail', component:ContractDetailComponent },
   { path: 'dashboard/overview/folder-detail', component:FolderDetailComponent },
   { path: 'dashboard/home/notifications', component:NotificationsComponent },
+  { path: 'dashboard/home/notifications/notification-detail', component:NotificationDetailComponent },
   { path: 'dashboard/favourite/contract-detail', component:ContractDetailComponent },
   { path: 'dashboard/home/contract-detail/fileview', component: FileviewComponent},
   { path: 'dashboard/home/adddocument', component:AddPageComponent},

@@ -41,7 +41,7 @@ export class NotificationsComponent implements OnInit {
   _init(){
     this.notifService.getNotifications().subscribe({
       next:(resp)=>{
-        console.table(resp);
+        
         if(Array.isArray(resp)){
           resp.sort((a, b) => a.isRead.localeCompare(b.isRead));
           for(let item of resp){
@@ -68,6 +68,9 @@ export class NotificationsComponent implements OnInit {
         } else{
           //error
         }
+      },
+      complete:()=>{
+        console.log(this.allNotifsArr.length);
       }
     });
     //a copy to avoid unneccesary network requests

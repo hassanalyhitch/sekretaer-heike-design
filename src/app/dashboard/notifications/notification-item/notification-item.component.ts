@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { NotificationData } from '../../../models/notification.model';
 import { NotificationsService } from '../../../services/notification.service';
 import { NotificationModalComponent } from '../notification-modal/notification-modal.component';
@@ -16,7 +17,8 @@ export class NotificationItemComponent implements OnInit {
 
   notifIcon:string = "";
 
-  constructor(private notificationService: NotificationsService, private matDialog: MatDialog) { }
+  constructor(
+    private router: Router,private notificationService: NotificationsService, private matDialog: MatDialog) { }
 
   ngOnInit() {
     
@@ -85,6 +87,12 @@ export class NotificationItemComponent implements OnInit {
     dialogConfig.data = passdata;
     // https://material.angular.io/components/dialog/overview
     const modalDialog = this.matDialog.open(NotificationModalComponent, dialogConfig);
+  }
+
+  //emeit selected notification, and navigate to notification-detail
+  onNotificationClick(notification: NotificationData){
+    this.notificationService.emitSelectedNotification(notification);
+    this.router.navigate(["dashboard/home/notifications/notification-detail"]);
   }
 
 }
