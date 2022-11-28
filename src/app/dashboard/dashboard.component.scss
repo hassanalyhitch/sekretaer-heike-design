@@ -8,8 +8,8 @@
 
 }
 .header-wrapper{
-  height: 10vh;
-  min-height: 10vh;
+  @include rfs(3.75rem, height);
+  min-height: 60px;
   background-color: #F2F2F2;
   background-image: linear-gradient(to right, #E5007E 50% , #F2F2F2 50%);
 }

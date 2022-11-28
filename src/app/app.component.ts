@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent  implements OnInit{
   
-  authenticated: boolean = false;
+  authenticated: boolean = true;
   lang: string = 'en';
   show_privacy_policy: boolean = false;
   show_terms_and_conditions: boolean = false;
