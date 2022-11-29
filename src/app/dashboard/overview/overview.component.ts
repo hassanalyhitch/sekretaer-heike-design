@@ -146,7 +146,7 @@ export class OverviewComponent implements OnInit {
       this.onDefaultInsuranceCardClick();
     } else {
 
-      document.getElementById("cards").setAttribute("style","min-height:230px;height:230px;");
+      document.getElementById("cards").setAttribute("style","min-height:230px;height:auto;");
       document.getElementById("extra-cards").setAttribute("style","transition: opacity 0s;");
       setTimeout(()=>{this.collapsed = true;},200);
     }
@@ -181,7 +181,8 @@ export class OverviewComponent implements OnInit {
       } else if(this.allContractsArr.length==2){
         //expand 2
         this.collapsed = false;
-        document.getElementById("cards").setAttribute("style","min-height:380px;height:380px;");
+        let height = document.getElementsByClassName("card-2").item(0).clientHeight * 2 + 30 + 'px';
+        document.getElementById("cards").setAttribute("style","min-height:380px;height:"+height+";");
         setTimeout(()=>{
           document.getElementById("extra-cards").setAttribute("style","transition: all 0.4s;opacity:1;");
         },10);
@@ -189,7 +190,8 @@ export class OverviewComponent implements OnInit {
       } else {
         //expand all
         this.collapsed = false;
-        document.getElementById("cards").setAttribute("style","min-height:570px;height:570px;");
+        let height = document.getElementsByClassName("card-2").item(0).clientHeight * 3 + 50 + 'px';
+        document.getElementById("cards").setAttribute("style","min-height:380px;height:"+height+";");
         setTimeout(()=>{
           document.getElementById("extra-cards").setAttribute("style","transition: all 0.4s;opacity:1;");
         },10);

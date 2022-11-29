@@ -1,4 +1,5 @@
 @import url('https://use.typekit.net/myb7tas.css');
+@import "~bootstrap/scss/bootstrap.scss";
 .filter-icon{
   width: 20px;
   height: 20px;
@@ -9,6 +10,9 @@
   background-image: linear-gradient(to right, #E5007E 50% , #F2F2F2 50%);
   margin-top: 0px !important;
   padding: 0px !important;
+}
+.bg-white{
+  background-color: rgba(255, 255, 255, 1) !important;
 }
 ._content{
   background-color: #F2F2F2;
@@ -67,7 +71,7 @@
 
 .cards{
   min-height: 230px;
-  height: 230px;
+  height: auto;
   width: 100%;
   position: relative;
 }
@@ -79,7 +83,6 @@
 }
 .a_card{
   position: absolute;
-  margin-bottom: 10px;
   transition: all 0.2s cubic-bezier(0.63, 0.15, 0.03, 1.12);
 }
 .card-1{
@@ -97,14 +100,6 @@
 .card-3{
   z-index: 10;
   transform: translateY(0px);
-}
-.cards.transition .card-2{
-  transform: translateY(190px);
-  opacity: 1;
-}
-.cards.transition .card-1{
-  transform: translateY(380px);
-  opacity: 1;
 }
 .folders.transition .card-2{
   transform: translateY(190px);
@@ -169,3 +164,71 @@ app-folder-card{
   scrollbar-width: none !important;
 
 }
+
+//340 to 400
+@media (min-width: 320px) and (max-width: 400px) { 
+  .cards.transition .card-2{
+    @include rfs(translateY(10rem), transform);
+    opacity: 1;
+  }
+  .cards.transition .card-1{
+    @include rfs(translateY(20rem), transform);
+    opacity: 1;
+  }
+}
+//401 to 480
+@media (min-width: 401px) and (max-width: 480px) { 
+  .cards.transition .card-2{
+    @include rfs(translateY(11rem), transform);
+    opacity: 1;
+  }
+  .cards.transition .card-1{
+    @include rfs(translateY(22rem), transform);
+    opacity: 1;
+  }
+}
+//481 to 560
+@media (min-width: 481px) and (max-width: 560px) { 
+  .cards.transition .card-2{
+    @include rfs(translateY(12.5rem), transform);
+    opacity: 1;
+  }
+  .cards.transition .card-1{
+    @include rfs(translateY(24.5rem), transform);
+    opacity: 1;
+  }
+}
+
+@media (min-width: 561px) and (max-width: 640px) { 
+  .cards.transition .card-2{
+    @include rfs(translateY(14rem), transform);
+    opacity: 1;
+  }
+  .cards.transition .card-1{
+    @include rfs(translateY(28rem), transform);
+    opacity: 1;
+  }
+}
+@media (min-width: 641px) and (max-width: 720px) { 
+  .cards.transition .card-2{
+    @include rfs(translateY(15rem), transform);
+    opacity: 1;
+  }
+  .cards.transition .card-1{
+    @include rfs(translateY(30rem), transform);
+    opacity: 1;
+  }
+}
+@media (min-width: 721px)  { 
+  .cards.transition .card-2{
+    @include rfs(translateY(17rem), transform);
+    opacity: 1;
+  }
+  .cards.transition .card-1{
+    @include rfs(translateY(33.5rem), transform);
+    opacity: 1;
+  }
+}
+// @include media-breakpoint-up(md) { ... }
+// @include media-breakpoint-up(lg) { ... }
+// @include media-breakpoint-up(xl) { ... }
