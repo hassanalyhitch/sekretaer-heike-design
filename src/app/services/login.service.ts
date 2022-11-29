@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { tap } from "rxjs";
+import { Observable, Observer, tap } from "rxjs";
 import { AuthLogin } from "../models/auth_login.model";
 import { LoginData } from "../models/login.model";
 
@@ -11,7 +11,20 @@ export class LoginService {
   public chatCheck: number;
   public insuranceCheck: number;
 
-  constructor(private http: HttpClient) {}
+  authenticatedObs: Observable<boolean>;
+  observer: Observer<boolean>;
+  isAuthenticated: boolean = false;
+
+  constructor(private http: HttpClient) {
+    this.authenticatedObs = new Observable((observer:Observer<boolean>)=>{
+      this.observer = observer;
+      this.observer.next(this.isAuthenticated);
+    });
+  }
+
+  emitAuthenticated(isValid: boolean){
+    this.observer.next(isValid);
+  }
 
   login(data: LoginData) {
     return this.http
@@ -37,6 +50,7 @@ export class LoginService {
           this.lang = resp.lang;
           this.insuranceCheck = resp.config.insuranceCheck;
           //console.log(resp);
+
         })
       );
   }

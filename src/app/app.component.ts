@@ -1,6 +1,7 @@
-import { Component, OnInit, VERSION } from '@angular/core';
+import { Component, Input, OnInit, VERSION } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { LoginService } from './services/login.service';
 
 @Component({
   selector: 'my-sekretaer',
@@ -9,13 +10,13 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent  implements OnInit{
   
-  authenticated: boolean = true;
+  @Input() authenticated: boolean = false;
   lang: string = 'en';
   show_privacy_policy: boolean = false;
   show_terms_and_conditions: boolean = false;
   show_forgot_password: boolean = false;
 
-  constructor(private translate: TranslateService, private router: Router, private activatedRoute: ActivatedRoute){
+  constructor(private translate: TranslateService, private router: Router, private activatedRoute: ActivatedRoute, private loginService: LoginService){
 
     //Translator
     translate.setDefaultLang('en');
@@ -39,7 +40,16 @@ export class AppComponent  implements OnInit{
           this.show_forgot_password = false;
         }
       }
-    })
+    });
+
+    this.loginService.authenticatedObs.subscribe({
+      next:(resp)=>{
+        if(resp === false){
+          this.authenticated = false;
+        }
+      }
+    });
+
   }
 
   showPrivacyPolicy(event){

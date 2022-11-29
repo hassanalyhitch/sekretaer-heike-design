@@ -11,6 +11,7 @@
   border-radius: 45px 0px 0px 0px;
   overflow-y: scroll;
   font-family: oscine, sans-serif;
+  padding-bottom: 60px;
 }
 .section-title{
   text-shadow: none;

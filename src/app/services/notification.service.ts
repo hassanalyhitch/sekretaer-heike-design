@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, Observer, tap } from "rxjs";
 import { NotificationData } from "../models/notification.model";
+import { LoginService } from "./login.service";
 
 @Injectable({ providedIn: 'root' })
 export class NotificationsService {
@@ -22,7 +23,7 @@ export class NotificationsService {
   userNotificationsArr: NotificationData[]; 
   notifCount: number = 0;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private loginService: LoginService) {
     this.getUnreadNotifications().subscribe({
       next:(resp)=>{
         
@@ -46,7 +47,10 @@ export class NotificationsService {
                   'Content-Type': 'application/json'
               }),
       }
-    );
+    ).pipe(
+        tap({
+        })
+      );
 
   }
 

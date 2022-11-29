@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Observer, Subscription, tap } from 'rxjs';
 import { ContractData } from '../models/contract.model';
+import { LoginService } from './login.service';
 
 
 @Injectable({ providedIn: 'root' })
@@ -35,7 +36,7 @@ export class ContractsService {
   userContractsArr: ContractData[] = []; 
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private loginService: LoginService ) {
     this.selectObservable = new Observable((observer: Observer<ContractData>)=>{
       this.observer = observer;
       this.observer.next(this.selectedContract);
@@ -91,6 +92,7 @@ export class ContractsService {
             
             index++;
           }
+          
 
        } else {
         //invalid token
@@ -124,7 +126,7 @@ export class ContractsService {
                 }),
         }).pipe(
             tap((resp)=>{
-              
+              console.log(resp);
               this.userContractsArr = [];
               
               // console.log("Contract service => "+resp);
@@ -196,9 +198,7 @@ export class ContractsService {
         'Content-Type': 'application/json',
       }),
     }).pipe(
-      tap((resp)=>{
-        
-          console.log(data);
+      tap({
           
       })
     );

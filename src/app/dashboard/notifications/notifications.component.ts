@@ -96,8 +96,11 @@ export class NotificationsComponent implements OnInit {
     console.log("sortByType");
     if(this.sortTypeByAsc){
       this.allNotifsArr.sort((a, b) => {
+        if(a.links === null){
+          console.log(a);
+        }
         if(a.links === null||b.links === null){
-          return 1;
+          return -1;
         } else {
         return a.links[0].assocType.localeCompare(b.links[0].assocType);}
       });
@@ -115,7 +118,7 @@ export class NotificationsComponent implements OnInit {
       this.allNotifsArr.sort((a, b) => {
         console.log(a.infoHeadline);
         if(a.infoHeadline === null || b.infoHeadline === null){
-          return 1;
+          return -1;
         }
         return a.infoHeadline.localeCompare(b.infoHeadline);
       });

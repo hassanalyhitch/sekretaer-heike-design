@@ -154,8 +154,8 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
           this.contract.details.isFav = '1';
         },
         error: (resp) => {
-          console.log(resp);
-          console.log(contract.details.Amsidnr);
+          // console.log(resp);
+          // console.log(contract.details.Amsidnr);
         },
       });
   }
@@ -169,8 +169,8 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
           this.contract.details.isFav = '0';
         },
         error: (resp) => {
-          console.log(resp);
-          console.log(contract.details.favoriteId);
+          // console.log(resp);
+          // console.log(contract.details.favoriteId);
         },
       });
   }
