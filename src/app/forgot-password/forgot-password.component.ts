@@ -26,11 +26,10 @@ export class ForgotPasswordComponent implements OnInit {
   userInput = {};
   buttonDisabled = true;
 
-  // username = "";
-  // password = "";
-
   email: string = "";
   submitted: boolean = false;
+
+  isFormSubmmited: boolean = false;
 
   @ViewChild("loginForm", { static: true }) loginForm: NgForm;
   errorMessage: string = null;
@@ -82,28 +81,20 @@ export class ForgotPasswordComponent implements OnInit {
     // });
   }
 
-  showSnackbar(error: string) {
-    this.errorStack.push(this.errorMessage);
-    setInterval(() => {
-      this.errorStack.pop();
-    }, 8000);
-  }
+  // showSnackbar(error: string) {
+  //   this.errorStack.push(this.errorMessage);
+  //   setInterval(() => {
+  //     this.errorStack.pop();
+  //   }, 8000);
+  // }
 
   onSubmit(formData: LoginData) {
-    // formData.loginType = "customer";
-    // this.submitted = true;
+    
     // this.errorMessage = null;
     // this.validateUser(formData);
 
-    //Just go back for now
-    this._location.back();
-    console.log(formData);
+    this.isFormSubmmited = true;
     
-  }
-
-  onCloseButtonClicked(){
-    this._location.back();
-    //this.router.navigate(['login']);
   }
 
 }

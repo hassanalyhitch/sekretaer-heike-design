@@ -1,3 +1,4 @@
+import { LoadingService } from 'src/app/services/loading.service';
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -29,13 +30,14 @@ export class NotificationsComponent implements OnInit {
   descDate:NotificationData[] = [];
   sortDateByAsc:boolean = true;
 
-  constructor(private router:Router, private notifService: NotificationsService) { 
+  constructor(private router:Router, private notifService: NotificationsService,private loadingService:LoadingService) { 
     
   }
 
   ngOnInit() {
+    this.loadingService.emitIsLoading(true);
     this._init();
-
+  
   }
 
   _init(){
@@ -71,6 +73,7 @@ export class NotificationsComponent implements OnInit {
       },
       complete:()=>{
         // console.table(this.allNotifsArr);
+        this.loadingService.emitIsLoading(false);
       }
     });
     //a copy to avoid unneccesary network requests

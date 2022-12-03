@@ -1,3 +1,4 @@
+import { LoadingService } from 'src/app/services/loading.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -84,18 +85,22 @@ export class OverviewComponent implements OnInit {
   ascendFolderDate:FolderData[] =[];
   descendFolderDate:FolderData[] =[];
 
-  constructor(private router:Router, private contractService: ContractsService, private folderService: FoldersService,private matDialog: MatDialog) { }
+  constructor(private router:Router, private contractService: ContractsService, 
+    private folderService: FoldersService,
+    private matDialog: MatDialog,
+    private loadingService:LoadingService
+    ) {
+      this.loadingService.emitIsLoading(true);
+     }
 
   ngOnInit() {
-
+   
     this._init();
-    
   }
-
   _init(){
-
     this.contractService.getContracts().subscribe({
       next: ()=>{
+      
         this.allContractsArr = this.contractService.userContractsArr;
 
         if(this.contractService.userContractsArr.length>3){
@@ -108,7 +113,6 @@ export class OverviewComponent implements OnInit {
         this.allContractsArr.length>2 ? this.showCard1 = true: this.showCard1 = false;
       },
       complete:()=>{
-
         this.folderService.getFolders().subscribe({
           next: (resp)=>{
             this.foldersArr = this.folderService.userFolderArr;
@@ -120,8 +124,12 @@ export class OverviewComponent implements OnInit {
             // console.log(this.foldersArr);
             this.foldersArr.length>1 ? this.showFolderCard2 = true: this.showFolderCard2 = false;
             this.foldersArr.length>2 ? this.showFolderCard1 = true: this.showFolderCard1 = false;
+          },
+          complete:()=>{
+            this.loadingService.emitIsLoading(false);
           }
         });
+       
       }
       
     });
@@ -146,7 +154,7 @@ export class OverviewComponent implements OnInit {
       this.onDefaultInsuranceCardClick();
     } else {
 
-      document.getElementById("cards").setAttribute("style","min-height:230px;height:auto;");
+      document.getElementById("cards").setAttribute("style","min-height:230px;height:230px;");
       document.getElementById("extra-cards").setAttribute("style","transition: opacity 0s;");
       setTimeout(()=>{this.collapsed = true;},200);
     }
@@ -181,8 +189,7 @@ export class OverviewComponent implements OnInit {
       } else if(this.allContractsArr.length==2){
         //expand 2
         this.collapsed = false;
-        let height = document.getElementsByClassName("card-2").item(0).clientHeight * 2 + 30 + 'px';
-        document.getElementById("cards").setAttribute("style","min-height:380px;height:"+height+";");
+        document.getElementById("cards").setAttribute("style","min-height:380px;height:380px;");
         setTimeout(()=>{
           document.getElementById("extra-cards").setAttribute("style","transition: all 0.4s;opacity:1;");
         },10);
@@ -190,8 +197,7 @@ export class OverviewComponent implements OnInit {
       } else {
         //expand all
         this.collapsed = false;
-        let height = document.getElementsByClassName("card-2").item(0).clientHeight * 3 + 50 + 'px';
-        document.getElementById("cards").setAttribute("style","min-height:380px;height:"+height+";");
+        document.getElementById("cards").setAttribute("style","min-height:570px;height:570px;");
         setTimeout(()=>{
           document.getElementById("extra-cards").setAttribute("style","transition: all 0.4s;opacity:1;");
         },10);

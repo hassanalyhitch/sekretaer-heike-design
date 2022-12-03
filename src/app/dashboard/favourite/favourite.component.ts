@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { ContractData } from '../../models/contract.model';
 import { FolderData } from '../../models/folder.model';
 import { ContractsService } from '../../services/contracts.service';
 import { FoldersService } from '../../services/folder.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-favourite',
   templateUrl: './favourite.component.html',
   styleUrls: ['./favourite.component.css']
 })
-export class FavouriteComponent implements OnInit {
+export class FavouriteComponent implements OnInit, OnChanges {
 
   favContractArr:ContractData[] = [];
   allContractsArr:ContractData[] = [];
@@ -18,7 +19,16 @@ export class FavouriteComponent implements OnInit {
   favFoldersArr: FolderData[] = [];
   allFoldersArr: FolderData[] = [];
 
-  constructor(private router:Router, private contractService: ContractsService, private folderService: FoldersService) { }
+  constructor(private router:Router, private contractService: ContractsService, 
+    private folderService: FoldersService,private loadingService:LoadingService) {
+      
+    this.loadingService.emitIsLoading(true);
+     }
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+    
+  }
 
   ngOnInit() {
     this.contractService.getContracts().subscribe({
@@ -35,6 +45,7 @@ export class FavouriteComponent implements OnInit {
       },
       complete:()=>{
         
+        
         this.folderService.getFolders().subscribe({
           next: (resp)=>{
 
@@ -46,6 +57,9 @@ export class FavouriteComponent implements OnInit {
             
             });
                     
+          },
+          complete:()=>{
+            this.loadingService.emitIsLoading(false);
           }
         });
       }

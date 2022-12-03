@@ -1,3 +1,4 @@
+import { FileSizePipe } from './../../../pipes/filesize.pipe';
 import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { BranchData } from '../../../models/branch.model';
@@ -7,13 +8,16 @@ import { CompanyService } from '../../../services/company.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
+import { UploadFileData } from '../../../models/upload-file.model';
+
 
 
 
 @Component({
   selector: 'app-new-contract',
   templateUrl: './new-contract.component.html',
-  styleUrls: ['./new-contract.component.css']
+  styleUrls: ['./new-contract.component.css'],
+  providers:[FileSizePipe]
 })
 
 export class NewContractComponent implements OnInit {
@@ -43,13 +47,18 @@ selectedBranches:any;
 selectedCompanies:any;
 // ------------------------------
 
+show:boolean = false;
 formGroup:FormGroup;
+file:File = null;
+fileName:string ="No file chosen";
+uploadFileArr: UploadFileData [] =[];
+
 
  
 @ViewChild("selectFile",{static:true}) selectFile:ElementRef;
 branchSettings ={}; 
 companySettings = {};
-  constructor(private branchService:BranchService) { 
+  constructor(private branchService:BranchService, private fileSizePipe:FileSizePipe) { 
 
   }
 
@@ -185,7 +194,7 @@ this.companySettings = {
 
 
   onBranchSelected(item:any){
-    console.log('---- ------------------------------------------------------------------------------------------');
+    console.log('----------------------------------------------------------------------------------------------');
     this.branchService.getCompany(item.Branch2MasterId).subscribe({
       next:(resp)=> {
        
@@ -225,15 +234,31 @@ this.companySettings = {
   showContracts(){
     this.showcontract = this.branchSelected;
   }
-
+  
   onSubmit(formData:any){
-    console.log('------------------------------');
-    console.log(formData);
+   console.log(formData);
   }
 
   onOptionSelected(option:boolean){
     this.optionSelected = option;
     console.log(this.optionSelected);
   }
+  handleChange(event){
+    this.show = !this.show;
+    this.file = event.target.files[0];
+   console.log(this.file);
 
+   let _file:UploadFileData ={
+    doc_file:this.file,
+    fileName :this.file.name,
+    fileId : this.uploadFileArr.length +"",
+
+    fileSize :this.fileSizePipe.transform(this.file.size,'MB'),
+    
+   fileType  :this.file.type
+   }
+   this.uploadFileArr =[];
+   this.uploadFileArr.push(_file);
+   this.selectFile.nativeElement.value = null;
+  }
 }

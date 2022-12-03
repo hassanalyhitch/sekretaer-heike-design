@@ -1,0 +1,68 @@
+@import url('https://use.typekit.net/myb7tas.css');
+.main-wrapper{
+  font-family: oscine, sans-serif;
+  height: 100vh;
+  background-color: #F2F2F2;
+  background-image: linear-gradient(to right, #E5007E 50% , #F2F2F2 50%);
+  position: relative;
+
+}
+.header-wrapper{
+  height: 10vh;
+  min-height: 10vh;
+  background-color: #F2F2F2;
+  background-image: linear-gradient(to right, #E5007E 50% , #F2F2F2 50%);
+}
+.header-content{
+  background-color: #E5007E;
+  background-image: linear-gradient(114deg, #E5007E, #D60B51);
+  border-radius: 0px 0px 45px 0px;
+  height: 100%;
+}
+.content-wrapper{
+  height: 90vh;
+  background-color: #F2F2F2;
+  background-image: linear-gradient(to right, #E5007E 50% , #F2F2F2 50%);
+  margin-top: 0px !important;
+  padding: 0px !important;
+}
+._content{
+  background-color: #F2F2F2;
+  border-radius: 45px 0px 0px 0px;
+}
+
+.bottom-links{
+  position: absolute;
+  bottom: 0;
+  z-index: 6;
+}
+.bottom-links a {
+  color: white;
+  text-decoration: none;
+}
+app-bottom-nav{
+  z-index: 60px;
+}
+.snackbar-wrapper{
+  position: absolute;
+  bottom: 60px;
+  width: 80%;
+  background-color: #D60B51;
+  border-radius: 7px;
+  border: solid 2px white;
+  transition: 0.4s ease-in;
+}
+.logo-container{
+  width:8vh;
+  max-width: 8vh;
+  overflow: hidden;
+  
+}
+.app-logo{
+  height: 48px;
+  width: 48px;
+  padding: 8px;
+  object-fit: contain;
+  object-position: center center;
+}
+

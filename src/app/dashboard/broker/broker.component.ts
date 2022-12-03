@@ -1,3 +1,4 @@
+import { LoadingService } from 'src/app/services/loading.service';
 import { Component, OnInit } from '@angular/core';
 import { BrokerData } from '../../models/broker.model';
 import { BrokerService } from '../../services/broker.service';
@@ -15,12 +16,12 @@ export class BrokerComponent implements OnInit {
   mailto: string = "mailto:";
   telto: string = "tel:";
 
-  constructor(private brokerService:BrokerService) { }
+  constructor(private brokerService:BrokerService, private loadingService:LoadingService) { }
 
   ngOnInit() {
+    this.loadingService.emitIsLoading(true);
     this.brokerService.getBrokerDetails().subscribe({
       next:(resp:BrokerData)=>{
-
         console.log(resp);
 
         this.brokerName = resp.myBroker.V_NAME;
@@ -29,9 +30,11 @@ export class BrokerComponent implements OnInit {
         this.brokerEmail = resp.myBroker.V_EMAIL;
         this.mailto = this.mailto + this.brokerEmail;
         this.telto = this.telto + this.brokerNumber;
+
+       
       },
-      error:(e)=>{
-        console.log(e);
+      complete:()=>{
+        this.loadingService.emitIsLoading(false);
       }
     });
   }

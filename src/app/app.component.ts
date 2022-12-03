@@ -1,3 +1,4 @@
+import { LoadingService } from './services/loading.service';
 import { Component, Input, OnInit, VERSION } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -16,7 +17,9 @@ export class AppComponent  implements OnInit{
   show_terms_and_conditions: boolean = false;
   show_forgot_password: boolean = false;
 
-  constructor(private translate: TranslateService, private router: Router, private activatedRoute: ActivatedRoute, private loginService: LoginService){
+  showOverlay:boolean=false;
+
+  constructor(private translate: TranslateService, private router: Router, private activatedRoute: ActivatedRoute, private loginService: LoginService,private loadingService:LoadingService){
 
     //Translator
     translate.setDefaultLang('en');
@@ -49,7 +52,11 @@ export class AppComponent  implements OnInit{
         }
       }
     });
-
+    this.loadingService.loadingObs.subscribe({
+      next:(resp) =>{
+        this.showOverlay = resp;
+      }
+    });
   }
 
   showPrivacyPolicy(event){

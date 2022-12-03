@@ -6,6 +6,7 @@ import { formatDate } from "@angular/common";
 import { ContractData } from "../../models/contract.model";
 import { NotificationsService } from "../../services/notification.service";
 import { LoginService } from "../../services/login.service";
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: "app-home",
@@ -31,11 +32,13 @@ export class HomeComponent implements OnInit,AfterViewInit{
   constructor(
     private router: Router,
     private contractService: ContractsService,
-    private notificationService: NotificationsService
+    private notificationService: NotificationsService,
+    private loadingService:LoadingService
   ) {}
 
 
   ngOnInit() {
+    this.loadingService.emitIsLoading(true);
     this.contractService.getContracts().subscribe({
       complete: () => {
         this.allContractsArr = this.contractService.userContractsArr;
@@ -69,6 +72,9 @@ export class HomeComponent implements OnInit,AfterViewInit{
         }
         
       },
+      complete:()=>{
+        this.loadingService.emitIsLoading(false);
+      }
     });
 
     // this.chatCheck = this.loginService.chatCheck;

@@ -75,7 +75,10 @@
   },
   "login": {
     "title_login": "Let's Login",
-    "title_forgot_password" : "Reset Your Password",
+    "title_forgot_password_1" : "Forgot Password?",
+    "title_forgot_password_2" : "Don't Worry.",
+    "title_forgot_password_3" : "It Happens to the rest of us.",
+    "content_forgot_password" : "Please enter your email address or your username and we will send you a link to reset your password",
     "btn_login": "LOG IN",
     "btn_reset_password": "RESET PASSWORD",
     "btn_back": "BACK",
@@ -84,7 +87,12 @@
     "forgot_password": "Forgot your Password?",
     "privacy_policy": "Privacy Policy",
     "terms": "Terms & Conditions",
-    "email": "Email"
+    "email": "Email",
+    "forgot_password_input_lable" : "Email or Username",
+    "btn_back_to_login" : "BACK TO LOGIN",
+    "title_email_sent" : "Fast geschafft.",
+    "content_email_sent_1" : "We have sent you an email.",
+    "content_email_sent_2" : "Please check your inbox or your spam folder"
   },
   "settings":{
     "main_title":"SETTINGS",

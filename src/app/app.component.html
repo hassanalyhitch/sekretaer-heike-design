@@ -15,6 +15,9 @@
     <div *ngIf="!authenticated && show_privacy_policy || !authenticated && show_terms_and_conditions || !authenticated && show_forgot_password">
       <router-outlet></router-outlet>
     </div>
-
+    <div *ngIf="showOverlay" class="position-absolute top-0 start-0 bottom-0 end-0 w-100 h-100">
+      <app-loading></app-loading>
+    </div>
+    
   </div>
 </div>

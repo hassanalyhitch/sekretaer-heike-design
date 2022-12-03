@@ -1,0 +1,20 @@
+@import url('https://use.typekit.net/myb7tas.css');
+._content{
+    position: absolute;
+    width: 100%;
+    z-index: 20;
+    height:100%;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.logo{
+    margin-top:200px;
+    margin-right:50px;
+    margin-left:50px;
+    margin-bottom:200px;
+    height:150px;
+    width: 150px;
+ }
