@@ -6,7 +6,7 @@ import { formatDate } from "@angular/common";
 import { ContractData } from "../../models/contract.model";
 import { NotificationsService } from "../../services/notification.service";
 import { LoginService } from "../../services/login.service";
-import { LoadingService } from 'src/app/services/loading.service';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: "app-home",
@@ -34,11 +34,12 @@ export class HomeComponent implements OnInit,AfterViewInit{
     private contractService: ContractsService,
     private notificationService: NotificationsService,
     private loadingService:LoadingService
-  ) {}
+  ) {
+    this.loadingService.emitIsLoading(true);
+  }
 
 
   ngOnInit() {
-    this.loadingService.emitIsLoading(true);
     this.contractService.getContracts().subscribe({
       complete: () => {
         this.allContractsArr = this.contractService.userContractsArr;

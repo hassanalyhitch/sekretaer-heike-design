@@ -1,4 +1,4 @@
-import { LoadingService } from 'src/app/services/loading.service';
+import { LoadingService } from '../../services/loading.service';
 import { Component, OnInit } from '@angular/core';
 import { BrokerData } from '../../models/broker.model';
 import { BrokerService } from '../../services/broker.service';
@@ -16,10 +16,11 @@ export class BrokerComponent implements OnInit {
   mailto: string = "mailto:";
   telto: string = "tel:";
 
-  constructor(private brokerService:BrokerService, private loadingService:LoadingService) { }
+  constructor(private brokerService:BrokerService, private loadingService:LoadingService) {
+    this.loadingService.emitIsLoading(true);
+   }
 
   ngOnInit() {
-    this.loadingService.emitIsLoading(true);
     this.brokerService.getBrokerDetails().subscribe({
       next:(resp:BrokerData)=>{
         console.log(resp);

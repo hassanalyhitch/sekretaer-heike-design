@@ -11,10 +11,7 @@
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 .logo{
-    margin-top:200px;
-    margin-right:50px;
-    margin-left:50px;
-    margin-bottom:200px;
+    margin: auto auto;
     height:150px;
     width: 150px;
  }
