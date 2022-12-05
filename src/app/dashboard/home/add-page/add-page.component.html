@@ -31,9 +31,7 @@
               #selectFile  
               (change)="getFileName($event)" 
               id="selectFile" 
-              [(ngModel)]="file"
               name="file"
-              ngModel
               required/>
             
             <app-upload-file class="fileUpload"*ngFor="let uploadFile of uploadFileArr" [uploadFile]="uploadFile" (deleteFile)="removeFile($event)"></app-upload-file>
@@ -43,17 +41,17 @@
             <input type="text"  placeholder="Class"  class="fileUpload">
         <div class="folderSection">
           <div class="fileUpload">
-                <ng-multiselect-dropdown
-                  [placeholder]="'add_document.placeholder' | translate "
-                  [settings]="dropdownSettings"
-                  [data]="dataArr"
-                  (onSelect)="onItemSelected($event)"
-                  name="myItems"
-                  formControlName="myItems"
-                  ngModel 
-                  [disabled]="dropdownDisabled"
-                  >
-                </ng-multiselect-dropdown>
+            <ng-multiselect-dropdown
+            [placeholder]="'add_document.placeholder' | translate "
+            [settings]="dropdownSettings"
+            [data]="dataArr"
+            (onSelect)="onItemSelected($event)"
+            name="myItems"
+            [(ngModel)]="selectedItems"
+            ngModel 
+            [disabled]="dropdownDisabled"
+            >
+          </ng-multiselect-dropdown>
           </div>
         </div>
             <div class="share"><img src="\assets\Gruppe 195.svg"></div>

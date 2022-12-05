@@ -16,7 +16,8 @@ export class BrokerComponent implements OnInit {
   mailto: string = "mailto:";
   telto: string = "tel:";
 
-  constructor(private brokerService:BrokerService, private loadingService:LoadingService) {
+  constructor(private brokerService:BrokerService, private loadingService:LoadingService) 
+  {
     this.loadingService.emitIsLoading(true);
    }
 

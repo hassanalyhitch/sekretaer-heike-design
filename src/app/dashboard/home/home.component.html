@@ -78,9 +78,9 @@
           <div class="container mb-4">
             <div class="row g-2">
               <div class="col-6">
-                <div class="p-3 bg-white add_page-card">
+                <div class="p-3 bg-white add_page-card" (click)="onAddPage()">
                   <img class="service-icon" src="\assets\Gruppe 230.svg">
-                  <div class="d-flex flex-column " (click)="onAddPage()">
+                  <div class="d-flex flex-column ">
                     <span class="mt-4 fw-bold card-text-title">{{ "home.service_card_add_title" | translate }}</span>
                   
                     
@@ -97,7 +97,7 @@
               </div>
 
               <div class="col-6">
-                <div class="p-3 bg-white inbox-card">
+                <div class="p-3 bg-white inbox-card" (click)="onNotifClick()">
                   <span *ngIf="isNotificationCountText" class="position-absolute top-0 end-0  bg-new-notify-icon">
                     9+
                     <span class="visually-hidden">unread messages</span>
@@ -108,7 +108,7 @@
                   <span class="visually-hidden">unread messages</span>
                 </span>
                   <img class="service-icon" src="\assets\Gruppe 234.svg">
-                  <div class="d-flex flex-column mt-4 position-relative" (click)="onNotifClick()">
+                  <div class="d-flex flex-column mt-4 position-relative" >
                     <span class="fw-bold card-text-title ">
                       {{ "home.service_card_notifications" | translate }}
                     </span>

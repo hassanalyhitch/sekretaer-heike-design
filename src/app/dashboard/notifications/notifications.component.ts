@@ -30,14 +30,13 @@ export class NotificationsComponent implements OnInit {
   descDate:NotificationData[] = [];
   sortDateByAsc:boolean = true;
 
-  constructor(private router:Router, private notifService: NotificationsService,private loadingService:LoadingService) { 
-    
+  constructor(private router:Router, private notifService: NotificationsService,private loadingService:LoadingService) 
+  { 
+    this.loadingService.emitIsLoading(true);
   }
 
   ngOnInit() {
-    this.loadingService.emitIsLoading(true);
     this._init();
-  
   }
 
   _init(){

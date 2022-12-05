@@ -37,50 +37,50 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
  
   @ViewChild("selectFile",{static:true}) selectFile:ElementRef;
   @ViewChild("addPageForm",{static:true}) addPageForm:NgForm;
-   dropdownSettings = {};
-   @Input() index:String;
-   folders:FolderData =<FolderData>{
-    id : "",
-    loginId : "",
-    customerAmsidnr : "",
-    ownerFolderId : "",
-    folderName : "",
-    createTime :"",
-    createdAt : "",
-    subFolders : [],
+  dropdownSettings = {};
+  @Input() index:String;
+  folders:FolderData =<FolderData>{
+  id : "",
+  loginId : "",
+  customerAmsidnr : "",
+  ownerFolderId : "",
+  folderName : "",
+  createTime :"",
+  createdAt : "",
+  subFolders : [],
 
-    isSelected:false
-   };
+  isSelected:false
+  };
+
+
+  folderSub:Subscription;
+  folderArr: any[] = [];
+  contractArr: any[] = [];
+  dataArr: {
+    id: String,
+    customerAmsidnr: string,
+    dataName : string,
+    type: string
+  }[] = [];
+    
+
+  shortLink: string = "";
+  loading: boolean = false; // Flag variable
+  file: File = null;
+  successResponse:boolean = true;
+  postResponse:any;
+  uploadFileArr: UploadFileData [] =[];
   
- 
-   folderSub:Subscription;
-   folderArr: any[] = [];
-   contractArr: any[] = [];
-   dataArr: {
-      id: String,
-      customerAmsidnr: string,
-      dataName : string,
-      type: string
-    }[] = [];
-      
- 
-   shortLink: string = "";
-   loading: boolean = false; // Flag variable
-   file: File = null;
-   successResponse:boolean = true;
-   postResponse:any;
-   uploadFileArr: UploadFileData [] =[];
-   
-   dateFormat ="yyyy-MM-dd";
-   language="en";
-   dropDownForm:FormGroup;
-   dropdownDisabled:boolean = false;
+  dateFormat ="yyyy-MM-dd";
+  language="en";
+  dropDownForm:FormGroup;
+  dropdownDisabled:boolean = false;
   
 
    
-   typeSelected:string='';
-    myItems =[];
-    pickdate:any;
+  typeSelected:string='';
+  myItems =[];
+  pickdate:any;
     constructor( private route:ActivatedRoute, private router:Router,private folderService:FoldersService,
 private contractService:ContractsService,private http:HttpClient,private fileUploadService: FileUploadService,
 private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePipe:FileSizePipe,private builder:FormBuilder) {
@@ -153,7 +153,7 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
       // namefile:['',Validators.required],
       // date:['',Validators.required],
       // file: new FormControl(),
-      myItems: [this.selectedItems],
+      // myItems: [this.selectedItems],
       // today:new FormControl(this.formatFormDate(new Date()))
     });
 
@@ -193,6 +193,10 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
         if(Array.isArray(resp)){
 
           for(let item of resp){
+
+            if(item['id'] === undefined || item['id'] === null){
+              console.log('problems');
+            }
             //
             let folder: any = {
               id: item['id'],
@@ -214,7 +218,10 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
               
               if(Array.isArray(res)){
                 for(let cont of res){
-                  // console.log(cont);
+
+                  if(cont['Amsidnr'] === undefined || cont['Amsidnr'] === null){
+                    console.log('problems');
+                  }
                   //
                   let contract: any = {
                     id: cont['Amsidnr'],
@@ -234,11 +241,7 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
 
             },
             complete:()=>{
-              for(let x=0;x<this.dataArr.length;x++){
-                if(this.selectedItems[0].id == this.dataArr[x].id){
-                  this.typeSelected = this.dataArr[x].type;
-                }
-              }
+              
             
             }
 
