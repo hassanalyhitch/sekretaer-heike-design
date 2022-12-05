@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, Observer, tap } from "rxjs";
 import { NotificationData } from "../models/notification.model";
@@ -30,6 +30,16 @@ export class NotificationsService {
         if(Array.isArray(resp)){
           this.notifCount = resp.length;
         }
+      },
+      error:(error: any)=>{
+
+        if(error instanceof HttpErrorResponse){
+          //Invalid Token or Unauthorised request
+          if(error.status == 401){
+            this.loginService.emitAuthenticated(false);
+          }
+        }
+
       }
     });
   }
@@ -39,35 +49,61 @@ export class NotificationsService {
   }
 
   getNotifications() {
-    return this.http.get(
-      'https://testapi.maxpool.de/api/v1/sekretaer/notifications',
-      {
+    return this.http.get('https://testapi.maxpool.de/api/v1/sekretaer/notifications',{
           headers: new HttpHeaders({
                   'accept': 'application/json',
                   'Content-Type': 'application/json'
               }),
       }
     ).pipe(
-        tap({
-        })
-      );
+      tap({
+        next:()=>{
+
+        },
+        error:(error: any)=>{
+
+          if(error instanceof HttpErrorResponse){
+            //Invalid Token or Unauthorised request
+            if(error.status == 401){
+              this.loginService.emitAuthenticated(false);
+            }
+          }
+
+        }
+      })
+    );
 
   }
 
   getUnreadNotifications() {
-    return this.http.get(
-      'https://testapi.maxpool.de/api/v1/sekretaer/notifications/unread',
-      {
+    return this.http.get('https://testapi.maxpool.de/api/v1/sekretaer/notifications/unread',{
           headers: new HttpHeaders({
                   'accept': 'application/json',
                   'Content-Type': 'application/json'
               }),
       }
+    ).pipe(
+      tap({
+        next:()=>{
+
+        },
+        error:(error: any)=>{
+
+          if(error instanceof HttpErrorResponse){
+            //Invalid Token or Unauthorised request
+            if(error.status == 401){
+              this.loginService.emitAuthenticated(false);
+            }
+          }
+
+        }
+      })
     );
 
   }
   
   markAsRead(notificationId){
+
     let url ='https://testapi.maxpool.de/api/v1/sekretaer/notifications/'+notificationId+'/mark/read';
 
     return this.http.put(url, {
@@ -76,10 +112,20 @@ export class NotificationsService {
         'Content-Type': 'application/json',
       }),
     }).pipe(
-      tap((resp)=>{
-        
-          console.log(resp);
-          
+      tap({
+        next:()=>{
+
+        },
+        error:(error: any)=>{
+
+          if(error instanceof HttpErrorResponse){
+            //Invalid Token or Unauthorised request
+            if(error.status == 401){
+              this.loginService.emitAuthenticated(false);
+            }
+          }
+
+        }
       })
     );
   }

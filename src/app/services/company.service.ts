@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { tap } from 'rxjs';
+import { LoginService } from './login.service';
 @Injectable({ providedIn: 'root' })
 
 export class CompanyService {
-    constructor (private http:HttpClient){
-    }
+
+    constructor (private http:HttpClient, private loginService:LoginService){}
+
     getCompany(Branch2MasterId){
         
         let url = 'https://testapi.maxpool.de/api/v1/masterbranches/'+ Branch2MasterId +'/companies';
@@ -16,9 +18,21 @@ export class CompanyService {
             'Content-Type': 'application/json',
            }),
         }).pipe(
-            tap((resp) =>{
-                console.log(resp);
-            })
+            tap({
+                next:()=>{
+      
+                },
+                error:(error: any)=>{
+
+                  if(error instanceof HttpErrorResponse){
+                    //Invalid Token or Unauthorised request
+                    if(error.status == 401){
+                      this.loginService.emitAuthenticated(false);
+                    }
+                  }
+                  
+                }
+              })
         )
 
     }

@@ -1,4 +1,4 @@
-import { HttpClient,HttpHeaders} from '@angular/common/http';
+import { HttpClient,HttpErrorResponse,HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs';
 import { LoginService } from './login.service';
@@ -11,9 +11,7 @@ export class BrokerService {
   constructor(private http:HttpClient, private loginService:LoginService) { }
 
   getBrokerDetails(){
-    return this.http.get(
-        'https://testapi.maxpool.de/api/v1/sekretaer/myprofile',
-        {
+    return this.http.get('https://testapi.maxpool.de/api/v1/sekretaer/myprofile',{
           headers: new HttpHeaders({
                   'accept': 'application/json',
                   'Content-Type': 'application/json'
@@ -24,12 +22,12 @@ export class BrokerService {
           next:()=>{
 
           },
-          error:(resp)=>{
-            //handle non-200 status codes
-            
-            //if invalid token emit false
-            if(resp.message === "Invalid Token"){
-              this.loginService.emitAuthenticated(false);
+          error:(error: any)=>{
+            if(error instanceof HttpErrorResponse){
+              //Invalid Token or Unauthorised request
+              if(error.status == 401){
+                this.loginService.emitAuthenticated(false);
+              }
             }
           }
         })

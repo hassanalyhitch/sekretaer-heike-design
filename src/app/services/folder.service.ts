@@ -1,8 +1,9 @@
 import { formatDate } from '@angular/common';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Observer, Subscription, tap } from 'rxjs';
 import { FolderData } from '../models/folder.model';
+import { LoginService } from './login.service';
 
 
 @Injectable({ providedIn: 'root' })
@@ -27,7 +28,7 @@ export class FoldersService {
   selectObservable:Observable<FolderData>;
   userFolderArr:FolderData[] =[];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private loginService:LoginService) {
 
     this.selectObservable = new Observable((observer: Observer<FolderData>)=>{
       this.observer = observer;
@@ -49,42 +50,58 @@ export class FoldersService {
                     'Content-Type': 'application/json'
                 }),
         }).pipe(
-          tap((resp)=>{
+          tap({
+            next:(resp)=>{
 
-            this.userFolderArr = [];
-            if(Array.isArray(resp)){
-              let index: number = 0;
-    
-              for(let item of resp){
-                //format date 
-                // item['createdAt'] = formatDate(item['createdAt'], "dd.MM.YYYY","en");
-                //
-                let folder: FolderData = {
-                  id: item['id'],
-                  loginId : item['loginId'],
-                  customerAmsidnr:  item['customerAmsidnr'],
-                  createdAt:  item['createdAt'],         
-                  ownerFolderId : item['ownerFolderId'],
-                  folderName : item['folderName'],
-                  createTime : item['createdAt'],
-                  subFolders : item['subFolders'],
-                  docs : item['docs'],
-                  isFavorite: item['isFavorite'],
-                  favoriteId: item['favoriteId'],
-                  isSelected:false
-                };
-                this.userFolderArr.push(folder);
+              this.userFolderArr = [];
+              if(Array.isArray(resp)){
+                let index: number = 0;
+      
+                for(let item of resp){
+
+                  try{
+                    //format date 
+                    item['createdAt'] = formatDate(item['createdAt'], "dd.MM.YYYY","en");
                 
-                index++;
+                  } catch(error){
+                    console.log(error.message);
+                  }
+                  
+                  let folder: FolderData = {
+                    id: item['id'],
+                    loginId : item['loginId'],
+                    customerAmsidnr:  item['customerAmsidnr'],
+                    createdAt:  item['createdAt'],         
+                    ownerFolderId : item['ownerFolderId'],
+                    folderName : item['folderName'],
+                    createTime : item['createdAt'],
+                    subFolders : item['subFolders'],
+                    docs : item['docs'],
+                    isFavorite: item['isFavorite'],
+                    favoriteId: item['favoriteId'],
+                    isSelected:false
+                  };
+                  this.userFolderArr.push(folder);
+                  
+                  index++;
+                }
+      
+              } else {
+                //invalid token
+      
               }
-    
-            } else {
-              //invalid token
-    
-            }
-          }
+            },
+            error:(error: any)=>{
 
-        ));
+              if(error instanceof HttpErrorResponse){
+                //Invalid Token or Unauthorised request
+                if(error.status == 401){
+                  this.loginService.emitAuthenticated(false);
+                }
+              }
+              
+            }
+          }));
   }
   getFolderDetails(id:string){
     let url =  'https://testapi.maxpool.de/api/v1/sekretaer/myfolders' + id;
@@ -94,9 +111,24 @@ export class FoldersService {
         headers: new HttpHeaders({
           'accept': 'application/json',
           'Content-Type': 'application/json'
-      }),
+        }),
       
-      });
+      }).pipe(
+        tap({
+          next:(resp)=>{
+            
+          },
+          error:(error: any)=>{
+  
+            if(error instanceof HttpErrorResponse){
+              //Invalid Token or Unauthorised request
+              if(error.status == 401){
+                this.loginService.emitAuthenticated(false);
+              }
+            }
+  
+          }
+        }));
   }
   
   makeFolderFavourite(folderId){
@@ -108,10 +140,20 @@ export class FoldersService {
         'Content-Type': 'application/json',
       }),
     }).pipe(
-      tap((resp)=>{
-        
-          console.log(data);
+      tap({
+        next:(resp)=>{
           
+        },
+        error:(error: any)=>{
+
+          if(error instanceof HttpErrorResponse){
+            //Invalid Token or Unauthorised request
+            if(error.status == 401){
+              this.loginService.emitAuthenticated(false);
+            }
+          }
+
+        }
       })
     );
   }
@@ -124,71 +166,114 @@ export class FoldersService {
         'Content-Type': 'application/json',
       }),
     }).pipe(
-      tap((resp)=>{
-        
-          console.log(url);
+      tap({
+        next:(resp)=>{
           
+        },
+        error:(error: any)=>{
+
+          if(error instanceof HttpErrorResponse){
+            //Invalid Token or Unauthorised request
+            if(error.status == 401){
+              this.loginService.emitAuthenticated(false);
+            }
+          }
+
+        }
       })
     );
   }
   
   rename(folderId, data) {
+
     let url = 'https://testapi.maxpool.de/api/v1/sekretaer/myfolders/'+folderId;
+
     return this.http.put(url, data, {
       headers: new HttpHeaders({
         'accept': 'application/json',
         'Content-Type': 'application/json',
       }),
     }).pipe(
-      tap((resp)=>{
-        console.log(resp);
-        let folder: FolderData = {
-          id: resp['id'],
-          loginId : resp['loginId'],
-          customerAmsidnr:  resp['customerAmsidnr'],
-          createdAt:  resp['createdAt'],         
-          ownerFolderId : resp['ownerFolderId'],
-          folderName : resp['folderName'],
-          createTime : resp['createdAt'],
-          subFolders : resp['subFolders'],
-          docs : resp['docs'],
-          isFavorite: resp['isFavorite'],
-          favoriteId: resp['favoriteId'],
-          isSelected: true
+      tap({
+        next:(resp)=>{
+
+          //console.log('from rename folder service ->'+resp);
+
+          let folder: FolderData = {
+            id: resp['id'],
+            loginId : resp['loginId'],
+            customerAmsidnr:  resp['customerAmsidnr'],
+            createdAt:  resp['createdAt'],         
+            ownerFolderId : resp['ownerFolderId'],
+            folderName : resp['folderName'],
+            createTime : resp['createdAt'],
+            subFolders : resp['subFolders'],
+            docs : resp['docs'],
+            isFavorite: resp['isFavorite'],
+            favoriteId: resp['favoriteId'],
+            isSelected: true
+          }
+          this.emitSelectedFolder(folder);
+        },
+        error:(error: any)=>{
+
+          if(error instanceof HttpErrorResponse){
+            //Invalid Token or Unauthorised request
+            if(error.status == 401){
+              this.loginService.emitAuthenticated(false);
+            }
+          }
+
         }
-        this.emitSelectedFolder(folder);
       })
     );
   }
   
   addNewFolder( folderName:string, parentFolderId:string) {
+
     let data = '{"parentFolderId": "'+parentFolderId+'", "name": "'+folderName+'" }' ;
 
     let url = 'https://testapi.maxpool.de/api/v1/sekretaer/myfolders';
+
     return this.http.post(url, data, {
       headers: new HttpHeaders({
         'accept': 'application/json',
         'Content-Type': 'application/json',
       }),
     }).pipe(
-      tap((resp)=>{
-        
-        console.log(resp);
-        let folder: FolderData = {
-          id: resp['id'],
-          loginId : resp['loginId'],
-          customerAmsidnr:  resp['customerAmsidnr'],
-          createdAt:  resp['createdAt'],         
-          ownerFolderId : resp['ownerFolderId'],
-          folderName : resp['folderName'],
-          createTime : resp['createdAt'],
-          subFolders : resp['subFolders'],
-          docs : resp['docs'],
-          isFavorite: resp['isFavorite'],
-          favoriteId: resp['favoriteId'],
-          isSelected: true
+      tap({
+        next:(resp)=>{
+
+          //console.log('from add new folder service ->'+resp);
+
+          let folder: FolderData = {
+            id: resp['id'],
+            loginId : resp['loginId'],
+            customerAmsidnr:  resp['customerAmsidnr'],
+            createdAt:  resp['createdAt'],         
+            ownerFolderId : resp['ownerFolderId'],
+            folderName : resp['folderName'],
+            createTime : resp['createdAt'],
+            subFolders : resp['subFolders'],
+            docs : resp['docs'],
+            isFavorite: resp['isFavorite'],
+            favoriteId: resp['favoriteId'],
+            isSelected: true
+          }
+
+          this.emitSelectedFolder(folder);
+
+        },
+        error:(error: any)=>{
+
+          if(error instanceof HttpErrorResponse){
+            //Invalid Token or Unauthorised request
+            if(error.status == 401){
+              this.loginService.emitAuthenticated(false);
+            }
+          }
+
         }
-        this.emitSelectedFolder(folder);
       })
     );
   }

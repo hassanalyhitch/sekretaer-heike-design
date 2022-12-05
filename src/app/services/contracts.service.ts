@@ -1,5 +1,5 @@
 import { formatDate } from '@angular/common';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Observer, Subscription, tap } from 'rxjs';
 import { ContractData } from '../models/contract.model';
@@ -62,7 +62,7 @@ export class ContractsService {
             item['Begin'] = formatDate(item['Begin'], "dd.MM.YYYY","en");
             item['End'] = formatDate(item['End'], "dd.MM.YYYY","en");
             }catch(error){
-              console.log(error.message);
+              console.log('Date Formating Error ->'+error.message);
             }
             //
             let contract: ContractData = {
@@ -101,7 +101,7 @@ export class ContractsService {
 
       },
       error: (e) => {
-        console.log(e);
+        console.log('Error in fetching contracts ->'+e);
         
       },
       complete: () => {
@@ -117,63 +117,27 @@ export class ContractsService {
 
 
   getContracts() {
-    return this.http.get(
-        'https://testapi.maxpool.de/api/v1/contracts',
-        {
+    return this.http.get('https://testapi.maxpool.de/api/v1/contracts',{
             headers: new HttpHeaders({
                     'accept': 'application/json',
                     'Content-Type': 'application/json'
                 }),
         }).pipe(
-            tap((resp)=>{
-              console.log(resp);
-              this.userContractsArr = [];
+          tap({
+            next:(resp)=>{
               
-              // console.log("Contract service => "+resp);
-              // console.table(resp);
-              if(Array.isArray(resp)){
-                let index: number = 0;
+            },
+            error:(error: any)=>{
 
-                for(let item of resp){
-                  //format date 
-                  item['Begin'] = formatDate(item['Begin'], "dd.MM.YYYY","en");
-                  item['End'] = formatDate(item['End'], "dd.MM.YYYY","en");
-                  //
-                  let contract: ContractData = {
-                    id: index,
-                    details: {
-                      Amsidnr: item['Amsidnr'],
-                      CustomerAmsidnr:  item['CustomerAmsidnr'],
-                      InsuranceId:  item['Contractnumber'],
-                      ContractNumber:  item['Contractnumber'],
-                      Company:  item['Company'],
-                      StartDate:  item['Begin'],
-                      EndDate:  item['End'],
-                      YearlyPayment:  item['YearlyPayment'],
-                      Paymethod:  item['PaymentMethod'],
-                      Branch:  item['Branch'],
-                      Risk:  item['Risk'],
-                      docs: item['docs'],
-                      name: item['name'],
-                      productSek: item['ProductSekretaer'],
-                      tarif: item['tarif'],
-                      isFav: item['isFavorite'],
-                      favoriteId: item['favoriteId']
-                      
-                    },
-                    isSelected: false
-                  };
-                  this.userContractsArr.push(contract);
-                  
-                  index++;
+              if(error instanceof HttpErrorResponse){
+                //Invalid Token or Unauthorised request
+                if(error.status == 401){
+                  this.loginService.emitAuthenticated(false);
                 }
-
-              } else {
-                //invalid token
-
               }
-            })
-          );
+
+            }
+          }));
     }
 
   getContractDetails(Amsidnr: string){
@@ -186,7 +150,22 @@ export class ContractsService {
                   'accept': 'application/json',
                   'Content-Type': 'application/json'
               }),
-      });
+      }).pipe(
+        tap({
+          next:(resp)=>{
+            
+          },
+          error:(error: any)=>{
+
+            if(error instanceof HttpErrorResponse){
+              //Invalid Token or Unauthorised request
+              if(error.status == 401){
+                this.loginService.emitAuthenticated(false);
+              }
+            }
+            
+          }
+        }));
   }
 
   makeContractFavourite(contractId){
@@ -199,7 +178,19 @@ export class ContractsService {
       }),
     }).pipe(
       tap({
+        next:(resp)=>{
+            
+        },
+        error:(error: any)=>{
+
+          if(error instanceof HttpErrorResponse){
+            //Invalid Token or Unauthorised request
+            if(error.status == 401){
+              this.loginService.emitAuthenticated(false);
+            }
+          }
           
+        } 
       })
     );
   }
@@ -212,10 +203,20 @@ export class ContractsService {
         'Content-Type': 'application/json',
       }),
     }).pipe(
-      tap((resp)=>{
-        
-          console.log(url);
+      tap({
+        next:(resp)=>{
+            
+        },
+        error:(error: any)=>{
+
+          if(error instanceof HttpErrorResponse){
+            //Invalid Token or Unauthorised request
+            if(error.status == 401){
+              this.loginService.emitAuthenticated(false);
+            }
+          }
           
+        } 
       })
     );
   }
