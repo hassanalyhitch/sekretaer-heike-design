@@ -26,7 +26,6 @@
     "@popperjs/core": "2.11.5",
     "@syncfusion/ej2-inputs": "17.3.21",
     "bootstrap": "5.2.0",
-    "core-js": "^3.26.1",
     "hammerjs": "2.0.8",
     "ng-multiselect-dropdown": "latest",
     "rfs": "9.0.6",
