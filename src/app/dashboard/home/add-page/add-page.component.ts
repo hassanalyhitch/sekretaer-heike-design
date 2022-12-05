@@ -95,7 +95,7 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
       idField:'id',
       textField:'dataName',
       singleSelection:false,
-      enableCheckAll: true,
+      enableCheckAll: false,
       selectAllText: 'Select All',
       unSelectAllText: 'Unselect All',
       allowSearchFilter: true,
