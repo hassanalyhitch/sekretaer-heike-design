@@ -7,6 +7,11 @@ body {
   background-color: #F2F2F2; /*#e6ecf5; rgba(255, 250, 237, 1);*/
   min-height: 100%;
 }
+.main{
+  height: 100vh;
+  overflow: hidden;
+  background-color: #F2F2F2;
+}
 .bg-white{
   background-color: #ffffff !important;
 }
