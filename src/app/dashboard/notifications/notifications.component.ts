@@ -112,7 +112,7 @@ export class NotificationsComponent implements OnInit {
     console.log("sortByTitle");
     if(this.sortTitleByAsc){
       this.allNotifsArr.sort((a, b) => {
-        console.log(a.infoHeadline);
+        // console.log(a.infoHeadline);
         if(a.infoHeadline === null || b.infoHeadline === null){
           return -1;
         }
