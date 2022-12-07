@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -16,6 +17,8 @@ export class NotificationItemComponent implements OnInit {
   @Input() notification: NotificationData;
 
   notifIcon:string = "/assets/icon_document.svg";
+  bg_white:boolean = false;
+  isInfo:boolean = false;
 
   constructor(
     private router: Router,private notificationService: NotificationsService, private matDialog: MatDialog) { }
@@ -29,18 +32,26 @@ export class NotificationItemComponent implements OnInit {
         switch(this.notification.links[i].assocType){
           case "vamsidnr" : {
             this.notifIcon = "/assets/icon_document.svg";
+            this.bg_white = false;
+            this.isInfo = false;
             break;
           }
           case "dms" : {
             this.notifIcon = "/assets/icon_pdf.svg";
+            this.bg_white = false;
+            this.isInfo = false;
             break;
           }
           case "chat" : {
             this.notifIcon = "/assets/chat-icon.svg";
+            this.bg_white = true;
+            this.isInfo = false;
             break;
           }
           case "info" : {
             this.notifIcon = "/assets/info-icon.svg";
+            this.bg_white = true;
+            this.isInfo = true;
             break;
           }
           default: {
@@ -50,6 +61,42 @@ export class NotificationItemComponent implements OnInit {
         }
       }
     }
+    this.notification.createdAt = this.dateEngine(this.notification.createdAt);
+  }
+
+  dateEngine(a_date){
+    a_date = new Date(a_date);
+    const today = new Date
+    const yesterday = new Date; 
+    yesterday.setDate(today.getDate() - 1);
+
+    if((a_date > this.fiveDaysAgo(today))){
+
+      if(a_date.toLocaleDateString() == today.toLocaleDateString()){
+        return 'Today'
+      }else if (a_date.toLocaleDateString() == yesterday.toLocaleDateString()) {
+        return 'Yesterday'
+      }
+      return a_date.toLocaleDateString('en-US', {
+        weekday : 'long'
+      });
+
+    } else {
+      // format date 
+        try{
+          a_date = formatDate(a_date, "dd.MM.YYYY","en");
+          return a_date;
+        } catch(e:any){
+          
+          return a_date;
+        }
+    }
+  }
+
+  fiveDaysAgo(date, days:number = 4) {
+    var result = new Date(date);
+    result.setDate(result.getDate() - days);
+    return result;
   }
 
   contains(obj) {

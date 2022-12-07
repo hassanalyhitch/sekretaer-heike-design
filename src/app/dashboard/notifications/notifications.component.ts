@@ -46,13 +46,7 @@ export class NotificationsComponent implements OnInit {
         if(Array.isArray(resp)){
           resp.sort((a, b) => a.isRead.localeCompare(b.isRead));
           for(let item of resp){
-            //format date 
-            try{
-              item['createdAt'] = formatDate(item['createdAt'], "dd.MM.YYYY","en");
-
-            } catch(e:any){
-              console.log(e.message);
-            }
+            
             let notif: NotificationData = {
               notificationId: item['notificationId'],
               customerLoginId: item['customerLoginId'],
@@ -135,12 +129,21 @@ export class NotificationsComponent implements OnInit {
   sortByDate(){
     console.log("sortByDate");
     if(this.sortDateByAsc){
-      this.ascDate = this.allNotifsArr.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
-      this.allNotifsArr = this.ascDate;
+      this.allNotifsArr.sort((a, b) => {  
+        try{
+
+          var dateA = new Date(a.createdAt).getTime();
+          var dateB = new Date(b.createdAt).getTime();
+
+        } catch(e){
+          return 1;
+        }
+        
+        return dateA > dateB ? 1 : -1;  
+    });
       this.sortDateByAsc = !this.sortDateByAsc;
     } else {
-      this.descDate = this.allNotifsArr.sort((a, b) => a.createdAt.localeCompare(b.createdAt)).reverse();
-      this.allNotifsArr = this.descDate;
+      this.allNotifsArr.reverse();
       this.sortDateByAsc = !this.sortDateByAsc;
 
     }

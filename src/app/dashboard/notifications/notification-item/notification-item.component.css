@@ -20,8 +20,11 @@
   width: 60%;
   height: 60%;
   border: none;
-  object-fit: contain;
+  object-fit: scale-down;
   object-position: center center;
+}
+i{
+  color: #D60B51;
 }
 .name{
   color: #2C262D;
@@ -31,7 +34,8 @@
 }
 .date{
   font-size: 15px;
-  font-weight: 300;
+  font-weight: bold;
+  color: black;
 }
 
 .more{
@@ -50,4 +54,7 @@
 .read{
   color: #707070;
   font-weight: 400;
+}
+.headline{
+  font-weight: 500;
 }
