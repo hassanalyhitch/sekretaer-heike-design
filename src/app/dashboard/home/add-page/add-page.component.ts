@@ -13,6 +13,7 @@ import { formatDate } from '@angular/common';
 import { FileSizePipe } from '../../../pipes/filesize.pipe';
 import { ThisReceiver } from '@angular/compiler';
 import { FileNameData } from '../../../models/file-name.model';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -81,9 +82,16 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
   typeSelected:string='';
   myItems =[];
   pickdate:any;
+
+  uploadStatus:boolean =false;
+  shareWithBroker:boolean=false;
+  status:string = "/assets/icon_broker.svg";
+  acceptBroker:boolean = true;
+  
+
     constructor( private route:ActivatedRoute, private router:Router,private folderService:FoldersService,
 private contractService:ContractsService,private http:HttpClient,private fileUploadService: FileUploadService,
-private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePipe:FileSizePipe,private builder:FormBuilder) {
+private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePipe:FileSizePipe,private builder:FormBuilder,private location:Location) {
  
 
   }
@@ -95,7 +103,7 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
       idField:'id',
       textField:'dataName',
       singleSelection:false,
-      enableCheckAll: false,
+      enableCheckAll: true,
       selectAllText: 'Select All',
       unSelectAllText: 'Unselect All',
       allowSearchFilter: true,
@@ -177,11 +185,18 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
 
       },
       error:(e)=>{
-        console.log('AddPageComponent');
-        console.log(e);
+        console.log('An Error Occurred');
+        this.uploadStatus = false;
+        setTimeout(()=>{
+          this.location.back()
+        },4000);
       },
       complete:()=>{
         console.log('Success');
+        this.uploadStatus = true;
+        setTimeout(()=>{
+          this.location.back()
+        },4000);
       }
     })
   }
@@ -300,7 +315,9 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
   
   switch (this.typeSelected){
     case 'folder':{
-     this.addNewFile(fileData,this.selectedItems[0].id);
+     this.addNewFile(fileData,this.selectedItems[0].id)
+    
+    
       break;
     }
     case 'contract':{
@@ -330,8 +347,16 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
 
       fileSize :this.fileSizePipe.transform(this.file.size,'MB'),
       
-     fileType  :this.file.type
+     fileType:this.file.type
+     
     }
+   if (this.file.type == 'application/pdf' || this.file.type =='!application/pdf') {
+   }
+    else{
+      alert("file type should be pdf")
+      return;
+    }
+   
     this.uploadFileArr = [];
     this.uploadFileArr.push(_file);
     this.selectFile.nativeElement.value = null;
@@ -348,6 +373,11 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
     return (value.fileName != obj.fileName && value.fileId != obj.docid);
     });
 
+  }
+  onShareWithBroker(){
+    // this.shareWithBroker =!this.shareWithBroker;
+    this.acceptBroker = !this.acceptBroker;
+    this.status = this.acceptBroker ? "/assets/icon_broker.svg": "/assets/broker_pink.svg";
   }
 
   ngDoCheck():void{

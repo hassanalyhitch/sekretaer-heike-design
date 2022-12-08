@@ -54,9 +54,22 @@
           </ng-multiselect-dropdown>
           </div>
         </div>
-            <div class="share"><img src="\assets\Gruppe 195.svg"></div>
+        <div class="d-flex flex-row assignment">
+          <button class="broker-btn" (click)="onShareWithBroker()"><img class="broker-icon" [src]="status"></button>
+          <!-- <img  class="btn share" (click)="onShareWithBroker()" class="broker-icon" 
+          [ngClass]="{'acceptShare':shareWithBroker, 'declineShare':!shareWithBroker}"
+          src="/assets/icon_broker.svg"> -->
+          <p class="m-2">Show my Broker</p>
+        </div>
+           
       
             <button type="submit" class="submit" >{{ 'add_document.submit_button_label' | translate }}</button>
+            <div class="fileUploadStatus">
+              <p *ngIf="uploadStatus;else noFileUploaded">File was uploaded successfully</p>
+              <ng-template #noFileUploaded><p class="_fileStatus">No File was uploaded</p></ng-template>
+            </div>
+          
+            
     </form>
   </div>
   
