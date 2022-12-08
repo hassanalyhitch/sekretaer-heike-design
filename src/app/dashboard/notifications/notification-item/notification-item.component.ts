@@ -19,6 +19,7 @@ export class NotificationItemComponent implements OnInit {
   notifIcon:string = "/assets/icon_document.svg";
   bg_white:boolean = false;
   isInfo:boolean = false;
+  formatedDate:string;
 
   constructor(
     private router: Router,private notificationService: NotificationsService, private matDialog: MatDialog) { }
@@ -61,7 +62,7 @@ export class NotificationItemComponent implements OnInit {
         }
       }
     }
-    this.notification.createdAt = this.dateEngine(this.notification.createdAt);
+    this.formatedDate = this.dateEngine(this.notification.createdAt);
   }
 
   dateEngine(a_date){

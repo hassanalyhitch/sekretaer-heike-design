@@ -17,10 +17,9 @@
   margin-bottom: 10px;
 }
 .icon{
-  width: 60%;
-  height: 60%;
+  width: 75%;
+  height: 75%;
   border: none;
-  object-fit: scale-down;
   object-position: center center;
 }
 i{

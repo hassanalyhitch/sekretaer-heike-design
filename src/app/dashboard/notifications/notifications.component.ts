@@ -132,14 +132,25 @@ export class NotificationsComponent implements OnInit {
       this.allNotifsArr.sort((a, b) => {  
         try{
 
-          var dateA = new Date(a.createdAt).getTime();
-          var dateB = new Date(b.createdAt).getTime();
+          let dateA = new Date(a.createdAt);
+          let dateB = new Date(b.createdAt);
 
+          if ((dateA instanceof Date && !isNaN(dateA.getTime()))&&(dateB instanceof Date && !isNaN(dateB.getTime()))) {
+            //valid date object
+            return dateA >= dateB ? 1 : -1; 
+          } else if((dateA instanceof Date && !isNaN(dateA.getTime()))&& !(dateB instanceof Date && !isNaN(dateB.getTime()))){
+            // invalid date object
+            return -1;
+          } else if(!(dateA instanceof Date && !isNaN(dateA.getTime()))&& (dateB instanceof Date && !isNaN(dateB.getTime()))){
+            // invalid date object
+            return 1;
+          } else {
+            return 0;
+          }
         } catch(e){
-          return 1;
+          console.log(e);
         }
         
-        return dateA > dateB ? 1 : -1;  
     });
       this.sortDateByAsc = !this.sortDateByAsc;
     } else {

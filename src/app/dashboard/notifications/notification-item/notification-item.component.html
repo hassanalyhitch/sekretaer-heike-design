@@ -9,7 +9,7 @@
     </div>
     <div class="px-2 d-flex justify-content-between flex-row w-100"  (click)="onNotificationClick(notification)" >
       <span>{{notification.infoText | shortenText: 20 }}</span>
-      <span class="ml-auto align-self-end date" >{{notification.createdAt  }}</span>
+      <span class="ml-auto align-self-end date" >{{formatedDate }}</span>
     </div>
   </div>
 </div>
