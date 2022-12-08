@@ -89,7 +89,7 @@ export class NotificationsComponent implements OnInit {
   }
 
   sortByType(){
-    console.log("sortByType");
+    // console.log("sortByType");
     if(this.sortTypeByAsc){
       this.allNotifsArr.sort((a, b) => {
         if(a.links === null && b.links === null){
@@ -111,7 +111,7 @@ export class NotificationsComponent implements OnInit {
   }
 
   sortByTitle(){
-    console.log("sortByTitle");
+    // console.log("sortByTitle");
     if(this.sortTitleByAsc){
       this.allNotifsArr.sort((a, b) => {
         if(a.infoHeadline === null && b.infoHeadline === null){
@@ -133,7 +133,7 @@ export class NotificationsComponent implements OnInit {
   }
 
   sortByDate(){
-    console.log("sortByDate");
+    // console.log("sortByDate");
     if(this.sortDateByAsc){
       this.allNotifsArr.sort((a, b) => {  
         try{

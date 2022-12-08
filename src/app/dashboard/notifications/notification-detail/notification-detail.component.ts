@@ -16,7 +16,7 @@ export class NotificationDetailComponent implements OnInit {
   ngOnInit() {
     this.notification = this.notificationService.notification;
 
-    console.log(this.notification);
+    // console.log(this.notification);
   }
 
   markAsRead(notificationId){
