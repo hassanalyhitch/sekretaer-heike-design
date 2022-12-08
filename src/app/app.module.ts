@@ -106,7 +106,7 @@ const appRoutes: Routes = [
   { path: 'terms-and-conditions', component:TermsConditionsComponent},
   { path: 'forgot-password', component:ForgotPasswordComponent},
   { path: 'forgot-password-email-sent', component:ForgotPasswordEmailSentComponent},
-
+  { path: '**', redirectTo: 'dashboard' }
 
 ];
 @NgModule({

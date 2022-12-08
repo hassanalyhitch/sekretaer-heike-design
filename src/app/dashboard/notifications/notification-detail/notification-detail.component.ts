@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationData } from '../../../models/notification.model';
 import { NotificationsService } from '../../../services/notification.service';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-notification-detail',
@@ -12,7 +11,7 @@ export class NotificationDetailComponent implements OnInit {
 
   notification:NotificationData;
 
-  constructor(private notificationService: NotificationsService, private _location: Location) { }
+  constructor(private notificationService: NotificationsService) { }
 
   ngOnInit() {
     this.notification = this.notificationService.notification;
@@ -44,7 +43,4 @@ export class NotificationDetailComponent implements OnInit {
     return false;
   }
 
-  onBackNavClick() {
-    this._location.back();
-  }
 }
