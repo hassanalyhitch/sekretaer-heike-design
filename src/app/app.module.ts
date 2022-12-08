@@ -65,6 +65,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { NotificationDetailComponent } from './dashboard/notifications/notification-detail/notification-detail.component';
 import { ForgotPasswordEmailSentComponent } from './forgot-password-email-sent/forgot-password-email-sent.component';
 import { LoadingComponent } from './loading/loading.component';
+import { BackButtonDirective } from './directives/backbutton.directive';
 
 
 // AoT requires an exported function for factories
@@ -174,7 +175,8 @@ const appRoutes: Routes = [
     ForgotPasswordComponent,
     NotificationDetailComponent,
     ForgotPasswordEmailSentComponent,
-    LoadingComponent
+    LoadingComponent,
+    BackButtonDirective
    ],
   bootstrap:    [ AppComponent ],
   providers: [
