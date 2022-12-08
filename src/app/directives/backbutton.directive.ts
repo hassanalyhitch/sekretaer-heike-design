@@ -10,6 +10,6 @@ export class BackButtonDirective {
   @HostListener('click')
   onClick(): void {
     console.log("back directive called");
-    this.navigation.back()
+    this.navigation.back();
   }
 }

@@ -4,23 +4,23 @@ import { Router, NavigationEnd } from '@angular/router'
 
 @Injectable({ providedIn: 'root' })
 export class BackNavigationService {
-  private history: string[] = []
+  private history: string[] = [];
 
   constructor(private router: Router, private location: Location) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.history.push(event.urlAfterRedirects)
+        this.history.push(event.urlAfterRedirects);
       }
     })
   }
 
   back(): void {
     this.history.pop()
-    console.log("back called");
+    console.log("back service called");
     if (this.history.length > 0) {
-      this.location.back()
+      this.location.back();
     } else {
-      this.router.navigateByUrl('')
+      this.router.navigateByUrl('');
     }
   }
 }
