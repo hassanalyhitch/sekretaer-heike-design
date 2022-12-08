@@ -93,7 +93,7 @@ export class NotificationsComponent implements OnInit {
     if(this.sortTypeByAsc){
       this.allNotifsArr.sort((a, b) => {
         if(a.links === null && b.links === null){
-          return 0;
+          return -1;
         } else if(a.links === null && b.links !== null){
           return 1;
         } else if(a.links !== null && b.links === null){

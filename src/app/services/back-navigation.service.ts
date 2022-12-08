@@ -16,6 +16,7 @@ export class BackNavigationService {
 
   back(): void {
     this.history.pop()
+    console.log("back called");
     if (this.history.length > 0) {
       this.location.back()
     } else {
