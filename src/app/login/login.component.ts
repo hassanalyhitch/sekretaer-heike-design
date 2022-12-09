@@ -12,6 +12,7 @@ import { Router } from "@angular/router";
 import { LoginData } from "../models/login.model";
 import { LoadingService } from "../services/loading.service";
 import { LoginService } from "../services/login.service";
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: "app-login",
@@ -44,11 +45,14 @@ export class LoginComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private loginService: LoginService,
-    private loadingService:LoadingService ){
+    private loadingService:LoadingService,
+    private _snackBar: MatSnackBar ){
       this.loadingService.emitIsLoading(false); 
     }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this._snackBar.open("message", "action");
+  }
 
   validateUser(formData: LoginData) {
     this.loginService.login(formData).subscribe({

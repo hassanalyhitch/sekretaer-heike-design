@@ -66,6 +66,7 @@ import { NotificationDetailComponent } from './dashboard/notifications/notificat
 import { ForgotPasswordEmailSentComponent } from './forgot-password-email-sent/forgot-password-email-sent.component';
 import { LoadingComponent } from './loading/loading.component';
 import { BackButtonDirective } from './directives/backbutton.directive';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 // AoT requires an exported function for factories
@@ -126,6 +127,7 @@ const appRoutes: Routes = [
     MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatSnackBarModule,
     HammerModule,
     NgMultiSelectDropDownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
