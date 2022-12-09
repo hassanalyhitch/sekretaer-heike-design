@@ -51,7 +51,6 @@ export class LoginComponent implements OnInit {
     }
 
   ngOnInit() {
-    this._snackBar.open("message", "action");
   }
 
   validateUser(formData: LoginData) {

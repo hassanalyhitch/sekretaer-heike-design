@@ -14,6 +14,7 @@ import { FileSizePipe } from '../../../pipes/filesize.pipe';
 import { ThisReceiver } from '@angular/compiler';
 import { FileNameData } from '../../../models/file-name.model';
 import { Location } from '@angular/common';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -91,7 +92,8 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
 
     constructor( private route:ActivatedRoute, private router:Router,private folderService:FoldersService,
 private contractService:ContractsService,private http:HttpClient,private fileUploadService: FileUploadService,
-private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePipe:FileSizePipe,private builder:FormBuilder,private location:Location) {
+private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePipe:FileSizePipe,private builder:FormBuilder,private location:Location,
+private _snackBar: MatSnackBar ) {
  
 
   }
@@ -99,6 +101,10 @@ private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePi
   
   ngOnInit() {
    
+    this._snackBar.open("message", "dismiss",{
+      panelClass: ['snack']
+    });
+
     this.dropdownSettings = {
       idField:'id',
       textField:'dataName',
