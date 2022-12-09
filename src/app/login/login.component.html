@@ -22,7 +22,7 @@
         <span>{{ "login.title_login" | translate }}</span>
       </div>
 
-      <div class="form-container w-100">
+      <div class="form-container d-flex flex-column w-100 h-100">
         <form
           (ngSubmit)="onSubmit(loginForm.value)"
           class="d-flex flex-column"
@@ -55,8 +55,8 @@
               id="sign-in-btn"
               class="btn btn-login w-100 py-2"
               [disabled]="
-                !(username.length > 1 && password.length > 1) &&
-                !loginForm.valid && submitted
+                (!(username.length > 1 && password.length > 1) &&
+                !loginForm.valid) || submitted
               "
               type="submit"
               style="font-size: 20px"
@@ -71,6 +71,15 @@
             </a>
           </div>
         </form>
+        <div class="d-flex justify-content-between bottom-links w-100 mt-auto py-3">
+          <a class="" (click)="onPolicySelected()">
+            <span>{{ "login.privacy_policy" | translate }}</span>
+          </a>
+      
+          <a class="" (click)="onTermsAndConditionSelected()">
+            <span>{{ "login.terms" | translate }}</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -82,13 +91,4 @@
     <app-snackbar [msg]="error"></app-snackbar>
   </div>
 
-  <div class="d-flex justify-content-evenly bottom-links w-100 my-2 py-2">
-    <a  (click)="onPolicySelected()">
-      <span>{{ "login.privacy_policy" | translate }}</span>
-    </a>
-
-    <a  (click)="onTermsAndConditionSelected()">
-      <span>{{ "login.terms" | translate }}</span>
-    </a>
-  </div>
 </div>

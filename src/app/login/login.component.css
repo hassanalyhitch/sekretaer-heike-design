@@ -48,11 +48,11 @@
   cursor: pointer;
   text-decoration: none;
 }
-.bottom-links{
+/* .bottom-links{
   position: absolute;
   bottom: 0;
   
-}
+} */
 .bottom-links a {
   color: white;
   text-decoration: none;
