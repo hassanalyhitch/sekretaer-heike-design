@@ -1,7 +1,7 @@
 <div class="content-wrapper w-100 ">
 <div class="_content d-flex flex-column align-items-center w-100 h-100 bg-">
 
-  <strong class="section-title align-self-center mt-4 mb-3">{{ 'search.title' | translate }}</strong>
+  <strong class="section-title align-self-center mt-4 mb-3">{{ 'search.title_main' | translate }}</strong>
 
   <div class="search_input_container d-flex w-100 bg-">
     <div class="_input_group w-100 d-flex m- bg-" >
@@ -19,7 +19,7 @@
   <!-- insurances -->
 
   <div class="d-flex flex-column w-100 px-3 bg-" *ngIf="contractsResArr.length>0" >
-    <p class="text-center m-3"> Insurances</p>
+    <p class="section-sub-title text-center m-3">{{ 'search.title_insurances' | translate }}</p>
     <div class="w-100 d-flex flex-column align-items-center extra-cards bg-" >
       <app-fav-item class="col-12" *ngFor="let item of contractsResArr" [contractItem]=item  (click)="onContractClick(item)"></app-fav-item>
     </div>
@@ -28,7 +28,7 @@
   <!-- folders -->
 
   <div class="d-flex flex-column w-100 px-3 bg-" *ngIf="foldersResArr.length>0" >
-    <p class="text-center m-3"> Folders</p>
+    <p class="section-sub-title text-center m-3">{{ 'search.title_folders' | translate }}</p>
     <div class="w-100 d-flex flex-column align-items-center extra-folders bg-"  >
       <app-folder-card class="col-12" *ngFor="let item of foldersResArr" [folder]=item  (click)="onFolderCardClick(item)"></app-folder-card>
     </div>
@@ -36,7 +36,7 @@
   <!-- documents -->
 
   <div class="d-flex flex-column px-3 pb-4 w-100 bg-" *ngIf="documentsResArr.length>0" >
-    <p class="text-center m-3"> Documents</p>
+    <p class="section-sub-title text-center m-3">{{ 'search.title_documents' | translate }}</p>
     <div class="d-flex documentItem " *ngFor="let doc of documentsResArr; let i = index"  (swipe)="onSwipe($event, doc)"  >
       <app-document-item class="w-100"  [ngClass]="{'swipedLeft':doc.swipedLeft}" [doc]=doc  (tap)="onDocClick(doc)" ></app-document-item>
     
@@ -48,8 +48,8 @@
     </div>
   </div>
   
-  <p class="text-center m-auto" *ngIf="searchValue==''" >
-    Search across Insurance Contracts, Folders and Documents
+  <p class="search-message text-center m-auto" *ngIf="searchValue==''" >
+    {{ 'search.search_message' | translate }}
   </p>
 
   <div class="searching-status m-auto" *ngIf="searchValue!='' && !resultExists" >

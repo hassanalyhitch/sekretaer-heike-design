@@ -52,3 +52,22 @@ app-fav-item, app-folder-card, app-document-item{
   margin: 10px;
   cursor: pointer;
 }
+
+.section-title{
+  text-shadow: none;
+  font-size: 20px;
+  letter-spacing: 2.5px;
+}
+
+.section-sub-title{
+  text-shadow: none;
+  font-size: 20px;
+  letter-spacing: 2.5px;
+  font-weight: bold;
+}
+
+.search-message{
+  text-shadow: none;
+  font-size: 17px;
+  font-weight: bold;
+}

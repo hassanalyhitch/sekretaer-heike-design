@@ -10,6 +10,7 @@ import {
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 import { LoginData } from "../models/login.model";
+import { LoadingService } from "../services/loading.service";
 import { LoginService } from "../services/login.service";
 
 @Component({
@@ -42,14 +43,17 @@ export class LoginComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private loginService: LoginService
-  ) {}
+    private loginService: LoginService,
+    private loadingService:LoadingService ){
+      this.loadingService.emitIsLoading(false); 
+    }
 
   ngOnInit() {}
 
   validateUser(formData: LoginData) {
     this.loginService.login(formData).subscribe({
       next: (resp) => {
+        this.submitted = false;
         if (resp.hasOwnProperty("token")) {
           this.authenticated.emit(true);
           this.lang.emit(this.loginService.lang);

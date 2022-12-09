@@ -56,12 +56,13 @@
               class="btn btn-login w-100 py-2"
               [disabled]="
                 !(username.length > 1 && password.length > 1) &&
-                !loginForm.valid
+                !loginForm.valid && submitted
               "
               type="submit"
               style="font-size: 20px"
             >
-              {{ "login.btn_login" | translate }}
+            <span *ngIf="submitted" class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status"></span>
+            <span *ngIf="!submitted">{{ "login.btn_login" | translate }}</span>
             </button>
           </div>
           <div class="row forgot-password mt-3">

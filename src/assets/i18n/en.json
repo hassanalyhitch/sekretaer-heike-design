@@ -177,7 +177,11 @@
     "submit_button_label": "UPLOAD"
   },
   "search":{
-    "title":"SEARCH"
+    "title_main":"SEARCH",
+    "title_insurances": "INSURANCES",
+    "title_folders": "FOLDERS",
+    "title_documents": "DOCUMENTS",
+    "search_message": "Search across Insurance Contracts, Folders and Documents"
   },
   "privacy_policy":{
     "title" : "Privacy Policy"
