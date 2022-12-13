@@ -49,3 +49,15 @@ body {
   border: 1px solid rgba(218, 216, 216, 0.3);
 }
 
+.mat-snack-bar-container {
+  border-radius: 4px;
+  box-sizing: border-box;
+  display: flex;
+  margin: 24px;
+  max-width: 33vw;
+  min-width: 344px;
+  padding: 14px 16px;
+  min-height: 48px;
+  transform-origin: center;
+}
+

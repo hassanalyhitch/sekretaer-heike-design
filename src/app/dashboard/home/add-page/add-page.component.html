@@ -64,10 +64,7 @@
            
       
             <button type="submit" class="submit" >{{ 'add_document.submit_button_label' | translate }}</button>
-            <div class="fileUploadStatus">
-              <p *ngIf="uploadStatus;else noFileUploaded">File was uploaded successfully</p>
-              <ng-template #noFileUploaded><p class="_fileStatus">No File was uploaded</p></ng-template>
-            </div>
+          
           
             
     </form>

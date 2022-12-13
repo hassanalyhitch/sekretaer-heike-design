@@ -88,6 +88,7 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
   shareWithBroker:boolean=false;
   status:string = "/assets/icon_broker.svg";
   acceptBroker:boolean = true;
+  doneIcon:"/assets/icons8-done-30.png"
   
 
     constructor( private route:ActivatedRoute, private router:Router,private folderService:FoldersService,
@@ -100,11 +101,6 @@ private _snackBar: MatSnackBar ) {
 
   
   ngOnInit() {
-   
-    this._snackBar.open("message", "dismiss",{
-      panelClass: ['snack']
-    });
-
     this.dropdownSettings = {
       idField:'id',
       textField:'dataName',
@@ -185,26 +181,37 @@ private _snackBar: MatSnackBar ) {
 
     console.log('addNewFile selected f->'+folder_Id);
 
+    // this._snackBar.open("File Uploaded Successfully","dismiss",{
+    //   panelClass: ['snack_success'],
+    //   // duration:400,
+    // });
+
     this.fileUploadService.addFolderFile(fileData,folder_Id).subscribe({
       next:(resp)=>{
         console.log(resp);
-
       },
       error:(e)=>{
         console.log('An Error Occurred');
-        this.uploadStatus = false;
+        this._snackBar.open("File upload failed", "dismiss",{
+          panelClass: ['snack_error'],
+           duration:2000,
+        });
         setTimeout(()=>{
           this.location.back()
         },4000);
       },
       complete:()=>{
         console.log('Success');
-        this.uploadStatus = true;
+        this._snackBar.open("File Upload Successful","dismiss",{
+          panelClass: ['snack_success'],
+          duration:2000,
+        });
         setTimeout(()=>{
           this.location.back()
         },4000);
       }
     })
+
   }
 
   getDropdownData(){

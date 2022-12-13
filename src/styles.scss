@@ -17,10 +17,33 @@ body {
 .bg-white{
   background-color: #ffffff !important;
 }
-.snack{
+.snack_error{
+  background-color: #ffff;
+  color: #2C262D;
+  position: relative;
+  text-align: center !important;
+  padding-left:50px !important;
+}
+.snack_error::before{
+  content:url("/assets/error-icon.svg");
+  position: absolute;
+  left: 17px;
+  top: 13px;
+}
+.snack_success{
   background-color: #ffffff;
   color: #2C262D;
+  position: relative;
+  text-align: center !important;
+  padding-left: 50px !important;
 }
+.snack_success::before{
+  content:url("/assets/done-icon.svg");
+  position: absolute;
+  left: 17px;
+  top: 13px;
+}
+
 ::-webkit-scrollbar {
   width: 0px;
   overflow-y: scroll;
