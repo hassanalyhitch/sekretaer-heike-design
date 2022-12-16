@@ -201,7 +201,7 @@ export class HomeComponent implements OnInit,AfterViewInit{
   scrollToContract(id){
     this.contracts.forEach((element:ElementRef, index)=>{
       let target = element.nativeElement as HTMLElement;
-      if(target.getAttribute('id') == id){
+      if(index == id){
 
         target.scrollIntoView({behavior: "smooth"});
         return;
