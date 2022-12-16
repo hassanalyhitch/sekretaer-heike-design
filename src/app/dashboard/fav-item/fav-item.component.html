@@ -18,11 +18,11 @@
       <div class="d-flex align-items-end justify-content-between w-100 mt-auto py-1 ">
         <div class="date d-flex align-items-end px-1">
           <i class="material-icons ">access_time</i>
-          <span class="mx-1">{{contractItem.details.EndDate}}</span>
+          <span class="mx-1">{{contractItem.details.EndDate | formatDate}}</span>
         </div>
         <div class="price ml-auto px-1">
           <span class="price">{{ contractItem.details.YearlyPayment | currencyFormat}}</span>
-          <span>/{{ 'contract_detail.contract_yearly_payment_label' | translate }}</span>
+          <span>/{{ 'contract_detail.contract_yearly_payment_label' | translate }}</span> 
         </div>
       </div>
   

@@ -15,6 +15,7 @@ import { ThisReceiver } from '@angular/compiler';
 import { FileNameData } from '../../../models/file-name.model';
 import { Location } from '@angular/common';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
   fileDoc:any;
 
   form:FormGroup;
-  submitted = false;
+  submitted: boolean = false;
   dropDownIsHidden:boolean= true;
   selectedItems = [];
   dropDownList = [];
@@ -91,13 +92,20 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
   doneIcon:"/assets/icons8-done-30.png"
   
 
-    constructor( private route:ActivatedRoute, private router:Router,private folderService:FoldersService,
-private contractService:ContractsService,private http:HttpClient,private fileUploadService: FileUploadService,
-private httpClient:HttpClient,private formBuilder:FormBuilder,private fileSizePipe:FileSizePipe,private builder:FormBuilder,private location:Location,
-private _snackBar: MatSnackBar ) {
- 
-
-  }
+  constructor( 
+    private route:ActivatedRoute, 
+    private router:Router,
+    private folderService:FoldersService,
+    private contractService:ContractsService,
+    private http:HttpClient,
+    private fileUploadService: FileUploadService,
+    private httpClient:HttpClient,
+    private formBuilder:FormBuilder,
+    private fileSizePipe:FileSizePipe,
+    private builder:FormBuilder,
+    private location:Location,
+    private _snackBar: MatSnackBar,
+    private translate:TranslateService ) { }
 
   
   ngOnInit() {
@@ -177,38 +185,44 @@ private _snackBar: MatSnackBar ) {
   }
   addNewFile(fileData:FileNameData, folder_Id: string){
 
-    console.log(fileData);
+    //console.log(fileData);
 
-    console.log('addNewFile selected f->'+folder_Id);
-
-    // this._snackBar.open("File Uploaded Successfully","dismiss",{
-    //   panelClass: ['snack_success'],
-    //   // duration:400,
-    // });
+    //console.log('addNewFile selected f->'+folder_Id);
 
     this.fileUploadService.addFolderFile(fileData,folder_Id).subscribe({
       next:(resp)=>{
-        console.log(resp);
+        //console.log(resp);
+        this.submitted = false;
       },
       error:(e)=>{
-        console.log('An Error Occurred');
-        this._snackBar.open("File upload failed", "dismiss",{
+        this.submitted = false;
+
+        //show snackbar with error message
+        this._snackBar.open(this.translate.instant('add_document.file_upload_error'), this.translate.instant('snack_bar.action_button'),{
           panelClass: ['snack_error'],
            duration:2000,
         });
+
+        //return back to previous page
         setTimeout(()=>{
           this.location.back()
-        },4000);
+        },3500);
+
       },
       complete:()=>{
-        console.log('Success');
-        this._snackBar.open("File Upload Successful","dismiss",{
+        this.submitted = false;
+        
+        //show snackbar with success message
+        this._snackBar.open(this.translate.instant('add_document.file_upload_success'), this.translate.instant('snack_bar.action_button'),{
           panelClass: ['snack_success'],
           duration:2000,
         });
+
+        //return back to previous page
         setTimeout(()=>{
           this.location.back()
-        },4000);
+        },3500);
+
       }
     })
 
@@ -325,6 +339,8 @@ private _snackBar: MatSnackBar ) {
  
  onSubmit(fileData:FileNameData){
   fileData.doc_file = this.file;
+
+  this.submitted = true;
   
   switch (this.typeSelected){
     case 'folder':{
@@ -365,10 +381,14 @@ private _snackBar: MatSnackBar ) {
     }
    if (this.file.type == 'application/pdf' || this.file.type =='!application/pdf') {
    }
-    else{
-      alert("file type should be pdf")
-      return;
-    }
+   else{
+    // alert("file type should be pdf")
+    this._snackBar.open(this.translate.instant('add_document.file_type_alert'),this.translate.instant('snack_bar.action_button'),{
+      panelClass:['snack_fileType'],
+      duration:1800,
+    })
+    return;
+  }
    
     this.uploadFileArr = [];
     this.uploadFileArr.push(_file);

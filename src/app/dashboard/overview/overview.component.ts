@@ -103,6 +103,7 @@ export class OverviewComponent implements OnInit {
       
         this.allContractsArr = this.contractService.userContractsArr;
 
+        this.subsetArr = [];
         if(this.contractService.userContractsArr.length>3){
           for(let i=3; i<this.contractService.userContractsArr.length; i++){
             this.subsetArr.push(this.contractService.userContractsArr[i]);
@@ -116,6 +117,7 @@ export class OverviewComponent implements OnInit {
         this.folderService.getFolders().subscribe({
           next: (resp)=>{
             this.foldersArr = this.folderService.userFolderArr;
+            this.folderSubsetArr = [];
             if(this.folderService.userFolderArr.length>3){
               for(let i=3; i<this.folderService.userFolderArr.length; i++){
                 this.folderSubsetArr.push(this.folderService.userFolderArr[i]);
@@ -294,28 +296,41 @@ export class OverviewComponent implements OnInit {
   }
 
   sortByContractDate(){
-    if(this.sortContractDateByAsc){
-      this.ascendContractDate = this.allContractsArr.sort((a,b)=>a.details.EndDate.localeCompare(b.details.EndDate));
-      this.allContractsArr = this.ascendContractDate;
-        if(this.allContractsArr.length>3){
-          this.subsetArr=[];
-          for(let i=3; i<this.allContractsArr.length; i++){
-            this.subsetArr.push(this.allContractsArr[i]);
+    if (this.sortContractDateByAsc){
+      this.allContractsArr.sort ((a,b)=>{
+        try{
+          let dateA = new Date(a.details.EndDate);
+          let dateB = new Date(b.details.EndDate);
+
+          if ((dateA instanceof Date && !isNaN(dateA.getTime()))&&(dateB instanceof Date && !isNaN(dateB.getTime()))) {
+            //valid date object
+            return dateA >= dateB ? 1 : -1; 
+          } else {
+            console.log("invalid date");
           }
         }
+        catch(e){
+          console.log(e);
+          
+        }
+      });
+      this.subsetArr =[];
+      if (this.allContractsArr.length>3){
+        for (let i=3;i<this.allContractsArr.length;i++){
+          this.subsetArr.push(this.allContractsArr[i]);
+        }
+      }
       this.sortContractDateByAsc = !this.sortContractDateByAsc;
     }else{
-      this.descendContractDate = this.allContractsArr.sort((a,b)=>a.details.EndDate.localeCompare(b.details.EndDate)).reverse();
-      this.allContractsArr = this.descendContractDate;
-        if(this.allContractsArr.length>3){
-          this.subsetArr =[];
-          for(let i=3;i<this.allContractsArr.length;i++){
-            this.subsetArr.push(this.allContractsArr[i]);
-          }
+      this.allContractsArr.reverse();
+      this.subsetArr =[];
+      if (this.allContractsArr.length>3){
+        for (let i=3;i<this.allContractsArr.length;i++){
+          this.subsetArr.push(this.allContractsArr[i]);
         }
-      this.sortContractDateByAsc =!this.sortContractDateByAsc;
+      }
+      this.sortContractDateByAsc = !this.sortContractDateByAsc;
     }
-
   }
 
   sortByFolderTitle(){
@@ -346,27 +361,38 @@ export class OverviewComponent implements OnInit {
 
    sortByFolderDate(){
     if (this.sortFolderDateByAsc){
-      this.ascendFolderDate = this.foldersArr.sort((a,b)=>a.createdAt.localeCompare(b.createdAt));
-      this.folderSubsetArr = this.ascendFolderDate;
-      if(this.foldersArr.length>3){
-       this.folderSubsetArr = [];
-       for(let i=3; i<this.foldersArr.length; i++){
-         this.folderSubsetArr.push(this.foldersArr[i]);
-       }
-     }
-      this.sortFolderDateByAsc =!this.sortFolderDateByAsc;
-    }else{
-      this.descendFolderDate = this.foldersArr.sort((a,b)=>a.createdAt.localeCompare(b.createdAt)).reverse();
-      this.folderSubsetArr = this.descendFolderDate;
-      if(this.foldersArr.length>3){
-       this.folderSubsetArr = [];
-       for(let i=3; i<this.foldersArr.length; i++){
-         this.folderSubsetArr.push(this.foldersArr[i]);
-       }
-     }
-      this.sortFolderDateByAsc = !this.sortFolderDateByAsc;
-    }
+         this.foldersArr.sort((a,b)=>{
+          try{
+            let dateA = new Date(a.createdAt);
+            let dateB = new Date(b.createdAt);
+
+            if ((dateA instanceof Date && !isNaN(dateA.getTime()))&&(dateB instanceof Date && !isNaN(dateB.getTime()))) {
+              //valid date object
+              return dateA >= dateB ? 1 : -1; 
+            } else {
+              console.log("invalid date");
+            }
+          }
+          catch(e){
+            console.log(e);
+          }
+         });
+         this.folderSubsetArr = [];
+            if(this.foldersArr.length>3){
+              for(let i=3; i<this.foldersArr.length; i++){
+                this.folderSubsetArr.push(this.foldersArr[i]);
+              }
+            }
+         this.sortFolderDateByAsc = !this.sortFolderDateByAsc;
+        }else{
+          this.foldersArr.reverse();
+          this.folderSubsetArr = [];
+          if(this.foldersArr.length>3){
+            for(let i=3; i<this.foldersArr.length; i++){
+              this.folderSubsetArr.push(this.foldersArr[i]);
+            }
+          }
+          this.sortFolderDateByAsc = !this.sortFolderDateByAsc;
+        }
   }
-
-
 }

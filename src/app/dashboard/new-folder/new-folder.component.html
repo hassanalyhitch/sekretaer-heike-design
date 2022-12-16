@@ -48,11 +48,11 @@
         <button
         id="save-btn"
         class="btn btn-login w-100 py-2"
-        [disabled]="!saveForm.valid"
+        [disabled]="(!saveForm.valid) || submitted"
         type="submit"
-        style="font-size:20px;margin-top:20px;"
-        >
-        {{ 'overview.new_folder_dialog.btn_save_label' | translate }}
+        style="font-size:20px;margin-top:20px;">
+          <span *ngIf="submitted" class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status"></span>
+          <span *ngIf="!submitted">{{ 'overview.new_folder_dialog.btn_save_label' | translate }}</span>
         </button>
       </div>
       

@@ -19,6 +19,7 @@ import { RenameContractComponent } from '../rename-contract/rename-contract.comp
 import { Location } from '@angular/common';
 import { RenameModalComponent } from '../rename-modal/rename-modal.component';
 import { DownloadService } from '../../services/download-file.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-contract-detail',
@@ -68,7 +69,9 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private contractService: ContractsService,
     private _location: Location,
-    private downloadService: DownloadService
+    private downloadService: DownloadService,
+    private snackbar:MatSnackBar,
+    
   ) {
     this.contractSub = contractService.selectObservable.subscribe({
       next: (contract) => {
@@ -156,7 +159,18 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
         error: (resp) => {
           // console.log(resp);
           // console.log(contract.details.Amsidnr);
+          this.snackbar.open(this.translate.instant('contract_detail.mark_fav_error'),this.translate.instant('snack_bar.action_button'),{
+            duration:1500,
+            panelClass:['snack_error'],
+          });
         },
+        complete:()=>{
+          this.snackbar.open(this.translate.instant('contract_detail.mark_fav_success'),this.translate.instant('snack_bar.action_button'),{
+            duration:1500,
+            panelClass:['snack_success'],
+          });
+          
+        }
       });
   }
 
@@ -171,7 +185,17 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
         error: (resp) => {
           // console.log(resp);
           // console.log(contract.details.favoriteId);
+          this.snackbar.open(this.translate.instant('contract_detail.unmark_fav_error'),this.translate.instant('snack_bar.action_button'),{
+            panelClass:['snack_error'],
+            duration:1500,
+          })
         },
+        complete:()=>{
+          this.snackbar.open(this.translate.instant('contract_detail.unmark_fav_success'),this.translate.instant('snack_bar.action_button'),{
+            panelClass:['snack_success'],
+            duration:1500,
+          })
+        }
       });
   }
 

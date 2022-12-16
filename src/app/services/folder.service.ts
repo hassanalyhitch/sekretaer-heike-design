@@ -58,15 +58,6 @@ export class FoldersService {
                 let index: number = 0;
       
                 for(let item of resp){
-
-                  try{
-                    //format date 
-                    item['createdAt'] = formatDate(item['createdAt'], "dd.MM.YYYY","en");
-                
-                  } catch(error){
-                    console.log(error.message);
-                  }
-                  
                   let folder: FolderData = {
                     id: item['id'],
                     loginId : item['loginId'],

@@ -62,8 +62,13 @@
           <p class="m-2">Show my Broker</p>
         </div>
            
-      
-            <button type="submit" class="submit" >{{ 'add_document.submit_button_label' | translate }}</button>
+          <button 
+            type="submit"
+            [disabled]="submitted" 
+            class="submit" >
+              <span *ngIf="submitted" class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status"></span>
+              <span *ngIf="!submitted">{{ 'add_document.submit_button_label' | translate }}</span>
+          </button>
           
           
             

@@ -11,6 +11,7 @@ import { NewFolderComponent } from '../new-folder/new-folder.component';
 import { DocumentData } from '../../models/document.model';
 import { RenameModalComponent } from '../rename-modal/rename-modal.component';
 import { DownloadService } from '../../services/download-file.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-folder-detail',
@@ -38,7 +39,9 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     private matDialog: MatDialog, 
     private translate:TranslateService, 
     private _location: Location,
-    private downloadService: DownloadService) { }
+    private downloadService: DownloadService,
+    private snackbar:MatSnackBar
+    ) { }
 
   ngOnInit() {
     console.table(this.folderService.selectedFolder);    
@@ -126,6 +129,16 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
       error:(resp)=>{
         console.log(resp);
         console.log(folder.customerAmsidnr);
+        this.snackbar.open(this.translate.instant('folder-detail.mark_fav_error'),this.translate.instant('snack_bar.action_button'),{
+          panelClass:['snack_error'],
+          duration:1500,
+        })
+      },
+      complete:()=>{
+        this.snackbar.open(this.translate.instant('folder-detail.mark_fav_success'),this.translate.instant('snack_bar.action_button'),{
+          panelClass:['snack_success'],
+          duration:1500,
+        })
       }
     });
   }
@@ -139,6 +152,16 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
       error:(resp)=>{
         console.log(resp);
         console.log(folder.favoriteId);
+        this.snackbar.open(this.translate.instant('folder-detail.unmark_fav_error'),this.translate.instant('snack_bar.action_button'),{
+          panelClass:['snack_error'],
+          duration:1500,
+        })
+      },
+      complete:()=>{
+        this.snackbar.open(this.translate.instant('folder-detail.unmark_fav_success'),this.translate.instant('snack_bar.action_button'),{
+          panelClass:['snack_success'],
+          duration:1500,
+        })
       }
     });
   }

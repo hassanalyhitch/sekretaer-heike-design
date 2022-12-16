@@ -71,7 +71,11 @@
     "insurance_side_menu_item_2": "Unmark as Favourite",
     "insurance_side_menu_item_3": "Rename",
     "document_side_menu_item_1" : "Open Document",
-    "document_side_menu_item_2" : "Rename Document"
+    "document_side_menu_item_2" : "Rename Document",
+    "mark_fav_success":"Successfully marked as Favourite",
+    "mark_fav_error":"Failed to mark as Favourite",
+    "unmark_fav_success":"Unmarked as Favourite",
+    "unmark_fav_error":"Failed to unmark as Favourite"
   },
   "login": {
     "title_login": "Let's Login",
@@ -119,7 +123,15 @@
     "documents": "My Documents",
     "sub_folders": "Sub-folders",
     "add_subfolder" : "Add Sub-Folder",
-    "add_new_document": "Add new Document"
+    "add_new_document": "Add new Document",
+    "sub_folder_creation_error" : "Sub-Folder Creation Failed",
+    "sub_folder_creation_success" : "Sub-Folder Created Successfully",
+    "folder_creation_error" : "Folder Creation Failed",
+    "folder_creation_success" : "Folder Created Successfully",
+    "mark_fav_success":"Successfully marked as Favourite",
+    "mark_fav_error":"Failed to mark as Favourite",
+    "unmark_fav_success":"Unmarked as Favourite",
+    "unmark_fav_error":"Failed to unmark as Favourite"
   },
   "favourites": {
     "title": "FAVOURITES",
@@ -160,13 +172,17 @@
     "title" : "Rename Document",
     "sub_title_name": "Name",
     "text_input_label" : "New Document Name",
-    "btn_save_label": "SAVE"
+    "btn_save_label": "SAVE",
+    "contract_rename_success" : "Contract Renamed Successfully",
+    "contract_rename_error" : "Contract Rename Failed"
   },
   "rename_folder": {
     "title" : "Rename Folder",
     "sub_title_name": "Name",
     "text_input_label" : "New Folder Name",
-    "btn_save_label": "SAVE"
+    "btn_save_label": "SAVE",
+    "folder_rename_success" : "Folder Renamed Successfully",
+    "folder_rename_error" : "Folder Rename Failed"
   },
   "add_document": {
     "main_title":"ADD DOCUMENT",
@@ -174,7 +190,10 @@
     "sub_title_1":"Upload document/Image",
     "sub_title_2":"Assign",
     "placeholder":"Current Folder",
-    "submit_button_label": "UPLOAD"
+    "submit_button_label": "UPLOAD",
+    "file_upload_error": "File Upload Failed",
+    "file_upload_success": "File Upload Successfully",
+    "file_type_alert":"Only pdf is accepted"
   },
   "search":{
     "title_main":"SEARCH",
@@ -188,6 +207,9 @@
   },
   "terms_conditions":{
     "title" : "Terms & Conditions"
+  },
+  "snack_bar" : {
+    "action_button": "Dismiss"
   }
 }
 

@@ -43,6 +43,19 @@ body {
   left: 17px;
   top: 13px;
 }
+.snack_fileType::before{
+  content:url("/assets/error-icon.svg");
+  position: absolute;
+  left: 17px;
+  top: 13px;
+}
+.snack_fileType{
+  background-color: #ffffff;
+  color: #2C262D;
+  position: relative;
+  text-align: center !important;
+  padding-left: 50px !important;
+}
 
 ::-webkit-scrollbar {
   width: 0px;

@@ -1,3 +1,4 @@
+import { FormatDatePipe } from './pipes/format-date.pipe';
 import { Injectable, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -178,7 +179,8 @@ const appRoutes: Routes = [
     NotificationDetailComponent,
     ForgotPasswordEmailSentComponent,
     LoadingComponent,
-    BackButtonDirective
+    BackButtonDirective,
+    FormatDatePipe
    ],
   bootstrap:    [ AppComponent ],
   providers: [

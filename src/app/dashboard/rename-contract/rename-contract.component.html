@@ -24,11 +24,11 @@
         <button
           id="save-btn"
           class="btn btn-login w-100 py-2"
-          [disabled]="!saveForm.valid"
+          [disabled]="(!saveForm.valid) || submitted"
           type="submit"
-          style="font-size:20px;"
-        >
-        {{ 'rename_contract.btn_save_label' | translate }}
+          style="font-size:20px;">
+            <span *ngIf="submitted" class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status"></span>
+            <span *ngIf="!submitted">{{ 'rename_contract.btn_save_label' | translate }}</span>
         </button>
       </div>
       </form>
