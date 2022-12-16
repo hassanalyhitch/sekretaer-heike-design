@@ -7,6 +7,8 @@ import { ContractData } from "../../models/contract.model";
 import { NotificationsService } from "../../services/notification.service";
 import { LoginService } from "../../services/login.service";
 import { LoadingService } from '../../services/loading.service';
+import { BrokerService } from '../../services/broker.service';
+import { BrokerData } from '../../models/broker.model';
 
 @Component({
   selector: "app-home",
@@ -19,6 +21,8 @@ export class HomeComponent implements OnInit,AfterViewInit{
   notifCount: number = 0;
   isNotificationCountText: boolean = false;
   
+  telto: string = "tel:";
+  brokerNumber: string = "";
   //chatCheck: number = 0;
   //insuranceCheck: number = 0;
   //isChatFabEnabled: boolean = false;
@@ -33,7 +37,8 @@ export class HomeComponent implements OnInit,AfterViewInit{
     private router: Router,
     private contractService: ContractsService,
     private notificationService: NotificationsService,
-    private loadingService:LoadingService
+    private loadingService:LoadingService,
+    private brokerService:BrokerService
   ) {
     this.loadingService.emitIsLoading(true);
   }
@@ -54,8 +59,20 @@ export class HomeComponent implements OnInit,AfterViewInit{
     });
 
     
+    this.brokerService.getBrokerDetails().subscribe({
+      next:(resp:BrokerData)=>{
+
+        this.brokerNumber = resp.myBroker.V_TEL1;
+        this.telto = this.telto + this.brokerNumber;
+
+        console.log(this.telto);
+      },
+      complete:()=>{
+      }
+    });
+
     // this.notif.nativeElement.setAttribute("notification-count", this.notifCount+"");
-    this.notificationService.getNotifications().subscribe({
+    this.notificationService.getUnreadNotifications().subscribe({
       next: () => {
         this.notifCount = this.notificationService.notifCount;
         if(this.notifCount < 8){
@@ -77,7 +94,6 @@ export class HomeComponent implements OnInit,AfterViewInit{
         this.loadingService.emitIsLoading(false);
       }
     });
-
     // this.chatCheck = this.loginService.chatCheck;
     // this.insuranceCheck = this.loginService.insuranceCheck;
 

@@ -269,3 +269,7 @@
 .isActive{
   background-color: #d60b51;
 }
+
+.tel{
+  text-decoration: none;
+}
