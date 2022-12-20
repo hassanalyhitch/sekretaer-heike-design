@@ -2,6 +2,7 @@
 .filter-icon{
   width: 20px;
   height: 20px;
+  cursor:pointer;
 }
 
 .section-folder-detail{
@@ -22,7 +23,7 @@
 }
 .text-sub-title-2{
   font-size: 15px;
-  color: #848484;
+  color: #2C262D;
 }
 .text-sub-title-3{
   font-size: 18px;
@@ -219,6 +220,12 @@ app-folder-card, app-document-item{
 }
  .swipedLeft{
   margin-left: -52px !important;
+}
+.back-arrow-icon{
+  cursor:pointer;
+}
+.page-title{
+  cursor: pointer;
 }
 
 ::-webkit-scrollbar {

@@ -16,21 +16,9 @@ export class DocumentItemComponent implements OnInit {
   constructor(private router: Router,private matDialog: MatDialog) { }
 
   ngOnInit() {
-    if(this.doc){
-      // console.log(this.doc);
-      if(this.doc.createdAt){
-        try{
-          //format date 
-          this.doc.createdAt = formatDate(this.doc.createdAt, "dd.MM.YYYY","en");
-
-        } catch(error){
-
-        }
-      }
-    }
   }
-  onDocumentClick(doc: DocumentData){
 
+  onDocumentClick(doc: DocumentData){
     this.router.navigate(['dashboard/home/contract-detail/fileview', { id: doc.linkToDoc}],{ skipLocationChange: false });
   }
 

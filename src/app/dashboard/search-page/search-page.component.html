@@ -1,60 +1,90 @@
 <div class="content-wrapper w-100 ">
-<div class="_content d-flex flex-column align-items-center w-100 h-100 bg-">
+  <div class="_content d-flex flex-column align-items-center w-100 h-100 bg-">
 
-  <strong class="section-title align-self-center mt-4 mb-3">{{ 'search.title_main' | translate }}</strong>
-
-  <div class="search_input_container d-flex w-100 bg-">
-    <div class="_input_group w-100 d-flex m- bg-" >
-      <i class="material-icons p-2">search</i>
-      <input type="text " class="search_input w-100" [(ngModel)]="searchValue" (ngModelChange)="filterSearch(searchValue)" placeholder="Search" />
+    <div class="d-flex justify-content-between w-100 mb-2 px-3 pt-3">
       
-    </div>
-    
-    <div class="ml-auto btn-group dropstart align-self-center m-2 p-2 bg-">
-      <img class="filter-icon" src="/assets/icon_filter_dark.svg">
-    </div>
-  </div>
-
-
-  <!-- insurances -->
-
-  <div class="d-flex flex-column w-100 px-3 bg-" *ngIf="contractsResArr.length>0" >
-    <p class="section-sub-title text-center m-3">{{ 'search.title_insurances' | translate }}</p>
-    <div class="w-100 d-flex flex-column align-items-center extra-cards bg-" >
-      <app-fav-item class="col-12" *ngFor="let item of contractsResArr" [contractItem]=item  (click)="onContractClick(item)"></app-fav-item>
-    </div>
-  </div>
-
-  <!-- folders -->
-
-  <div class="d-flex flex-column w-100 px-3 bg-" *ngIf="foldersResArr.length>0" >
-    <p class="section-sub-title text-center m-3">{{ 'search.title_folders' | translate }}</p>
-    <div class="w-100 d-flex flex-column align-items-center extra-folders bg-"  >
-      <app-folder-card class="col-12" *ngFor="let item of foldersResArr" [folder]=item  (click)="onFolderCardClick(item)"></app-folder-card>
-    </div>
-  </div>
-  <!-- documents -->
-
-  <div class="d-flex flex-column px-3 pb-4 w-100 bg-" *ngIf="documentsResArr.length>0" >
-    <p class="section-sub-title text-center m-3">{{ 'search.title_documents' | translate }}</p>
-    <div class="d-flex documentItem " *ngFor="let doc of documentsResArr; let i = index"  (swipe)="onSwipe($event, doc)"  >
-      <app-document-item class="w-100"  [ngClass]="{'swipedLeft':doc.swipedLeft}" [doc]=doc  (tap)="onDocClick(doc)" ></app-document-item>
-    
-      <div class=" edit-rename p-2 d-flex align-self-center justify-content-center align-items-center bg-white "
-       [ngClass]="{'d-none':!doc.swipedLeft}"
-       (click)= "renameFileModal(doc)" >
-          <i class="material-icons">mode_edit</i>
+      <div class="d-flex justify-content-center align-items-center" backButton>
+        <i class="material-icons p-2 ">arrow_back_ios</i>
       </div>
+
+      <div class="p-2">
+        <strong class="section-title align-self-center mt-4 mb-3">{{ 'search.title_main' | translate }}</strong>
+      </div>
+
+      <div class="p-2">
+        <img class="filter-icon" src="/assets/icon_filter_dark.svg">
+      </div>
+
     </div>
-  </div>
-  
-  <p class="search-message text-center m-auto" *ngIf="searchValue==''" >
-    {{ 'search.search_message' | translate }}
-  </p>
 
-  <div class="searching-status m-auto" *ngIf="searchValue!='' && !resultExists" >
-    <mat-spinner [diameter]="40"></mat-spinner>
-  </div>
+    <div class="search_input_container d-flex w-100 bg-- mb-2">
+      <div class="_input_group w-100 d-flex m- bg-" >
+        <i class="material-icons p-2">search</i>
+        <input type="text " class="search_input w-100" [(ngModel)]="searchValue" (ngModelChange)="filterSearch(searchValue)" placeholder="Search" />
+      </div>
+      
+      <!-- <div class="ml-auto btn-group dropstart align-self-center m-2 p-2 bg-">
+        <img class="filter-icon" src="/assets/icon_filter_dark.svg">
+      </div> -->
+    </div>
 
-</div>
+    <div class="search-content w-100 d-flex flex-column align-items-center p-3">
+
+      <!-- insurances -->
+      <div class="d-flex flex-column w-100 px-3 bg-" *ngIf="contractsResArr.length>0" >
+        <p class="section-sub-title text-center m-3">{{ 'search.title_insurances' | translate }}</p>
+        <div class="w-100 d-flex flex-column align-items-center extra-cards bg-" >
+          <app-fav-item class="col-12" *ngFor="let item of contractsResArr" [contractItem]=item  (click)="onContractClick(item)"></app-fav-item>
+        </div>
+      </div>
+
+      <!-- folders -->
+      <div class="d-flex flex-column w-100 px-3 bg-" *ngIf="foldersResArr.length>0" >
+        <p class="section-sub-title text-center m-3">{{ 'search.title_folders' | translate }}</p>
+        <div class="w-100 d-flex flex-column align-items-center extra-folders bg-"  >
+          <app-folder-card class="col-12" *ngFor="let item of foldersResArr" [folder]=item  (click)="onFolderCardClick(item)"></app-folder-card>
+        </div>
+      </div>
+
+      <!-- documents -->
+      <div class="d-flex flex-column px-3 pb-4 w-100 bg-" *ngIf="documentsResArr.length>0" >
+        <p class="section-sub-title text-center m-3">{{ 'search.title_documents' | translate }}</p>
+        <div class="d-flex documentItem " *ngFor="let doc of documentsResArr; let i = index"  (swipe)="onSwipe($event, doc)"  >
+          <app-document-item class="w-100"  [ngClass]="{'swipedLeft':doc.swipedLeft}" [doc]=doc  (tap)="onDocClick(doc)" ></app-document-item>
+        
+          <div class=" edit-rename p-2 d-flex align-self-center justify-content-center align-items-center bg-white "
+          [ngClass]="{'d-none':!doc.swipedLeft}"
+          (click)= "renameFileModal(doc)" >
+              <i class="material-icons">mode_edit</i>
+          </div>
+        </div>
+      </div>
+
+      <!-- shown when the search type includes all documents-->
+      <p class="search-message text-center m-auto" *ngIf="searchValue=='' && searchType=='all' " >
+        {{ 'search.search_all_documents_message' | translate }}
+      </p>
+
+      <!-- shown when the search type is only folders -->
+      <p class="search-message text-center m-auto" *ngIf="searchValue=='' && searchType=='folders' " >
+        {{ 'search.search_only_folders_message' | translate }}
+      </p>
+
+      <!-- shown when the search type is only contracts -->
+      <p class="search-message text-center m-auto" *ngIf="searchValue=='' && searchType=='contracts' " >
+        {{ 'search.search_only_contracts_message' | translate }}
+      </p>
+
+      <!-- shown when the search type is only documents -->
+      <p class="search-message text-center m-auto" *ngIf="searchValue=='' && searchType=='docs' " >
+        {{ 'search.search_only_documents_message' | translate }}
+      </p>
+
+      <div class="searching-status m-auto" *ngIf="searchValue!='' && !resultExists" >
+        <mat-spinner [diameter]="40"></mat-spinner>
+      </div>
+
+    </div>
+
+  </div>
 </div>

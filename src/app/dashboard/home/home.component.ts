@@ -214,6 +214,10 @@ export class HomeComponent implements OnInit,AfterViewInit{
     this.router.navigate(["dashboard/broker"]);
   }
 
+  openFavouritesPage(){
+    this.router.navigate(["dashboard/favourite"]);
+  }
+
   scrollToContract(id){
     this.contracts.forEach((element:ElementRef, index)=>{
       let target = element.nativeElement as HTMLElement;

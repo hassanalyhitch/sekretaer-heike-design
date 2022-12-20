@@ -97,6 +97,7 @@ export class OverviewComponent implements OnInit {
    
     this._init();
   }
+
   _init(){
     this.contractService.getContracts().subscribe({
       next: ()=>{
@@ -268,6 +269,7 @@ export class OverviewComponent implements OnInit {
   onAddContract(){
     this.router.navigate(['dashboard/overview/new-contract']);
   }
+  
   sortByContractTitle(){
     if(this.sortContractTitleByAsc){
       this.ascendContractTitle = this.allContractsArr.sort((a,b) =>a.details.name.localeCompare(b.details.name));
@@ -394,5 +396,13 @@ export class OverviewComponent implements OnInit {
           }
           this.sortFolderDateByAsc = !this.sortFolderDateByAsc;
         }
+  }
+
+  onSearchFoldersClicked(){
+    this.router.navigate(['dashboard/home/search', {searchType:'folders'}]);
+  }
+
+  onSearchContractsClicked(){
+    this.router.navigate(['dashboard/home/search', {searchType:'contracts'}]);
   }
 }

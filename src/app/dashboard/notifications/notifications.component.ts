@@ -77,7 +77,7 @@ export class NotificationsComponent implements OnInit {
     console.log(searchValue);
     if(searchValue != undefined && searchValue != ""){
       let searchResult = this.allNotifsArr.filter((obj) => {
-        if( obj.infoHeadline.toLowerCase().includes(searchValue.toLowerCase())
+        if( obj.infoHeadline != null && obj.infoHeadline.toLowerCase().includes(searchValue.toLowerCase())
          || (obj.infoText != null && obj.infoText.toLowerCase().includes(searchValue.toLowerCase()))){
           return true;
         }

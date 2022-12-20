@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit,ViewChildren,QueryList,ElementRef } from '@angular/core';
 import { NavigationEnd, Router, Event, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
@@ -20,7 +20,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class FolderDetailComponent implements OnInit, OnDestroy {
 
-  folder: FolderData;
+ folder:FolderData;
   //hrTitle: string;
   //hrTitle2: string;
 
@@ -32,6 +32,13 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
   routeListener: Subscription;
   visitedFolderArray:FolderData[] = [];
 
+  docArr: DocumentData[] = [];
+  folderSub:Subscription;
+  sortDocDateByAsc:boolean =true;
+
+  sortSubFolderDate:boolean =true;
+  subFoldersArr:FolderData[] = [];
+
   constructor(
     private router:Router, 
     private route:ActivatedRoute, 
@@ -41,18 +48,11 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     private _location: Location,
     private downloadService: DownloadService,
     private snackbar:MatSnackBar
-    ) { }
+    ) { 
+
+    }
 
   ngOnInit() {
-    console.table(this.folderService.selectedFolder);    
-    //this.hrTitle = this.translate.instant('folder-detail.documents');
-    //this.hrTitle2 = this.translate.instant('folder-detail.subfolder');
-
-    // const wholeDocTemplate = document.getElementsByClassName('section-folderdetail').item(0) as HTMLElement | null;
-    // if (wholeDocTemplate != null) {
-    //   document.getElementById("folder-hr").setAttribute('data-content', this.hrTitle2);
-    //   document.getElementById("docu-hr").setAttribute('data-content', this.hrTitle);
-    // } 
 
     this.routeListener = this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
@@ -94,6 +94,28 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     //main folder set once and shouldn't change
     this.mainFolder = this.folder; 
     this.visitedFolderArray.push(this.mainFolder);
+    // --------------------------------------------------
+    
+    this.folderSub = this.folderService.selectObservable.subscribe({
+      next:(folder) => {
+        this.folder = folder;
+        this.folderService
+        .getFolderDetails(this.folder.id)
+        .subscribe({
+          next:(resp:any) =>{
+            if(resp.hasOwnProperty('docs')){
+              for (let i = 0; i< resp.docs.length; i++){
+                // this.folder.docs.push(resp.docs[i]);
+                console.log(folder.docs.length); 
+              }
+                 
+            }
+          },
+          complete:()=>{},
+        });
+      },
+    });
+
 
 
   }
@@ -103,6 +125,7 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     console.log('hasParent -> '+this.hasParent);
     this.routeListener.unsubscribe();
     this.visitedFolderArray = [];
+    // this.folderSub.unsubscribe();
   }
   
   onFolderCardClick(clickedFolder: FolderData){
@@ -185,19 +208,19 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     // https://material.angular.io/components/dialog/overview
     const modalDialog = this.matDialog.open(RenameFolderComponent, dialogConfig);
     
-    this.matDialog.getDialogById('renamefolder-modal-component').afterClosed().subscribe({
-      next:()=>{
+    // this.matDialog.getDialogById('renamefolder-modal-component').afterClosed().subscribe({
+    //   next:()=>{
 
-        // this.currentNav = resp.folderName;
-        // this.folder.folderName = resp.foldername;
+    //     // this.currentNav = resp.folderName;
+    //     // this.folder.folderName = resp.foldername;
         
-         this.folder = this.folderService.selectedFolder;
-         this.currentNav = this.folder.folderName;
-      },
-      error:(resp)=>{
-        console.log(resp);
-      }
-    });
+    //      //this.folder = this.folderService.selectedFolder;
+    //      this.currentNav = this.folder.folderName;
+    //   },
+    //   error:(resp)=>{
+    //     console.log(resp);
+    //   }
+    // });
   }
   
   addNewFolder(){
@@ -272,5 +295,57 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
         }
       }
     });
+  }
+
+  sortByDocDate(){
+    if(this.sortDocDateByAsc){
+      this.folder.docs.sort((a, b) => {  
+        try{
+
+          let dateA = new Date(a.createdAt);
+          let dateB = new Date(b.createdAt);
+
+          if ((dateA instanceof Date && !isNaN(dateA.getTime()))&&(dateB instanceof Date && !isNaN(dateB.getTime()))) {
+            //valid date object
+            return dateA >= dateB ? 1 : -1; 
+          } else {
+            console.log("invalid date");
+          }
+        } catch(e){
+          console.log(e);
+        }
+        
+    });
+      this.sortDocDateByAsc = !this.sortDocDateByAsc;
+    } else {
+      this.folder.docs.reverse();
+      this.sortDocDateByAsc = !this.sortDocDateByAsc;
+    }
+    
+  }
+
+  sortSubFoldersDate(){
+    if(this.sortSubFolderDate){
+      this.folder.subFolders.sort((a,b)=>{
+        try{
+          let dateA = new Date(a.createdAt);
+          let dateB = new Date (b.createdAt);
+          if ((dateA instanceof Date && !isNaN(dateA.getTime()))&&(dateB instanceof Date && !isNaN(dateB.getTime()))) {
+            //valid date object
+            return dateA >= dateB ? 1 : -1; 
+          } else {
+            console.log("invalid date");
+          }
+        }
+        catch(e){
+          console.log(e);
+        }
+      });
+      this.sortSubFolderDate = !this.sortSubFolderDate;
+    }
+    else{
+      this.folder.subFolders.reverse();
+      this.sortSubFolderDate = !this.sortSubFolderDate;
+    }
   }
 }

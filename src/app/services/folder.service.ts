@@ -95,7 +95,7 @@ export class FoldersService {
           }));
   }
   getFolderDetails(id:string){
-    let url =  'https://testapi.maxpool.de/api/v1/sekretaer/myfolders' + id;
+    let url =  'https://testapi.maxpool.de/api/v1/sekretaer/myfolders/' + id;
     return this.http.get(
       url,
       {

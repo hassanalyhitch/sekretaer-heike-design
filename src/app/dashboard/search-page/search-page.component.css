@@ -71,3 +71,11 @@ app-fav-item, app-folder-card, app-document-item{
   font-size: 17px;
   font-weight: bold;
 }
+
+.search-content{
+  min-height: 280px;
+  height: inherit;
+  position: relative;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}

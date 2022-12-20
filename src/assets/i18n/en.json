@@ -135,7 +135,9 @@
   },
   "favourites": {
     "title": "FAVOURITES",
-    "no_favourites" : "You have no favourite Contracts or Folders"
+    "no_favourites" : "You have no favourite Contracts or Folders",
+    "title_lable_insurances" : "INSURANCES",
+    "title_lable_folders" : "FOLDERS"
   },
   "broker":{
     "title": "MY BROKER",
@@ -200,7 +202,10 @@
     "title_insurances": "INSURANCES",
     "title_folders": "FOLDERS",
     "title_documents": "DOCUMENTS",
-    "search_message": "Search across Insurance Contracts, Folders and Documents"
+    "search_all_documents_message": "Search across Insurance Contracts, Folders and Documents",
+    "search_only_folders_message" : "Search Folders",
+    "search_only_contracts_message" : "Search Insurance Contracts",
+    "search_only_documents_message" : "Search Documents"
   },
   "privacy_policy":{
     "title" : "Privacy Policy"

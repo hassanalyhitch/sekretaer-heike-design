@@ -73,25 +73,7 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     private snackbar:MatSnackBar,
     
   ) {
-    this.contractSub = contractService.selectObservable.subscribe({
-      next: (contract) => {
-        // console.log(contract);
-        this.contract = contract;
-        contractService
-          .getContractDetails(this.contract.details.Amsidnr)
-          .subscribe({
-            next: (resp: any) => {
-              if (resp.hasOwnProperty('docs')) {
-                for (let i = 0; i < resp.docs.length; i++) {
-                  this.docArr.push(resp.docs[i]);
-                }
-                // console.table(this.docArr);
-              }
-            },
-            complete: () => {},
-          });
-      },
-    });
+
   }
 
   ngOnInit() {
@@ -102,19 +84,39 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
       next: () => {
         console.log('closed dialogs in next');
         this.contractService
-          .getContractDetails(this.contract.details.Amsidnr)
+          .getContractDetails(this.index)
           .subscribe({
             next: (resp: any) => {
+              // if (resp.hasOwnProperty('docs')) {
+              //   this.docArr = [];
+              //   for (let i = 0; i < resp.docs.length; i++) {
+              //     resp.docs.swipedLeft = false;
+              //     this.docArr.push(resp.docs[i]);
+              //   }
+              //   console.log(resp);
+                this.contract.details.name = resp.name;
+              // }
+            },
+          });
+      },
+    });
+
+    this.contractSub = this.contractService.selectObservable.subscribe({
+      next: (contract) => {
+        // console.log(contract);
+        this.contract = contract;
+        this.contractService
+          .getContractDetails(this.index)
+          .subscribe({
+            next: (resp:any) => {
               if (resp.hasOwnProperty('docs')) {
-                this.docArr = [];
                 for (let i = 0; i < resp.docs.length; i++) {
-                  resp.docs.swipedLeft = false;
                   this.docArr.push(resp.docs[i]);
                 }
-                // console.log(resp);
-                this.contract.details.name = resp.name;
+                // console.table(this.docArr);
               }
             },
+            complete: () => {},
           });
       },
     });
@@ -274,16 +276,33 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
   }
 
   sortByDate(){
-    
     if(this.sortDateByAsc){
-      this.ascDate = this.docArr.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
-      this.docArr = this.ascDate;
+      this.docArr.sort((a,b)=>{
+        try{
+          let dateA = new Date(a.createdAt);
+          let dateB = new Date(b.createdAt);
+
+          if ((dateA instanceof Date && !isNaN(dateA.getTime()))&&(dateB instanceof Date && !isNaN(dateB.getTime()))) {
+            //valid date object
+            return dateA >= dateB ? 1 : -1; 
+          } else if((dateA instanceof Date && !isNaN(dateA.getTime()))&& !(dateB instanceof Date && !isNaN(dateB.getTime()))){
+            // invalid date object
+            return -1;
+          } else if(!(dateA instanceof Date && !isNaN(dateA.getTime()))&& (dateB instanceof Date && !isNaN(dateB.getTime()))){
+            // invalid date object
+            return 1;
+          } else {
+            return 0;
+          }
+        }   catch(e){
+          console.log(e);
+        }
+      });
       this.sortDateByAsc = !this.sortDateByAsc;
-    } else {
-      this.descDate = this.docArr.sort((a, b) => a.createdAt.localeCompare(b.createdAt)).reverse();
-      this.docArr = this.descDate;
+    }else {
+      this.docArr.reverse();
       this.sortDateByAsc = !this.sortDateByAsc;
+
     }
   }
-
 }

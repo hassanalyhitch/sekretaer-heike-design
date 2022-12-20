@@ -11,11 +11,15 @@
         {{ 'favourites.no_favourites' | translate }}
       </div>
 
+      <!-- Favourite Insurances -->
       <div class="w-100 d-flex flex-column align-items-center extra-folders bg-">
+        <p class="section-sub-title text-center m-3">{{ 'favourites.title_lable_insurances' | translate }}</p>
         <app-fav-item class="w-100" *ngFor="let favItem of favContractArr; let index = index" (click)="onFavContractClick(index)" [contractItem]="favItem" ></app-fav-item>
       </div>
       
+      <!-- Favourite Folders -->
       <div class="w-100 d-flex flex-column align-items-center extra-folders bg-" id="extra-folders" >
+        <p class="section-sub-title text-center mt-5 mb-1">{{ 'favourites.title_lable_folders' | translate }}</p>
         <app-folder-card class="col-12" *ngFor="let item of favFoldersArr" [folder]=item  (click)="onFolderCardClick(item)"></app-folder-card>
       </div>
 

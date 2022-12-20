@@ -4,11 +4,11 @@
     <div class="d-flex justify-content-between w-100 mb-2 px-3 pt-3">
     
         <div class="d-flex justify-content-center align-items-center" (click)="onBackNavClick()" >
-          <i class="material-icons p-2 ">arrow_back_ios</i>
+          <i class="material-icons p-2 back-arrow-icon ">arrow_back_ios</i>
         </div>
   
         <div class="p-2">
-          <span class="text-sub-title-4">{{ 'folder-detail.title' | translate }}</span>
+          <span class="text-sub-title-4 page-title">{{ 'folder-detail.title' | translate }}</span>
         </div>
   
         <div class="p-2">
@@ -38,7 +38,7 @@
           <div class="ms-auto p-2">
             <p class="text-sub-title-2">
               {{ 'folder-detail.date_filter_label' | translate }}
-              <img class="filter-icon" src="/assets/icon_date_filter.svg">
+              <img class="filter-icon" src="/assets/icon_date_filter.svg"(click)="sortByDocDate()">
             </p>
           </div>
         </div>
@@ -65,7 +65,7 @@
           <div class="ms-auto p-2">
             <p class="text-sub-title-2">
               {{ 'folder-detail.date_filter_label' | translate }}
-              <img class="filter-icon" src="/assets/icon_date_filter.svg">
+              <img class="filter-icon" src="/assets/icon_date_filter.svg" (click)="sortSubFoldersDate()">
             </p>
           </div>
         </div>

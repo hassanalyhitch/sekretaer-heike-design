@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ContractData } from '../../models/contract.model';
 import { DocumentData } from '../../models/document.model';
 import { FolderData } from '../../models/folder.model';
@@ -18,6 +18,7 @@ export class SearchPageComponent implements OnInit {
 
   searchValue = "";
   resultExists: boolean = false;
+  searchType: string = '';
 
   contractsArr: ContractData[] = [];
   contractsResArr: ContractData[] = [];
@@ -26,11 +27,37 @@ export class SearchPageComponent implements OnInit {
   documentsArr: DocumentData[] = [];
   documentsResArr: DocumentData[] = [];
 
-  constructor(private contractService: ContractsService, private folderService: FoldersService, private router:Router,
+  constructor(
+    private contractService: ContractsService, 
+    private folderService: FoldersService, 
+    private router:Router,
     private downloadService: DownloadService,
-    private matDialog: MatDialog) { }
+    private matDialog: MatDialog,
+    private route:ActivatedRoute) { }
 
   ngOnInit() {
+
+    //this.router.navigate(['dashboard/home/adddocument',{type:'folder'}]);
+
+    switch (this.route.snapshot.params['searchType']){
+      case "folders": {
+        this.searchType = 'folders';
+        break;
+      }
+      case "contracts" :{
+        this.searchType = 'contracts';
+        break;
+      }
+      case "docs" :{
+        this.searchType = 'docs';
+        break;
+      }
+      default:{
+        this.searchType = 'all';
+        break;
+      }
+    }
+
     this.contractService.getContracts().subscribe({
       next:()=>{
         this.contractsArr = this.contractService.userContractsArr;
@@ -68,25 +95,64 @@ export class SearchPageComponent implements OnInit {
     this.resultExists = false
 
     if(searchValue != undefined && searchValue != ""){
-      for(let contract of this.contractsArr){
-        if(contract.details.name && contract.details.name.includes(searchValue)){
-          this.contractsResArr.push(contract);
+
+      if(this.searchType == 'all'){
+
+        for(let contract of this.contractsArr){
+          if(contract.details.name && contract.details.name.includes(searchValue)){
+            this.contractsResArr.push(contract);
+          }
         }
-      }
-      for(let folder of this.foldersArr){
-        if(folder.folderName && folder.folderName.includes(searchValue)){
-          this.foldersResArr.push(folder);
+  
+        for(let folder of this.foldersArr){
+          if(folder.folderName && folder.folderName.includes(searchValue)){
+            this.foldersResArr.push(folder);
+          }
         }
-      }
-      for(let document of this.documentsArr){
-        if(document.name && document.name.includes(searchValue) ){
-          this.documentsResArr.push(document);
+  
+        for(let document of this.documentsArr){
+          if(document.name && document.name.includes(searchValue) ){
+            this.documentsResArr.push(document);
+          }
         }
+
+      } else if(this.searchType == 'folders'){
+
+        for(let folder of this.foldersArr){
+          if(folder.folderName && folder.folderName.includes(searchValue)){
+            this.foldersResArr.push(folder);
+          }
+        }
+
+      } else if(this.searchType == 'contracts'){
+
+        for(let contract of this.contractsArr){
+          if(contract.details.name && contract.details.name.includes(searchValue)){
+            this.contractsResArr.push(contract);
+          }
+        }
+
+      } else if(this.searchType == 'docs'){
+
+        for(let document of this.documentsArr){
+          if(document.name && document.name.includes(searchValue) ){
+            this.documentsResArr.push(document);
+          }
+        }
+        
       }
+
     }
-    if(this.contractsResArr.length > 0) { this.resultExists = true;}
-    if(this.foldersResArr.length > 0) { this.resultExists = true;}
-    if(this.documentsResArr.length > 0) { this.resultExists = true;}
+
+    if( this.searchType == 'all' && this.contractsResArr.length > 0 && this.foldersResArr.length > 0 && this.documentsResArr.length > 0){
+      this.resultExists = true;
+    } else if(this.searchType == 'folders' && this.foldersResArr.length > 0){
+      this.resultExists = true;
+    } else if(this.searchType == 'contracts' && this.contractsResArr.length > 0){
+      this.resultExists = true;
+    } else if(this.searchType == 'docs' && this.documentsResArr.length > 0){
+      this.resultExists = true;
+    }
 
   }
   
