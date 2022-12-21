@@ -110,7 +110,8 @@
     "sub_title_2_3": "Change Your Password",
     "sub_title_3": "OFFICIAL",
     "sub_title_3_1": "Terms & Conditions",
-    "sub_title_3_2": "Privacy Policy"
+    "sub_title_3_2": "Privacy Policy",
+    "logout":"logout"
   },
   "folder-detail":{
     "subfolder":"My Sub-Folders",
