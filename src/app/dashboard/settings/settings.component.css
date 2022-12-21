@@ -93,3 +93,7 @@
 .title{
   color:#707070;
 }
+.logout{
+  color: #E5007E;
+  cursor: pointer;
+}
