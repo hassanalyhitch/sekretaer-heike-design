@@ -3,11 +3,11 @@
 
     <!-- new top line -->
     <div class="d-flex justify-content-between mb-2 pt-3">
-      <div class="d-flex" (click)="onBackNavClick()">
-        <i class="material-icons p-2 ">arrow_back_ios</i>
+      <div class="d-flex back-btn" (click)="onBackNavClick()">
+        <i class="material-icons p-2 back-btn">arrow_back_ios</i>
       </div>
       <div class="p-2">
-        <span class="section-title align-self-center">
+        <span class="section-title align-self-center ">
           {{ 'contract_detail.title_main' | translate }}
         </span>
       </div>
@@ -91,10 +91,10 @@
         <p class="text-muted">{{ 'contract_detail.title_documents' | translate }}</p>
       </div>
       <div class="ms-auto p-2 bd-highlight" (click)="sortByDate()" style="cursor:pointer;">
-        <p class="text-muted">
+        <span class="text-muted">
           {{ 'folder-detail.date_filter_label' | translate }}
           <img class="filter-icon" src="/assets/icon_date_filter.svg">
-        </p>
+        </span>
       </div>
     </div>
 

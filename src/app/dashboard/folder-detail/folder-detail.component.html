@@ -33,13 +33,13 @@
         <!-- documents -->
         <div class="d-flex pt-1 mb-1">
           <div class="p-2">
-            <p class="text-sub-title-2">{{ 'folder-detail.documents' | translate }}</p>
+            <span class="text-sub-title-2 my-docs">{{ 'folder-detail.documents' | translate }}</span>
           </div>
           <div class="ms-auto p-2">
-            <p class="text-sub-title-2">
+            <span class="text-sub-title-2 sort-text" (click)="sortByDocDate()">
               {{ 'folder-detail.date_filter_label' | translate }}
-              <img class="filter-icon" src="/assets/icon_date_filter.svg"(click)="sortByDocDate()">
-            </p>
+              <img class="filter-icon" src="/assets/icon_date_filter.svg">
+            </span>
           </div>
         </div>
     
@@ -60,13 +60,13 @@
         <!-- subfolders -->
         <div class="d-flex pt-3 mb-1">
           <div class="p-2">
-            <p class="text-sub-title-2">{{ 'folder-detail.subfolder' | translate }}</p>
+            <span class="text-sub-title-2 my-subfolders">{{ 'folder-detail.subfolder' | translate }}</span>
           </div>
           <div class="ms-auto p-2">
-            <p class="text-sub-title-2">
+            <span class="text-sub-title-2 sort-text" (click)="sortSubFoldersDate()">
               {{ 'folder-detail.date_filter_label' | translate }}
-              <img class="filter-icon" src="/assets/icon_date_filter.svg" (click)="sortSubFoldersDate()">
-            </p>
+              <img class="filter-icon" src="/assets/icon_date_filter.svg" >
+            </span>
           </div>
         </div>
     

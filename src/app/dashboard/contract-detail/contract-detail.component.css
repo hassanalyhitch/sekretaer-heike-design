@@ -48,6 +48,10 @@
 .filter-icon{
   width: 20px;
   height: 20px;
+  cursor:pointer;
+}
+.back-btn{
+  cursor:pointer;
 }
 
 .icon-container{

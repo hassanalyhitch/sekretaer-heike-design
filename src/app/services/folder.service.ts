@@ -94,6 +94,7 @@ export class FoldersService {
             }
           }));
   }
+
   getFolderDetails(id:string){
     let url =  'https://testapi.maxpool.de/api/v1/sekretaer/myfolders/' + id;
     return this.http.get(
@@ -107,7 +108,22 @@ export class FoldersService {
       }).pipe(
         tap({
           next:(resp)=>{
-            
+
+            let folder: FolderData = {
+              id: resp['id'],
+              loginId : resp['loginId'],
+              customerAmsidnr:  resp['customerAmsidnr'],
+              createdAt:  resp['createdAt'],         
+              ownerFolderId : resp['ownerFolderId'],
+              folderName : resp['folderName'],
+              createTime : resp['createdAt'],
+              subFolders : resp['subFolders'],
+              docs : resp['docs'],
+              isFavorite: resp['isFavorite'],
+              favoriteId: resp['favoriteId'],
+              isSelected: true
+            }
+              this.emitSelectedFolder(folder);
           },
           error:(error: any)=>{
   

@@ -224,9 +224,7 @@ app-folder-card, app-document-item{
 .back-arrow-icon{
   cursor:pointer;
 }
-.page-title{
-  cursor: pointer;
-}
+
 
 ::-webkit-scrollbar {
   width: 0px;
@@ -245,6 +243,16 @@ app-folder-card, app-document-item{
 *{
   scrollbar-width: none !important;
 
+}
+.sort-text{
+  color: #848484;
+  cursor: pointer;
+}
+.my-docs{
+  color: #848484;
+}
+.my-subfolders{
+  color: #848484;
 }
 
 @-webkit-keyframes swing

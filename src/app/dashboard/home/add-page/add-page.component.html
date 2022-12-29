@@ -6,7 +6,9 @@
 
   <!--section header -->
   <div class="d-flex justify-content-between mb-2 px-4 pt-3 w-100">
-    <div class="d-flex"></div>
+    <div class="d-flex" backButton>
+      <i class="material-icons p-2 back-arrow-icon">arrow_back_ios</i>
+    </div>
     <div class="p-2">
       <span class="section-title d-flex justify-content-center">{{ 'add_document.main_title' | translate }}</span>
     </div>
@@ -56,9 +58,6 @@
         </div>
         <div class="d-flex flex-row assignment">
           <button class="broker-btn" (click)="onShareWithBroker()"><img class="broker-icon" [src]="status"></button>
-          <!-- <img  class="btn share" (click)="onShareWithBroker()" class="broker-icon" 
-          [ngClass]="{'acceptShare':shareWithBroker, 'declineShare':!shareWithBroker}"
-          src="/assets/icon_broker.svg"> -->
           <p class="m-2">Show my Broker</p>
         </div>
            

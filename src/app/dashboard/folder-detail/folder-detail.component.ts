@@ -103,6 +103,7 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
         .getFolderDetails(this.folder.id)
         .subscribe({
           next:(resp:any) =>{
+            console.log('folder-details');
             if(resp.hasOwnProperty('docs')){
               for (let i = 0; i< resp.docs.length; i++){
                 // this.folder.docs.push(resp.docs[i]);
@@ -208,19 +209,20 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     // https://material.angular.io/components/dialog/overview
     const modalDialog = this.matDialog.open(RenameFolderComponent, dialogConfig);
     
-    // this.matDialog.getDialogById('renamefolder-modal-component').afterClosed().subscribe({
-    //   next:()=>{
-
-    //     // this.currentNav = resp.folderName;
-    //     // this.folder.folderName = resp.foldername;
-        
-    //      //this.folder = this.folderService.selectedFolder;
-    //      this.currentNav = this.folder.folderName;
-    //   },
-    //   error:(resp)=>{
-    //     console.log(resp);
-    //   }
-    // });
+    this.matDialog.getDialogById('renamefolder-modal-component').afterClosed().subscribe({
+      next:()=>{
+        this.folderService.getFolderDetails(this.folder.id).subscribe({
+          next:(resp:any) =>{
+            console.log('folder-details');
+            this.folder = this.folderService.selectedFolder;
+          },
+          complete:()=>{},
+        });
+      },
+      error:(resp)=>{
+        console.log(resp);
+      }
+    });
   }
   
   addNewFolder(){
