@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
     private translate: TranslateService) { }
 
   ngOnInit() {
-    // this.getLocation();
+    this.getLocation();
   }
 
   getLocation() {
@@ -30,14 +30,14 @@ export class DashboardComponent implements OnInit {
           this.lat = position.coords.latitude;
           this.lng = position.coords.longitude;
           this.whereIsThis(this.lat, this.lng).subscribe({
-            next:(resp)=>{
-              alert(resp);
-              this.snackbar.open(this.translate.instant('contract_detail.mark_fav_error'),this.translate.instant('snack_bar.action_button'),{
-                duration:1500
+            next:(resp:any)=>{
+              this.snackbar.open("You are accessing from "+resp.display_name,this.translate.instant('snack_bar.action_button'),{
+                duration:10000,
+                panelClass:['snack'],
               });
             },
             error:(resp)=>{
-              alert(resp);
+              console.log(resp);
             }
           });
         }
@@ -49,7 +49,10 @@ export class DashboardComponent implements OnInit {
   }
 
   whereIsThis(Latitude: number, Longitude: number){
+    //https://api.openweathermap.org/geo/1.0/reverse?lat={lat}&lon={lon}&limit={limit}&appid={API key}
+    //https://eu1.locationiq.com/v1/reverse?key=YOUR_ACCESS_TOKEN&lat=LATITUDE&lon=LONGITUDE&format=json
     //Call API
-    return this.http.get('http://api.openweathermap.org/geo/1.0/reverse?lat='+Latitude+'&lon='+Longitude+'&limit=5&appid={585bb7ca9265879a6b7e815bdf5f027d}')
+    return this.http.get('https://eu1.locationiq.com/v1/reverse?key=pk.343eb1cee62c9704c1e140a97a783dd6&lat='+Latitude+'&lon='+Longitude+'&format=json');
+    // return this.http.get('https://api.openweathermap.org/geo/1.0/reverse?lat='+Latitude+'&lon='+Longitude+'&appid=585bb7ca9265879a6b7e815bdf5f027d');
   }
 }

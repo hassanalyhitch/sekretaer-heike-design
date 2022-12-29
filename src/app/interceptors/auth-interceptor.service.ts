@@ -14,7 +14,7 @@ export class AuthInterceptorService implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         
 
-        if(this.loginService.authToken!==null && this.loginService.authToken !== undefined){
+        if(this.loginService.authToken!==null && this.loginService.authToken !== undefined && req.url.includes('maxpool')){
 
             this.auth = 'Bearer ' + this.loginService.authToken;
             this.authReq = req.clone({
