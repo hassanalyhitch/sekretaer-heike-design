@@ -124,10 +124,9 @@
   bottom: -24px;
 }
 .disabled {
-  box-shadow: none;
+  box-shadow: none !important;
   border: none;
-  background-color: #bfbfbf;
-  color: #707070;
+  background-color: #bfbfbf !important;
 }
 .section-service {
   height: 100%;
