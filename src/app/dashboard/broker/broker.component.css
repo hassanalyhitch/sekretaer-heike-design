@@ -97,6 +97,10 @@
   text-shadow: none;
   font-size: 16px;
 }
+.broker-city{
+  margin-right:5px;
+  margin-left: 16px;
+}
 
 ::-webkit-scrollbar {
   width: 0px;

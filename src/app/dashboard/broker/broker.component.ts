@@ -13,6 +13,8 @@ export class BrokerComponent implements OnInit {
   brokerNumber: string = "";
   brokerStreet: string = "";
   brokerEmail: string = "";
+  brokerCity:string = "";
+  brokerZipCode:string = "";
   mailto: string = "mailto:";
   telto: string = "tel:";
 
@@ -30,6 +32,8 @@ export class BrokerComponent implements OnInit {
         this.brokerNumber = resp.myBroker.V_TEL1;
         this.brokerStreet = resp.myBroker.V_STRASSE;
         this.brokerEmail = resp.myBroker.V_EMAIL;
+        this.brokerCity = resp.myBroker.V_PLZ;
+        this.brokerZipCode = resp.myBroker.V_ORT;
         this.mailto = this.mailto + this.brokerEmail;
         this.telto = this.telto + this.brokerNumber;
 
