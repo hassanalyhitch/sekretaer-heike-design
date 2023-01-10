@@ -63,6 +63,7 @@ export class NotificationItemComponent implements OnInit {
       }
     }
     this.formatedDate = this.dateEngine(this.notification.createdAt);
+    if(this.formatedDate == "Invalid Date") this.formatedDate = "" ;
   }
 
   dateEngine(a_date){

@@ -1,7 +1,7 @@
-import { LoadingService } from 'src/app/services/loading.service';
+import { LoadingService } from '../../../services/loading.service';
 import { Component, OnInit } from '@angular/core';
-import { PersonalData } from 'src/app/models/personal-data.model';
-import { PersonalDataService } from 'src/app/services/personal-data.service';
+import { PersonalData } from '../../../models/personal-data.model';
+import { PersonalDataService } from '../../../services/personal-data.service';
 
 @Component({
   selector: 'app-my-data',
@@ -14,7 +14,7 @@ export class MyDataComponent implements OnInit {
   myCity:string ="";
   myStreet:string= "";
 
-  constructor(private personaldataService:PersonalDataService,private loadingService:LoadingService) {
+  constructor(private personaldataService:PersonalDataService ,private loadingService:LoadingService) {
     this.loadingService.emitIsLoading(true);
    }
 

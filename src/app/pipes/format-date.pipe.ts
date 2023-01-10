@@ -14,7 +14,7 @@ export class FormatDatePipe implements PipeTransform {
         date = formatDate(date, "dd.MM.YYYY","en");
       } catch(error){
         console.log("this ---> " + error.message);
-        date = "Invalid Date";
+        date = "";
       }
     return date;
   }
