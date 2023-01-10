@@ -13,11 +13,23 @@ export class SettingsComponent implements OnInit {
   
   ngOnInit():void {}
 
-  onPolicySelect(){ this.router.navigate(['privacy-policy']); }
+  onPolicySelect(){ 
+    this.router.navigate(['dashboard/settings/privacy-policy']); 
+  }
 
-  onTermsAndConditionSelected(){ this.router.navigate(['terms-and-conditions']); }
+  onTermsAndConditionSelected(){ 
+    this.router.navigate(['dashboard/settings/terms-and-conditions']); 
+  }
 
   onLogoutSelect(){
     this.navigation.logout();
+  }
+  
+  onMyData(){
+    this.router.navigate(['dashboard/settings/my-data']);
+  }
+
+  onChangePassword(){
+    this.router.navigate(['dashboard/settings/change-password']);
   }
 }

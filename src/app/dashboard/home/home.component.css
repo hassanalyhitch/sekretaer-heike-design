@@ -214,7 +214,11 @@
   position: absolute;
 }
 
-.app-fav-item {
+app-fav-item {
+  cursor: pointer;
+}
+
+.see-more{
   cursor: pointer;
 }
 

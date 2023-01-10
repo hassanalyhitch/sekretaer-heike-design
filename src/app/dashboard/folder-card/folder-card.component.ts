@@ -20,13 +20,9 @@ export class FolderCardComponent implements OnInit {
     docs: [],
     isSelected:false
   };
-
-  docNumber: number = 0;
-
+  
   constructor() {}
 
-  ngOnInit() {
-    this.docNumber = this.folder.docs.length;
-  }
+  ngOnInit() {}
 
 }

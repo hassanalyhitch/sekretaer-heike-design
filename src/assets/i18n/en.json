@@ -101,9 +101,7 @@
   "settings":{
     "main_title":"SETTINGS",
     "sub_title_1": "PERSONAL DETAILS",
-    "sub_title_1_1": "Push Notifications",
-    "sub_title_1_2": "Collapse Insurance",
-    "sub_title_1_3": "Collapse Folder",
+    "sub_title_1_a": "My Data",
     "sub_title_2": "SETTINGS",
     "sub_title_2_1": "Language",
     "sub_title_2_2": "Your Data",
@@ -216,6 +214,28 @@
   },
   "snack_bar" : {
     "action_button": "Dismiss"
-  }
+  },
+  "rename_document": {
+    "title" : "Rename Document",
+    "sub_title": "Document Name",
+    "text_input_label": "New Document Name",
+    "btn_save_label": "SAVE",
+    "document_rename_error": "Document Rename Failed",
+    "document_rename_success" : "Document Rename Successfully"
+  },
+ "my-data":{
+    "page_title":"MY DATA",
+    "title_name":"Name",
+    "title_city":"City",
+    "title_zipcode":"ZipCode",
+    "title_street":"Street"
+ },
+ "change-password":{
+  "page_title":"CHANGE PASSWORD",
+  "sub_title_1":"Current Password",
+  "sub_title_2":"New Password",
+  "sub_title_3":"Confirm Password",
+  "submit_btn":"SUBMIT"
+ }
 }
 

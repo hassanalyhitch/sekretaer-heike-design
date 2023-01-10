@@ -20,9 +20,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class FolderDetailComponent implements OnInit, OnDestroy {
 
- folder:FolderData;
-  //hrTitle: string;
-  //hrTitle2: string;
+ folder:FolderData; 
 
   parentNav: string = '';
   currentNav: string = '';
@@ -39,6 +37,8 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
   sortSubFolderDate:boolean =true;
   subFoldersArr:FolderData[] = [];
 
+  selected_folder_id: string = '';
+
   constructor(
     private router:Router, 
     private route:ActivatedRoute, 
@@ -53,6 +53,19 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     }
 
   ngOnInit() {
+
+    this.selected_folder_id = this.route.snapshot.paramMap.get('id');
+
+    this.folderSub = this.folderService
+        .getFolderDetails(this.selected_folder_id)
+        .subscribe({
+          next:() =>{
+
+            this.folder = this.folderService.selectedFolder
+
+          },
+          complete:()=>{},
+        });
 
     this.routeListener = this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
@@ -96,37 +109,14 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     this.visitedFolderArray.push(this.mainFolder);
     // --------------------------------------------------
     
-    this.folderSub = this.folderService.selectObservable.subscribe({
-      next:(folder) => {
-        this.folder = folder;
-        this.folderService
-        .getFolderDetails(this.folder.id)
-        .subscribe({
-          next:(resp:any) =>{
-            console.log('folder-details');
-            if(resp.hasOwnProperty('docs')){
-              for (let i = 0; i< resp.docs.length; i++){
-                // this.folder.docs.push(resp.docs[i]);
-                console.log(folder.docs.length); 
-              }
-                 
-            }
-          },
-          complete:()=>{},
-        });
-      },
-    });
-
-
-
   }
 
   ngOnDestroy(){
     this.hasParent = false;
     console.log('hasParent -> '+this.hasParent);
     this.routeListener.unsubscribe();
+    this.folderSub.unsubscribe();
     this.visitedFolderArray = [];
-    // this.folderSub.unsubscribe();
   }
   
   onFolderCardClick(clickedFolder: FolderData){
@@ -257,13 +247,31 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     let passdata:string = '{"docName": "'+file.name+'","docid": "'+file.docid+'","systemId": "'+file.systemId+'"}';
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
-    dialogConfig.id = 'modal-component';
+    dialogConfig.id = 'rename-doc-component';
     // dialogConfig.height = '80%';
     dialogConfig.width = '350px';
     dialogConfig.panelClass = 'bg-dialog-folder';
     dialogConfig.data = passdata;
     // https://material.angular.io/components/dialog/overview
     const renameFileDialog = this.matDialog.open(RenameModalComponent, dialogConfig);
+
+    this.matDialog.getDialogById('rename-doc-component').afterClosed().subscribe({
+      next:()=>{
+        
+        this.folderService
+        .getFolderDetails(this.selected_folder_id)
+        .subscribe({
+          next:() =>{
+
+            this.folder = this.folderService.selectedFolder
+
+          },
+          complete:()=>{},
+        });
+
+      }
+    });
+
   }
 
   onSwipe(evt, doc: DocumentData) {

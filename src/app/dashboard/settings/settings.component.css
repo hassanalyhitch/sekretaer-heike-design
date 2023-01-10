@@ -90,8 +90,24 @@
   font-family:oscine, sans-serif;
   border-radius:0px 0px 25px 0px;
 }
+
 .title{
   color:#707070;
+}
+
+.personal-data{
+  cursor: pointer;
+}
+
+.terms{
+  cursor: pointer;
+}
+
+.privacy-policy{
+  cursor:pointer;
+}
+.change-password{
+  cursor:pointer;
 }
 .logout{
   color: #E5007E;

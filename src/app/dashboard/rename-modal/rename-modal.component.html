@@ -1,28 +1,40 @@
- <div class="col-md-12 col-12 px-4">
+<div class="col-md-12 col-12 px-1">
   
-    <div class="d-flex flex-column w-100">
-      <strong class="section-title align-self-center p-2 m-2"> Rename Document</strong>
-      <div class="align-items-center w-100">
-        Document Name :<br />
-        {{ documentName }}
+  <div class="d-flex flex-column w-100">
+
+    <div class="position-relative">
+      <div class="fav-btn position-absolute top-0 end-0" (click)="closeDialog()">
+        <i class="material-icons">clear</i>
       </div>
-      <form (ngSubmit)= "onSubmit(saveForm.value)" class="d-flex flex-column mt-4" #saveForm="ngForm" > 
-        <div class="material-textfield mb-1">
-          <input placeholder=" " type="text" [(ngModel)]="newDocName" name="name" ngModel required/>
-          <label>New document name</label>
-        </div>
-        <div class="mt-5 w-100">
-          <button
-            id="save-btn"
-            class="btn btn-login w-100 py-2"
-            [disabled]="!saveForm.valid"
-            type="submit"
-            style="font-size:20px;"
-          >
-            SAVE
-          </button>
-        </div>
-        </form>
     </div>
+
+    <strong class="text-title align-self-center p-2 m-2">
+      {{ 'rename_document.title' | translate }}
+    </strong>
+
+    <div class="align-items-center w-100">
+      {{ 'rename_document.sub_title' | translate }}:<br />
+      <strong>{{ documentName }}</strong>
+    </div>
+
+    <form (ngSubmit)= "onSubmit(saveForm.value)" class="d-flex flex-column mt-4" #saveForm="ngForm" > 
+      <div class="material-textfield mb-1">
+        <input placeholder=" " type="text" [(ngModel)]="newDocName" name="name" ngModel required/>
+        <label>{{ 'rename_document.text_input_label' | translate }}</label>
+      </div>
+      <div class="mt-5 w-100">
+        <button
+          id="save-btn"
+          class="btn btn-login w-100 py-2"
+          [disabled]="(!saveForm.valid) || submitted"
+          type="submit"
+          style="font-size:20px;"
+          >
+            <span *ngIf="submitted" class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status"></span>
+            <span *ngIf="!submitted">{{ 'rename_document.btn_save_label' | translate }}</span>
+        </button>
+      </div>
+      </form>
   </div>
+</div>
 

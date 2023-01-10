@@ -25,20 +25,20 @@ export class NewFolderComponent implements OnInit {
 
   ngOnInit() {}
 
-  onFetchFolders(){
-    this.folderService.getFolders().subscribe ({
-      next:(resp) =>{
-        console.log(resp);
+  // onFetchFolders(){
+  //   this.folderService.getFolders().subscribe ({
+  //     next:(resp) =>{
+  //       console.log(resp);
         
-      },
-      error:(e) =>{
-        console.log(e);
-      },
-      complete:()=>{
+  //     },
+  //     error:(e) =>{
+  //       console.log(e);
+  //     },
+  //     complete:()=>{
 
-      }
-    });
-  }
+  //     }
+  //   });
+  // }
 
   onSubmit(formData: any) {
     //console.log(this.newFolderName, this.data.parentFolderId);

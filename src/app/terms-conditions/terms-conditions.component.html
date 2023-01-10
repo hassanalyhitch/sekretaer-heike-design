@@ -1,7 +1,23 @@
 <div class="main-wrapper w-100 d-flex flex-column">
 
-    <div class="header-wrapper">
-        
+    <!-- ngif in settings, after login -->
+    <div *ngIf="inSettings" class="header-wrapper-container">
+        <div class="header-wrapper">
+            
+            <div class="d-flex flex-column align-items-center">
+                <img
+                    src="../assets/logo.svg"
+                    alt="sekretaer_logo"
+                    class="app-logo"
+                />
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- ngif before login -->
+    <div  *ngIf="!inSettings" class="header-wrapper-nologin">
+            
         <div class="d-flex flex-column align-items-center">
             <img
                 src="../assets/logo.svg"
@@ -12,65 +28,22 @@
         
     </div>
     
-    <div class="section-content">
-        <div class="align-items-center px-4 w-100">
+    <div [ngClass]="{'section-content-in-settings': inSettings, 'section-content': !inSettings}">
 
-            <div class="d-flex justify-content-start pt-1 w-100">
-                <div class="p-1">
-                    <span class="section-title">{{ 'terms_conditions.title' | translate }}</span>
-                </div>
+        <div class="align-items-center  w-100 h-100">
+
+            <iframe 
+                id="iFrame" 
+                class="w-100 h-100" 
+                src="https://docs.google.com/document/d/e/2PACX-1vQIeFDfOPBPm354Ezx4V3C5y_DMo4JiQvzhs11VuwdmMeEI9AylQyfD91h_RH0d6g/pub?embedded=true">
+            </iframe>
+            
+            <div class="">
+                <button class="close-btn my-2" (click)="onCloseButtonClicked()">CLOSE</button>
             </div>
 
-            <p class="text-content px-1 pt-2">
-                Lorem ipsum dolor sit amet consectetur, 
-                dipisicing elit. Vel adipisci quibusdam sed, 
-                optio commodi nihil suscipit ipsa atque deserunt architecto dolorum accusamus unde,
-                vero exercitationem tempora facilis beatae doloribus nobis. Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                In tenetur eos corrupti reprehenderit porro. Commodi quos sequi explicabo sunt eaque accusamus sed eum quia?
-                Voluptates totam sint omnis sapiente aliquid! Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-                Quidem laboriosam deleniti sapiente in, molestias quaerat labore sed placeat iste asperiores. 
-                Et totam dolorum blanditiis sint quis, aut quidem voluptatibus similique. Lorem ipsum dolor,
-                sit amet consectetur adipisicing elit. 
-                Illum architecto inventore minus consequatur cum repellat perspiciatis sapiente pariatur, 
-                fuga nulla rem, maxime quas itaque autem quos vitae ipsa illo nobis? 
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed expedita vitae quo, 
-                reiciendis fugit placeat nihil, eum est unde alias atque esse corrupti impedit libero non quasi rerum, soluta incidunt? 
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                Quisquam ducimus ab, quae quibusdam at corrupti, 
-                iste enim mollitia soluta, saepe aspernatur aperiam vero est numquam repellendus obcaecati in.
-                Repellendus, eum! Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
-                Dolores, recusandae laudantium perferendis, 
-                molestiae reprehenderit eveniet provident nam facere omnis minima voluptatibus, 
-                debitis adipisci consequuntur reiciendis porro dolor. Voluptas, molestias sed!
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Esse voluptatem rerum tenetur omnis, 
-                magnam saepe dolorem voluptatum sit nobis, 
-                impedit autem illo repellat perferendis fuga eligendi ratione delectus suscipit. Quis. 
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ad voluptate tenetur mollitia, 
-                dicta quidem illo laborum voluptas asperiores, illum quis omnis impedit officia quam, rem distinctio harum.
-                Officia, assumenda. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur deleniti dolorem ipsum nisi 
-                temporibus sapiente neque beatae odio impedit animi nobis a, sunt earum. Ipsam dicta cumque totam pariatur ab?
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illum voluptatem vitae repellendus vel perspiciatis corporis
-                corrupti quae similique itaque nam, adipisci nesciunt eos ex, laudantium ea voluptate voluptas, non possimus.
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque aliquid labore dolor eum, 
-                unde incidunt deserunt reiciendis dolorem laboriosam veniam animi consectetur eos sint corporis illum eveniet ut ex dolorum.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum incidunt ipsa nemo labore alias quas explicabo temporibus eveniet
-                sapiente nesciunt maiores doloribus ut aspernatur, numquam, necessitatibus pariatur eaque iste illo.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam officiis possimus dicta, 
-                optio dolor et ut nostrum eligendi magnam ea fugiat atque accusamus voluptates 
-                adipisci non quo dolores explicabo quis? Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                Velit ullam, laboriosam accusantium ut qui rerum quos at, 
-                molestiae veritatis quia minima quo doloremque quibusdam dolorem neque officia. Quasi, consectetur dicta.
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Voluptatem amet eaque incidunt dignissimos quis ullam distinctio unde, 
-                tempora itaque voluptatibus nesciunt eveniet minima voluptates ea fugit libero hic id sit!
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum deserunt 
-                omnis atque consequatur accusantium dolorum quas asperiores repellendus ullam, 
-                rem, commodi nam id aut magnam magni cum explicabo, perspiciatis saepe.
-            </p>
-            <button class="close-btn" backButton>CLOSE</button>
         </div>
     </div>
-  
+
   </div>
 

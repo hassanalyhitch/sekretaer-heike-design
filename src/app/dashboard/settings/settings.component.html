@@ -19,21 +19,12 @@
 
       <div class="card d-flex flex-column mt-2 mb-2 w-100">
         <ul class="title">{{ 'settings.sub_title_1' | translate }}</ul>
-        <ul>
+        <ul class="personal-data"(click)="onMyData()">
           <img  src="\assets\Gruppe 218.svg"/>
-          <span class="ms-3">{{ 'settings.sub_title_1_1' | translate }}</span> 
-          <img class="caret-options" src="\assets\Pfad 103.svg">
+          <span class="ms-3">{{ 'settings.sub_title_1_a' | translate }}</span> 
+          <img class="caret-options" src="\assets\Pfad 103.svg" >
         </ul>
-        <ul>
-          <img src="\assets\Gruppe 218.svg"/>
-          <span class="ms-3">{{ 'settings.sub_title_1_2' | translate }}</span>
-          <img class="caret-options"src="\assets\Pfad 103.svg">
-        </ul>
-        <ul>
-          <img src="\assets\Gruppe 218.svg"/>
-          <span class="ms-3">{{ 'settings.sub_title_1_3' | translate }}</span> 
-          <img class="caret-options" src="\assets\Pfad 103.svg">
-        </ul>
+        
       </div>
 
       <div class="card d-flex flex-column mt-3 mb-2 w-100">
@@ -43,12 +34,7 @@
           <span class="ms-3">{{ 'settings.sub_title_2_1' | translate }}</span>
           <img class="caret-options" src="\assets\Pfad 103.svg">
         </ul>
-        <ul>
-          <img src="\assets\Gruppe 218.svg">
-          <span class="ms-3">{{ 'settings.sub_title_2_2' | translate }}</span>
-          <img class="caret-options" src="\assets\Pfad 103.svg">
-        </ul>
-        <ul>
+        <ul class="change-password" (click)="onChangePassword()">
           <img src="\assets\Gruppe 218.svg">
           <span class="ms-3">{{ 'settings.sub_title_2_3' | translate }}</span>
           <img class="caret-options" src="\assets\Pfad 103.svg">
@@ -57,21 +43,21 @@
 
       <div class="official-card d-flex flex-column mt-3 mb-3 w-100">
         <ul class="title">{{ 'settings.sub_title_3' | translate }}</ul>
-        <ul>
+        <ul class="terms" (click)="onTermsAndConditionSelected()">
           <img src="\assets\Gruppe 218.svg">
-          <span class="ms-3" (click)="onTermsAndConditionSelected()">{{ 'settings.sub_title_3_1' | translate }}</span>
-          <img class="caret-options" src="\assets\Pfad 103.svg" (click)="onTermsAndConditionSelected()">
+          <span class="ms-3 terms" >{{ 'settings.sub_title_3_1' | translate }}</span>
+          <img class="caret-options" src="\assets\Pfad 103.svg">
         </ul>
-        <ul>
+        <ul class="privacy-policy"(click)="onPolicySelect()">
           <img src="\assets\Gruppe 218.svg">
-          <span class="ms-3" (click)="onPolicySelect()">{{ 'settings.sub_title_3_2' | translate }}</span>
-          <img class="caret-options" src="\assets\Pfad 103.svg" (click)="onPolicySelect()">
+          <span class="ms-3">{{ 'settings.sub_title_3_2' | translate }}</span>
+          <img class="caret-options" src="\assets\Pfad 103.svg">
         </ul>
       </div>
 
       <div class="official-card d-flex mt-3 mb-3 w-100 logout" (click)="onLogoutSelect()">
         <ul class="d-flex w-100" >
-          <i class="material-icons px-1" style="background:;" >logout</i>
+          <i class="material-icons px-1">logout</i>
           <span class="ms-3">{{ 'settings.logout' | translate }}</span>
         </ul>
       </div>

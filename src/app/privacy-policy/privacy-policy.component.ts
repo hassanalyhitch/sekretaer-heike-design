@@ -9,9 +9,21 @@ import { Location } from '@angular/common';
 
 export class PrivacyPolicyComponent implements OnInit, AfterContentInit {
 
+  inSettings: boolean;
+
   constructor(private _location: Location) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+    if(window.location.href.includes("settings")){
+      //if logged in
+      this.inSettings = true;
+    } else {
+      //if not logged in
+      this.inSettings = false;
+    }
+
+  }
 
   ngAfterContentInit(){
 

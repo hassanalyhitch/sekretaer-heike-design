@@ -68,6 +68,8 @@ import { ForgotPasswordEmailSentComponent } from './forgot-password-email-sent/f
 import { LoadingComponent } from './loading/loading.component';
 import { BackButtonDirective } from './directives/backbutton.directive';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MyDataComponent } from './dashboard/settings/my-data/my-data.component';
+import { ChangePasswordComponent } from './dashboard/settings/change-password/change-password.component';
 
 
 // AoT requires an exported function for factories
@@ -100,15 +102,19 @@ const appRoutes: Routes = [
   { path: 'dashboard/home/notifications', component:NotificationsComponent },
   { path: 'dashboard/home/notifications/notification-detail', component:NotificationDetailComponent },
   { path: 'dashboard/favourite/contract-detail', component:ContractDetailComponent },
-  { path: 'dashboard/home/contract-detail/fileview', component: FileviewComponent},
-  { path: 'dashboard/home/adddocument', component:AddPageComponent},
-  { path: 'dashboard/home/chat', component:ChatComponent},  
-  { path: 'dashboard/home/search', component:SearchPageComponent},  
-  { path: 'dashboard/overview/new-contract',component:NewContractComponent},
-  { path: 'privacy-policy',component:PrivacyPolicyComponent},
-  { path: 'terms-and-conditions', component:TermsConditionsComponent},
-  { path: 'forgot-password', component:ForgotPasswordComponent},
-  { path: 'forgot-password-email-sent', component:ForgotPasswordEmailSentComponent},
+  { path: 'dashboard/home/contract-detail/fileview', component: FileviewComponent },
+  { path: 'dashboard/home/adddocument', component:AddPageComponent },
+  { path: 'dashboard/home/chat', component:ChatComponent },  
+  { path: 'dashboard/home/search', component:SearchPageComponent },  
+  { path: 'dashboard/overview/new-contract',component:NewContractComponent },
+  { path: 'dashboard/settings/my-data',component:MyDataComponent },
+  { path:'dashboard/settings/change-password',component:ChangePasswordComponent},
+  { path: 'dashboard/settings/privacy-policy',component:PrivacyPolicyComponent },
+  { path: 'dashboard/settings/terms-and-conditions', component:TermsConditionsComponent },
+  { path: 'privacy-policy',component:PrivacyPolicyComponent },
+  { path: 'terms-and-conditions', component:TermsConditionsComponent },
+  { path: 'forgot-password', component:ForgotPasswordComponent },
+  { path: 'forgot-password-email-sent', component:ForgotPasswordEmailSentComponent },
   { path: '**', redirectTo: 'dashboard' }
 
 ];
@@ -180,7 +186,9 @@ const appRoutes: Routes = [
     ForgotPasswordEmailSentComponent,
     LoadingComponent,
     BackButtonDirective,
-    FormatDatePipe
+    FormatDatePipe,
+    MyDataComponent,
+    ChangePasswordComponent
    ],
   bootstrap:    [ AppComponent ],
   providers: [

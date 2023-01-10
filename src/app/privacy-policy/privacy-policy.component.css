@@ -72,8 +72,18 @@
     position: relative;
     overflow-y: scroll;
     overflow-x: hidden;
-    padding-bottom: 180px;
-    padding-top: 190px;
+    padding-bottom: 100px;
+    padding-top: 140px;
+    background-image: linear-gradient(#F2F2F2,#EDCFD6);
+  }
+
+  .section-content-in-settings{
+    height: 100vh;
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-bottom: 228px;
+    padding-top: 180px;
     background-image: linear-gradient(#F2F2F2,#EDCFD6);
   }
 
@@ -105,10 +115,10 @@
   .app-logo{
     height: 100px;
     width: 122.5px;
-    margin-top: 40.6px;
+    margin-top: 10.6px;
     margin-left: 151px;
     margin-right: 151px;
-    margin-bottom: 30.9px;
+    margin-bottom: 20.9px;
     /* padding: 8px;
     object-fit: contain;
     object-position: center center; */

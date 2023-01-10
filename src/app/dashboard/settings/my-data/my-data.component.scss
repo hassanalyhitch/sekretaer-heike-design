@@ -1,0 +1,145 @@
+@import url('https://use.typekit.net/myb7tas.css');
+.content-wrapper{
+  height: 92vh;
+  background-color: #F2F2F2;
+  background-image: linear-gradient(to right, #E5007E 50% , #F2F2F2 50%);
+  margin-top: 0px !important;
+  padding: 0px !important;
+}
+._content{
+  background-color: #F2F2F2;
+  border-radius: 45px 0px 0px 0px;
+  height: inherit;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-bottom: 60px;
+  font-family: oscine, sans-serif;
+}
+
+.section-my-data{
+  min-height: 280px;
+  height: inherit;
+  position: relative;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.home-icon-fabs{
+  overflow-x: scroll;
+  min-height: 100px;
+}
+
+.section-title{
+  text-shadow: none;
+  font-weight: bold;
+  font-size: 20px;
+  letter-spacing: 2.5px;
+}
+.my-data-card{
+  height: 250px;
+  border-radius: 0px 0px 45px 0px;
+}
+.my-data-icon{
+  border-radius: 50%;
+  width: 142px;
+  height:142px;
+  background-color: white;
+  margin-bottom: -76px;
+  position: relative;
+}
+
+.my-data-img{
+  height: 80%;
+  width: 80%;
+  object-position: center center;
+  position: absolute;
+  
+}
+
+.tel{
+  color: #050505 ;
+  text-decoration: none;
+}
+.email{
+  color: #050505 ;
+  word-break: break-all;
+  white-space: normal;
+}
+.chat-bubble-link{
+  background-color: #284464;
+  width: 103px;
+  height: 103px;
+  border-radius: 50%;
+  color: white;
+  font-size: medium;
+  cursor: pointer;
+}
+.back{
+  cursor:pointer;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.home-fab-icons-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.home-fab-icons-scroll {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  overflow-x: scroll;
+}
+
+.text-title{
+  text-shadow: none;
+  font-size: 16px;
+  font-weight: bold;
+}
+.sub-text-title{
+  text-shadow: none;
+  font-size: 16px;
+}
+
+.text-content{
+  text-shadow: none;
+  font-size: 16px;
+}
+.my-data-city{
+  margin-right:5px;
+  margin-left: 16px;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+  overflow-y: scroll;
+  background: grey;
+  box-shadow: inset 0 0 4px #707070;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #009ee2;
+  border-radius: 8px;
+}
+/* for mozilla */
+*{
+  scrollbar-width: none !important;
+
+}
+
+/* For Medium Mobile (375px) */
+@media screen and (max-width: 375px){
+
+  .text-title{
+    text-shadow: none;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  
+  .text-content{
+    text-shadow: none;
+    font-size: 12px;
+  }
+
+}
