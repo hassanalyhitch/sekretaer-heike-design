@@ -11,23 +11,23 @@ export class ContractsService {
   selectedContract: ContractData = <ContractData>{
     id: 0,
     details: {
-      Amsidnr: "",
+      Amsidnr:         "",
       CustomerAmsidnr: "",
-      InsuranceId: "",
-      ContractNumber: "",
-      Company: "",
-      StartDate: "",
-      EndDate: "",
-      YearlyPayment: "",
-      Paymethod: "",
-      Branch: "",
-      Risk: "",
+      InsuranceId:     "",
+      ContractNumber:  "",
+      Company:         "",
+      StartDate:       "",
+      EndDate:         "",
+      YearlyPayment:   "",
+      Paymethod:       "",
+      Branch:          "",
+      Risk:            "",
       docs: [],
-      name: "",
-      productSek: "",
-      tarif: "",
+      name:            "",
+      productSek:      "",
+      tarif:           "",
       isFav: 0,
-      favoriteId: ""
+      favoriteId:      ""
     },
     isSelected: false
   };
@@ -59,23 +59,23 @@ export class ContractsService {
             let contract: ContractData = {
               id: index,
               details: {
-                Amsidnr: item['Amsidnr'],
-                CustomerAmsidnr:  item['CustomerAmsidnr'],
-                InsuranceId:  item['Contractnumber'],
+                Amsidnr:         item['Amsidnr'],
+                CustomerAmsidnr: item['CustomerAmsidnr'],
+                InsuranceId:     item['Contractnumber'],
                 ContractNumber:  item['Contractnumber'],
-                Company:  item['Company'],
-                StartDate:  item['Begin'],
-                EndDate:  item['End'],
-                YearlyPayment:  item['YearlyPayment'],
-                Paymethod:  item['PaymentMethod'],
-                Branch:  item['Branch'],
-                Risk:  item['Risk'],
-                docs: item['docs'],
-                name: item['name'],
-                productSek: item['ProductSekretaer'],
-                tarif: item['tarif'],
-                isFav: item['isFavorite'],
-                favoriteId: item['favoriteId']
+                Company:         item['Company'],
+                StartDate:       item['Begin'],
+                EndDate:         item['End'],
+                YearlyPayment:   item['YearlyPayment'],
+                Paymethod:       item['PaymentMethod'],
+                Branch:          item['Branch'],
+                Risk:            item['Risk'],
+                docs:            item['docs'],
+                name:            item['name'],
+                productSek:      item['ProductSekretaer'],
+                tarif:           item['tarif'],
+                isFav:           item['isFavorite'],
+                favoriteId:      item['favoriteId']
               },
               isSelected: false
             };
@@ -144,7 +144,31 @@ export class ContractsService {
       }).pipe(
         tap({
           next:(resp)=>{
-            
+            let contract: ContractData = {
+              id:                resp['Amsidnr'],
+              details: {
+                Amsidnr:         resp['Amsidnr'],
+                CustomerAmsidnr: resp['CustomerAmsidnr'],
+                InsuranceId:     resp['Contractnumber'],
+                ContractNumber:  resp['Contractnumber'],
+                Company:         resp['Company'],
+                StartDate:       resp['Begin'],
+                EndDate:         resp['End'],
+                YearlyPayment:   resp['YearlyPayment'],
+                Paymethod:       resp['PaymentMethod'],
+                Branch:          resp['Branch'],
+                Risk:            resp['Risk'],
+                docs:            resp['docs'],
+                name:            resp['name'],
+                productSek:      resp['ProductSekretaer'],
+                tarif:           resp['tarif'],
+                isFav:           resp['isFavorite'],
+                favoriteId:      resp['favoriteId']
+              },
+              isSelected:        true
+            };
+
+            this.selectedContract = contract;
           },
           error:(error: any)=>{
 

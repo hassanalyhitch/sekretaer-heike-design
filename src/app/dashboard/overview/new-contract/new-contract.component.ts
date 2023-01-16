@@ -1,3 +1,4 @@
+import { UploadFileData } from './../../../models/upload-file.model';
 import { FileSizePipe } from './../../../pipes/filesize.pipe';
 import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
@@ -8,10 +9,7 @@ import { CompanyService } from '../../../services/company.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
-import { UploadFileData } from '../../../models/upload-file.model';
-
-
-
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-new-contract',
@@ -53,12 +51,18 @@ file:File = null;
 fileName:string ="No file chosen";
 uploadFileArr: UploadFileData [] =[];
 
+shareWithBroker:boolean=false;
+status:string = "/assets/icon_broker.svg";
+acceptBroker:boolean = true;
+doneIcon:"/assets/icons8-done-30.png"
+
 
  
 @ViewChild("selectFile",{static:true}) selectFile:ElementRef;
 branchSettings ={}; 
 companySettings = {};
-  constructor(private branchService:BranchService, private fileSizePipe:FileSizePipe) { 
+productSettings ={};
+  constructor(private branchService:BranchService, private fileSizePipe:FileSizePipe,private _location:Location) { 
 
   }
 
@@ -103,6 +107,25 @@ this.companySettings = {
   
 };
 
+this.productSettings = {
+  itemsShowLimit: 1,
+  idField: 'MATCHCODE',
+  textField: 'displayName',
+  singleSelection: false,
+  enableCheckAll: true,
+  selectAllText: 'Select All',
+  unSelectAllText: 'Unselect All',
+  allowSearchFilter: true,
+  limitSelection: 1,
+  clearSearchFilter: true,
+  maxHeight: 197,
+  searchPlaceholderText: 'Search',
+  noDataAvailablePlaceholderText: 'No data available',
+  closeDropDownOnSelection: true,
+  showSelectedItemsAtTop: true,
+  defaultOpen: false,
+
+};
 
     console.log(this.optionSelected);
     this.branchService.getBranches().subscribe({
@@ -231,6 +254,10 @@ this.companySettings = {
     console.log(item);
   }
 
+  onProductSelected(item:any){
+    console.log(item);
+  }
+
   showContracts(){
     this.showcontract = this.branchSelected;
   }
@@ -243,8 +270,8 @@ this.companySettings = {
     this.optionSelected = option;
     console.log(this.optionSelected);
   }
-  handleChange(event){
-    this.show = !this.show;
+
+  getFile(event){
     this.file = event.target.files[0];
    console.log(this.file);
 
@@ -257,8 +284,39 @@ this.companySettings = {
     
    fileType  :this.file.type
    }
-   this.uploadFileArr =[];
+  //  this.uploadFileArr =[];
    this.uploadFileArr.push(_file);
    this.selectFile.nativeElement.value = null;
+
+   if(this.uploadFileArr.length>0){
+    this.show = true;
+  } else {
+    this.show = false;
+  }
+  }
+  deleteFile(event){
+   
+  }
+
+  onBackNavClick(){
+    this._location.back();
+  }
+
+  onShareWithBroker(){
+    // this.shareWithBroker =!this.shareWithBroker;
+    this.acceptBroker = !this.acceptBroker;
+    this.status = this.acceptBroker ? "/assets/icon_broker.svg": "/assets/broker_pink.svg";
+  }
+
+ 
+  removeFile(obj){
+    console.log (obj);
+    console.log(this.selectFile.nativeElement.files)
+    let removeIndex = obj.fileId;
+    this.uploadFileArr = this.uploadFileArr.filter(function(value, index, arr){
+    console.log(value);
+    return (value.fileName != obj.fileName && value.fileId != obj.docid);
+    });
+
   }
 }

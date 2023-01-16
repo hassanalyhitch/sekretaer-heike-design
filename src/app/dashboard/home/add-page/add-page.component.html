@@ -57,15 +57,15 @@
           </div>
         </div>
         <div class="d-flex flex-row assignment">
-          <button class="broker-btn" (click)="onShareWithBroker()"><img class="broker-icon" [src]="status"></button>
-          <p class="m-2">Show my Broker</p>
+          <span class="broker-btn" (click)="onShareWithBroker()"><img class="broker-icon" [src]="status"></span>
+          <p class="m-2">Share with Broker</p>
         </div>
            
           <button 
             type="submit"
             [disabled]="submitted" 
             class="submit" >
-              <span *ngIf="submitted" class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status"></span>
+              <span *ngIf="submitted" class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role=""></span>
               <span *ngIf="!submitted">{{ 'add_document.submit_button_label' | translate }}</span>
           </button>
           

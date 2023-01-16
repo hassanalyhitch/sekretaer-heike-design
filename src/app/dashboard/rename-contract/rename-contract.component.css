@@ -108,3 +108,14 @@ button[disabled]:hover#sign-in-btn {
   width: 22px;
   height: 22px;
 }
+
+.close-btn i{
+  font-size: 16px;
+  background-color: #848484;
+  padding: 3px;
+  color: white;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+}

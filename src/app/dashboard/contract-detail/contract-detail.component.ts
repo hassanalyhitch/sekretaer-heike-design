@@ -20,6 +20,7 @@ import { Location } from '@angular/common';
 import { RenameModalComponent } from '../rename-modal/rename-modal.component';
 import { DownloadService } from '../../services/download-file.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AddPageModalComponent } from '../add-page-modal/add-page-modal.component';
 
 @Component({
   selector: 'app-contract-detail',
@@ -27,7 +28,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./contract-detail.component.css'],
 })
 export class ContractDetailComponent implements OnInit, OnDestroy {
-  @Input() index: string;
+
+  contract_id: string;
 
   contract: ContractData = <ContractData>{
     id: 0,
@@ -50,6 +52,7 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     },
     isSelected: false,
   };
+
   contractSub: Subscription;
   documents: any;
   swipedLeft: boolean = false;
@@ -77,53 +80,31 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log('on view init');
-    this.index = this.route.snapshot.paramMap.get('id');
+    //console.log('on view init');
 
-    this.matDialog.afterAllClosed.subscribe({
-      next: () => {
-        console.log('closed dialogs in next');
-        this.contractService
-          .getContractDetails(this.index)
-          .subscribe({
-            next: (resp: any) => {
-              // if (resp.hasOwnProperty('docs')) {
-              //   this.docArr = [];
-              //   for (let i = 0; i < resp.docs.length; i++) {
-              //     resp.docs.swipedLeft = false;
-              //     this.docArr.push(resp.docs[i]);
-              //   }
-              //   console.log(resp);
-                this.contract.details.name = resp.name;
-              // }
-            },
-          });
-      },
-    });
+    this.contract_id = this.route.snapshot.paramMap.get('id');
 
-    this.contractSub = this.contractService.selectObservable.subscribe({
-      next: (contract) => {
-        // console.log(contract);
-        this.contract = contract;
-        this.contractService
-          .getContractDetails(this.index)
-          .subscribe({
-            next: (resp:any) => {
-              if (resp.hasOwnProperty('docs')) {
-                for (let i = 0; i < resp.docs.length; i++) {
-                  this.docArr.push(resp.docs[i]);
-                }
-                // console.table(this.docArr);
-              }
-            },
-            complete: () => {},
-          });
-      },
-    });
+    this.contractService
+      .getContractDetails(this.contract_id)
+      .subscribe({
+        next: (resp:any) => {
+
+          this.contract = this.contractService.selectedContract;
+
+          if (resp.hasOwnProperty('docs')) {
+            for (let i = 0; i < resp.docs.length; i++) {
+              this.docArr.push(resp.docs[i]);
+            }
+            // console.table(this.docArr);
+          }
+
+        },
+        complete: () => {},
+      });
   }
 
   ngOnDestroy() {
-    this.contractSub.unsubscribe();
+    //this.contractSub.unsubscribe();
   }
 
   openModal(file) {
@@ -137,7 +118,7 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
       '"}';
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
-    dialogConfig.id = 'renamecontract-modal-component';
+    dialogConfig.id = 'rename-contract-dialog';
     // dialogConfig.height = '80%';
     dialogConfig.width = '350px';
     dialogConfig.panelClass = 'bg-dialog-folder';
@@ -147,6 +128,23 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
       RenameContractComponent,
       dialogConfig
     );
+
+    this.matDialog.getDialogById('rename-contract-dialog').afterClosed().subscribe({
+      next: () => {
+
+        this.contractService
+          .getContractDetails(this.contract_id)
+          .subscribe({
+            next: (resp: any) => {
+              
+              this.contract.details.name = resp.name;
+
+            },
+          });
+
+      },
+    });
+
   }
 
   markFav(contract: ContractData) {
@@ -233,13 +231,40 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     let passdata:string = '{"docName": "'+file.name+'","docid": "'+file.docid+'","systemId": "'+file.systemId+'"}';
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
-    dialogConfig.id = 'modal-component';
+    dialogConfig.id = 'rename-document-dialog';
     // dialogConfig.height = '80%';
     dialogConfig.width = '350px';
     dialogConfig.panelClass = 'bg-dialog-folder';
     dialogConfig.data = passdata;
     // https://material.angular.io/components/dialog/overview
     const renameFileDialog = this.matDialog.open(RenameModalComponent, dialogConfig);
+
+    this.matDialog.getDialogById('rename-document-dialog').afterClosed().subscribe({
+      next:()=>{
+        
+        this.contractService
+        .getContractDetails(this.contract_id)
+        .subscribe({
+          next:(resp: any) =>{
+
+            this.docArr.length = 0;
+
+            this.contract = this.contractService.selectedContract;
+            
+            if (resp.hasOwnProperty('docs')) {
+              for (let i = 0; i < resp.docs.length; i++) {
+                this.docArr.push(resp.docs[i]);
+              }
+              // console.table(this.docArr);
+            }
+
+          },
+          complete:()=>{},
+        });
+
+      }
+    });
+
   }
 
   onSwipe(evt, doc: DocumentData) {
@@ -304,5 +329,46 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
       this.sortDateByAsc = !this.sortDateByAsc;
 
     }
+  }
+
+  onAddDoc(file) {
+    const dialogConfig = new MatDialogConfig();
+    // let passdata:string = '{"fileName": "'+this.file.name+'","fileUrl": "'+this.file.fileUrl+'"}';
+    // let passdata: string =
+    //   '{"contractName": "' +
+    //   file.details.name +
+    //   '","contractId": "' +
+    //   file.details.Amsidnr +
+    //   '"}';
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = false;
+    dialogConfig.id = 'add-document-modal-component';
+    // dialogConfig.height = '80%';
+    dialogConfig.width = '400px';
+    dialogConfig.panelClass = 'bg-dialog-folder';
+    // dialogConfig.data = passdata;
+    // https://material.angular.io/components/dialog/overview
+    const modalDialog = this.matDialog.open(
+      AddPageModalComponent,
+      dialogConfig
+    );
+
+    this.matDialog.getDialogById('add-document-modal-component').afterClosed().subscribe({
+      next:() =>{
+        this.contractService.getContractDetails(this.contract.details.Amsidnr).subscribe({
+          next:(resp:any) =>{
+            console.log('contract-details');
+            this.contract = this.contractService.selectedContract;
+          },
+          complete:()=>{
+
+          },
+        });
+      },
+      error:(resp)=>{
+        console.log(resp);
+      }
+    });
+
   }
 }

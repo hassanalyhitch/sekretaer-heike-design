@@ -70,6 +70,7 @@ import { BackButtonDirective } from './directives/backbutton.directive';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MyDataComponent } from './dashboard/settings/my-data/my-data.component';
 import { ChangePasswordComponent } from './dashboard/settings/change-password/change-password.component';
+import { AddPageModalComponent } from './dashboard/add-page-modal/add-page-modal.component';
 
 
 // AoT requires an exported function for factories
@@ -188,7 +189,8 @@ const appRoutes: Routes = [
     BackButtonDirective,
     FormatDatePipe,
     MyDataComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    AddPageModalComponent
    ],
   bootstrap:    [ AppComponent ],
   providers: [

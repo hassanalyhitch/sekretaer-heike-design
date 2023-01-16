@@ -12,6 +12,7 @@ import { DocumentData } from '../../models/document.model';
 import { RenameModalComponent } from '../rename-modal/rename-modal.component';
 import { DownloadService } from '../../services/download-file.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AddPageModalComponent } from '../add-page-modal/add-page-modal.component';
 
 @Component({
   selector: 'app-folder-detail',
@@ -357,5 +358,35 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
       this.folder.subFolders.reverse();
       this.sortSubFolderDate = !this.sortSubFolderDate;
     }
+  }
+
+  addNewDoc(folder: FolderData) {
+    const dialogConfig = new MatDialogConfig();
+    // let passdata:string = '{"folderName": "'+folder.folderName+'","folderId": "'+folder.id+'"}';
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = false;
+    dialogConfig.id = 'add-document-modal-component';
+    //dialogConfig.height = '350px';
+    dialogConfig.width = '400px';
+    // dialogConfig.data = passdata;
+
+    dialogConfig.panelClass = 'bg-dialog-folder';
+    // https://material.angular.io/components/dialog/overview
+    const modalDialog = this.matDialog.open(AddPageModalComponent, dialogConfig);
+    
+    this.matDialog.getDialogById('add-document-modal-component').afterClosed().subscribe({
+      next:()=>{
+        this.folderService.getFolderDetails(this.folder.id).subscribe({
+          next:(resp:any) =>{
+            console.log('folder-details');
+            this.folder = this.folderService.selectedFolder;
+          },
+          complete:()=>{},
+        });
+      },
+      error:(resp)=>{
+        console.log(resp);
+      }
+    });
   }
 }

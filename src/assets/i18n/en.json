@@ -204,7 +204,10 @@
     "search_all_documents_message": "Search across Insurance Contracts, Folders and Documents",
     "search_only_folders_message" : "Search Folders",
     "search_only_contracts_message" : "Search Insurance Contracts",
-    "search_only_documents_message" : "Search Documents"
+    "search_only_documents_message" : "Search Documents",
+    "no_folders_found": "No Matching Folders Found",
+    "no_documents_found" : "No Matching Documents Found",
+    "no_insurance_contracts_found" : "No Matching Insurance Contracts Found"
   },
   "privacy_policy":{
     "title" : "Privacy Policy"
