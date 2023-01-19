@@ -286,12 +286,15 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
 
   onClick(doc: DocumentData){
     console.log('tap !');
-    this.downloadService.getDownloadFile(doc.linkToDoc).subscribe({
+    this.downloadService.getDownloadFile(doc.systemId, doc.docid).subscribe({
       next:(resp:any)=>{
+        console.log(resp.headers);
         try{
-          var file = new Blob([resp]);
-          var fileURL = URL.createObjectURL(file);
-          window.open(fileURL);
+          var mimetype = "application/octetstream" //hacky approach that browsers seem to accept.
+          var file = new File([resp], 'doc.name', { type: mimetype });
+          const url = window.URL.createObjectURL(file);
+          window.open(url, '_blank');
+          URL.revokeObjectURL(url);
 
         } catch(e){
           console.log(e);

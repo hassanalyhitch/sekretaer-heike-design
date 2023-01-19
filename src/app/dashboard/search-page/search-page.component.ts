@@ -243,7 +243,7 @@ export class SearchPageComponent implements OnInit {
     if(!doc.swipedLeft){
       
     }
-    this.downloadService.getDownloadFile(doc.linkToDoc).subscribe({
+    this.downloadService.getDownloadFile(doc.systemId, doc.docid).subscribe({
       next:(resp:any)=>{
         try{
           var file = new Blob([resp]);

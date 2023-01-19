@@ -294,7 +294,7 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
 
   onClick(doc: DocumentData){
     console.log('tap !');
-    this.downloadService.getDownloadFile(doc.linkToDoc).subscribe({
+    this.downloadService.getDownloadFile(doc.systemId, doc.docid).subscribe({
       next:(resp:any)=>{
         try{
           var file = new Blob([resp]);
