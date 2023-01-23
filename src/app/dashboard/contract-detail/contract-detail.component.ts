@@ -286,14 +286,34 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
 
   onClick(doc: DocumentData){
     console.log('tap !');
+    this.snackbar.open("Download requested. Please wait.", this.translate.instant('snack_bar.action_button'),{
+      duration:5000,
+      panelClass:['snack'],
+    });
     this.downloadService.getDownloadFile(doc.systemId, doc.docid).subscribe({
       next:(resp:any)=>{
-        console.log(resp.headers);
+        
+      // const keys = resp.headers.keys();
+      // var headers = keys.map(key =>
+      //     `${key}=>: ${resp.headers.get(key)}`
+      //   );
+
+      let nameWithExtension = resp.headers.get('content-disposition').split("=")[1];
+      console.log(nameWithExtension);
+
         try{
           var mimetype = "application/octetstream" //hacky approach that browsers seem to accept.
-          var file = new File([resp], 'doc.name', { type: mimetype });
+          var file = new File([resp.body], doc.name,{type: mimetype});
           const url = window.URL.createObjectURL(file);
-          window.open(url, '_blank');
+
+          const link = document.createElement('a');
+          link.setAttribute('target', '_blank');
+          link.setAttribute('href', url);
+          link.setAttribute('download', nameWithExtension);
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+          
           URL.revokeObjectURL(url);
 
         } catch(e){
