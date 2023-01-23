@@ -319,6 +319,14 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
         } catch(e){
           console.log(e);
         }
+      },
+      error: (resp) => {
+        // console.log(resp);
+        // console.log(contract.details.favoriteId);
+        this.snackbar.open("Download request failed.",this.translate.instant('snack_bar.action_button'),{
+          panelClass:['snack_error'],
+          duration:1500,
+        })
       }
     });
   }
