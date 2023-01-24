@@ -3,9 +3,12 @@
 @import "~bootstrap/scss/bootstrap.scss";
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500&display=swap');
 @import "theme.scss";
-$primaryColor: #E5007E;
-$primaryColorDark: #D60B51;
-$secondaryColor: #2C262D;
+:root{
+
+  --primaryColor: #E5007E;
+  --primaryColorDark: #D60B51;
+  --secondaryColor: #2C262D;
+}
 
 html,
 body {

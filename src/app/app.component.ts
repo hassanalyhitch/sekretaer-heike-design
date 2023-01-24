@@ -50,6 +50,17 @@ export class AppComponent  implements OnInit{
         if(resp === false){
           this.authenticated = false;
         }
+        //change primary app colors
+        //TO DO :: store these values on client side and read from client side 1st if available
+        let root:any = document.querySelector(':root');
+        //case blue
+        root.style.setProperty("--primaryColor", "#2B71A3");
+        root.style.setProperty("--primaryColorDark", "#2A318B");
+        root.style.setProperty("--secondaryColor", "#2C262D");
+        //case default
+        // root.style.setProperty("--primaryColor", "#E5007E");
+        // root.style.setProperty("--primaryColorDark", "#D60B51");
+        // root.style.setProperty("--secondaryColor", "#2C262D");
       }
     });
     this.loadingService.loadingObs.subscribe({
