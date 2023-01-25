@@ -51,7 +51,7 @@
     content: '';
     width: 45px;
     height: 45px;
-    background-color: #E5007E;
+    background-color: var(--primaryColor);
     position: absolute;
     top: -45px;
     left: 0;
@@ -96,8 +96,8 @@
   }
   
   .close-btn{
-    background-image: linear-gradient(131deg, #E5007E, #D60B51);
-    border-color: #E5007E !important;
+    background-image: linear-gradient(131deg, var(--primaryColor), var(--primaryColorDark));
+    border-color: var(--primaryColor) !important;
     width: 80%;
     color: #ffff;
     border-radius:7px;
