@@ -59,7 +59,7 @@
   font-size: 16px;
 }
 .isFav{
-  background-color: #E5007E;
+  background-color: var(--primaryIconColor);
 }
 .notFav{
   background-color: #000000 !important;

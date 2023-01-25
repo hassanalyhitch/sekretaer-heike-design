@@ -49,7 +49,7 @@ export class LoginService {
           this.chatCheck = resp.config.chat;
           this.lang = resp.lang;
           this.insuranceCheck = resp.config.insuranceCheck;
-          //console.log(resp);
+          console.log(resp);
 
         })
       );

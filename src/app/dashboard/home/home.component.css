@@ -25,7 +25,7 @@
 .content-wrapper {
   height: 92vh;
   background-color: #f2f2f2;
-  background-image: linear-gradient(to right, #e5007e 50%, #f2f2f2 50%);
+  background-image: linear-gradient(to right, var(--primaryColor) 50%, #f2f2f2 50%);
   margin-top: 0px !important;
   padding: 0px !important;
 }
@@ -95,7 +95,7 @@
 }
 .chat-quicky::after {
   content: attr(chat-unread);
-  background-color: #d60b51;
+  background-color: var(--primaryColorDark);
   border-radius: 50%;
   width: fit-content;
   min-width: 22px;
@@ -179,7 +179,7 @@
 }
 .notification-card::after {
   content: attr(notification-count);
-  background-color: #d60b51;
+  background-color: var(--primaryIconColor);
   border-radius: 50%;
   width: fit-content;
   min-width: 30px;
@@ -198,7 +198,7 @@
 }
 
 .bg-new-notify-icon {
-  background-color: #d60b51;
+  background-color: var(--primaryIconColor);
   border-radius: 50%;
   width: fit-content;
   height: fit-content;
@@ -270,7 +270,7 @@ app-fav-item {
   background-color: #000000;
 }
 .isActive{
-  background-color: #d60b51;
+  background-color: var(--primaryIconColor);
 }
 
 .tel{

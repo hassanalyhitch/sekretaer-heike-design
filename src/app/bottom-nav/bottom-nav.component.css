@@ -11,5 +11,5 @@
 }
 .bottom-nav a.active {
   text-decoration: none;
-  color: #D60B51;
+  color: var(--primaryIconColor);
 }
