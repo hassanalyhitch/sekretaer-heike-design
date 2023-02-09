@@ -21,5 +21,6 @@ export interface ContractData {
     isFav: any
     favoriteId: string
   },
+  swipedLeft?:boolean,
   isSelected: boolean
 }

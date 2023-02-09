@@ -191,6 +191,53 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
       
       }
 
+      if(window.location.href.includes('overview')){
+        let selectedItem = {
+          id:this.folderService.selectedFolder.id,
+          dataName:this.folderService.selectedFolder.folderName
+        };
+        let folder: any = {
+          id: this.folderService.selectedFolder['id'],
+          customerAmsidnr:this.folderService.selectedFolder['customerAmsidnr'],
+          dataName :this.folderService.selectedFolder['folderName'],
+          type: 'folder'
+        };
+        this.dataArr.push(folder);
+
+
+        this.selectedItems.push(selectedItem);
+        this.typeSelected = 'folder';
+
+        this.dropdownDisabled = false;
+      }
+
+      else{
+      
+      }
+
+      
+      if (window.location.href.includes('overview')){
+        let selectedItem ={
+          id:this.contractService.selectedContract.details.Amsidnr,
+          dataName:this.contractService.selectedContract.details.name
+        };
+        let contract:any ={
+          id:this.contractService.selectedContract['details.Amsidnr'],
+          dataName:this.contractService.selectedContract['details.name'],
+          type:'contract'
+        };
+        this.dataArr.push(contract);
+
+        this.selectedItems.push(selectedItem);
+        this.typeSelected ='contract';
+
+        this.dropdownDisabled = false;
+       } 
+       else{
+
+      }
+
+
 
 
       // this.selectedItems = [

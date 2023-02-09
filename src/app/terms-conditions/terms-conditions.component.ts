@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 
 @Component({
@@ -6,7 +6,8 @@ import { Location } from '@angular/common';
   templateUrl: './terms-conditions.component.html',
   styleUrls: ['./terms-conditions.component.css']
 })
-export class TermsConditionsComponent implements OnInit, AfterContentInit {
+
+export class TermsConditionsComponent implements OnInit {
 
   inSettings: boolean;
 
@@ -22,16 +23,6 @@ export class TermsConditionsComponent implements OnInit, AfterContentInit {
       this.inSettings = false;
     }
 
-  }
-
-  ngAfterContentInit(){
-
-      let myiFrame:any = document.getElementById("iFrame");
-      let doc = myiFrame.contentDocument;
-      doc.body.innerHTML = doc.body.innerHTML + 
-      '<style>::-webkit-scrollbar {width: 0px;height: 0px;overflow-y: scroll;background: grey;box-shadow: inset 0 0 4px #707070;border-radius: 8px;}::-webkit-scrollbar-thumb {background: #009ee2;border-radius: 8px;}*{scrollbar-width: none !important;}</style>';
-      console.log("ContentInit");
-   
   }
 
   onCloseButtonClicked(){

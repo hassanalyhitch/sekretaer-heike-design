@@ -8,7 +8,7 @@
       </div>
       <div class="p-2">
         <div class="ml-auto btn-group dropstart align-self-center">
-          <img class="filter-icon" src="/assets/icon_filter_dark.svg">
+          <img alt="filter icom" class="filter-icon" src="/assets/icon_filter_dark.svg">
         </div>
       </div>
     </div>
@@ -51,12 +51,12 @@
     
 
       <!-- Home icons fabs-->
-      <div class="home-icon-fabs d-flex px-3 mt-2">
+      <div class="home-icon-fabs d-flex px-2 mt-3">
         <app-home-fab-icons> </app-home-fab-icons>
       </div>
 
       <div class="d-flex flex-column w-100 ">
-        <div class="section-service d-flex flex-column mt-1 px-3 pt-3 w-100">
+        <div class="section-service d-flex flex-column mt-1 px-3 pt-3 w-100 h-100">
 
           <div class="d-flex justify-content-between mb-2 px-3">
 
@@ -68,7 +68,7 @@
       
             <div class="p-2">
               <div class="ml-auto btn-group dropstart justify-content-center align-self-center">
-                <img class="filter-icon" src="/assets/icon_filter_dark.svg">
+                <img alt="filter icom" class="filter-icon" src="/assets/icon_filter_dark.svg">
               </div>
             </div>
       
@@ -79,7 +79,7 @@
             <div class="row g-2">
               <div class="col-6">
                 <div class="p-3 bg-white add_page-card" (click)="onAddPage()">
-                  <img class="service-icon" src="\assets\Gruppe 230.svg">
+                  <img alt="service icom" class="service-icon" src="\assets\Gruppe 230.svg">
                   <div class="d-flex flex-column ">
                     <span class="mt-4 fw-bold card-text-title">{{ "home.service_card_add_title" | translate }}</span>
                   
@@ -98,16 +98,18 @@
 
               <div class="col-6">
                 <div class="p-3 bg-white inbox-card" (click)="onNotifClick()">
-                  <span *ngIf="isNotificationCountText" class="position-absolute top-0 end-0  bg-new-notify-icon">
-                    9+
-                    <span class="visually-hidden">unread messages</span>
-                  </span>
 
-                  <span *ngIf="!isNotificationCountText" class="position-absolute top-0 end-0 bg-new-notify-icon">
-                    {{ notifCount }}
-                  <span class="visually-hidden">unread messages</span>
-                </span>
-                  <img class="service-icon" src="\assets\Gruppe 234.svg">
+                    <span *ngIf="isNotificationCountText" class="position-absolute top-0 end-0 text-center bg-new-notify-icon">
+                      99+
+                      <span class="visually-hidden">unread messages</span>
+                    </span>
+
+                    <span *ngIf="!isNotificationCountText" class="position-absolute top-0 end-0 text-center bg-new-notify-icon" [ngClass]="{'d-none':zeroNotifCount}">
+                      {{ notifCount }}
+                      <span class="visually-hidden">unread messages</span>
+                    </span>
+
+                  <img alt="service icom" class="service-icon" src="\assets\Gruppe 234.svg">
                   <div class="d-flex flex-column mt-4 position-relative" >
                     <span class="fw-bold card-text-title ">
                       {{ "home.service_card_notifications" | translate }}
@@ -125,7 +127,7 @@
 
               <div class="col-6">
                 <div class="p-3 claim-card disabled">
-                  <img class="service-icon" src="\assets\Gruppe 239.svg">
+                  <img alt="service icom" class="service-icon" src="\assets\Gruppe 239.svg">
                   <div class="d-flex flex-column">
                     <span class="mt-4 fw-bold card-text-title">{{ "home.service_card_notification_of_claim" | translate }}</span>
                     <div class="d-flex align-items-center">
@@ -141,7 +143,7 @@
               <div class="col-6">
                 <a [href]="telto" class="tel">
                   <div class="p-3 bg-white broker-card">
-                    <img class="service-icon" src="\assets\Gruppe 241.svg">
+                    <img alt="service icom" class="service-icon" src="\assets\Gruppe 241.svg">
                     <div class="d-flex flex-column">
                       <span class="mt-4 fw-bold card-text-title">{{"home.service_card_call_your_broker" | translate}}</span>
                     </div>

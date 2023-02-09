@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit,AfterViewInit{
   public favArr: ContractData[] = [];
   allContractsArr: ContractData[] = [];
   notifCount: number = 0;
+  zeroNotifCount:boolean = false;
   isNotificationCountText: boolean = false;
   
   telto: string = "tel:";
@@ -75,7 +76,7 @@ export class HomeComponent implements OnInit,AfterViewInit{
     this.notificationService.getUnreadNotifications().subscribe({
       next: () => {
         this.notifCount = this.notificationService.notifCount;
-        if(this.notifCount < 8){
+        if(this.notifCount >= 1 && this.notifCount <= 99){
 
           this.isNotificationCountText = false;
 
@@ -83,10 +84,12 @@ export class HomeComponent implements OnInit,AfterViewInit{
           // .getElementById("notif")
           // .setAttribute("notification-count", this.notifCount + "");
 
-        } else if(this.notifCount > 8){
+        } else if(this.notifCount > 99){
 
           this.isNotificationCountText = true;
 
+        } else{
+          this.zeroNotifCount = true;
         }
         
       },
@@ -223,7 +226,11 @@ export class HomeComponent implements OnInit,AfterViewInit{
       let target = element.nativeElement as HTMLElement;
       if(index == id){
 
-        target.scrollIntoView({behavior: "smooth"});
+        // target.scrollIntoView({behavior: "smooth"});
+        document.getElementById("fav-wrapper").scrollTo({
+          left:this.lineObjectArr[id].startsFrom,
+          behavior:'smooth'
+        });
         return;
       }
     });

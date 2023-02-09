@@ -27,13 +27,46 @@
       <div class="w-100 d-flex flex-wrap p-3 py-3 justify-content-center">
 
         <div class="cards bg- w-100 d-flex flex-column align-items-center mt-1" id="cards" [ngClass]="{'transition':!collapsed}">
-          <app-fav-item class="a_card card-1 col-12" [contractItem]=allContractsArr[2] (click)="onCardClick(allContractsArr[2])" *ngIf="showCard1" ></app-fav-item>
-          <app-fav-item class="a_card card-2 col-12" [contractItem]=allContractsArr[1] (click)="onCardClick(allContractsArr[1])" *ngIf="showCard2"></app-fav-item>
-          <app-fav-item class="a_card card-3 col-12" [contractItem]=allContractsArr[0] (click)="onDefaultInsuranceCardClick()"></app-fav-item>
+        
+
+          <div class="w-100 d-flex a_card card-1" (swipe)="onContractSwipe($event,allContractsArr[2])" >
+            <app-fav-item class="col-12 m-1" [ngClass]="{'swipedLeft':allContractsArr[2].swipedLeft}" [contractItem]=allContractsArr[2] (tap)="onCardClick(allContractsArr[2])" *ngIf="showCard1" ></app-fav-item>
+              <div class="edit-rename d-flex flex-column p-2 align-self-center justify-content-center align-items-center"
+                  [ngClass]="{'d-none':!allContractsArr[2].swipedLeft}">
+                  <i class="material-icons contractIcons mb-1"  (click) ="renameContract(allContractsArr[2])">mode_edit</i>
+                  <i  class="material-icons contractIcons d-flex justify-content-center"(click)=" addContractDoc(allContractsArr[2])">add</i>
+            </div>
+          </div>
+
+        
+
+          <div class="w-100 d-flex a_card card-2"(swipe)="onContractSwipe($event,allContractsArr[1])">
+                <app-fav-item class="col-12 m-1" [ngClass]="{'swipedLeft':allContractsArr[1].swipedLeft}" [contractItem]=allContractsArr[1] (tap)="onCardClick(allContractsArr[1])" *ngIf="showCard2"></app-fav-item>
+                <div class="edit-rename d-flex flex-column p-2 align-self-center justify-content-center align-items-center"
+                [ngClass]="{'d-none':!allContractsArr[1].swipedLeft}">
+                  <i class="material-icons contractIcons mb-1"  (click) ="renameContract(allContractsArr[1])">mode_edit</i>
+                  <i  class="material-icons contractIcons d-flex justify-content-center"(click)=" addContractDoc(allContractsArr[1])">add</i>
+                </div>
+          </div>
+
+          <div class="w-100 d-flex a_card card-3"(swipe)="onContractSwipe($event,allContractsArr[0])">
+            <app-fav-item class="col-12 m-1" [ngClass]="{'swipedLeft':allContractsArr[0].swipedLeft}" [contractItem]=allContractsArr[0] (tap)="onDefaultInsuranceCardClick()"></app-fav-item>
+            <div class="edit-rename d-flex flex-column p-2 align-self-center justify-content-center align-items-center"
+            [ngClass]="{'d-none':!allContractsArr[0].swipedLeft}">
+              <i class="material-icons contractIcons mb-1"  (click) ="renameContract(allContractsArr[0])">mode_edit</i>
+              <i  class="material-icons contractIcons d-flex justify-content-center"(click)=" addContractDoc(allContractsArr[0])">add</i>
+            </div>
+          </div>
         </div>
         
         <div class="w-100 d-flex flex-column align-items-center extra-cards" id="extra-cards" [ngClass]="{'show':!collapsed}">
-          <app-fav-item class="col-12" *ngFor="let item of subsetArr" [contractItem]=item  (click)="onCardClick(item)"></app-fav-item>
+          <div class="contractsubset d-flex" *ngFor="let item of subsetArr;let i = index">
+            <app-fav-item class="col-12 m-1" [ngClass]="{'swipedLeft':item.swipedLeft}" [contractItem]=item (swipe)="onContractSwipe($event,item)" (tap)="onCardClick(item)"></app-fav-item>
+            <div class="edit-rename d-flex flex-column p-2 align-self-center justify-content-center align-items-center"  [ngClass]="{'d-none':!item.swipedLeft}">
+              <i class="material-icons mb-1 contractIcons"   (click) ="renameContract(item)">mode_edit</i>
+              <i  class="material-icons contractIcons  d-flex justify-content-center" (click) ="addContractDoc(item)">add</i>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -67,13 +100,52 @@
 
         <div class="w-100 d-flex flex-wrap py-3 justify-content-center">
               
-          <div class="folders w-100 d-flex flex-column align-items-center mt-1 bg-" id="folders" [ngClass]="{'transition':!collapsedFolders}">
-            <app-folder-card class="a_card card-1 col-12" [folder]=foldersArr[2] (click)="onFolderCardClick(foldersArr[2])" *ngIf="showFolderCard1" ></app-folder-card>
-            <app-folder-card class="a_card card-2 col-12" [folder]=foldersArr[1] (click)="onFolderCardClick(foldersArr[1])" *ngIf="showFolderCard2"></app-folder-card>
-            <app-folder-card class="a_card card-3 col-12" [folder]=foldersArr[0] (click)="onDefaultFolderCardClick()"></app-folder-card>
-          </div>
-          <div class="w-100 d-flex flex-column align-items-center extra-folders bg-" id="extra-folders" [ngClass]="{'show':!collapsedFolders}">
-            <app-folder-card class="col-12" *ngFor="let item of folderSubsetArr" [folder]=item  (click)="onFolderCardClick(item)"></app-folder-card>
+        <div class="folders w-100 d-flex flex-column align-items-center mt-1 bg-" id="folders" [ngClass]="{'transition':!collapsedFolders}">
+            <div class="w-100 d-flex a_card card-1"(swipe)="onFolderSwipe($event,foldersArr[2])">
+              <app-folder-card class=" col-12 m-1"  [ngClass]="{'swipedLeft':foldersArr[2].swipedLeft}" [folder]=foldersArr[2] (tap)="onFolderCardClick(foldersArr[2])" *ngIf="showFolderCard1" ></app-folder-card>
+              <div class="edit-rename d-flex flex-column p-2 align-self-center justify-content-center align-items-center" 
+                  [ngClass]="{'d-none':!foldersArr[2].swipedLeft}"
+                  >
+                    <i class="material-icons folderIcons mb-1"(click) ="renameFolderModal(foldersArr[2])">mode_edit</i>
+                    <i  class="material-icons folderIcons d-flex justify-content-center" (click)=" addFolderDoc(foldersArr[2])">add</i>
+              </div>
+            </div>
+
+            <div class="w-100 d-flex a_card card-2"(swipe)="onFolderSwipe($event,foldersArr[1])">
+              <app-folder-card class=" col-12 m-1"  [ngClass]="{'swipedLeft':foldersArr[1].swipedLeft}" [folder]=foldersArr[1] (tap)="onFolderCardClick(foldersArr[1])" *ngIf="showFolderCard2" ></app-folder-card>
+              <div class="edit-rename d-flex flex-column p-2 align-self-center justify-content-center align-items-center" 
+                  [ngClass]="{'d-none':!foldersArr[1].swipedLeft}"
+                 >
+                    <i class="material-icons folderIcons mb-1"  (click) ="renameFolderModal(foldersArr[1])">mode_edit</i>
+                    <i  class="material-icons folderIcons d-flex justify-content-center" (click)=" addFolderDoc(foldersArr[1])">add</i>
+              </div>
+            </div>
+
+            <div class="w-100 d-flex a_card card-3"(swipe)="onFolderSwipe($event,foldersArr[0])">
+              <app-folder-card class=" col-12 m-1"  [ngClass]="{'swipedLeft':foldersArr[0].swipedLeft}" [folder]=foldersArr[0] (tap)="onDefaultFolderCardClick()"></app-folder-card>
+              <div class="edit-rename d-flex flex-column p-2 align-self-center justify-content-center align-items-center" 
+                  [ngClass]="{'d-none':!foldersArr[0].swipedLeft}"
+                 >
+                    <i class="material-icons folderIcons mb-1"  (click) ="renameFolderModal(foldersArr[0])">mode_edit</i>
+                    <i  class="material-icons folderIcons d-flex justify-content-center" (click)=" addFolderDoc(foldersArr[0])">add</i>
+              </div>
+            </div>
+
+        </div>
+
+          
+          <div class="w-100 d-flex flex-column  align-items-center extra-folders bg-" id="extra-folders" [ngClass]="{'show':!collapsedFolders}">
+            <div class="foldersubset d-flex" *ngFor="let item of folderSubsetArr; let i = index">
+                <app-folder-card class="col-12 m-1" [ngClass]="{'swipedLeft':item.swipedLeft}" [folder]=item  (swipe)="onFolderSwipe($event,item)" (tap)="onFolderCardClick(item)"></app-folder-card>
+
+                <div class="edit-rename d-flex flex-column p-2 align-self-center justify-content-center align-items-center bg-white" 
+                  [ngClass]="{'d-none':!item.swipedLeft}"
+               >
+                    <i class="material-icons folderIcons mb-1"   (click) ="renameFolderModal(item)">mode_edit</i>
+                    <i  class="material-icons  folderIcons d-flex justify-content-center" (click) ="addFolderDoc(item)">add</i>
+                </div>
+            </div>
+           
           </div>
 
         </div>

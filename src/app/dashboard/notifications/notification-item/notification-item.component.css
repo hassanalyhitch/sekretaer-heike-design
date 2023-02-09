@@ -8,8 +8,7 @@
   min-height: 65px;
   max-height: 65px;
   border-radius: 0px 0px 15px 0px;
-  background-color: #D60B51;
-  /* background-color: #D60B51; */
+  background-color: var(--primaryColorDark);
 }
 .notif-item{
   margin-left: 30px;
@@ -23,7 +22,7 @@
   object-position: center center;
 }
 i{
-  color: #D60B51;
+  color: var(--primaryColorDark);
 }
 .name{
   color: #2C262D;

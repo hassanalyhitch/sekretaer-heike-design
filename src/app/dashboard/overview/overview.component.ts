@@ -7,7 +7,10 @@ import { FolderData } from '../../models/folder.model';
 import { ContractsService } from '../../services/contracts.service';
 import { FoldersService } from '../../services/folder.service';
 import { NewFolderComponent } from '../new-folder/new-folder.component';
-import { RenameModalComponent } from '../rename-modal/rename-modal.component';
+import { AddPageModalComponent } from '../add-page-modal/add-page-modal.component';
+import { RenameFolderComponent } from '../rename-folder/rename-folder.component';
+import { RenameContractComponent } from '../rename-contract/rename-contract.component';
+
 
 @Component({
   selector: 'app-overview',
@@ -18,6 +21,52 @@ export class OverviewComponent implements OnInit {
 
   subsetArr:ContractData[] = [];
   allContractsArr:ContractData[] = [{
+    id: 0,
+    details: {
+      Amsidnr: "",
+      CustomerAmsidnr: "",
+      InsuranceId: "",
+      ContractNumber: "",
+      Company: "",
+      StartDate: "",
+      EndDate: "",
+      YearlyPayment: "",
+      Paymethod: "",
+      Branch: "",
+      Risk: "",
+      docs: [],
+      name: "",
+      productSek: "",
+      tarif: "",
+      isFav: 1,
+      favoriteId: ""
+    },
+    isSelected: false
+  },
+  {
+    id: 0,
+    details: {
+      Amsidnr: "",
+      CustomerAmsidnr: "",
+      InsuranceId: "",
+      ContractNumber: "",
+      Company: "",
+      StartDate: "",
+      EndDate: "",
+      YearlyPayment: "",
+      Paymethod: "",
+      Branch: "",
+      Risk: "",
+      docs: [],
+      name: "",
+      productSek: "",
+      tarif: "",
+      isFav: 1,
+      favoriteId: ""
+    },
+    isSelected: false
+  },
+  {
     id: 0,
     details: {
       Amsidnr: "",
@@ -55,8 +104,40 @@ export class OverviewComponent implements OnInit {
     isFavorite: 0,
     favoriteId: "",
     isSelected:false
+  },
+  {
+    id :  "",
+    loginId :  "",
+    customerAmsidnr :  "",
+    ownerFolderId :  "",
+    folderName :  "",
+    createTime :  "",
+    createdAt :  "",
+    subFolders : [],
+    docs: [],
+    isFavorite: 0,
+    favoriteId: "",
+    isSelected:false
+  },
+  {
+    id :  "",
+    loginId :  "",
+    customerAmsidnr :  "",
+    ownerFolderId :  "",
+    folderName :  "",
+    createTime :  "",
+    createdAt :  "",
+    subFolders : [],
+    docs: [],
+    isFavorite: 0,
+    favoriteId: "",
+    isSelected:false
   }
 ];
+
+  folder:FolderData;
+  contract:ContractData;
+
   folderSubsetArr: FolderData[] = [];
 
   showCard2:boolean = false;
@@ -118,10 +199,15 @@ export class OverviewComponent implements OnInit {
         this.folderService.getFolders().subscribe({
           next: (resp)=>{
             this.foldersArr = this.folderService.userFolderArr;
+
+          for(let i=0;i<this.foldersArr.length;i++){
+            this.foldersArr[i].swipedLeft = false;
+          }
+
             this.folderSubsetArr = [];
-            if(this.folderService.userFolderArr.length>3){
-              for(let i=3; i<this.folderService.userFolderArr.length; i++){
-                this.folderSubsetArr.push(this.folderService.userFolderArr[i]);
+            if(this.foldersArr.length>3){
+              for(let i=3; i<this.foldersArr.length; i++){
+                this.folderSubsetArr.push(this.foldersArr[i]);
               }
             }
             // console.log(this.foldersArr);
@@ -405,4 +491,189 @@ export class OverviewComponent implements OnInit {
   onSearchContractsClicked(){
     this.router.navigate(['dashboard/home/search', {searchType:'contracts'}]);
   }
+
+  onFolderSwipe(evt,folder:FolderData){
+    const swipeDirection = Math.abs(evt.deltaX) > 40 ? (evt.deltaX > 0 ? 'right' : 'left'):'';
+
+    console.log('swiped '+swipeDirection);
+    switch(swipeDirection){
+      case 'left':{
+      folder.swipedLeft = true;
+        break;
+      }
+      case 'right':{
+
+        folder.swipedLeft = false;
+        break;
+      }
+    }
+
+  }
+
+  renameFolderModal(folder:FolderData){
+    const dialogConfig = new MatDialogConfig();
+    // let passdata:string = '{"fileName": "'+this.file.name+'","fileUrl": "'+this.file.fileUrl+'"}';
+    let passdata:string = '{"folderName": "'+folder.folderName+'","folderId": "'+folder.id+'"}';
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = false;
+    dialogConfig.id = 'renamefolder-modal-component';
+    //dialogConfig.height = '350px';
+    dialogConfig.width = '350px';
+    dialogConfig.data = passdata;
+
+    dialogConfig.panelClass = 'bg-dialog-folder';
+    // https://material.angular.io/components/dialog/overview
+    const modalDialog = this.matDialog.open(RenameFolderComponent, dialogConfig);
+    
+    this.matDialog.getDialogById('renamefolder-modal-component').afterClosed().subscribe({
+      next:()=>{
+        this.folderService.getFolderDetails(this.folder.id).subscribe({
+          next:(resp:any) =>{
+            console.log('folder-details');
+            this.folder = this.folderService.selectedFolder;
+          },
+          complete:()=>{},
+        });
+      },
+      error:(resp)=>{
+        console.log(resp);
+      }
+    });
+  }
+
+  addFolderDoc(folder:FolderData){
+    const dialogConfig = new MatDialogConfig();
+    this.folderService.emitSelectedFolder(folder);
+    let passdata:string = '{"folderName": "'+folder.folderName+'","folderId": "'+folder.id+'"}';
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = false;
+    dialogConfig.id = 'add-document-modal-component';
+    //dialogConfig.height = '350px';
+    dialogConfig.width = '400px';
+    dialogConfig.data = passdata;
+
+    dialogConfig.panelClass = 'bg-dialog-folder';
+    // https://material.angular.io/components/dialog/overview
+    const modalDialog = this.matDialog.open(AddPageModalComponent, dialogConfig);
+    this.matDialog.getDialogById('add-document-modal-component').afterOpened().subscribe({
+      next:()=>{
+       
+        this.folderService.getFolderDetails(folder.id).subscribe({
+          next:(resp:any) =>{
+            console.log('folder-details');
+            console.log(folder.id);
+            console.log(folder.folderName);
+           this. folder = this.folderService.selectedFolder;
+          },
+          complete:()=>{},
+        });
+      },
+      error:(resp)=>{
+        console.log(resp);
+      }
+    });
+
+  }
+
+  
+  onContractSwipe(evt,contract:ContractData){
+    const swipeDirection = Math.abs(evt.deltaX) > 40 ? (evt.deltaX > 0 ? 'right' : 'left'):'';
+
+    console.log('swiped '+swipeDirection);
+    switch(swipeDirection){
+      case 'left':{
+      contract.swipedLeft = true;
+        break;
+      }
+      case 'right':{
+        contract.swipedLeft = false;
+        break;
+      }
+    }
+
+  }
+
+  
+  renameContract(contract:ContractData) {
+    const dialogConfig = new MatDialogConfig();
+    // let passdata:string = '{"fileName": "'+this.file.name+'","fileUrl": "'+this.file.fileUrl+'"}';
+    let passdata: string =
+      '{"contractName": "' +
+      contract.details.name +
+      '","contractId": "' +
+      contract.details.Amsidnr +
+      '"}';
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = false;
+    dialogConfig.id = 'rename-contract-dialog';
+    // dialogConfig.height = '80%';
+    dialogConfig.width = '350px';
+    dialogConfig.panelClass = 'bg-dialog-folder';
+    dialogConfig.data = passdata;
+    // https://material.angular.io/components/dialog/overview
+    const modalDialog = this.matDialog.open(
+      RenameContractComponent,
+      dialogConfig
+    );
+
+    this.matDialog.getDialogById('rename-contract-dialog').afterClosed().subscribe({
+      next: () => {
+
+        this.contractService
+          .getContractDetails(contract.details.Amsidnr)
+          .subscribe({
+            next: (resp: any) => {
+              
+              contract.details.name = resp.name;
+
+            },
+          });
+
+      },
+    });
+
+  }
+
+  addContractDoc(contract:ContractData){
+    const dialogConfig = new MatDialogConfig();
+    this.contractService.emitSelectedFolder(contract);
+    // let passdata:string = '{"fileName": "'+this.file.name+'","fileUrl": "'+this.file.fileUrl+'"}';
+    let passdata: string =
+      '{"contractName": "' +
+      contract.details.name +
+      '","contractId": "' +
+      contract.details.Amsidnr +
+      '"}';
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = false;
+    dialogConfig.id = 'add-document-modal-component';
+    // dialogConfig.height = '80%';
+    dialogConfig.width = '400px';
+    dialogConfig.panelClass = 'bg-dialog-folder';
+    dialogConfig.data = passdata;
+    // https://material.angular.io/components/dialog/overview
+    const modalDialog = this.matDialog.open(
+      AddPageModalComponent,
+      dialogConfig
+    );
+
+    this.matDialog.getDialogById('add-document-modal-component').afterClosed().subscribe({
+      next:() =>{
+        this.contractService.getContractDetails(contract.details.Amsidnr).subscribe({
+          next:(resp:any) =>{
+            console.log('contract-details');
+            this.contract = this.contractService.selectedContract;
+          },
+          complete:()=>{
+
+          },
+        });
+      },
+      error:(resp)=>{
+        console.log(resp);
+      }
+    });
+  }
+
+
 }

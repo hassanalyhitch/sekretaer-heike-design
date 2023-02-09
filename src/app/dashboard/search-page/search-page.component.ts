@@ -1,6 +1,9 @@
+import { LowerCasePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { ContractData } from '../../models/contract.model';
 import { DocumentData } from '../../models/document.model';
 import { FolderData } from '../../models/folder.model';
@@ -12,12 +15,13 @@ import { RenameModalComponent } from '../rename-modal/rename-modal.component';
 @Component({
   selector: 'app-search-page',
   templateUrl: './search-page.component.html',
-  styleUrls: ['./search-page.component.css']
+  styleUrls: ['./search-page.component.css'],
+  providers: [LowerCasePipe]
 })
 export class SearchPageComponent implements OnInit {
 
-  searchValue = "";
-  //is_spinner_showing: boolean = false;
+  searchedValue : string = '';
+
   searchType: string = '';
 
   no_contracts_found: boolean = false;
@@ -32,11 +36,14 @@ export class SearchPageComponent implements OnInit {
   documentsResArr: DocumentData[] = [];
 
   constructor(
+    private lowerCasePipe: LowerCasePipe,
     private contractService: ContractsService, 
     private folderService: FoldersService, 
     private router:Router,
     private downloadService: DownloadService,
     private matDialog: MatDialog,
+    private translate:TranslateService,
+    private snackbar:MatSnackBar,
     private route:ActivatedRoute) { }
 
   ngOnInit() {
@@ -79,31 +86,33 @@ export class SearchPageComponent implements OnInit {
     
   }
   
-  filterSearch(searchValue:string){
-    console.log(searchValue);
+  filterSearch(searchQuery: string){
+
     this.contractsResArr = [];
     this.foldersResArr = [];
     this.documentsResArr = [];
-    //this.is_spinner_showing = false
-
-    if(searchValue != undefined && searchValue != ""){
+    
+    if(this.searchedValue != undefined && this.searchedValue != ""){
 
       if(this.searchType == 'all'){
 
         for(let contract of this.contractsArr){
-          if(contract.details.name && contract.details.name.includes(searchValue)){
+          if(contract.details.name && 
+            this.lowerCasePipe.transform(contract.details.name).includes(this.lowerCasePipe.transform(searchQuery))){
             this.contractsResArr.push(contract);
           }
         }
   
         for(let folder of this.foldersArr){
-          if(folder.folderName && folder.folderName.includes(searchValue)){
+          if(folder.folderName && 
+            this.lowerCasePipe.transform(folder.folderName).includes(this.lowerCasePipe.transform(searchQuery))){
             this.foldersResArr.push(folder);
           }
         }
   
         for(let document of this.documentsArr){
-          if(document.name && document.name.includes(searchValue) ){
+          if(document.name && 
+            this.lowerCasePipe.transform(document.name).includes(this.lowerCasePipe.transform(searchQuery)) ){
             this.documentsResArr.push(document);
           }
         }
@@ -111,7 +120,8 @@ export class SearchPageComponent implements OnInit {
       } else if(this.searchType == 'folders'){
 
         for(let folder of this.foldersArr){
-          if(folder.folderName && folder.folderName.includes(searchValue)){
+          if(folder.folderName && 
+            this.lowerCasePipe.transform(folder.folderName).includes(this.lowerCasePipe.transform(searchQuery))){
             this.foldersResArr.push(folder);
           }
         }
@@ -119,7 +129,8 @@ export class SearchPageComponent implements OnInit {
       } else if(this.searchType == 'contracts'){
 
         for(let contract of this.contractsArr){
-          if(contract.details.name && contract.details.name.includes(searchValue)){
+          if(contract.details.name && 
+            this.lowerCasePipe.transform(contract.details.name).includes(this.lowerCasePipe.transform(searchQuery))){
             this.contractsResArr.push(contract);
           }
         }
@@ -127,7 +138,8 @@ export class SearchPageComponent implements OnInit {
       } else if(this.searchType == 'docs'){
 
         for(let document of this.documentsArr){
-          if(document.name && document.name.includes(searchValue) ){
+          if(document.name && 
+            this.lowerCasePipe.transform(document.name).includes(this.lowerCasePipe.transform(searchQuery)) ){
             this.documentsResArr.push(document);
           }
         }
@@ -139,31 +151,25 @@ export class SearchPageComponent implements OnInit {
     if(this.searchType == 'all'){
 
       if( this.contractsResArr.length > 0 ){
-        //this.is_spinner_showing = true;
         this.no_contracts_found = false;
         console.log('contracts size -> '+this.contractsResArr.length);
       } else if( this.contractsResArr.length == 0 ){
-        //this.is_spinner_showing = false;
         this.no_contracts_found = true;
         console.log('contracts size -> '+this.contractsResArr.length);
       }
 
       if( this.foldersResArr.length > 0 ) {
-        //this.is_spinner_showing = false;
         this.no_folders_found = false;
         console.log('folders size -> '+this.foldersResArr.length);
       } else if( this.foldersResArr.length == 0 ){
-        //this.is_spinner_showing = false;
         this.no_folders_found = true;
         console.log('folders size -> '+this.foldersResArr.length);
       } 
       
       if( this.documentsResArr.length > 0 ) {
-        //this.is_spinner_showing = false;
         this.no_documents_found = false;
         console.log('Documents size -> '+this.documentsResArr.length);
       } else if( this.documentsResArr.length == 0 ){
-        //this.is_spinner_showing = false;
         this.no_documents_found = true;
         console.log('Documents size -> '+this.documentsResArr.length);
       }
@@ -173,11 +179,9 @@ export class SearchPageComponent implements OnInit {
     if(this.searchType == 'folders'){
 
       if( this.foldersResArr.length > 0 ) {
-        //this.is_spinner_showing = true;
         this.no_folders_found = false;
         console.log('folders size -> '+this.foldersResArr.length);
       } else if( this.foldersResArr.length == 0 ) {
-        //this.is_spinner_showing = false;
         this.no_folders_found = true;
         console.log('folders size -> '+this.foldersResArr.length);
       }
@@ -187,11 +191,9 @@ export class SearchPageComponent implements OnInit {
     if(this.searchType == 'contracts'){
 
       if( this.contractsResArr.length > 0 ){
-        //this.is_spinner_showing = true;
         this.no_contracts_found = false;
         console.log('contracts size -> '+this.contractsResArr.length);
       } else if( this.contractsResArr.length == 0 ) {
-        //this.is_spinner_showing = false;
         this.no_contracts_found = true;
         console.log('contracts size -> '+this.contractsResArr.length);
       }
@@ -201,10 +203,8 @@ export class SearchPageComponent implements OnInit {
     if(this.searchType == 'docs'){
 
       if( this.documentsResArr.length > 0 ) {
-        //this.is_spinner_showing = true;
         this.no_documents_found = false;
       } else if( this.documentsResArr.length == 0 ){
-        //this.is_spinner_showing = false;
         this.no_documents_found = true;
       }
 
@@ -239,20 +239,54 @@ export class SearchPageComponent implements OnInit {
   }
 
   onDocClick(doc: DocumentData){
+
     console.log('tap !');
+
     if(!doc.swipedLeft){
       
     }
+    
+    this.snackbar.open("Download requested. Please wait.", this.translate.instant('snack_bar.action_button'),{
+      duration:5000,
+      panelClass:['snack'],
+    });
     this.downloadService.getDownloadFile(doc.systemId, doc.docid).subscribe({
       next:(resp:any)=>{
+        
+      // const keys = resp.headers.keys();
+      // var headers = keys.map(key =>
+      //     `${key}=>: ${resp.headers.get(key)}`
+      //   );
+
+      let nameWithExtension = resp.headers.get('content-disposition').split("=")[1];
+      console.log(nameWithExtension);
+
         try{
-          var file = new Blob([resp]);
-          var fileURL = URL.createObjectURL(file);
-          window.open(fileURL);
+          var mimetype = "application/octetstream" //hacky approach that browsers seem to accept.
+          var file = new File([resp.body], doc.name,{type: mimetype});
+          const url = window.URL.createObjectURL(file);
+
+          const link = document.createElement('a');
+          link.setAttribute('target', '_blank');
+          link.setAttribute('href', url);
+          link.setAttribute('download', nameWithExtension);
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+          
+          URL.revokeObjectURL(url);
 
         } catch(e){
           console.log(e);
         }
+      },
+      error: (resp) => {
+        // console.log(resp);
+        // console.log(contract.details.favoriteId);
+        this.snackbar.open("Download request failed.",this.translate.instant('snack_bar.action_button'),{
+          panelClass:['snack_error'],
+          duration:1500,
+        })
       }
     });
   }
@@ -264,8 +298,6 @@ export class SearchPageComponent implements OnInit {
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = 'rename-document-component';
-    // dialogConfig.height = '80%';
-    // dialogConfig.width = '90%';
     dialogConfig.width = '350px';
     dialogConfig.panelClass = 'bg-dialog-folder';
     dialogConfig.data = passdata;
@@ -274,10 +306,9 @@ export class SearchPageComponent implements OnInit {
 
     this.matDialog.getDialogById('rename-document-component').afterClosed().subscribe({
       next: () => {
-        this.searchValue = "";
-        //this.is_spinner_showing = false;
+        this.searchedValue   = "";
         this.contractsResArr = [];
-        this.foldersResArr = [];
+        this.foldersResArr   = [];
         this.documentsResArr = [];
       }
     });

@@ -21,6 +21,10 @@ export class RenameModalComponent implements OnInit {
 
   submitted: boolean = false;
 
+  shareWithBroker:boolean=true;
+  acceptShare:string ="/assets/icon_broker.svg";
+  denyShare:string = "/assets/icons8-done-30.png";
+
   constructor(
     @Inject(MAT_DIALOG_DATA)public data:any, 
     private renameDocService: RenameDocumentService, 
@@ -80,6 +84,11 @@ export class RenameModalComponent implements OnInit {
 
   closeDialog(){
     this.dialogRef.close();
+  }
+  
+  onShareWithBroker(){
+    this.shareWithBroker = !this.shareWithBroker;
+    this.acceptShare = this.shareWithBroker ?  "/assets/icon_broker.svg": "/assets/broker_pink.svg";
   }
 
 }

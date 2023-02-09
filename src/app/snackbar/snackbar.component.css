@@ -1,5 +1,5 @@
 .snackbar{
-  background-color: #D60B51;
+  background-color: var(--primaryColorDark);
   color: white;
   font-size: 1rem;
   font-family: 'Poppins';

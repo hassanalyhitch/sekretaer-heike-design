@@ -2,7 +2,7 @@
 .content-wrapper{
   height: 92vh;
   background-color: #F2F2F2;
-  background-image: linear-gradient(to right, #E5007E 50% , #F2F2F2 50%);
+  background-image: linear-gradient(to right, var(--primaryColor) 50% , #F2F2F2 50%);
   margin-top: 0px !important;
   padding: 0px !important;
 }
@@ -26,7 +26,7 @@
 }
 
 .btn-add{
-  background-color: #D60B51;
+  background-color: var(--primaryColorDark);
   color: #ffffff;
  }
 
@@ -42,7 +42,7 @@
 }
 
 .per-month-contract-label{
-  color: #D60B51;
+  color: var(--primaryColorDark);
 }
 
 .filter-icon{
@@ -56,8 +56,8 @@
 
 .icon-container{
   width: 50px;
-  background-color: #E5007E;
-  background-image: linear-gradient(141deg, #E5007E, #D60B51);
+  background-color: var(--primaryColor);
+  background-image: linear-gradient(141deg, var(--primaryColor), var(--primaryColorDark));
   border-radius: 0px 0px 15px 0px;
   height: 100%;
   color: white;
@@ -103,7 +103,7 @@
 }
 
 .isFav{
-  background-color: #E5007E;
+  background-color: var(--primaryColor);
 }
 .notFav{
   background-color: #000000 !important;
@@ -155,7 +155,7 @@ hr:after {
   border-radius: 50%;
   border: solid 2px white;
   background-color: white;
-  color: #D60B51;
+  color: var(--primaryColorDark);
   box-shadow: 0px 3px 3px #0000001A;
   backdrop-filter: blur(6.6px);
   -webkit-backdrop-filter: blur(6.6px);

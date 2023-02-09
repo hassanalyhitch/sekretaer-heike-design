@@ -20,7 +20,7 @@
     <div class="search_input_container d-flex w-100 bg-- mb-2">
       <div class="_input_group w-100 d-flex m- bg-" >
         <i class="material-icons p-2">search</i>
-        <input type="text " class="search_input w-100" [(ngModel)]="searchValue" (ngModelChange)="filterSearch(searchValue)" placeholder="Search" />
+        <input type="text " class="search_input w-100" [(ngModel)]="searchedValue" (ngModelChange)="filterSearch(searchedValue)" placeholder="Search" />
       </div>
       
       <!-- <div class="ml-auto btn-group dropstart align-self-center m-2 p-2 bg-">
@@ -38,7 +38,7 @@
         </div>
       </div>
 
-      <p class="search-message text-center m-auto" *ngIf="searchValue != '' && no_contracts_found">
+      <p class="search-message text-center m-auto" *ngIf="searchedValue != '' && no_contracts_found">
         {{ 'search.no_insurance_contracts_found' | translate }}
       </p>
 
@@ -50,7 +50,7 @@
         </div>
       </div>
 
-      <p class="search-message text-center m-auto" *ngIf="searchValue != '' && no_folders_found">
+      <p class="search-message text-center m-auto" *ngIf="searchedValue != '' && no_folders_found">
         {{ 'search.no_folders_found' | translate }}
       </p>
 
@@ -68,27 +68,27 @@
         </div>
       </div>
 
-      <p class="search-message text-center m-auto" *ngIf="searchValue != '' && no_documents_found">
+      <p class="search-message text-center m-auto" *ngIf="searchedValue != '' && no_documents_found">
         {{ 'search.no_documents_found' | translate }}
       </p>
 
       <!-- shown when the search type includes all documents-->
-      <p class="search-message text-center m-auto" *ngIf="searchValue=='' && searchType=='all' " >
+      <p class="search-message text-center m-auto" *ngIf="searchedValue=='' && searchType=='all' " >
         {{ 'search.search_all_documents_message' | translate }}
       </p>
 
       <!-- shown when the search type is only folders -->
-      <p class="search-message text-center m-auto" *ngIf="searchValue=='' && searchType=='folders' " >
+      <p class="search-message text-center m-auto" *ngIf="searchedValue=='' && searchType=='folders' " >
         {{ 'search.search_only_folders_message' | translate }}
       </p>
 
       <!-- shown when the search type is only contracts -->
-      <p class="search-message text-center m-auto" *ngIf="searchValue=='' && searchType=='contracts' " >
+      <p class="search-message text-center m-auto" *ngIf="searchedValue=='' && searchType=='contracts' " >
         {{ 'search.search_only_contracts_message' | translate }}
       </p>
 
       <!-- shown when the search type is only documents -->
-      <p class="search-message text-center m-auto" *ngIf="searchValue=='' && searchType=='docs' " >
+      <p class="search-message text-center m-auto" *ngIf="searchedValue=='' && searchType=='docs' " >
         {{ 'search.search_only_documents_message' | translate }}
       </p>
 

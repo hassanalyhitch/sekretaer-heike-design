@@ -294,16 +294,48 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
 
   onClick(doc: DocumentData){
     console.log('tap !');
+    
+    this.snackbar.open("Download requested. Please wait.", this.translate.instant('snack_bar.action_button'),{
+      duration:5000,
+      panelClass:['snack'],
+    });
     this.downloadService.getDownloadFile(doc.systemId, doc.docid).subscribe({
       next:(resp:any)=>{
+        
+      // const keys = resp.headers.keys();
+      // var headers = keys.map(key =>
+      //     `${key}=>: ${resp.headers.get(key)}`
+      //   );
+
+      let nameWithExtension = resp.headers.get('content-disposition').split("=")[1];
+      console.log(nameWithExtension);
+
         try{
-          var file = new Blob([resp]);
-          var fileURL = URL.createObjectURL(file);
-          window.open(fileURL);
+          var mimetype = "application/octetstream" //hacky approach that browsers seem to accept.
+          var file = new File([resp.body], doc.name,{type: mimetype});
+          const url = window.URL.createObjectURL(file);
+
+          const link = document.createElement('a');
+          link.setAttribute('target', '_blank');
+          link.setAttribute('href', url);
+          link.setAttribute('download', nameWithExtension);
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+          
+          URL.revokeObjectURL(url);
 
         } catch(e){
           console.log(e);
         }
+      },
+      error: (resp) => {
+        // console.log(resp);
+        // console.log(contract.details.favoriteId);
+        this.snackbar.open("Download request failed.",this.translate.instant('snack_bar.action_button'),{
+          panelClass:['snack_error'],
+          duration:1500,
+        })
       }
     });
   }

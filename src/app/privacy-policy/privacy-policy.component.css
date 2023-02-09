@@ -58,7 +58,7 @@
   }
   .header-wrapper::after{
     content: '';
-    width: 45px;
+    width: 100%;
     height: 45px;
     background: #F2F2F2;
     position: absolute;
@@ -72,7 +72,6 @@
     position: relative;
     overflow-y: scroll;
     overflow-x: hidden;
-    padding-bottom: 100px;
     padding-top: 140px;
     background-image: linear-gradient(#F2F2F2,#EDCFD6);
   }
@@ -82,7 +81,6 @@
     position: relative;
     overflow-y: scroll;
     overflow-x: hidden;
-    padding-bottom: 228px;
     padding-top: 180px;
     background-image: linear-gradient(#F2F2F2,#EDCFD6);
   }
@@ -142,4 +140,71 @@
 *{
   scrollbar-width: none !important;
 
+}
+
+/* New content starts here*/
+.terms_policy_content{
+  font-size: medium;
+  font-family:oscine, sans-serif;
+  text-align: center;
+}
+
+h3{
+  margin: 0;
+  color: #000000;
+  font-weight: bold;
+  font-size: large !important;
+  margin-bottom: 15px;
+}
+
+h4{
+  margin: 0;
+  color: #000000;
+  font-weight: bold;
+  text-align: justify;
+  font-size: medium !important;
+}
+
+p{
+  text-align: justify;
+  color: #575757;
+
+}
+
+ul,ol{
+  text-align: justify;
+  line-height: 2.5rem;
+  text-decoration: none;
+}
+
+ul > li{
+  color: #575757;
+  margin-left: 21.3pt;
+  padding-top: 12pt;
+  padding-left: 0pt;
+  padding-bottom: 12pt;
+  line-height: 1.0;
+  text-align: justify;
+}
+
+ol > li{
+  color: #575757;
+  margin-left: 21.3pt;
+  padding-top: 12pt;
+  padding-left: 0pt;
+  padding-bottom: 12pt;
+  line-height: 1.0;
+  text-align: justify;
+}
+
+ol.k { list-style-type: lower-alpha; }
+
+.close-button-bottom-distance{
+  padding-bottom: 1rem!important; 
+  margin-bottom: 1rem!important;
+}
+
+.close-button-bottom-distance-in-settings{
+  padding-bottom: 6.5rem!important; 
+  margin-bottom: 1.5rem!important;
 }

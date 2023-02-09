@@ -25,7 +25,7 @@
   animation: swing 1s ease;
   -webkit-animation-iteration-count: 1;
   animation-iteration-count: 1;
-  color: #D60B51;
+  color: var(--primaryColorDark);
 }
 .quick-fab:hover{
   border: solid 2.5px rgba(0, 0, 0, 0.2);
@@ -36,11 +36,11 @@
     text-align: center;
     font-family:'oscine, sans-serif';
     padding: 10px;
-    background-color: #E5007E !important;
-    border-color: #E5007E !important;
+    background-color: var(--primaryColor) !important;
+    border-color: var(--primaryColor) !important;
     border: solid 2px;
     border-radius: 8px;
-    background-image: linear-gradient(131deg, #E5007E, #D60B51);
+    background-image: linear-gradient(131deg, var(--primaryColor), var(--primaryColorDark));
     transition: 0.1s ease-out; 
 }
 .notif-action:hover{

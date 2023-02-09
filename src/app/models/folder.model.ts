@@ -13,5 +13,6 @@ export interface FolderData {
   isFavorite: number,
   favoriteId: string,
 
+  swipedLeft?:boolean;
   isSelected:boolean
 }

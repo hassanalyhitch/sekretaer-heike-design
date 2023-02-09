@@ -64,7 +64,7 @@ label{
   transition: 0.1s ease-out;
 }
 .material-textfield > input:focus {
-  border: 2px solid #E5007E;
+  border: 2px solid var(--primaryColor);
 }
 .material-textfield > input:focus + label {
   color: rgba(0,0,0,.87);
@@ -81,13 +81,13 @@ label{
 .btn-login, .btn-login:focus:not(button[disabled]) {
   color: white;
   height: 50px !important;
-  background-color: #E5007E !important;
-  border-color: #E5007E !important;
-  background-image: linear-gradient(131deg, #E5007E, #D60B51);
+  background-color: var(--primaryColor) !important;
+  border-color: var(--primaryColor) !important;
+  background-image: linear-gradient(131deg, var(--primaryColor), var(--primaryColorDark));
   transition: 0.1s ease-out;
 }
 .btn-login:hover {
-  background-color: #E5007E !important;
+  background-color: var(--primaryColor) !important;
   background-image: linear-gradient(131deg, #D8D3E8, #EBC3CD);
   color: #2C262D;
   border: none;

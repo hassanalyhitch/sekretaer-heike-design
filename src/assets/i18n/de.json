@@ -9,6 +9,8 @@
     "insurance_check_fab": "Insurance Check",
     "service_card_add_title": "ADD",
     "service_card_add_sub_title": "(a document, a picture, etc)",
+    "service_card_inbox_sub_title":"View",
+    "service_card_file_submit_sub_title":"File Submit",
     "service_card_notifications": "INBOX",
     "service_card_notification_of_claim": "Schaden melden",
     "service_card_call_your_broker": "Makler anrufen"
@@ -40,7 +42,20 @@
       "title": "NEW SUB FOLDER",
       "text_input_label": "Name",
       "btn_save_label": "SAVE"
+    },
+    "folder_menu": {
+      "title_new_folder"   : "Add New Folder",
+      "sort_by_date"       : "Sort by Date",
+      "sort_by_a_to_z"     : "Sort by A-Z",
+      "search"             : "Search Folders"
+    },
+    "contract_menu": {
+      "title_new_contract" : "Add New Contract",
+      "sort_by_date"       : "Sort by Date",
+      "sort_by_a_to_z"     : "Sort by A-Z",
+      "search"             : "Search Contracts"
     }
+
   },
   "contract_detail": {
     "title_main" : "INSURANCE DETAILS",
@@ -56,23 +71,37 @@
     "insurance_side_menu_item_2": "Als Favorit löschen",
     "insurance_side_menu_item_3": "Umbenennen",
     "document_side_menu_item_1" : "Dokument öffnen",
-    "document_side_menu_item_2" : "Dokument umbennen"
+    "document_side_menu_item_2" : "Dokument umbennen",
+    "mark_fav_success":"Successfully marked as Favourite",
+    "mark_fav_error":"Failed to mark as Favourite",
+    "unmark_fav_success":"Unmarked as Favourite",
+    "unmark_fav_error":"Failed to unmark as Favourite"
   },
   "login": {
     "title_login": "Let's Login",
+    "title_forgot_password_1" : "Forgot Password?",
+    "title_forgot_password_2" : "Don't Worry.",
+    "title_forgot_password_3" : "It Happens to the rest of us.",
+    "content_forgot_password" : "Please enter your email address or your username and we will send you a link to reset your password",
     "btn_login": "LOG IN",
+    "btn_reset_password": "RESET PASSWORD",
+    "btn_back": "BACK",
     "username": "Username",
     "password": "Password",
     "forgot_password": "Forgot your Password?",
     "privacy_policy": "Privacy Policy",
-    "terms": "Terms & Conditions"
+    "terms": "Terms & Conditions",
+    "email": "Email",
+    "forgot_password_input_lable" : "Email or Username",
+    "btn_back_to_login" : "BACK TO LOGIN",
+    "title_email_sent" : "Fast geschafft.",
+    "content_email_sent_1" : "We have sent you an email.",
+    "content_email_sent_2" : "Please check your inbox or your spam folder"
   },
   "settings":{
     "main_title":"SETTINGS",
     "sub_title_1": "PERSONAL DETAILS",
-    "sub_title_1_1": "Push Notifications",
-    "sub_title_1_2": "Collapse Insurance",
-    "sub_title_1_3": "Collapse Folder",
+    "sub_title_1_a": "My Data",
     "sub_title_2": "SETTINGS",
     "sub_title_2_1": "Language",
     "sub_title_2_2": "Your Data",
@@ -93,15 +122,27 @@
     "documents": "My Documents",
     "sub_folders": "Sub-folders",
     "add_subfolder" : "Add Sub-Folder",
-    "add_new_document": "Add new Document"
+    "add_new_document": "Add new Document",
+    "sub_folder_creation_error" : "Sub-Folder Creation Failed",
+    "sub_folder_creation_success" : "Sub-Folder Created Successfully",
+    "folder_creation_error" : "Folder Creation Failed",
+    "folder_creation_success" : "Folder Created Successfully",
+    "mark_fav_success":"Successfully marked as Favourite",
+    "mark_fav_error":"Failed to mark as Favourite",
+    "unmark_fav_success":"Unmarked as Favourite",
+    "unmark_fav_error":"Failed to unmark as Favourite"
   },
   "favourites": {
     "title": "FAVOURITES",
-    "no_favourites" : "You have no favourite Contracts or Folders"
+    "no_favourites" : "You have no favourite Contracts or Folders",
+    "title_lable_insurances" : "INSURANCES",
+    "title_lable_folders" : "FOLDERS"
   },
   "broker":{
     "title": "MY BROKER",
-    "name_label": "NAME"
+    "inbox_label": "Inbox",
+    "call_label": "Call",
+    "email_label": "Email"
   },
   "chat" : {
     "title": "CHAT"
@@ -121,21 +162,268 @@
       "title": "Notification Title",
       "content": "Notification content",
       "mark_as_read": "Mark as Read"
+    },
+    "notification-detail":{
+      "title": "NOTIFICATIONS",
+      "back": "Go back",
+      "from": "Message from"
     }
   },
   "rename_contract": {
     "title" : "Rename Contract",
     "sub_title_name": "Contract Name",
     "text_input_label" : "New Contract Name",
-    "btn_save_label": "SAVE"
+    "btn_save_label": "SAVE",
+    "contract_rename_success" : "Contract Renamed Successfully",
+    "contract_rename_error" : "Contract Rename Failed"
   },
   "rename_folder": {
     "title" : "Rename Folder",
     "sub_title_name": "Folder Name",
     "text_input_label" : "New Folder Name",
-    "btn_save_label": "SAVE"
+    "btn_save_label": "SAVE",
+    "folder_rename_success" : "Folder Renamed Successfully",
+    "folder_rename_error" : "Folder Rename Failed"
   },
   "add_document": {
-    "title" : "Add a document e.g picture"
-  }
+    "main_title":"ADD DOCUMENT",
+    "title" : "Add a document e.g picture",
+    "sub_title_1":"Upload document/Image",
+    "sub_title_2":"Assign",
+    "placeholder":"Current Folder",
+    "submit_button_label": "UPLOAD",
+    "file_upload_error": "File Upload Failed",
+    "file_upload_success": "File Upload Successfully",
+    "file_type_alert":"Only pdf is accepted"
+  },
+  "search":{
+    "title_main":"SEARCH",
+    "title_insurances": "INSURANCES",
+    "title_folders": "FOLDERS",
+    "title_documents": "DOCUMENTS",
+    "search_all_documents_message": "Search across Insurance Contracts, Folders and Documents",
+    "search_only_folders_message" : "Search Folders",
+    "search_only_contracts_message" : "Search Insurance Contracts",
+    "search_only_documents_message" : "Search Documents",
+    "no_folders_found": "No Matching Folders Found",
+    "no_documents_found" : "No Matching Documents Found",
+    "no_insurance_contracts_found" : "No Matching Insurance Contracts Found"
+  },
+  "privacy_policy":{
+    "title" : "Privacy Policy"
+  },
+  "terms_conditions":{
+    "title" : "Terms & Conditions"
+  },
+  "snack_bar" : {
+    "action_button": "Dismiss"
+  },
+  "rename_document": {
+    "title" : "Rename Document",
+    "sub_title": "Document Name",
+    "text_input_label": "New Document Name",
+    "btn_save_label": "SAVE",
+    "document_rename_error": "Document Rename Failed",
+    "document_rename_success" : "Document Rename Successfully"
+  },
+ "my-data":{
+    "page_title":"MY DATA",
+    "title_name":"Name",
+    "title_city":"City",
+    "title_zipcode":"ZipCode",
+    "title_street":"Street"
+ },
+ "change-password":{
+  "page_title":"CHANGE PASSWORD",
+  "sub_title_1":"Current Password",
+  "sub_title_2":"New Password",
+  "sub_title_3":"Confirm Password",
+  "submit_btn":"SUBMIT"
+ },
+ "privacy_policy_and_terms_content": {
+
+  "a1_title" : "A. Geschäftsbedingungen",
+
+  "a1_content_intro" : "Die nachfolgenden Hinweise und allgemeinen Geschäftsbedingungen (AGB) ergänzen die zwischen dem Makler und seinem Mandanten getroffene Servicevereinbarung. Um seinen Kunden den bestmöglichen Service anbieten zu können, kooperiert der Makler mit der PHÖNIX MAXPOOL Gruppe AG („PHÖNIX MAXPOOL“), die vereinbarungsgemäß verschiedene Bestandteile des Leistungsspektrums im Auftrag und für Rechnung des Maklers ausführt.",
+  "a1_support_the_broker" : "Den Makler unterstützen:",
+
+  "a1_support_the_broker_option_1_title": "Maxpool Maklerkooperation GmbH",
+  "a1_support_the_broker_option_1_content": "(\"MAXPOOL\") als Ansprechpartner für Beratungsleistungen;",
+
+  "a1_support_the_broker_option_2_title": "PHÖNIX Digital GmbH",
+  "a1_support_the_broker_option_2_content" : "(“PHÖNIX Digital”) als Betreiber der Kundenplattform SEKRETÄR einschl. ScanService und SOS-Hotline für mobile Endgeräte, sowie als Zahlungsabwickler der Servicegebühren, und",
+
+  "a1_support_the_broker_option_3_title" : "PHÖNIX Schutzgemeinschaft Assekuranz GmbH",
+  "a1_support_the_broker_option_3_content": "(“PHÖNIX Schutz”) als Assekuradeur und Versicherungsnehmer der Gruppenversicherungs-verträge, welche den in der Servicevereinbarung enthaltenen Versicherungsschutz für den Mandanten gewähren.",
+
+  "a2_title" : "A1. Datenschutzhinweise zur Servicevereinbarung",
+  "a2_content_intro": "Hiermit informieren wir Sie über die Erhebung, Verarbeitung und Weitergabe von personenbezogenen Daten im Rahmen ihrer Servicevereinbarung und insbesondere in Zusammenhang mit der Nutzung des digitalen Kundenportals SEKRETÄR Pro.",
+  "a2_content_paragraph_1": "Der Makler bietet die vereinbarungsgemäßen Leistungen in Zusammenarbeit mit PHÖNIX MAXPOOL an. Das sind",
+    "a2_content_paragraph_1_option_1": "die MAXPOOL Maklerkooperation GmbH („MAXPOOL“) als Erbringer von Serviceleistungen (z.B.: Beratung im Schadenfall),",
+    "a2_content_paragraph_1_option_2" : "die PHÖNIX Digital GmbH („PHÖNIX Digital“) als Betreiber des Kundenportals SEKRETÄR, Erbringer von Serviceleistungen (z.B.: ScanService und SOS-Hotline) und Zahlungsabwickler sowie",
+    "a2_content_paragraph_1_option_3" : "die PHÖNIX Schutzgemeinschaft GmbH („PHÖNIX Schutz“) als Assekuradeur und Versicherungs-nehmer der Gruppenversicherungsverträge, welche den in der Servicevereinbarung enthaltenen Versicherungs-schutz für den Mandanten gewähren.",
+
+  "a2_content_paragraph_2": "Versicherer und Risikoträger des Versicherungsschutzes ist die Landesschadenhilfe Versicherung VaG („LSH“).",
+
+  "a2_content_sub_title_1": "1. Inlands-Versprechen",
+  "a2_content_sub_title_1_content": "Ihre Daten sind uns genauso wichtig wie Sie als Kunde! Deshalb versprechen wir Ihnen auch digital Sicherheit und Qualität „made in Germany“. Wir sichern zu, dass alle Webseiten und Services im Zusammenhang mit der Nutzung des SEKRETÄR Pro ausschließlich über deutsche Serververbindungen betrieben werden. Wir bedienen uns bei der Erfüllung unserer Aufgaben, Leistungen und Versprechen keiner Partner aus Drittländern.",
+
+  "a2_content_sub_title_2" : "2. Allgemeines",
+    "a2_content_sub_title_2_option_1" : "Personenbezogene Daten sind alle Daten, die auf Sie persönlich beziehbar sind, z. B. Name, Adresse, E-Mail-Adressen und Nutzerverhalten.",
+    "a2_content_sub_title_2_option_2" : "Ihre Daten werden im Rahmen der gesetzlichen Vorschriften erhoben und geschützt. Hierbei werden die einschlägigen datenschutzrechtlichen Bestimmungen, insbesondere die Regelungen des Telemediengesetzes (TMG), der europäischen Datenschutzgrundverordnung (EU-DS-GVO) und des Bundesdatenschutzgesetzes (BDSG) beachtet.",
+    "a2_content_sub_title_2_option_3" : "Anonyme Daten werden ausschließlich zur Verbesserung des Angebots ausgewertet und erlauben keinerlei Rückschlüsse auf die Person des Nutzers. Personenbezogene Daten und Gesundheitsdaten werden nicht ohne Ihre Einwilligung verwendet oder gespeichert.",
+
+  "a2_content_sub_title_3" : "3. Datenverarbeitung bei Vertragsschluss und Inkasso",
+    "a2_content_sub_title_3_option_1" : "Bei Vertragsschluss werden neben den Daten zu Ihrer Person und den Kontaktdaten keine weiteren personenbezogenen Daten erhoben.",
+    "a2_content_sub_title_3_option_2" : "Zusätzlich werden ggfs. Daten von Dritten, z.B. begünstigten/mitversicherten Personen, bei Ihnen erhoben, soweit dieses zur Vertragsdurchführung erforderlich ist.",
+    "a2_content_sub_title_3_option_3" : "Ihre Kontaktdaten und ggfs. Daten i.S.v. Abs. 2 werden zum Zwecke der Vertragserfüllung i.S.v. Art. 6 Abs. 1 S. 1 lit. b) DS-GVO und mit ihrer Einwilligung gem. Art. 6 Abs. 1 S. 1 lit. a) DS-GVO an PHÖNIX MAXPOOL und die LSH weitergegeben.",
+    "a2_content_sub_title_3_option_4" : "Im Rahmen der Erteilung des SEPA-Mandats und des monatlichen Einzugs der Servicegebühr wird zusätzlich ihre Bankverbindung festgestellt und mit ihrer Zustimmung gem. Art. 6 Abs. 1 S. 1 lit. a) DS-GVO an die PHÖNIX Digital zum Zwecke der Zahlungsabwicklung übermittelt.",
+
+  "a2_content_sub_title_4" : "4. Datenverarbeitung bei Servicenutzung",
+  "a2_content_sub_title_4_intro" : "Die digitale Kundenplattform SEKRETÄR Pro und alle dazugehörigen Services wie z.B. ScanService oder SOS- Hotline, werden durch die PHÖNIX Digital betrieben. PHÖNIX Digital erhebt und verarbeitet Daten ausschließlich gesetzeskonform und im nachfolgenden Sinne:",
+    "a2_content_sub_title_4_option_1" : "PHÖNIX Digital verarbeitet im Rahmen der Eröffnung Ihres Kunden- und Zugangskontos zum SEKRETÄR Pro Ihre Kontaktinformationen als personenbezogene Daten.",
+    "a2_content_sub_title_4_option_2" : "PHÖNIX Digital verpflichtet sich, sämtliche durch Sie zur Verfügung gestellten Informationen und Daten vertraulich zu behandeln. Dies gilt nicht für solche Informationen, die zum Zeitpunkt der Datenübermittlung bereits öffentlich zugänglich sind. Eine Weitergabe der Daten an unbeteiligte Dritte erfolgt nicht, es sei denn, dass eine solche Weitergabe gesetzlich vorgesehen ist.",
+    "a2_content_sub_title_4_option_3" : "Die bei PHÖNIX Digital gespeicherten persönlichen Daten des Mandanten werden zur Vertragserfüllung gemäß Art. 6 Abs. 1 S. 1 lit. b) DS-GVO verarbeitet und gespeichert. Darüberhinausgehende besondere Kategorien von Daten, bspw. Gesundheitsdaten, werden über eine gesonderte Einwilligung zur Verarbeitung freigegeben. Unter Umständen findet eine Übermittlung an entsprechende Service-mitarbeiter statt, um den jeweils gewünschten Service zu erbringen (den Vertrag erfüllen zu können) und um mit dem Interessenten kommunizieren zu können.",
+    "a2_content_sub_title_4_option_4" : "Hat der Mandant einen Beratungs-, Optimierungs- bzw. Angebotswunsch, kann er die nötigen Dokumente für den ihn beratenden Makler freischalten (d.h. diesem sichtbar machen). Spätestens mit dieser Freischaltung der Dokumente für den Makler hat der Mandant Kenntnis davon, dass der Makler selbst oder aber ein von ihm zwischengeschalteter Kooperations-partner (bspw. MAXPOOL) die freigeschalteten Dokumente und darin enthaltenen Daten an den potenziellen Vertragspartner (z.B. Versicherer) auch im vorvertraglichen Bereich weitergibt bzw. weitergeben muss. Hierüber wird der Mandant durch den Betreiber im Wege eines Datenschutzhinweises nebst einzelfallbezogener Einwilligung vor Freischaltung des Dokuments für den Makler auch informiert. Im Zweifel hat der Makler im Verhältnis zum Mandanten sicherzustellen, dass eine gültige Einwilligung des Mandanten zur Weitergabe der Daten vorliegt. Die potenziellen Vertragspartner (z.B. Versicherer) des Mandanten sind nach Weitergabe der Dokumente durch den Makler zur ordnungsgemäßen Prüfung und weiteren Vertragsdurchführung berechtigt, die vertragsrelevanten Daten – insbesondere auch die Gesundheitsdaten – im Rahmen des Vertragszweckes zu speichern und zu verwenden. Soweit es für die Eingehung einer Vertragsverlängerung erforderlich ist, dürfen diese Daten, einschließlich der Gesundheitsdaten, an Drittanbieter zur Beurteilung des vertraglichen Risikos übermittelt werden.",
+    "a2_content_sub_title_4_option_5" : "Der Betreiber verpflichtet sich, im Innenverhältnis zu seinen Mitarbeitern sicherzustellen, dass diese über ihre Pflichten zur Einhaltung der europäischen Datenschutzgrundverordnung (DS-GVO) unterrichtet sind und regelmäßig geschult werden. Dazu werden sämtliche Mitarbeiter von dem Betreiber arbeitsrechtlich auf die Vertraulichkeit im Umgang mit Daten allgemein und Mandantendaten im Besonderen verpflichtet.",
+    "a2_content_sub_title_4_option_6" : "Der Betreiber speichert zur Qualitätssicherung, Kontrolle und Funktionsgarantie bei verschiedenen Zugriffen die vollständige IP-Adresse, Uhrzeit und Art des Browsers.",
+    
+  "a2_content_sub_title_5": "5. Datenspeicherung",
+  "a2_content_sub_title_5_intro" : "Wir speichern Ihre Daten nur solange, wie dies zur Durchführung der Servicevereinbarung erforderlich ist. Im Falle der Beendigung der Servicevereinbarung – egal aus welchem Grunde – bleiben Ihre Daten über den Zeitpunkt des Wirksamwerdens der Kündigung noch einen Monat gespeichert. Dies dient der Abwicklung Ihres Accounts und gibt Ihnen die Möglichkeit, diesen wieder aufleben zu lassen. Nach dem Verstreichen eines Monats, löschen wir Ihre Daten endgültig und unwiederbringlich.",
+
+  "a2_content_sub_title_6": "6. Verantwortliche Stelle",
+  "a2_content_sub_title_6_intro" : "Verantwortlich i.S.v. Art. 4 No. 7 DS-GVO ist die",
+  "a2_content_sub_title_6_send_email" : "Unseren Datenschutzbeauftragten erreichen Sie unter",
+
+  "a2_content_sub_title_7": "7. Ihre Rechte",
+
+  "a2_content_sub_title_7_option_1" : "Sie haben gegenüber uns folgende Rechte hinsichtlich der Sie betreffenden Daten:",
+    "a2_content_sub_title_7_option_1_a" : "Recht auf Auskunft,",
+    "a2_content_sub_title_7_option_1_b" : "Recht auf Berichtigung oder Löschung,",
+    "a2_content_sub_title_7_option_1_c" : "Recht auf Einschränkung der Verarbeitung,",
+    "a2_content_sub_title_7_option_1_d" : "Recht auf Widerspruch gegen die Verarbeitung und",
+    "a2_content_sub_title_7_option_1_e" : "Recht auf Datenübertragbarkeit",
+  
+  "a2_content_sub_title_7_option_2" : "Sie haben zudem das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über die Verarbeitung Ihrer personenbezogenen Daten durch uns zu beschweren.",
+  "a2_content_sub_title_7_option_3" : "Um Ihre Rechte geltend zu machen, wenden Sie sich bitte direkt an:",
+  "a2_content_sub_title_7_option_4" : "Findet die Verarbeitung ihrer Daten auf Grundlage Ihrer Einwilligung i.S.v. Art. 6 Abs. 1 S. 1 lit. a) DS-GVO statt, können Sie Ihre Einwilligung jederzeit widerrufen. Beachten Sie bitte, dass der Widerruf zur Undurchführbarkeit der Servicevereinbarung führen kann. In diesem Fall kann das Vertragsverhältnis außerordentlich und fristlos beendet werden. Ihren Widerruf richten Sie bitte formfrei an PHÖNIX Digital oder",
+  "a2_content_sub_title_7_option_5" : "Ist Widerspruch eingelegt worden, erfolgt eine Verarbeitung Ihrer personenbezogenen Daten nicht mehr, es sei denn, es liegen nachweislich zwingende Gründe vor, die Ihre Interessen, Rechte und Freiheiten überwiegen. Eine weitere Verarbeitung ist auch dann möglich, wenn die Verarbeitung der Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen dient.",
+  "a2_content_sub_title_7_option_6" : "Die an der Vertragsvermittlung und/oder-verwaltung beteiligten Unternehmen (auch der Makler selbst) werden sofort über den Widerruf informiert und verpflichtet, unverzüglich die gesetzlichen Regelungen der DS-GVO und des BDSG umzusetzen.",
+
+  "a2_content_ending_paragraph" : "Bei allen weiteren Fragen zum Datenschutz wenden Sie vertrauensvoll an unseren Datenschutzbeauftragten:",
+  
+  "a3_title" : "A-III. Allgemeine Nutzungsbedingungen SEKRETÄR Pro und Zusatzservices",
+
+  "a3_content_sub_title_1" : "1. Freischaltung, Vertragsgegenstand",
+    "a3_content_sub_title_1_option_1" : "Betreiber des SEKRETÄR Pro ist PHÖNIX Digital. Leistungserbringer für Zusatzservices rund um den SEKRETÄR Pro, wie z.B. ScanService oder SOS-Hotline, ist ebenfalls PHÖNIX Digital.",
+    "a3_content_sub_title_1_option_2" : "Der Betreiber erfüllt weder Aufgaben als sog. „Internetaccessprovider“, noch bietet er Telekommunikationsdienstleistungen an.",
+    "a3_content_sub_title_1_option_3" : "Bestandteil der Servicevereinbarung – egal in welcher Servicestufe – ist das onlinebasierte Verwaltungsprogramm SEKRETÄR Pro. Leistungsgegenstand des SEKRETÄR Pro ist die Bereitstellung einer onlinebasierten Software, die als Verwaltungsprogramm für eine digitalisierte Haushaltsführung des Mandanten dienen kann. Es können im Kundenverwaltungssystem die Kundenstammdaten, Vertragsstammdaten zu Versicherungsverträgen,        allgemeine Korrespondenz und Dokumente, sonstige Verträge, Abrechnungsdaten, Passwörter, Kaufbelege und anderes online hinterlegt und verwaltet werden.",
+    "a3_content_sub_title_1_option_4" : "Liegt dem Makler die beiderseits unterschriebene Servicevereinbarung vor, schaltet er den Mandanten unverzüglich, spätestens jedoch nach drei Werktagen, für die Nutzung des SEKRETÄR Pro frei.",
+    "a3_content_sub_title_1_option_5" : "Das Kundenportal SEKRETÄR Pro funktioniert in der Browserversion unabhängig von verwendeten Betriebssystemen. JavaScript muss bei den jeweiligen Browsern zwingend aktiviert sein. Zur Nutzung des Funktionsumfangs muss der Computer das Anzeigen von PDF-Dokumenten unterstützen. Für die Funktion der Software ist die Internetverbindung zwingende Voraussetzung. Die Software ist also explizit nicht offlinefähig, bietet jedoch eine Funktion, mit welcher der Mandant seine darin hinterlegten Dokumente insgesamt herunterladen und lokal (offline) abspeichern kann. Zudem bietet das System alle relevanten Funktionen auch in APP-Version für mobile Endgeräte (Betriebssysteme iOS und Android).",
+
+  "a3_content_sub_title_2" : "2. Vorherige/nachträgliche SEKRETÄR-Nutzung",
+    "a3_content_sub_title_2_option_1" : "Für den Fall, dass der Mandant bereits ein Nutzerkonto im SEKRETÄR (kostenfreie Grundversion zu SEKRETÄR Pro) unterhält, wird der Mandant durch den Makler erneut für den SEKRETÄR Pro freigeschaltet. § 1 Abs. 4 gilt sinngemäß",
+    "a3_content_sub_title_2_option_2" : "Der Mandant registriert sich in diesem Fall erneut und gesondert für den SEKRETÄR Pro. Mit der Registrierung im SEKRETÄR Pro erlischt das, der kostenfreien Nutzung zugrundeliegende, Nutzungsverhältnis und wird durch die Servicevereinbarung und die Geschäfts- und Versicherungsbedingungen zur Servicevereinbarung ersetzt.",
+    "a3_content_sub_title_2_option_3" : "Die Daten des Mandanten bleiben im Wege der Neuregistrierung erhalten und werden in das neue Nutzerkonto im SEKRETÄR Pro übertragen. Hierzu ist es erforderlich, dass der Mandant bei der Neuregistrierung gem. Abs. 1 und 2 dieselbe E-Mail-Adresse verwendet, die auch von seinem bestehenden Nutzerkonto verwendet wird. Möchte der Mandant seine E-Mail-Adresse ändern, muss er sich an den Betreiber wenden.",
+    "a3_content_sub_title_2_option_4" : "Zusätzlich gleicht der Betreiber die angegebenen Stammdaten mit dem bestehenden Nutzerkonto ab, um eine Übereinstimmung der Nutzerkonten sicherzustellen.",
+    "a3_content_sub_title_2_option_5" : "Kündigt der Mandant die Servicevereinbarung, so endet dessen Nutzungsberechtigung für den SEKRETÄR automatisch mit Wirksamwerden der Kündigung; eine Herabstufung des Nutzerkontos auf SEKRETÄR (Grundversion) erfolgt nicht.",
+    "a3_content_sub_title_2_option_6" : "Eine Herabstufung des Nutzerkontos kann auf Anfrage im Einzelfall erfolgen; hierbei können jedoch lediglich die Daten migriert werden, die in den Anwendungsbereichen abgelegt sind, die auch vom Nutzungsumfang des SEKRETÄR (Grundversion) enthalten sind.",
+    "a3_content_sub_title_2_option_7" : "Wird eine Herabstufung des SEKRETÄR-Kontos im Rahmen der Kündigung des Mandanten im Einzelfall vorgenommen, trägt der Mandant die alleinige Verantwortung dafür, dass alle Daten, die nicht gem. Abs. 6 migriert werden, durch ihn persönlich abgespeichert und lokal gesichert werden. Eine Datensicherung durch den Betreiber erfolgt nicht.",
+
+  "a3_content_sub_title_3" : "3. Rechte und Pflichten des Betreibers",
+    "a3_content_sub_title_3_option_1" : "Für die Nutzung des SEKRETÄR Pro stellt der Betreiber dem Mandanten eine Software zur Verfügung, mit deren Hilfe der Mandant digital auf das Programm des Betreibers zugreifen kann. Die Nutzbarkeit der Software erfolgt durch das Bereitstellen eines Onlinezugangs.",
+    "a3_content_sub_title_3_option_2" : "Der Betreiber stellt dem Mandanten die zur vertragsgemäßen Nutzung des SEKRETÄR Pro erforderlichen Nutzungsrechte sowie Daten für den vereinbarten Nutzungszeitraum zur Verfügung. Hierzu zählen insbesondere der Benutzername sowie ein Passwort, mit Hilfe derer der Mandant die Software nutzen kann.",
+    "a3_content_sub_title_3_option_3" : "Der Betreiber stellt den Zugang zum SEKRETÄR Pro erst dann zur Verfügung, wenn Mandant und Makler eine gültige Servicevereinbarung abgeschlossen haben, der darin vereinbarte Vertragsbeginn erreicht ist und die Servicevereinbarung bei dem Betreiber vorliegt.",
+    "a3_content_sub_title_3_option_4" : "Der Betreiber führt täglich eine Sicherung aller Daten der Mandanten durch und erfüllt einen hohen Datensicherheitsstandard.",
+    "a3_content_sub_title_3_option_5" : "Überarbeitung und Pflege der Software erfolgen regelmäßig durch den Betreiber.",
+    "a3_content_sub_title_3_option_6" : "Sofern es zu funktionalen Erweiterungen der bestehenden Software kommt, wird der Mandant durch den Makler, oder aber PHÖNIX Digital als Betreiber, per E-Mail informiert.",
+    "a3_content_sub_title_3_option_7" : "Durch eine Funktionserweiterung kann eine Änderung der Nutzungsbedingungen erforderlich werden. Auch hierrüber wird der Mandant durch den Makler, oder in dessen Auftrag durch den Betreiber, per E-Mail informiert. Es handelt sich bei einer solchen Notifikation um ein Angebot zur Vertragsänderung. Es gelten die Bestimmungen gem. § 9 Servicevereinbarung.",
+    "a3_content_sub_title_3_option_8" : "Wie bei Softwareprodukten üblich, ist eine Verfügbarkeit zu 100% nicht lückenlos zu garantieren. Eine Verfügbarkeit der Software wird aber zu durchschnittlich 95%, gerechnet auf ein Jahr ab Beginn des Vertrages, ausdrücklich zugesagt. Zudem muss der Betreiber jederzeit die Möglichkeit der Programmpflege und des Updateservices für zum Betrieb notwendige Hard- und Software haben.",
+    "a3_content_sub_title_3_option_9" : "Der SEKRETÄR Pro steht dem Mandanten auch für nicht über den Makler und/oder MAXPOOL vermittelte oder auf den Makler oder MAXPOOL übertragene Verträge zur Verfügung (sog. „Fremdverträge“). Der Makler und MAXPOOL unterstützen nicht bei der Aktualisierung und Verwaltung der Fremdverträge und servicieren diese nicht. Insbesondere haftet der Betreiber nicht für vertragliche Inhalte solcher Verträge. Auch die Haftung des Maklers umfasst diese Verträge ausdrücklich nicht, bis der Makler die Betreuungsübernahme dieser Verträge schriftlich bestätigt hat.",
+    "a3_content_sub_title_3_option_10": "Der Betreiber kann dem Mandanten über den SEKRETÄR Pro bestellbare Dienstleistungen Dritter zur Verfügung stellen. Die Nutzung dieser Dienstleistungen ist nur über einen separaten Bestellprozess des Drittanbieters möglich. Das Vertragsverhältnis zwischen dem Drittanbieter und dem Mandanten entsteht unabhängig von dem Vertragsverhältnis zwischen dem Betreiber und dem Mandanten. Der Betreiber haftet nicht für das Vertragsverhältnis zwischen dem Drittanbieter und dem Mandanten. Der Mandant trägt ggf. anfallende Kosten für die Dienstleistungen Dritter.",
+
+    "a3_content_sub_title_4" : "4. Rechte und Pflichten des Mandanten",
+      "a3_content_sub_title_4_option_1" : "Sollte es bei der Nutzung der Software zu Problemen kommen, so hat der Mandant den Betreiber hierüber unverzüglich in Kenntnis zu setzen, damit der Betreiber diese Probleme beseitigen kann.",
+      "a3_content_sub_title_4_option_2" : "Der Mandant ist für die Aufrechterhaltung von Vertraulichkeit und Sicherheit seines Kontos verantwortlich. Er verpflichtet sich, den Betreiber unverzüglich über etwaige Sicherheitsverstöße im Hinblick auf sein Konto zu benachrichtigen. Er haftet für jeden Missbrauch, der unter Verwendung seiner Kontoinformationen oder seines Kontos vorgenommen wird, wenn er diesen Missbrauch zu vertreten hat, insbesondere wenn er gegen seine bestehenden Sorgfaltspflichten verstoßen hat.",
+      "a3_content_sub_title_4_option_3" : "Der Mandant verpflichtet sich, alle ihm bekannten Umstände, welche die Funktion der vertragsgegenständlichen Software beeinträchtigen könnten, dem Anbieter unverzüglich anzuzeigen.",
+      "a3_content_sub_title_4_option_4" : "Der Mandant verpflichtet sich zur vertragsgemäßen Nutzung der Software. Insbesondere darf der Mandant die Software nicht für rechtswidrige Zwecke verwenden oder illegale Inhalte hinterlegen und speichern.",
+      "a3_content_sub_title_4_option_5" : "Der Mandant verpflichtet sich, die Nutzer der ihm zugeordneten Partner-Accounts darüber zu informieren, dass deren Nutzungsrecht an das Bestehen der Servicevereinbarung und seines daraus resultierenden Haupt-Accounts gebunden ist. Der Mandant ist berechtigt, den SEKRETÄR Pro auch für nicht über den Makler oder MAXPOOL vermittelte oder auf den Makler übertragene Verträge (sog. „Fremdverträge“) zu nutzen. Der Mandant ist für die Verwaltung dieser Daten allein verantwortlich. Die Sichtbarkeit der durch den Mandanten eingestellten Dokumente ist für den Makler und MAXPOOL gesperrt. Der Mandant kann die Sperrung der Sichtbarkeit für einzelne Dokumente aufheben und diese damit beispielsweise dem betreuenden Makler zur Verfügung stellen.",
+      "a3_content_sub_title_4_option_6" : "Der Mandant ist verpflichtet, richtige und vollständige Angaben zu machen, wenn er sich für das Konto anmeldet und die Software nutzt („Anmeldedaten“). Das System fordert auf, die Anmeldedaten mindestens im Abstand von drei Monaten zu aktualisieren. Der Mandant teilt dem Betreiber jede Änderung seiner Kontaktdaten unverzüglich postalisch oder per Mail mit.",
+      "a3_content_sub_title_4_option_7" : "Dem Mandanten sind insbesondere der Versuch bzw. die Durchführung negativer Beeinflussung der Software untersagt.",
+      "a3_content_sub_title_4_option_8" : "Sollte eine Benachrichtigung des Anbieters erforderlich sein, ist diese bitte zu richten an:",
+
+    "a3_content_sub_title_5" : "5. Nutzungsumfang",
+      "a3_content_sub_title_5_option_1" : "Der Mandant erhält in beiden Servicestufen uneingeschränkten Zugang zum digitalen Kundenportal SEKRETÄR Pro (Haupt-Account), in welchem er die Ablage und Verwaltung seiner Versicherungsverträge und sonstiger Vertragsdokumente in geheimer und datenschutzkonformer Weise vornehmen kann.",
+      "a3_content_sub_title_5_option_2" : "Der Mandant kann, muss aber gleichwohl nicht, für den Makler und MAXPOOL als dessen Erfüllungsgehilfen bestimmte Dokumente einsehbar machen.",
+      "a3_content_sub_title_5_option_3" : "Dies gilt nicht für Versicherungsverträge, die im Bestand von MAXPOOL geführt werden. Diese sind systembedingt stets für alle Account-Nutzer, den Makler und PHÖNIX MAXPOOL einsehbar.",
+      "a3_content_sub_title_5_option_4" : "Die Erlaubnis zur Nutzung der Software beschränkt sich nur auf solche Accounts, welche namentlich dem Makler oder Betreiber vorab schriftlich durch die Registrierung bekannt gegeben wurden.",
+
+    "a3_content_sub_title_6" : "6. Partner-Account",
+      "a3_content_sub_title_6_option_1" : "Der Mandant hat die Möglichkeit, neben dem eigenen Haupt-Account bis zu vier Partner- Accounts (z.B. für Lebenspartner oder Familie) freischalten zu lassen. Diese Partner-Accounts können den SEKRETÄR Pro mit demselben Leistungsumfang wie der Haupt-Account nutzen.",
+      "a3_content_sub_title_6_option_2" : "Möchte der Mandant einen, mehrere oder alle vier der möglichen Partner-Accounts aktivieren lassen, so teilt er dem Makler oder unmittelbar der PHÖNIX Digital die Kontaktdaten der vorgesehenen Nutzer mit. Hierzu reicht er das im SEKRETÄR Pro bereitgestellte Formular zur Einverständniserklärung ein, welches von ihm und dem künftigen Partner-Account-Nutzer unterzeichnet ist. Der Makler oder PHÖNIX Digital schalten die neuen Nutzer unverzüglich, spätestens jedoch nach drei Werktagen, für den SEKRETÄR Pro frei. Für den Fall, dass die Nutzer der Partner-Accounts nur dem Makler mitgeteilt werden, leitet dieser die Nutzerinformationen an PHÖNIX Digital weiter.",
+      "a3_content_sub_title_6_option_3" : "Partner-Accounts haben denselben Nutzungsumfang wie ein Haupt-Account. Haupt- und Partner-Accounts können die im SEKRETÄR Pro abgelegten Inhalte standardmäßig gegenseitig einsehen. Die jeweiligen Nutzer können diese Einstellung jedoch ändern und die von ihnen dazu bestimmten Inhalte für andere Nutzer verbergen.",
+      "a3_content_sub_title_6_option_4" : "Verborgene Inhalte können jederzeit (wieder) füreinander oder aber auch für den Makler und PHÖNIX MAXPOOL einsehbar gemacht werden.",
+      "a3_content_sub_title_6_option_5" : "Eine dauerhafte Nutzung eines Partner-Accounts wird nur gewährt, wenn und soweit der Nutzer des Partner-Accounts im Rahmen der Registrierung den Nutzungsbedingungen des SEKRETÄRs Pro zustimmt. Verweigert der Nutzer die Zustimmung, scheitert die Registrierung und die Freischaltung wird zurückgenommen. Der Mandant kann als Inhaber eines Haupt-Accounts stets erneut einen Partner- Account beantragen, bis das Limit von bis zu vier Partner-Accounts erreicht ist.",
+      "a3_content_sub_title_6_option_6" : "Die Nutzungsberechtigung eines Partner-Accounts ist an den Status und das Bestehen des Haupt- Accounts gebunden. Wird der Haupt-Account in seiner Nutzungsberechtigung eingeschränkt oder entfällt diese (etwa durch Kündigung oder bei Zahlungsverzug), so wird auch die Nutzungsberechtigung der Partner-Accounts eingeschränkt, oder entfällt; dies gilt unabhängig davon, ob die Nutzungseinschränkung des Haupt-Accounts endgültig oder vorrübergehend ist.",
+      "a3_content_sub_title_6_option_7" : "Die Nutzer der Partner-Accounts werden rechtzeitig über eine Änderung der Nutzungsberechtigung per E-Mail in Kenntnis gesetzt. Für den Fall des Entfallens der Nutzungsberechtigung erhalten die Partner-Accounts die Möglichkeit, ihren Account in einen zahlungspflichtigen Haupt-Account umzuwandeln, oder innerhalb von drei Monaten nach Wegfallen der Nutzungsberechtigung ihre Unterlagen aus dem SEKRETÄR Pro herunterzuladen und zu speichern.",
+
+    "a3_content_sub_title_7" : "7. Zusatzservices",
+      "a3_content_sub_title_7_option_1" : "Als Zusatzservices mit Bezug zum SEKRETÄR Pro sind in der Servicevereinbarung der ScanService und die SOS-Hotline enthalten. Der Mandant kann diese Mehrwerte als Haupt-Account-Inhaber mit dem ihm jeweils vereinbarungsgemäß zustehenden Basiskontingent nutzen.",
+      "a3_content_sub_title_7_option_2" : "Im Rahmen der Einverständniserklärung gem. § 6 Abs. 2 gestattet der Mandant den Partner- Accounts, die ihm zugeordnet sind, diese Zusatzservices ebenfalls zu nutzen.",
+      "a3_content_sub_title_7_option_3" : "Der Haupt-Account teilt insoweit das ihm zustehende Basiskontingent für die Zusatzservices mit den Partner-Accounts. Ist das Basiskontingent aufgebraucht und werden die Services weiter beansprucht, fallen alle Kosten nur beim Mandanten als Haupt-Account-Inhaber an.",
+      "a3_content_sub_title_7_option_4" : "Diese Regel beschränkt sich nicht auf das derzeit bestehende Serviceangebot, sondern gilt sinngemäß bei Angebotserweiterung auch für zukünftige Zusatzservices.",
+      "a3_content_sub_title_7_option_5" : "Es wird auf die besonderen Nutzungs-bedingungen ScanService und SOS-Hotline hingewiesen.",
+
+    "a3_content_sub_title_8" : "8. Speicherplatz",
+    "a3_content_sub_title_8_option_1" : "Der dem Mandanten zur Verfügung stehende Basis- Speicherplatz im SEKRETÄR Pro variiert je nach gewählter Servicestufe. Haupt-Account und Partner-Accounts teilen sich das Speichervolumen. Es wird auf das Leistungs- und Kostenverzeichnis zur Servicevereinbarung verwiesen.",
+    "a3_content_sub_title_8_option_2" : "Der Mandant kann eine Aufstockung seines Speicherplatzes um je 10 GB beantragen. Wird eine Speicherplatz-Erhöhung durch den Nutzer eines Partner-Accounts veranlasst, so wird das Gesamtspeichervolumen erhöht und die Kosten entstehen für Rechnung des Haupt-Accounts.",
+    "a3_content_sub_title_8_option_3" : "Für jede Erhöhung fallen pro 10 GB je € 0,99 (zzgl. MWST) monatlich an.",
+    "a3_content_sub_title_8_option_4" : "Wird eine Speicherplatzerhöhung beantragt, so erhöht sich die Servicegebühr beginnend mit dem laufendem Rechnungsmonat um den angegebenen Betrag. Die neue Servicegebühr wird zu unverändertem Zeitpunkt durch PHÖNIX Digital eingezogen.",
+
+    "a3_content_sub_title_9" : "9. Folgen bei Kündigung der Servicevereinbarung",
+      "a3_content_sub_title_9_option_1" : "Wird die Servicevereinbarung gekündigt, wird der Mandant für den SEKRETÄR Pro gesperrt. Der Mandant hat nach Wirksamwerden der Kündigung die Möglichkeit, seine persönlichen Dokumente innerhalb von drei Monaten aus dem System herunterzuladen und lokal auf eigene Verantwortung abzuspeichern. Hierbei ist der Anbieter auf Nachfrage gern unterstützend und beratend behilflich.",
+      "a3_content_sub_title_9_option_2" : "Die Kündigung der Servicevereinbarung beinhaltet auch die Kündigung des SEKRETÄR-Pro-Kontos sowie die Kündigung für die Lizenz der Software und führt dazu, dass eine Nutzung des Dienstes mit Wirksamwerden der Kündigung verhindert wird. Nach Wirksamwerden der Kündigung hat der Mandant nur so weit Zugriff auf den SEKRTÄR Pro, wie es zur Datensicherung gem. Abs. 1 erforderlich ist.",
+
+    "a3_content_sub_title_10" : "10. Datenherausgabe an berechtigte Personen",
+      "a3_content_sub_title_10_option_1" : "Datensicherheit und -geheimnis haben für Makler und Betreiber einen hohen Stellenwert. Daher trifft der Betreiber sachgerechte Vorkehrungen, um den Zugriff unbefugter Dritter zu verhindern; hierzu wird auf § 11 sowie die Datenschutzhinweise zur Servicevereinbarung verwiesen.",
+      "a3_content_sub_title_10_option_2" : "In Einzelfällen können allerdings Dritte ein berechtigtes Interesse am Zugang der im SEKRETÄR Pro vom Nutzer hinterlegten Daten haben, auch wenn ihnen die Zugangsdaten des Nutzers nicht vorliegen.  Dies können im Falle des Versterbens des Nutzers dessen Erben oder aber bei Geschäftsunfähigkeit des Nutzers Vorsorgebevollmächtigte oder gerichtlich bestellte Betreuer sein.",
+      "a3_content_sub_title_10_option_3" : "Der Mandant willigt ein, dass Makler und Betreiber berechtigten Personen i.S.v. Abs. 2 Zugang zu seinem SEKRETÄR-Pro-Konto zwecks vorrübergehender Vertragsfortsetzung oder Schließung mit Datendownload verschafft, wenn die Berechtigung in geeigneter Weise nachgewiesen wird.",
+      "a3_content_sub_title_10_option_4" : "Als geeigneter Nachweis der Berechtigung gilt im Falle der Erbschaft die Vorlage eines Erbscheins oder die Vorlage eines notariellen Testaments in Verbindung mit einem gerichtlichen Eröffnungsbeschluss zum Testamentsverfahren.",
+      "a3_content_sub_title_10_option_5" : "Als geeigneter Nachweis der Berechtigung gilt im Falle der Geschäftsunfähigkeit die Vorlage einer notariellen Vorsorge- bzw. Generalvollmacht oder die Vorlage einer einstweiligen Anordnung oder eines Beschlusses des Betreuungsgerichts. Ist die Vollmacht unter der aufschiebenden Bedingung des Eintritts des Vorsorgefalls erteilt, muss zudem wenigstens durch einfach-ärztliches Attest der Vorsorgefall nachgewiesen werden.",
+      "a3_content_sub_title_10_option_6" : "Um in den Fällen des Abs. 2 eine unbürokratische Datenherausgabe zu ermöglichen, hat der Mandant die Möglichkeit, dem Betreiber schriftlich Vertrauenspersonen mitzuteilen. Diesen Vertrauenspersonen verschafft der Betreiber im Falle des Abs. 2 Zugang zum Nutzerkonto, wenn diese eine Berechtigung bloß glaubhaft machen. Hieran halten sich Makler und Betreiber gebunden, es sei denn, der Nutzer widerruft die Berechtigung der Vertrauenspersonen schriftlich.",
+      "a3_content_sub_title_10_option_7" : "Einer schriftlichen Mitteilung oder einem schriftlichen Widerruf gem. Abs. 6 steht die elektronische Hinterlegung oder Entfernung von Vertrauenspersonen im SEKRETÄR-Pro-Nutzerkonto gleich.",
+      "a3_content_sub_title_10_option_8" : "In Fällen, die denen des Abs. 2 vergleichbar sind, prüft der Betreiber die Berechtigung nach eigenem Ermessen und wendet dabei Abs. 3 sinngemäß an.",
+
+    "a3_content_sub_title_11" : "11. Datenschutz",
+      "a3_content_sub_title_11_option_1" : "Daten werden im Rahmen der gesetzlichen Vorschriften erhoben und geschützt. Hierbei beachtet der Betreiber die einschlägigen datenschutzrechtlichen Bestimmungen, insbesondere die Regelungen des Telemediengesetzes (TMG), der europäischen Datenschutzgrundverordnung (DS-GVO) und des Bundesdatenschutzgesetzes (BDSG).",
+      "a3_content_sub_title_11_option_2" : "Anonyme Daten werden ausschließlich zur Verbesserung des Angebots vom Betreiber ausgewertet und erlauben keinerlei Rückschlüsse auf die Person des Nutzers. Personenbezogene Daten und Gesundheitsdaten werden nur verwendet und gespeichert, wenn der Nutzer dies freiwillig mitteilt.",
+      "a3_content_sub_title_11_option_3" : "Der Betreiber verpflichtet sich, sämtliche durch den Mandanten zur Verfügung gestellten Informationen und Daten vertraulich zu behandeln. Dies gilt nicht für solche Informationen, die zum Zeitpunkt der Datenübermittlung bereits öffentlich zugänglich sind. Eine Weitergabe der Daten an unbeteiligte Dritte erfolgt nicht, es sei denn, dass eine solche Weitergabe gesetzlich vorgesehen ist.",
+      "a3_content_sub_title_11_option_4" : "Es wird auf die Datenschutzhinweise zur Servicevereinbarung in der aktuellen Fassung hingewiesen.",
+
+    "a3_content_sub_title_12" : "12. Haftung",
+      "a3_content_sub_title_12_option_1" : "Makler und Betreiber stellen die Leistungen in oben beschriebenem Sinne ohne Gewähr für deren Inhalt und den darauf basierenden Auskünften und Berechnungen bereit und sind nicht verpflichtet, eine Plausibilitätsprüfung der Unterlagen vorzunehmen.",
+      "a3_content_sub_title_12_option_2" : "Ferner übernehmen Makler und Betreiber keine Gewähr für Richtigkeit und Vollständigkeit des Datenmaterials. Makler und Betreiber können auch keine Gewähr für die richtige, vollständige und zeitnahe Übermittlung der Daten und auch nicht für die Zuleitung von Dokumenten an den Mandanten übernehmen.",
+      "a3_content_sub_title_12_option_3" : "Makler und Betreiber haften gegenüber dem Mandanten nicht für die Richtigkeit und Vollständigkeit von Angaben sonstiger Produktgeber im Zusammenhang mit dem Angebot des SEKRETÄR Pro für mögliche daraus resultierende Vermögensschäden.",
+      "a3_content_sub_title_12_option_4" : "Makler und Betreiber treffen technische Voraussetzungen zum Schutze des SEKRETÄR Pro und den dort hinterlegten Daten vor Computerviren, Trojanern, sonstiger Malware u.ä.. Gehen Daten des Mandanten dadurch verloren oder werden beschädigt, dass dieser unwissentlich eine mit Malware behaftete Datei in den SEKRETÄR Pro hochlädt, so haften Makler und Betreiber für daraus resultierende Schäden nicht.",
+      "a3_content_sub_title_12_option_5" : "Werden Daten des Mandanten dadurch beschädigt oder gehen verloren, dass der Makler eine kompromittierte Datei i.S.v. Abs. 4 hochlädt, so haftet hierfür der Betreiber nicht.",
+      "a3_content_sub_title_12_option_6" : "Die Haftung für eine Datenherausgabe gem. § 10 Abs. 3 ist ausgeschlossen, wenn die Prüfung der Berechtigung anhand von geeigneten Nachweisen gem. § 10 Abs. 4 und 5 fehlerfrei erfolgt ist.",
+      "a3_content_sub_title_12_option_7" : "Die Haftung für eine Datenherausgabe an Vertrauenspersonen gem. § 10 Abs. 6 ist ausgeschlossen.",
+
+    "a3_content_sub_title_13" : "13. Urheberrecht",
+      "a3_content_sub_title_13_option_1" : "Sämtliche geistige Eigentumsrechte an der Software verbleiben bei dem Betreiber.",
+      "a3_content_sub_title_13_option_2" : "Der Mandant erlangt durch Vertragsunterzeichnung lediglich ein Recht zur Nutzung an der Software in vertraglich vereinbartem Umfang.",
+
+    "a3_content_sub_title_14" : "14. Service/Kontakt",
+      "a3_content_sub_title_14_part_1" : "Der Betreiber ist von Montag bis Freitag von 9-18 Uhr per Mail unter",
+      "a3_content_sub_title_14_part_2" : "oder telefonisch unter 0800/10 00 135 (gebührenfrei aus dem deutschen Fest- und Mobilfunknetz) erreichbar.",
+
+    "phoenix_digital_address_1" : "PHOENIX Digital GmbH",
+    "phoenix_digital_address_2" : "Glockengiesserwall 2,",
+    "phoenix_digital_address_3" : "20095 Hamburg",
+    "phoenix_digital_address_4" : "T: 0800/1000 135",
+    "phoenix_digital_address_5" : "(gebuhrenfrei aus dem deutschen",
+    "phoenix_digital_address_6" : "Fest- und Mobilfunknetz)"
+
+}
+
 }

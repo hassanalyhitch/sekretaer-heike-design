@@ -17,27 +17,27 @@
 }
 .content{
   margin-top: -30px;
-  border-top: solid 4px #D60B51;
+  border-top: solid 4px var(--primaryColorDark);
   border-top-right-radius: 15px;
 }
 .folder-top{
   width: 110px;
   height: 50px;
-  background-image: linear-gradient(141deg, #E5007E, #D60B51);
+  background-image: linear-gradient(141deg, var(--primaryColor), var(--primaryColorDark));
   border-radius: 0px 25px 10px 0px;
 }
 .folder-bg-dark-pink{
   top: 40px;
   border-top-right-radius: 15px;
-  background-color: #E5007E;
-  background-image: linear-gradient(141deg, #E5007E, #D60B51);
+  background-color: var(--primaryColor);
+  background-image: linear-gradient(141deg, var(--primaryColor), var(--primaryColorDark));
   width: 338px;
   height: 170px;
 }
 .icon-container{
   width: 50px;
-  background-color: #E5007E;
-  background-image: linear-gradient(141deg, #E5007E, #D60B51);
+  background-color: var(--primaryColor);
+  background-image: linear-gradient(141deg, var(--primaryColor), var(--primaryColorDark));
   border-radius: 0px 0px 15px 0px;
   height: 100%;
   color: white;
@@ -73,7 +73,7 @@
 }
 
 .isFav{
-  background-color: #E5007E;
+  background-color: var(--primaryColor);
 }
 .notFav{
   background-color: #000000 !important;

@@ -22,6 +22,12 @@
         <input placeholder=" " type="text" [(ngModel)]="newDocName" name="name" ngModel required/>
         <label>{{ 'rename_document.text_input_label' | translate }}</label>
       </div>
+
+      <div class="d-flex flex-row share">
+        <span class="broker-btn" (click)="onShareWithBroker()"><img class="broker-icon" [src]="acceptShare"></span>
+        <p class="m-2">Share with Broker</p>
+      </div>
+
       <div class="mt-5 w-100">
         <button
           id="save-btn"
