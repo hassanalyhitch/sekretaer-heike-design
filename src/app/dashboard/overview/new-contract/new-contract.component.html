@@ -51,12 +51,20 @@
                     onclick="(this.type='date')"
                      class="form-control" id="end" name="end" class="fileUpload"/>
 
-                    <input ngModel [required]="optionSelected" type="text" 
-                    placeholder="Payment Method"  class="form-control" id="payment" 
-                    name="payment"class="fileUpload" />
+
+                     <div class="fileUpload">
+                        <ng-multiselect-dropdown
+                        [placeholder]="'Payment Method'"
+                        [settings]="paymentMethodSettings"
+                        (onSelect)="onPaymentMethodSelected($event)"
+                        [data]="paymentMethodsList"
+                        >
+                        </ng-multiselect-dropdown>
+                    </div>
+                  
 
                     <input  ngModel [required]="optionSelected"  
-                    type="text" placeholder="Bonus" class="form-control" 
+                    type="text" placeholder="Amount" class="form-control" 
                     id="Amount" name="Amount" class="fileUpload"/>
                     
                <p class="subtitle_section">File for Preview:</p>

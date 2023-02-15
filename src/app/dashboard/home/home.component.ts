@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit,AfterViewInit{
 
   ngOnInit() {
     this.contractService.getContracts().subscribe({
-      complete: () => {
+      next: () => {
         this.allContractsArr = this.contractService.userContractsArr;
       
         this.allContractsArr.forEach((contract) => {

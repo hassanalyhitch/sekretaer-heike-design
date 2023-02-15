@@ -143,6 +143,22 @@
   color:#707070;
   font-style: normal;
 }
+.payment_methods{
+  margin-left:auto;
+  margin-right:auto;
+  margin-top: 3px;
+  margin-bottom: 6px;
+  border-radius: 7px;
+  border:none;
+  width: 90%;
+  padding: 15px;
+  background-color: #fff;
+  cursor: pointer;
+  font-family:oscine, sans-serif;
+  font-size: 17px;
+  color:#707070;
+  font-style: normal;
+}
 
 input{
   outline:none;

@@ -24,9 +24,9 @@
   overflow-x: hidden;
   padding-bottom: 40px;
   }
+
 .allowScroll{
   overflow-y: scroll !important;
-
 }
 .disableScroll{
   overflow-y: hidden !important;
@@ -139,7 +139,7 @@
   padding-top:20px;
 }
 
-.submit{
+.btn-login{
   background-image: linear-gradient(131deg, var(--primaryColor), var(--primaryColorDark));
   border-color: var(--primaryColor) !important;
   width: 80%;
@@ -154,11 +154,24 @@
   margin-left:auto;
   margin-right:auto;
 }
-.submit:hover{
+.btn-login:hover{
   background-image: linear-gradient(131deg, #D8D3E8, #EBC3CD);
   color: #2C262D;
   border: none;
 }
+button[disabled] {
+  color: white;
+  cursor: default;
+}
+button[disabled]:hover {
+  border-color: white !important;
+  background-color: transparent;
+  cursor: default;
+}
+button[disabled]:hover#sign-in-btn {
+  color: white;
+}
+
 .fileUploadStatus{
   display: block;
   margin-left: auto;
@@ -180,6 +193,7 @@
 .broker-btn{
   outline:none;
   border:none;
+  cursor: pointer;
 }
 .acceptShare{
   background-image: linear-gradient(131deg, var(--primaryColor), var(--primaryColorDark));
@@ -191,7 +205,9 @@
   width:48px;
   height:48px;
 }
-
+.back-arrow-icon{
+  cursor: pointer;
+}
 
 
 

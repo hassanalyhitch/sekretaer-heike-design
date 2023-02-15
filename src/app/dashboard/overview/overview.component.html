@@ -34,8 +34,7 @@
               <div class="edit-rename d-flex flex-column p-2 align-self-center justify-content-center align-items-center"
                   [ngClass]="{'d-none':!allContractsArr[2].swipedLeft}">
                   <i class="material-icons contractIcons mb-1"  (click) ="renameContract(allContractsArr[2])">mode_edit</i>
-                  <i  class="material-icons contractIcons d-flex justify-content-center"(click)=" addContractDoc(allContractsArr[2])">add</i>
-            </div>
+              </div>
           </div>
 
         
@@ -45,7 +44,6 @@
                 <div class="edit-rename d-flex flex-column p-2 align-self-center justify-content-center align-items-center"
                 [ngClass]="{'d-none':!allContractsArr[1].swipedLeft}">
                   <i class="material-icons contractIcons mb-1"  (click) ="renameContract(allContractsArr[1])">mode_edit</i>
-                  <i  class="material-icons contractIcons d-flex justify-content-center"(click)=" addContractDoc(allContractsArr[1])">add</i>
                 </div>
           </div>
 
@@ -54,7 +52,6 @@
             <div class="edit-rename d-flex flex-column p-2 align-self-center justify-content-center align-items-center"
             [ngClass]="{'d-none':!allContractsArr[0].swipedLeft}">
               <i class="material-icons contractIcons mb-1"  (click) ="renameContract(allContractsArr[0])">mode_edit</i>
-              <i  class="material-icons contractIcons d-flex justify-content-center"(click)=" addContractDoc(allContractsArr[0])">add</i>
             </div>
           </div>
         </div>
@@ -64,7 +61,6 @@
             <app-fav-item class="col-12 m-1" [ngClass]="{'swipedLeft':item.swipedLeft}" [contractItem]=item (swipe)="onContractSwipe($event,item)" (tap)="onCardClick(item)"></app-fav-item>
             <div class="edit-rename d-flex flex-column p-2 align-self-center justify-content-center align-items-center"  [ngClass]="{'d-none':!item.swipedLeft}">
               <i class="material-icons mb-1 contractIcons"   (click) ="renameContract(item)">mode_edit</i>
-              <i  class="material-icons contractIcons  d-flex justify-content-center" (click) ="addContractDoc(item)">add</i>
             </div>
           </div>
         </div>

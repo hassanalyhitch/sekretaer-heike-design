@@ -421,4 +421,55 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
       }
     });
   }
+
+  onSubFolderSwipe(evt,subfolder:FolderData){
+    const swipeDirection = Math.abs(evt.deltaX) > 40 ? (evt.deltaX > 0 ? 'right' : 'left'):'';
+    
+    console.log('swiped '+swipeDirection);
+    switch(swipeDirection){
+      case 'left':{
+        subfolder.swipedLeft = true;
+        break;
+      }
+      case 'right':{
+
+       subfolder.swipedLeft = false;
+        break;
+      }
+    }
+
+  }
+
+  renameSubFolder(subfolder:FolderData){
+    const dialogConfig = new MatDialogConfig();
+    // let passdata:string = '{"fileName": "'+this.file.name+'","fileUrl": "'+this.file.fileUrl+'"}';
+    let passdata:string = '{"folderName": "'+subfolder.folderName+'","folderId": "'+subfolder.id+'"}';
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = false;
+    dialogConfig.id = 'renamefolder-modal-component';
+    //dialogConfig.height = '350px';
+    dialogConfig.width = '350px';
+    dialogConfig.data = passdata;
+
+    dialogConfig.panelClass = 'bg-dialog-folder';
+    // https://material.angular.io/components/dialog/overview
+    const modalDialog = this.matDialog.open(RenameFolderComponent, dialogConfig);
+    
+    this.matDialog.getDialogById('renamefolder-modal-component').afterClosed().subscribe({
+      next:()=>{
+        this.folderService.getFolderDetails(this.folder.id).subscribe({
+          next:(resp:any) =>{
+            console.log('folder-details');
+            this.folder = this.folderService.selectedFolder;
+          },
+          complete:()=>{},
+        });
+      },
+      error:(resp)=>{
+        console.log(resp);
+      }
+    });
+  }
+
+
 }

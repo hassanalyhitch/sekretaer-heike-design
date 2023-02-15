@@ -9,6 +9,8 @@
   --primaryColorDark: #D60B51;
   --secondaryColor: #2C262D;
   --primaryIconColor: #D60B51;
+  --primaryLightColor: #E5007E8A;
+  --primaryLightColor-100: #edcfd6;
 }
 
 html,
@@ -83,9 +85,8 @@ body {
 }  
 
 .multiselect-dropdown .dropdown-btn .selected-item{
-  border:1px solid #E5007E !important;
   margin-right: 30px !important;
-  background: #E5007E !important;
+  background-image: linear-gradient(131deg, var(--primaryColor), var(--primaryColorDark))!important;
   padding: 0 8px !important;
   color: #fff !important;
   border-radius: 2px !important;
@@ -104,5 +105,80 @@ body {
   backdrop-filter: blur(9.7px);
   -webkit-backdrop-filter: blur(9.7px);
   border: 1px solid rgba(218, 216, 216, 0.3);
+}
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+  background-color: var(--primaryColor)!important;
+}
+.mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+  background-color: var(--primaryLightColor);
+}
+.mat-slide-toggle.mat-primary.mat-checked .mat-slide-toggle-bar{
+  background-color: var(--primaryLightColor) !important;
+}
+.mat-disabled {
+  opacity: 1 !important;
+}
+
+.content-container{
+  background: linear-gradient(29deg, var(--primaryColor), var(--primaryColorDark));
+  height:85%;
+  border-bottom-left-radius:200px;
+}
+.app-logo{
+  height: 148px;
+  width: 148px;
+  padding: 8px;
+  object-fit: contain;
+  object-position: center center;
+}
+.loader { 
+  width:60%; 
+  margin:30px auto;
+  position:relative;
+  padding:2px;
+  background-color:#000;
+  z-index:2;
+  }
+.loader:before {
+  content:'';
+  position:absolute;
+  top:-4px; 
+  right:-4px; 
+  bottom:-4px; 
+  left:-4px;
+  }
+.loader .loaderBar { 
+  position:absolute;
+  top:0;
+  right:100%;
+  bottom:0;
+  left:0;
+  width:0;
+  background-color:#f8f8ff;
+  animation:borealisBar 2s linear infinite;
+  }
+
+@keyframes borealisBar {
+  0% {
+      left:0%;
+      right:100%;
+      width:0%;
+  }
+  10% {
+      left:0%;
+      right:75%;
+      width:25%;
+  }
+  90% {
+      right:0%;
+      left:75%;
+      width:25%;
+  }
+  100% {
+      left:100%;
+      right:0%;
+      width:0%;
+  }
 }
 

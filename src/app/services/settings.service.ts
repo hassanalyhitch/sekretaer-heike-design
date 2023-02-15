@@ -1,0 +1,91 @@
+import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class SettingsService {
+
+  theme: string;
+  language: string;
+
+  constructor(private translateService: TranslateService) {
+
+    this.switchTheme(this.getCurrentTheme());
+
+  }
+
+  setLanguage(){
+    this.translateService.use(this.getCurrentLanguage());
+  }
+
+  currentSettings(){
+    let settings:any[] = [
+      this.getCurrentLanguage,
+      this.getCurrentTheme
+    ]
+
+    return settings;
+  }
+
+  setCurrentTheme(theme: string){
+    localStorage.setItem('theme_selected', theme);
+
+    //todo : save this THEME to API
+
+    this.switchTheme(theme);
+  }
+
+  setCurrentLanguage(lang: string){
+    localStorage.setItem('language', lang);
+
+    //TODO : SAVE THIS LANG TO API
+
+    this.translateService.use(lang);
+  }
+
+  getCurrentTheme(){
+    this.theme = localStorage.getItem('theme_selected');
+
+    return this.theme;
+  }
+
+  getCurrentLanguage(){
+    this.language = localStorage.getItem('language');
+
+    return this.language;
+  }
+
+  clearSettings(){
+    localStorage.clear();
+  }
+  
+  switchTheme(theme_color: string){
+
+    let root:any = document.querySelector(':root');
+
+    switch(theme_color){
+
+      case 'blue':{
+        root.style.setProperty("--primaryColor", "#2B71A3");
+        root.style.setProperty("--primaryColorDark", "#2A318B");
+        root.style.setProperty("--primaryIconColor", "#1989ba");
+        root.style.setProperty("--secondaryColor", "#2C262D");
+        root.style.setProperty("--primaryLightColor", "#2B71A38A");
+        root.style.setProperty("--primaryLightColor-100", "#CFD2ED");
+      }
+      break;
+
+      default :{
+        root.style.setProperty("--primaryColor", "#E5007E");
+        root.style.setProperty("--primaryColorDark", "#D60B51");
+        root.style.setProperty("--primaryIconColor", "#D60B51");
+        root.style.setProperty("--secondaryColor", "#2C262D");
+        root.style.setProperty("--primaryLightColor", "#E5007E8A");
+        root.style.setProperty("--primaryLightColor-100", "#EDCFD6");
+      }
+    }
+
+  }
+
+}

@@ -17,7 +17,7 @@
           <ul class="dropdown-menu shadow">
             <li><span class="dropdown-item" href="" *ngIf="contract.details.isFav=='0'" (click)="markFav(contract)" >{{ 'contract_detail.insurance_side_menu_item_1' | translate }}</span></li>
             <li><span class="dropdown-item" href="" *ngIf="contract.details.isFav=='1'" (click)="unmarkFav(contract)" >{{ 'contract_detail.insurance_side_menu_item_2' | translate }}</span></li>
-            <li><span class="dropdown-item" href="" (click)="openModal(contract)" >{{ 'contract_detail.insurance_side_menu_item_3' | translate }}</span></li>
+            <li><span class="dropdown-item" href="" (click)="openModal(contract)" >{{ 'contract_detail.insurance_side_menu_item_3' | translate }}</span></li>    
           </ul>
         </div>
       </div>
@@ -58,7 +58,7 @@
 
             <div class="price align-self-end px-2 my-2">
               <span class="amount">{{contract.details.YearlyPayment | currencyFormat}}</span>
-              <span>/{{ 'contract_detail.contract_yearly_payment_label' | translate }}</span>
+              <span> / {{ 'contract_detail.contract_yearly_payment_label' | translate }}</span>
             </div>
 
             <!-- <div class="d-flex align-items-end justify-content-between w-100 py-2 ">
@@ -98,9 +98,7 @@
       </div>
     </div>
 
-    <div class="d-flex flex-column justify-content-center align-items-center mb-2">  
-      <button class="btn btn-lg btn-add mx-3" (click)="onAddDoc(contract)">{{ 'contract_detail.title_add_new_document' | translate }}</button>
-    </div>
+   
   
     <div class="d-flex my-2 documentItem" *ngFor="let doc of docArr; let i = index"  (swipe)="onSwipe($event, doc)">
       <app-document-item class="w-100"  [ngClass]="{'swipedLeft':doc.swipedLeft}" [doc]=doc (tap)="onClick(doc)"></app-document-item>

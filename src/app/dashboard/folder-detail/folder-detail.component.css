@@ -216,6 +216,7 @@ app-folder-card, app-document-item{
   width: 52px;
   height: 42px;
   border-radius: 8px;
+  cursor: pointer;
   margin-left: 10px !important;
 }
  .swipedLeft{

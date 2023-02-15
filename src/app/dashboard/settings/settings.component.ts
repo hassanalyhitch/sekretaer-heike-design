@@ -32,4 +32,16 @@ export class SettingsComponent implements OnInit {
   onChangePassword(){
     this.router.navigate(['dashboard/settings/change-password']);
   }
+
+  onChangeAppTheme(){
+    this.router.navigate(['dashboard/settings/change-theme']);
+  }
+
+  onChangeAppLanguage(){
+    this.router.navigate(['dashboard/settings/change-language']);
+  }
+
+  onChangePushNotificationSettings(){
+    //todo
+  }
 }

@@ -498,7 +498,9 @@ export class OverviewComponent implements OnInit {
     console.log('swiped '+swipeDirection);
     switch(swipeDirection){
       case 'left':{
-      folder.swipedLeft = true;
+        if(!this.collapsedFolders){
+          folder.swipedLeft = true;
+       }
         break;
       }
       case 'right':{
@@ -527,10 +529,12 @@ export class OverviewComponent implements OnInit {
     
     this.matDialog.getDialogById('renamefolder-modal-component').afterClosed().subscribe({
       next:()=>{
-        this.folderService.getFolderDetails(this.folder.id).subscribe({
+        this.folderService.getFolderDetails(folder.id).subscribe({
           next:(resp:any) =>{
             console.log('folder-details');
-            this.folder = this.folderService.selectedFolder;
+            this._init();
+            // this.folder = this.folderService.selectedFolder;
+            
           },
           complete:()=>{},
         });
@@ -582,7 +586,9 @@ export class OverviewComponent implements OnInit {
     console.log('swiped '+swipeDirection);
     switch(swipeDirection){
       case 'left':{
-      contract.swipedLeft = true;
+        if(!this.collapsed){
+          contract.swipedLeft = true;
+        }
         break;
       }
       case 'right':{
@@ -633,47 +639,5 @@ export class OverviewComponent implements OnInit {
     });
 
   }
-
-  addContractDoc(contract:ContractData){
-    const dialogConfig = new MatDialogConfig();
-    this.contractService.emitSelectedFolder(contract);
-    // let passdata:string = '{"fileName": "'+this.file.name+'","fileUrl": "'+this.file.fileUrl+'"}';
-    let passdata: string =
-      '{"contractName": "' +
-      contract.details.name +
-      '","contractId": "' +
-      contract.details.Amsidnr +
-      '"}';
-    // The user can't close the dialog by clicking outside its body
-    dialogConfig.disableClose = false;
-    dialogConfig.id = 'add-document-modal-component';
-    // dialogConfig.height = '80%';
-    dialogConfig.width = '400px';
-    dialogConfig.panelClass = 'bg-dialog-folder';
-    dialogConfig.data = passdata;
-    // https://material.angular.io/components/dialog/overview
-    const modalDialog = this.matDialog.open(
-      AddPageModalComponent,
-      dialogConfig
-    );
-
-    this.matDialog.getDialogById('add-document-modal-component').afterClosed().subscribe({
-      next:() =>{
-        this.contractService.getContractDetails(contract.details.Amsidnr).subscribe({
-          next:(resp:any) =>{
-            console.log('contract-details');
-            this.contract = this.contractService.selectedContract;
-          },
-          complete:()=>{
-
-          },
-        });
-      },
-      error:(resp)=>{
-        console.log(resp);
-      }
-    });
-  }
-
 
 }

@@ -6,6 +6,7 @@
     "message_no_favourite_contracts": "Es gibt keine Favoriten",
     "search_fab": "Suche",
     "chat_fab": "Chat",
+    "mail_fab": "My Broker",
     "insurance_check_fab": "Insurance Check",
     "service_card_add_title": "ADD",
     "service_card_add_sub_title": "(a document, a picture, etc)",
@@ -102,14 +103,24 @@
     "main_title":"SETTINGS",
     "sub_title_1": "PERSONAL DETAILS",
     "sub_title_1_a": "My Data",
+    "sub_title_1_b": "Change Your Password",
     "sub_title_2": "SETTINGS",
-    "sub_title_2_1": "Language",
-    "sub_title_2_2": "Your Data",
-    "sub_title_2_3": "Change Your Password",
+    "sub_title_2_a": "Language",
+    "sub_title_2_b": "Change Theme",
+    "sub_title_2_c": "Push Notifications",
     "sub_title_3": "OFFICIAL",
-    "sub_title_3_1": "Terms & Conditions",
-    "sub_title_3_2": "Privacy Policy",
-    "logout":"Log Out"
+    "sub_title_3_a": "Terms & Conditions",
+    "sub_title_3_b": "Privacy Policy",
+    "logout": "Log Out",
+    "go_back": "Go Back",
+    "change_language_title": "Change Language",
+    "change_theme_title": "Change Theme",
+    "language_en": "English",
+    "language_de": "Deutsch",
+    "theme_pink": "Pink",
+    "theme_blue": "Blue",
+    "language_changed_ok" : "Language Changed Succussfully",
+    "theme_changed_ok" : "Theme Color Changed Succussfully"
   },
   "folder-detail":{
     "subfolder":"My Sub-Folders",
@@ -224,7 +235,8 @@
     "text_input_label": "New Document Name",
     "btn_save_label": "SAVE",
     "document_rename_error": "Document Rename Failed",
-    "document_rename_success" : "Document Rename Successfully"
+    "document_rename_success" : "Document Rename Successfully",
+    "share_with_broker" : "Share With Broker"
   },
  "my-data":{
     "page_title":"MY DATA",

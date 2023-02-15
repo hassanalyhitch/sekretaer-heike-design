@@ -13,15 +13,15 @@
 
     <div class="d-flex broker-card w-100 shadow bg-white mb-2">
 
-      <div class=" d-flex flex-column pt-4 mt-5">
-        <div class="d-flex">
-          <span class="text-title mx-3">{{ 'broker.inbox_label' | translate }}</span>
-          <span class="text-title">{{brokerName}}</span>
+      <div class=" d-flex flex-column pt-4 mt-5 mx-2">
+        <div class="grid-container-element">
+          <span class="grid-child-element text-title">{{ 'broker.inbox_label' | translate }}</span>
+          <span class="grid-child-element text-content">{{brokerName}}</span>
         </div>
 
-        <div class="d-flex">
-          <span class="text-title mx-3">{{ 'broker.call_label' | translate }}</span>
-          <span class="text-content" style="padding-left:11px;"
+        <div class="grid-container-element">
+          <div class="grid-child-element text-title">{{ 'broker.call_label' | translate }}</div>
+          <div class="grid-child-element text-content"
             matTooltip="Click to make Phone Call"
             matTooltipPosition="right">
             <span itemprop="telephone">
@@ -29,26 +29,31 @@
                 {{brokerNumber}}
               </a>
             </span>
-          </span>
+          </div>
         </div>
 
-        <div class="d-flex">
-          <span class="text-title mx-3">{{ 'broker.email_label' | translate }}</span>
-          <span class="text-content" 
+        <div class="grid-container-element">
+          <div class="grid-child-element text-title">
+            {{ 'broker.email_label' | translate }}
+          </div>
+          <div class="grid-child-element text-content" 
             matTooltip="Click to send Email"
             matTooltipPosition="right">
+            
               <a [href]="mailto" class="email">
                 {{brokerEmail}}
               </a>
-          </span>
+            
+              
+          </div>
         </div>
 
         <div class="d-flex mt-4">
-          <span class="text-content mx-3">{{brokerStreet}}</span>
+          <span class="grid-child-element text-content">{{brokerStreet}}</span>
         </div>
         <div class="d-flex mt-2">
-          <span class="text-content broker-city">{{brokerCity}}</span>
-          <span class="text-content">{{brokerZipCode}}</span>
+          <span class="grid-child-element text-content broker-city">{{brokerCity}}</span>
+          <span class="grid-child-element text-content">{{brokerZipCode}}</span>
         </div>
 
 

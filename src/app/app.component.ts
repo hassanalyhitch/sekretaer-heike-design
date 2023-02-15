@@ -3,6 +3,7 @@ import { Component, Input, OnInit, VERSION } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { LoginService } from './services/login.service';
+import { SettingsService } from './services/settings.service';
 
 @Component({
   selector: 'my-sekretaer',
@@ -19,7 +20,16 @@ export class AppComponent  implements OnInit{
 
   showOverlay:boolean=false;
 
-  constructor(private translate: TranslateService, private router: Router, private activatedRoute: ActivatedRoute, private loginService: LoginService,private loadingService:LoadingService){
+  current_theme: string;
+
+  constructor(
+    private translate: TranslateService, 
+    private router: Router, 
+    private activatedRoute: ActivatedRoute, 
+    private loginService: LoginService,
+    private loadingService:LoadingService,
+    private settingsService: SettingsService
+  ){
 
     //Translator
     translate.setDefaultLang('en');
@@ -27,9 +37,15 @@ export class AppComponent  implements OnInit{
     const browserLang = translate.getBrowserLang();
     console.log(browserLang);
     translate.use(browserLang.match(/en|de/) ? browserLang : 'en');
+
+    this.settingsService.currentSettings();
+
+    translate.use(this.settingsService.getCurrentLanguage());
+
   }
 
   ngOnInit(): void {
+
     this.router.events.subscribe(event => {
       if(event instanceof NavigationEnd) {
         // do something...
@@ -50,21 +66,10 @@ export class AppComponent  implements OnInit{
         if(resp === false){
           this.authenticated = false;
         }
-        //change primary app colors
-        //TO DO :: store these values on client side and read from client side 1st if available
-        let root:any = document.querySelector(':root');
-        //case blue
-        root.style.setProperty("--primaryColor", "#2B71A3");
-        root.style.setProperty("--primaryColorDark", "#2A318B");
-        root.style.setProperty("--primaryIconColor", "#1989ba");
-        root.style.setProperty("--secondaryColor", "#2C262D");
-        //case default
-        // root.style.setProperty("--primaryColor", "#E5007E");
-        // root.style.setProperty("--primaryColorDark", "#D60B51");
-        // root.style.setProperty("--primaryIconColor", "#D60B51");
-        // root.style.setProperty("--secondaryColor", "#2C262D");
+        
       }
     });
+
     this.loadingService.loadingObs.subscribe({
       next:(resp) =>{
         this.showOverlay = resp;

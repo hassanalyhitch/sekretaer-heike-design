@@ -121,6 +121,16 @@
 
 }
 
+.grid-container-element { 
+  display: grid; 
+  grid-template-columns:0.3fr 1.2fr; 
+  grid-gap: 10px; 
+  width: 100%; 
+} 
+.grid-child-element { 
+  margin: 0px 5px; 
+}
+
 /* For Medium Mobile (375px) */
 @media screen and (max-width: 375px){
 

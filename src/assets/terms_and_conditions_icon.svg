@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35">
+  <g id="Terms_Conditions" data-name="Terms &amp; Conditions" transform="translate(-283 -157)">
+    <rect id="Rechteck_96" data-name="Rechteck 96" width="35" height="35" rx="10" transform="translate(283 157)" fill="#f2f2f2"/>
+    <g id="Gruppe_322" data-name="Gruppe 322" transform="translate(-869.032 -7356.824)">
+      <path id="Differenzmenge_13" data-name="Differenzmenge 13" d="M8.769,0H.948A.947.947,0,0,0,0,.947v16.4a.947.947,0,0,0,.948.947h11.2a.947.947,0,0,0,.947-.947V4.325Z" transform="translate(1163.327 7521.413)" fill="rgba(0,0,0,0)" stroke="#2c262d" stroke-width="1.5"/>
+      <path id="Pfad_134" data-name="Pfad 134" d="M21.347,1.467l3.824,3.824H22.295a.947.947,0,0,1-.947-.947Zm0-1.2a1.2,1.2,0,0,0-1.2,1.2V4.344a2.147,2.147,0,0,0,2.145,2.145h2.877a1.2,1.2,0,0,0,.847-2.044L22.194.621A1.2,1.2,0,0,0,21.347.27" transform="translate(1150.686 7520.653)" fill="#2c262d"/>
+      <g id="Ellipse_40" data-name="Ellipse 40" transform="translate(1167.815 7529.464)" fill="#fff" stroke="#2c262d" stroke-width="1.5">
+        <circle cx="6.131" cy="6.131" r="6.131" stroke="none"/>
+        <circle cx="6.131" cy="6.131" r="5.381" fill="none"/>
+      </g>
+      <path id="Pfad_136" data-name="Pfad 136" d="M1153.927,7530.809l2.16,3.365,1.513-2.8,1.139-2.105" transform="translate(17.613 4.154)" fill="none" stroke="#2c262d" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    </g>
+  </g>
+</svg>

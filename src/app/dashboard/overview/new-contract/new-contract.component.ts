@@ -54,7 +54,10 @@ uploadFileArr: UploadFileData [] =[];
 shareWithBroker:boolean=false;
 status:string = "/assets/icon_broker.svg";
 acceptBroker:boolean = true;
-doneIcon:"/assets/icons8-done-30.png"
+doneIcon:"/assets/icons8-done-30.png";
+
+paymentMethodsList =[];
+paymentMethodSettings = {};
 
 
  
@@ -167,6 +170,31 @@ this.productSettings = {
         //console.info('complete')
       }
     });
+
+
+    this.paymentMethodsList = [
+      { item_id: 1, item_text: 'Yearly' },
+      { item_id: 2, item_text: 'Half-yearly' },
+      { item_id: 3, item_text: 'Quaterly' },
+      { item_id: 4, item_text: 'Monthly' },
+    ];
+
+    this.paymentMethodSettings = {
+      singleSelection: true,
+      idField: 'item_id',
+      textField: 'item_text',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 1,
+      allowSearchFilter: true,
+      searchPlaceholderText: 'Search',
+      noDataAvailablePlaceholderText: 'No data available',
+      closeDropDownOnSelection: true,
+      showSelectedItemsAtTop:true,
+    };
+
+
+
   }
 
       
@@ -255,6 +283,9 @@ this.productSettings = {
   }
 
   onProductSelected(item:any){
+    console.log(item);
+  }
+  onPaymentMethodSelected(item:any){
     console.log(item);
   }
 

@@ -68,11 +68,7 @@
   background: #009ee2;
   border-radius: 8px;
 }
-/* for mozilla */
-*{
-  scrollbar-width: none !important;
 
-}
 .card{
   background-color: #fff;
   box-shadow: 0 0px 0px #00000030, 0 0px 4px #0000003b;
@@ -95,25 +91,18 @@
   color:#707070;
 }
 
-.personal-data{
-  cursor: pointer;
-}
-
-.terms{
-  cursor: pointer;
-}
-
-.privacy-policy{
-  cursor:pointer;
-}
-.change-password{
-  cursor:pointer;
-}
 .logout{
   color: var(--primaryColor);
+}
+
+.remove-list-item-bullets{
+  list-style-type:none;
+}
+
+.cursor-pointer{
   cursor: pointer;
 }
 
-.change-language{
-  cursor: pointer;
+.icon-options{
+  float: left;
 }

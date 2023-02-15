@@ -71,6 +71,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MyDataComponent } from './dashboard/settings/my-data/my-data.component';
 import { ChangePasswordComponent } from './dashboard/settings/change-password/change-password.component';
 import { AddPageModalComponent } from './dashboard/add-page-modal/add-page-modal.component';
+import { ChangeLanguageComponent } from './change-language/change-language.component';
+import { ChangeThemeComponent } from './change-theme/change-theme.component';
 
 
 // AoT requires an exported function for factories
@@ -109,9 +111,11 @@ const appRoutes: Routes = [
   { path: 'dashboard/home/search', component:SearchPageComponent },  
   { path: 'dashboard/overview/new-contract',component:NewContractComponent },
   { path: 'dashboard/settings/my-data',component:MyDataComponent },
-  { path:'dashboard/settings/change-password',component:ChangePasswordComponent},
-  { path: 'dashboard/settings/privacy-policy',component:PrivacyPolicyComponent },
+  { path: 'dashboard/settings/change-password', component:ChangePasswordComponent},
+  { path: 'dashboard/settings/privacy-policy', component:PrivacyPolicyComponent },
   { path: 'dashboard/settings/terms-and-conditions', component:TermsConditionsComponent },
+  { path: 'dashboard/settings/change-theme', component:ChangeThemeComponent },
+  { path: 'dashboard/settings/change-language', component:ChangeLanguageComponent },
   { path: 'privacy-policy',component:PrivacyPolicyComponent },
   { path: 'terms-and-conditions', component:TermsConditionsComponent },
   { path: 'forgot-password', component:ForgotPasswordComponent },
@@ -190,7 +194,9 @@ const appRoutes: Routes = [
     FormatDatePipe,
     MyDataComponent,
     ChangePasswordComponent,
-    AddPageModalComponent
+    AddPageModalComponent,
+    ChangeLanguageComponent,
+    ChangeThemeComponent
    ],
   bootstrap:    [ AppComponent ],
   providers: [

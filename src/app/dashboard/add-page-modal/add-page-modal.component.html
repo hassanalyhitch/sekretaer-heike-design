@@ -38,6 +38,7 @@
                 (change)="getFileName($event)" 
                 id="selectFile" 
                 name="file"
+                ngModel
                 required/>
               
               <app-upload-file class="fileUpload"*ngFor="let uploadFile of uploadFileArr" [uploadFile]="uploadFile" (deleteFile)="removeFile($event)"></app-upload-file>
@@ -66,6 +67,7 @@
               [(ngModel)]="selectedItems"
               ngModel 
               [disabled]="dropdownDisabled"
+              required
               >
             </ng-multiselect-dropdown>
             </div>
@@ -75,13 +77,14 @@
             <p class="m-2">Share with Broker</p>
           </div>
              
-            <button 
-              type="submit"
-              [disabled]="submitted" 
-              class="submit" >
-                <span *ngIf="submitted" class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role=""></span>
-                <span *ngIf="!submitted">{{ 'add_document.submit_button_label' | translate }}</span>
-            </button>
+        <button 
+          id="save-btn" 
+          type="submit"
+          [disabled]="(!addPageForm.valid)||submitted" 
+          class="btn btn-login" >
+            <span *ngIf="submitted" class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role=""></span>
+            <span *ngIf="!submitted">{{ 'add_document.submit_button_label' | translate }}</span>
+        </button>
             
             
               

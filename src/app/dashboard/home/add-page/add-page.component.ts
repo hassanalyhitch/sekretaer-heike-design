@@ -37,7 +37,7 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
   dropDownIsHidden:boolean= true;
   selectedItems = [];
   dropDownList = [];
- 
+  
   @ViewChild("selectFile",{static:true}) selectFile:ElementRef;
   @ViewChild("addPageForm",{static:true}) addPageForm:NgForm;
   dropdownSettings = {};
@@ -127,9 +127,7 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
       showSelectedItemsAtTop: false,
       defaultOpen:false,
     };
-   
 
-  
       switch (this.route.snapshot.params['type']){
         case "folder": {
           let selectedItem = {
@@ -345,8 +343,6 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
   switch (this.typeSelected){
     case 'folder':{
      this.addNewFile(fileData,this.selectedItems[0].id)
-    
-    
       break;
     }
     case 'contract':{
@@ -359,7 +355,6 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
   console.table(this.typeSelected);
 
   console.log('folder id -> ' +this.selectedItems[0].id);
-
  }
 
   getFileName(event){
@@ -433,4 +428,5 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
   onFileUpload(event){
     this.selectedFile = event.target.files[0];
   }
+
 }

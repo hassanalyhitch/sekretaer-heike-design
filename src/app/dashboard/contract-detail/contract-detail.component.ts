@@ -362,44 +362,4 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     }
   }
 
-  onAddDoc(file) {
-    const dialogConfig = new MatDialogConfig();
-    // let passdata:string = '{"fileName": "'+this.file.name+'","fileUrl": "'+this.file.fileUrl+'"}';
-    // let passdata: string =
-    //   '{"contractName": "' +
-    //   file.details.name +
-    //   '","contractId": "' +
-    //   file.details.Amsidnr +
-    //   '"}';
-    // The user can't close the dialog by clicking outside its body
-    dialogConfig.disableClose = false;
-    dialogConfig.id = 'add-document-modal-component';
-    // dialogConfig.height = '80%';
-    dialogConfig.width = '400px';
-    dialogConfig.panelClass = 'bg-dialog-folder';
-    // dialogConfig.data = passdata;
-    // https://material.angular.io/components/dialog/overview
-    const modalDialog = this.matDialog.open(
-      AddPageModalComponent,
-      dialogConfig
-    );
-
-    this.matDialog.getDialogById('add-document-modal-component').afterClosed().subscribe({
-      next:() =>{
-        this.contractService.getContractDetails(this.contract.details.Amsidnr).subscribe({
-          next:(resp:any) =>{
-            console.log('contract-details');
-            this.contract = this.contractService.selectedContract;
-          },
-          complete:()=>{
-
-          },
-        });
-      },
-      error:(resp)=>{
-        console.log(resp);
-      }
-    });
-
-  }
 }
