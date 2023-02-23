@@ -5,7 +5,7 @@ import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { BranchData } from '../../../models/branch.model';
 import { BranchService } from '../../../services/branch.service';
 import { CompanyData } from '../../../models/company.model';
-import { ProductData } from 'src/app/models/products.model';
+import { ProductData } from '../../../models/products.model';
 import { CompanyService } from '../../../services/company.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import {FormControl} from '@angular/forms';
