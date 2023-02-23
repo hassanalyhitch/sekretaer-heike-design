@@ -30,7 +30,7 @@
         
 
           <div class="w-100 d-flex a_card card-1" (swipe)="onContractSwipe($event,allContractsArr[2])" >
-            <app-fav-item class="col-12 m-1" [ngClass]="{'swipedLeft':allContractsArr[2].swipedLeft}" [contractItem]=allContractsArr[2] (tap)="onCardClick(allContractsArr[2])" *ngIf="showCard1" ></app-fav-item>
+            <app-fav-item class="col-12 m-1" [ngClass]="{'swipedLeft':allContractsArr[2].swipedLeft}" [contractItem]=allContractsArr[2] (click)="onCardClick(allContractsArr[2])" *ngIf="showCard1" ></app-fav-item>
               <div class="edit-rename d-flex flex-column p-2 align-self-center justify-content-center align-items-center"
                   [ngClass]="{'d-none':!allContractsArr[2].swipedLeft}">
                   <i class="material-icons contractIcons mb-1"  (click) ="renameContract(allContractsArr[2])">mode_edit</i>
@@ -40,7 +40,7 @@
         
 
           <div class="w-100 d-flex a_card card-2"(swipe)="onContractSwipe($event,allContractsArr[1])">
-                <app-fav-item class="col-12 m-1" [ngClass]="{'swipedLeft':allContractsArr[1].swipedLeft}" [contractItem]=allContractsArr[1] (tap)="onCardClick(allContractsArr[1])" *ngIf="showCard2"></app-fav-item>
+                <app-fav-item class="col-12 m-1" [ngClass]="{'swipedLeft':allContractsArr[1].swipedLeft}" [contractItem]=allContractsArr[1] (click)="onCardClick(allContractsArr[1])" *ngIf="showCard2"></app-fav-item>
                 <div class="edit-rename d-flex flex-column p-2 align-self-center justify-content-center align-items-center"
                 [ngClass]="{'d-none':!allContractsArr[1].swipedLeft}">
                   <i class="material-icons contractIcons mb-1"  (click) ="renameContract(allContractsArr[1])">mode_edit</i>
