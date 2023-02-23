@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ContractsService } from 'src/app/services/contracts.service';
+import { ContractsService } from '../../services/contracts.service';
 import { ContractData } from '../../models/contract.model';
 
 @Component({
