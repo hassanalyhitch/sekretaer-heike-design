@@ -32,6 +32,7 @@ export class FavItemComponent implements OnInit {
     },
     isSelected: false
   };
+  @Input() collapsed: boolean = true;
 
   constructor(private contractService: ContractsService, private router:Router) {
   }
@@ -40,9 +41,14 @@ export class FavItemComponent implements OnInit {
   }
 
   onCardClick(clickedContract){
-    
-    this.contractService.emitSelectedFolder(clickedContract);
-    this.router.navigate(['dashboard/overview/contract-detail', { id: clickedContract.details.Amsidnr }]);
+    if(!this.collapsed){
+
+      this.contractService.emitSelectedFolder(clickedContract);
+      this.router.navigate(['dashboard/overview/contract-detail', { id: clickedContract.details.Amsidnr }]);
+      
+    }
+    else
+    return false;
     
   }
 }
