@@ -1,0 +1,36 @@
+<div class="content-wrapper w-100 ">
+    <div class="_content d-flex flex-column w-100 h-100 ">
+
+        <div class="d-flex flex-column justify-content-center mb-2 px-4 pt-3">
+            <strong class="section-title align-self-center p-2">{{ 'change-password.page_title' | translate }}</strong>
+            <img class="align-self-center mt-1" src="\assets\Gruppe 321.svg"/>
+            <p class="align-self-center mt-2">{{ 'change-password.sub_title_1' | translate }}</p>
+        </div>
+
+        <div class="d-flex flex-column align-items-center py-4 w-100">
+            <span>{{ 'reset-successful.sub_title_1' | translate }}</span>
+            <span>{{ 'reset-successful.sub_title_2' | translate }}</span>
+        </div>
+        <div class="form-container d-flex flex-column w-100 h-100">
+            <form>
+                <div class="py-3 w-100">
+                    <button
+                      id="proceed-btn"
+                      class="btn w-100 py-2" (click)="backToHome()">
+                    <span>{{ 'reset-successful.btn_1' | translate }}</span>
+                    </button>
+                </div>
+
+                <div class="d-flex navigate_back py-2" (click)="backToSettings()">
+                    <i class="material-icons py-2 back-arrow-icon">arrow_back_ios</i>
+                    <span class="py-2 back">{{ 'reset-successful.btn_2' | translate }}</span>
+                </div>
+
+
+            </form>
+        </div>
+     
+
+    </div>
+</div>
+

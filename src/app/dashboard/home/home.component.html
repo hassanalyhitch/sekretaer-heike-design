@@ -38,7 +38,7 @@
       
       <!-- see more link-->
       <div class="d-flex flex-row px-3 justify-content-between see-more">
-        <a class="see-more" (click)="openFavouritesPage()">{{ "home.title_see_more" | translate }} > </a>
+        <a class="see-more px-2" (click)="openFavouritesPage()">{{ "home.title_see_more" | translate }} > </a>
           <!-- indicators -->
           <div class="d-flex align-self-center line_container">
             <div class="m-1 border flex-fill line_item"
@@ -48,10 +48,9 @@
             </div>
           </div>
       </div>
-    
-
-      <!-- Home icons fabs-->
-      <div class="home-icon-fabs d-flex px-2 mt-3">
+  
+      <!-- Home icons fabs for mobile and small screens-->
+      <div class="d-flex col-12 px-3 home-icon-fabs">
         <app-home-fab-icons> </app-home-fab-icons>
       </div>
 
@@ -81,17 +80,15 @@
                 <div class="p-3 bg-white add_page-card" (click)="onAddPage()">
                   <img alt="service icom" class="service-icon" src="\assets\Gruppe 230.svg">
                   <div class="d-flex flex-column ">
-                    <span class="mt-4 fw-bold card-text-title">{{ "home.service_card_add_title" | translate }}</span>
-                  
-                    
-                        
-                        <div class="d-flex align-items-center">
-                          <span class="card-text-subtitle">{{ "home.service_card_add_sub_title" | translate }}
-                          <i class="material-icons">chevron_right</i>
+                    <span class="mt-4 fw-bold card-text-title">
+                      {{ "home.service_card_add_title" | translate }}
+                    </span>
+                    <div class="d-flex align-items-center">
+                      <span class="card-text-subtitle">
+                        {{ "home.service_card_add_sub_title" | translate }}
+                        <i class="material-icons">chevron_right</i>
                       </span>
-                        </div>
-                   
-                   
+                    </div>
                   </div>
                 </div>
               </div>

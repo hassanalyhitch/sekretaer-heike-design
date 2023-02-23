@@ -1,14 +1,14 @@
-<div class="_content d-flex flex-row w-100 px-2">
+<div class="_content d-flex flex-row w-100">
 
-    <div class="d-flex flex-column mx-3" (click)="onSearchClick()">
-        <div  class="quick-fab d-flex justify-content-center align-items-center">
+    <div class="d-flex flex-column mx-2" (click)="onSearchClick()">
+        <div  class="quick-fab d-flex pr-3 justify-content-center align-items-center">
             <i class="material-icons align-self-center">search</i>
         </div>
         <span class="text-center fab-label mt-1">{{"home.search_fab" | translate}}</span>
     </div>
     
     <div *ngIf="isChatFabEnabled"
-        class="d-flex mx-3 text-center justify-content-center chat-quicky"
+        class="d-flex mx-2 text-center justify-content-center chat-quicky"
         chat-unread="0"
         (click)="onChatClick()">
         <div  class="quick-fab d-flex justify-content-center align-items-center">
@@ -18,7 +18,7 @@
     </div>
 
     <div *ngIf="!isChatFabEnabled"
-        class="d-flex flex-column mx-3 justify-content-center align-items-center"
+        class="d-flex flex-column mx-2 justify-content-center align-items-center"
         (click)="onOpenBrokerPage()">
         <div  class="quick-fab d-flex justify-content-center align-items-center">
             <img class="align-self-center" src="/assets/Gruppe 234.svg">
@@ -26,15 +26,15 @@
         <span class="text-center fab-label mt-1">{{"home.mail_fab" | translate}}</span>
     </div>
 
-    <div class="home-fab mx-3 disabled d-flex justify-content-center align-items-center">
+    <div class="home-fab mx-2 disabled d-flex justify-content-center align-items-center">
         <i class="material-icons d-none">search</i>
     </div>
 
-    <div class="home-fab mx-3 disabled d-flex justify-content-center align-items-center">
+    <div class="home-fab mx-2 disabled d-flex justify-content-center align-items-center">
         <i class="material-icons d-none">search</i>
     </div>
 
-    <div class="home-fab mx-3 disabled d-flex justify-content-center align-items-center">
+    <div class="home-fab mx-2 disabled d-flex justify-content-center align-items-center">
         <i class="material-icons d-none">search</i>
     </div>
 

@@ -108,6 +108,91 @@
   margin-right:5px;
   margin-left: 16px;
 }
+.details_subtitle{
+  color: #575756;
+  border-bottom: 2px solid white;
+  padding: 0.5rem 0.7rem 0rem 0.7rem;
+}
+
+.btn-login{
+  background-image: linear-gradient(131deg, var(--primaryColor), var(--primaryColorDark));
+  border-color: var(--primaryColor) !important;
+  width: 100%;
+  color: #ffff;
+  border-radius:7px;
+  border: none;
+  cursor: pointer;
+  font-family:oscine, sans-serif;
+  display: block;
+  margin-top:25px;
+}
+.btn-login:hover{
+  background-image: linear-gradient(131deg, #D8D3E8, #EBC3CD);
+  color: #2C262D;
+  border: none;
+}
+.navigate_back{
+  display: block;
+  cursor: pointer;
+  margin-top:20px;
+  margin-bottom: 20px;
+
+}
+.section-data{
+  padding-left: 45px !important;
+  padding-right: 45px !important;
+}
+
+.material-textfield {
+  position: relative;
+  width: 100%;
+  border-bottom: 2px solid white;
+  margin-bottom: 24px;
+}
+
+.material-textfield > label {
+  position: absolute;
+  font-size: 1rem;
+  left: 0;
+  top: 20%;
+  transform: translateY(-25%);
+  color: #575756;
+  background-color: inherit;
+  padding: 0 0.3rem;
+  margin: 0 0.5rem;
+  transition: 0.1s ease-out;
+  transform-origin: left top;
+  pointer-events: none;
+}
+.material-textfield > input {
+  font-size: 1rem;
+  outline: none;
+  border:none;
+  border-radius: 7px;
+  padding: 0.5rem 0.7rem 0rem 0.7rem;
+  width: 100%;
+  color: #000;
+  background-color:#F2F2F2;
+  transition: 0.1s ease-out;
+}
+
+
+.material-textfield > input:focus + label {
+  color: #575756;
+  background-color: inherit;
+  top: 0;
+  transform: translateY(-75%) scale(0.9);
+}
+
+.material-textfield > input:not(:placeholder-shown) + label {
+  color: #575756;
+  top: 0;
+  transform: translateY(-75%) scale(0.9);
+}
+.border-bottom-white{
+  border-bottom: 1px solid white;
+}
+
 
 ::-webkit-scrollbar {
   width: 0px;
@@ -142,4 +227,33 @@
     font-size: 12px;
   }
 
+}
+
+
+.cselect select { appearance: none; }
+.cselect::after { content:url("/assets/icon_date_filter.svg"); }
+
+.cselect {
+  position: relative;
+  margin-bottom: 20px;
+}
+.cselect::after {
+  position: absolute;
+  top: 0; right: 0;
+}
+.options-textfield {
+  position: relative;
+  height:20px;
+  width: 100%;
+  background-color:#F2F2F2;
+  border: none;
+}
+.options-textfield:focus {
+  outline: none;
+  background-color:#F2F2F2;
+  border: none;
+}
+.back{
+  color: #848484;
+  font-weight: bold;
 }

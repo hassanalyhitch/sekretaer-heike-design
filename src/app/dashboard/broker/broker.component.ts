@@ -9,14 +9,14 @@ import { BrokerService } from '../../services/broker.service';
 })
 export class BrokerComponent implements OnInit {
 
-  brokerName: string = "";
-  brokerNumber: string = "";
-  brokerStreet: string = "";
-  brokerEmail: string = "";
-  brokerCity:string = "";
-  brokerZipCode:string = "";
-  mailto: string = "mailto:";
-  telto: string = "tel:";
+  brokerName:    string = "";
+  brokerNumber:  string = "";
+  brokerStreet:  string = "";
+  brokerEmail:   string = "";
+  brokerCity:    string = "";
+  brokerZipCode: string = "";
+  mailto:        string = "mailto:";
+  telto:         string = "tel:";
 
   constructor(private brokerService:BrokerService, private loadingService:LoadingService) 
   {
@@ -26,18 +26,16 @@ export class BrokerComponent implements OnInit {
   ngOnInit() {
     this.brokerService.getBrokerDetails().subscribe({
       next:(resp:BrokerData)=>{
-        console.log(resp);
-
-        this.brokerName = resp.myBroker.V_NAME;
-        this.brokerNumber = resp.myBroker.V_TEL1;
-        this.brokerStreet = resp.myBroker.V_STRASSE;
-        this.brokerEmail = resp.myBroker.V_EMAIL;
-        this.brokerCity = resp.myBroker.V_PLZ;
-        this.brokerZipCode = resp.myBroker.V_ORT;
+        
+        this.brokerName = resp.myBroker.name;
+        this.brokerNumber = resp.myBroker.tel1;
+        this.brokerStreet = resp.myBroker.streed;
+        this.brokerEmail = resp.myBroker.email;
+        this.brokerCity = resp.myBroker.city;
+        this.brokerZipCode = resp.myBroker.zipcode;
         this.mailto = this.mailto + this.brokerEmail;
         this.telto = this.telto + this.brokerNumber;
 
-       
       },
       complete:()=>{
         this.loadingService.emitIsLoading(false);

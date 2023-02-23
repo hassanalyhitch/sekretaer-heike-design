@@ -347,6 +347,8 @@ export class OverviewComponent implements OnInit {
     
     this.matDialog.getDialogById('newfolder-modal-component').afterClosed().subscribe({
       next:()=>{
+
+        //refresh folder list
         this._init();
       }
     });
@@ -531,7 +533,9 @@ export class OverviewComponent implements OnInit {
       next:()=>{
         this.folderService.getFolderDetails(folder.id).subscribe({
           next:(resp:any) =>{
-            console.log('folder-details');
+            //console.log('folder-details');
+
+            //refresh folders list
             this._init();
             // this.folder = this.folderService.selectedFolder;
             
@@ -631,6 +635,9 @@ export class OverviewComponent implements OnInit {
             next: (resp: any) => {
               
               contract.details.name = resp.name;
+
+              //refresh contract list
+              this._init();
 
             },
           });

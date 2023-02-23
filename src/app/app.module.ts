@@ -73,6 +73,8 @@ import { ChangePasswordComponent } from './dashboard/settings/change-password/ch
 import { AddPageModalComponent } from './dashboard/add-page-modal/add-page-modal.component';
 import { ChangeLanguageComponent } from './change-language/change-language.component';
 import { ChangeThemeComponent } from './change-theme/change-theme.component';
+import { NewPasswordComponent } from './dashboard/settings/change-password/new-password/new-password.component';
+import { ResetSuccessfulComponent } from './dashboard/settings/change-password/reset-successful/reset-successful.component';
 
 
 // AoT requires an exported function for factories
@@ -112,6 +114,8 @@ const appRoutes: Routes = [
   { path: 'dashboard/overview/new-contract',component:NewContractComponent },
   { path: 'dashboard/settings/my-data',component:MyDataComponent },
   { path: 'dashboard/settings/change-password', component:ChangePasswordComponent},
+  { path:  'dashboard/settings/new-password',component:NewPasswordComponent},
+  { path:  'dashboard/settings/password-reset-successful',component:ResetSuccessfulComponent},
   { path: 'dashboard/settings/privacy-policy', component:PrivacyPolicyComponent },
   { path: 'dashboard/settings/terms-and-conditions', component:TermsConditionsComponent },
   { path: 'dashboard/settings/change-theme', component:ChangeThemeComponent },
@@ -196,7 +200,9 @@ const appRoutes: Routes = [
     ChangePasswordComponent,
     AddPageModalComponent,
     ChangeLanguageComponent,
-    ChangeThemeComponent
+    ChangeThemeComponent,
+    NewPasswordComponent,
+    ResetSuccessfulComponent
    ],
   bootstrap:    [ AppComponent ],
   providers: [

@@ -10,7 +10,7 @@
                 
                 <div class="select_item">
                     <ng-multiselect-dropdown
-                    [placeholder]="'Please Select Company'"
+                    [placeholder]="'Please Select Branch'"
                     [settings]="branchSettings"
                     [data]="dataArr"
                     [(ngModel)]="selectedBranches"
@@ -21,7 +21,7 @@
 
                 <div class="select_item">
                     <ng-multiselect-dropdown
-                    [placeholder]="'Please select Branch'"
+                    [placeholder]="'Please select Company'"
                     [settings]="companySettings"
                     [data]="companyArr"
                     (onSelect)="onCompanySelected($event)"
@@ -31,10 +31,11 @@
 
                 <div class="select_item">
                     <ng-multiselect-dropdown
-                    [placeholder]="'Product'"
+                    [placeholder]="'Please select Product'"
                     [settings]="productSettings"
                     (onSelect)="onProductSelected($event)"
-                    [data]=""
+                    [data]="productArr"
+                    [(ngModel)]="selectedProducts"
                     >
                     </ng-multiselect-dropdown>
                 </div>

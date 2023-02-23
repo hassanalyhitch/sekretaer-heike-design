@@ -41,7 +41,7 @@ export class LoginService {
         tap((resp: AuthLogin) => {
           this.authToken = resp.token;
           this.chatCheck = resp.config.chat;
-          this.themeColor = "pink"; //api color;
+          this.themeColor = resp.config.colorSchema; //api theme color;
           this.lang = resp.lang;
           this.insuranceCheck = resp.config.insuranceCheck;
 

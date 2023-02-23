@@ -5,6 +5,7 @@ import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { BranchData } from '../../../models/branch.model';
 import { BranchService } from '../../../services/branch.service';
 import { CompanyData } from '../../../models/company.model';
+import { ProductData } from 'src/app/models/products.model';
 import { CompanyService } from '../../../services/company.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import {FormControl} from '@angular/forms';
@@ -33,8 +34,18 @@ export class NewContractComponent implements OnInit {
     displayName: string;
   }[] = [];
 
+  productArr:{
+    Branch2ProductId:string;
+    Branch2MasterId:string;
+    displayName:string;
+    displayNameMAXOFFICE:string;
+    displayNameSEKRETAER:string;
+    displayNameDIMAS:string;
+  }[]=[];
+
 branches:BranchData[] = [];
 companies:CompanyData[]=[];
+products:ProductData[]=[];
 name='company';
 showcontract:string;
 branchSelected:string;
@@ -43,6 +54,7 @@ optionSelected:boolean=true;
 Branch2MasterId:any;
 selectedBranches:any;
 selectedCompanies:any;
+selectedProducts:any;
 // ------------------------------
 
 show:boolean = false;
@@ -75,7 +87,7 @@ this.branchSettings = {
     itemsShowLimit: 1,
     idField: 'Branch2MasterId',
     textField: 'displayNameSEKRETAER',
-    singleSelection:false,
+    singleSelection:true,
     enableCheckAll: false,
     selectAllText: 'Select All',
     unSelectAllText: 'Unselect All',
@@ -94,7 +106,7 @@ this.companySettings = {
     itemsShowLimit: 1,
     idField: 'MATCHCODE',
     textField: 'displayName',
-    singleSelection: false,
+    singleSelection: true,
     enableCheckAll: true,
     selectAllText: 'Select All',
     unSelectAllText: 'Unselect All',
@@ -112,9 +124,9 @@ this.companySettings = {
 
 this.productSettings = {
   itemsShowLimit: 1,
-  idField: 'MATCHCODE',
-  textField: 'displayName',
-  singleSelection: false,
+  idField:'Branch2ProductId',
+  textField:'displayName',
+  singleSelection: true,
   enableCheckAll: true,
   selectAllText: 'Select All',
   unSelectAllText: 'Unselect All',
@@ -275,6 +287,39 @@ this.productSettings = {
       complete:()=>{
         //console.info('complete')
       }
+    });
+    this.branchService.getProducts(item.Branch2MasterId).subscribe({
+      next:(resp)=>{
+        this.products =[];
+        if (Array.isArray(resp)){
+          let index:number = 0;
+
+          for (let item of resp){
+            let product:ProductData ={
+              Branch2ProductId:item['Branch2ProductId'],
+              Branch2MasterId:item ['Branch2MasterId'],
+              displayName:item['displayName'],
+              displayNameMAXOFFICE:item['displayNameMAXOFFICE'],
+              displayNameSEKRETAER:item['displayNameSEKRETAER'],
+              displayNameDIMAS:item['displayNameDIMAS']
+            };
+
+            this.products.push(product);
+            index ++;
+          }
+        }
+        this.productArr = this.products;
+        console.log(this.productArr);
+
+      },
+      error:(e)=>{
+        console.log(e);
+      },
+      complete:()=>{
+
+      }
+
+
     });
    
   }

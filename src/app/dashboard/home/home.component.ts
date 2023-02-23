@@ -16,7 +16,7 @@ import { BrokerData } from '../../models/broker.model';
   styleUrls: ["./home.component.css"],
 })
 export class HomeComponent implements OnInit,AfterViewInit{
-  public favArr: ContractData[] = [];
+  favArr: ContractData[];
   allContractsArr: ContractData[] = [];
   notifCount: number = 0;
   zeroNotifCount:boolean = false;
@@ -46,65 +46,59 @@ export class HomeComponent implements OnInit,AfterViewInit{
 
 
   ngOnInit() {
+    this.favArr = [];
     this.contractService.getContracts().subscribe({
       next: () => {
         this.allContractsArr = this.contractService.userContractsArr;
-      
+        this.favArr.length = 0;
         this.allContractsArr.forEach((contract) => {
           if (contract.details.isFav === 1 || contract.details.isFav === "1") {
             this.favArr.push(contract);
            }
         });
         console.log(this.favArr.length);
-      },
-    });
 
+        this.brokerService.getBrokerDetails().subscribe({
+          next:(resp:BrokerData)=>{
     
-    this.brokerService.getBrokerDetails().subscribe({
-      next:(resp:BrokerData)=>{
+            this.brokerNumber = resp.myBroker.tel1;
+            this.telto = this.telto + this.brokerNumber;
+    
+            console.log(this.telto);
 
-        this.brokerNumber = resp.myBroker.V_TEL1;
-        this.telto = this.telto + this.brokerNumber;
-
-        console.log(this.telto);
-      },
-      complete:()=>{
-      }
-    });
-
-    // this.notif.nativeElement.setAttribute("notification-count", this.notifCount+"");
-    this.notificationService.getUnreadNotifications().subscribe({
-      next: () => {
-        this.notifCount = this.notificationService.notifCount;
-        if(this.notifCount >= 1 && this.notifCount <= 99){
-
-          this.isNotificationCountText = false;
-
-          // document
-          // .getElementById("notif")
-          // .setAttribute("notification-count", this.notifCount + "");
-
-        } else if(this.notifCount > 99){
-
-          this.isNotificationCountText = true;
-
-        } else{
-          this.zeroNotifCount = true;
-        }
+            this.notificationService.getUnreadNotifications().subscribe({
+              next: () => {
+                this.notifCount = this.notificationService.notifCount;
+                if(this.notifCount >= 1 && this.notifCount <= 99){
         
-      },
-      complete:()=>{
-        this.loadingService.emitIsLoading(false);
-      }
-    });
-    // this.chatCheck = this.loginService.chatCheck;
-    // this.insuranceCheck = this.loginService.insuranceCheck;
+                  this.isNotificationCountText = false;
+        
+                  // document
+                  // .getElementById("notif")
+                  // .setAttribute("notification-count", this.notifCount + "");
+        
+                } else if(this.notifCount > 99){
+        
+                  this.isNotificationCountText = true;
+        
+                } else{
+                  this.zeroNotifCount = true;
+                }
+                
+              },
+              complete:()=>{
+                this.loadingService.emitIsLoading(false);
+              }
+            });
 
-    // if (this.chatCheck > 0) {
-    //   this.isChatFabEnabled = true;
-    // } else if (this.chatCheck === 0) {
-    //   this.isChatFabEnabled = false;
-    // } 
+          },
+          complete:()=>{
+          }
+        });
+
+      },
+    });
+
   }
   ngAfterViewInit(){
     let isScrolling, start,end, distance,totalScrollWidth;

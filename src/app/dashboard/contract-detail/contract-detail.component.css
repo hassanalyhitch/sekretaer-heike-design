@@ -86,20 +86,17 @@
 .fav-btn{
   position: absolute;
   top: 10px;
-  right: 70px;
-  padding: 3px;
+  right:65px;
   color: white;
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   cursor: pointer;
 }
 
-.fav-size-icon{
-  width: 15px;
-  height: 15px;
-  font-size: 14px;
-  position: absolute;
+.fav-btn i{
+  font-size:18px;
+  position:absolute;
 }
 
 .isFav{
@@ -117,7 +114,6 @@
 .branch{
   font-size: 15px;
   font-weight: bold;
-
 }
 .price{
   font-size: 18px;

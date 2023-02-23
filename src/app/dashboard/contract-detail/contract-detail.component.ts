@@ -362,4 +362,12 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     }
   }
 
+  showTariffInfo(){
+    if(this.contract.details.tarif != "" && !this.contract.details.tarif.includes('TODO')){
+      return true;
+    }
+
+    return false;
+  }
+
 }

@@ -5,11 +5,21 @@
         <div class="header-wrapper">
             
             <div class="d-flex flex-column align-items-center">
-                <img
+
+                <!-- pink logo -->
+                <img *ngIf="sekretar_pink_logo"
                     src="../assets/logo.svg"
                     alt="sekretaer_logo"
                     class="app-logo"
                 />
+
+                <!-- blue logo -->
+                <img *ngIf="sekretar_blue_logo"
+                    src="../assets/sekretar_blue_logo.svg"
+                    alt="sekretaer_logo"
+                    class="app-logo"
+                />
+
             </div>
             
         </div>
@@ -19,11 +29,21 @@
     <div  *ngIf="!inSettings" class="header-wrapper-nologin">
             
         <div class="d-flex flex-column align-items-center">
-            <img
+
+            <!-- pink logo -->
+            <img *ngIf="sekretar_pink_logo"
                 src="../assets/logo.svg"
                 alt="sekretaer_logo"
                 class="app-logo"
             />
+
+            <!-- blue logo -->
+            <img *ngIf="sekretar_blue_logo"
+                src="../assets/sekretar_blue_logo.svg"
+                alt="sekretaer_logo"
+                class="app-logo"
+            />
+            
         </div>
         
     </div>

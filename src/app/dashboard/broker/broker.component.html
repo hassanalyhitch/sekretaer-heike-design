@@ -5,13 +5,13 @@
     <strong class="section-title align-self-center p-2">{{ 'broker.title' | translate }}</strong>
   </div>
   
-  <div class="section-broker d-flex flex-column px-3 w-100">
+  <div class="section-broker d-flex flex-column px-2 w-100">
 
     <div class="broker-icon d-flex justify-content-center align-self-center bg-white">
       <img class="broker-img align-self-center mt-1" src="/assets/icon_broker.svg">
     </div>
 
-    <div class="d-flex broker-card w-100 shadow bg-white mb-2">
+    <div class="d-flex broker-card shadow bg-white mx-2">
 
       <div class=" d-flex flex-column pt-4 mt-5 mx-2">
         <div class="grid-container-element">
@@ -52,8 +52,8 @@
           <span class="grid-child-element text-content">{{brokerStreet}}</span>
         </div>
         <div class="d-flex mt-2">
-          <span class="grid-child-element text-content broker-city">{{brokerCity}}</span>
           <span class="grid-child-element text-content">{{brokerZipCode}}</span>
+          <span class="grid-child-element text-content broker-city">{{brokerCity}}</span>
         </div>
 
 
@@ -61,12 +61,16 @@
 
     </div>
 
-    <!-- Home icons fabs-->
-    <div class="d-flex px-4 pt-4 pb-5 mt-4 mb-5 col-12 home-fab-icons-scroll">
+    <!-- Home icons fabs for mobile and small screens-->
+    <div class="d-flex mt-4 d-md-none col-12 home-fab-icons-scroll">
+      <app-home-fab-icons> </app-home-fab-icons>
+    </div>
+
+    <!-- Home icons fabs for large screens -->
+    <div class="d-md-flex mt-4 justify-content-center align-items-center col-12 px-3 d-none home-icon-fabs">
       <app-home-fab-icons> </app-home-fab-icons>
     </div>
 
   </div>
-
   </div>
 </div>

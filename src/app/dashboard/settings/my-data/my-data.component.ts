@@ -2,6 +2,7 @@ import { LoadingService } from '../../../services/loading.service';
 import { Component, OnInit } from '@angular/core';
 import { PersonalData } from '../../../models/personal-data.model';
 import { PersonalDataService } from '../../../services/personal-data.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-my-data',
@@ -9,12 +10,15 @@ import { PersonalDataService } from '../../../services/personal-data.service';
   styleUrls: ['./my-data.component.scss']
 })
 export class MyDataComponent implements OnInit {
-  myName:string ="";
+  myName:string[]=[];
   myZipCode:string ="";
   myCity:string ="";
-  myStreet:string= "";
+  myStreet:string[]=[];
 
-  constructor(private personaldataService:PersonalDataService ,private loadingService:LoadingService) {
+  constructor(private personaldataService:PersonalDataService ,
+    private loadingService:LoadingService,
+    private _location:Location,
+    ) {
     this.loadingService.emitIsLoading(true);
    }
 
@@ -23,16 +27,21 @@ export class MyDataComponent implements OnInit {
       next:(resp:PersonalData) =>{
         console.log(resp);
 
-        this.myName = resp.myData.VNAME;
-        this.myCity = resp.myData.VN_ORT;
-        this.myZipCode = resp.myData.VN_PLZ;
-        this.myStreet = resp.myData.VN_STR;
+        this.myName = resp.myData.ShowName.split(", ");
+        this.myCity = resp.myData.City;
+        this.myZipCode = resp.myData.ZipCode;
+        this.myStreet = resp.myData.Street.split(" ");
       },
       complete:()=>{
         this.loadingService.emitIsLoading(false);
       }
     });
   }
-
+  onBackNavClick(){
+    this._location.back();
+  }
+  onSubmit(personalData:PersonalData){
+    console.log(personalData);
+}
 
 }

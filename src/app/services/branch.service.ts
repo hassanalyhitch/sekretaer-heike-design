@@ -69,4 +69,29 @@ export class BranchService {
         )
 
     }
+    getProducts(Branch2MasterId){
+
+      let url = 'https://testapi.maxpool.de/api/v1/masterbranches/'+ Branch2MasterId +'/products';
+      return this.http.get(url,{
+        headers:new HttpHeaders({
+          'accept': 'application/json',
+          'Content-Type': 'application/json',
+        }),
+      }).pipe(
+        tap({
+          next:()=>{
+
+          },
+          error:(error:any)=>{
+            if(error instanceof HttpErrorResponse){
+              //Invalid Token or Unauthorised request
+              if(error.status == 401){
+                this.loginService.emitAuthenticated(false);
+              }
+            }
+          }
+        })
+      )
+
+    }
 }

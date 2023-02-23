@@ -238,20 +238,42 @@
     "document_rename_success" : "Document Rename Successfully",
     "share_with_broker" : "Share With Broker"
   },
- "my-data":{
-    "page_title":"MY DATA",
-    "title_name":"Name",
+  "my-data":{
+    "page_sub_title_1":"your data",
+    "page_sub_title_2":"Personal Details",
+    "title_first_name":"First Name",
+    "title_last_name":"Last Name",
+    "title_telephone":"Telephone",
     "title_city":"City",
-    "title_zipcode":"ZipCode",
-    "title_street":"Street"
+    "title_number":"Number",
+    "title_postalCode":"Postal Code",
+    "title_street":"Street",
+    "save_btn":"SAVE",
+    "back_btn":"Back"
  },
  "change-password":{
-  "page_title":"CHANGE PASSWORD",
-  "sub_title_1":"Current Password",
-  "sub_title_2":"New Password",
-  "sub_title_3":"Confirm Password",
-  "submit_btn":"SUBMIT"
+  "page_title":"SETTINGS",
+  "sub_title_1":"change your password",
+  "sub_title_2":"Please enter",
+  "sub_title_3":"Your Current password",
+  "field_placeholder":"Current Password",
+  "submit_btn":"PROCEED",
+  "back_btn":"Back"
+},
+"new-password":{
+  "sub_title_1":"Please enter",
+  "sub_title_2" :"Your New Password",
+  "placeholder_1":"New Password",
+  "placeholder_2":"Repeat New Password",
+  "submit_btn":"CONFIRM"
  },
+"reset-successful":{
+  "sub_title_1":"Thank you very much",
+  "sub_title_2":"You have successfully reset your password",
+  "btn_1":"BACK TO HOMEPAGE",
+  "btn_2":"Back to Settings"
+ },
+
  "privacy_policy_and_terms_content": {
 
   "a1_title" : "A. Terms and Conditions",

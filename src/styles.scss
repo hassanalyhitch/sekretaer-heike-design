@@ -133,11 +133,11 @@ body {
   object-position: center center;
 }
 .loader { 
-  width:60%; 
-  margin:30px auto;
+  width: 70%; 
+  margin: 20px auto;
   position:relative;
   padding:2px;
-  background-color:#000;
+  background-color:#f2f2f25d;
   z-index:2;
   }
 .loader:before {
@@ -157,6 +157,18 @@ body {
   width:0;
   background-color:#f8f8ff;
   animation:borealisBar 2s linear infinite;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-outline {
+    display: flex;
+    position: absolute;
+    top: 0.25em;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    background-color: #fff !important;
+    border-radius: 5px;
   }
 
 @keyframes borealisBar {

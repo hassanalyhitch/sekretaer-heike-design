@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-change-password',
@@ -7,19 +8,25 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./change-password.component.scss']
 })
 export class ChangePasswordComponent implements OnInit {
+  showPassword: boolean;
 
-  constructor() { }
+  constructor(private _location:Location,private router:Router) { }
 
-  resetPasswordForm = new FormGroup({
-    'currentpassword': new FormControl(null,Validators.required),
-    'newpassword': new FormControl(null,Validators.required),
-    'confirmpassword': new FormControl(null,Validators.required),
-  });
-
+ 
   ngOnInit(): void {
+
   }
+
   onSubmit(){
-    console.log(this.resetPasswordForm);
+   
+  }
+
+  onBackNavClick(){
+    this._location.back();
+  }
+
+  newPassword(){
+    this.router.navigate(['dashboard/settings/new-password']);
   }
 
 }
