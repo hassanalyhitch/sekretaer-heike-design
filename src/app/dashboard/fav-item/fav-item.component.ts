@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ContractsService } from 'src/app/services/contracts.service';
 import { ContractData } from '../../models/contract.model';
 
 @Component({
@@ -31,10 +33,16 @@ export class FavItemComponent implements OnInit {
     isSelected: false
   };
 
-  constructor() {
+  constructor(private contractService: ContractsService, private router:Router) {
   }
 
   ngOnInit() {
   }
 
+  onCardClick(clickedContract){
+    
+    this.contractService.emitSelectedFolder(clickedContract);
+    this.router.navigate(['dashboard/overview/contract-detail', { id: clickedContract.details.Amsidnr }]);
+    
+  }
 }
