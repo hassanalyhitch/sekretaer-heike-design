@@ -9,8 +9,8 @@ import { LoginService } from "../../services/login.service";
 import { LoadingService } from '../../services/loading.service';
 import { BrokerService } from '../../services/broker.service';
 import { BrokerData } from '../../models/broker.model';
-import { FoldersService } from 'src/app/services/folder.service';
-import { FolderData } from 'src/app/models/folder.model';
+import { FoldersService } from '../../services/folder.service';
+import { FolderData } from '../..//models/folder.model';
 
 @Component({
   selector: "app-home",

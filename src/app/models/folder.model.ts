@@ -11,7 +11,7 @@ export interface FolderData {
   subFolders : FolderData[],
   docs: DocumentData[],
   isFavorite: number,
-  favoriteId: string,
+  favoriteId?: string,
 
   swipedLeft?:boolean;
   isSelected:boolean

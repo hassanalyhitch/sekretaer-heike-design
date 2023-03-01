@@ -103,7 +103,8 @@ export class OverviewComponent implements OnInit {
     docs: [],
     isFavorite: 0,
     favoriteId: "",
-    isSelected:false
+    isSelected:false,
+    swipedLeft: false
   },
   {
     id :  "",
@@ -117,7 +118,8 @@ export class OverviewComponent implements OnInit {
     docs: [],
     isFavorite: 0,
     favoriteId: "",
-    isSelected:false
+    isSelected:false,
+    swipedLeft: false
   },
   {
     id :  "",
@@ -131,7 +133,8 @@ export class OverviewComponent implements OnInit {
     docs: [],
     isFavorite: 0,
     favoriteId: "",
-    isSelected:false
+    isSelected:false,
+    swipedLeft: false
   }
 ];
 

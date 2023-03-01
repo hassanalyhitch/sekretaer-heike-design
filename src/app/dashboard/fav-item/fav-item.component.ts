@@ -3,7 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { ContractsService } from 'src/app/services/contracts.service';
+import { ContractsService } from '../../services/contracts.service';
 import { ContractData } from '../../models/contract.model';
 import { RenameContractComponent } from '../rename-contract/rename-contract.component';
 

@@ -76,6 +76,7 @@ export class FoldersService {
                   
                   index++;
                 }
+                console.table(resp);
       
               } else {
                 //invalid token
