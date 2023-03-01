@@ -16,6 +16,10 @@
   overflow-x: hidden;
 }
 
+*{
+  touch-action: pan-y !important;
+}
+
 .section-content{
   min-height: 280px;
   height: inherit;

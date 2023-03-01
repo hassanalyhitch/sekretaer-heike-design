@@ -13,6 +13,10 @@
   overflow-x: hidden;
 }
 
+*{
+  touch-action: pan-y !important;
+}
+
 .btn-add{
  background-color: var(--primaryColorDark);
  color: #ffffff;

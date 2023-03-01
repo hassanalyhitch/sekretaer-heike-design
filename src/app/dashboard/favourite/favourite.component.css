@@ -16,6 +16,10 @@
   font-family: oscine, sans-serif;
 }
 
+*{
+  touch-action: pan-y !important;
+}
+
 .fav-wrapper{
   min-height: 280px;
   height: inherit;
