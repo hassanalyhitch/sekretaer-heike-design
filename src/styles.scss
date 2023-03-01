@@ -11,6 +11,9 @@
   --primaryIconColor: #D60B51;
   --primaryLightColor: #E5007E8A;
   --primaryLightColor-100: #edcfd6;
+  --primaryButtonColor-100:#D8D3E8;
+  --primaryButtonColor-200:#EBC3CD;
+
 }
 
 html,
@@ -170,6 +173,8 @@ body {
     background-color: #fff !important;
     border-radius: 5px;
   }
+
+  .mat-simple-snackbar-action > button { color: var(--primaryColor); }
 
 @keyframes borealisBar {
   0% {

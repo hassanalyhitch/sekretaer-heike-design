@@ -6,16 +6,8 @@
             
             <div class="d-flex flex-column align-items-center">
                 
-                <!-- pink logo -->
-                <img *ngIf="sekretar_pink_logo"
-                    src="../assets/logo.svg"
-                    alt="sekretaer_logo"
-                    class="app-logo"
-                />
-
-                <!-- blue logo -->
-                <img *ngIf="sekretar_blue_logo"
-                    src="../assets/sekretar_blue_logo.svg"
+                <img
+                    [src]="app_logo_link_src"
                     alt="sekretaer_logo"
                     class="app-logo"
                 />
@@ -30,16 +22,8 @@
             
         <div class="d-flex flex-column align-items-center">
             
-            <!-- pink logo -->
-            <img *ngIf="sekretar_pink_logo"
-                src="../assets/logo.svg"
-                alt="sekretaer_logo"
-                class="app-logo"
-            />
-
-            <!-- blue logo -->
-            <img *ngIf="sekretar_blue_logo"
-                src="../assets/sekretar_blue_logo.svg"
+            <img
+                [src]="app_logo_link_src"
                 alt="sekretaer_logo"
                 class="app-logo"
             />
@@ -743,7 +727,7 @@
                 <!-- end content -->
 
                 <div [ngClass]="{'close-button-bottom-distance-in-settings': inSettings, 'close-button-bottom-distance': !inSettings}">
-                    <button class="close-btn mb-2" (click)="onCloseButtonClicked()">CLOSE</button>
+                    <button class="close-btn mb-2" backButton>CLOSE</button>
                 </div>
 
             </div>

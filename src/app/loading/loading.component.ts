@@ -7,9 +7,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoadingComponent implements OnInit {
 
-  constructor() { }
+  selected_theme: string;
+  app_loading_logo_link_src: string;
+
+  constructor() { 
+    this.app_loading_logo_link_src = "../assets/icon_loading_logo_pink.svg"; //default logo 
+    this.selected_theme = "";
+  }
 
   ngOnInit(): void {
+
+    this.selected_theme = localStorage.getItem('theme_selected');
+
+      if(!this.selected_theme){
+    
+        this.app_loading_logo_link_src = "../assets/icon_loading_logo_pink.svg";
+
+      } else if(this.selected_theme == 'pink'){
+        //use pink logo
+        this.app_loading_logo_link_src = "../assets/icon_loading_logo_pink.svg";
+  
+      } else if(this.selected_theme == 'blue'){
+        //use blue logo
+        this.app_loading_logo_link_src = "../assets/icon_loading_logo_blue.svg";
+        
+      }
+      
   }
 
 }

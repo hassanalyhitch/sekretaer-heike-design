@@ -87,11 +87,14 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
   myItems =[];
   pickdate:any;
 
-  uploadStatus:boolean =false;
-  shareWithBroker:boolean=false;
-  status:string = "/assets/icon_broker.svg";
-  acceptBroker:boolean = true;
-  doneIcon:"/assets/icons8-done-30.png"
+  broker_icon_link: string;
+  selected_theme:   string;
+
+  shareWithBroker:  boolean;
+  broker_blue_logo: boolean;
+  broker_pink_logo: boolean;
+
+  doneIcon: string = "../assets/icons8-done-30.png";
   
 
   constructor( 
@@ -108,10 +111,35 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
     private location:Location,
     private _snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<AddPageModalComponent>,
-    private translate:TranslateService ) { }
+    private translate:TranslateService ) { 
+
+      this.broker_icon_link = "../assets/icon_broker_round_default.svg"; // default round broker icon
+      this.selected_theme   = "";
+
+      this.broker_blue_logo = false;
+      this.broker_pink_logo = false;
+      this.shareWithBroker  = false;
+    }
 
   
   ngOnInit() {
+
+    this.selected_theme = localStorage.getItem('theme_selected');
+
+    if(!this.selected_theme){
+      //use default pink logo
+      this.broker_pink_logo = true;
+
+    } else if(this.selected_theme == 'pink'){
+      //use pink logo
+      this.broker_pink_logo = true;
+
+    } else if(this.selected_theme == 'blue'){
+      //use blue logo
+      this.broker_blue_logo = true;
+
+    }
+
     this.dropdownSettings = {
       idField:'id',
       textField:'dataName',
@@ -453,11 +481,15 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
 
       fileSize :this.fileSizePipe.transform(this.file.size,'MB'),
       
-     fileType:this.file.type
+      fileType:this.file.type
      
     }
-   if (this.file.type == 'application/pdf' || this.file.type =='!application/pdf') {
+   if (this.file.type =='application/pdf' || this.file.type =='!application/pdf') {
+    // console.log('File is pdf');
+   }else if(this.file.type =='image/jpeg' || this.file.type =='!image/jpeg'){
+    // console.log('File is jpeg');
    }
+
    else{
     // alert("file type should be pdf")
     this._snackBar.open(this.translate.instant('add_document.file_type_alert'),this.translate.instant('snack_bar.action_button'),{
@@ -485,9 +517,22 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
 
   }
   onShareWithBroker(){
-    // this.shareWithBroker =!this.shareWithBroker;
-    this.acceptBroker = !this.acceptBroker;
-    this.status = this.acceptBroker ? "/assets/icon_broker.svg": "/assets/broker_pink.svg";
+    this.shareWithBroker =!this.shareWithBroker;
+
+    if(this.shareWithBroker && this.broker_blue_logo){
+
+      this.broker_icon_link = "../assets/icon_broker_round_blue.svg";
+
+    } else if(this.shareWithBroker && this.broker_pink_logo){
+
+      this.broker_icon_link = "../assets/icon_broker_round_pink.svg";
+
+    } else {
+
+      this.broker_icon_link = "../assets/icon_broker_round_default.svg";
+
+    }
+    
   }
 
   ngDoCheck():void{

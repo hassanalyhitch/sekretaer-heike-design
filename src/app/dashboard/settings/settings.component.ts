@@ -42,6 +42,6 @@ export class SettingsComponent implements OnInit {
   }
 
   onChangePushNotificationSettings(){
-    //todo
+    this.router.navigate(['dashboard/settings/change-push-notifications']);
   }
 }

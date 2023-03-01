@@ -17,11 +17,21 @@
         <span class="text-center fab-label mt-1">{{"home.chat_fab" | translate}}</span>
     </div>
 
-    <div *ngIf="!isChatFabEnabled"
+    <div *ngIf="!isChatFabEnabled && isSendEmailToBrokerFabEnabled"
+        class="d-flex flex-column mx-2 justify-content-center align-items-center">
+        <div  class="quick-fab d-flex justify-content-center align-items-center">
+            <a href="mailto:{{broker_email}}" class="email">
+                <img class="align-self-center" src="/assets/icon_mail.svg">
+            </a>
+        </div>
+        <span class="text-center fab-label mt-1">{{"home.mail_fab" | translate}}</span>
+    </div>
+
+    <div *ngIf="!isChatFabEnabled && !isSendEmailToBrokerFabEnabled"
         class="d-flex flex-column mx-2 justify-content-center align-items-center"
         (click)="onOpenBrokerPage()">
         <div  class="quick-fab d-flex justify-content-center align-items-center">
-            <img class="align-self-center" src="/assets/Gruppe 234.svg">
+            <img class="align-self-center" src="/assets/icon_mail.svg">
         </div>
         <span class="text-center fab-label mt-1">{{"home.mail_fab" | translate}}</span>
     </div>

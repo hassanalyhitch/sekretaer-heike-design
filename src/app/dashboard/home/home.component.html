@@ -8,7 +8,13 @@
       </div>
       <div class="p-2">
         <div class="ml-auto btn-group dropstart align-self-center">
-          <img alt="filter icom" class="filter-icon" src="/assets/icon_filter_dark.svg">
+            <img alt="filter icom" class="filter-icon" data-bs-toggle="dropdown" aria-expanded="false" src="/assets/icon_filter_dark.svg">
+            <ul class="dropdown-menu shadow">
+              <li><span class="dropdown-item" (click)="onAddPage()"> {{ "home.service_card_add_title" | translate }}</span></li>
+              <li><span class="dropdown-item" (click)="onNotifClick()">{{ "home.service_card_notifications" | translate }}</span></li>
+              <li><a [href]="telto" class="dropdown-item">{{"home.service_card_call_your_broker" | translate}}</a></li>
+              <li><span class="dropdown-item">{{ "home.service_card_notification_of_claim" | translate }}</span></li>
+            </ul>
         </div>
       </div>
     </div>
@@ -21,17 +27,31 @@
           {{ "home.message_no_favourite_contracts" | translate }}
         </div>
 
-        <div class="d-flex w-100 px-3">
-          <div 
-          *ngFor="let favItem of favArr; let index = index"
+        <div class="d-flex flex-row w-100 px-3">
+
+          <div
           class="col-12 px-1"
-          [id]="favItem.id"
-          #contracts>
-              <app-fav-item
-              (click)="onFavContractClick(index)"
+          #contracts 
+          *ngFor="let favItem of favArr; let index = index">
+
+            <app-fav-item 
               [contractItem]="favItem">
             </app-fav-item>
           </div>
+
+          <div
+          *ngFor="let favFolderitem of favFoldersArr"
+          class="col-12 px-1"
+          #contracts >
+
+            <app-folder-card   
+              (click)="onFolderCardClick(favFolderitem)"
+              [folder]="favFolderitem">
+            </app-folder-card>
+          </div>
+            
+
+
         </div>
 
       </div>
@@ -51,7 +71,7 @@
   
       <!-- Home icons fabs for mobile and small screens-->
       <div class="d-flex col-12 px-3 home-icon-fabs">
-        <app-home-fab-icons> </app-home-fab-icons>
+        <app-home-fab-icons fab_location="home_page"> </app-home-fab-icons>
       </div>
 
       <div class="d-flex flex-column w-100 ">
@@ -106,7 +126,7 @@
                       <span class="visually-hidden">unread messages</span>
                     </span>
 
-                  <img alt="service icom" class="service-icon" src="\assets\Gruppe 234.svg">
+                  <img alt="service icom" class="service-icon" src="\assets\icon_mail.svg">
                   <div class="d-flex flex-column mt-4 position-relative" >
                     <span class="fw-bold card-text-title ">
                       {{ "home.service_card_notifications" | translate }}

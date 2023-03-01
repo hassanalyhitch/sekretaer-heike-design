@@ -264,3 +264,6 @@ app-fav-item {
   text-decoration: none;
   color: #000000;
 }
+.dropdown-item{
+  cursor: pointer;
+}

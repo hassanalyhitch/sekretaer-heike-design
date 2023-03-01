@@ -5,8 +5,8 @@
     
     
       <div class="position-relative">
-        <div class="close-btn position-absolute top-0 end-0" (click)="closeDialog()">
-          <i class="material-icons">clear</i>
+        <div class="d-flex close-btn p-2 position-absolute top-0 end-0 align-items-center justify-content-center align-items-center" (click)="closeDialog()">
+          <i class="material-icons d-flex justify-content-center">clear</i>
         </div>
       </div>
   
@@ -33,7 +33,7 @@
               <input 
                 class="file-input d-none" 
                 type="file" 
-                accept="application/pdf"
+                accept=".pdf,.jpeg,.jpg"
                 #selectFile  
                 (change)="getFileName($event)" 
                 id="selectFile" 
@@ -41,7 +41,7 @@
                 ngModel
                 required/>
               
-              <app-upload-file class="fileUpload"*ngFor="let uploadFile of uploadFileArr" [uploadFile]="uploadFile" (deleteFile)="removeFile($event)"></app-upload-file>
+              <app-upload-file class="uploads"*ngFor="let uploadFile of uploadFileArr" [uploadFile]="uploadFile" (deleteFile)="removeFile($event)"></app-upload-file>
 
           </div>
           
@@ -73,9 +73,12 @@
             </div>
           </div>
           <div class="d-flex flex-row assignment">
-            <span class="broker-btn" (click)="onShareWithBroker()"><img class="broker-icon" [src]="status"></span>
+            <span class="broker-btn" (click)="onShareWithBroker()">
+              <img class="broker-icon" [src]="broker_icon_link"></span>
             <p class="m-2">Share with Broker</p>
           </div>
+
+          
              
         <button 
           id="save-btn" 

@@ -9,6 +9,8 @@ import { LoginService } from "../../services/login.service";
 import { LoadingService } from '../../services/loading.service';
 import { BrokerService } from '../../services/broker.service';
 import { BrokerData } from '../../models/broker.model';
+import { FoldersService } from 'src/app/services/folder.service';
+import { FolderData } from 'src/app/models/folder.model';
 
 @Component({
   selector: "app-home",
@@ -27,11 +29,15 @@ export class HomeComponent implements OnInit,AfterViewInit{
   //chatCheck: number = 0;
   //insuranceCheck: number = 0;
   //isChatFabEnabled: boolean = false;
+
+  favFoldersArr: FolderData[] = [];
+  allFoldersArr: FolderData[] = [];
  
 
   
   @ViewChild("notif", { static: false }) notif: ElementRef<HTMLElement>;
   @ViewChildren("contracts") contracts:QueryList<ElementRef>;
+  @ViewChildren("folders") folders:QueryList<ElementRef>;
   lineObjectArr:{isActive: boolean, startsFrom: number, endsAt: number}[] = [];
 
   constructor(
@@ -39,7 +45,8 @@ export class HomeComponent implements OnInit,AfterViewInit{
     private contractService: ContractsService,
     private notificationService: NotificationsService,
     private loadingService:LoadingService,
-    private brokerService:BrokerService
+    private brokerService:BrokerService,
+    private folderService: FoldersService
   ) {
     this.loadingService.emitIsLoading(true);
   }
@@ -56,7 +63,26 @@ export class HomeComponent implements OnInit,AfterViewInit{
             this.favArr.push(contract);
            }
         });
+
         console.log(this.favArr.length);
+
+        //all favorite folders
+        this.folderService.getFolders().subscribe({
+          next: (resp)=>{
+
+            this.allFoldersArr = this.folderService.userFolderArr;
+            this.allFoldersArr.forEach((folder)=>{
+              if(folder.isFavorite === 1 ){
+                this.favFoldersArr.push(folder);
+              }
+            
+            });
+                    
+          },
+          complete:()=>{
+            
+          }
+        });
 
         this.brokerService.getBrokerDetails().subscribe({
           next:(resp:BrokerData)=>{
@@ -110,11 +136,16 @@ export class HomeComponent implements OnInit,AfterViewInit{
 
     this.contracts.changes.subscribe({
       next:()=>{
+        globalThis.lineObjectArr = [];
+        cardstart = 0;
+        cardend = 0;
         this.contracts.toArray().forEach((element:ElementRef, index)=>{
           let target = element.nativeElement as HTMLElement;
           cardWidth = target.clientWidth;
 
-          favArrCount = this.favArr.length;
+          console.log("Home Component: Fav Folder Array count "+this.favFoldersArr.length);
+
+          favArrCount = this.favArr.length + this.favFoldersArr.length;
 
           cardend = cardend + cardWidth;
           globalThis.lineObjectArr.push({isActive: false, startsFrom: cardstart, endsAt: cardend});
@@ -128,10 +159,13 @@ export class HomeComponent implements OnInit,AfterViewInit{
             left: 0,
             behavior: 'smooth'
           });
+
+          console.log(globalThis.lineObjectArr);
         });
 
       }
     });
+
     document.getElementById("fav-wrapper").addEventListener('scroll', function (event) {
       // Set starting position
     if (!start) {
@@ -228,6 +262,12 @@ export class HomeComponent implements OnInit,AfterViewInit{
         return;
       }
     });
+  }
+
+  onFolderCardClick(clickedFolder){
+
+    this.folderService.emitSelectedFolder(clickedFolder);
+    this.router.navigate(['dashboard/overview/folder-detail', { id: clickedFolder.id }]);
   }
 
 

@@ -157,7 +157,7 @@ label {
 }
 .btn-login:hover {
   background-color: var(--primaryColor) !important;
-  background-image: linear-gradient(131deg, #D8D3E8, #EBC3CD);
+  background-image: linear-gradient(131deg,var(--primaryButtonColor-100), var(--primaryButtonColor-200));
   color: #2C262D;
   border: none;
 }

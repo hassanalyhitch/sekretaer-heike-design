@@ -7,131 +7,108 @@
       <p class="align-self-center">{{ 'my-data.page_sub_title_1' | translate }}</p>
   </div>
 
-  <div class="section-data d-flex flex-column px-3 w-100">
-    <form (ngSubmit)="onSubmit(personalDetailsForm.value)"  #personalDetailsForm ="ngForm">
-          <div class="mb-4 details_subtitle">
-            <span>{{ 'my-data.page_sub_title_2' | translate }}:</span>
-          </div>
-          <!-- 
-          <label>Gender</label>
-          <div class="cselect">
-              <select class="options-textfield">
-                <option selected>Male</option>
-                <option >Female</option>
-              </select>
-          </div>
-         
-           -->
-          <!-- <div class="material-textfield">
-            <input
-              placeholder=" "
-              type="text"
-              name="username"
-              ngModel
-              required
-            />
-            <label>Title</label>
-          </div> -->
-          
-          <div class="material-textfield">
-            <input
-              placeholder=" "
-              type="text"
-              name="firstName"
-              ngModel
-              required
-              value="{{myName[1]}}"
-            />
-            <label>{{ 'my-data.title_first_name' | translate }}</label>
-          </div>
-          <div class="material-textfield">
-            <input
-              placeholder=" "
-              type="text"
-              name="lastName"
-              ngModel
-              required
-              value="{{myName[0]}}"
-            />
-            <label>{{ 'my-data.title_last_name' | translate }}</label>
-          </div>
-          
-          <div class="material-textfield">
-            <input
-              placeholder=" "
-              type="text"
-              name="telephone"
-              ngModel
-              required
-              value="{{myStreet[1]}}"
-            />
-            <label>{{ 'my-data.title_telephone' | translate }}</label>
-          </div>
-          
-          <div class="material-textfield">
-            <input
-              placeholder=" "
-              type="text"
-              name="street"
-              ngModel
-              required
-              value="{{myStreet[0]}}"
-            />
-            <label>{{ 'my-data.title_street' | translate }}</label>
-          </div>
-          
-          <div class="material-textfield">
-            <input
-              placeholder=" "
-              type="text"
-              name="number"
-              ngModel
-              required
-              value="{{myStreet[1]}}"
-            />
-            <label>{{ 'my-data.title_number' | translate }}</label>
-          </div>
-          
-          <div class="material-textfield">
-            <input
-              placeholder=" "
-              type="text"
-              name="postalCode"
-              ngModel
-              required
-              value="{{myZipCode}}"
-            />
-            <label>{{ 'my-data.title_postalCode' | translate }}</label>
-          </div>
-          
-          <div class="material-textfield">
-            <input
-              placeholder=" "
-              type="text"
-              name="city"
-              ngModel
-              required
-              value="{{myCity}}"
-            />
-            <label>{{ 'my-data.title_city' | translate }}</label>
-          </div>
-          
+    <div class="section-data d-flex flex-column px-3 w-100">
+      <form (ngSubmit)="onSubmit(personalDetailsForm.value)"  #personalDetailsForm ="ngForm">
+            <div class="mb-4 details_subtitle">
+                <span>{{ 'my-data.page_sub_title_2' | translate }}:</span>
+            </div>
+            
+            <div class="material-textfield">
+                <input
+                  placeholder=" "
+                  type="text"
+                  name="firstName"
+                  ngModel
+                  required
+                  value="{{myName[1]}}"
+                  disabled
+                />
+                <label>{{ 'my-data.title_first_name' | translate }}</label>
+            </div>
 
-          <button 
-            id="save-btn" 
-            type="submit"
-            class="btn btn-login  py-2" >
-              <span>{{ 'my-data.save_btn' | translate }}</span>
-          </button>
+            <div class="material-textfield">
+                <input
+                  placeholder=" "
+                  type="text"
+                  name="lastName"
+                  ngModel
+                  required
+                  value="{{myName[0]}}"
+                  disabled
+                />
+                <label>{{ 'my-data.title_last_name' | translate }}</label>
+            </div>
+            
+            <div class="material-textfield">
+                <input
+                  placeholder=" "
+                  type="text"
+                  name="telephone"
+                  ngModel
+                  required
+                  value="{{myStreet[1]}}"
+                  disabled
+                />
+                <label>{{ 'my-data.title_telephone' | translate }}</label>
+            </div>
+            
+            <div class="material-textfield">
+                <input
+                  placeholder=" "
+                  type="text"
+                  name="street"
+                  ngModel
+                  required
+                  value="{{myStreet[0]}}"
+                  disabled
+                />
+                <label>{{ 'my-data.title_street' | translate }}</label>
+            </div>
+            
+            <div class="material-textfield">
+                <input
+                  placeholder=" "
+                  type="text"
+                  name="number"
+                  ngModel
+                  required
+                  value="{{myStreet[1]}}"
+                  disabled
+                />
+                <label>{{ 'my-data.title_number' | translate }}</label>
+            </div>
+            
+            <div class="material-textfield">
+                <input
+                  placeholder=" "
+                  type="text"
+                  name="postalCode"
+                  ngModel
+                  required
+                  value="{{myZipCode}}"
+                  disabled
+                />
+                <label>{{ 'my-data.title_postalCode' | translate }}</label>
+            </div>
+            
+            <div class="material-textfield">
+                <input
+                  placeholder=" "
+                  type="text"
+                  name="city"
+                  ngModel
+                  required
+                  value="{{myCity}}"
+                  disabled
+                />
+                <label>{{ 'my-data.title_city' | translate }}</label>
+            </div>
 
-          <div class="d-flex navigate_back" (click)="onBackNavClick()" >
-            <i class="material-icons py-2 back-arrow-icon">arrow_back_ios</i>
-            <span class="py-2 back">{{ 'my-data.back_btn' | translate }}</span>
-          </div>
-    </form>
-  </div>
-  
- 
-
+            <div class="d-flex navigate_back" (click)="onBackNavClick()" >
+                <i class="material-icons py-2 back-arrow-icon">arrow_back_ios</i>
+                <span class="py-2 back">{{ 'my-data.back_btn' | translate }}</span>
+            </div>
+      </form>
+    </div>
   </div>
 </div>

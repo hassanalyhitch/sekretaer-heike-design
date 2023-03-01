@@ -5,17 +5,8 @@
     >
       <div class="logo-container align-self-center">
         
-        <!-- pink logo -->
-        <img *ngIf="sekretar_pink_logo"
-          src="../assets/logo.svg"
-          alt="sekretaer_logo"
-          class="app-logo shadow-sm"
-          style="max-width: 120px"
-        />
-
-        <!-- blue logo -->
-        <img *ngIf="sekretar_blue_logo"
-          src="../assets/sekretar_blue_logo.svg"
+        <img
+          [src]="app_logo_link_src"
           alt="sekretaer_logo"
           class="app-logo shadow-sm"
           style="max-width: 120px"

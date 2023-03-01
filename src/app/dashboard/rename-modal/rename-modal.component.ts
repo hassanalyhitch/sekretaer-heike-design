@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './rename-modal.component.html',
   styleUrls: ['./rename-modal.component.css']
 })
+
 export class RenameModalComponent implements OnInit {
 
   dataObj:{
@@ -16,14 +17,16 @@ export class RenameModalComponent implements OnInit {
     docid: string,
     systemId: string
   };
-  documentName: string = "";
-  newDocName: string= "";
 
-  submitted: boolean = false;
+  documentName:                string;
+  newDocName:                  string;
+  share_with_broker_logo_link: string;
+  selected_theme:              string;
 
-  shareWithBroker:boolean=true;
-  acceptShare:string ="/assets/icon_broker.svg";
-  denyShare:string = "/assets/icons8-done-30.png";
+  broker_blue_logo: boolean;
+  broker_pink_logo: boolean;
+  shareWithBroker:  boolean;
+  submitted:        boolean;
 
   constructor(
     @Inject(MAT_DIALOG_DATA)public data:any, 
@@ -35,11 +38,36 @@ export class RenameModalComponent implements OnInit {
     this.dataObj = JSON.parse(this.data);
     this.documentName = this.dataObj.docName;
     
-    // console.log(this.dataObj);
+    this.broker_blue_logo = false;
+    this.broker_pink_logo = false;
+    this.shareWithBroker  = false;
+    this.submitted        = false;
+
+    this.selected_theme              = "";
+    this.share_with_broker_logo_link = "../assets/icon_broker_round_default.svg";
+    this.documentName                = "";
+    this.newDocName                  = "";
 
   }
 
   ngOnInit() {
+
+    this.selected_theme = localStorage.getItem('theme_selected');
+
+    if(!this.selected_theme){
+      //use default pink logo
+      this.broker_pink_logo = true;
+
+    } else if(this.selected_theme == 'pink'){
+      //use pink logo
+      this.broker_pink_logo = true;
+
+    } else if(this.selected_theme == 'blue'){
+      //use blue logo
+      this.broker_blue_logo = true;
+
+    }
+
   }
   
   onSubmit(formData: any) {
@@ -88,7 +116,21 @@ export class RenameModalComponent implements OnInit {
   
   onShareWithBroker(){
     this.shareWithBroker = !this.shareWithBroker;
-    this.acceptShare = this.shareWithBroker ?  "/assets/icon_broker.svg": "/assets/broker_pink.svg";
+
+    if(this.shareWithBroker && this.broker_blue_logo){
+
+      this.share_with_broker_logo_link = "../assets/icon_broker_round_blue.svg";
+
+    } else if(this.shareWithBroker && this.broker_pink_logo){
+
+      this.share_with_broker_logo_link = "../assets/icon_broker_round_pink.svg";
+
+    } else {
+
+      this.share_with_broker_logo_link = "../assets/icon_broker_round_default.svg";
+
+    }
+
   }
 
 }

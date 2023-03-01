@@ -63,3 +63,9 @@
     background-color: #BFBFBF;
     color: #707070;
 }
+
+.email{
+    color: #050505 ;
+    word-break: break-all;
+    white-space: normal;
+  }

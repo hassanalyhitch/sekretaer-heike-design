@@ -20,9 +20,9 @@
 .section-broker{
   /* min-height: 280px;
   height: inherit; */
-  position: relative;
+  /* position: relative; */
   overflow-y: scroll;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
 .home-icon-fabs{

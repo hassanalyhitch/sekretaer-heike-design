@@ -47,13 +47,23 @@ export class SettingsService {
   getCurrentTheme(){
     this.theme = localStorage.getItem('theme_selected');
 
-    return this.theme;
+    if(!this.theme){
+      return "pink";
+    } else {
+      return this.theme;
+    }
+    
   }
 
   getCurrentLanguage(){
     this.language = localStorage.getItem('language');
 
-    return this.language;
+    if(!this.language){
+      return "en";
+    } else {
+      return this.language;
+    }
+
   }
 
   clearSettings(){
@@ -73,6 +83,8 @@ export class SettingsService {
         root.style.setProperty("--secondaryColor", "#2C262D");
         root.style.setProperty("--primaryLightColor", "#2B71A38A");
         root.style.setProperty("--primaryLightColor-100", "#CFD2ED");
+        root.style.setProperty("--primaryButtonColor-100", "#C7E3F7");
+        root.style.setProperty("--primaryButtonColor-200", "#CFD2ED");
       }
       break;
 
@@ -83,6 +95,8 @@ export class SettingsService {
         root.style.setProperty("--secondaryColor", "#2C262D");
         root.style.setProperty("--primaryLightColor", "#E5007E8A");
         root.style.setProperty("--primaryLightColor-100", "#EDCFD6");
+        root.style.setProperty("--primaryButtonColor-100", "#D8D3E8");   
+        root.style.setProperty("--primaryButtonColor-200", "#EBC3CD");
       }
     }
 

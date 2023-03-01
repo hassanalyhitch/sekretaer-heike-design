@@ -11,17 +11,18 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatSelectModule} from '@angular/material/select';
-import {MatInputModule} from '@angular/material/input'
+import { MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatFormFieldModule} from '@angular/material/form-field';
+import { MatSelectModule} from '@angular/material/select';
+import { MatInputModule} from '@angular/material/input'
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+
 // import ngx-translate and the http loader
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import { TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { APP_BASE_HREF } from '@angular/common';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './interceptors/auth-interceptor.service';
@@ -61,13 +62,13 @@ import { TermsConditionsComponent } from './terms-conditions/terms-conditions.co
 
 // particular imports for hammer
 import * as Hammer from 'hammerjs';
-import {HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
+import { HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { NotificationDetailComponent } from './dashboard/notifications/notification-detail/notification-detail.component';
 import { ForgotPasswordEmailSentComponent } from './forgot-password-email-sent/forgot-password-email-sent.component';
 import { LoadingComponent } from './loading/loading.component';
 import { BackButtonDirective } from './directives/backbutton.directive';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule} from '@angular/material/snack-bar';
 import { MyDataComponent } from './dashboard/settings/my-data/my-data.component';
 import { ChangePasswordComponent } from './dashboard/settings/change-password/change-password.component';
 import { AddPageModalComponent } from './dashboard/add-page-modal/add-page-modal.component';
@@ -75,6 +76,7 @@ import { ChangeLanguageComponent } from './change-language/change-language.compo
 import { ChangeThemeComponent } from './change-theme/change-theme.component';
 import { NewPasswordComponent } from './dashboard/settings/change-password/new-password/new-password.component';
 import { ResetSuccessfulComponent } from './dashboard/settings/change-password/reset-successful/reset-successful.component';
+import { ChangePushNotificationsComponent } from './change-push-notifications/change-push-notifications.component';
 
 
 // AoT requires an exported function for factories
@@ -84,7 +86,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any> {
-    swipe: { direction: Hammer.DIRECTION_HORIZONTAL },
+    swipe: { direction: Hammer.DIRECTION_ALL },
   };
 }
 
@@ -114,12 +116,13 @@ const appRoutes: Routes = [
   { path: 'dashboard/overview/new-contract',component:NewContractComponent },
   { path: 'dashboard/settings/my-data',component:MyDataComponent },
   { path: 'dashboard/settings/change-password', component:ChangePasswordComponent},
-  { path:  'dashboard/settings/new-password',component:NewPasswordComponent},
-  { path:  'dashboard/settings/password-reset-successful',component:ResetSuccessfulComponent},
+  { path: 'dashboard/settings/new-password',component:NewPasswordComponent},
+  { path: 'dashboard/settings/password-reset-successful',component:ResetSuccessfulComponent},
   { path: 'dashboard/settings/privacy-policy', component:PrivacyPolicyComponent },
   { path: 'dashboard/settings/terms-and-conditions', component:TermsConditionsComponent },
   { path: 'dashboard/settings/change-theme', component:ChangeThemeComponent },
   { path: 'dashboard/settings/change-language', component:ChangeLanguageComponent },
+  { path: 'dashboard/settings/change-push-notifications', component:ChangePushNotificationsComponent },
   { path: 'privacy-policy',component:PrivacyPolicyComponent },
   { path: 'terms-and-conditions', component:TermsConditionsComponent },
   { path: 'forgot-password', component:ForgotPasswordComponent },
@@ -202,7 +205,8 @@ const appRoutes: Routes = [
     ChangeLanguageComponent,
     ChangeThemeComponent,
     NewPasswordComponent,
-    ResetSuccessfulComponent
+    ResetSuccessfulComponent,
+    ChangePushNotificationsComponent
    ],
   bootstrap:    [ AppComponent ],
   providers: [

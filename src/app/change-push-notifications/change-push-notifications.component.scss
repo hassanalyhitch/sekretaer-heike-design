@@ -1,0 +1,59 @@
+@import url('https://use.typekit.net/myb7tas.css');
+.content-wrapper{
+  height: 92vh;
+  background-color: #F2F2F2;
+  background-image: linear-gradient(to right, var(--primaryColor) 50% , #F2F2F2 50%);
+  margin-top: 0px !important;
+  padding: 0px !important;
+}
+
+._content{
+  font-family: oscine, sans-serif;
+  background-color: #F2F2F2;
+  border-radius: 45px 0px 0px 0px;
+  height: inherit;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.section-content{
+  min-height: 280px;
+  height: inherit;
+  position: relative;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-bottom: 75px; 
+}
+
+.section-title{
+    text-shadow: none;
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 2.5px;
+    font-family: oscine, sans-serif;
+  }
+
+  .icon-options{
+    width: 40px;
+    height: 40px;
+  }
+
+  .example-form mat-slide-toggle {
+    margin: 8px 0;
+    display: block;
+  }
+
+  .w3-ul{
+    list-style-type:none;
+    padding:0;
+    margin:0
+  }
+
+  .w3-ul li{
+    padding:8px 16px;
+    border-bottom:1px solid #fff
+  }
+  
+  .w3-ul li:last-child{
+    border-bottom:none
+  }

@@ -5,7 +5,7 @@ import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { BranchData } from '../../../models/branch.model';
 import { BranchService } from '../../../services/branch.service';
 import { CompanyData } from '../../../models/company.model';
-import { ProductData } from '../../../models/products.model';
+import { ProductData } from 'src/app/models/products.model';
 import { CompanyService } from '../../../services/company.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import {FormControl} from '@angular/forms';
@@ -20,6 +20,7 @@ import { Location } from '@angular/common';
 })
 
 export class NewContractComponent implements OnInit {
+
   dataArr: {
     Branch2MasterId:string;
     displayNameMAXOFFICE:string;
@@ -43,47 +44,77 @@ export class NewContractComponent implements OnInit {
     displayNameDIMAS:string;
   }[]=[];
 
-branches:BranchData[] = [];
-companies:CompanyData[]=[];
-products:ProductData[]=[];
-name='company';
-showcontract:string;
-branchSelected:string;
-BrokerForm:FormGroup;
-optionSelected:boolean=true;
-Branch2MasterId:any;
-selectedBranches:any;
-selectedCompanies:any;
-selectedProducts:any;
-// ------------------------------
+  branches: BranchData[] = [];
+  companies: CompanyData[] = [];
+  products: ProductData[] = [];
 
-show:boolean = false;
-formGroup:FormGroup;
-file:File = null;
-fileName:string ="No file chosen";
-uploadFileArr: UploadFileData [] =[];
+  name = 'company';
+  showcontract: string;
+  branchSelected: string;
+  BrokerForm: FormGroup;
+  optionSelected: boolean = true;
+  Branch2MasterId: any;
+  selectedBranches: any;
+  selectedCompanies: any;
+  selectedProducts: any;
+  // ------------------------------
 
-shareWithBroker:boolean=false;
-status:string = "/assets/icon_broker.svg";
-acceptBroker:boolean = true;
-doneIcon:"/assets/icons8-done-30.png";
+  show: boolean = false;
+  formGroup: FormGroup;
+  file: File = null;
+  fileName: string ="No file chosen";
+  uploadFileArr: UploadFileData [] =[];
 
-paymentMethodsList =[];
-paymentMethodSettings = {};
+  doneIcon: string = "../assets/icons8-done-30.png";
 
+  paymentMethodsList = [];
+  paymentMethodSettings = {};
 
- 
-@ViewChild("selectFile",{static:true}) selectFile:ElementRef;
-branchSettings ={}; 
-companySettings = {};
-productSettings ={};
-  constructor(private branchService:BranchService, private fileSizePipe:FileSizePipe,private _location:Location) { 
+  broker_icon_link: string;
+  selected_theme:   string;
 
+  shareWithBroker:  boolean;
+  broker_blue_logo: boolean;
+  broker_pink_logo: boolean;
+  
+  @ViewChild("selectFile",{static:true}) selectFile:ElementRef;
+
+  branchSettings = {}; 
+  companySettings = {};
+  productSettings = {};
+
+  constructor(
+    private branchService:BranchService, 
+    private fileSizePipe:FileSizePipe,
+    private _location:Location) { 
+
+      this.broker_icon_link = "../assets/icon_broker_round_default.svg"; // default round broker icon
+      this.selected_theme   = "";
+
+      this.broker_blue_logo = false;
+      this.broker_pink_logo = false;
+      this.shareWithBroker  = false;
   }
 
   ngOnInit(): void {
+
+    this.selected_theme = localStorage.getItem('theme_selected');
+
+    if(!this.selected_theme){
+      //use default pink logo
+      this.broker_pink_logo = true;
+
+    } else if(this.selected_theme == 'pink'){
+      //use pink logo
+      this.broker_pink_logo = true;
+
+    } else if(this.selected_theme == 'blue'){
+      //use blue logo
+      this.broker_blue_logo = true;
+
+    }
      
-this.branchSettings = {
+  this.branchSettings = {
     itemsShowLimit: 1,
     idField: 'Branch2MasterId',
     textField: 'displayNameSEKRETAER',
@@ -100,9 +131,10 @@ this.branchSettings = {
     closeDropDownOnSelection: true,
     showSelectedItemsAtTop:true,
     defaultOpen: false,
-  
-};
-this.companySettings = {
+    
+  };
+
+  this.companySettings = {
     itemsShowLimit: 1,
     idField: 'MATCHCODE',
     textField: 'displayName',
@@ -119,28 +151,28 @@ this.companySettings = {
     closeDropDownOnSelection: true,
     showSelectedItemsAtTop: true,
     defaultOpen: false,
-  
-};
+    
+  };
 
-this.productSettings = {
-  itemsShowLimit: 1,
-  idField:'Branch2ProductId',
-  textField:'displayName',
-  singleSelection: true,
-  enableCheckAll: true,
-  selectAllText: 'Select All',
-  unSelectAllText: 'Unselect All',
-  allowSearchFilter: true,
-  limitSelection: 1,
-  clearSearchFilter: true,
-  maxHeight: 197,
-  searchPlaceholderText: 'Search',
-  noDataAvailablePlaceholderText: 'No data available',
-  closeDropDownOnSelection: true,
-  showSelectedItemsAtTop: true,
-  defaultOpen: false,
+  this.productSettings = {
+    itemsShowLimit: 1,
+    idField:'Branch2ProductId',
+    textField:'displayName',
+    singleSelection: true,
+    enableCheckAll: true,
+    selectAllText: 'Select All',
+    unSelectAllText: 'Unselect All',
+    allowSearchFilter: true,
+    limitSelection: 1,
+    clearSearchFilter: true,
+    maxHeight: 197,
+    searchPlaceholderText: 'Search',
+    noDataAvailablePlaceholderText: 'No data available',
+    closeDropDownOnSelection: true,
+    showSelectedItemsAtTop: true,
+    defaultOpen: false,
 
-};
+  };
 
     console.log(this.optionSelected);
     this.branchService.getBranches().subscribe({
@@ -379,9 +411,21 @@ this.productSettings = {
   }
 
   onShareWithBroker(){
-    // this.shareWithBroker =!this.shareWithBroker;
-    this.acceptBroker = !this.acceptBroker;
-    this.status = this.acceptBroker ? "/assets/icon_broker.svg": "/assets/broker_pink.svg";
+    this.shareWithBroker =!this.shareWithBroker;
+
+    if(this.shareWithBroker && this.broker_blue_logo){
+
+      this.broker_icon_link = "../assets/icon_broker_round_blue.svg";
+
+    } else if(this.shareWithBroker && this.broker_pink_logo){
+
+      this.broker_icon_link = "../assets/icon_broker_round_pink.svg";
+
+    } else {
+
+      this.broker_icon_link = "../assets/icon_broker_round_default.svg";
+
+    }
   }
 
  

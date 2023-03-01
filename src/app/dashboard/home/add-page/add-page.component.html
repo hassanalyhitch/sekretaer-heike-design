@@ -29,7 +29,7 @@
             <input 
               class="file-input d-none" 
               type="file" 
-              accept="application/pdf"
+              accept=".pdf,.jpeg,.jpg"
               #selectFile  
               (change)="getFileName($event)" 
               id="selectFile" 
@@ -60,7 +60,8 @@
         </div>
       
         <div class="d-flex flex-row assignment">
-          <span class="broker-btn" (click)="onShareWithBroker()"><img class="broker-icon" [src]="status"></span>
+          <span class="broker-btn" (click)="onShareWithBroker()">
+            <img class="broker-icon" [src]="broker_icon_link"></span>
           <p class="m-2">Share with Broker</p>
         </div>
            

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 
@@ -9,11 +9,26 @@ import { LoginService } from '../../services/login.service';
 })
 export class HomeFabIconsComponent implements OnInit {
 
-  isChatFabEnabled: boolean = false;
-  insuranceCheck: number = 0;
-  chatCheck: number = 0;
+  @Input() fab_location: string;
+  @Input() broker_email: string;
 
-  constructor(private loginService: LoginService, private router: Router,) { }
+  isChatFabEnabled:              boolean;
+  isSendEmailToBrokerFabEnabled: boolean;
+
+  insuranceCheck: number;
+  chatCheck:      number;
+
+  constructor(private loginService: LoginService, private router: Router,) { 
+    this.isChatFabEnabled              = false;
+    this.isSendEmailToBrokerFabEnabled = false;
+  
+    this.insuranceCheck = 0;
+    this.chatCheck      = 0;
+
+    this.broker_email = "";
+    this.fab_location = "";
+
+  }
 
   ngOnInit(): void {
 
@@ -24,6 +39,12 @@ export class HomeFabIconsComponent implements OnInit {
       this.isChatFabEnabled = true;
     } else if (this.chatCheck === 0) {
       this.isChatFabEnabled = false;
+    }
+
+    if(this.fab_location == "home_page"){
+      this.isSendEmailToBrokerFabEnabled = false;
+    } else if(this.fab_location == "broker_page"){
+      this.isSendEmailToBrokerFabEnabled = true;
     }
 
   }

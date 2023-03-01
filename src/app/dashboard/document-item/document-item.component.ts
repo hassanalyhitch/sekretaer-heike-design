@@ -13,9 +13,42 @@ import { RenameModalComponent } from '../rename-modal/rename-modal.component';
 export class DocumentItemComponent implements OnInit {
 
   @Input() doc: DocumentData;
-  constructor(private router: Router,private matDialog: MatDialog) { }
+
+  broker_icon_link: string;
+  selected_theme:   string;
+
+  sharedWithBroker: boolean;
+
+  constructor(private router: Router,private matDialog: MatDialog) { 
+
+    this.broker_icon_link = "../assets/icon_broker_simple_default.svg"; // default broker icon
+    this.selected_theme   = "";
+
+    this.sharedWithBroker = false;
+  }
 
   ngOnInit() {
+
+    this.selected_theme = localStorage.getItem('theme_selected');
+
+    if(this.sharedWithBroker && !this.selected_theme){
+
+      this.broker_icon_link = "../assets/icon_broker_simple_pink.svg";
+
+    } else if(this.sharedWithBroker && this.selected_theme == 'pink'){
+
+      this.broker_icon_link = "../assets/icon_broker_simple_pink.svg";
+
+    } else if(this.sharedWithBroker && this.selected_theme == 'blue'){
+
+      this.broker_icon_link = "../assets/icon_broker_simple_blue.svg";
+
+    } else {
+
+      // default broker icon
+      this.broker_icon_link = "../assets/icon_broker_simple_default.svg"; 
+    }
+    
   }
 
   onDocumentClick(doc: DocumentData){

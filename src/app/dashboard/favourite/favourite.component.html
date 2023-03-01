@@ -14,7 +14,7 @@
       <!-- Favourite Insurances -->
       <div  *ngIf="favContractArr.length > 0" class="w-100 d-flex flex-column align-items-center extra-folders bg-">
         <p class="section-sub-title text-center m-3">{{ 'favourites.title_lable_insurances' | translate }}</p>
-        <app-fav-item class="w-100" *ngFor="let favItem of favContractArr; let index = index" (click)="onFavContractClick(index)" [contractItem]="favItem" ></app-fav-item>
+        <app-fav-item class="w-100" *ngFor="let favItem of favContractArr; let index = index" [contractItem]="favItem" ></app-fav-item>
       </div>
       
       <!-- Favourite Folders -->

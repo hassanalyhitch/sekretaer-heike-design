@@ -109,6 +109,9 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     this.mainFolder = this.folder; 
     this.visitedFolderArray.push(this.mainFolder);
     // --------------------------------------------------
+
+    //sort documents by date
+    this.sortByDocDate();
     
   }
 

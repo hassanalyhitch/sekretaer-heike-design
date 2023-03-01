@@ -11,12 +11,10 @@ export class PrivacyPolicyComponent implements OnInit{
 
   inSettings: boolean;
   selected_theme: string;
-  sekretar_blue_logo: boolean;
-  sekretar_pink_logo: boolean;
+  app_logo_link_src: string;
 
   constructor(private _location: Location) { 
-    this.sekretar_blue_logo = false;
-    this.sekretar_pink_logo = false;
+    this.app_logo_link_src = "../assets/sekretaer_pink_logo.svg"; //default logo 
     this.selected_theme = "";
   }
 
@@ -24,19 +22,19 @@ export class PrivacyPolicyComponent implements OnInit{
 
     this.selected_theme = localStorage.getItem('theme_selected');
 
-    if(this.selected_theme == ""){
-      //use default pink logo
-      this.sekretar_pink_logo = true;
+      if(!this.selected_theme){
+    
+        this.app_logo_link_src = "../assets/sekretaer_pink_logo.svg";
 
-    } else if(this.selected_theme == 'pink'){
-      //use pink logo
-      this.sekretar_pink_logo = true;
-
-    } else if(this.selected_theme == 'blue'){
-      //use blue logo
-      this.sekretar_blue_logo = true;
-
-    }
+      } else if(this.selected_theme == 'pink'){
+        //use pink logo
+        this.app_logo_link_src = "../assets/sekretaer_pink_logo.svg";
+  
+      } else if(this.selected_theme == 'blue'){
+        //use blue logo
+        this.app_logo_link_src = "../assets/sekretar_blue_logo.svg";
+        
+      }
 
     if(window.location.href.includes("settings")){
       //if logged in

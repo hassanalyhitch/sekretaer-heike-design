@@ -87,3 +87,21 @@
   font-size: 15px;
   font-weight: 300;
 }
+
+.dropstart {
+  cursor: pointer;
+}
+
+.dropstart::before{
+  content: "" !important;
+}
+
+.dropstart .dropdown-toggle::before {
+  border: none !important;
+}
+
+.filter-icon{
+  width: 20px;
+  height: 20px;
+  cursor:pointer;
+}

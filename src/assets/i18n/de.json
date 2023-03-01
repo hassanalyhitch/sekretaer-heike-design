@@ -8,11 +8,11 @@
     "chat_fab": "Chat",
     "mail_fab": "My Broker",
     "insurance_check_fab": "Insurance Check",
-    "service_card_add_title": "ADD",
+    "service_card_add_title": "Add",
     "service_card_add_sub_title": "(a document, a picture, etc)",
     "service_card_inbox_sub_title":"View",
     "service_card_file_submit_sub_title":"File Submit",
-    "service_card_notifications": "INBOX",
+    "service_card_notifications": "Inbox",
     "service_card_notification_of_claim": "Schaden melden",
     "service_card_call_your_broker": "Makler anrufen"
   },
@@ -119,8 +119,13 @@
     "language_de": "Deutsch",
     "theme_pink": "Pink",
     "theme_blue": "Blue",
-    "language_changed_ok" : "Language Changed Succussfully",
-    "theme_changed_ok" : "Theme Color Changed Succussfully"
+    "language_changed_ok" : "Language Changed Successfully",
+    "theme_changed_ok" : "Theme Color Changed Successfully",
+    "change_push_notifications_title": "Manage Push Notifications",
+    "manage_push_notification_option_1": "New Document",
+    "manage_push_notification_option_2": "Insurance Offers",
+    "manage_push_notification_option_3": "Insurance Change Information",
+    "manage_push_notification_option_4": "Information From Broker"
   },
   "folder-detail":{
     "subfolder":"My Sub-Folders",
@@ -205,7 +210,7 @@
     "submit_button_label": "UPLOAD",
     "file_upload_error": "File Upload Failed",
     "file_upload_success": "File Upload Successfully",
-    "file_type_alert":"Only pdf is accepted"
+    "file_type_alert":"Only pdf and jpg is accepted"
   },
   "search":{
     "title_main":"SEARCH",
