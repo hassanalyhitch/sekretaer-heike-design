@@ -69,9 +69,11 @@ export class FoldersService {
                     subFolders : item['subFolders'],
                     docs : item['docs'],
                     isFavorite: item['isFavorite'],
-                    favoriteId: item['favoriteId'],
                     isSelected:false
                   };
+                  if('favoriteId' in item){
+                    folder.favoriteId = item['favoriteId'];
+                  }
                   this.userFolderArr.push(folder);
                   
                   index++;

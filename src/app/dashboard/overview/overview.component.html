@@ -97,8 +97,8 @@
         <div class="w-100 d-flex flex-wrap py-3 justify-content-center">
               
         <div class="folders w-100 d-flex flex-column align-items-center mt-1 bg-" id="folders" [ngClass]="{'transition':!collapsedFolders}">
-            <div class="w-100 d-flex a_card card-1"(swipe)="onFolderSwipe($event,foldersArr[2])">
-              <app-folder-card class=" col-12 m-1"  [ngClass]="{'swipedLeft':foldersArr[2].swipedLeft}" [folder]=foldersArr[2] (tap)="onFolderCardClick(foldersArr[2])" *ngIf="showFolderCard1" ></app-folder-card>
+            <div class="w-100 d-flex a_card card-1"(swipe)="onFolderSwipe($event,foldersArr[2])" *ngIf="showFolderCard1" >
+              <app-folder-card class=" col-12 m-1"  [ngClass]="{'swipedLeft':foldersArr[2].swipedLeft}" [folder]=foldersArr[2] (tap)="onFolderCardClick(foldersArr[2])"  ></app-folder-card>
               <div class="edit-rename d-flex flex-column p-2 align-self-center justify-content-center align-items-center" 
                   [ngClass]="{'d-none':!foldersArr[2].swipedLeft}"
                   >
@@ -107,8 +107,8 @@
               </div>
             </div>
 
-            <div class="w-100 d-flex a_card card-2"(swipe)="onFolderSwipe($event,foldersArr[1])">
-              <app-folder-card class=" col-12 m-1"  [ngClass]="{'swipedLeft':foldersArr[1].swipedLeft}" [folder]=foldersArr[1] (tap)="onFolderCardClick(foldersArr[1])" *ngIf="showFolderCard2" ></app-folder-card>
+            <div class="w-100 d-flex a_card card-2"(swipe)="onFolderSwipe($event,foldersArr[1])" *ngIf="showFolderCard2">
+              <app-folder-card class=" col-12 m-1"  [ngClass]="{'swipedLeft':foldersArr[1].swipedLeft}" [folder]=foldersArr[1] (tap)="onFolderCardClick(foldersArr[1])"  ></app-folder-card>
               <div class="edit-rename d-flex flex-column p-2 align-self-center justify-content-center align-items-center" 
                   [ngClass]="{'d-none':!foldersArr[1].swipedLeft}"
                  >
