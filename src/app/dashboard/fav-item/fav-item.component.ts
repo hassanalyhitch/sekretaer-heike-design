@@ -37,7 +37,7 @@ export class FavItemComponent implements OnInit {
     isSelected: false
   };
 
-  @Input() collapsed: boolean;
+  @Input() collapsed: boolean = false;
 
   constructor(
     private route: ActivatedRoute,

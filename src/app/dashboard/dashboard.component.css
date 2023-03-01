@@ -41,7 +41,7 @@
   text-decoration: none;
 }
 app-bottom-nav{
-  z-index: 60px;
+  z-index: 15;
 }
 .snackbar-wrapper{
   position: absolute;
