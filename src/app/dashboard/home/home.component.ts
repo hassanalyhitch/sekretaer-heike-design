@@ -126,6 +126,43 @@ export class HomeComponent implements OnInit,AfterViewInit{
     });
 
   }
+
+  refresh(){
+
+    this.favArr = [];
+    this.contractService.getContracts().subscribe({
+      next: () => {
+        this.allContractsArr = this.contractService.userContractsArr;
+        this.favArr.length = 0;
+        this.allContractsArr.forEach((contract) => {
+          if (contract.details.isFav === 1 || contract.details.isFav === "1") {
+            this.favArr.push(contract);
+           }
+        });
+
+        console.log(this.favArr.length);
+
+        //all favorite folders
+        this.folderService.getFolders().subscribe({
+          next: (resp)=>{
+
+            this.allFoldersArr = this.folderService.userFolderArr;
+            this.allFoldersArr.forEach((folder)=>{
+              if(folder.isFavorite === 1 ){
+                this.favFoldersArr.push(folder);
+              }
+            
+            });
+                    
+          },
+          complete:()=>{
+            
+          }
+        });
+      }
+    })
+  }
+
   ngAfterViewInit(){
     let isScrolling, start,end, distance,totalScrollWidth;
     let cardWidth = 1; //initializing just to avoid division errors

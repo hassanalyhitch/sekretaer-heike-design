@@ -35,7 +35,8 @@
           *ngFor="let favItem of favArr; let index = index">
 
             <app-fav-item 
-              [contractItem]="favItem">
+              [contractItem]="favItem"
+              (favoriteEvent)="refresh()" >
             </app-fav-item>
           </div>
 

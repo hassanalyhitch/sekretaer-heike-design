@@ -48,47 +48,6 @@ export class ContractsService {
 
     this.getContracts().subscribe({
       next: (resp) => {
-        this.userContractsArr = [];
-        
-        // console.log("Contract service => "+resp);
-        // console.table(resp);
-        if(Array.isArray(resp)){
-          let index: number = 0;
-
-          for(let item of resp){
-            let contract: ContractData = {
-              id: index,
-              details: {
-                Amsidnr:         item['Amsidnr'],
-                CustomerAmsidnr: item['CustomerAmsidnr'],
-                InsuranceId:     item['Contractnumber'],
-                ContractNumber:  item['Contractnumber'],
-                Company:         item['Company'],
-                StartDate:       item['Begin'],
-                EndDate:         item['End'],
-                YearlyPayment:   item['YearlyPayment'],
-                Paymethod:       item['PaymentMethod'],
-                Branch:          item['Branch'],
-                Risk:            item['Risk'],
-                docs:            item['docs'],
-                name:            item['name'],
-                productSek:      item['ProductSekretaer'],
-                tarif:           item['tarif'],
-                isFav:           item['isFavorite'],
-                favoriteId:      item['favoriteId']
-              },
-              isSelected: false
-            };
-            this.userContractsArr.push(contract);
-            
-            index++;
-          }
-          
-
-       } else {
-        //invalid token
-
-       }
 
       },
       error: (e) => {
@@ -116,6 +75,47 @@ export class ContractsService {
         }).pipe(
           tap({
             next:(resp)=>{
+              this.userContractsArr = [];
+              
+              // console.log("Contract service => "+resp);
+              // console.table(resp);
+              if(Array.isArray(resp)){
+                let index: number = 0;
+      
+                for(let item of resp){
+                  let contract: ContractData = {
+                    id: index,
+                    details: {
+                      Amsidnr:         item['Amsidnr'],
+                      CustomerAmsidnr: item['CustomerAmsidnr'],
+                      InsuranceId:     item['Contractnumber'],
+                      ContractNumber:  item['Contractnumber'],
+                      Company:         item['Company'],
+                      StartDate:       item['Begin'],
+                      EndDate:         item['End'],
+                      YearlyPayment:   item['YearlyPayment'],
+                      Paymethod:       item['PaymentMethod'],
+                      Branch:          item['Branch'],
+                      Risk:            item['Risk'],
+                      docs:            item['docs'],
+                      name:            item['name'],
+                      productSek:      item['ProductSekretaer'],
+                      tarif:           item['tarif'],
+                      isFav:           item['isFavorite'],
+                      favoriteId:      item['favoriteId']
+                    },
+                    isSelected: false
+                  };
+                  this.userContractsArr.push(contract);
+                  
+                  index++;
+                }
+                
+      
+             } else {
+              //invalid token
+      
+             }
               
             },
             error:(error: any)=>{

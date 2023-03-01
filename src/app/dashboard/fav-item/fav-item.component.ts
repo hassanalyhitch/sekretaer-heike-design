@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -38,6 +38,8 @@ export class FavItemComponent implements OnInit {
   };
 
   @Input() collapsed: boolean = false;
+  
+  @Output() favoriteEvent = new EventEmitter<boolean>();
 
   constructor(
     private route: ActivatedRoute,
@@ -138,7 +140,8 @@ export class FavItemComponent implements OnInit {
           this.snackbar.open(this.translate.instant('contract_detail.unmark_fav_success'),this.translate.instant('snack_bar.action_button'),{
             panelClass:['snack_success'],
             duration:1500,
-          })
+          });
+          this.favoriteEvent.emit(true);
         }
       });
   }
