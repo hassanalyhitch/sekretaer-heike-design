@@ -28,4 +28,23 @@ export class DownloadService {
         })
       );
   }
+
+  getBase64DownloadFile(systemId:string, fileId:string ){
+
+    let url = 'https://testapi.maxpool.de/api/v1/dms/'+systemId+'/'+fileId+'/download/base64';
+
+    return this.http.get(
+        url,
+        {
+          headers: new HttpHeaders({'accept': 'application/octetstream'}),
+          observe: 'response'
+        }
+      ).pipe(
+          tap({
+            next:()=>{
+              
+          }
+        })
+      );
+  }
 }
