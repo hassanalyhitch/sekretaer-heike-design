@@ -96,16 +96,49 @@ export class SearchPageComponent implements OnInit {
 
       if(this.searchType == 'all'){
 
+// searching all contract fields//
+
         for(let contract of this.contractsArr){
           if(contract.details.name && 
             this.lowerCasePipe.transform(contract.details.name).includes(this.lowerCasePipe.transform(searchQuery))){
             this.contractsResArr.push(contract);
           }
         }
+
+        for(let contract of this.contractsArr){
+          if(contract.details.Branch && 
+            this.lowerCasePipe.transform(contract.details.Branch).includes(this.lowerCasePipe.transform(searchQuery))){
+            this.contractsResArr.push(contract);
+          }
+        }
+
+
+        for(let contract of this.contractsArr){
+          if(contract.details.Company && 
+            this.lowerCasePipe.transform(contract.details.Company).includes(this.lowerCasePipe.transform(searchQuery))){
+            this.contractsResArr.push(contract);
+          }
+        }
+
+        for(let contract of this.contractsArr){
+          if(contract.details.EndDate && 
+            this.lowerCasePipe.transform(contract.details.EndDate).includes(this.lowerCasePipe.transform(searchQuery))){
+            this.contractsResArr.push(contract);
+          }
+        }
+
+ // searching all folder fields//       
   
         for(let folder of this.foldersArr){
           if(folder.folderName && 
             this.lowerCasePipe.transform(folder.folderName).includes(this.lowerCasePipe.transform(searchQuery))){
+            this.foldersResArr.push(folder);
+          }
+        }
+
+        for(let folder of this.foldersArr){
+          if(folder.createdAt && 
+            this.lowerCasePipe.transform(folder.createdAt).includes(this.lowerCasePipe.transform(searchQuery))){
             this.foldersResArr.push(folder);
           }
         }
@@ -118,6 +151,7 @@ export class SearchPageComponent implements OnInit {
         }
 
       } else if(this.searchType == 'folders'){
+// searching  folder fields//
 
         for(let folder of this.foldersArr){
           if(folder.folderName && 
@@ -126,11 +160,40 @@ export class SearchPageComponent implements OnInit {
           }
         }
 
+        for(let folder of this.foldersArr){
+          if(folder.createdAt && 
+            this.lowerCasePipe.transform(folder.createdAt).includes(this.lowerCasePipe.transform(searchQuery))){
+            this.foldersResArr.push(folder);
+          }
+        }
+
       } else if(this.searchType == 'contracts'){
+// searching  contract fields//
 
         for(let contract of this.contractsArr){
           if(contract.details.name && 
             this.lowerCasePipe.transform(contract.details.name).includes(this.lowerCasePipe.transform(searchQuery))){
+            this.contractsResArr.push(contract);
+          }
+        }
+
+        for(let contract of this.contractsArr){
+          if(contract.details.Branch && 
+            this.lowerCasePipe.transform(contract.details.Branch).includes(this.lowerCasePipe.transform(searchQuery))){
+            this.contractsResArr.push(contract);
+          }
+        }
+
+        for(let contract of this.contractsArr){
+          if(contract.details.Company && 
+            this.lowerCasePipe.transform(contract.details.Company).includes(this.lowerCasePipe.transform(searchQuery))){
+            this.contractsResArr.push(contract);
+          }
+        }
+
+        for(let contract of this.contractsArr){
+          if(contract.details.EndDate && 
+            this.lowerCasePipe.transform(contract.details.EndDate).includes(this.lowerCasePipe.transform(searchQuery))){
             this.contractsResArr.push(contract);
           }
         }
@@ -152,26 +215,26 @@ export class SearchPageComponent implements OnInit {
 
       if( this.contractsResArr.length > 0 ){
         this.no_contracts_found = false;
-        console.log('contracts size -> '+this.contractsResArr.length);
+        // console.log('contracts size -> '+this.contractsResArr.length);
       } else if( this.contractsResArr.length == 0 ){
         this.no_contracts_found = true;
-        console.log('contracts size -> '+this.contractsResArr.length);
+        // console.log('contracts size -> '+this.contractsResArr.length);
       }
 
       if( this.foldersResArr.length > 0 ) {
         this.no_folders_found = false;
-        console.log('folders size -> '+this.foldersResArr.length);
+        // console.log('folders size -> '+this.foldersResArr.length);
       } else if( this.foldersResArr.length == 0 ){
         this.no_folders_found = true;
-        console.log('folders size -> '+this.foldersResArr.length);
+        // console.log('folders size -> '+this.foldersResArr.length);
       } 
       
       if( this.documentsResArr.length > 0 ) {
         this.no_documents_found = false;
-        console.log('Documents size -> '+this.documentsResArr.length);
+        // console.log('Documents size -> '+this.documentsResArr.length);
       } else if( this.documentsResArr.length == 0 ){
         this.no_documents_found = true;
-        console.log('Documents size -> '+this.documentsResArr.length);
+        // console.log('Documents size -> '+this.documentsResArr.length);
       }
 
     }
@@ -180,22 +243,21 @@ export class SearchPageComponent implements OnInit {
 
       if( this.foldersResArr.length > 0 ) {
         this.no_folders_found = false;
-        console.log('folders size -> '+this.foldersResArr.length);
+        // console.log('folders size -> '+this.foldersResArr.length);
       } else if( this.foldersResArr.length == 0 ) {
         this.no_folders_found = true;
-        console.log('folders size -> '+this.foldersResArr.length);
+        // console.log('folders size -> '+this.foldersResArr.length);
       }
-
     }
 
     if(this.searchType == 'contracts'){
 
       if( this.contractsResArr.length > 0 ){
         this.no_contracts_found = false;
-        console.log('contracts size -> '+this.contractsResArr.length);
+        // console.log('contracts size -> '+this.contractsResArr.length);
       } else if( this.contractsResArr.length == 0 ) {
         this.no_contracts_found = true;
-        console.log('contracts size -> '+this.contractsResArr.length);
+        // console.log('contracts size -> '+this.contractsResArr.length);
       }
 
     }
@@ -250,39 +312,70 @@ export class SearchPageComponent implements OnInit {
       duration:5000,
       panelClass:['snack'],
     });
-    this.downloadService.getDownloadFile(doc.systemId, doc.docid).subscribe({
-      next:(resp:any)=>{
+  
+    // -------------------------------------------------------------------------------------------//
+    //                 downloading using blob                                                     //
+    // -------------------------------------------------------------------------------------------//
+    // this.downloadService.getDownloadFile(doc.systemId, doc.docid).subscribe({
+    //   next:(resp:any)=>{
         
-      // const keys = resp.headers.keys();
-      // var headers = keys.map(key =>
-      //     `${key}=>: ${resp.headers.get(key)}`
-      //   );
+    //   // const keys = resp.headers.keys();
+    //   // var headers = keys.map(key =>
+    //   //     `${key}=>: ${resp.headers.get(key)}`
+    //   //   );
 
-      let nameWithExtension = resp.headers.get('content-disposition').split("=")[1];
-      console.log(nameWithExtension);
+    //   let nameWithExtension = resp.headers.get('content-disposition').split("=")[1];
+    //   console.log(nameWithExtension);
 
-        try{
-          var mimetype = "application/octetstream" //hacky approach that browsers seem to accept.
-          var file = new File([resp.body], doc.name,{type: mimetype});
-          const url = window.URL.createObjectURL(file);
+    //     try{
+    //       var mimetype = "application/octetstream" //hacky approach that browsers seem to accept.
+    //       var file = new File([resp.body], doc.name,{type: mimetype});
+    //       const url = window.URL.createObjectURL(file);
 
-          const link = document.createElement('a');
-          link.setAttribute('target', '_blank');
-          link.setAttribute('href', url);
-          link.setAttribute('download', nameWithExtension);
-          document.body.appendChild(link);
-          link.click();
-          link.remove();
+    //       const link = document.createElement('a');
+    //       link.setAttribute('target', '_blank');
+    //       link.setAttribute('href', url);
+    //       link.setAttribute('download', nameWithExtension);
+    //       document.body.appendChild(link);
+    //       link.click();
+    //       link.remove();
           
-          URL.revokeObjectURL(url);
+    //       URL.revokeObjectURL(url);
 
-        } catch(e){
-          console.log(e);
-        }
+    //     } catch(e){
+    //       console.log(e);
+    //     }
+    //   },
+    //   error: (resp) => {
+    //     // console.log(resp);
+    //     // console.log(contract.details.favoriteId);
+    //     this.snackbar.open("Download request failed.",this.translate.instant('snack_bar.action_button'),{
+    //       panelClass:['snack_error'],
+    //       duration:1500,
+    //     })
+    //   }
+    // });
+
+
+    // -------------------------------------------------------------------------------------------//
+    //                 downloading using base64                                                     //
+    // -------------------------------------------------------------------------------------------//
+    this.downloadService.getBase64DownloadFile(doc.systemId, doc.docid).subscribe({
+      next:(resp:any)=>{
+        console.log(resp.body);
+        //use of application/octetstream is a hacky approach that browsers seem to accept.
+        let base64String = "data:application/octetstream;base64," + resp.body.document;
+        
+        const link = document.createElement('a');
+        link.setAttribute('target', '_blank');
+        link.setAttribute('href', base64String);
+        link.setAttribute('download', resp.body.meta.name+'.'+resp.body.meta.extension);
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
       },
       error: (resp) => {
-        // console.log(resp);
-        // console.log(contract.details.favoriteId);
+        console.log(resp);
         this.snackbar.open("Download request failed.",this.translate.instant('snack_bar.action_button'),{
           panelClass:['snack_error'],
           duration:1500,

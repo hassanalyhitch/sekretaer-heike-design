@@ -3,14 +3,14 @@
         <div  class="form-container">
             <form (ngSubmit)="onSubmit(contractForm.value)" class="d-flex flex-column" #contractForm="ngForm">
                 <div class="d-flex justify-content-center mb-2 px-4 pt-3">
-                    <strong class="section-title align-self-center p-2">NEW INSURANCE</strong>
+                    <strong class="section-title align-self-center p-2">{{ 'new-contract.page_title' | translate }}</strong>
                 </div>
 
-                <p class="subtitle_section">Please Select Categories:</p>
+                <p class="subtitle_section">{{ 'new-contract.sub_title_1' | translate }}</p>
                 
                 <div class="select_item">
                     <ng-multiselect-dropdown
-                    [placeholder]="'Please Select Branch'"
+                    [placeholder]="'new-contract.sub_title_1_a' |translate"
                     [settings]="branchSettings"
                     [data]="dataArr"
                     [(ngModel)]="selectedBranches"
@@ -21,7 +21,7 @@
 
                 <div class="select_item">
                     <ng-multiselect-dropdown
-                    [placeholder]="'Please select Company'"
+                    [placeholder]="'new-contract.sub_title_1_b' |translate"
                     [settings]="companySettings"
                     [data]="companyArr"
                     (onSelect)="onCompanySelected($event)"
@@ -31,7 +31,7 @@
 
                 <div class="select_item">
                     <ng-multiselect-dropdown
-                    [placeholder]="'Please select Product'"
+                    [placeholder]="'new-contract.sub_title_1_c' |translate"
                     [settings]="productSettings"
                     (onSelect)="onProductSelected($event)"
                     [data]="productArr"
@@ -40,22 +40,29 @@
                     </ng-multiselect-dropdown>
                 </div>
 
-                <p class="subtitle_section">Please Enter Risk:</p>
+         
+                <p class="subtitle_section">{{ 'new-contract.sub_title_2' | translate }}:</p>
 
-                    <input  ngModel [required]="optionSelected" 
-                    type="text" placeholder="Start Date" 
-                    onclick="(this.type='date')"
-                    class="form-control" id="end" name="end" class="fileUpload"/>
+                <mat-form-field class="example-full-width" appearance="none">
+                    <input matInput [matDatepicker]="picker" placeholder= "{{'new-contract.sub_title_2_placeholder_a' | translate }}">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker">
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              
                     
-                    <input  ngModel [required]="optionSelected" 
-                    type="text" placeholder="End Date" 
-                    onclick="(this.type='date')"
-                     class="form-control" id="end" name="end" class="fileUpload"/>
+                <mat-form-field class="example-full-width" appearance="none">
+                    <input matInput [matDatepicker]="pickerDate" placeholder="{{'new-contract.sub_title_2_placeholder_b' | translate }}">
+                    <mat-datepicker-toggle matIconSuffix [for]="pickerDate">
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #pickerDate></mat-datepicker>
+                </mat-form-field>
+                  
 
 
                      <div class="fileUpload">
                         <ng-multiselect-dropdown
-                        [placeholder]="'Payment Method'"
+                        [placeholder]="'new-contract.sub_title_2_a' | translate "
                         [settings]="paymentMethodSettings"
                         (onSelect)="onPaymentMethodSelected($event)"
                         [data]="paymentMethodsList"
@@ -65,13 +72,13 @@
                   
 
                     <input  ngModel [required]="optionSelected"  
-                    type="text" placeholder="Amount" class="form-control" 
+                    type="text" placeholder="{{'new-contract.sub_title_2_b' | translate }}" class="form-control" 
                     id="Amount" name="Amount" class="fileUpload"/>
                     
-               <p class="subtitle_section">File for Preview:</p>
+                    <p class="subtitle_section">{{'new-contract.sub_title_3' | translate }}:</p>
 
                 <div class="d-flex flex-row uploads">
-                    <div class="d-flex flex-column upload-section_a"(click)="selectFile.click()">Add Document</div>
+                    <div class="d-flex flex-column upload-section_a"(click)="selectFile.click()">{{'new-contract.sub_title_3_a' | translate }}</div>
 
                     <div class="d-flex flex-column upload-section_b align-items-center">
                         <input 
@@ -105,14 +112,14 @@
                 <span class="broker-btn" (click)="onShareWithBroker()">
                     <img class="broker-icon" [src]="broker_icon_link">
                 </span>
-                <p class="m-2">Share with Broker</p>
+                <p class="m-2">{{'new-contract.share_broker' | translate }}</p>
               </div>
 
-                <button class="btn py-2" type="submit">SAVE INSURANCE</button>
+                <button class="btn py-2" type="submit">{{'new-contract.submit_btn' | translate }}</button>
 
                 <div class="d-flex uploads back" (click)="onBackNavClick()" >
                     <i class="material-icons py-2 back-arrow-icon">arrow_back_ios</i>
-                    <span class="py-2">Back</span>
+                    <span class="py-2">{{'new-contract.back_btn' | translate }}</span>
                 </div>
         </form>
 

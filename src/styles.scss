@@ -21,31 +21,37 @@ body {
   background-color: #F2F2F2; /*#e6ecf5; rgba(255, 250, 237, 1);*/
   min-height: 100%;
 }
+
 .main{
   height: 100vh;
   overflow: hidden;
   background-color: #F2F2F2;
 }
+
 .bg-white{
   background-color: #ffffff !important;
 }
+
 .snack{
   background-color: #ffff;
   color: #2C262D;
 }
+
 .snack_error{
   background-color: #ffff;
   color: #2C262D;
   position: relative;
   text-align: center !important;
-  padding-left:50px !important;
+  display: flex;
 }
+
 .snack_error::before{
   content:url("/assets/error-icon.svg");
-  position: absolute;
-  left: 17px;
-  top: 13px;
+  margin-right: 12px;
+  align-self: center;
+  transform: scale(1.25);
 }
+
 .snack_success{
   background-color: #ffffff;
   color: #2C262D;
@@ -53,18 +59,21 @@ body {
   text-align: center !important;
   padding-left: 50px !important;
 }
+
 .snack_success::before{
   content:url("/assets/done-icon.svg");
   position: absolute;
   left: 17px;
   top: 13px;
 }
+
 .snack_fileType::before{
   content:url("/assets/error-icon.svg");
   position: absolute;
   left: 17px;
   top: 13px;
 }
+
 .snack_fileType{
   background-color: #ffffff;
   color: #2C262D;
@@ -80,9 +89,11 @@ body {
   box-shadow: inset 0 0 4px #707070;
   border-radius: 8px;
 }
+
 .multiselect-dropdown .dropdown-btn .selected-item:hover {
   box-shadow: none !important;
 }
+
 .multiselect-dropdown .dropdown-btn {
   border: none !important;
 }  
@@ -113,12 +124,15 @@ body {
 .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
   background-color: var(--primaryColor)!important;
 }
+
 .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
   background-color: var(--primaryLightColor);
 }
+
 .mat-slide-toggle.mat-primary.mat-checked .mat-slide-toggle-bar{
   background-color: var(--primaryLightColor) !important;
 }
+
 .mat-disabled {
   opacity: 1 !important;
 }
@@ -128,6 +142,7 @@ body {
   height:85%;
   border-bottom-left-radius:200px;
 }
+
 .app-logo{
   height: 148px;
   width: 148px;
@@ -135,6 +150,7 @@ body {
   object-fit: contain;
   object-position: center center;
 }
+
 .loader { 
   width: 70%; 
   margin: 20px auto;
@@ -142,7 +158,8 @@ body {
   padding:2px;
   background-color:#f2f2f25d;
   z-index:2;
-  }
+}
+
 .loader:before {
   content:'';
   position:absolute;
@@ -150,7 +167,8 @@ body {
   right:-4px; 
   bottom:-4px; 
   left:-4px;
-  }
+}
+
 .loader .loaderBar { 
   position:absolute;
   top:0;
@@ -160,21 +178,65 @@ body {
   width:0;
   background-color:#f8f8ff;
   animation:borealisBar 2s linear infinite;
-  }
+}
 
-  .mat-form-field-appearance-outline .mat-form-field-outline {
-    display: flex;
-    position: absolute;
-    top: 0.25em;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-    background-color: #fff !important;
-    border-radius: 5px;
-  }
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  display: flex;
+  position: absolute;
+  top: 0.25em;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background-color: #fff !important;
+  border-radius: 5px;
+}
 
-  .mat-simple-snackbar-action > button { color: var(--primaryColor); }
+.mat-form-field-infix {
+  display: flex !important;
+  position: relative;
+  flex: auto;
+  min-width: 0;
+  width: 180px;
+  padding-top: 0px !important;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: #fff !important;
+  
+}
+
+.mat-form-field-wrapper {
+  width: 90%;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding:2px 5px !important;
+}
+
+.mat-simple-snackbar-action > button { color: var(--primaryColor); }
+
+.mat-snack-bar-container {
+  border-radius: 4px;
+  box-sizing: border-box;
+  display: flex !important;
+  margin: 24px;
+  max-width: 33vw;
+  min-width: 344px;
+  padding: 14px 16px;
+  min-height: 48px;
+  transform-origin: center;
+  justify-content: space-around !important;
+}
+
+.mat-simple-snack-bar-content {
+  text-align: left;
+}
+
+.mat-snack-bar-handset .mat-snack-bar-container {
+  margin: 8px !important;
+  width: 75% !important;
+  min-width: 0 !important;
+}
 
 @keyframes borealisBar {
   0% {

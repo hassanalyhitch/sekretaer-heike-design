@@ -296,5 +296,22 @@ input{
     width:48px;
     height:48px;
   }
+  .example-full-width{
+    display: block;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 3px;
+    margin-bottom: 6px;
+    border-radius: 7px;
+    border:#fff;
+    width: 90%;
+    background-color: #fff;
+    cursor: pointer;
+    font-family:oscine, sans-serif;
+    font-size: 17px;
+    color:#707070;
+    font-style: normal;
+  }
+  
   
   

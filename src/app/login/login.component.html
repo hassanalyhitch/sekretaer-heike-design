@@ -39,6 +39,7 @@
               ngModel
               required
               id="username"
+              autocomplete="username"
             />
             <label for="username">{{ "login.username" | translate }}</label>
           </div>
@@ -51,6 +52,7 @@
               ngModel
               required
               id="password"
+              autocomplete="current-password"
             />
             <label for="password">{{ "login.password" | translate }}</label>
           </div>
@@ -86,13 +88,6 @@
         </div>
       </div>
     </div>
-  </div>
-
-  <div
-    class="snackbar-wrapper p-2 mx-5 align-self-center shadow-lg"
-    *ngFor="let error of errorStack"
-  >
-    <app-snackbar [msg]="error"></app-snackbar>
   </div>
 
 </div>

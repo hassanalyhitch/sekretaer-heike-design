@@ -97,7 +97,9 @@
     "btn_back_to_login" : "BACK TO LOGIN",
     "title_email_sent" : "Fast geschafft.",
     "content_email_sent_1" : "We have sent you an email.",
-    "content_email_sent_2" : "Please check your inbox or your spam folder"
+    "content_email_sent_2" : "Please check your inbox or your spam folder",
+    "wrong_credentials_used": "Incorrect Username or Password",
+    "connection_error" : "Failed to Connect. No Active Internet Connection."
   },
   "settings":{
     "main_title":"SETTINGS",
@@ -277,6 +279,23 @@
   "placeholder_1":"New Password",
   "placeholder_2":"Repeat New Password",
   "submit_btn":"CONFIRM"
+ },
+ "new-contract":{
+  "page_title":"NEW INSURANCE",
+  "sub_title_1":"Please Select Categories",
+  "sub_title_1_a":"Please Select Branch",
+  "sub_title_1_b":"Please Select Company",
+  "sub_title_1_c":"Please Select Product",
+  "sub_title_2":"Please Enter Risk",
+  "sub_title_2_placeholder_a":"Start Date",
+  "sub_title_2_placeholder_b":"End Date",
+  "sub_title_2_a":"Payment Method",
+  "sub_title_2_b":"Amount",
+  "sub_title_3":"File for preview",
+  "sub_title_3_a":"Add Document",
+  "share_broker":"Share with Broker",
+  "submit_btn":"SAVE INSURANCE",
+  "back_btn":"Back"
  },
  "privacy_policy_and_terms_content": {
 

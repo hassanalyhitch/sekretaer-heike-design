@@ -27,7 +27,7 @@ export class ChangeThemeComponent implements OnInit {
   ngOnInit(): void {
 
     this.colors =  [
-      {uiname: this.translateService.instant('settings.theme_pink'), name: "pink" , selected : false},
+      {uiname: this.translateService.instant('settings.theme_pink'), name: "default" , selected : false},
       {uiname: this.translateService.instant('settings.theme_blue') ,name : "blue", selected: false}
     ];
     
@@ -37,6 +37,7 @@ export class ChangeThemeComponent implements OnInit {
     }
   }
 
+  
   onSlideToggle(name:string){
 
     for(let i = 0; i<this.colors.length; i++){

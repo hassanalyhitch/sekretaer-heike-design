@@ -57,15 +57,6 @@
   color: white;
   text-decoration: none;
 }
-.snackbar-wrapper{
-  position: absolute;
-  bottom: 60px;
-  width: 80%;
-  background-color: var(--primaryColorDark);
-  border-radius: 7px;
-  border: solid 2px white;
-  transition: 0.4s ease-in;
-}
 
 .logo-container{
   

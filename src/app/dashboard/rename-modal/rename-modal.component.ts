@@ -35,9 +35,6 @@ export class RenameModalComponent implements OnInit {
     private translate:TranslateService,
     private dialogRef: MatDialogRef<RenameModalComponent>) { 
 
-    this.dataObj = JSON.parse(this.data);
-    this.documentName = this.dataObj.docName;
-    
     this.broker_blue_logo = false;
     this.broker_pink_logo = false;
     this.shareWithBroker  = false;
@@ -51,6 +48,8 @@ export class RenameModalComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dataObj = JSON.parse(this.data);
+    this.documentName = this.dataObj.docName;
 
     this.selected_theme = localStorage.getItem('theme_selected');
 

@@ -13,6 +13,7 @@ import { LoginData } from "../models/login.model";
 import { LoadingService } from "../services/loading.service";
 import { LoginService } from "../services/login.service";
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "app-login",
@@ -51,7 +52,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private loginService: LoginService,
     private loadingService:LoadingService,
-    private _snackBar: MatSnackBar ){
+    private translate: TranslateService,
+    private snackBar: MatSnackBar ){
       this.loadingService.emitIsLoading(false);
 
       this.app_logo_link_src = "../assets/sekretaer_pink_logo.svg"; //default logo 
@@ -90,33 +92,35 @@ export class LoginComponent implements OnInit {
         }
       },
       error: (e) => {
-        console.log(e);
-        if (e.hasOwnProperty("name") && e.hasOwnProperty("statusText")) {
-          this.errorMessage = " " + e.name + " -> " + e.statusText;
-          console.log("display this error => " + this.errorMessage);
+
+        if (e.error.hasOwnProperty("message")) {
+
+          if(e.error.hasOwnProperty("errors")){
+
+            this.errorMessage = this.translate.instant('login.wrong_credentials_used');
+
+          }
+
+        } else {
+
+          this.errorMessage = this.translate.instant('login.connection_error');
         }
 
-        if (e.error.hasOwnProperty("msg")) {
-          this.errorMessage = e.error.msg;
-          console.log("display this error => " + this.errorMessage);
-        } else if (e.error.hasOwnProperty("message")) {
-          this.errorMessage = e.error.message;
-          console.log("display this error => " + this.errorMessage);
-        }
-        this.showSnackbar(this.errorMessage);
+        this.snackBar.open(
+          this.errorMessage,
+          this.translate.instant('snack_bar.action_button'),
+          {
+            duration: 8000,
+            panelClass:['snack_error'],
+          }
+        );
+
         this.submitted = false;
       },
       complete: () => {
         // console.info('complete')
       },
     });
-  }
-
-  showSnackbar(error: string) {
-    this.errorStack.push(this.errorMessage);
-    setInterval(() => {
-      this.errorStack.pop();
-    }, 8000);
   }
 
   onSubmit(formData: LoginData) {
