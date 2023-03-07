@@ -8,6 +8,8 @@
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "noImplicitUseStrict": true,
+    "strict": false,
+    "strictTemplates": false,
     "module": "esnext",
     "moduleResolution": "node",
     "importHelpers": true,
