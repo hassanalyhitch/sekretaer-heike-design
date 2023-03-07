@@ -9,11 +9,9 @@
       "projectType": "application",
       "prefix": "app",
       "schematics": {
-        "@schematics/angular:application": {
-          "strict": false
-        },
         "@schematics/angular:component": {
-           "style": "scss" }
+           "style": "scss",
+           "strict": false }
           },
       "architect": {
         "build": {
