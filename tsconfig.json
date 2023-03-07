@@ -8,7 +8,8 @@
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "module": "esnext",
-    "strictTemplates": false,
+    "strict": false,
+    "noImplicitReturns": false,
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
@@ -22,8 +23,8 @@
   },
   "angularCompilerOptions": {
     "enableIvy": true,
-    "strictTemplates": false,
     "fullTemplateTypeCheck": false,
-    "strictInjectionParameters": false
+    "strictInjectionParameters": false,
+    "strictTemplates": false,
   }
 }
