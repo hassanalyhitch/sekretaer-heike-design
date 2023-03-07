@@ -83,6 +83,8 @@ export class NewContractComponent implements OnInit {
   companySettings = {};
   productSettings = {};
 
+  none:any = "none";
+
   constructor(
     private branchService:BranchService, 
     private fileSizePipe:FileSizePipe,
