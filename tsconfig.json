@@ -23,6 +23,6 @@
     "enableIvy": true,
     "strictTemplates": false,
     "fullTemplateTypeCheck": false,
-    "strictInjectionParameters": true
+    "strictInjectionParameters": false
   }
 }
