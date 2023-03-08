@@ -350,6 +350,10 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
         document.body.appendChild(link);
         link.click();
         link.remove();
+        this.snackbar.open("Downloading (https:) Test File", this.translate.instant('snack_bar.action_button'),{
+          duration:4000,
+          panelClass:['snack'],
+        });
       },
       error: (resp) => {
         console.log(resp);
