@@ -368,7 +368,7 @@ export class SearchPageComponent implements OnInit {
         
         const link = document.createElement('a');
         link.setAttribute('target', '_blank');
-        link.setAttribute('href', base64String);
+        link.setAttribute('href', resp.body.meta.linkToDoc);
         link.setAttribute('download', resp.body.meta.name+'.'+resp.body.meta.extension);
         document.body.appendChild(link);
         link.click();
