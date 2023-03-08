@@ -339,7 +339,7 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     // -------------------------------------------------------------------------------------------//
     this.downloadService.getBase64DownloadFile(doc.systemId, doc.docid).subscribe({
       next:(resp:any)=>{
-        console.log(resp.body);
+        console.log(resp);
         //use of application/octetstream is a hacky approach that browsers seem to accept.
         let base64String = "data:application/octetstream;base64," + resp.body.document;
         
