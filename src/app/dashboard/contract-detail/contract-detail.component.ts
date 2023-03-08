@@ -345,7 +345,7 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
         
         const link = document.createElement('a');
         link.setAttribute('target', '_blank');
-        link.setAttribute('href', base64String);
+        link.setAttribute('href', "https://testapi.maxpool.de/api/v1/download/test");
         link.setAttribute('download', resp.body.meta.name+'.'+resp.body.meta.extension);
         document.body.appendChild(link);
         link.click();
