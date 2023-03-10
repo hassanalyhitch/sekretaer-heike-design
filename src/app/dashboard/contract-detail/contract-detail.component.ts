@@ -341,12 +341,12 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
       next:(resp:any)=>{
         console.log(resp.url.split("/api")[0]+resp.body.meta.linkToDoc);
         //use of application/octetstream is a hacky approach that browsers seem to accept.
-        let base64String = "data:application/octetstream;base64," + resp.body.document;
+        // let base64String = "data:application/octetstream;base64," + resp.body.document;
         
         const link = document.createElement('a');
         link.setAttribute('target', '_blank');
         link.setAttribute('href', resp.url.split("/api")[0]+resp.body.meta.linkToDoc);
-        // link.setAttribute('download', resp.body.meta.name+'.'+resp.body.meta.extension);
+        link.setAttribute('download', resp.body.meta.name+'.'+resp.body.meta.extension);
         document.body.appendChild(link);
         link.click();
         link.remove();
