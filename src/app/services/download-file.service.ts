@@ -31,7 +31,7 @@ export class DownloadService {
 
   getBase64DownloadFile(systemId:string, fileId:string ){
 
-    let url = 'https://testapi.maxpool.de/api/v1/dms/'+systemId+'/'+fileId+'/download/base64';
+    let url = 'https://testapi.maxpool.de/api/v1/dms/'+systemId+'/'+fileId;
 
     return this.http.get(
         url,
