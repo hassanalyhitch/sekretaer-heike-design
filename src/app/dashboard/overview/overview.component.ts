@@ -19,77 +19,8 @@ import { RenameContractComponent } from '../rename-contract/rename-contract.comp
 })
 export class OverviewComponent implements OnInit {
 
-  subsetArr:ContractData[] = [];
-  allContractsArr:ContractData[] = [{
-    id: 0,
-    details: {
-      Amsidnr: "",
-      CustomerAmsidnr: "",
-      InsuranceId: "",
-      ContractNumber: "",
-      Company: "",
-      StartDate: "",
-      EndDate: "",
-      YearlyPayment: "",
-      Paymethod: "",
-      Branch: "",
-      Risk: "",
-      docs: [],
-      name: "",
-      productSek: "",
-      tarif: "",
-      isFav: 1,
-      favoriteId: ""
-    },
-    isSelected: false
-  },
-  {
-    id: 0,
-    details: {
-      Amsidnr: "",
-      CustomerAmsidnr: "",
-      InsuranceId: "",
-      ContractNumber: "",
-      Company: "",
-      StartDate: "",
-      EndDate: "",
-      YearlyPayment: "",
-      Paymethod: "",
-      Branch: "",
-      Risk: "",
-      docs: [],
-      name: "",
-      productSek: "",
-      tarif: "",
-      isFav: 1,
-      favoriteId: ""
-    },
-    isSelected: false
-  },
-  {
-    id: 0,
-    details: {
-      Amsidnr: "",
-      CustomerAmsidnr: "",
-      InsuranceId: "",
-      ContractNumber: "",
-      Company: "",
-      StartDate: "",
-      EndDate: "",
-      YearlyPayment: "",
-      Paymethod: "",
-      Branch: "",
-      Risk: "",
-      docs: [],
-      name: "",
-      productSek: "",
-      tarif: "",
-      isFav: 1,
-      favoriteId: ""
-    },
-    isSelected: false
-  }
-];
+  allContractsArr:ContractData[] = [];
+  subsetArr:ContractData[] = this.allContractsArr;
 
   foldersArr: FolderData[] = [{
     id :  "",
