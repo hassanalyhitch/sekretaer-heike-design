@@ -83,6 +83,9 @@ export class ContractsService {
                 let index: number = 0;
       
                 for(let item of resp){
+                  if(item['docs'] === undefined){
+                    item['docs'] = [];
+                  }
                   let contract: ContractData = {
                     id: index,
                     details: {
@@ -104,7 +107,8 @@ export class ContractsService {
                       isFav:           item['isFavorite'],
                       favoriteId:      item['favoriteId']
                     },
-                    isSelected: false
+                    isSelected: false,
+                    swipedLeft: false
                   };
                   this.userContractsArr.push(contract);
                   

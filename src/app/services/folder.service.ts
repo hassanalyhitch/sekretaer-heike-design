@@ -69,7 +69,8 @@ export class FoldersService {
                     subFolders : item['subFolders'],
                     docs : item['docs'],
                     isFavorite: item['isFavorite'],
-                    isSelected:false
+                    isSelected: false,
+                    swipedLeft: false
                   };
                   if('favoriteId' in item){
                     folder.favoriteId = item['favoriteId'];

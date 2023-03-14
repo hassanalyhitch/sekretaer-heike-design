@@ -74,9 +74,11 @@ export class OverviewComponent implements OnInit {
 
   folderSubsetArr: FolderData[] = [];
 
+  showCard3:boolean = false;
   showCard2:boolean = false;
   showCard1:boolean = false;
 
+  showFolderCard3:boolean = false;
   showFolderCard2:boolean = false;
   showFolderCard1:boolean = false;
 
@@ -109,7 +111,78 @@ export class OverviewComponent implements OnInit {
      }
 
   ngOnInit() {
-   
+    this.allContractsArr = [{
+      id: 0,
+      details: {
+        Amsidnr: "",
+        CustomerAmsidnr: "",
+        InsuranceId: "",
+        ContractNumber: "",
+        Company: "",
+        StartDate: "",
+        EndDate: "",
+        YearlyPayment: "",
+        Paymethod: "",
+        Branch: "",
+        Risk: "",
+        docs: [],
+        name: "",
+        productSek: "",
+        tarif: "",
+        isFav: 1,
+        favoriteId: ""
+      },
+      isSelected: false,
+      swipedLeft: false
+    },
+    {
+      id: 0,
+      details: {
+        Amsidnr: "",
+        CustomerAmsidnr: "",
+        InsuranceId: "",
+        ContractNumber: "",
+        Company: "",
+        StartDate: "",
+        EndDate: "",
+        YearlyPayment: "",
+        Paymethod: "",
+        Branch: "",
+        Risk: "",
+        docs: [],
+        name: "",
+        productSek: "",
+        tarif: "",
+        isFav: 1,
+        favoriteId: ""
+      },
+      isSelected: false,
+      swipedLeft: false
+    },
+    {
+      id: 0,
+      details: {
+        Amsidnr: "",
+        CustomerAmsidnr: "",
+        InsuranceId: "",
+        ContractNumber: "",
+        Company: "",
+        StartDate: "",
+        EndDate: "",
+        YearlyPayment: "",
+        Paymethod: "",
+        Branch: "",
+        Risk: "",
+        docs: [],
+        name: "",
+        productSek: "",
+        tarif: "",
+        isFav: 1,
+        favoriteId: ""
+      },
+      isSelected: false,
+      swipedLeft: false
+    }];
     this._init();
   }
 
@@ -118,16 +191,47 @@ export class OverviewComponent implements OnInit {
       next: ()=>{
       
         this.allContractsArr = this.contractService.userContractsArr;
+        // console.table(this.allContractsArr);
 
         this.subsetArr = [];
         if(this.contractService.userContractsArr.length>3){
           for(let i=3; i<this.contractService.userContractsArr.length; i++){
             this.subsetArr.push(this.contractService.userContractsArr[i]);
           }
+        } else {
+          this.allContractsArr.length>0 ? this.showCard3 = true: this.showCard3 = false;
+          this.allContractsArr.length>1 ? this.showCard2 = true: this.showCard2 = false;
+          this.allContractsArr.length>2 ? this.showCard1 = true: this.showCard1 = false;
+          let emptyContract: ContractData = {
+            id: 0,
+            details: {
+              Amsidnr: "",
+              CustomerAmsidnr: "",
+              InsuranceId: "",
+              ContractNumber: "",
+              Company: "",
+              StartDate: "",
+              EndDate: "",
+              YearlyPayment: "",
+              Paymethod: "",
+              Branch: "",
+              Risk: "",
+              docs: [],
+              name: "",
+              productSek: "",
+              tarif: "",
+              isFav: 1,
+              favoriteId: ""
+            },
+            isSelected: false,
+            swipedLeft: false
+          }
+          this.allContractsArr.push(emptyContract);
+          this.allContractsArr.push(emptyContract);
+          this.allContractsArr.push(emptyContract);
         }
+
         // console.log(this.allContractsArr);
-        this.allContractsArr.length>1 ? this.showCard2 = true: this.showCard2 = false;
-        this.allContractsArr.length>2 ? this.showCard1 = true: this.showCard1 = false;
       },
       complete:()=>{
         this.folderService.getFolders().subscribe({
@@ -143,10 +247,30 @@ export class OverviewComponent implements OnInit {
               for(let i=3; i<this.foldersArr.length; i++){
                 this.folderSubsetArr.push(this.foldersArr[i]);
               }
+            } else {
+              this.foldersArr.length>0 ? this.showFolderCard3 = true: this.showFolderCard3 = false;
+              this.foldersArr.length>1 ? this.showFolderCard2 = true: this.showFolderCard2 = false;
+              this.foldersArr.length>2 ? this.showFolderCard1 = true: this.showFolderCard1 = false;
+              let emptyFolder: FolderData = {
+                id :  "",
+                loginId :  "",
+                customerAmsidnr :  "",
+                ownerFolderId :  "",
+                folderName :  "",
+                createTime :  "",
+                createdAt :  "",
+                subFolders : [],
+                docs: [],
+                isFavorite: 0,
+                favoriteId: "",
+                isSelected:false,
+                swipedLeft: false
+              }
+              this.foldersArr.push(emptyFolder);
+              this.foldersArr.push(emptyFolder);
+              this.foldersArr.push(emptyFolder);
             }
             // console.log(this.foldersArr);
-            this.foldersArr.length>1 ? this.showFolderCard2 = true: this.showFolderCard2 = false;
-            this.foldersArr.length>2 ? this.showFolderCard1 = true: this.showFolderCard1 = false;
           },
           complete:()=>{
             this.loadingService.emitIsLoading(false);
