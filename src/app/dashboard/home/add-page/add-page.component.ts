@@ -105,6 +105,7 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
   shareWithBroker:  boolean;
   broker_blue_logo: boolean;
   broker_pink_logo: boolean;
+  none:any = "none";
   
 
   constructor( 

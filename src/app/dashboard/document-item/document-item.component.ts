@@ -4,7 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { DownloadService } from 'src/app/services/download-file.service';
+import { DownloadService } from '../../services/download-file.service';
 import { DocumentData } from '../../models/document.model';
 import { RenameModalComponent } from '../rename-modal/rename-modal.component';
 
@@ -265,7 +265,7 @@ export class DocumentItemComponent implements OnInit {
         document.body.appendChild(link);
         link.click();
         link.remove();
-        this.snackbar.open("Downloading (https:) Test File", this.translate.instant('snack_bar.action_button'),{
+        this.snackbar.open("Download Test : "+resp.url.split("/api")[0]+resp.body.linkToDoc, this.translate.instant('snack_bar.action_button'),{
           duration:5000,
           panelClass:['snack'],
         });

@@ -118,6 +118,8 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
   fromModalInput_folder_id: string;
 
   enableShareWithBrokerIcon: boolean;
+
+  none:any = "none";
   
 
   constructor( 

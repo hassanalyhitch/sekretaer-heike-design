@@ -49,7 +49,7 @@
           
               <p class="assignment">{{ 'add_document.sub_title_2' | translate }}</p>
 
-              <mat-form-field class="example-full-width" appearance="none">
+              <mat-form-field class="example-full-width" [appearance]="none">
                 <input matInput [matDatepicker]="pickerDate"
                  placeholder="Date" >
                 <mat-datepicker-toggle matIconSuffix [for]="pickerDate">
