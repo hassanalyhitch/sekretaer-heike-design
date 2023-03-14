@@ -95,7 +95,7 @@ export class HomeComponent implements OnInit,AfterViewInit{
             this.notificationService.getUnreadNotifications().subscribe({
               next: () => {
                 this.notifCount = this.notificationService.notifCount;
-                if(this.notifCount >= 1 && this.notifCount <= 99){
+                if(this.notifCount >= 0 && this.notifCount <= 99){
         
                   this.isNotificationCountText = false;
         

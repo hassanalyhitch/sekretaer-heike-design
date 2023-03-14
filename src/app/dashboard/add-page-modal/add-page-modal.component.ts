@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit,Input, ViewChild, ElementRef, Injectable,DoCheck, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit,Input, ViewChild, ElementRef, Injectable,DoCheck, SimpleChanges, Inject } from '@angular/core';
 import { Router,Event, ActivatedRoute } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Subscription } from 'rxjs';
@@ -16,7 +16,9 @@ import { FileNameData } from '../../models/file-name.model';
 import { Location } from '@angular/common';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { ENTER, COMMA } from '@angular/cdk/keycodes';
 
 
 @Component({
@@ -95,9 +97,31 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
   broker_pink_logo: boolean;
 
   doneIcon: string = "../assets/icons8-done-30.png";
+  chips: string[] = [];
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  addOnBlur = true;
+
+  dataObj:{
+    contractName: string,
+    contractId: string,
+    document_type: string,
+    folderName: string,
+    folderId: string
+  };
+
+  fromModalInput_contract_name: string;
+  fromModalInput_contract_id: string;
+
+  fromModalInput_document_type: string;
+
+  fromModalInput_folder_name: string;
+  fromModalInput_folder_id: string;
+
+  enableShareWithBrokerIcon: boolean;
   
 
   constructor( 
+    @Inject(MAT_DIALOG_DATA)public data:any,
     private route:ActivatedRoute, 
     private router:Router,
     private folderService:FoldersService,
@@ -119,6 +143,23 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
       this.broker_blue_logo = false;
       this.broker_pink_logo = false;
       this.shareWithBroker  = false;
+
+      this.dataObj = JSON.parse(this.data);
+
+      this.fromModalInput_document_type = this.dataObj.document_type;
+
+      this.enableShareWithBrokerIcon = false;
+
+      if(this.fromModalInput_document_type == "folder"){
+        this.fromModalInput_folder_name = this.dataObj.folderName;
+        this.fromModalInput_folder_id = this.dataObj.folderId;
+        this.enableShareWithBrokerIcon = false;
+
+      } else if(this.fromModalInput_document_type == "contract"){
+        this.fromModalInput_contract_name = this.dataObj.contractName;
+        this.fromModalInput_contract_id = this.dataObj.contractId;
+        this.enableShareWithBrokerIcon = true;
+      }
     }
 
   
@@ -158,112 +199,159 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
       showSelectedItemsAtTop: false,
       defaultOpen:false,
     };
+
+    //-----------------------------------START NEW CODE ---------------------------------------
+
+    if(this.fromModalInput_document_type == 'folder'){
+
+      let selectedItem = {
+        id:this.fromModalInput_folder_id,
+        dataName:this.fromModalInput_folder_name
+      };
+
+      let folder: any = {
+        id: this.folderService.selectedFolder['id'],
+        customerAmsidnr:this.folderService.selectedFolder['customerAmsidnr'],
+        dataName :this.folderService.selectedFolder['folderName'],
+        type: 'folder'
+      };
+
+      this.dataArr.push(folder);
+      
+      this.selectedItems.push(selectedItem);
+      this.typeSelected = 'folder';
+
+      this.dropdownDisabled = true;
+
+    } else if(this.fromModalInput_document_type == 'contract'){
+
+      let selectedItem ={
+        id:this.fromModalInput_contract_id,
+        dataName:this.fromModalInput_contract_name
+      };
+
+      let contract:any ={
+        id:this.fromModalInput_contract_id,
+        dataName:this.fromModalInput_contract_name,
+        type:'contract'
+      };
+
+      this.dataArr.push(contract);
+
+      this.selectedItems.push(selectedItem);
+      this.typeSelected ='contract';
+
+      this.dropdownDisabled = true;
+
+    }
+
+    //--------------------------------------------END NEW CODE------------------------------
    
 
   
-      switch (this.route.snapshot.params['type']){
-        case "folder": {
-          let selectedItem = {
-            id:this.folderService.selectedFolder.id,
-            dataName:this.folderService.selectedFolder.folderName
-          };
-          let folder: any = {
-            id: this.folderService.selectedFolder['id'],
-            customerAmsidnr:this.folderService.selectedFolder['customerAmsidnr'],
-            dataName :this.folderService.selectedFolder['folderName'],
-            type: 'folder'
-          };
-          this.dataArr.push(folder);
+      // switch (this.route.snapshot.params['type']){
+      //   case "folder": {
+      //     let selectedItem = {
+      //       id:this.folderService.selectedFolder.id,
+      //       dataName:this.folderService.selectedFolder.folderName
+      //     };
+      //     let folder: any = {
+      //       id: this.folderService.selectedFolder['id'],
+      //       customerAmsidnr:this.folderService.selectedFolder['customerAmsidnr'],
+      //       dataName :this.folderService.selectedFolder['folderName'],
+      //       type: 'folder'
+      //     };
+      //     this.dataArr.push(folder);
 
 
-          this.selectedItems.push(selectedItem);
-          this.typeSelected = 'folder';
+      //     this.selectedItems.push(selectedItem);
+      //     this.typeSelected = 'folder';
 
-          this.dropdownDisabled = false;
+      //     this.dropdownDisabled = false;
 
-          break;
-        }
-        case "contract" :{
+      //     break;
+      //   }
+      //   case "contract" :{
 
 
-          break;
-        }
-        default:{
-        this.getDropdownData();
+      //     break;
+      //   }
+      //   default:{
+      //   this.getDropdownData();
     
-          break;
-        }
-      }
+      //     break;
+      //   }
+      // }
       
-      if(window.location.href.includes('folder-detail')){
-        let selectedItem = {
-          id:this.folderService.selectedFolder.id,
-          dataName:this.folderService.selectedFolder.folderName
-        };
-        let folder: any = {
-          id: this.folderService.selectedFolder['id'],
-          customerAmsidnr:this.folderService.selectedFolder['customerAmsidnr'],
-          dataName :this.folderService.selectedFolder['folderName'],
-          type: 'folder'
-        };
-        this.dataArr.push(folder);
+      // if(window.location.href.includes('folder-detail')){
+      //   let selectedItem = {
+      //     id:this.folderService.selectedFolder.id,
+      //     dataName:this.folderService.selectedFolder.folderName
+      //   };
+      //   let folder: any = {
+      //     id: this.folderService.selectedFolder['id'],
+      //     customerAmsidnr:this.folderService.selectedFolder['customerAmsidnr'],
+      //     dataName :this.folderService.selectedFolder['folderName'],
+      //     type: 'folder'
+      //   };
+      //   this.dataArr.push(folder);
 
 
-        this.selectedItems.push(selectedItem);
-        this.typeSelected = 'folder';
+      //   this.selectedItems.push(selectedItem);
+      //   this.typeSelected = 'folder';
 
-        this.dropdownDisabled = false;
-      }
+      //   this.dropdownDisabled = false;
+      // }
 
-      else{
+      // else{
       
-      }
+      // }
 
-      if(window.location.href.includes('overview')){
-        let selectedItem = {
-          id:this.folderService.selectedFolder.id,
-          dataName:this.folderService.selectedFolder.folderName
-        };
-        let folder: any = {
-          id: this.folderService.selectedFolder['id'],
-          customerAmsidnr:this.folderService.selectedFolder['customerAmsidnr'],
-          dataName :this.folderService.selectedFolder['folderName'],
-          type: 'folder'
-        };
-        this.dataArr.push(folder);
+      // if(window.location.href.includes('overview')){
+      //   let selectedItem = {
+      //     id:this.folderService.selectedFolder.id,
+      //     dataName:this.folderService.selectedFolder.folderName
+      //   };
+      //   let folder: any = {
+      //     id: this.folderService.selectedFolder['id'],
+      //     customerAmsidnr:this.folderService.selectedFolder['customerAmsidnr'],
+      //     dataName :this.folderService.selectedFolder['folderName'],
+      //     type: 'folder'
+      //   };
+      //   this.dataArr.push(folder);
 
 
-        this.selectedItems.push(selectedItem);
-        this.typeSelected = 'folder';
+      //   this.selectedItems.push(selectedItem);
+      //   this.typeSelected = 'folder';
 
-        this.dropdownDisabled = false;
-      }
+      //   this.dropdownDisabled = false;
+      // }
 
-      else{
+      // else{
       
-      }
+      // }
 
       
-      if (window.location.href.includes('overview')){
-        let selectedItem ={
-          id:this.contractService.selectedContract.details.Amsidnr,
-          dataName:this.contractService.selectedContract.details.name
-        };
-        let contract:any ={
-          id:this.contractService.selectedContract['details.Amsidnr'],
-          dataName:this.contractService.selectedContract['details.name'],
-          type:'contract'
-        };
-        this.dataArr.push(contract);
+      // if (window.location.href.includes('overview')){
+      //   let selectedItem ={
+      //     id:this.contractService.selectedContract.details.Amsidnr,
+      //     dataName:this.contractService.selectedContract.details.name
+      //   };
+      //   let contract:any ={
+      //     id:this.contractService.selectedContract['details.Amsidnr'],
+      //     dataName:this.contractService.selectedContract['details.name'],
+      //     type:'contract'
+      //   };
+      //   this.dataArr.push(contract);
 
-        this.selectedItems.push(selectedItem);
-        this.typeSelected ='contract';
+      //   this.selectedItems.push(selectedItem);
+      //   this.typeSelected ='contract';
 
-        this.dropdownDisabled = false;
-       } 
-       else{
+      //   this.dropdownDisabled = false;
+      //  } 
+      //  else{
 
-      }
+      // }
 
 
 
@@ -288,7 +376,8 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
 
 
   }
-  addNewFile(fileData:FileNameData, folder_Id: string){
+
+  uploadFolderDocument(fileData:FileNameData, folder_Id: string){
 
     //console.log(fileData);
 
@@ -308,10 +397,8 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
            duration:2000,
         });
 
-        //return back to previous page
-        setTimeout(()=>{
-          this.location.back()
-        },3500);
+        //close dialog
+        this.closeDialog();
 
       },
       complete:()=>{
@@ -323,10 +410,8 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
           duration:2000,
         });
 
-        //return back to previous page
-        setTimeout(()=>{
-          this.location.back()
-        },3500);
+       //close dialog
+       this.closeDialog();
 
       }
     })
@@ -442,66 +527,154 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
   // }
  
  
+//  onSubmit(fileData:FileNameData){
+//   fileData.doc_file = this.file;
+
+//   this.submitted = true;
+  
+//   switch (this.typeSelected){
+//     case 'folder':{
+//      this.addNewFile(fileData,this.selectedItems[0].id)
+    
+    
+//       break;
+//     }
+//     case 'contract':{
+//       break;
+//     }
+//   }
+
+//   console.table(fileData);
+
+//   console.table(this.typeSelected);
+
+//   console.log('folder id -> ' +this.selectedItems[0].id);
+
+//  }
+
  onSubmit(fileData:FileNameData){
+
   fileData.doc_file = this.file;
 
-  this.submitted = true;
-  
+  console.table(fileData);
+
+  //console.log("Document Upload Type ->"+this.typeSelected);
+
   switch (this.typeSelected){
     case 'folder':{
-     this.addNewFile(fileData,this.selectedItems[0].id)
-    
+
+      // Upload to folders
+      console.log('folder id -> ' +this.selectedItems[0].id);
+
+      this.submitted = true;
+
+      this.uploadFolderDocument(fileData,this.selectedItems[0].id)
     
       break;
     }
     case 'contract':{
+
+      this.submitted = true;
+
+      this._snackBar.open(
+        " File Upload To Contracts Coming soon", 
+        this.translate.instant('snack_bar.action_button'),{
+          panelClass: ['snack_success'],
+          duration: 5000,
+      });
+
+      setTimeout(()=>{
+        this.submitted = false;
+        this.closeDialog();
+      }, 6000);
+
       break;
     }
   }
 
-  console.table(fileData);
-
-  console.table(this.typeSelected);
-
-  console.log('folder id -> ' +this.selectedItems[0].id);
-
  }
 
-  getFileName(event){
-    this.file = event.target.files[0];
-    this.showFileName = true;
-    console.log(this.showFileName);
-    console.log(this.file);
+  // getFileName(event){
+  //   this.file = event.target.files[0];
+  //   this.showFileName = true;
+  //   console.log(this.showFileName);
+  //   console.log(this.file);
 
-    let _file:UploadFileData ={
-      doc_file:this.file,
-      fileId : this.uploadFileArr.length +"",
-      fileName :this.file.name,
+  //   let _file:UploadFileData ={
+  //     doc_file:this.file,
+  //     fileId : this.uploadFileArr.length +"",
+  //     fileName :this.file.name,
 
 
-      fileSize :this.fileSizePipe.transform(this.file.size,'MB'),
+  //     fileSize :this.fileSizePipe.transform(this.file.size,'MB'),
       
-      fileType:this.file.type
+  //     fileType:this.file.type
      
-    }
-   if (this.file.type =='application/pdf' || this.file.type =='!application/pdf') {
-    // console.log('File is pdf');
-   }else if(this.file.type =='image/jpeg' || this.file.type =='!image/jpeg'){
-    // console.log('File is jpeg');
-   }
+  //   }
+  //  if (this.file.type =='application/pdf' || this.file.type =='!application/pdf') {
+  //   // console.log('File is pdf');
+  //  }else if(this.file.type =='image/jpeg' || this.file.type =='!image/jpeg'){
+  //   // console.log('File is jpeg');
+  //  }
 
-   else{
-    // alert("file type should be pdf")
-    this._snackBar.open(this.translate.instant('add_document.file_type_alert'),this.translate.instant('snack_bar.action_button'),{
-      panelClass:['snack_fileType'],
-      duration:1800,
-    })
-    return;
-  }
+  //  else{
+  //   // alert("file type should be pdf")
+  //   this._snackBar.open(this.translate.instant('add_document.file_type_alert'),this.translate.instant('snack_bar.action_button'),{
+  //     panelClass:['snack_fileType'],
+  //     duration:1800,
+  //   })
+  //   return;
+  // }
    
-    this.uploadFileArr = [];
-    this.uploadFileArr.push(_file);
-    this.selectFile.nativeElement.value = null;
+  //   this.uploadFileArr = [];
+  //   this.uploadFileArr.push(_file);
+  //   this.selectFile.nativeElement.value = null;
+  // }
+
+  getFileName(event){
+
+    this.file = event.target.files[0];
+    
+    if (this.file.type =='application/pdf' || this.file.type =='image/jpeg') {
+
+      this.showFileName = true;
+
+      let _file:UploadFileData ={
+        doc_file:this.file,
+        fileId : this.uploadFileArr.length +"",
+        fileName :this.file.name,
+
+        fileSize :this.fileSizePipe.transform(this.file.size,'MB'),
+        
+        fileType:this.file.type
+      
+      }
+
+      //this.submitted = true;
+      //this.isDocumentValuesValid = true;
+      this.uploadFileArr = [];
+      this.uploadFileArr.push(_file);
+      this.selectFile.nativeElement.value = null;
+
+    } else{
+
+      //Reset data
+      //this.submitted = false;
+      //this.isDocumentValuesValid = false;
+      this.uploadFileArr = [];
+      this.selectFile.nativeElement.value = null;
+
+      //The file not PDF or JPEG
+      this._snackBar.open(
+        this.translate.instant('add_document.file_type_alert'),
+        this.translate.instant('snack_bar.action_button'),
+        {
+          panelClass:['snack_fileType'],
+          duration: 8000,
+        });
+
+    }
+
   }
 
 
@@ -516,6 +689,7 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
     });
 
   }
+  
   onShareWithBroker(){
     this.shareWithBroker =!this.shareWithBroker;
 
@@ -523,13 +697,40 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
 
       this.broker_icon_link = "../assets/icon_broker_round_blue.svg";
 
+      // display snackbar message
+      this._snackBar.open(
+        this.translate.instant('contract_detail.shared_with_broker'),
+        this.translate.instant('snack_bar.action_button'),{
+          duration: 8000,
+          panelClass:['snack_success'],
+        }
+      );
+
     } else if(this.shareWithBroker && this.broker_pink_logo){
 
       this.broker_icon_link = "../assets/icon_broker_round_pink.svg";
 
+      // display snackbar message
+      this._snackBar.open(
+        this.translate.instant('contract_detail.shared_with_broker'),
+        this.translate.instant('snack_bar.action_button'),{
+          duration: 8000,
+          panelClass:['snack_success'],
+        }
+      );
+
     } else {
 
       this.broker_icon_link = "../assets/icon_broker_round_default.svg";
+
+      // display snackbar message
+      this._snackBar.open(
+        this.translate.instant('contract_detail.unshared_with_broker'),
+        this.translate.instant('snack_bar.action_button'),{
+          duration: 8000,
+          panelClass:['snack_error'],
+        }
+      );
 
     }
     
@@ -558,6 +759,24 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
 
   closeDialog(){
     this.dialogRef.close();
+  }
+
+  add(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    if (value) {
+      this.chips.push(value);
+      event.chipInput!.clear();
+    }
+  }
+
+
+  removeChip(chip: string): void {
+    const index = this.chips.indexOf(chip);
+
+    if (index >= 0) {
+      this.chips.splice(index, 1);
+    }
   }
 }
 

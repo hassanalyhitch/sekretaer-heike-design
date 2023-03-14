@@ -227,8 +227,7 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
 
   renameFileModal(file) {
     const dialogConfig = new MatDialogConfig();
-    // let passdata:string = '{"fileName": "'+this.file.name+'","fileUrl": "'+this.file.fileUrl+'"}';
-    let passdata:string = '{"docName": "'+file.name+'","docid": "'+file.docid+'","systemId": "'+file.systemId+'"}';
+    let passdata:string = '{"docName": "'+file.name+'","docid": "'+file.docid+'","systemId": "'+file.systemId+'","fromLocation":"contract" }';
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = 'rename-document-dialog';
@@ -236,6 +235,7 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     dialogConfig.width = '350px';
     dialogConfig.panelClass = 'bg-dialog-folder';
     dialogConfig.data = passdata;
+
     // https://material.angular.io/components/dialog/overview
     const renameFileDialog = this.matDialog.open(RenameModalComponent, dialogConfig);
 
@@ -282,87 +282,6 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
         break;
       }
     }
-  }
-
-  onClick(doc: DocumentData){
-    console.log('tap !');
-    this.snackbar.open("Download requested. Please wait.", this.translate.instant('snack_bar.action_button'),{
-      duration:5000,
-      panelClass:['snack'],
-    });
-    // -------------------------------------------------------------------------------------------//
-    //                 downloading using blob                                                     //
-    // -------------------------------------------------------------------------------------------//
-    // this.downloadService.getDownloadFile(doc.systemId, doc.docid).subscribe({
-    //   next:(resp:any)=>{
-        
-    //   // const keys = resp.headers.keys();
-    //   // var headers = keys.map(key =>
-    //   //     `${key}=>: ${resp.headers.get(key)}`
-    //   //   );
-
-    //   let nameWithExtension = resp.headers.get('content-disposition').split("=")[1];
-    //   console.log(nameWithExtension);
-
-    //     try{
-    //       var mimetype = "application/octetstream" //hacky approach that browsers seem to accept.
-    //       var file = new File([resp.body], doc.name,{type: mimetype});
-    //       const url = window.URL.createObjectURL(file);
-
-    //       const link = document.createElement('a');
-    //       link.setAttribute('target', '_blank');
-    //       link.setAttribute('href', url);
-    //       link.setAttribute('download', nameWithExtension);
-    //       document.body.appendChild(link);
-    //       link.click();
-    //       link.remove();
-          
-    //       URL.revokeObjectURL(url);
-
-    //     } catch(e){
-    //       console.log(e);
-    //     }
-    //   },
-    //   error: (resp) => {
-    //     // console.log(resp);
-    //     // console.log(contract.details.favoriteId);
-    //     this.snackbar.open("Download request failed.",this.translate.instant('snack_bar.action_button'),{
-    //       panelClass:['snack_error'],
-    //       duration:1500,
-    //     })
-    //   }
-    // });
-
-
-    // -------------------------------------------------------------------------------------------//
-    //                 downloading using base64                                                     //
-    // -------------------------------------------------------------------------------------------//
-    this.downloadService.getBase64DownloadFile(doc.systemId, doc.docid).subscribe({
-      next:(resp:any)=>{
-        console.log(resp.url.split("/api")[0]+resp.body.linkToDoc);
-        //use of application/octetstream is a hacky approach that browsers seem to accept.
-        // let base64String = "data:application/octetstream;base64," + resp.body.document;
-        
-        const link = document.createElement('a');
-        link.setAttribute('target', '_blank');
-        link.setAttribute('href', resp.url.split("/api")[0]+resp.body.linkToDoc);
-        link.setAttribute('download', resp.body.name+'.'+resp.body.extension);
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-        this.snackbar.open("Download Test : "+resp.url.split("/api")[0]+resp.body.linkToDoc, this.translate.instant('snack_bar.action_button'),{
-          duration:5000,
-          panelClass:['snack'],
-        });
-      },
-      error: (resp) => {
-        console.log(resp);
-        this.snackbar.open("Download request failed.",this.translate.instant('snack_bar.action_button'),{
-          panelClass:['snack_error'],
-          duration:1500,
-        })
-      }
-    });
   }
 
   sortByDate(){

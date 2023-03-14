@@ -210,7 +210,7 @@ body {
   width: 90%;
   margin-left: auto !important;
   margin-right: auto !important;
-  padding:2px 5px !important;
+  padding:0px 5px !important;
 }
 
 .mat-simple-snackbar-action > button { color: var(--primaryColor); }
@@ -220,7 +220,7 @@ body {
   box-sizing: border-box;
   display: flex !important;
   margin: 24px;
-  max-width: 33vw;
+  max-width: 100%;
   min-width: 344px;
   padding: 14px 16px;
   min-height: 48px;
@@ -234,7 +234,7 @@ body {
 
 .mat-snack-bar-handset .mat-snack-bar-container {
   margin: 8px !important;
-  width: 75% !important;
+  width: 80% !important;
   min-width: 0 !important;
 }
 

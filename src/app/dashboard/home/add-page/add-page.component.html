@@ -21,6 +21,7 @@
   <div class="main-content align-items-center px-1 w-100">
     <form  (ngSubmit)="onSubmit(addPageForm.value)" #addPageForm="ngForm">
       <p div class="assignment">{{ "add_document.title" | translate }}:</p>
+      
         <div>
             <label for="selectFile" class="selectDocument" >
               <img src="\assets\upload-snippet.png"><br>
@@ -39,24 +40,48 @@
             
             <app-upload-file class="fileUpload"*ngFor="let uploadFile of uploadFileArr" [uploadFile]="uploadFile" (deleteFile)="removeFile($event)"></app-upload-file>
         </div>
-            <p class="assignment">{{ 'add_document.sub_title_2' | translate }}</p>
-            <input type="date"  id="pickdate" placeholder="Date" class="fileUpload">
-            <input type="text"  placeholder="Class"  class="fileUpload">
-        <div class="folderSection">
+
           <div class="fileUpload">
-            <ng-multiselect-dropdown
-            [placeholder]="'add_document.placeholder' | translate "
-            [settings]="dropdownSettings"
-            [data]="dataArr"
-            (onSelect)="onItemSelected($event)"
-            name="myItems"
-            [(ngModel)]="selectedItems"
-            ngModel 
-            [disabled]="dropdownDisabled"
-            required
-            >
-          </ng-multiselect-dropdown>
-          </div>
+            <mat-chip-list #chipList class="chipList">
+              <mat-chip *ngFor="let chip of chips" (removed)="removeChip(chip)" class="chipItems">
+                {{ chip }}
+                <mat-icon matChipRemove class="removeChip">cancel</mat-icon>
+              </mat-chip>
+            </mat-chip-list>
+            <input  placeholder="Notice" matInput [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  [matChipInputAddOnBlur]="addOnBlur"
+                  (matChipInputTokenEnd)="add($event)">
+          </div>  
+
+            <p class="assignment">{{ 'add_document.sub_title_2' | translate }}</p>
+
+           
+
+          <mat-form-field class="example-full-width" appearance="none">
+              <input matInput [matDatepicker]="pickerDate"
+               placeholder="Date" >
+              <mat-datepicker-toggle matIconSuffix [for]="pickerDate">
+                  <mat-icon class="dateIcon" matDatepickerToggleIcon>arrow_drop_down</mat-icon>
+              </mat-datepicker-toggle>
+              <mat-datepicker #pickerDate></mat-datepicker>
+          </mat-form-field>
+        
+          <div class="folderSection">
+              <div class="fileUpload">
+                  <ng-multiselect-dropdown
+                    [placeholder]="'add_document.placeholder' | translate "
+                    [settings]="dropdownSettings"
+                    [data]="dataArr"
+                    (onSelect)="onItemSelected($event)"
+                    name="myItems"
+                    [(ngModel)]="selectedItems"
+                    ngModel 
+                    [disabled]="dropdownDisabled"
+                    required
+                  >
+                </ng-multiselect-dropdown>
+              </div>
         </div>
       
         <div class="d-flex flex-row assignment">

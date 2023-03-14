@@ -16,6 +16,9 @@ import { FileNameData } from '../../../models/file-name.model';
 import { Location } from '@angular/common';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { ENTER, COMMA } from '@angular/cdk/keycodes';
+
 
 
 @Component({
@@ -92,6 +95,9 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
   uploadStatus: boolean = false;
 
   doneIcon: string = "../assets/icons8-done-30.png";
+  chips: string[] = [];
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  addOnBlur = true;
 
   broker_icon_link: string;
   selected_theme:   string;
@@ -477,6 +483,24 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
 
   onFileUpload(event){
     this.selectedFile = event.target.files[0];
+  }
+
+  add(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    if (value) {
+      this.chips.push(value);
+      event.chipInput!.clear();
+    }
+  }
+
+
+  removeChip(chip: string): void {
+    const index = this.chips.indexOf(chip);
+
+    if (index >= 0) {
+      this.chips.splice(index, 1);
+    }
   }
 
 }

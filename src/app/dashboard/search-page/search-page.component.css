@@ -78,3 +78,7 @@ app-fav-item, app-folder-card, app-document-item{
   overflow-y: scroll;
   overflow-x: hidden;
 }
+
+.back_btn{
+  cursor: pointer;
+}

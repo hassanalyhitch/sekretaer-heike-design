@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ContractsService } from '../../services/contracts.service';
 import { ContractData } from '../../models/contract.model';
 import { RenameContractComponent } from '../rename-contract/rename-contract.component';
+import { AddPageModalComponent } from '../add-page-modal/add-page-modal.component';
 
 @Component({
   selector: 'app-fav-item',
@@ -161,6 +162,43 @@ export class FavItemComponent implements OnInit {
     }
 
     return false;
+  }
+
+  addNewDocument(contract: ContractData) {
+
+    const dialogConfig = new MatDialogConfig();
+
+    let passdata:string = '{"contractName": "'+contract.details.name+'","contractId": "'+contract.details.Amsidnr+'","document_type":"contract" }';
+
+    console.log("from fav item ->"+passdata);
+
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = false;
+    dialogConfig.id = 'add-document-modal-component';
+    //dialogConfig.height = '350px';
+    dialogConfig.width = '400px';
+    dialogConfig.data = passdata;
+
+    dialogConfig.panelClass = 'bg-dialog-folder';
+    // https://material.angular.io/components/dialog/overview
+    const modalDialog = this.matDialog.open(AddPageModalComponent, dialogConfig);
+    
+    this.matDialog.getDialogById('add-document-modal-component').afterClosed().subscribe({
+      next:()=>{
+
+        // this.folderService.getFolderDetails(this.folder.id).subscribe({
+        //   next:(resp:any) =>{
+        //     console.log('folder-details');
+        //     this.folder = this.folderService.selectedFolder;
+        //   },
+        //   complete:()=>{},
+        // });
+
+      },
+      error:(resp)=>{
+        console.log(resp);
+      }
+    });
   }
 
 }

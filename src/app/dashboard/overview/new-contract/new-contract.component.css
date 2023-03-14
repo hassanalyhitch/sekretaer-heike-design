@@ -124,9 +124,6 @@
   color: transparent; 
 }
 
-.example-full-width {
-  width: 100%;
-}
 .select_item{
   margin-left:auto;
   margin-right:auto;
@@ -312,6 +309,12 @@ input{
     color:#707070;
     font-style: normal;
   }
+  .dateIcon{
+    transform: scale(1.7);
   
+  }
+  .example-full-width input{
+    color:#707070;
+  }
   
   

@@ -76,7 +76,15 @@
     "mark_fav_success":"Successfully marked as Favourite",
     "mark_fav_error":"Failed to mark as Favourite",
     "unmark_fav_success":"Unmarked as Favourite",
-    "unmark_fav_error":"Failed to unmark as Favourite"
+    "unmark_fav_error":"Failed to unmark as Favourite",
+    "fav_item_insurance_side_menu_option_1" : "Add New Document",
+    "fav_item_insurance_side_menu_option_2" : "Mark as Favourite",
+    "fav_item_insurance_side_menu_option_3" : "Unmark as Favourite",
+    "fav_item_insurance_side_menu_option_4" : "Rename Contract",
+    "shared_with_broker" : "Document shared with Broker",
+    "unshared_with_broker" : "Document not shared with Broker",
+    "document_download_request" : "Download requested. Please wait.",
+    "document_download_failed" : "Download request failed."
   },
   "login": {
     "title_login": "Let's Login",
@@ -99,7 +107,7 @@
     "content_email_sent_1" : "We have sent you an email.",
     "content_email_sent_2" : "Please check your inbox or your spam folder",
     "wrong_credentials_used": "Incorrect Username or Password",
-    "connection_error" : "Failed to Connect. No Active Internet Connection."
+    "connection_error" : "Failed to make an Internet Connection"
   },
   "settings":{
     "main_title":"SETTINGS",
@@ -208,11 +216,13 @@
     "title" : "Add a document e.g picture",
     "sub_title_1":"Upload document/Image",
     "sub_title_2":"Assign",
-    "placeholder":"Current Folder",
+    "placeholder":"Select Insurance/Folder",
     "submit_button_label": "UPLOAD",
     "file_upload_error": "File Upload Failed",
     "file_upload_success": "File Upload Successfully",
-    "file_type_alert":"Only pdf and jpg is accepted"
+    "file_type_alert": "Only PDF Document and JPEG Image is accepted",
+    "share_with_broker" : "Share With Broker",
+    "un_share_with_broker" : "Don't Share With Broker"
   },
   "search":{
     "title_main":"SEARCH",
@@ -243,7 +253,8 @@
     "btn_save_label": "SAVE",
     "document_rename_error": "Document Rename Failed",
     "document_rename_success" : "Document Rename Successfully",
-    "share_with_broker" : "Share With Broker"
+    "share_with_broker" : "Share With Broker",
+    "un_share_with_broker" : "Don't Share With Broker"
   },
  "my-data":{
     "page_sub_title_1":"your data",

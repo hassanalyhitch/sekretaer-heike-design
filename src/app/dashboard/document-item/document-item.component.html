@@ -1,15 +1,17 @@
 <div class="d-flex w-100">
     <div class="_content bg-white shadow-sm w-100 d-flex document-item" >
-        <div class="icon-container d-flex flex-column">
-            <img class="doc-icon" src="/assets/icon_document.svg" alt="">
+        <div class="icon-container d-flex flex-column" (tap)="onDocumentClick(doc)">
+            <img *ngIf="isDocument" class="doc-icon" src="/assets/icon_document.svg" alt="">
+            <img *ngIf="isPDF" class="doc-icon" src="/assets/icon_pdf.svg" alt="">
+            <img *ngIf="isJPEG" class="doc-icon" src="/assets/icon_jpg.svg" alt="">
         </div>
         <div class="d-flex justify-content-between w-100 bg-">
-            <div class="d-flex flex-column _content bg-">
-                <span class="fw-bold px-2 mt-3 mb-1">{{doc.name | shortenText: 20 }}</span>
+            <div class="d-flex flex-column _content bg-" (tap)="onDocumentClick(doc)">
+                <span class="fw-bold px-2 mt-3 mb-1">{{doc.name | shortenText: 10 }}</span>
                 <span class="fw-normal px-2 ">{{doc.createdAt |formatDate}}</span>
             </div>
-            <div class="d-flex justify-content-center align-items-center p-2 bg-" >
-                <img class="doc-broker-icon" [src]="broker_icon_link">
+            <div class="d-flex justify-content-center align-items-center p-2 bg-" (click)="onShareWithBroker()">
+                <img *ngIf="enableSharedWithBrokerIcon" class="doc-broker-icon" [src]="broker_icon_link">
             </div>
         </div>
     </div>

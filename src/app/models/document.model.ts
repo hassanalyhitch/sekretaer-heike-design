@@ -6,4 +6,5 @@ export interface DocumentData {
   name: string;
   systemId: string;
   swipedLeft?:boolean;
+  extension: string;
 }

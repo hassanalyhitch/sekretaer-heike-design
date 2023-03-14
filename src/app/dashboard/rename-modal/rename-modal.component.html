@@ -23,11 +23,12 @@
         <label>{{ 'rename_document.text_input_label' | translate }}</label>
       </div>
 
-      <div class="d-flex flex-row share">
+      <div class="d-flex flex-row share" *ngIf="enableShareWithBrokerIcon">
         <span class="broker-btn" (click)="onShareWithBroker()">
           <img class="broker-icon" [src]="share_with_broker_logo_link">
         </span>
-        <p class="m-2">{{ 'rename_document.share_with_broker' | translate }}</p>
+        <p class="m-2" *ngIf="!shareWithBroker" (click)="onShareWithBroker()">{{ 'rename_document.share_with_broker' | translate }}</p>
+        <p class="m-2" *ngIf="shareWithBroker" (click)="onShareWithBroker()">{{ 'rename_document.un_share_with_broker' | translate }}</p>
       </div>
 
       <div class="mt-5 w-100">

@@ -207,6 +207,7 @@ export class NewContractComponent implements OnInit {
         }
 
         this.dataArr = this.branches;
+        this.sortBranches();
         console.log(this.dataArr);
       },
       error:(e)=>{
@@ -312,6 +313,7 @@ export class NewContractComponent implements OnInit {
         
         }
         this.companyArr = this.companies;
+        this.sortCompanies();
         console.log(this.companyArr);
         //this.branches = resp;
       },
@@ -343,6 +345,7 @@ export class NewContractComponent implements OnInit {
           }
         }
         this.productArr = this.products;
+        this.sortProducts();
         console.log(this.productArr);
 
       },
@@ -440,5 +443,48 @@ export class NewContractComponent implements OnInit {
     return (value.fileName != obj.fileName && value.fileId != obj.docid);
     });
 
+  }
+
+  sortBranches(){
+    this.branches.sort((a:BranchData, b:BranchData) =>{
+      let branchNameA = a.displayNameSEKRETAER.toUpperCase();
+      let branchNameB = a.displayNameSEKRETAER.toUpperCase();
+    if (branchNameA < branchNameB){
+      return -1;
+    }else if(branchNameA > branchNameB)
+    {
+      return 1;
+    }else{
+      return 0;
+    }
+    });
+  }
+
+  sortCompanies(){
+    this.companies.sort((a:CompanyData,b:CompanyData)=>{
+      let companyNameA = a.displayName.toUpperCase();
+      let companyNameB = b.displayName.toUpperCase();
+      if (companyNameA < companyNameB){
+        return -1;
+      }else if (companyNameA > companyNameB){
+        return 1;
+      }else {
+        return 0;
+      }
+    });
+  }
+
+  sortProducts(){
+    this.products.sort((a:ProductData,b:ProductData)=>{
+      let productNameA = a.displayNameSEKRETAER.toUpperCase();
+      let productNameB = b.displayNameSEKRETAER.toUpperCase();
+      if (productNameA < productNameB){
+        return -1;
+      }else if (productNameA >productNameB){
+        return 1;
+      }else {
+        return 0;
+      }
+    });
   }
 }

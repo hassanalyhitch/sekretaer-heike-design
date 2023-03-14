@@ -555,7 +555,7 @@ export class OverviewComponent implements OnInit {
   addFolderDoc(folder:FolderData){
     const dialogConfig = new MatDialogConfig();
     this.folderService.emitSelectedFolder(folder);
-    let passdata:string = '{"folderName": "'+folder.folderName+'","folderId": "'+folder.id+'"}';
+    let passdata:string = '{ "folderName": "'+folder.folderName+'","folderId": "'+folder.id+'","document_type":"folder" }';
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = 'add-document-modal-component';
@@ -566,15 +566,19 @@ export class OverviewComponent implements OnInit {
     dialogConfig.panelClass = 'bg-dialog-folder';
     // https://material.angular.io/components/dialog/overview
     const modalDialog = this.matDialog.open(AddPageModalComponent, dialogConfig);
-    this.matDialog.getDialogById('add-document-modal-component').afterOpened().subscribe({
+
+    this.matDialog.getDialogById('add-document-modal-component').afterClosed().subscribe({
       next:()=>{
        
         this.folderService.getFolderDetails(folder.id).subscribe({
           next:(resp:any) =>{
-            console.log('folder-details');
-            console.log(folder.id);
-            console.log(folder.folderName);
-           this. folder = this.folderService.selectedFolder;
+            // console.log('folder-details');
+            // console.log(folder.id);
+            // console.log(folder.folderName);
+            // this. folder = this.folderService.selectedFolder;
+
+            //refresh contract list
+            this._init();
           },
           complete:()=>{},
         });

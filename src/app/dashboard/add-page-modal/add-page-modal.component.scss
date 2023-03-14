@@ -128,7 +128,7 @@
 .assignment{
   font-family:oscine, sans-serif;
   font-size: 17px;
-  margin-left:49px;
+  margin-left: 35px;
   color:#707070;
   font-style: normal;
   padding-top:20px;
@@ -230,7 +230,55 @@ button[disabled]:hover#sign-in-btn {
   .uploads:focus{
     outline:none;
   }
- 
+  .example-full-width{
+    display: block;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 3px;
+    margin-bottom: 6px;
+    border-radius: 7px;
+    border:#fff;
+    width: 80%;
+    background-color: #fff;
+    cursor: pointer;
+    font-family:oscine, sans-serif;
+    font-size: 17px;
+    color:#707070;
+    font-style: normal;
+  }
+  .dateIcon{
+    transform: scale(1.7);
+  }
+  .example-full-width input{
+    color:#707070;
+  }
+  .notice{
+    color: #707070 !important;
+  }
+  .chipList{
+    width:100%;
+  }
+  .chipItems{
+    height: 12px;
+    font-size: 17px;
+    background-image: linear-gradient(131deg, var(--primaryColor), var(--primaryColorDark))!important;
+    color: #fff !important;
+  }
+  .mat-chip.mat-standard-chip .mat-chip-remove {
+    color: #fff;
+    opacity:1;
+  }
+  
+  .mat-standard-chip {
+    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    padding: 7px 12px;
+    border-radius: 4px;
+    align-items: center;
+    cursor: default;
+    min-height: 32px;
+    height: 1px;
+  }
 
 
 

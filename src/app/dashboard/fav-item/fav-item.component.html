@@ -7,9 +7,10 @@
     <div class="p-2">
       <img class="filter-icon py-1" data-bs-toggle="dropdown" aria-expanded="false" src="/assets/icon_filter.svg">
           <ul class="dropdown-menu shadow">
-            <li><span class="dropdown-item" href="" *ngIf="contractItem.details.isFav=='0'" (click)="markFav(contractItem)" >{{ 'contract_detail.insurance_side_menu_item_1' | translate }}</span></li>
-            <li><span class="dropdown-item" href="" *ngIf="contractItem.details.isFav=='1'" (click)="unmarkFav(contractItem)" >{{ 'contract_detail.insurance_side_menu_item_2' | translate }}</span></li>
-            <li><span class="dropdown-item" href="" (click)="openRenameContractModal(contractItem)" >{{ 'contract_detail.insurance_side_menu_item_3' | translate }}</span></li>    
+            <li><span class="dropdown-item" href="" (click)="addNewDocument(contractItem)" >{{ 'contract_detail.fav_item_insurance_side_menu_option_1' | translate }}</span></li>
+            <li><span class="dropdown-item" href="" *ngIf="contractItem.details.isFav=='0'" (click)="markFav(contractItem)" >{{ 'contract_detail.fav_item_insurance_side_menu_option_2' | translate }}</span></li>
+            <li><span class="dropdown-item" href="" *ngIf="contractItem.details.isFav=='1'" (click)="unmarkFav(contractItem)" >{{ 'contract_detail.fav_item_insurance_side_menu_option_3' | translate }}</span></li>
+            <li><span class="dropdown-item" href="" (click)="openRenameContractModal(contractItem)" >{{ 'contract_detail.fav_item_insurance_side_menu_option_4' | translate }}</span></li>    
           </ul>
     </div>
   </div>

@@ -15,18 +15,20 @@ export class RenameModalComponent implements OnInit {
   dataObj:{
     docName: string,
     docid: string,
-    systemId: string
+    systemId: string,
+    fromLocation: string
   };
 
-  documentName:                string;
-  newDocName:                  string;
+  documentName: string;
+  newDocName: string;
   share_with_broker_logo_link: string;
-  selected_theme:              string;
+  selected_theme: string;
 
   broker_blue_logo: boolean;
   broker_pink_logo: boolean;
-  shareWithBroker:  boolean;
-  submitted:        boolean;
+  shareWithBroker: boolean;
+  submitted: boolean;
+  enableShareWithBrokerIcon: boolean;
 
   constructor(
     @Inject(MAT_DIALOG_DATA)public data:any, 
@@ -39,6 +41,7 @@ export class RenameModalComponent implements OnInit {
     this.broker_pink_logo = false;
     this.shareWithBroker  = false;
     this.submitted        = false;
+    this.enableShareWithBrokerIcon = false;
 
     this.selected_theme              = "";
     this.share_with_broker_logo_link = "../assets/icon_broker_round_default.svg";
@@ -50,6 +53,12 @@ export class RenameModalComponent implements OnInit {
   ngOnInit() {
     this.dataObj = JSON.parse(this.data);
     this.documentName = this.dataObj.docName;
+
+    if(this.dataObj.fromLocation == "folder"){
+      this.enableShareWithBrokerIcon = false;
+    } else if(this.dataObj.fromLocation == "contract"){
+      this.enableShareWithBrokerIcon = true;
+    }
 
     this.selected_theme = localStorage.getItem('theme_selected');
 
@@ -82,9 +91,11 @@ export class RenameModalComponent implements OnInit {
         this.submitted = false;
     
         //show snackbar with error message
-        this.snackBar.open(this.translate.instant('rename_document.document_rename_error'),  this.translate.instant('snack_bar.action_button'),{
-          panelClass: ['snack_error'],
-           duration:5000,
+        this.snackBar.open(
+          this.translate.instant('rename_document.document_rename_error'),  
+          this.translate.instant('snack_bar.action_button'),{
+            panelClass: ['snack_error'],
+            duration: 8000,
         });
 
         //close dialog
@@ -96,10 +107,12 @@ export class RenameModalComponent implements OnInit {
         this.submitted = false;
 
         //show snackbar with success message
-        this.snackBar.open(this.translate.instant('rename_document.document_rename_success'), this.translate.instant('snack_bar.action_button'),{
+       this.snackBar.open(
+        this.translate.instant('rename_document.document_rename_success'), 
+        this.translate.instant('snack_bar.action_button'),{
           panelClass: ['snack_success'],
-          duration:5000,
-        });
+          duration: 8000,
+      });
 
         //close dialog
         this.dialogRef.close();
@@ -120,13 +133,40 @@ export class RenameModalComponent implements OnInit {
 
       this.share_with_broker_logo_link = "../assets/icon_broker_round_blue.svg";
 
+      // display snackbar message
+      this.snackBar.open(
+        this.translate.instant('contract_detail.shared_with_broker'),
+        this.translate.instant('snack_bar.action_button'),{
+          duration: 8000,
+          panelClass:['snack_success'],
+        }
+      );
+
     } else if(this.shareWithBroker && this.broker_pink_logo){
 
       this.share_with_broker_logo_link = "../assets/icon_broker_round_pink.svg";
 
+      // display snackbar message
+      this.snackBar.open(
+        this.translate.instant('contract_detail.shared_with_broker'),
+        this.translate.instant('snack_bar.action_button'),{
+          duration: 8000,
+          panelClass:['snack_success'],
+        }
+      );
+
     } else {
 
       this.share_with_broker_logo_link = "../assets/icon_broker_round_default.svg";
+
+      // display snackbar message
+      this.snackBar.open(
+        this.translate.instant('contract_detail.unshared_with_broker'),
+        this.translate.instant('snack_bar.action_button'),{
+          duration: 8000,
+          panelClass:['snack_error'],
+        }
+      );
 
     }
 

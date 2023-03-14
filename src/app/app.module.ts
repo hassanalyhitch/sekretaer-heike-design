@@ -17,6 +17,11 @@ import { MatSelectModule} from '@angular/material/select';
 import { MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule}from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatIconModule} from '@angular/material/icon';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatChipsModule } from '@angular/material/chips';
+
+
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -148,9 +153,11 @@ const appRoutes: Routes = [
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatIconModule,
     MatFormFieldModule,
     MatSelectModule,
     MatSnackBarModule,
+    MatChipsModule,
     HammerModule,
     NgMultiSelectDropDownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
@@ -215,6 +222,7 @@ const appRoutes: Routes = [
   bootstrap:    [ AppComponent ],
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'},
+    {provide :MAT_DATE_LOCALE,useValue:'de-DE'},
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true},
     {
       provide: HAMMER_GESTURE_CONFIG,
