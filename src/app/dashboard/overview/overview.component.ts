@@ -191,10 +191,13 @@ export class OverviewComponent implements OnInit {
       next: ()=>{
       
         this.allContractsArr = this.contractService.userContractsArr;
-        // console.table(this.allContractsArr);
+        console.table(this.allContractsArr);
 
         this.subsetArr = [];
         if(this.contractService.userContractsArr.length>3){
+          this.showCard1 = true;
+          this.showCard2 = true;
+          this.showCard3 = true;
           for(let i=3; i<this.contractService.userContractsArr.length; i++){
             this.subsetArr.push(this.contractService.userContractsArr[i]);
           }
@@ -244,6 +247,9 @@ export class OverviewComponent implements OnInit {
 
             this.folderSubsetArr = [];
             if(this.foldersArr.length>3){
+              this.showFolderCard1 = true;
+              this.showFolderCard2 = true;
+              this.showFolderCard3 = true;
               for(let i=3; i<this.foldersArr.length; i++){
                 this.folderSubsetArr.push(this.foldersArr[i]);
               }
@@ -328,12 +334,12 @@ export class OverviewComponent implements OnInit {
     } else {
 
         
-      if(this.allContractsArr.length==1){
+      if(this.showCard3 && !this.showCard2 && !this.showCard1){
         //show detail page
         this.contractService.emitSelectedFolder(this.allContractsArr[0]);
         this.router.navigate(['dashboard/overview/contract-detail', { id: this.allContractsArr[0].details.Amsidnr }]);
 
-      } else if(this.allContractsArr.length==2){
+      } else if(this.showCard2 && !this.showCard1){
         //expand 2
         this.collapsed = false;
         document.getElementById("cards").setAttribute("style","min-height:380px;height:380px;");
@@ -363,12 +369,12 @@ export class OverviewComponent implements OnInit {
     } else {
 
         
-      if(this.foldersArr.length==1){
+      if(this.showFolderCard3 && !this.showFolderCard2 && !this.showFolderCard1){
         //show detail page
         this.folderService.emitSelectedFolder(this.foldersArr[0]);
         this.router.navigate(['dashboard/overview/folder-detail', { id: this.foldersArr[0].id }]);
 
-      } else if(this.foldersArr.length==2){
+      } else if(this.showFolderCard2 && !this.showFolderCard1){
         //expand 2
         this.collapsedFolders = false;
         document.getElementById("folders").setAttribute("style","min-height:380px;height:380px;");
