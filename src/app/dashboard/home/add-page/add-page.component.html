@@ -1,110 +1,110 @@
 <div class="content-wrapper w-100 ">
-  <div class="_content d-flex flex-column w-100 h-100 "
-  [ngClass]="{'allowScroll' :dropDownIsHidden, 'disableScroll':!dropDownIsHidden}"
-  >
-  
-
-  <!--section header -->
-  <div class="d-flex justify-content-between mb-2 px-4 pt-3 w-100">
-    <div class="d-flex" backButton>
-      <i class="material-icons p-2 back-arrow-icon">arrow_back_ios</i>
-    </div>
-    <div class="p-2">
-      <span class="section-title d-flex justify-content-center">{{ 'add_document.main_title' | translate }}</span>
-    </div>
-    <div class="p-2">
-    </div>
-  </div>
-
-
-  <!--contains main content -->
-  <div class="main-content align-items-center px-1 w-100">
-    <form  (ngSubmit)="onSubmit(addPageForm.value)" #addPageForm="ngForm">
-      <p div class="assignment">{{ "add_document.title" | translate }}:</p>
+    <div class="_content d-flex flex-column w-100 h-100 "
+      [ngClass]="{'allowScroll' :dropDownIsHidden, 'disableScroll':!dropDownIsHidden}"
+      >
       
-        <div>
-            <label for="selectFile" class="selectDocument" >
-              <img src="\assets\upload-snippet.png"><br>
-              <span>{{ 'add_document.sub_title_1' | translate }}</span>
-            </label>
-            <input 
-              class="file-input d-none" 
-              type="file" 
-              accept=".pdf,.jpeg,.jpg"
-              #selectFile  
-              (change)="getFileName($event)" 
-              id="selectFile" 
-              name="file"
-              ngModel
-              required/>
-            
-            <app-upload-file class="fileUpload"*ngFor="let uploadFile of uploadFileArr" [uploadFile]="uploadFile" (deleteFile)="removeFile($event)"></app-upload-file>
+
+      <!--section header -->
+      <div class="d-flex justify-content-between mb-2 px-4 pt-3 w-100">
+        <div class="d-flex" backButton>
+          <i class="material-icons p-2 back-arrow-icon">arrow_back_ios</i>
         </div>
-
-          <div class="fileUpload">
-            <mat-chip-list #chipList class="chipList">
-              <mat-chip *ngFor="let chip of chips" (removed)="removeChip(chip)" class="chipItems">
-                {{ chip }}
-                <mat-icon matChipRemove class="removeChip">cancel</mat-icon>
-              </mat-chip>
-            </mat-chip-list>
-            <input  placeholder="Notice" matInput [matChipInputFor]="chipList"
-                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                  [matChipInputAddOnBlur]="addOnBlur"
-                  (matChipInputTokenEnd)="add($event)">
-          </div>  
-
-            <p class="assignment">{{ 'add_document.sub_title_2' | translate }}</p>
-
-           
-
-          <mat-form-field class="example-full-width" [appearance]="none">
-              <input matInput [matDatepicker]="pickerDate"
-               placeholder="Date" >
-              <mat-datepicker-toggle matIconSuffix [for]="pickerDate">
-                  <mat-icon class="dateIcon" matDatepickerToggleIcon>arrow_drop_down</mat-icon>
-              </mat-datepicker-toggle>
-              <mat-datepicker #pickerDate></mat-datepicker>
-          </mat-form-field>
-        
-          <div class="folderSection">
-              <div class="fileUpload">
-                  <ng-multiselect-dropdown
-                    [placeholder]="'add_document.placeholder' | translate "
-                    [settings]="dropdownSettings"
-                    [data]="dataArr"
-                    (onSelect)="onItemSelected($event)"
-                    name="myItems"
-                    [(ngModel)]="selectedItems"
-                    ngModel 
-                    [disabled]="dropdownDisabled"
-                    required
-                  >
-                </ng-multiselect-dropdown>
-              </div>
+        <div class="p-2">
+          <span class="section-title d-flex justify-content-center">{{ 'add_document.main_title' | translate }}</span>
         </div>
-      
-        <div class="d-flex flex-row assignment">
-          <span class="broker-btn" (click)="onShareWithBroker()">
-            <img class="broker-icon" [src]="broker_icon_link"></span>
-          <p class="m-2">Share with Broker</p>
+        <div class="p-2">
         </div>
-           
+      </div>
 
-          <button 
-            id="save-btn" 
-            type="submit"
-            [disabled]="(!addPageForm.valid)||submitted" 
-            class="btn btn-login" >
-              <span *ngIf="submitted" class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role=""></span>
-              <span *ngIf="!submitted">{{ 'add_document.submit_button_label' | translate }}</span>
-          </button>
+
+      <!--contains main content -->
+      <div class="main-content align-items-center px-1 w-100">
+        <form  (ngSubmit)="onSubmit(addPageForm.value)" #addPageForm="ngForm">
+          <p div class="assignment">{{ "add_document.title" | translate }}:</p>
           
+            <div>
+                <label for="selectFile" class="selectDocument" >
+                  <img src="\assets\upload-snippet.png"><br>
+                  <span>{{ 'add_document.sub_title_1' | translate }}</span>
+                </label>
+                <input 
+                  class="file-input d-none" 
+                  type="file" 
+                  accept=".pdf,.jpeg,.jpg"
+                  #selectFile  
+                  (change)="getFileName($event)" 
+                  id="selectFile" 
+                  name="file"
+                  ngModel
+                  required/>
+                
+                <app-upload-file class="fileUpload"*ngFor="let uploadFile of uploadFileArr" [uploadFile]="uploadFile" (deleteFile)="removeFile($event)"></app-upload-file>
+            </div>
+
+              <div class="fileUpload">
+                <mat-chip-list #chipList class="chipList">
+                  <mat-chip *ngFor="let chip of chips" (removed)="removeChip(chip)" class="chipItems">
+                    {{ chip }}
+                    <mat-icon matChipRemove class="removeChip">cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+                <input  placeholder="Tags" matInput [matChipInputFor]="chipList"
+                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                      [matChipInputAddOnBlur]="addOnBlur"
+                      (matChipInputTokenEnd)="add($event)">
+              </div>  
+
+                <p class="assignment">{{ 'add_document.sub_title_2' | translate }}</p>
+
+              
+
+              <mat-form-field class="example-full-width" [appearance]="none">
+                  <input matInput [matDatepicker]="pickerDate"
+                  placeholder="Date" disabled>
+                  <mat-datepicker-toggle matIconSuffix [for]="pickerDate" [disabled]="false">
+                      <mat-icon class="dateIcon" matDatepickerToggleIcon>arrow_drop_down</mat-icon>
+                  </mat-datepicker-toggle>
+                  <mat-datepicker #pickerDate [disabled]="false"></mat-datepicker>
+              </mat-form-field>
             
-    </form>
-  </div>
-  
-  
-</div> 
+              <div class="folderSection">
+                  <div class="fileUpload">
+                      <ng-multiselect-dropdown
+                        [placeholder]="'add_document.placeholder' | translate "
+                        [settings]="dropdownSettings"
+                        [data]="dataArr"
+                        (onSelect)="onItemSelected($event)"
+                        name="myItems"
+                        [(ngModel)]="selectedItems"
+                        ngModel 
+                        [disabled]="dropdownDisabled"
+                        required
+                      >
+                    </ng-multiselect-dropdown>
+                  </div>
+            </div>
+          
+            <div class="d-flex flex-row assignment">
+              <span class="broker-btn" (click)="onShareWithBroker()">
+                <img class="broker-icon" [src]="broker_icon_link"></span>
+              <p class="m-2">Share with Broker</p>
+            </div>
+              
+
+              <button 
+                id="save-btn" 
+                type="submit"
+                [disabled]="(!addPageForm.valid)||submitted" 
+                class="btn btn-login" >
+                  <span *ngIf="submitted" class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role=""></span>
+                  <span *ngIf="!submitted">{{ 'add_document.submit_button_label' | translate }}</span>
+              </button>
+              
+                
+        </form>
+      </div>
+      
+      
+    </div> 
 </div>
 

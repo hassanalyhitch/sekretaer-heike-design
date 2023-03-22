@@ -41,7 +41,7 @@
                   <mat-icon matChipRemove class="removeChip">cancel</mat-icon>
                 </mat-chip>
               </mat-chip-list>
-              <input  placeholder="Notice" matInput [matChipInputFor]="chipList"
+              <input  placeholder="Tags" matInput [matChipInputFor]="chipList"
                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                     [matChipInputAddOnBlur]="addOnBlur"
                     (matChipInputTokenEnd)="add($event)">
@@ -51,11 +51,11 @@
 
               <mat-form-field class="example-full-width" [appearance]="none">
                 <input matInput [matDatepicker]="pickerDate"
-                 placeholder="Date" >
-                <mat-datepicker-toggle matIconSuffix [for]="pickerDate">
+                 placeholder="Date" disabled>
+                <mat-datepicker-toggle matIconSuffix [for]="pickerDate" [disabled]="false">
                     <mat-icon class="dateIcon" matDatepickerToggleIcon>arrow_drop_down</mat-icon>
-                </mat-datepicker-toggle>
-                <mat-datepicker #pickerDate></mat-datepicker>
+                </mat-datepicker-toggle >
+                <mat-datepicker #pickerDate [disabled]="false"></mat-datepicker>
             </mat-form-field>
 
 

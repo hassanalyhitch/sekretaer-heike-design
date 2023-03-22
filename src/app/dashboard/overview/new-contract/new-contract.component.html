@@ -43,27 +43,31 @@
          
                 <p class="subtitle_section">{{ 'new-contract.sub_title_2' | translate }}:</p>
 
-                <mat-form-field class="example-full-width" [appearance]="none">
-                    <input matInput [matDatepicker]="picker" 
-                    placeholder= "{{'new-contract.sub_title_2_placeholder_a' | translate }}">
-                    <mat-datepicker-toggle matIconSuffix [for]="picker">
-                        <mat-icon class="dateIcon" matDatepickerToggleIcon>arrow_drop_down</mat-icon>
-                    </mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
+                <div class="dates">
+                    <mat-form-field class="example-full-width" appearance="none">
+                        <input matInput [matDatepicker]="picker" 
+                        placeholder= "{{'new-contract.sub_title_2_placeholder_a' | translate }}" disabled>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker" [disabled]="false">
+                            <mat-icon class="dateIcon" matDatepickerToggleIcon>arrow_drop_down</mat-icon>
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #picker [disabled]="false"></mat-datepicker>
+                    </mat-form-field>
+                </div>
               
-                <mat-form-field class="example-full-width" [appearance]="none">
-                    <input matInput [matDatepicker]="pickerDate"
-                     placeholder="{{'new-contract.sub_title_2_placeholder_b' | translate }}" >
-                    <mat-datepicker-toggle matIconSuffix [for]="pickerDate">
-                        <mat-icon class="dateIcon" matDatepickerToggleIcon>arrow_drop_down</mat-icon>
-                    </mat-datepicker-toggle>
-                    <mat-datepicker #pickerDate></mat-datepicker>
-                </mat-form-field>
+                <div class="dates">
+                    <mat-form-field class="example-full-width" appearance="none">
+                        <input matInput [matDatepicker]="pickerDate"
+                         placeholder="{{'new-contract.sub_title_2_placeholder_b' | translate }}" disabled>
+                        <mat-datepicker-toggle matIconSuffix [for]="pickerDate" [disabled]="false">
+                            <mat-icon class="dateIcon" matDatepickerToggleIcon>arrow_drop_down</mat-icon>
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #pickerDate [disabled]="false"></mat-datepicker>
+                    </mat-form-field>
+                  </div>
                   
 
 
-                     <div class="fileUpload">
+                     <div class="fileUpload dates">
                         <ng-multiselect-dropdown
                         [placeholder]="'new-contract.sub_title_2_a' | translate "
                         [settings]="paymentMethodSettings"
@@ -76,7 +80,7 @@
 
                     <input  ngModel [required]="optionSelected"  
                     type="text" placeholder="{{'new-contract.sub_title_2_b' | translate }}" class="form-control" 
-                    id="Amount" name="Amount" class="fileUpload"/>
+                    id="Amount" name="Amount" class="amount"/>
                     
                     <p class="subtitle_section">{{'new-contract.sub_title_3' | translate }}:</p>
 

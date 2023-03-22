@@ -17,7 +17,21 @@ import { Location } from '@angular/common';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { ENTER, COMMA } from '@angular/cdk/keycodes';
+import { ENTER, COMMA,SPACE} from '@angular/cdk/keycodes';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+
+
+export const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'DD.MM.YYYY',
+  },
+  display: {
+    dateInput: 'DD.MM.YYYY',
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY'
+  },
+};
 
 
 
@@ -25,7 +39,9 @@ import { ENTER, COMMA } from '@angular/cdk/keycodes';
   selector: 'app-add-page',
   templateUrl: './add-page.component.html',
   styleUrls: ['./add-page.component.css'],
-  providers:[FileSizePipe]
+  providers:[
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
+    FileSizePipe]
 })
 export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
 
@@ -96,7 +112,7 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
 
   doneIcon: string = "../assets/icons8-done-30.png";
   chips: string[] = [];
-  separatorKeysCodes: number[] = [ENTER, COMMA];
+  separatorKeysCodes: number[] = [ENTER, COMMA ,SPACE];
   addOnBlur = true;
 
   broker_icon_link: string;
@@ -192,6 +208,23 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
           break;
         }
         case "contract" :{
+          let selectedItem = {
+            id: this.contractService.selectedContract.id,
+            dataName:this.contractService.selectedContract.details.name
+          };
+          let contract:any = {
+            id:this.contractService.selectedContract['id'],
+            CustomerAmsidnr:this.contractService.selectedContract['CustomerAmsidnr'],
+            dataName: this.contractService.selectedContract['name'],
+            type:'contract'
+          };
+
+          this.dataArr.push(contract);
+
+          this.selectedItems.push(selectedItem);
+          this.typeSelected ='contract';
+
+          this.dropdownDisabled =false;
 
 
           break;
@@ -264,6 +297,48 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
 
       }
     })
+
+  }
+
+  addContractDocument(fileData:FileNameData,contractId:string){
+
+    this.fileUploadService.addContractFile(fileData,contractId).subscribe({
+      next:(resp)=>{
+        this.submitted = false;
+        console.log('success');
+      },
+      error:(e)=>{
+        this.submitted = false;
+        console.log('error');
+
+         //show snackbar with error message
+         this._snackBar.open(this.translate.instant('add_document.file_upload_error'), this.translate.instant('snack_bar.action_button'),{
+          panelClass: ['snack_error'],
+           duration:2000,
+        });
+
+         //return back to previous page
+         setTimeout(()=>{
+          this.location.back()
+        },3500);
+
+      },
+      complete:()=>{
+        this.submitted = false;
+
+        this._snackBar.open(this.translate.instant('add_document.file_upload_success'), this.translate.instant('snack_bar.action_button'),{
+          panelClass: ['snack_success'],
+          duration:2000,
+        });
+
+          //return back to previous page
+          setTimeout(()=>{
+            this.location.back()
+          },3500);
+  
+      }
+
+    });
 
   }
 
@@ -383,10 +458,17 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
   
   switch (this.typeSelected){
     case 'folder':{
-     this.addNewFile(fileData,this.selectedItems[0].id)
+       console.log('folder id -> ' +this.selectedItems[0].id);
+
+      this.addNewFile(fileData,this.selectedItems[0].id);
+
       break;
     }
     case 'contract':{
+      console.log('contract id  -> ' + this.selectedItems[0].id);
+
+      this.addContractDocument(fileData,this.selectedItems[0].id);
+
       break;
     }
   }

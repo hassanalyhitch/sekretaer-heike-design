@@ -104,10 +104,17 @@
                 <label>{{ 'my-data.title_city' | translate }}</label>
             </div>
 
-            <div class="d-flex navigate_back" (click)="onBackNavClick()" >
-                <i class="material-icons py-2 back-arrow-icon">arrow_back_ios</i>
-                <span class="py-2 back">{{ 'my-data.back_btn' | translate }}</span>
+            <div class="d-flex" style="cursor:pointer;" backButton>
+              <div class="d-flex" >
+                <i class="material-icons p-2 ">arrow_back_ios</i>
+              </div>
+              <div class="py-2">
+                <span class="align-self-center">
+                    {{ 'settings.go_back' | translate }}
+                </span>
+              </div>
             </div>
+            
       </form>
     </div>
   </div>

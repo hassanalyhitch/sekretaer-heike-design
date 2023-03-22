@@ -17,7 +17,8 @@
           <ul class="dropdown-menu shadow">
             <li><span class="dropdown-item" href="" *ngIf="contract.details.isFav=='0'" (click)="markFav(contract)" >{{ 'contract_detail.insurance_side_menu_item_1' | translate }}</span></li>
             <li><span class="dropdown-item" href="" *ngIf="contract.details.isFav=='1'" (click)="unmarkFav(contract)" >{{ 'contract_detail.insurance_side_menu_item_2' | translate }}</span></li>
-            <li><span class="dropdown-item" href="" (click)="openModal(contract)" >{{ 'contract_detail.insurance_side_menu_item_3' | translate }}</span></li>    
+            <li><span class="dropdown-item" href="" (click)="openModal(contract)" >{{ 'contract_detail.insurance_side_menu_item_3' | translate }}</span></li>  
+            <li><span class="dropdown-item" href=""  (click)="addNewDocument(contract)">{{ 'contract_detail.insurance_side_menu_item_4' | translate }}</span></li>   
           </ul>
         </div>
       </div>

@@ -132,7 +132,7 @@
   border-radius: 7px;
   border:none;
   width: 90%;
-  padding: 15px;
+  padding: 6px;
   background-image: linear-gradient(114deg,#fff,#fff,var(--primaryButtonColor-200) 93%);
   cursor: pointer;
   font-family:oscine, sans-serif;
@@ -171,7 +171,7 @@ input{
   border-radius: 7px;
   border:#fff;
   width: 90%;
-  padding: 15px;
+  padding: 6px;
   background-color: #fff;
   cursor: pointer;
   font-family:oscine, sans-serif;
@@ -188,9 +188,8 @@ input{
   font-style: normal;
   font-size: 17px;
   width:90%;
-  padding: 15px;
+  padding: 7px;
   cursor: pointer;
-  
 }
 .upload-section_b{
   background-color: #fff;
@@ -201,7 +200,7 @@ input{
   font-style: normal;
   font-size: 17px;
   width:10%;
-  padding:15px;
+  padding:7px;
   margin-left:3px;
 }
 
@@ -297,8 +296,6 @@ input{
     display: block;
     margin-left:auto;
     margin-right:auto;
-    margin-top: 3px;
-    margin-bottom: 6px;
     border-radius: 7px;
     border:#fff;
     width: 90%;
@@ -307,7 +304,9 @@ input{
     font-family:oscine, sans-serif;
     font-size: 17px;
     color:#707070;
-    font-style: normal;
+    font-weight: 300;
+    padding-right:9px !important;
+    padding-left: 16px !important;
   }
   .dateIcon{
     transform: scale(1.7);
@@ -315,6 +314,25 @@ input{
   }
   .example-full-width input{
     color:#707070;
+  }
+  .dates{
+    margin-top:5px;
+  }
+  .amount{
+    display: block;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom: 6px;
+    border-radius: 7px;
+    border:#fff;
+    width: 90%;
+    padding:10px 16px;
+    background-color: #fff;
+    cursor: pointer;
+    font-family:oscine, sans-serif;
+    font-size: 17px;
+    color:#707070;
+    font-style: normal;
   }
   
   

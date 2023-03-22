@@ -14,18 +14,34 @@ import { FileSizePipe } from '../../pipes/filesize.pipe';
 import { ThisReceiver } from '@angular/compiler';
 import { FileNameData } from '../../models/file-name.model';
 import { Location } from '@angular/common';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar} from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { ENTER, COMMA } from '@angular/cdk/keycodes';
+import { ENTER, COMMA ,SPACE} from '@angular/cdk/keycodes';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+
+
+export const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'DD.MM.YYYY',
+  },
+  display: {
+    dateInput: 'DD.MM.YYYY',
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY'
+  },
+};
 
 
 @Component({
   selector: 'app-add-page-modal',
   templateUrl: './add-page-modal.component.html',
   styleUrls: ['./add-page-modal.component.scss'],
-  providers:[FileSizePipe]
+  providers:[
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
+    FileSizePipe]
 })
 
 export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
@@ -98,7 +114,7 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
 
   doneIcon: string = "../assets/icons8-done-30.png";
   chips: string[] = [];
-  separatorKeysCodes: number[] = [ENTER, COMMA];
+  separatorKeysCodes: number[] = [ENTER, COMMA ,SPACE];
   addOnBlur = true;
 
   dataObj:{
@@ -220,6 +236,8 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
 
       this.dataArr.push(folder);
       
+      console.log('folder modal' + JSON.stringify(folder));
+      
       this.selectedItems.push(selectedItem);
       this.typeSelected = 'folder';
 
@@ -240,6 +258,8 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
 
       this.dataArr.push(contract);
 
+      console.log('contract modal' + JSON.stringify(contract));
+
       this.selectedItems.push(selectedItem);
       this.typeSelected ='contract';
 
@@ -249,119 +269,6 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
 
     //--------------------------------------------END NEW CODE------------------------------
    
-
-  
-      // switch (this.route.snapshot.params['type']){
-      //   case "folder": {
-      //     let selectedItem = {
-      //       id:this.folderService.selectedFolder.id,
-      //       dataName:this.folderService.selectedFolder.folderName
-      //     };
-      //     let folder: any = {
-      //       id: this.folderService.selectedFolder['id'],
-      //       customerAmsidnr:this.folderService.selectedFolder['customerAmsidnr'],
-      //       dataName :this.folderService.selectedFolder['folderName'],
-      //       type: 'folder'
-      //     };
-      //     this.dataArr.push(folder);
-
-
-      //     this.selectedItems.push(selectedItem);
-      //     this.typeSelected = 'folder';
-
-      //     this.dropdownDisabled = false;
-
-      //     break;
-      //   }
-      //   case "contract" :{
-
-
-      //     break;
-      //   }
-      //   default:{
-      //   this.getDropdownData();
-    
-      //     break;
-      //   }
-      // }
-      
-      // if(window.location.href.includes('folder-detail')){
-      //   let selectedItem = {
-      //     id:this.folderService.selectedFolder.id,
-      //     dataName:this.folderService.selectedFolder.folderName
-      //   };
-      //   let folder: any = {
-      //     id: this.folderService.selectedFolder['id'],
-      //     customerAmsidnr:this.folderService.selectedFolder['customerAmsidnr'],
-      //     dataName :this.folderService.selectedFolder['folderName'],
-      //     type: 'folder'
-      //   };
-      //   this.dataArr.push(folder);
-
-
-      //   this.selectedItems.push(selectedItem);
-      //   this.typeSelected = 'folder';
-
-      //   this.dropdownDisabled = false;
-      // }
-
-      // else{
-      
-      // }
-
-      // if(window.location.href.includes('overview')){
-      //   let selectedItem = {
-      //     id:this.folderService.selectedFolder.id,
-      //     dataName:this.folderService.selectedFolder.folderName
-      //   };
-      //   let folder: any = {
-      //     id: this.folderService.selectedFolder['id'],
-      //     customerAmsidnr:this.folderService.selectedFolder['customerAmsidnr'],
-      //     dataName :this.folderService.selectedFolder['folderName'],
-      //     type: 'folder'
-      //   };
-      //   this.dataArr.push(folder);
-
-
-      //   this.selectedItems.push(selectedItem);
-      //   this.typeSelected = 'folder';
-
-      //   this.dropdownDisabled = false;
-      // }
-
-      // else{
-      
-      // }
-
-      
-      // if (window.location.href.includes('overview')){
-      //   let selectedItem ={
-      //     id:this.contractService.selectedContract.details.Amsidnr,
-      //     dataName:this.contractService.selectedContract.details.name
-      //   };
-      //   let contract:any ={
-      //     id:this.contractService.selectedContract['details.Amsidnr'],
-      //     dataName:this.contractService.selectedContract['details.name'],
-      //     type:'contract'
-      //   };
-      //   this.dataArr.push(contract);
-
-      //   this.selectedItems.push(selectedItem);
-      //   this.typeSelected ='contract';
-
-      //   this.dropdownDisabled = false;
-      //  } 
-      //  else{
-
-      // }
-
-
-
-
-      // this.selectedItems = [
-      //   { id: '30007', dataName: 'default selected'  }
-      // ];
-  
     this.form =this.formBuilder.group({
       // namefile:['',Validators.required],
       // date:['',Validators.required],
@@ -396,7 +303,7 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
         //show snackbar with error message
         this._snackBar.open(this.translate.instant('add_document.file_upload_error'), this.translate.instant('snack_bar.action_button'),{
           panelClass: ['snack_error'],
-           duration:2000,
+           duration: 8000,
         });
 
         //close dialog
@@ -409,13 +316,51 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
         //show snackbar with success message
         this._snackBar.open(this.translate.instant('add_document.file_upload_success'), this.translate.instant('snack_bar.action_button'),{
           panelClass: ['snack_success'],
-          duration:2000,
+          duration: 8000,
         });
 
        //close dialog
        this.closeDialog();
 
       }
+    })
+
+  }
+
+  addContractDocument(fileData:FileNameData,contractId:string){
+
+    this.fileUploadService.addContractFile(fileData,contractId).subscribe({
+      next:(resp)=>{
+        this.submitted = false;
+        console.log('success');
+      },
+      error:(e)=>{
+        this.submitted = false;
+
+          //show snackbar with error message
+          this._snackBar.open('File Upload to contracts coming soon' , this.translate.instant('snack_bar.action_button'),{
+            panelClass: ['snack_success'],
+             duration: 8000,
+          });
+  
+          //close dialog
+          this.closeDialog();
+        
+      },
+      complete:()=>{
+        this.submitted = false;
+
+          //show snackbar with success message
+          this._snackBar.open(this.translate.instant('add_document.file_upload_success'), this.translate.instant('snack_bar.action_button'),{
+            panelClass: ['snack_success'],
+            duration: 8000,
+          });
+  
+         //close dialog
+         this.closeDialog();
+  
+      }
+
     })
 
   }
@@ -575,20 +520,10 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
       break;
     }
     case 'contract':{
-
+      console.log(' contract id -> ' +this.selectedItems[0].id);
       this.submitted = true;
 
-      this._snackBar.open(
-        " File Upload To Contracts Coming soon", 
-        this.translate.instant('snack_bar.action_button'),{
-          panelClass: ['snack_success'],
-          duration: 5000,
-      });
-
-      setTimeout(()=>{
-        this.submitted = false;
-        this.closeDialog();
-      }, 6000);
+      this.addContractDocument(fileData,this.selectedItems[0].id);
 
       break;
     }

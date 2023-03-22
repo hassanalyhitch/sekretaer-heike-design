@@ -43,10 +43,10 @@
             />
             <label for="username">{{ "login.username" | translate }}</label>
           </div>
-          <div class="material-textfield mt-4 mb-1">
+          <div class="material-textfield mt-4 mb-1 d-flex inner-addon right-addon">
             <input
               placeholder=" "
-              type="password"
+              [type]="showPassword ? 'text' : 'password'"
               [(ngModel)]="password"
               name="password"
               ngModel
@@ -55,6 +55,13 @@
               autocomplete="current-password"
             />
             <label for="password">{{ "login.password" | translate }}</label>
+            <div (click)="showPassword = !showPassword">
+              <i alt="show" class="far material-icons" 
+              [class.show]="showPassword">visibility</i>
+
+              <i alt="hide" class="far material-icons" 
+              [class.hide]="!showPassword">visibility_off</i>
+            </div>
           </div>
           <div class="mt-5 w-100">
             <button

@@ -47,6 +47,8 @@ export class LoginComponent implements OnInit {
   selected_theme: string;
   app_logo_link_src: string;
 
+  showPassword:boolean;
+
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -57,7 +59,9 @@ export class LoginComponent implements OnInit {
       this.loadingService.emitIsLoading(false);
 
       this.app_logo_link_src = "../assets/sekretaer_pink_logo.svg"; //default logo 
-      this.selected_theme    = ""; 
+      this.selected_theme    = "";
+      
+      this.showPassword = false; 
     }
 
     ngOnInit() {

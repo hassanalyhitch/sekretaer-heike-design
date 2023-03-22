@@ -4,21 +4,23 @@
     <div class="mb-auto p-2">
       <img class="icon" src="/assets/icon_weight_balance.svg">
     </div>
-    <div class="p-2">
-      <img class="filter-icon py-1" data-bs-toggle="dropdown" aria-expanded="false" src="/assets/icon_filter.svg">
-          <ul class="dropdown-menu shadow">
-            <li><span class="dropdown-item" href="" (click)="addNewDocument(contractItem)" >{{ 'contract_detail.fav_item_insurance_side_menu_option_1' | translate }}</span></li>
-            <li><span class="dropdown-item" href="" *ngIf="contractItem.details.isFav=='0'" (click)="markFav(contractItem)" >{{ 'contract_detail.fav_item_insurance_side_menu_option_2' | translate }}</span></li>
-            <li><span class="dropdown-item" href="" *ngIf="contractItem.details.isFav=='1'" (click)="unmarkFav(contractItem)" >{{ 'contract_detail.fav_item_insurance_side_menu_option_3' | translate }}</span></li>
-            <li><span class="dropdown-item" href="" (click)="openRenameContractModal(contractItem)" >{{ 'contract_detail.fav_item_insurance_side_menu_option_4' | translate }}</span></li>    
-          </ul>
+    <div class="">
+      <div class="w-100 p-2" data-bs-toggle="dropdown" aria-expanded="false" >
+        <img class="p-2" src="/assets/icon_filter.svg">
+      </div>
+      <ul class="dropdown-menu shadow">
+        <li><span class="dropdown-item" href="" (click)="addNewDocument(contractItem)" >{{ 'contract_detail.fav_item_insurance_side_menu_option_1' | translate }}</span></li>
+        <li><span class="dropdown-item" href="" *ngIf="contractItem.details.isFav=='0'" (click)="markFav(contractItem)" >{{ 'contract_detail.fav_item_insurance_side_menu_option_2' | translate }}</span></li>
+        <li><span class="dropdown-item" href="" *ngIf="contractItem.details.isFav=='1'" (click)="unmarkFav(contractItem)" >{{ 'contract_detail.fav_item_insurance_side_menu_option_3' | translate }}</span></li>
+        <li><span class="dropdown-item" href="" (click)="openRenameContractModal(contractItem)" >{{ 'contract_detail.fav_item_insurance_side_menu_option_4' | translate }}</span></li>    
+      </ul>
     </div>
   </div>
   
   <div class="d-flex w-100 ">
     <div class="d-flex flex-column _content ml-auto w-100 " (click)="onContractClick(contractItem)">
       <span class="risk px-2 mt-1 mb-1">{{contractItem.details.name | shortenText: 13 }}</span>
-      <span class="branch mt-2 px-2 ">{{contractItem.details.Branch | shortenText: 25}}</span>
+      <span class="branch mt-2 px-2 ">{{contractItem.details.productSek | shortenText: 25}}</span>
       <span class="company px-2">{{contractItem.details.Company | shortenText: 20}}</span>
   
       <div class="d-flex align-items-end justify-content-between w-100 mt-auto py-1 ">

@@ -44,6 +44,48 @@ export class FileUploadService {
         })
       );
     }
+
+
+    addContractFile(data:FileNameData,contractId:string) {
+
+      console.log(contractId);
+      let url ='https://testapi.maxpool.de/api/v1/dms/upload'
+
+      let formData = new FormData();
+
+      formData.append("file",data.doc_file);
+      formData.append("contract",contractId);
+      formData.append("name","");
+      formData.append("tag","");
+      formData.append("customer","");
+      formData.append("agent","");
+      formData.append("folder","");
+
+      console.log(formData);
+      
+
+      return this.http.post(url,formData,{
+        headers:new HttpHeaders({
+          'Content-Type':'multipart/form-data',
+          'Accept':'application/json',
+        }),
+      }).pipe(
+        tap({
+          next:(resp) =>{
+
+          },
+          error:(error:any)=>{
+            if(error instanceof HttpErrorResponse){
+               //Invalid Token or Unauthorised request
+               if(error.status == 401){
+                this.loginService.emitAuthenticated(false);
+              }
+            }
+          }
+        })
+      );
+    
+    }
 }
 
 

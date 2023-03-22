@@ -11,12 +11,29 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import { Location } from '@angular/common';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+
+
+export const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'DD.MM.YYYY',
+  },
+  display: {
+    dateInput: 'DD.MM.YYYY',
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY'
+  },
+};
+
 
 @Component({
   selector: 'app-new-contract',
   templateUrl: './new-contract.component.html',
   styleUrls: ['./new-contract.component.css'],
-  providers:[FileSizePipe]
+  providers:[
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
+    FileSizePipe]
 })
 
 export class NewContractComponent implements OnInit {
