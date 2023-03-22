@@ -44,7 +44,7 @@
                 <p class="subtitle_section">{{ 'new-contract.sub_title_2' | translate }}:</p>
 
                 <div class="dates">
-                    <mat-form-field class="example-full-width" appearance="none">
+                    <mat-form-field class="example-full-width" [appearance]="none">
                         <input matInput [matDatepicker]="picker" 
                         placeholder= "{{'new-contract.sub_title_2_placeholder_a' | translate }}" disabled>
                         <mat-datepicker-toggle matIconSuffix [for]="picker" [disabled]="false">
@@ -55,7 +55,7 @@
                 </div>
               
                 <div class="dates">
-                    <mat-form-field class="example-full-width" appearance="none">
+                    <mat-form-field class="example-full-width" [appearance]="none">
                         <input matInput [matDatepicker]="pickerDate"
                          placeholder="{{'new-contract.sub_title_2_placeholder_b' | translate }}" disabled>
                         <mat-datepicker-toggle matIconSuffix [for]="pickerDate" [disabled]="false">
