@@ -45,18 +45,25 @@ export class LoginService {
         console.log('Expired. Clear Cache.');
         console.log('Already expired on => '+cacheExpiry);
         
-        const deleteCache = async (key) => {
-          await caches.delete(key);
-        };
+        try{
 
-        const deleteOldCaches = async () => {
-          const keyList = await caches.keys();
-          console.log(keyList);
-          await Promise.all(keyList.map(deleteCache));
-        };
-
-        deleteOldCaches();
-        location.reload();
+          const deleteCache = async (key) => {
+            await caches.delete(key);
+          };
+  
+          const deleteOldCaches = async () => {
+            const keyList = await caches.keys();
+            console.log(keyList);
+            await Promise.all(keyList.map(deleteCache));
+          };
+  
+          deleteOldCaches();
+          localStorage.setItem('lastCache', now.toString());
+          location.reload();
+          
+        } catch(e:any){
+          console.log(e);
+        }
         
       }
     }
