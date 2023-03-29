@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Observer, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { AuthLogin } from '../models/auth_login.model';
 import { LoginData } from '../models/login.model';
 import { SettingsService } from './settings.service';
@@ -75,8 +76,9 @@ export class LoginService {
   }
 
   login(data: LoginData) {
+    let endPoint = environment.baseUrl + '/api/v1/login';
     return this.http
-      .post('https://testapi.maxpool.de/api/v1/login', data, {
+      .post(endPoint, data, {
         headers: new HttpHeaders({
           accept: 'application/json',
           'Content-Type': 'application/json',
