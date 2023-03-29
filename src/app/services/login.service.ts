@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Observer, tap } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
+// import { environment } from 'src/environments/environment';
 import { AuthLogin } from '../models/auth_login.model';
 import { LoginData } from '../models/login.model';
 import { SettingsService } from './settings.service';
