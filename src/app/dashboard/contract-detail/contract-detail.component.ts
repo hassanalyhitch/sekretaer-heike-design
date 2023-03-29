@@ -21,7 +21,7 @@ import { RenameModalComponent } from '../rename-modal/rename-modal.component';
 import { DownloadService } from '../../services/download-file.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AddPageModalComponent } from '../add-page-modal/add-page-modal.component';
-import { LoadingService } from 'src/app/services/loading.service';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-contract-detail',
