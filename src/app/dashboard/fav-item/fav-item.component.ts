@@ -33,7 +33,9 @@ export class FavItemComponent implements OnInit {
       name: "",
       productSek: "",
       tarif: "",
-      isFav: 1
+      isFav: 1,
+      iconLeft: "",
+      ownPicture : ""
     },
     isSelected: false
   };
@@ -42,6 +44,9 @@ export class FavItemComponent implements OnInit {
   
   @Output() favoriteEvent = new EventEmitter<boolean>();
 
+  src_link_for_icon_left: string;
+  src_link_for_small_picture: string;
+
   constructor(
     private route: ActivatedRoute,
     private matDialog: MatDialog,
@@ -49,9 +54,66 @@ export class FavItemComponent implements OnInit {
     private translate: TranslateService,
     private contractService: ContractsService,
     private snackbar:MatSnackBar
-  ) {}
+  ) {
+
+    this.src_link_for_icon_left = "../assets/icon_allgemein.svg"; //default logo for icon left
+
+  }
 
   ngOnInit() {
+
+    //console.log("Contract Icon Left -> "+this.contractItem.details.iconLeft);
+
+    if(this.contractItem.details.ownPicture.includes('data:image')){
+
+      this.src_link_for_small_picture = this.contractItem.details.ownPicture;
+
+    } else {
+      this.src_link_for_small_picture = "../assets/default_small_picture.svg";
+    }
+
+    if(this.contractItem.details.iconLeft == "Icon_Allgemein.svg"){
+    
+      this.src_link_for_icon_left = "../assets/icon_allgemein.svg";
+
+    } else if(this.contractItem.details.iconLeft == "Icon_Gewerbe.svg"){
+      
+      this.src_link_for_icon_left = "../assets/icon_gewerbe.svg";
+
+    } else if(this.contractItem.details.iconLeft == "Icon_Haftpflicht.svg"){
+      
+      this.src_link_for_icon_left = "../assets/icon_haftpflicht.svg";
+      
+    } else if(this.contractItem.details.iconLeft == "Icon_Kfz.svg"){
+      
+      this.src_link_for_icon_left = "../assets/icon_kfz.svg";
+      
+    } else if(this.contractItem.details.iconLeft == "Icon_Krank.svg"){
+      
+      this.src_link_for_icon_left = "../assets/icon_kranken.svg";
+      
+    } else if(this.contractItem.details.iconLeft == "Icon_LV.svg"){
+      
+      this.src_link_for_icon_left = "../assets/icon_lv.svg";
+      
+    } else if(this.contractItem.details.iconLeft == "Icon_Rechtsschutz.svg"){
+      
+      this.src_link_for_icon_left = "../assets/icon_rechtsschutz.svg";
+      
+    } else if(this.contractItem.details.iconLeft == "Icon_Tier.svg"){
+      
+      this.src_link_for_icon_left = "../assets/icon_tier.svg";
+      
+    } else if(this.contractItem.details.iconLeft == "Icon_Unfall.svg"){
+      
+      this.src_link_for_icon_left = "../assets/icon_unfall.svg";
+      
+    } else {
+      // none of the above
+      this.src_link_for_icon_left = "../assets/icon_allgemein.svg";
+
+    }
+
   }
 
   openRenameContractModal(file) {
@@ -150,7 +212,7 @@ export class FavItemComponent implements OnInit {
   onContractClick(clickedContract) {
 
     // console.log("From Fav Item Component: Contract Details ->"+JSON.stringify(clickedContract));
-    console.log(this.collapsed);
+    //console.log(this.collapsed);
 
     if(!this.collapsed){
 

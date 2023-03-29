@@ -21,11 +21,12 @@ import { RenameModalComponent } from '../rename-modal/rename-modal.component';
 import { DownloadService } from '../../services/download-file.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AddPageModalComponent } from '../add-page-modal/add-page-modal.component';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-contract-detail',
   templateUrl: './contract-detail.component.html',
-  styleUrls: ['./contract-detail.component.css'],
+  styleUrls: ['./contract-detail.component.scss'],
 })
 export class ContractDetailComponent implements OnInit, OnDestroy {
 
@@ -49,6 +50,7 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
       tarif: '',
       productSek: '',
       isFav: 0,
+      ownPicture: ''
     },
     isSelected: false,
   };
@@ -65,6 +67,8 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
 
   docArr: DocumentData[] = [];
 
+  src_link_for_small_picture: string;
+
   constructor(
     private route: ActivatedRoute,
     private matDialog: MatDialog,
@@ -74,9 +78,9 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     private _location: Location,
     private downloadService: DownloadService,
     private snackbar:MatSnackBar,
-    
+    private loadingService:LoadingService
   ) {
-
+    this.loadingService.emitIsLoading(true);
   }
 
   ngOnInit() {
@@ -91,6 +95,14 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
 
           this.contract = this.contractService.selectedContract;
 
+          if(this.contract.details.ownPicture.includes('data:image')){
+
+            this.src_link_for_small_picture = this.contract.details.ownPicture;
+
+          } else {
+            this.src_link_for_small_picture = "../assets/default_small_picture.svg";
+          }
+
           if (resp.hasOwnProperty('docs')) {
             for (let i = 0; i < resp.docs.length; i++) {
               this.docArr.push(resp.docs[i]);
@@ -99,7 +111,9 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
           }
 
         },
-        complete: () => {},
+        complete: () => {
+          this.loadingService.emitIsLoading(false);
+        },
       });
   }
 

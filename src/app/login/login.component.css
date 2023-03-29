@@ -5,7 +5,7 @@
   background-color: #F2F2F2;
   background-image: linear-gradient(to right, #F2F2F2 50% , #2C262D 50%);
   position: relative;
-
+  overflow-y: scroll;
 }
 
 .header-wrapper{
@@ -253,4 +253,8 @@ input:checked + .slider:before {
 
 .show {
   display: block;
+}
+
+.login-lables{
+  font-size:  small;
 }

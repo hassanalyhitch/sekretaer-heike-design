@@ -15,6 +15,9 @@
                     [data]="dataArr"
                     [(ngModel)]="selectedBranches"
                     (onSelect)="onBranchSelected($event)"
+                    name ="branches"
+                    ngModel
+                    required
                    >
                     </ng-multiselect-dropdown>
                 </div>
@@ -25,7 +28,11 @@
                     [settings]="companySettings"
                     [data]="companyArr"
                     (onSelect)="onCompanySelected($event)"
-                    [(ngModel)]="selectedCompanies">
+                    [(ngModel)]="selectedCompanies"
+                    name="companies"
+                    ngModel
+                    required
+                    >
                     </ng-multiselect-dropdown>
                 </div>
 
@@ -36,6 +43,9 @@
                     (onSelect)="onProductSelected($event)"
                     [data]="productArr"
                     [(ngModel)]="selectedProducts"
+                    name="products"
+                    ngModel
+                    required
                     >
                     </ng-multiselect-dropdown>
                 </div>
@@ -43,10 +53,13 @@
          
                 <p class="subtitle_section">{{ 'new-contract.sub_title_2' | translate }}:</p>
 
-                <div class="dates">
-                    <mat-form-field class="example-full-width" [appearance]="none">
-                        <input matInput [matDatepicker]="picker" 
-                        placeholder= "{{'new-contract.sub_title_2_placeholder_a' | translate }}" disabled>
+                <div>
+                    <mat-form-field class="example-full-width" appearance="none">
+                        <input #startDate matInput [matDatepicker]="picker" matDatepickerToggleIcon
+                        placeholder= "{{'new-contract.sub_title_2_placeholder_a' | translate }}" 
+                        disabled 
+                        name="startDate"
+                        required>
                         <mat-datepicker-toggle matIconSuffix [for]="picker" [disabled]="false">
                             <mat-icon class="dateIcon" matDatepickerToggleIcon>arrow_drop_down</mat-icon>
                         </mat-datepicker-toggle>
@@ -54,10 +67,12 @@
                     </mat-form-field>
                 </div>
               
-                <div class="dates">
-                    <mat-form-field class="example-full-width" [appearance]="none">
-                        <input matInput [matDatepicker]="pickerDate"
-                         placeholder="{{'new-contract.sub_title_2_placeholder_b' | translate }}" disabled>
+                <div>
+                    <mat-form-field class="example-full-width" appearance="none">
+                        <input #endDate matInput [matDatepicker]="pickerDate"
+                         placeholder="{{'new-contract.sub_title_2_placeholder_b' | translate }}" disabled
+                         name="endDate"
+                         required>
                         <mat-datepicker-toggle matIconSuffix [for]="pickerDate" [disabled]="false">
                             <mat-icon class="dateIcon" matDatepickerToggleIcon>arrow_drop_down</mat-icon>
                         </mat-datepicker-toggle>
@@ -67,20 +82,51 @@
                   
 
 
-                     <div class="fileUpload dates">
+                     <div class="fileUpload">
                         <ng-multiselect-dropdown
                         [placeholder]="'new-contract.sub_title_2_a' | translate "
                         [settings]="paymentMethodSettings"
                         (onSelect)="onPaymentMethodSelected($event)"
                         [data]="paymentMethodsList"
+                        name="paymentMethod"
+                        [(ngModel)]="PaymentMethod"
+                        ngModel
+                        required
+                        >
+                        </ng-multiselect-dropdown>
+                    </div>
+
+                    <div class="fileUpload ">
+                        <ng-multiselect-dropdown
+                        placeholder = 'Status Reason'
+                        [settings]="statusReasonSettings"
+                        (onSelect)="onStatusReasonSelected($event)"
+                        [data]="statusReasonList"
+                        ngModel
+                        required
+                        name="StatusReason"
+                        [(ngModel)]="StatusReason"
+                        ngModel
+                        required
                         >
                         </ng-multiselect-dropdown>
                     </div>
                   
+                    <div class="amount">
+                        <input  ngModel [required]="optionSelected"  
+                        type="text" placeholder="{{'new-contract.sub_title_2_b' | translate }}"
+                        id="Amount" name="amount"/>
+                    </div>
+                    
 
-                    <input  ngModel [required]="optionSelected"  
-                    type="text" placeholder="{{'new-contract.sub_title_2_b' | translate }}" class="form-control" 
-                    id="Amount" name="Amount" class="amount"/>
+                    <div class="risk">
+                        <input type="text" placeholder="Risk" ngModel name="Risk"/>
+                    </div>
+
+                    
+                    <input class="risk" type="text" placeholder="Insurance Number(optional)" ngModel name="insuranceNumber "/>
+                    
+                    
                     
                     <p class="subtitle_section">{{'new-contract.sub_title_3' | translate }}:</p>
 
@@ -89,31 +135,23 @@
 
                     <div class="d-flex flex-column upload-section_b align-items-center">
                         <input 
-                        class="file-input"
-                        hidden
-                        #selectFile
-                        id="selectFile"
-                        (change)="getFile($event)"
-                        type="file"
-                        accept="application/pdf"
-                        name="file"
-                        ngModel
-                        required
-                            />
+                            class="file-input"
+                            hidden
+                            #selectFile
+                            id="selectFile"
+                            (change)="getFile($event)"
+                            type="file"
+                            accept="application/pdf"
+                            name="file"
+                            ngModel
+                            required
+                                />
                             <i class="material-icons"(click)="selectFile.click()">add</i>
                     </div>
                     
                 </div>
 
-               <div class="d-flex justify-content-between fileUpload " *ngIf="show">
-                    <div *ngFor="let uploadFile of uploadFileArr">{{uploadFile.fileName}}<br>
-                        {{uploadFile.fileSize}}
-                    </div>
-                    <div class=" ml-auto align-self-end  e-icons e-file-delete-btn" (change)="deleteFile($event)"
-                    title="Delete file">
-                        <i class="material-icons">delete</i>
-                    </div>
-               </div>
+                <app-upload-file class="fileUpload"*ngFor="let uploadFile of uploadFileArr" [uploadFile]="uploadFile" (deleteFile)="removeFile($event)"></app-upload-file>
 
                <div class="d-flex flex-row assignment">
                 <span class="broker-btn" (click)="onShareWithBroker()">

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="18.947" height="24.148" viewBox="0 0 18.947 24.148">
+  <g id="Icon_Unfall" data-name="Icon Unfall" transform="translate(0.75 0.75)">
+    <path id="Pfad_161" data-name="Pfad 161" d="M152.972,196.6v-3.673c0-4.8,3.925-6.439,8.723-6.439h0c4.8,0,8.724,1.641,8.724,6.439v1.955c0,1.52-.392,1.837-1.861,1.758" transform="translate(-152.972 -174.498)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <g id="Gruppe_353" data-name="Gruppe 353" transform="translate(3.795)">
+      <path id="Pfad_162" data-name="Pfad 162" d="M159.6,179.21l6.488,2.167a4.86,4.86,0,0,0,.538-2,4.431,4.431,0,0,0-4.539-4.873c-2.74-.069-5.241,1.5-5.314,4.447a5.615,5.615,0,0,0,.506,2.652l-.034-.2Z" transform="translate(-156.767 -174.498)" fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="1.5"/>
+      <path id="Pfad_163" data-name="Pfad 163" d="M157.275,181.6l.224,1.337a4.256,4.256,0,0,0,4.061,3.55h.552A4.066,4.066,0,0,0,166,183.064l.147-1.665-.066-.022" transform="translate(-156.767 -174.498)" fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="1.5"/>
+      <path id="Pfad_164" data-name="Pfad 164" d="M166.084,181.377,159.6,179.21l-2.355,2.187.034.2" transform="translate(-156.767 -174.498)" fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="1.5"/>
+    </g>
+    <path id="Pfad_165" data-name="Pfad 165" d="M162.32,191.95l-2.139-5.342-1.084.175s.022,3.441.093,6.268" transform="translate(-152.972 -174.498)" fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="1"/>
+    <path id="Pfad_166" data-name="Pfad 166" d="M161.5,193.051" transform="translate(-152.972 -174.498)" fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="1.5"/>
+    <g id="Gruppe_354" data-name="Gruppe 354" transform="translate(2.833 12.728)">
+      <path id="Pfad_167" data-name="Pfad 167" d="M161.5,193.051h-3.871a1.829,1.829,0,0,0-1.828,1.829h0a1.828,1.828,0,0,0,1.828,1.828H159.4a18.549,18.549,0,0,1,2.184-3.649C161.556,193.058,161.531,193.051,161.5,193.051Z" transform="translate(-155.805 -187.225)" fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="1.5"/>
+      <path id="Pfad_168" data-name="Pfad 168" d="M159.4,196.708c-.014.082,0,.235.043.248a37.456,37.456,0,0,0,8.247,0c1.956-.342-.28-8.145-.491-8.955a.928.928,0,0,0-1.7-.343c-.437.552-2.345,3.119-3.914,5.4" transform="translate(-155.805 -187.225)" fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

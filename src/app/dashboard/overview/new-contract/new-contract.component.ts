@@ -1,3 +1,7 @@
+import { TranslateService } from '@ngx-translate/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { CustomerService } from './../../../services/customer.service';
+import { ContractsService } from './../../../services/contracts.service';
 import { UploadFileData } from './../../../models/upload-file.model';
 import { FileSizePipe } from './../../../pipes/filesize.pipe';
 import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
@@ -87,6 +91,9 @@ export class NewContractComponent implements OnInit {
   paymentMethodsList = [];
   paymentMethodSettings = {};
 
+  statusReasonList = [];
+  statusReasonSettings = {};
+
   broker_icon_link: string;
   selected_theme:   string;
 
@@ -95,6 +102,8 @@ export class NewContractComponent implements OnInit {
   broker_pink_logo: boolean;
   
   @ViewChild("selectFile",{static:true}) selectFile:ElementRef;
+  @ViewChild("startDate",{static:true}) startDate:ElementRef<HTMLInputElement>;
+  @ViewChild("endDate",{static:true}) endDate:ElementRef<HTMLInputElement>;
 
   branchSettings = {}; 
   companySettings = {};
@@ -102,10 +111,23 @@ export class NewContractComponent implements OnInit {
 
   none:any = "none";
 
+  submitted: boolean = false;
+  amount:any;
+  PaymentMethod:any;
+  StatusReason:any;
+  Risk:any;
+  insuranceNumber:any;
+
   constructor(
     private branchService:BranchService, 
     private fileSizePipe:FileSizePipe,
-    private _location:Location) { 
+    private _location:Location,
+    private contractService:ContractsService,
+    private customerService:CustomerService,
+    private _snackBar:MatSnackBar,
+    private translate:TranslateService,
+    private location:Location
+    ) { 
 
       this.broker_icon_link = "../assets/icon_broker_round_default.svg"; // default round broker icon
       this.selected_theme   = "";
@@ -193,6 +215,34 @@ export class NewContractComponent implements OnInit {
 
   };
 
+  this.paymentMethodSettings = {
+    singleSelection: true,
+    idField: 'item_id',
+    textField: 'item_text',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    itemsShowLimit: 1,
+    allowSearchFilter: true,
+    searchPlaceholderText: 'Search',
+    noDataAvailablePlaceholderText: 'No data available',
+    closeDropDownOnSelection: true,
+    showSelectedItemsAtTop:true,
+  };
+
+  this.statusReasonSettings = {
+    singleSelection: true,
+    idField: 'item_id',
+    textField: 'item_text',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    itemsShowLimit: 1,
+    allowSearchFilter: true,
+    searchPlaceholderText: 'Search',
+    noDataAvailablePlaceholderText: 'No data available',
+    closeDropDownOnSelection: true,
+    showSelectedItemsAtTop:true,
+  };
+
     console.log(this.optionSelected);
     this.branchService.getBranches().subscribe({
       next:(resp)=> {
@@ -243,19 +293,13 @@ export class NewContractComponent implements OnInit {
       { item_id: 4, item_text: 'Monthly' },
     ];
 
-    this.paymentMethodSettings = {
-      singleSelection: true,
-      idField: 'item_id',
-      textField: 'item_text',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 1,
-      allowSearchFilter: true,
-      searchPlaceholderText: 'Search',
-      noDataAvailablePlaceholderText: 'No data available',
-      closeDropDownOnSelection: true,
-      showSelectedItemsAtTop:true,
-    };
+    this.statusReasonList = [
+      { item_id: 100, item_text: 'AngeBot' },
+      { item_id: 200, item_text: 'Antrag' },
+      { item_id: 300, item_text: 'Aktiv' },
+      { item_id: 400, item_text: 'storniert' },
+      { item_id: 500, item_text: 'NZG' },
+    ];
 
 
 
@@ -382,9 +426,14 @@ export class NewContractComponent implements OnInit {
   }
 
   onProductSelected(item:any){
+    this.selectedProducts[0] = item;
     console.log(item);
   }
   onPaymentMethodSelected(item:any){
+    console.log(item);
+  }
+
+  onStatusReasonSelected(item:any){
     console.log(item);
   }
 
@@ -392,9 +441,62 @@ export class NewContractComponent implements OnInit {
     this.showcontract = this.branchSelected;
   }
   
-  onSubmit(formData:any){
-   console.log(formData);
-  }
+  onSubmit(formValue:any){
+
+    let formData = new FormData();
+ 
+    formData.append('CustomerAmsidnr', this.customerService.customerData.Amsidnr) ;
+    formData.append('CompanyShort', this.selectedCompanies[0].MATCHCODE)  ;
+    formData.append('Begin' ,this.startDate.nativeElement.value);
+    formData.append ('End' , this.endDate.nativeElement.value);
+    formData.append('File' , this.file);
+    formData.append('PaymentMethod','' + this.PaymentMethod[0].item_id);
+    formData.append('YearlyPayment', formValue.amount);
+    formData.append('StatusReason','' + this.StatusReason[0].item_id);
+    formData.append('Risk',formValue.Risk);
+    formData.append('Branch2ProductId',this.selectedProducts[0].Branch2ProductId);
+    formData.append('Amsidnr',formValue.insuranceNumber);
+ 
+    this.submitted = true;
+ 
+    this.contractService.addNewContract(formData).subscribe({
+     next:(resp)=>{
+       this.submitted = false;
+       console.log(resp);
+     },
+     error:(resp) =>{
+       console.log(resp);
+       this.submitted = false;
+
+          //show snackbar with error message
+          this._snackBar.open(this.translate.instant('new-contract.create_new_contract_error'), this.translate.instant('snack_bar.action_button'),{
+            panelClass: ['snack_error'],
+             duration:6000,
+          });
+  
+           //return back to previous page
+           setTimeout(()=>{
+            this.location.back()
+          },8000);
+
+     },
+     complete:()=>{
+       this.submitted = false;
+
+         //show snackbar with success message
+         this._snackBar.open(this.translate.instant('new-contract.create_new_contract_success'), this.translate.instant('snack_bar.action_button'),{
+          panelClass: ['snack_success'],
+           duration:6000,
+        });
+
+         //return back to previous page
+         setTimeout(()=>{
+          this.location.back()
+        },8000);
+       
+     }
+    });
+   }
 
   onOptionSelected(option:boolean){
     this.optionSelected = option;

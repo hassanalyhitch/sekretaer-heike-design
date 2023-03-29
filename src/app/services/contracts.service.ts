@@ -1,3 +1,5 @@
+import { FileNameData } from './../models/file-name.model';
+import { FileUploadService } from './file-upload.service';
 import { formatDate } from '@angular/common';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -8,6 +10,8 @@ import { LoginService } from './login.service';
 
 @Injectable({ providedIn: 'root' })
 export class ContractsService {
+
+  TAG:string = 'ContractsService -> ';
   selectedContract: ContractData = <ContractData>{
     id: 0,
     details: {
@@ -27,7 +31,9 @@ export class ContractsService {
       productSek:      "",
       tarif:           "",
       isFav: 0,
-      favoriteId:      ""
+      favoriteId:      "",
+      iconLeft:        "",
+      ownPicture:      ""
     },
     isSelected: false
   };
@@ -36,7 +42,7 @@ export class ContractsService {
   userContractsArr: ContractData[] = []; 
 
 
-  constructor(private http: HttpClient, private loginService: LoginService ) {
+  constructor(private http: HttpClient, private loginService: LoginService,private fileUploadService:FileUploadService ) {
     this.selectObservable = new Observable((observer: Observer<ContractData>)=>{
       this.observer = observer;
       this.observer.next(this.selectedContract);
@@ -105,7 +111,9 @@ export class ContractsService {
                       productSek:      item['ProductSekretaer'],
                       tarif:           item['tarif'],
                       isFav:           item['isFavorite'],
-                      favoriteId:      item['favoriteId']
+                      favoriteId:      item['favoriteId'],
+                      iconLeft:        item['iconLeft'],
+                      ownPicture:      item['ownPicture']
                     },
                     isSelected: false,
                     swipedLeft: false
@@ -167,7 +175,9 @@ export class ContractsService {
                 productSek:      resp['ProductSekretaer'],
                 tarif:           resp['tarif'],
                 isFav:           resp['isFavorite'],
-                favoriteId:      resp['favoriteId']
+                favoriteId:      resp['favoriteId'],
+                iconLeft:        resp['iconLeft'],
+                ownPicture:      resp['ownPicture']
               },
               isSelected:        true
             };
@@ -236,6 +246,92 @@ export class ContractsService {
           }
           
         } 
+      })
+    );
+  }
+
+
+  addNewContract(formData:FormData){
+  
+    let url = 'https://testapi.maxpool.de/api/v1/contracts';
+
+  
+    let document:FileNameData = {doc_file:null};
+
+    let postData:any = {};
+
+    formData.forEach((value,key)=>{
+      postData[key] = value;
+
+    });
+    
+    document.doc_file = postData.File;
+    console.log(this.TAG + postData.File);
+
+    return this.http.post(url , postData, {
+      headers:new HttpHeaders({
+        'accept': 'application/json',
+        'Content-Type': 'application/json',
+      }),   
+    }).pipe(
+      tap({
+        next:(resp)=>{
+
+          let contract: ContractData = {
+            id:                resp['Amsidnr'],
+            details: {
+              Amsidnr:         resp['Amsidnr'],
+              CustomerAmsidnr: resp['CustomerAmsidnr'],
+              InsuranceId:     resp['Contractnumber'],
+              ContractNumber:  resp['Contractnumber'],
+              Company:         resp['Company'],
+              StartDate:       resp['Begin'],
+              EndDate:         resp['End'],
+              YearlyPayment:   resp['YearlyPayment'],
+              Paymethod:       resp['PaymentMethod'],
+              Branch:          resp['Branch'],
+              Risk:            resp['Risk'],
+              docs:            resp['docs'],
+              name:            resp['name'],
+              productSek:      resp['ProductSekretaer'],
+              tarif:           resp['tarif'],
+              isFav:           resp['isFavorite'],
+              favoriteId:      resp['favoriteId'],
+              iconLeft:        resp['iconLeft'],
+              ownPicture:      resp['ownPicture']
+            },
+            isSelected:        true
+          };
+
+          // this.emitSelectedFolder(contract);
+          if (document !== null && document !== undefined){
+            
+            console.log(this.TAG + document);
+            this.fileUploadService.addContractFile(document,contract.details.Amsidnr).subscribe({
+              next:(resp)=>{
+                console.log(resp);
+  
+              },
+              error:()=>{
+  
+              },
+              complete:()=>{
+  
+              },
+            });
+          }
+
+          
+        },
+        error:(error: any) =>{
+            if(error instanceof HttpErrorResponse){
+              //Invalid token or Unauthorised request
+
+              if(error.status == 401){
+                this.loginService.emitAuthenticated(false);
+              }
+            }
+        }
       })
     );
   }

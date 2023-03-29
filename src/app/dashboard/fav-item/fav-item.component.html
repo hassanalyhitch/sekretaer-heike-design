@@ -1,8 +1,8 @@
 <div class=" _content bg- shadow mx-3 d-flex fav-item bg-white">
 
   <div class="icon-container d-flex align-items-start align-items-center flex-column mb-3">
-    <div class="mb-auto p-2">
-      <img class="icon" src="/assets/icon_weight_balance.svg">
+    <div class="mb-auto p-2 w-100 d-flex justify-content-center">
+      <img class="icon-left" [src]="src_link_for_icon_left">
     </div>
     <div class="">
       <div class="w-100 p-2" data-bs-toggle="dropdown" aria-expanded="false" >
@@ -35,7 +35,7 @@
       </div>
   
       <div class="small-picture">
-        <img class="w-100 img-responsive" src="https://images.unsplash.com/photo-1606759163253-094133091882?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt="">
+        <img class="w-100 img-responsive" [src]="src_link_for_small_picture" alt="small-picture">
         
         <div class=" fav-btn d-flex align-items-center justify-content-center"
          [ngClass]="{'isFav': contractItem.details.isFav == '1', 'notFav': contractItem.details.isFav == '0'}" >

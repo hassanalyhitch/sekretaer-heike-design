@@ -260,6 +260,12 @@ app-folder-card, app-document-item{
   color: #848484;
 }
 
+.no-content-message{
+  text-shadow: none;
+  font-size: 17px;
+  font-weight: bold;
+}
+
 @-webkit-keyframes swing
 {
     15%

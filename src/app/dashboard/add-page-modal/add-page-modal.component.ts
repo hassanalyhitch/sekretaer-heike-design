@@ -338,8 +338,8 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
         this.submitted = false;
 
           //show snackbar with error message
-          this._snackBar.open('File Upload to contracts coming soon' , this.translate.instant('snack_bar.action_button'),{
-            panelClass: ['snack_success'],
+          this._snackBar.open(this.translate.instant('add_document.file_upload_error'), this.translate.instant('snack_bar.action_button'),{
+            panelClass: ['snack_error'],
              duration: 8000,
           });
   
@@ -435,9 +435,7 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
     });
   }
 
-  formatFormDate(date:Date){
-    return formatDate(date, this.dateFormat, this.language);
-  }
+ 
  
   onItemSelected(selectedItem:any){
 
@@ -515,7 +513,7 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
 
       this.submitted = true;
 
-      this.uploadFolderDocument(fileData,this.selectedItems[0].id)
+      this.uploadFolderDocument(fileData,this.selectedItems[0].id);
     
       break;
     }

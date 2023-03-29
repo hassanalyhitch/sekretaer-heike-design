@@ -19,7 +19,9 @@ export interface ContractData {
     productSek: string,
     tarif: string,
     isFav: any
-    favoriteId: string
+    favoriteId: string,
+    iconLeft:   string,
+    ownPicture: string
   },
   swipedLeft?:boolean,
   isSelected: boolean

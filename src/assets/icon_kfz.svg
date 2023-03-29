@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="23.852" height="19.201" viewBox="0 0 23.852 19.201">
+  <g id="Icon_Kfz" data-name="Icon Kfz" transform="translate(0.5 0.625)">
+    <path id="Rechteck_153" data-name="Rechteck 153" d="M2,0H18.99a2,2,0,0,1,2,2V7.888a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V2A2,2,0,0,1,2,0Z" transform="translate(0.928 7.272)" fill="none" stroke="#fff" stroke-width="1.5"/>
+    <rect id="Rechteck_154" data-name="Rechteck 154" width="3.124" height="2.849" rx="0.329" transform="translate(18.235 15.227)" fill="none" stroke="#fff" stroke-width="1"/>
+    <rect id="Rechteck_155" data-name="Rechteck 155" width="3.124" height="2.849" rx="0.329" transform="translate(1.549 15.227)" fill="none" stroke="#fff" stroke-width="1"/>
+    <rect id="Rechteck_156" data-name="Rechteck 156" width="2.585" height="2.509" rx="0.2" transform="translate(3.236 9.836)" fill="none" stroke="#fff" stroke-width="1"/>
+    <rect id="Rechteck_157" data-name="Rechteck 157" width="2.585" height="2.509" rx="0.2" transform="translate(16.943 9.836)" fill="none" stroke="#fff" stroke-width="1"/>
+    <line id="Linie_75" data-name="Linie 75" x2="6.564" transform="translate(8.102 12.908)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="1"/>
+    <path id="Pfad_150" data-name="Pfad 150" d="M255.008,184.042l1.269-5.466a2.279,2.279,0,0,1,2.205-1.764l12.371-.085a2.262,2.262,0,0,1,2.254,1.935l1.038,5.714" transform="translate(-253.172 -176.726)" fill="none" stroke="#fff" stroke-width="1.25"/>
+    <path id="Pfad_151" data-name="Pfad 151" d="M255.159,182.95h-.888a1.361,1.361,0,0,1-1.36-1.361h0a1.361,1.361,0,0,1,1.36-1.361H255.9" transform="translate(-252.911 -176.02)" fill="none" stroke="#fff" stroke-width="1"/>
+    <path id="Pfad_152" data-name="Pfad 152" d="M271.4,182.95h.887a1.362,1.362,0,0,0,1.361-1.361h0a1.362,1.362,0,0,0-1.361-1.361h-1.623" transform="translate(-250.799 -176.02)" fill="none" stroke="#fff" stroke-width="1"/>
+  </g>
+</svg>

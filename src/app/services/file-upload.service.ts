@@ -8,6 +8,7 @@ import { LoginService } from './login.service';
   providedIn: 'root'
 })
 export class FileUploadService {
+  TAG:string = 'FileUploadService -> ';
     
   constructor(private http:HttpClient , private loginService: LoginService) {}
   
@@ -48,10 +49,10 @@ export class FileUploadService {
 
     addContractFile(data:FileNameData,contractId:string) {
 
-      console.log(contractId);
+      console.log(this.TAG + data);
       let url ='https://testapi.maxpool.de/api/v1/dms/upload'
 
-      let formData = new FormData();
+      let formData:FormData = new FormData();
 
       formData.append("file",data.doc_file);
       formData.append("contract",contractId);
@@ -66,7 +67,6 @@ export class FileUploadService {
 
       return this.http.post(url,formData,{
         headers:new HttpHeaders({
-          'Content-Type':'multipart/form-data',
           'Accept':'application/json',
         }),
       }).pipe(

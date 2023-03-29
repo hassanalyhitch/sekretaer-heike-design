@@ -44,21 +44,29 @@
             </span>
           </div>
         </div>
+
+        <div *ngIf="folder.docs.length == 0" class="w-100 d-flex align-items-center">
+          <p class="no-content-message text-center m-auto">
+            {{ 'folder-detail.no_documents_found' | translate }}
+          </p>
+        </div>
     
-       
+        <div *ngIf="folder.docs.length > 0">
+          <div class="d-flex my-2 documentItem"    
+            *ngFor="let doc of folder.docs; let i = index"  
+            (swipe)="onSwipe($event, doc)" >
+            <app-document-item 
+              class="w-100 m-1"  
+              [ngClass]="{'swipedLeft':doc.swipedLeft}" 
+              [doc]=doc
+              from_location=folder>
+            </app-document-item>
         
-        <div class="d-flex my-2 documentItem"  *ngFor="let doc of folder.docs; let i = index"  (swipe)="onSwipe($event, doc)" >
-          <app-document-item 
-            class="w-100 m-1"  
-            [ngClass]="{'swipedLeft':doc.swipedLeft}" 
-            [doc]=doc
-            from_location=folder>
-          </app-document-item>
-      
-          <div class=" edit-rename p-2 d-flex align-self-center justify-content-center align-items-center bg-white "
-            [ngClass]="{'d-none':!doc.swipedLeft}"
-            (click)= "renameFileModal(doc)" >
-              <i class="material-icons">mode_edit</i>
+            <div class=" edit-rename p-2 d-flex align-self-center justify-content-center align-items-center bg-white "
+              [ngClass]="{'d-none':!doc.swipedLeft}"
+              (click)= "renameFileModal(doc)" >
+                <i class="material-icons">mode_edit</i>
+            </div>
           </div>
         </div>
     
@@ -74,25 +82,30 @@
             </span>
           </div>
         </div>
-    
 
-        <div class="d-flex my-2 documentItem"  *ngFor="let subfolder of folder.subFolders; let i = index "  (swipe)="onSubFolderSwipe($event, subfolder)">
-              <app-sub-folder-card 
-                class="w-100 mt-2" 
-                [ngClass]="{'swipedLeft':subfolder.swipedLeft}" 
-                (tap)="onFolderCardClick(subfolder)" 
-                [folder]=subfolder  >
-              </app-sub-folder-card>
-              
-              <div class="edit-rename p-2 d-flex align-items-center justify-content-center align-self-center  bg-white"
-                [ngClass]="{'d-none':!subfolder.swipedLeft}"
-                (click)="renameSubFolder(subfolder)">
-                  <i class="material-icons">mode_edit</i>
-              </div>
+        <div *ngIf="folder.subFolders.length == 0" class="w-100 d-flex align-items-center">
+          <p class="no-content-message text-center m-auto">
+            {{ 'folder-detail.no_subfolders_found' | translate }}
+          </p>
         </div>
     
-       
-    
+        <div *ngIf="folder.subFolders.length > 0">
+          <div class="d-flex my-2 documentItem"  *ngFor="let subfolder of folder.subFolders; let i = index "  (swipe)="onSubFolderSwipe($event, subfolder)">
+            <app-sub-folder-card 
+              class="w-100 mt-2" 
+              [ngClass]="{'swipedLeft':subfolder.swipedLeft}" 
+              (tap)="onFolderCardClick(subfolder)" 
+              [folder]=subfolder  >
+            </app-sub-folder-card>
+            
+            <div class="edit-rename p-2 d-flex align-items-center justify-content-center align-self-center  bg-white"
+              [ngClass]="{'d-none':!subfolder.swipedLeft}"
+              (click)="renameSubFolder(subfolder)">
+                <i class="material-icons">mode_edit</i>
+            </div>
+          </div>
+        </div>
+
     </div>
 
   </div>

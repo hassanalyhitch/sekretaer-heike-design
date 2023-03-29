@@ -2,8 +2,8 @@
   "home": {
     "title_home": "FAVOURITES",
     "title_service": "SERVICES",
-    "title_see_more": "SEE MORE",
-    "message_no_favourite_contracts": "You have no Favourite contracts",
+    "title_see_more": "See More",
+    "message_no_favourite_contracts": "You have no favourite Contracts or Folders",
     "search_fab": "Search",
     "chat_fab": "Chat",
     "mail_fab": "My Broker",
@@ -17,6 +17,8 @@
     "service_card_call_your_broker": "Call your broker"
   },
   "overview": {
+    "no_folders_found": "No Folders Found",
+    "no_contracts_found": "No Contracts Found",
     "title_my_sekretar": "MY SEKRETÄR",
     "title_my_folders": "MY FOLDERS",
     "new_contract": {
@@ -56,7 +58,6 @@
       "sort_by_a_to_z"     : "Sort by A-Z",
       "search"             : "Search Contracts"
     }
-
   },
   "contract_detail": {
     "title_main" : "INSURANCE DETAILS",
@@ -85,7 +86,8 @@
     "shared_with_broker" : "Document shared with Broker",
     "unshared_with_broker" : "Document not shared with Broker",
     "document_download_request" : "Download requested. Please wait.",
-    "document_download_failed" : "Download request failed."
+    "document_download_failed" : "Download request failed.",
+    "no_documents_found": "No Documents Found"
   },
   "login": {
     "title_login": "Let's Login",
@@ -108,7 +110,7 @@
     "content_email_sent_1" : "We have sent you an email.",
     "content_email_sent_2" : "Please check your inbox or your spam folder",
     "wrong_credentials_used": "Incorrect Username or Password",
-    "connection_error" : "Failed to make an Internet Connection"
+    "connection_error" : "Failed to Connect"
   },
   "settings":{
     "main_title":"SETTINGS",
@@ -157,7 +159,9 @@
     "mark_fav_success":"Successfully marked as Favourite",
     "mark_fav_error":"Failed to mark as Favourite",
     "unmark_fav_success":"Unmarked as Favourite",
-    "unmark_fav_error":"Failed to unmark as Favourite"
+    "unmark_fav_error":"Failed to unmark as Favourite",
+    "no_documents_found": "No Documents Found",
+    "no_subfolders_found": "No Sub-Folders Found"
   },
   "favourites": {
     "title": "FAVOURITES",
@@ -307,49 +311,38 @@
   "sub_title_3_a":"Add Document",
   "share_broker":"Share with Broker",
   "submit_btn":"SAVE INSURANCE",
-  "back_btn":"Back"
+  "back_btn":"Back",
+  "create_new_contract_error":"Failed to create new contract",
+  "create_new_contract_success":"New Contact created successfully"
  },
-
-
  "privacy_policy_and_terms_content": {
-
   "a1_title" : "A. Terms and Conditions",
-
   "a1_content_intro" : "The following information and general terms and conditions (GTC) supplement the service agreement made between the broker and his client. In order to be able to offer its customers the best possible service, the broker cooperates with the PHÖNIX MAXPOOL Gruppe AG (\"PHÖNIX MAXPOOL\"), which carries out various components of the range of services on behalf of and for the account of the broker as agreed.",
   "a1_support_the_broker" : "Support the broker",
-
   "a1_support_the_broker_option_1_title": "Maxpool Maklerkooperation GmbH",
   "a1_support_the_broker_option_1_content": "(\"MAXPOOL\") as contact for consulting services;",
-
   "a1_support_the_broker_option_2_title": "PHÖNIX Digital GmbH",
   "a1_support_the_broker_option_2_content" : "(“PHÖNIX Digital”) as the operator of the SEKRETÄR customer platform, including the scan service and SOS hotline for mobile devices, as well as the payment processor for the service fees, and",
-
   "a1_support_the_broker_option_3_title" : "PHÖNIX Schutzgemeinschaft Assekuranz GmbH",
   "a1_support_the_broker_option_3_content": "(“PHÖNIX Schutz”) as underwriting agent and policyholder of the group insurance contracts, which grant the insurance protection for the client contained in the service agreement.",
-
   "a2_title" : "A1. Service Agreement Privacy Notice",
   "a2_content_intro": "We hereby inform you about the collection, processing and transfer of personal data as part of your service agreement and in particular in connection with the use of the digital customer portal SEKRETÄR Pro.",
   "a2_content_paragraph_1": "The broker offers the agreed services in cooperation with PHÖNIX MAXPOOL. These are",
     "a2_content_paragraph_1_option_1": "MAXPOOL Maklerkooperation GmbH (“MAXPOOL”) as a service provider (e.g. advice in the event of a claim)",
     "a2_content_paragraph_1_option_2" : "PHÖNIX Digital GmbH (“PHÖNIX Digital”) as the operator of the SECRETARY customer portal, provider of services (e.g. ScanService and SOS hotline) and payment processor as well",
     "a2_content_paragraph_1_option_3" : "PHÖNIX Schutzgemeinschaft GmbH (“PHÖNIX Schutz”) as underwriting agent and policyholder of the group insurance contracts, which grant the insurance cover for the client contained in the service agreement.",
-
   "a2_content_paragraph_2": "The insurer and risk bearer of the insurance cover is the Landes Schadenhilfe Versicherung VaG (“LSH”).",
-
   "a2_content_sub_title_1": "1. Domestic Promise",
   "a2_content_sub_title_1_content": "Your data is just as important to us as you are as a customer! That's why we promise you digital security and quality \"made in Germany\". We assure that all websites and services in connection with the use of the SEKRETÄR Pro are operated exclusively via German server connections. We do not use any partners from third countries to fulfill our tasks, services and promises.",
-
   "a2_content_sub_title_2" : "2. General",
     "a2_content_sub_title_2_option_1" : "Personal data is all data that can be related to you personally, e.g. B. Name, address, e-mail addresses and user behavior.",
     "a2_content_sub_title_2_option_2" : "Your data will be collected and protected in accordance with legal regulations. The relevant data protection regulations, in particular the provisions of the Telemedia Act (TMG), the European General Data Protection Regulation (EU-DS-GVO) and the Federal Data Protection Act (BDSG) are observed.",
     "a2_content_sub_title_2_option_3" : "Anonymous data is evaluated exclusively to improve the offer and does not allow any conclusions to be drawn about the person of the user. Personal data and health data will not be used or stored without your consent.",
-
   "a2_content_sub_title_3" : "3. Data processing upon conclusion of contract and debt collection",
     "a2_content_sub_title_3_option_1" : "When the contract is concluded, no further personal data is collected in addition to your personal data and contact details.",
     "a2_content_sub_title_3_option_2" : "In addition, data from third parties, e.g. beneficiaries/co-insured persons, may be collected from you if this is necessary for the execution of the contract.",
     "a2_content_sub_title_3_option_3" : "Your contact details and, if applicable, data within the meaning of paragraph 2 will be used for the purpose of fulfilling the contract within the meaning of Article 6 paragraph 1 sentence 1 letter b) GDPR and with your consent in accordance with Article 6 paragraph 1 sentence 1 letter a ) GDPR passed on to PHÖNIX MAXPOOL and LSH.",
     "a2_content_sub_title_3_option_4" : "As part of the issuing of the SEPA mandate and the monthly collection of the service fee, your bank details will also be determined and, with your consent in accordance with Article 6 (1) sentence 1 lit. a) GDPR, sent to PHÖNIX Digital for the purpose of payment processing .",
-
   "a2_content_sub_title_4" : "4. Data processing when using the service",
   "a2_content_sub_title_4_intro" : "The digital customer platform SEKRETÄR Pro and all associated services such as ScanService or SOS hotline are operated by PHÖNIX Digital. PHÖNIX Digital collects and processes data exclusively in accordance with the law and in the following sense:",
     "a2_content_sub_title_4_option_1" : "PHÖNIX Digital processes your contact information as personal data when opening your customer and access account for SEKRETÄR Pro.",
@@ -358,40 +351,31 @@
     "a2_content_sub_title_4_option_4" : "If the client has a request for advice, optimization or an offer, he can release the necessary documents for the broker advising him (ie make them visible to him). At the latest with this activation of the documents for the broker, the client is aware that the broker himself or an intermediary cooperation partner (e.g. MAXPOOL) has sent the activated documents and the data contained therein to the potential contractual partner (e.g. insurer) also in passes on or must pass on to the pre-contractual area. The client is also informed of this by the operator by means of a data protection notice together with individual consent before the document is released for the broker.In case of doubt, the broker must ensure in relation to the client that the client has validly consented to the transfer of the data. After the broker has passed on the documents, the client's potential contractual partners (e.g. insurers) are entitled to store and use the data relevant to the contract - in particular health data - within the scope of the purpose of the contract for proper examination and further execution of the contract. Insofar as it is necessary for entering into a contract extension, this data, including health data, may be transmitted to third parties for the purpose of assessing the contractual risk.",
     "a2_content_sub_title_4_option_5" : "The operator undertakes to ensure, in the internal relationship with its employees, that they are informed about their obligations to comply with the European General Data Protection Regulation (GDPR) and receive regular training. For this purpose, all employees of the operator are obliged under labor law to maintain confidentiality when handling data in general and client data in particular.",
     "a2_content_sub_title_4_option_6" : "The operator saves the complete IP address, time and type of browser for different accesses for quality assurance, control and functional guarantee.",
-    
   "a2_content_sub_title_5": "5. Data storage",
   "a2_content_sub_title_5_intro" : "We only store your data for as long as is necessary to implement the service agreement. In the event of the termination of the service agreement - for whatever reason - your data will remain stored for one month after the effective date of the termination. This serves to process your account and gives you the opportunity to revive it. After one month has elapsed, we will permanently and irretrievably delete your data.",
-
   "a2_content_sub_title_6": "6. Responsible body",
   "a2_content_sub_title_6_intro" : "Responsible within the meaning of Art. 4 No. 7 DS-GVO is the",
   "a2_content_sub_title_6_send_email" : "You can reach our data protection officer at",
-
   "a2_content_sub_title_7": "7. Your Rights",
-
   "a2_content_sub_title_7_option_1" : "You have the following rights towards us with regard to the data concerning you:",
     "a2_content_sub_title_7_option_1_a" : "Right to information,",
     "a2_content_sub_title_7_option_1_b" : "Right to rectification or erasure,",
     "a2_content_sub_title_7_option_1_c" : "Right to restriction of processing,",
     "a2_content_sub_title_7_option_1_d" : "Right to object to processing and",
     "a2_content_sub_title_7_option_1_e" : "Right to data portability",
-  
   "a2_content_sub_title_7_option_2" : "You also have the right to complain to a data protection supervisory authority about the processing of your personal data by us.",
   "a2_content_sub_title_7_option_3" : "To assert your rights, please contact:",
   "a2_content_sub_title_7_option_4" : "If the processing of your data takes place on the basis of your consent within the meaning of Article 6 (1) sentence 1 lit. a) GDPR, you can revoke your consent at any time. Please note that revocation may render the Service Agreement unenforceable. In this case, the contractual relationship can be terminated extraordinarily and without notice. Please send your revocation informally to PHÖNIX Digital or",
   "a2_content_sub_title_7_option_5" : "If an objection has been filed, your personal data will no longer be processed unless there are demonstrably compelling reasons that outweigh your interests, rights and freedoms. Further processing is also possible if the processing serves to assert, exercise or defend legal claims.",
   "a2_content_sub_title_7_option_6" : "The companies involved in brokering and/or managing the contract (including the broker himself) will be informed immediately about the revocation and obliged to implement the legal regulations of the DS-GVO and the BDSG without delay.",
-
   "a2_content_ending_paragraph" : "If you have any further questions about data protection, please contact our data protection officer:",
-  
   "a3_title" : "A-III. General Terms of Use SEKRETÄR Pro and Additional Services",
-
   "a3_content_sub_title_1" : "1. Activation, subject matter of the contract",
     "a3_content_sub_title_1_option_1" : "The SEKRETÄR Pro is operated by PHÖNIX Digital. PHÖNIX Digital is also the service provider for additional services related to the SEKRETÄR Pro, such as ScanService or the SOS hotline.",
     "a3_content_sub_title_1_option_2" : "The operator neither fulfills tasks as a so-called \"Internet access provider\" nor does it offer telecommunications services.",
     "a3_content_sub_title_1_option_3" : "The online-based administration program SEKRETÄR Pro is part of the service agreement, regardless of the service level. The subject matter of SEKRETÄR Pro is the provision of online-based software that can serve as a management program for the client's digitized budget management. Customer master data, contract master data for insurance contracts, general correspondence and documents, other contracts, billing data, passwords, purchase receipts and other things can be stored and managed online in the customer management system.",
     "a3_content_sub_title_1_option_4" : "If the broker has the service agreement signed by both parties, he will activate the client for the use of SEKRETÄR Pro immediately, but no later than after three working days",
     "a3_content_sub_title_1_option_5" : "The SEKRETÄR Pro customer portal works in the browser version independently of the operating systems used. JavaScript must be activated in the respective browser. To use the range of functions, the computer must support the display of PDF documents. An internet connection is a mandatory requirement for the software to function. The software is therefore explicitly not offline-capable, but offers a function with which the client can download all of the documents stored in it and save them locally (offline). The system also offers all relevant functions in an APP version for mobile devices (iOS and Android operating systems)",
-
   "a3_content_sub_title_2" : "2. Previous/subsequent SEKRETÄR use",
     "a3_content_sub_title_2_option_1" : "In the event that the client already has a user account in SEKRETÄR (free basic version of SEKRETÄR Pro), the client will be activated again for SEKRETÄR Pro by the broker. § 1 paragraph 4 applies accordingly.",
     "a3_content_sub_title_2_option_2" : "In this case, the client registers again and separately for SEKRETÄR Pro. With the registration in SEKRETÄR Pro, the user relationship on which the free use is based expires and is replaced by the service agreement and the business and insurance conditions for the service agreement.",
@@ -400,7 +384,6 @@
     "a3_content_sub_title_2_option_5" : "If the client terminates the service agreement, his right of use for the SECRETARY ends automatically when the termination takes effect; the user account will not be downgraded to SECRETARY (basic version).",
     "a3_content_sub_title_2_option_6" : "A user account can be downgraded on request in individual cases; however, only the data can be migrated that is stored in the application areas that are also included in the scope of use of the SEKRETÄR (basic version).",
     "a3_content_sub_title_2_option_7" : "If the SEKRETÄR account is downgraded as part of the termination by the client in an individual case, the client is solely responsible for ensuring that all data that is not migrated in accordance with paragraph 6 is personally saved and locally backed up by him. The operator does not back up data.",
-
   "a3_content_sub_title_3" : "3. Rights and obligations of the operator",
     "a3_content_sub_title_3_option_1" : "To use the SEKRETÄR Pro, the operator provides the client with software that the client can use to access the operator's program digitally. The software can be used by providing online access.",
     "a3_content_sub_title_3_option_2" : "The operator provides the client with the rights of use required for the contractual use of the SEKRETÄR Pro as well as data for the agreed period of use. This includes in particular the user name and a password with which the client can use the software.",
@@ -412,7 +395,6 @@
     "a3_content_sub_title_3_option_8" : "As is usual with software products, 100% availability cannot be guaranteed without gaps. However, an average of 95% availability of the software is expressly guaranteed, calculated over a period of one year from the start of the contract. In addition, the operator must always have the option of program maintenance and the update service for the hardware and software required for operation.",
     "a3_content_sub_title_3_option_9" : "The SEKRETÄR Pro is also available to the client for contracts that were not mediated through the broker and/or MAXPOOL or transferred to the broker or MAXPOOL (so-called \"third-party contracts\"). The broker and MAXPOOL do not support the updating and administration of third-party contracts and do not service them. In particular, the operator is not liable for the contractual content of such contracts. The broker's liability also expressly does not include these contracts until the broker has confirmed in writing that he will take care of these contracts.",
     "a3_content_sub_title_3_option_10": "The operator can provide the client with third-party services that can be ordered via the SEKRETÄR Pro. The use of these services is only possible via a separate ordering process from the third-party provider. The contractual relationship between the third-party provider and the client arises independently of the contractual relationship between the operator and the client. The operator is not liable for the contractual relationship between the third party and the client. The client bears any costs incurred for the services of third parties.",
-
     "a3_content_sub_title_4" : "4. Rights and obligations of the client",
       "a3_content_sub_title_4_option_1" : "If problems arise when using the software, the client must inform the operator of this immediately so that the operator can eliminate these problems.",
       "a3_content_sub_title_4_option_2" : "The tenant is responsible for maintaining the confidentiality and security of their account. He undertakes to notify the operator immediately of any security breaches with regard to his account. He is liable for any misuse made using his account information or his account if he is responsible for this misuse, especially if he has breached his existing duties of care.",
@@ -422,13 +404,11 @@
       "a3_content_sub_title_4_option_6" : "Client is required to provide accurate and complete information when registering for the Account and using the Software (“Login Information”). The system prompts to update the credentials at least every three months. The client informs the operator of any change in his contact details immediately by post or email.",
       "a3_content_sub_title_4_option_7" : "In particular, the client is prohibited from attempting or implementing negative influences on the software.",
       "a3_content_sub_title_4_option_8" : "If notification from the provider is required, please send it to:",
-
     "a3_content_sub_title_5" : "5. Scope of Use",
       "a3_content_sub_title_5_option_1" : "In both service levels, the client receives unrestricted access to the SEKRETÄR Pro digital customer portal (main account), in which he can store and manage his insurance contracts and other contract documents in a secret and data protection-compliant manner.",
       "a3_content_sub_title_5_option_2" : "The client can, but does not have to, make certain documents visible to the broker and MAXPOOL as his vicarious agents.",
       "a3_content_sub_title_5_option_3" : "This does not apply to insurance contracts held by MAXPOOL. Due to the system, these are always visible to all account users, the broker and PHÖNIX MAXPOOL.",
       "a3_content_sub_title_5_option_4" : "Permission to use the software is only limited to those accounts that have been notified in writing to the agent or operator in advance by registering.",
-
     "a3_content_sub_title_6" : "6. Partner Account",
       "a3_content_sub_title_6_option_1" :"The client has the option of having up to four partner accounts (e.g. for life partners or family) activated in addition to their own main account. These partner accounts can use the SEKRETÄR Pro with the same scope of services as the main account.",
       "a3_content_sub_title_6_option_2" : "If the client would like to have one, several or all four of the possible partner accounts activated, he shall inform the broker or PHÖNIX Digital directly of the contact details of the intended user. To do this, he submits the form provided in SEKRETÄR Pro for the declaration of consent, which is signed by him and the future partner account user. The broker or PHÖNIX Digital will activate the new users for the SEKRETÄR Pro immediately, but no later than after three working days. In the event that the users of the partner accounts are only communicated to the broker, the broker forwards the user information to PHÖNIX Digital.",
@@ -437,24 +417,20 @@
       "a3_content_sub_title_6_option_5" : "Permanent use of a partner account is only granted if and to the extent that the user of the partner account agrees to the SEKRETÄR Pro terms of use during registration. If the user refuses the consent, the registration fails and the activation is revoked. As the owner of a main account, the client can always apply for a partner account again until the limit of up to four partner accounts is reached.",
       "a3_content_sub_title_6_option_6" : "The right to use a partner account is linked to the status and existence of the main account. If the main account is restricted in its right to use or if this is lost (e.g. due to termination or default of payment), the right to use the partner accounts will also be restricted or will be lost; this applies regardless of whether the restriction on use of the main account is permanent or temporary.",
       "a3_content_sub_title_6_option_7" : "The users of the partner accounts will be informed in good time about a change in the usage authorization by e-mail. In the event that the right of use no longer applies, the partner accounts have the option of converting their account into a paid main account or downloading and saving their documents from SEKRETÄR Pro within three months of the end of the right of use.",
-
     "a3_content_sub_title_7" : "7. Additional Services",
       "a3_content_sub_title_7_option_1" :"The scan service and the SOS hotline are included in the service agreement as additional services related to the SEKRETÄR Pro. The client can use these added values ​​as the main account holder with the basic quota to which he is entitled in accordance with the agreement.",
       "a3_content_sub_title_7_option_2" : "As part of the declaration of consent in accordance with Section 6 (2), the client also allows the partner accounts assigned to them to use these additional services.",
       "a3_content_sub_title_7_option_3" : "In this respect, the main account shares the basic quota for the additional services to which it is entitled with the partner accounts. If the basic quota is used up and the services continue to be used, all costs are only incurred by the client as the main account holder.",
       "a3_content_sub_title_7_option_4" : "This rule is not limited to the currently existing service offer, but also applies to future additional services if the offer is expanded.",
       "a3_content_sub_title_7_option_5" : "Attention is drawn to the special ScanService and SOS hotline terms of use.",
-
     "a3_content_sub_title_8" : "8. Storage Space",
     "a3_content_sub_title_8_option_1" : "The basic storage space available to the client in SEKRETÄR Pro varies depending on the service level selected. The main account and partner accounts share the storage volume. Reference is made to the list of services and costs for the service agreement.",
     "a3_content_sub_title_8_option_2" : "The client can request an increase in storage space by 10 GB. If the user of a partner account initiates an increase in storage space, the total storage volume will be increased and the costs will be charged to the account of the main account.",
     "a3_content_sub_title_8_option_3" : "For each increase, € 0.99 (plus VAT) per month will be charged per 10 GB.",
     "a3_content_sub_title_8_option_4" : "If an increase in storage space is requested, the service fee increases by the specified amount starting with the current billing month. The new service fee will be collected by PHÖNIX Digital at the same time.",
-
     "a3_content_sub_title_9" : "9. Consequences of Terminating the Service Agreement",
       "a3_content_sub_title_9_option_1" : "If the service agreement is terminated, the client will be blocked for the SEKRETÄR Pro. After the termination has taken effect, the client has the option of downloading his personal documents from the system within three months and saving them locally at his own risk. The provider is happy to provide support and advice on request.",
       "a3_content_sub_title_9_option_2" : "The termination of the service agreement also includes the termination of the SEKRETÄR Pro account and the termination for the license of the software and results in the use of the service being prevented when the termination takes effect. After the termination takes effect, the client only has as much access to the SEKRTÄR Pro as is necessary for data backup in accordance with paragraph 1.",
-
     "a3_content_sub_title_10" : "10. Release of data to authorized persons",
       "a3_content_sub_title_10_option_1" : "Data security and secrecy are very important to brokers and operators. Therefore, the operator takes appropriate precautions to prevent access by unauthorized third parties; in this regard, reference is made to § 11 and the data protection notices for the service agreement.",
       "a3_content_sub_title_10_option_2" : "In individual cases, however, third parties may have a legitimate interest in accessing the data stored by the user in SEKRETÄR Pro, even if they do not have the user's access data. In the event of the user's death, this can be his heirs or, in the event of the user's legal incapacity, authorized representatives or court-appointed guardians.",
@@ -464,13 +440,11 @@
       "a3_content_sub_title_10_option_6" : "In order to enable an unbureaucratic release of data in the cases of paragraph 2, the client has the option of informing the operator in writing of persons he trusts. In the case of paragraph 2, the operator provides these persons of trust with access to the user account if they merely provide credible evidence of authorization. Brokers and operators are bound by this unless the user revokes the authorization of the person of trust in writing.",
       "a3_content_sub_title_10_option_7" : "The electronic filing or removal of trusted persons in the SEKRETÄR-Pro user account is equivalent to a written notification or a written revocation in accordance with paragraph 6.",
       "a3_content_sub_title_10_option_8" : "In cases that are comparable to those of paragraph 2, the operator checks the authorization at his own discretion and applies paragraph 3 accordingly.",
-
     "a3_content_sub_title_11" : "11. Data protection",
       "a3_content_sub_title_11_option_1" : "Data is collected and protected in accordance with legal regulations. The operator observes the relevant data protection regulations, in particular the regulations of the Telemedia Act (TMG), the European General Data Protection Regulation (GDPR) and the Federal Data Protection Act (BDSG).",
       "a3_content_sub_title_11_option_2" : "Anonymous data is only evaluated by the operator to improve the offer and does not allow any conclusions to be drawn about the person of the user. Personal data and health data are only used and stored if the user voluntarily communicates this.",
       "a3_content_sub_title_11_option_3" : "The operator undertakes to treat all information and data provided by the client confidentially. This does not apply to information that is already publicly accessible at the time the data is transmitted. The data will not be passed on to uninvolved third parties unless such a transfer is required by law.",
       "a3_content_sub_title_11_option_4" : "Attention is drawn to the current version of the data protection notices for the service agreement.",
-
     "a3_content_sub_title_12" : "12. Liability",
       "a3_content_sub_title_12_option_1" : "Brokers and operators provide the services in the sense described above without guarantee for their content and the information and calculations based on them and are not obliged to carry out a plausibility check of the documents.",
       "a3_content_sub_title_12_option_2" : "Furthermore, brokers and operators assume no liability for the correctness and completeness of the data material. Brokers and operators cannot guarantee the correct, complete and timely transmission of data or the delivery of documents to the client.",
@@ -479,23 +453,18 @@
       "a3_content_sub_title_12_option_5" : "If the client's data is damaged or lost because the broker uploads a compromised file within the meaning of Section 4, the operator is not liable for this.",
       "a3_content_sub_title_12_option_6" : "Liability for the disclosure of data in accordance with Section 10, Paragraph 3 is excluded if the verification of authorization based on suitable evidence in accordance with Section 10, Paragraphs 4 and 5 has been carried out without errors.",
       "a3_content_sub_title_12_option_7" : "Liability for the disclosure of data to persons of trust in accordance with Section 10 (6) is excluded.",
-
     "a3_content_sub_title_13" : "13. Copyright",
       "a3_content_sub_title_13_option_1" : "All intellectual property rights to the software remain with the operator.",
       "a3_content_sub_title_13_option_2" : "By signing the contract, the client only obtains a right to use the software to the contractually agreed extent.",
-
     "a3_content_sub_title_14" : "14. Service/Contact",
       "a3_content_sub_title_14_part_1" : "The operator can be reached from Monday to Friday from 9 a.m. to 6 p.m. by e-mail at",
       "a3_content_sub_title_14_part_2" : "or by telephone on 0800/10 00 135 (free of charge from German landline and mobile networks).",
-
     "phoenix_digital_address_1" : "PHOENIX Digital GmbH",
     "phoenix_digital_address_2" : "Glockengiesserwall 2,",
     "phoenix_digital_address_3" : "20095 Hamburg",
     "phoenix_digital_address_4" : "T: 0800/1000 135",
     "phoenix_digital_address_5" : "(gebuhrenfrei aus dem deutschen",
     "phoenix_digital_address_6" : "Fest- und Mobilfunknetz)"
-
-}
-
+  }
 }
 

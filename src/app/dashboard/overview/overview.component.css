@@ -172,3 +172,9 @@ app-folder-card{
 *{
   scrollbar-width: none !important;
 }
+
+.no-content-message{
+  text-shadow: none;
+  font-size: 17px;
+  font-weight: bold;
+}

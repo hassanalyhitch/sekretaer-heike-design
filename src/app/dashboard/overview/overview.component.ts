@@ -1,5 +1,5 @@
 import { LoadingService } from '../../services/loading.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ContractData } from '../../models/contract.model';
@@ -10,6 +10,8 @@ import { NewFolderComponent } from '../new-folder/new-folder.component';
 import { AddPageModalComponent } from '../add-page-modal/add-page-modal.component';
 import { RenameFolderComponent } from '../rename-folder/rename-folder.component';
 import { RenameContractComponent } from '../rename-contract/rename-contract.component';
+import { TranslateService } from '@ngx-translate/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -21,6 +23,10 @@ export class OverviewComponent implements OnInit {
 
   allContractsArr:ContractData[] = [];
   subsetArr:ContractData[] = this.allContractsArr;
+
+  templateContractArrLength: number = 0;
+  templateFolderArrLength: number = 0;
+  defaultContractReturnVal: boolean = true;
 
   foldersArr: FolderData[] = [{
     id :  "",
@@ -102,9 +108,15 @@ export class OverviewComponent implements OnInit {
   ascendFolderDate:FolderData[] =[];
   descendFolderDate:FolderData[] =[];
 
-  constructor(private router:Router, private contractService: ContractsService, 
+  @ViewChild('defaultContractCard', {static: false, read: ElementRef}) defaultContractCard: ElementRef<HTMLElement>;
+
+  constructor(
+    private router:Router, 
+    private contractService: ContractsService, 
     private folderService: FoldersService,
     private matDialog: MatDialog,
+    private translate: TranslateService,
+    private snackbar:MatSnackBar,
     private loadingService:LoadingService
     ) {
       this.loadingService.emitIsLoading(true);
@@ -130,7 +142,9 @@ export class OverviewComponent implements OnInit {
         productSek: "",
         tarif: "",
         isFav: 1,
-        favoriteId: ""
+        favoriteId: "",
+        iconLeft:   "",
+        ownPicture: ""
       },
       isSelected: false,
       swipedLeft: false
@@ -154,7 +168,9 @@ export class OverviewComponent implements OnInit {
         productSek: "",
         tarif: "",
         isFav: 1,
-        favoriteId: ""
+        favoriteId: "",
+        iconLeft:   "",
+        ownPicture: ""
       },
       isSelected: false,
       swipedLeft: false
@@ -178,7 +194,9 @@ export class OverviewComponent implements OnInit {
         productSek: "",
         tarif: "",
         isFav: 1,
-        favoriteId: ""
+        favoriteId: "",
+        iconLeft:   "",
+        ownPicture: ""
       },
       isSelected: false,
       swipedLeft: false
@@ -191,9 +209,15 @@ export class OverviewComponent implements OnInit {
       next: ()=>{
       
         this.allContractsArr = this.contractService.userContractsArr;
-        console.table(this.allContractsArr);
+
+        this.templateContractArrLength = this.contractService.userContractsArr.length;
+
+        if(this.templateContractArrLength == 1){
+          this.collapsed = false;
+        }
 
         this.subsetArr = [];
+
         if(this.contractService.userContractsArr.length>3){
           this.showCard1 = true;
           this.showCard2 = true;
@@ -224,7 +248,9 @@ export class OverviewComponent implements OnInit {
               productSek: "",
               tarif: "",
               isFav: 1,
-              favoriteId: ""
+              favoriteId: "",
+              iconLeft:   "",
+              ownPicture: ""
             },
             isSelected: false,
             swipedLeft: false
@@ -234,25 +260,30 @@ export class OverviewComponent implements OnInit {
           this.allContractsArr.push(emptyContract);
         }
 
-        // console.log(this.allContractsArr);
       },
       complete:()=>{
         this.folderService.getFolders().subscribe({
           next: (resp)=>{
+
             this.foldersArr = this.folderService.userFolderArr;
 
-          for(let i=0;i<this.foldersArr.length;i++){
-            this.foldersArr[i].swipedLeft = false;
-          }
+            this.templateFolderArrLength = this.folderService.userFolderArr.length;
+
+            for(let i=0;i<this.foldersArr.length;i++){
+              this.foldersArr[i].swipedLeft = false;
+            }
 
             this.folderSubsetArr = [];
+
             if(this.foldersArr.length>3){
               this.showFolderCard1 = true;
               this.showFolderCard2 = true;
               this.showFolderCard3 = true;
+
               for(let i=3; i<this.foldersArr.length; i++){
                 this.folderSubsetArr.push(this.foldersArr[i]);
               }
+
             } else {
               this.foldersArr.length>0 ? this.showFolderCard3 = true: this.showFolderCard3 = false;
               this.foldersArr.length>1 ? this.showFolderCard2 = true: this.showFolderCard2 = false;
@@ -276,7 +307,7 @@ export class OverviewComponent implements OnInit {
               this.foldersArr.push(emptyFolder);
               this.foldersArr.push(emptyFolder);
             }
-            // console.log(this.foldersArr);
+
           },
           complete:()=>{
             this.loadingService.emitIsLoading(false);
@@ -286,7 +317,6 @@ export class OverviewComponent implements OnInit {
       }
       
     });
-
 
   }
 
@@ -303,25 +333,30 @@ export class OverviewComponent implements OnInit {
   }
 
   collapse(){
-    if(this.collapsed){
-      this.onDefaultInsuranceCardClick();
-    } else {
+    
+    if(this.templateContractArrLength > 1){
+      
+      if(!this.collapsed){
 
-      document.getElementById("cards").setAttribute("style","min-height:230px;height:230px;");
-      document.getElementById("extra-cards").setAttribute("style","transition: opacity 0s;");
-      setTimeout(()=>{this.collapsed = true;},200);
+        document.getElementById("cards").setAttribute("style","min-height:230px;height:230px;");
+        document.getElementById("extra-cards").setAttribute("style","transition: opacity 0s;");
+        setTimeout(()=>{this.collapsed = true;},200);
+      }
+
     }
     
   }
   collapseFolders(){
 
-    if(this.collapsedFolders){
-      this.onDefaultFolderCardClick();
-    } else {
+    if(this.templateFolderArrLength > 1){
 
-      document.getElementById("folders").setAttribute("style","min-height:230px;height:230px;");
-      document.getElementById("extra-folders").setAttribute("style","transition: opacity 0s;");
-      setTimeout(()=>{this.collapsedFolders = true;},200);
+      if(!this.collapsedFolders){
+      
+        document.getElementById("folders").setAttribute("style","min-height:230px;height:230px;");
+        document.getElementById("extra-folders").setAttribute("style","transition: opacity 0s;");
+        setTimeout(()=>{this.collapsedFolders = true;},200);
+      }
+
     }
   }
 
@@ -329,16 +364,16 @@ export class OverviewComponent implements OnInit {
 
     if(this.collapsed===false){
 
-      this.contractService.emitSelectedFolder(this.allContractsArr[0]);
-      this.router.navigate(['dashboard/overview/contract-detail', { id: this.allContractsArr[0].details.Amsidnr }]);
+      this.collapsed = false;
+      this.defaultContractCard.nativeElement.click();
+      
     } else {
-
-        
+  
       if(this.showCard3 && !this.showCard2 && !this.showCard1){
         //show detail page
-        this.contractService.emitSelectedFolder(this.allContractsArr[0]);
-        this.router.navigate(['dashboard/overview/contract-detail', { id: this.allContractsArr[0].details.Amsidnr }]);
-
+        this.collapsed = false;
+        this.defaultContractCard.nativeElement.click();
+        
       } else if(this.showCard2 && !this.showCard1){
         //expand 2
         this.collapsed = false;
@@ -354,6 +389,7 @@ export class OverviewComponent implements OnInit {
         setTimeout(()=>{
           document.getElementById("extra-cards").setAttribute("style","transition: all 0.4s;opacity:1;");
         },10);
+        
       }
 
     }
@@ -423,103 +459,55 @@ export class OverviewComponent implements OnInit {
   }
   
   sortByContractTitle(){
-    if(this.sortContractTitleByAsc){
-      this.ascendContractTitle = this.allContractsArr.sort((a,b) =>a.details.name.localeCompare(b.details.name));
 
-      this.allContractsArr =this.ascendContractTitle;
-      if(this.allContractsArr.length>3){
-        this.subsetArr = [];
-        for(let i=3; i<this.allContractsArr.length; i++){
-          this.subsetArr.push(this.allContractsArr[i]);
+    if(this.templateContractArrLength > 1){
+
+      if(this.sortContractTitleByAsc){
+        this.ascendContractTitle = this.allContractsArr.sort((a,b) =>a.details.name.localeCompare(b.details.name));
+  
+        this.allContractsArr =this.ascendContractTitle;
+        if(this.allContractsArr.length>3){
+          this.subsetArr = [];
+          for(let i=3; i<this.allContractsArr.length; i++){
+            this.subsetArr.push(this.allContractsArr[i]);
+          }
         }
-      }
-    this.sortContractTitleByAsc = !this.sortContractDateByAsc;
-    }else
-    {
-      this.descendContractTitle = this.allContractsArr.sort((a,b) =>a.details.name.localeCompare(b.details.name)).reverse();
-      this.allContractsArr = this.descendContractTitle;
-      if(this.allContractsArr.length>3){
-        this.subsetArr = [];
-        for(let i=3; i<this.allContractsArr.length; i++){
-          this.subsetArr.push(this.allContractsArr[i]);
+      this.sortContractTitleByAsc = !this.sortContractDateByAsc;
+      }else
+      {
+        this.descendContractTitle = this.allContractsArr.sort((a,b) =>a.details.name.localeCompare(b.details.name)).reverse();
+        this.allContractsArr = this.descendContractTitle;
+        if(this.allContractsArr.length>3){
+          this.subsetArr = [];
+          for(let i=3; i<this.allContractsArr.length; i++){
+            this.subsetArr.push(this.allContractsArr[i]);
+          }
         }
+        this.sortContractTitleByAsc = !this.sortContractTitleByAsc;
       }
-      this.sortContractTitleByAsc = !this.sortContractTitleByAsc;
+
+    } else if(this.templateContractArrLength == 0){
+
+      this.snackbar.open(this.translate.instant('overview.no_contracts_found'),
+      this.translate.instant('snack_bar.action_button'),{
+        panelClass:['snack_error'],
+        duration: 8000,
+      });
+
     }
 
   }
 
   sortByContractDate(){
-    if (this.sortContractDateByAsc){
-      this.allContractsArr.sort ((a,b)=>{
-        try{
-          let dateA = new Date(a.details.EndDate);
-          let dateB = new Date(b.details.EndDate);
+    
+    if(this.templateContractArrLength > 1){
 
-          if ((dateA instanceof Date && !isNaN(dateA.getTime()))&&(dateB instanceof Date && !isNaN(dateB.getTime()))) {
-            //valid date object
-            return dateA >= dateB ? 1 : -1; 
-          } else {
-            console.log("invalid date");
-          }
-        }
-        catch(e){
-          console.log(e);
-          
-        }
-      });
-      this.subsetArr =[];
-      if (this.allContractsArr.length>3){
-        for (let i=3;i<this.allContractsArr.length;i++){
-          this.subsetArr.push(this.allContractsArr[i]);
-        }
-      }
-      this.sortContractDateByAsc = !this.sortContractDateByAsc;
-    }else{
-      this.allContractsArr.reverse();
-      this.subsetArr =[];
-      if (this.allContractsArr.length>3){
-        for (let i=3;i<this.allContractsArr.length;i++){
-          this.subsetArr.push(this.allContractsArr[i]);
-        }
-      }
-      this.sortContractDateByAsc = !this.sortContractDateByAsc;
-    }
-  }
-
-  sortByFolderTitle(){
-    if (this.sortFolderTitleByAsc){
-     this.ascendFolderTitle = this.foldersArr.sort((a,b) =>a.folderName.localeCompare(b.folderName));
-     this.folderSubsetArr = this.ascendFolderTitle;
-     
-     if(this.foldersArr.length>3){
-      this.folderSubsetArr = [];
-      for(let i=3; i<this.foldersArr.length; i++){
-        this.folderSubsetArr.push(this.foldersArr[i]);
-      }
-    }
-     this.sortFolderTitleByAsc =!this.sortFolderTitleByAsc;
-   }else{
-     this.descendFolderTitle = this.foldersArr.sort((a,b)=>a.folderName.localeCompare(b.folderName)).reverse();
-     this.folderSubsetArr = this.descendFolderTitle;
-     if(this.foldersArr.length>3){
-      this.folderSubsetArr = [];
-      for(let i=3; i<this.foldersArr.length; i++){
-        this.folderSubsetArr.push(this.foldersArr[i]);
-      }
-    }
-     this.sortFolderTitleByAsc = !this.sortFolderTitleByAsc;
-   }
- 
-   }
-
-   sortByFolderDate(){
-    if (this.sortFolderDateByAsc){
-         this.foldersArr.sort((a,b)=>{
+      if (this.sortContractDateByAsc){
+        this.allContractsArr.sort ((a,b)=>{
           try{
-            let dateA = new Date(a.createdAt);
-            let dateB = new Date(b.createdAt);
-
+            let dateA = new Date(a.details.EndDate);
+            let dateB = new Date(b.details.EndDate);
+  
             if ((dateA instanceof Date && !isNaN(dateA.getTime()))&&(dateB instanceof Date && !isNaN(dateB.getTime()))) {
               //valid date object
               return dateA >= dateB ? 1 : -1; 
@@ -529,33 +517,155 @@ export class OverviewComponent implements OnInit {
           }
           catch(e){
             console.log(e);
+            
           }
-         });
-         this.folderSubsetArr = [];
+        });
+        this.subsetArr =[];
+        if (this.allContractsArr.length>3){
+          for (let i=3;i<this.allContractsArr.length;i++){
+            this.subsetArr.push(this.allContractsArr[i]);
+          }
+        }
+        this.sortContractDateByAsc = !this.sortContractDateByAsc;
+      }else{
+        this.allContractsArr.reverse();
+        this.subsetArr =[];
+        if (this.allContractsArr.length>3){
+          for (let i=3;i<this.allContractsArr.length;i++){
+            this.subsetArr.push(this.allContractsArr[i]);
+          }
+        }
+        this.sortContractDateByAsc = !this.sortContractDateByAsc;
+      }
+
+    } else if(this.templateContractArrLength == 0){
+
+      this.snackbar.open(this.translate.instant('overview.no_contracts_found'),
+      this.translate.instant('snack_bar.action_button'),{
+        panelClass:['snack_error'],
+        duration: 8000,
+      });
+
+    }
+
+  }
+
+  sortByFolderTitle(){
+
+    if(this.templateFolderArrLength == 0){
+
+      this.snackbar.open(this.translate.instant('overview.no_folders_found'),
+      this.translate.instant('snack_bar.action_button'),{
+        panelClass:['snack_error'],
+        duration: 8000,
+      });
+
+    } else if(this.templateFolderArrLength > 1) {
+
+      if (this.sortFolderTitleByAsc){
+        this.ascendFolderTitle = this.foldersArr.sort((a,b) =>a.folderName.localeCompare(b.folderName));
+        this.folderSubsetArr = this.ascendFolderTitle;
+        
+        if(this.foldersArr.length>3){
+        this.folderSubsetArr = [];
+        for(let i=3; i<this.foldersArr.length; i++){
+          this.folderSubsetArr.push(this.foldersArr[i]);
+        }
+      }
+        this.sortFolderTitleByAsc =!this.sortFolderTitleByAsc;
+      }else{
+        this.descendFolderTitle = this.foldersArr.sort((a,b)=>a.folderName.localeCompare(b.folderName)).reverse();
+        this.folderSubsetArr = this.descendFolderTitle;
+        if(this.foldersArr.length>3){
+        this.folderSubsetArr = [];
+        for(let i=3; i<this.foldersArr.length; i++){
+          this.folderSubsetArr.push(this.foldersArr[i]);
+        }
+      }
+        this.sortFolderTitleByAsc = !this.sortFolderTitleByAsc;
+      }
+
+    }
+
+   }
+
+   sortByFolderDate(){
+
+    if(this.templateFolderArrLength == 0){
+
+      this.snackbar.open(this.translate.instant('overview.no_folders_found'),
+      this.translate.instant('snack_bar.action_button'),{
+        panelClass:['snack_error'],
+        duration: 8000,
+      });
+
+    } else if(this.templateFolderArrLength > 1){
+
+      if (this.sortFolderDateByAsc){
+           this.foldersArr.sort((a,b)=>{
+            try{
+              let dateA = new Date(a.createdAt);
+              let dateB = new Date(b.createdAt);
+  
+              if ((dateA instanceof Date && !isNaN(dateA.getTime()))&&(dateB instanceof Date && !isNaN(dateB.getTime()))) {
+                //valid date object
+                return dateA >= dateB ? 1 : -1; 
+              } else {
+                console.log("invalid date");
+              }
+            }
+            catch(e){
+              console.log(e);
+            }
+           });
+           this.folderSubsetArr = [];
+              if(this.foldersArr.length>3){
+                for(let i=3; i<this.foldersArr.length; i++){
+                  this.folderSubsetArr.push(this.foldersArr[i]);
+                }
+              }
+           this.sortFolderDateByAsc = !this.sortFolderDateByAsc;
+      }else{
+            this.foldersArr.reverse();
+            this.folderSubsetArr = [];
             if(this.foldersArr.length>3){
               for(let i=3; i<this.foldersArr.length; i++){
                 this.folderSubsetArr.push(this.foldersArr[i]);
               }
             }
-         this.sortFolderDateByAsc = !this.sortFolderDateByAsc;
-        }else{
-          this.foldersArr.reverse();
-          this.folderSubsetArr = [];
-          if(this.foldersArr.length>3){
-            for(let i=3; i<this.foldersArr.length; i++){
-              this.folderSubsetArr.push(this.foldersArr[i]);
-            }
-          }
-          this.sortFolderDateByAsc = !this.sortFolderDateByAsc;
-        }
+            this.sortFolderDateByAsc = !this.sortFolderDateByAsc;
+      }
+
+    }
+
   }
 
   onSearchFoldersClicked(){
-    this.router.navigate(['dashboard/home/search', {searchType:'folders'}]);
+    if(this.templateFolderArrLength == 0){
+
+      this.snackbar.open(this.translate.instant('overview.no_folders_found'),
+      this.translate.instant('snack_bar.action_button'),{
+        panelClass:['snack_error'],
+        duration: 8000,
+      });
+
+    } else {
+      this.router.navigate(['dashboard/home/search', {searchType:'folders'}]);
+    }
   }
 
   onSearchContractsClicked(){
-    this.router.navigate(['dashboard/home/search', {searchType:'contracts'}]);
+    if(this.templateContractArrLength == 0){
+
+      this.snackbar.open(this.translate.instant('overview.no_contracts_found'),
+      this.translate.instant('snack_bar.action_button'),{
+        panelClass:['snack_error'],
+        duration: 8000,
+      });
+
+    } else {
+      this.router.navigate(['dashboard/home/search', {searchType:'contracts'}]);
+    }
   }
 
   onFolderSwipe(evt,folder:FolderData){
@@ -633,11 +743,7 @@ export class OverviewComponent implements OnInit {
        
         this.folderService.getFolderDetails(folder.id).subscribe({
           next:(resp:any) =>{
-            // console.log('folder-details');
-            // console.log(folder.id);
-            // console.log(folder.folderName);
-            // this. folder = this.folderService.selectedFolder;
-
+            
             //refresh contract list
             this._init();
           },
@@ -713,6 +819,43 @@ export class OverviewComponent implements OnInit {
       },
     });
 
+  }
+
+  addContractDoc(contract: ContractData) {
+
+    const dialogConfig = new MatDialogConfig();
+
+    let passdata:string = '{"contractName": "'+contract.details.name+'","contractId": "'+contract.details.Amsidnr+'","document_type":"contract" }';
+
+    console.log("from fav item ->"+passdata);
+
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = false;
+    dialogConfig.id = 'add-document-modal-component';
+    //dialogConfig.height = '350px';
+    dialogConfig.width = '400px';
+    dialogConfig.data = passdata;
+
+    dialogConfig.panelClass = 'bg-dialog-folder';
+    // https://material.angular.io/components/dialog/overview
+    const modalDialog = this.matDialog.open(AddPageModalComponent, dialogConfig);
+    
+    this.matDialog.getDialogById('add-document-modal-component').afterClosed().subscribe({
+      next:()=>{
+
+        // this.contractService.getContractDetails(this.contract.details.Amsidnr).subscribe({
+        //   next:(resp:any) =>{
+        //     console.log('contract-details');
+        //     this.contract = this.contractService.selectedContract;
+        //   },
+        //   complete:()=>{},
+        // });
+
+      },
+      error:(resp)=>{
+        console.log(resp);
+      }
+    });
   }
 
 }

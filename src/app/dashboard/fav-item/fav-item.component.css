@@ -11,9 +11,8 @@
   font-family: oscine, sans-serif;
   color: #2C262D;
 }
-.doc-icon{
-  width: 40%;
-  height: 40%;
+.icon-left{
+  min-width: 28px;
 }
 
 .icon-container{

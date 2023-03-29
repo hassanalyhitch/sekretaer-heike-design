@@ -20,7 +20,6 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { ENTER, COMMA,SPACE} from '@angular/cdk/keycodes';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 
-
 export const MY_DATE_FORMATS = {
   parse: {
     dateInput: 'DD.MM.YYYY',
@@ -32,8 +31,6 @@ export const MY_DATE_FORMATS = {
     monthYearA11yLabel: 'MMMM YYYY'
   },
 };
-
-
 
 @Component({
   selector: 'app-add-page',
@@ -122,8 +119,9 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
   broker_blue_logo: boolean;
   broker_pink_logo: boolean;
   none:any = "none";
-  
 
+  enableShareWithBrokerIcon: boolean;
+  
   constructor( 
     private route:ActivatedRoute, 
     private router:Router,
@@ -145,6 +143,8 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
       this.broker_blue_logo = false;
       this.broker_pink_logo = false;
       this.shareWithBroker  = false;
+
+      this.enableShareWithBrokerIcon = false;
     }
 
   
@@ -209,11 +209,11 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
         }
         case "contract" :{
           let selectedItem = {
-            id: this.contractService.selectedContract.id,
+            id: this.contractService.selectedContract.details.Amsidnr,
             dataName:this.contractService.selectedContract.details.name
           };
           let contract:any = {
-            id:this.contractService.selectedContract['id'],
+            id:this.contractService.selectedContract.details.Amsidnr,
             CustomerAmsidnr:this.contractService.selectedContract['CustomerAmsidnr'],
             dataName: this.contractService.selectedContract['name'],
             type:'contract'
@@ -272,13 +272,13 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
         //show snackbar with error message
         this._snackBar.open(this.translate.instant('add_document.file_upload_error'), this.translate.instant('snack_bar.action_button'),{
           panelClass: ['snack_error'],
-           duration:2000,
+           duration:5000,
         });
 
         //return back to previous page
         setTimeout(()=>{
           this.location.back()
-        },3500);
+        },5000);
 
       },
       complete:()=>{
@@ -287,13 +287,13 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
         //show snackbar with success message
         this._snackBar.open(this.translate.instant('add_document.file_upload_success'), this.translate.instant('snack_bar.action_button'),{
           panelClass: ['snack_success'],
-          duration:2000,
+          duration:5000,
         });
 
         //return back to previous page
         setTimeout(()=>{
           this.location.back()
-        },3500);
+        },5000);
 
       }
     })
@@ -314,13 +314,13 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
          //show snackbar with error message
          this._snackBar.open(this.translate.instant('add_document.file_upload_error'), this.translate.instant('snack_bar.action_button'),{
           panelClass: ['snack_error'],
-           duration:2000,
+           duration:5000,
         });
 
          //return back to previous page
          setTimeout(()=>{
           this.location.back()
-        },3500);
+        },5000);
 
       },
       complete:()=>{
@@ -328,13 +328,13 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
 
         this._snackBar.open(this.translate.instant('add_document.file_upload_success'), this.translate.instant('snack_bar.action_button'),{
           panelClass: ['snack_success'],
-          duration:2000,
+          duration:5000,
         });
 
           //return back to previous page
           setTimeout(()=>{
             this.location.back()
-          },3500);
+          },5000);
   
       }
 
@@ -440,6 +440,12 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
       }
     }
 
+    if(this.typeSelected == 'folder'){
+      this.enableShareWithBrokerIcon = false;
+    } else if(this.typeSelected == 'contract'){
+      this.enableShareWithBrokerIcon = true;
+    }
+
   }
 
   // get f():{[key:string]:AbstractControl}{
@@ -528,6 +534,7 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
     });
 
   }
+  
   onShareWithBroker(){
     this.shareWithBroker =!this.shareWithBroker;
 
@@ -535,13 +542,40 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
 
       this.broker_icon_link = "../assets/icon_broker_round_blue.svg";
 
+      // display snackbar message
+      this._snackBar.open(
+        this.translate.instant('contract_detail.shared_with_broker'),
+        this.translate.instant('snack_bar.action_button'),{
+          duration: 8000,
+          panelClass:['snack_success'],
+        }
+      );
+
     } else if(this.shareWithBroker && this.broker_pink_logo){
 
       this.broker_icon_link = "../assets/icon_broker_round_pink.svg";
 
+      // display snackbar message
+      this._snackBar.open(
+        this.translate.instant('contract_detail.shared_with_broker'),
+        this.translate.instant('snack_bar.action_button'),{
+          duration: 8000,
+          panelClass:['snack_success'],
+        }
+      );
+
     } else {
 
       this.broker_icon_link = "../assets/icon_broker_round_default.svg";
+
+      // display snackbar message
+      this._snackBar.open(
+        this.translate.instant('contract_detail.unshared_with_broker'),
+        this.translate.instant('snack_bar.action_button'),{
+          duration: 8000,
+          panelClass:['snack_error'],
+        }
+      );
 
     }
     
