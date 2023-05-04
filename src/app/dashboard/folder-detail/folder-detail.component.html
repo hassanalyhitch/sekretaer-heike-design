@@ -2,7 +2,6 @@
   <div class="_content d-flex flex-column align-items-center w-100 h-100">
 
     <div class="d-flex justify-content-between w-100 mb-2 px-3 pt-3">
-    
         <div class="d-flex justify-content-center align-items-center" (click)="onBackNavClick()" >
           <i class="material-icons p-2 back-arrow-icon ">arrow_back_ios</i>
         </div>
@@ -27,7 +26,6 @@
     </div>
     
     <div class="section-folder-detail w-100 d-flex flex-column pt-3 px-3">
-      
         <div class="d-flex justify-content-start ms-2">
           <span class="text-sub-title-3">{{folder.folderName}} </span>
         </div>
@@ -59,7 +57,7 @@
               class="w-100 m-1"  
               [ngClass]="{'swipedLeft':doc.swipedLeft}" 
               [doc]=doc
-              from_location=folder>
+              from_location='folder'>
             </app-document-item>
         
             <div class=" edit-rename p-2 d-flex align-self-center justify-content-center align-items-center bg-white "

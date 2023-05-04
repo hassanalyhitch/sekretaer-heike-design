@@ -10,10 +10,12 @@ import { Location } from '@angular/common';
   styleUrls: ['./my-data.component.scss']
 })
 export class MyDataComponent implements OnInit {
+  myStreet:string[]=[];
   myName:string[]=[];
+
   myZipCode:string ="";
   myCity:string ="";
-  myStreet:string[]=[];
+  
 
   constructor(private personaldataService:PersonalDataService ,
     private loadingService:LoadingService,
@@ -25,8 +27,7 @@ export class MyDataComponent implements OnInit {
   ngOnInit(): void {
     this.personaldataService.getMyPersonalDetails().subscribe({
       next:(resp:PersonalData) =>{
-        console.log(resp);
-
+       
         this.myName = resp.myData.ShowName.split(", ");
         this.myCity = resp.myData.City;
         this.myZipCode = resp.myData.ZipCode;
@@ -41,7 +42,7 @@ export class MyDataComponent implements OnInit {
     this._location.back();
   }
   onSubmit(personalData:PersonalData){
-    console.log(personalData);
-}
+   
+  }
 
 }

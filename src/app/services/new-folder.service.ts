@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs';
 import { LoginService } from './login.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 
@@ -13,7 +14,7 @@ export class NewFolderService {
 
     let data = '{"parentFolderId": "'+parentFolderId+'", "name": "'+folderName+'" }' ;
 
-    let url = 'https://testapi.maxpool.de/api/v1/sekretaer/myfolders';
+    let url = environment.baseUrl +'/api/v1/sekretaer/myfolders';
 
     return this.http.post(url, data, {
       headers: new HttpHeaders({

@@ -1,16 +1,18 @@
 <div class="content-wrapper w-100 ">
   <div class="_content d-flex flex-column w-100 h-100 px-2">
 
-    <!-- new top line -->
+    <!-- Top bar content -->
     <div class="d-flex justify-content-between mb-2 pt-3">
       <div class="d-flex back-btn" (click)="onBackNavClick()">
         <i class="material-icons p-2 back-btn">arrow_back_ios</i>
       </div>
+
       <div class="p-2">
         <span class="section-title align-self-center ">
           {{ 'contract_detail.title_main' | translate }}
         </span>
       </div>
+
       <div class="p-2">
         <div class="ml-auto btn-group dropstart align-self-center">
           <img class="filter-icon py-1" data-bs-toggle="dropdown" aria-expanded="false" src="/assets/icon_filter_dark.svg">
@@ -22,9 +24,10 @@
           </ul>
         </div>
       </div>
+
     </div>
 
-    <!-- section content -->
+    <!-- Main content -->
     <div class="section-content">
 
       <div class="bg-white shadow-sm w-100 d-flex fav-item">
@@ -32,7 +35,6 @@
 
           <div class="d-flex flex-column _card-content w-100">
             <span class="risk px-2 mt-3 mb-1">{{contract.details.name}}</span>
-
             <span class="branch mt-3 px-2 ">{{contract.details.productSek}}</span>
             <span class="company px-2">{{contract.details.Company}}</span> 
 
@@ -49,11 +51,12 @@
             <div class="d-flex align-items-end justify-content-between w-100 py-2 ">
               <div class="date d-flex align-items-end px-2">
                 <span class="text-muted">{{ 'contract_detail.contract_start_date_label' | translate }}: </span>
-                <span class="mx-2 fw-bold">{{contract.details.StartDate}}</span>
+                <span class="mx-2 fw-bold">{{contract.details.StartDate | formatDate}}</span>
               </div>
+
               <div class="date ml-auto px-1">
-              <span class="text-muted">{{ 'contract_detail.contract_end_date_label' | translate }}: </span>
-              <span class="mx-2 fw-bold">{{contract.details.EndDate}}</span>
+                <span class="text-muted">{{ 'contract_detail.contract_end_date_label' | translate }}: </span>
+                <span class="mx-2 fw-bold">{{contract.details.EndDate | formatDate}}</span>
               </div>
             </div>
 
@@ -61,25 +64,15 @@
               <span class="amount">{{contract.details.YearlyPayment | currencyFormat}}</span>
               <span> / {{ 'contract_detail.contract_yearly_payment_label' | translate }}</span>
             </div>
-
-            <!-- <div class="d-flex align-items-end justify-content-between w-100 py-2 ">
-              <div class="date d-flex align-items-end px-2">
-                <span class="mx-2 fw-normal active-contract">Aktiver Vertrag</span>
-              </div>
-              <div class="date ml-auto px-1">
-                <span class="per-month-contract-label fw-bold">{{contract.details.YearlyPayment | currencyFormat}}</span>
-                <span class="per-month-contract-label fw-bold">/{{ 'contract_detail.contract_monthly_payment_label' | translate }}</span>
-              </div>
-            </div> -->
       
             <div class="small-picture">
-              <img class="w-100 img-responsive" [src]="src_link_for_small_picture" alt="small-picture">
+              <img class="w-100 img-responsive" [src]="src_link_for_small_picture" (click)="editSmallPicture(contract.details.Amsidnr,src_link_for_small_picture)" alt="small-picture">
             </div>
       
             <div class="d-flex p-2 fav-btn align-items-center justify-content-center"
-            [ngClass]="{'isFav': contract.details.isFav == '1', 'notFav': contract.details.isFav == '0'}"
-            (click)="toggleFav(contract)" >
-              <i class="material-icons">star</i>
+              [ngClass]="{'isFav': contract.details.isFav == '1', 'notFav': contract.details.isFav == '0'}"
+              (click)="toggleFav(contract)" >
+                <i class="material-icons">star</i>
             </div>
       
           </div>
@@ -88,40 +81,42 @@
       </div>
 
       <div class="d-flex bd-highlight mb-2 mt-5">
-      <div class="p-2 bd-highlight">
-        <p class="text-muted">{{ 'contract_detail.title_documents' | translate }}</p>
-      </div>
-      <div class="ms-auto p-2 bd-highlight" (click)="sortByDate()" style="cursor:pointer;">
-        <span class="text-muted">
-          {{ 'folder-detail.date_filter_label' | translate }}
-          <img class="filter-icon" src="/assets/icon_date_filter.svg">
-        </span>
-      </div>
-    </div>
+        <div class="p-2 bd-highlight">
+          <p class="text-muted">{{ 'contract_detail.title_documents' | translate }}</p>
+        </div>
 
-    <div *ngIf="docArr.length == 0" class="w-100 d-flex align-items-center">
-      <p class="no-content-message text-center m-auto">
-        {{ 'contract_detail.no_documents_found' | translate }}
-      </p>
-    </div>
+        <div class="ms-auto p-2 bd-highlight" (click)="sortByDate()" style="cursor:pointer;">
+          <span class="text-muted">
+            {{ 'folder-detail.date_filter_label' | translate }}
+            <img class="filter-icon" src="/assets/icon_date_filter.svg">
+          </span>
+        </div>
 
-    <div *ngIf="docArr.length > 0">
-      <div class="d-flex my-2 documentItem" *ngFor="let doc of docArr; let i = index"  (swipe)="onSwipe($event, doc)">
-  
-        <app-document-item 
-          class="w-100"  
-          [ngClass]="{'swipedLeft':doc.swipedLeft}" 
-          [doc]=doc
-          from_location="contract_details">
-        </app-document-item>
-      
-        <div class=" edit-rename p-2 d-flex align-self-center justify-content-center align-items-center bg-white "
-         [ngClass]="{'d-none':!doc.swipedLeft}"
-         (click)= "renameFileModal(doc)" >
-            <i class="material-icons">mode_edit</i>
+      </div>
+
+      <div *ngIf="docArr.length == 0" class="w-100 d-flex align-items-center">
+        <p class="no-content-message text-center m-auto">
+          {{ 'contract_detail.no_documents_found' | translate }}
+        </p>
+      </div>
+
+      <div *ngIf="docArr.length > 0">
+        <div class="d-flex my-2 documentItem" *ngFor="let doc of docArr; let i = index"  (swipe)="onSwipe($event, doc)">
+    
+          <app-document-item 
+            class="w-100"  
+            [ngClass]="{'swipedLeft':doc.swipedLeft}" 
+            [doc]=doc
+            from_location="contract_details">
+          </app-document-item>
+        
+          <div class=" edit-rename p-2 d-flex align-self-center justify-content-center align-items-center bg-white "
+            [ngClass]="{'d-none':!doc.swipedLeft}"
+            (click)= "renameFileModal(doc)" >
+                <i class="material-icons">mode_edit</i>
+          </div>
         </div>
       </div>
-    </div>
 
   </div>
   

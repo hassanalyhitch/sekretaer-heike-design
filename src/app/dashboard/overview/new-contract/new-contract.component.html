@@ -15,6 +15,7 @@
                     [data]="dataArr"
                     [(ngModel)]="selectedBranches"
                     (onSelect)="onBranchSelected($event)"
+                    (onDeSelect)="onBranchesDeselected($event)"
                     name ="branches"
                     ngModel
                     required
@@ -28,6 +29,7 @@
                     [settings]="companySettings"
                     [data]="companyArr"
                     (onSelect)="onCompanySelected($event)"
+                    #companyOptions
                     [(ngModel)]="selectedCompanies"
                     name="companies"
                     ngModel
@@ -42,6 +44,7 @@
                     [settings]="productSettings"
                     (onSelect)="onProductSelected($event)"
                     [data]="productArr"
+                    #productOptions
                     [(ngModel)]="selectedProducts"
                     name="products"
                     ngModel
@@ -78,95 +81,100 @@
                         </mat-datepicker-toggle>
                         <mat-datepicker #pickerDate [disabled]="false"></mat-datepicker>
                     </mat-form-field>
-                  </div>
+                </div>
                   
-
-
-                     <div class="fileUpload">
-                        <ng-multiselect-dropdown
-                        [placeholder]="'new-contract.sub_title_2_a' | translate "
-                        [settings]="paymentMethodSettings"
-                        (onSelect)="onPaymentMethodSelected($event)"
-                        [data]="paymentMethodsList"
-                        name="paymentMethod"
-                        [(ngModel)]="PaymentMethod"
-                        ngModel
-                        required
-                        >
-                        </ng-multiselect-dropdown>
-                    </div>
-
-                    <div class="fileUpload ">
-                        <ng-multiselect-dropdown
-                        placeholder = 'Status Reason'
-                        [settings]="statusReasonSettings"
-                        (onSelect)="onStatusReasonSelected($event)"
-                        [data]="statusReasonList"
-                        ngModel
-                        required
-                        name="StatusReason"
-                        [(ngModel)]="StatusReason"
-                        ngModel
-                        required
-                        >
-                        </ng-multiselect-dropdown>
-                    </div>
-                  
-                    <div class="amount">
-                        <input  ngModel [required]="optionSelected"  
-                        type="text" placeholder="{{'new-contract.sub_title_2_b' | translate }}"
-                        id="Amount" name="amount"/>
-                    </div>
-                    
-
-                    <div class="risk">
-                        <input type="text" placeholder="Risk" ngModel name="Risk"/>
-                    </div>
-
-                    
-                    <input class="risk" type="text" placeholder="Insurance Number(optional)" ngModel name="insuranceNumber "/>
-                    
-                    
-                    
-                    <p class="subtitle_section">{{'new-contract.sub_title_3' | translate }}:</p>
-
-                <div class="d-flex flex-row uploads">
-                    <div class="d-flex flex-column upload-section_a"(click)="selectFile.click()">{{'new-contract.sub_title_3_a' | translate }}</div>
-
-                    <div class="d-flex flex-column upload-section_b align-items-center">
-                        <input 
-                            class="file-input"
-                            hidden
-                            #selectFile
-                            id="selectFile"
-                            (change)="getFile($event)"
-                            type="file"
-                            accept="application/pdf"
-                            name="file"
-                            ngModel
-                            required
-                                />
-                            <i class="material-icons"(click)="selectFile.click()">add</i>
-                    </div>
-                    
+                <div class="fileUpload">
+                    <ng-multiselect-dropdown
+                    [placeholder]="'new-contract.sub_title_2_a' | translate "
+                    [settings]="paymentMethodSettings"
+                    (onSelect)="onPaymentMethodSelected($event)"
+                    [data]="paymentMethodsList"
+                    name="paymentMethod"
+                    [(ngModel)]="PaymentMethod"
+                    ngModel
+                    required
+                    >
+                    </ng-multiselect-dropdown>
                 </div>
 
-                <app-upload-file class="fileUpload"*ngFor="let uploadFile of uploadFileArr" [uploadFile]="uploadFile" (deleteFile)="removeFile($event)"></app-upload-file>
+                <div class="fileUpload ">
+                    <ng-multiselect-dropdown
+                    placeholder = 'Status Reason'
+                    [settings]="statusReasonSettings"
+                    (onSelect)="onStatusReasonSelected($event)"
+                    [data]="statusReasonList"
+                    ngModel
+                    required
+                    name="StatusReason"
+                    [(ngModel)]="StatusReason"
+                    ngModel
+                    required
+                    >
+                    </ng-multiselect-dropdown>
+                </div>
+                  
+                <div class="amount">
+                    <input  ngModel [required]="optionSelected"  
+                    type="number" placeholder="{{'new-contract.sub_title_2_b' | translate }}"
+                    id="Amount" name="amount" required />
+                </div>
+                    
 
-               <div class="d-flex flex-row assignment">
-                <span class="broker-btn" (click)="onShareWithBroker()">
-                    <img class="broker-icon" [src]="broker_icon_link">
-                </span>
-                <p class="m-2">{{'new-contract.share_broker' | translate }}</p>
-              </div>
+                <div class="risk">
+                    <input type="text" placeholder="Risk" ngModel name="Risk" required/>
+                </div>
 
-                <button class="btn py-2" type="submit">{{'new-contract.submit_btn' | translate }}</button>
+                <input class="risk" type="text" placeholder="Insurance Number(optional)" ngModel name="insuranceNumber"/>
+                
+                <p class="subtitle_section">{{'new-contract.sub_title_3' | translate }}:</p>
+
+                <div class="d-flex flex-column">
+                    <div class="d-flex flex-row uploads">
+                        <div class="d-flex flex-column upload-section_a"(click)="selectFile.click()">{{'new-contract.sub_title_3_a' | translate }}</div>
+    
+                        <div class="d-flex flex-column upload-section_b align-items-center">
+                            <input 
+                                class="file-input"
+                                hidden
+                                #selectFile
+                                id="selectFile"
+                                (change)="getFile($event)"
+                                type="file"
+                                accept="application/pdf"
+                                ngModel
+                                required
+                                name="File"
+                                    />
+                                <i class="material-icons"(click)="selectFile.click()">add</i>
+                        </div>
+                    </div>
+
+                    <app-upload-file class="fileUpload"  *ngFor="let uploadFile of uploadFileArr" [uploadFile]="uploadFile" (deleteFile)="removeFile($event)"></app-upload-file>
+
+                </div>
+            
+
+                <div class="d-flex flex-row assignment">
+                        <span class="broker-btn" (click)="onShareWithBroker()">
+                            <img class="broker-icon" [src]="broker_icon_link">
+                        </span>
+                        <p class="m-2">{{'new-contract.share_broker' | translate }}</p>
+                </div>
+
+                <button class="btn py-2"
+                    #submitButton
+                    type="submit" 
+                    [disabled]="(!contractForm.valid)||submitted"
+                    >
+                    <span *ngIf="submitted" class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role=""></span>
+                    <span *ngIf="!submitted">{{'new-contract.submit_btn' | translate }}</span>
+                </button>
 
                 <div class="d-flex uploads back" (click)="onBackNavClick()" >
                     <i class="material-icons py-2 back-arrow-icon">arrow_back_ios</i>
                     <span class="py-2">{{'new-contract.back_btn' | translate }}</span>
                 </div>
-        </form>
+            </form>
 
        
 

@@ -1,15 +1,16 @@
 @import url('https://use.typekit.net/myb7tas.css');
 @import "~bootstrap/scss/bootstrap.scss";
 .fav-item{
-  // min-width: 319px;
   @include rfs(22.2rem, height);
   min-height: 144px !important; 
   max-height: 250px !important;
   background-color: white;
 }
+
 ._content{
   font-family: oscine, sans-serif;
 }
+
 .doc-icon{
   width: 40%;
   height: 40%;
@@ -32,12 +33,13 @@
   border-radius: 0px 0px 15px 0px;
   height: 100%;
   color: white;
-
 }
+
 ._content{
   position: relative;
   margin: 0px !important;
 }
+
 .small-picture{
   position: absolute;
   top: 0;
@@ -51,6 +53,7 @@
   border-radius: 0px 0px 0px 12px;
   background-color: #f2f2f2;
 }
+
 .small-picture img {
   object-fit: cover; /* Do not scale the image */
   object-position: center; /* Center the image within the element */
@@ -58,11 +61,11 @@
   height: 100%;
   border-radius: 0px 0px 0px 12px;
 }
+
 .fav-btn{
   position: absolute;
   top: 4px;
   left: -1rem;
-  // @include rfs(6.5rem, right);
   padding: 3px;
   color: white;
   border-radius: 50%;
@@ -71,13 +74,16 @@
   @include rfs(2.5rem, width);
   @include rfs(2.5rem, height);
 }
+
 .fav-btn i{
   font-size: 16px;
   @include font-size(2rem);
 }
+
 .isFav{
   background-color: #E5007E;
 }
+
 .notFav{
   background-color: #000000 !important;
 }
@@ -88,22 +94,25 @@
   font-weight: 500;
   min-height: 27px;
 }
+
 .branch{
   font-size: 15px;
   @include font-size(1.25rem);
   font-weight: 500;
-
 }
+
 .price{
   font-size: 15px;
   @include font-size(1.25rem);
   font-weight: 500;
 }
+
 .date{
   font-size: 15px;
   @include font-size(1.25rem);
   font-weight: 300;
 }
+
 .company{
   font-size: 15px;
   @include font-size(1.3rem);

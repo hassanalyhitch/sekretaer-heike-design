@@ -39,11 +39,8 @@ export class RenameFolderComponent implements OnInit {
 
     this.submitted = true;
 
-    //console.log(formData);
-
     this.folderService.rename(this.dataObj.folderId , formData).subscribe({
       next:(resp)=>{
-        //console.log(resp);
         this.submitted = false;
       },
       error:(e)=>{

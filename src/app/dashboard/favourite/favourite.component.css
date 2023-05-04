@@ -6,6 +6,7 @@
   margin-top: 0px !important;
   padding: 0px !important;
 }
+
 ._content{
   background-color: #F2F2F2;
   border-radius: 45px 0px 0px 0px;
@@ -33,6 +34,7 @@
   font-size: 20px;
   letter-spacing: 2.5px;
 }
+
 app-fav-item, app-folder-card{
   margin: 10px;
   cursor: pointer;

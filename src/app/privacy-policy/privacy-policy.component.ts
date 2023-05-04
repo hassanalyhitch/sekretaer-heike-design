@@ -16,6 +16,7 @@ export class PrivacyPolicyComponent implements OnInit{
   constructor(private _location: Location) { 
     this.app_logo_link_src = "../assets/sekretaer_pink_logo.svg"; //default logo 
     this.selected_theme = "";
+    this.inSettings = false;
   }
 
   ngOnInit(): void {

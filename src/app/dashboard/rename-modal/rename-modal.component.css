@@ -12,7 +12,6 @@
   font-family: oscine, sans-serif;
 }
 
-
 button,
 input,
 label{
@@ -25,6 +24,7 @@ label{
   font-size: 2.5em;
   margin-top: 3em;
 }
+
 .sub-heading {
   font-family: oscine, sans-serif;
   font-weight: 200;
@@ -51,6 +51,7 @@ label{
   transform-origin: left top;
   pointer-events: none;
 }
+
 .material-textfield > input {
   font-family: oscine, sans-serif;
   font-size: 1rem;
@@ -63,15 +64,18 @@ label{
   background-color: white;
   transition: 0.1s ease-out;
 }
+
 .material-textfield > input:focus {
   border: 2px solid var(--primaryColor);
 }
+
 .material-textfield > input:focus + label {
   color: rgba(0,0,0,.87);
   background-color: inherit;
   top: 0;
   transform: translateY(-75%) scale(0.9);
 }
+
 .material-textfield > input:not(:placeholder-shown) + label {
   color: rgba(0,0,0,.87);
   top: 0;
@@ -86,21 +90,25 @@ label{
   background-image: linear-gradient(131deg, var(--primaryColor), var(--primaryColorDark));
   transition: 0.1s ease-out;
 }
+
 .btn-login:hover {
   background-color: var(--primaryColor) !important;
   background-image: linear-gradient(131deg,var(--primaryButtonColor-100), var(--primaryButtonColor-200));
   color: #2C262D;
   border: none;
 }
+
 button[disabled] {
   color: white;
   cursor: default;
 }
+
 button[disabled]:hover {
   border-color: white !important;
   background-color: transparent;
   cursor: default;
 }
+
 button[disabled]:hover#sign-in-btn {
   color: white;
 }
@@ -145,12 +153,30 @@ button[disabled]:hover#sign-in-btn {
   font-style: normal;
   padding-top:20px;
 }
+
 .broker-btn{
   outline:none;
   border:none;
   cursor: pointer;
 }
+
 .broker-icon{
   width:48px;
   height:48px;
+}
+
+.btn-delete-doc{
+  color: white;
+  height: 50px !important;
+  background-color: var(--primaryColor) !important;
+  border-color: var(--primaryColor) !important;
+  background-image: linear-gradient(131deg, var(--primaryColor), var(--primaryColorDark));
+  transition: 0.1s ease-out;
+}
+
+.btn-delete-doc:hover {
+  background-color: var(--primaryColor) !important;
+  background-image: linear-gradient(131deg,var(--primaryButtonColor-100), var(--primaryButtonColor-200));
+  color: #2C262D;
+  border: none;
 }

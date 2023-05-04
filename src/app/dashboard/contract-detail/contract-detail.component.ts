@@ -1,6 +1,5 @@
 import {
   Component,
-  Input,
   OnDestroy,
   OnInit,
   AfterViewInit,
@@ -22,6 +21,7 @@ import { DownloadService } from '../../services/download-file.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AddPageModalComponent } from '../add-page-modal/add-page-modal.component';
 import { LoadingService } from '../../services/loading.service';
+import { EditSmallPictureComponent } from '../edit-small-picture/edit-small-picture.component';
 
 @Component({
   selector: 'app-contract-detail',
@@ -31,7 +31,18 @@ import { LoadingService } from '../../services/loading.service';
 export class ContractDetailComponent implements OnInit, OnDestroy {
 
   contract_id: string;
+  src_link_for_small_picture: string;
 
+  swipedLeft: boolean = false;
+  sortDateByAsc:boolean = true;
+
+  ascDate:DocumentData[] = [];
+  descDate:DocumentData[] = [];
+  docArr: DocumentData[] = [];
+
+  contractSub: Subscription;
+  documents: any;
+ 
   contract: ContractData = <ContractData>{
     id: 0,
     details: {
@@ -55,19 +66,7 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     isSelected: false,
   };
 
-  contractSub: Subscription;
-  documents: any;
-  swipedLeft: boolean = false;
-  
-  ascDate:DocumentData[] = [];
-  descDate:DocumentData[] = [];
-  sortDateByAsc:boolean = true;
-
   @ViewChildren('documentItem') documentItemList: QueryList<ElementRef>;
-
-  docArr: DocumentData[] = [];
-
-  src_link_for_small_picture: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -84,8 +83,6 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    //console.log('on view init');
-
     this.contract_id = this.route.snapshot.paramMap.get('id');
 
     this.contractService
@@ -107,7 +104,7 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
             for (let i = 0; i < resp.docs.length; i++) {
               this.docArr.push(resp.docs[i]);
             }
-            // console.table(this.docArr);
+            this.sortDocumentsInAscendingOrderOnly();
           }
 
         },
@@ -118,26 +115,26 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    //this.contractSub.unsubscribe();
+   
   }
 
   openModal(file) {
     const dialogConfig = new MatDialogConfig();
-    // let passdata:string = '{"fileName": "'+this.file.name+'","fileUrl": "'+this.file.fileUrl+'"}';
+
     let passdata: string =
       '{"contractName": "' +
       file.details.name +
       '","contractId": "' +
       file.details.Amsidnr +
       '"}';
+
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = 'rename-contract-dialog';
-    // dialogConfig.height = '80%';
     dialogConfig.width = '350px';
     dialogConfig.panelClass = 'bg-dialog-folder';
     dialogConfig.data = passdata;
-    // https://material.angular.io/components/dialog/overview
+
     const modalDialog = this.matDialog.open(
       RenameContractComponent,
       dialogConfig
@@ -145,17 +142,13 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
 
     this.matDialog.getDialogById('rename-contract-dialog').afterClosed().subscribe({
       next: () => {
-
         this.contractService
           .getContractDetails(this.contract_id)
           .subscribe({
             next: (resp: any) => {
-              
               this.contract.details.name = resp.name;
-
             },
           });
-
       },
     });
 
@@ -166,13 +159,10 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
       .makeContractFavourite(contract.details.Amsidnr)
       .subscribe({
         next: (resp: any) => {
-          console.log(resp);
           this.contract.details.favoriteId = resp.id;
           this.contract.details.isFav = '1';
         },
         error: (resp) => {
-          // console.log(resp);
-          // console.log(contract.details.Amsidnr);
           this.snackbar.open(this.translate.instant('contract_detail.mark_fav_error'),this.translate.instant('snack_bar.action_button'),{
             duration:1500,
             panelClass:['snack_error'],
@@ -193,12 +183,9 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
       .deleteContractFavourite(contract.details.favoriteId)
       .subscribe({
         next: (resp: any) => {
-          console.log(resp);
           this.contract.details.isFav = '0';
         },
         error: (resp) => {
-          // console.log(resp);
-          // console.log(contract.details.favoriteId);
           this.snackbar.open(this.translate.instant('contract_detail.unmark_fav_error'),this.translate.instant('snack_bar.action_button'),{
             panelClass:['snack_error'],
             duration:1500,
@@ -228,12 +215,11 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    console.log('afterViewInit ' + this.docArr.length);
     this.documentItemList.changes.subscribe({
       next: (t) => {
         if (this.docArr.length > 0) {
-          console.log('after view init ' + this.documentItemList.length);
-          // this.swipeLeft();
+          //console.log('after view init ' + this.documentItemList.length);
+          this.sortDocumentsInAscendingOrderOnly();
         }
       },
     });
@@ -242,15 +228,14 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
   renameFileModal(file) {
     const dialogConfig = new MatDialogConfig();
     let passdata:string = '{"docName": "'+file.name+'","docid": "'+file.docid+'","systemId": "'+file.systemId+'","fromLocation":"contract" }';
+
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = 'rename-document-dialog';
-    // dialogConfig.height = '80%';
     dialogConfig.width = '350px';
     dialogConfig.panelClass = 'bg-dialog-folder';
     dialogConfig.data = passdata;
 
-    // https://material.angular.io/components/dialog/overview
     const renameFileDialog = this.matDialog.open(RenameModalComponent, dialogConfig);
 
     this.matDialog.getDialogById('rename-document-dialog').afterClosed().subscribe({
@@ -269,7 +254,7 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
               for (let i = 0; i < resp.docs.length; i++) {
                 this.docArr.push(resp.docs[i]);
               }
-              // console.table(this.docArr);
+              this.sortDocumentsInAscendingOrderOnly();
             }
 
           },
@@ -284,14 +269,12 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
   onSwipe(evt, doc: DocumentData) {
     const swipeDirection = Math.abs(evt.deltaX) > 40 ? (evt.deltaX > 0 ? 'right' : 'left'):'';
     
-    console.log('swiped '+swipeDirection);
     switch(swipeDirection){
       case 'left':{
         doc.swipedLeft = true;
         break;
       }
       case 'right':{
-
         doc.swipedLeft = false;
         break;
       }
@@ -317,8 +300,8 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
           } else {
             return 0;
           }
-        }   catch(e){
-          console.log(e);
+        }  catch(e){
+          
         }
       });
       this.sortDateByAsc = !this.sortDateByAsc;
@@ -333,7 +316,6 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     if(this.contract.details.tarif != "" && !this.contract.details.tarif.includes('TODO')){
       return true;
     }
-
     return false;
   }
 
@@ -343,35 +325,102 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
 
     let passdata:string = '{"contractName": "'+contract.details.name+'","contractId": "'+contract.details.Amsidnr+'","document_type":"contract" }';
 
-    console.log("from fav item ->"+passdata);
-
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = 'add-document-modal-component';
-    //dialogConfig.height = '350px';
     dialogConfig.width = '400px';
     dialogConfig.data = passdata;
 
     dialogConfig.panelClass = 'bg-dialog-folder';
-    // https://material.angular.io/components/dialog/overview
     const modalDialog = this.matDialog.open(AddPageModalComponent, dialogConfig);
     
     this.matDialog.getDialogById('add-document-modal-component').afterClosed().subscribe({
       next:()=>{
 
-        // this.folderService.getFolderDetails(this.folder.id).subscribe({
-        //   next:(resp:any) =>{
-        //     console.log('folder-details');
-        //     this.folder = this.folderService.selectedFolder;
-        //   },
-        //   complete:()=>{},
-        // });
+        this.contractService
+        .getContractDetails(this.contract_id)
+        .subscribe({
+          next: (resp:any) => {
+
+            this.contract = this.contractService.selectedContract;
+
+            if(this.contract.details.ownPicture.includes('data:image')){
+
+              this.src_link_for_small_picture = this.contract.details.ownPicture;
+
+            } else {
+              this.src_link_for_small_picture = "../assets/default_small_picture.svg";
+            }
+
+            if (resp.hasOwnProperty('docs')) {
+              for (let i = 0; i < resp.docs.length; i++) {
+                this.docArr.push(resp.docs[i]);
+              }
+            }
+
+          },
+          complete: () => {
+            this.loadingService.emitIsLoading(false);
+          },
+        });
 
       },
       error:(resp)=>{
-        console.log(resp);
+
       }
     });
+  }
+
+  editSmallPicture(contract_id: string, small_picture_link: string){
+
+    const dialogConfig = new MatDialogConfig();
+
+    let passdata:string = '{"contractId": "'+contract_id+'","smallPictureLink": "'+small_picture_link+'"}';
+
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = false;
+    dialogConfig.id = 'edit-small-picture-modal-component';
+    dialogConfig.width = '400px';
+    dialogConfig.data = passdata;
+
+    dialogConfig.panelClass = 'bg-dialog-folder';
+    const modalDialog = this.matDialog.open(EditSmallPictureComponent, dialogConfig);
+    
+    this.matDialog.getDialogById('edit-small-picture-modal-component').afterClosed().subscribe({
+      next:()=>{
+
+      },
+      error:(resp)=>{
+      
+      }
+    });
+
+  }
+
+  sortDocumentsInAscendingOrderOnly(){
+    this.docArr.sort((a,b)=>{
+      try{
+        let dateA = new Date(a.createdAt);
+        let dateB = new Date(b.createdAt);
+
+        if ((dateA instanceof Date && !isNaN(dateA.getTime()))&&(dateB instanceof Date && !isNaN(dateB.getTime()))) {
+          //valid date object
+          return dateA >= dateB ? 1 : -1; 
+        } else if((dateA instanceof Date && !isNaN(dateA.getTime()))&& !(dateB instanceof Date && !isNaN(dateB.getTime()))){
+          // invalid date object
+          return -1;
+        } else if(!(dateA instanceof Date && !isNaN(dateA.getTime()))&& (dateB instanceof Date && !isNaN(dateB.getTime()))){
+          // invalid date object
+          return 1;
+        } else {
+          return 0;
+        }
+      }  catch(e){
+        
+      }
+    });
+
+    this.docArr.reverse();
   }
 
 }

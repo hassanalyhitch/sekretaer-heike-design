@@ -1,51 +1,32 @@
-import { HttpClient } from "@angular/common/http";
-import {
-  Component,
-  OnInit,
-  Output,
-  EventEmitter,
-  ViewChild,
-  Input,
-} from "@angular/core";
-
-import { Location } from '@angular/common';
-
-import { NgForm } from "@angular/forms";
-import { Router } from "@angular/router";
-
-import { LoginData } from "../models/login.model";
-import { LoginService } from "../services/login.service";
+import { Component, OnInit } from "@angular/core";
+import { FormControl, Validators, FormGroup} from "@angular/forms";
+import { PasswordService } from "../services/password.service";
+import { TranslateService } from "@ngx-translate/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.css']
 })
+
 export class ForgotPasswordComponent implements OnInit {
 
-  userInput = {};
-  buttonDisabled = true;
-
-  email: string = "";
-  submitted: boolean = false;
-
-  isFormSubmmited: boolean = false;
+  isFormSubmmited: boolean;
 
   selected_theme: string;
   app_logo_link_src: string;
+  errorMessage: string;
 
-  @ViewChild("loginForm", { static: true }) loginForm: NgForm;
-  errorMessage: string = null;
-  errorStack: string[] = [];
-
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private loginService: LoginService,
-    private _location: Location
+  constructor( 
+    private passwordService: PasswordService,
+    private translate: TranslateService,
+    private snackBar: MatSnackBar
   ) {
     this.app_logo_link_src = "../assets/sekretaer_pink_logo.svg"; //default logo 
     this.selected_theme = "";
+    this.isFormSubmmited = false;
+    this.errorMessage = "";
   }
 
   ngOnInit(): void {
@@ -68,57 +49,38 @@ export class ForgotPasswordComponent implements OnInit {
     
   }
 
-  validateUser(formData: LoginData) {
+  resetPasswordform = new FormGroup({
+    email : new FormControl('', [Validators.required, Validators.email]),
+  });
+  
+  onSubmit() {
 
-    // TODO: Reset Password Service
+    this.passwordService.sendPasswordResetLinkToUserEmail(this.resetPasswordform.value).subscribe({
+      next: () => {},
+      error: (e) => {
 
-    // this.loginService.login(formData).subscribe({
-    //   next: (resp) => {
-    //     // if (resp.hasOwnProperty("token")) {
-    //     //   this.authenticated.emit(true);
-    //     //   this.lang.emit(this.loginService.lang);
-    //     // }
+        this.isFormSubmmited = false;
 
-    //     console.log("Forgot Password Response=> " + resp);
+        if (e.error.hasOwnProperty("message")) {
 
-    //   },
-    //   error: (e) => {
-    //     console.log(e);
-    //     if (e.hasOwnProperty("name") && e.hasOwnProperty("statusText")) {
-    //       this.errorMessage = " " + e.name + " -> " + e.statusText;
-    //       console.log("display this error => " + this.errorMessage);
-    //     }
+          if(e.error.hasOwnProperty("errors")){
 
-    //     if (e.error.hasOwnProperty("msg")) {
-    //       this.errorMessage = e.error.msg;
-    //       console.log("display this error => " + this.errorMessage);
-    //     } else if (e.error.hasOwnProperty("message")) {
-    //       this.errorMessage = e.error.message;
-    //       console.log("display this error => " + this.errorMessage);
-    //     }
-    //     this.showSnackbar(this.errorMessage);
-    //     this.submitted = false;
-    //   },
-    //   complete: () => {
-    //     // console.info('complete')
-    //   },
-    // });
-  }
+            this.snackBar.open(
+              e.error.message,
+              this.translate.instant('snack_bar.action_button'),
+              {
+                duration: 8000,
+                panelClass:['snack_error'],
+              }
+            ); 
 
-  // showSnackbar(error: string) {
-  //   this.errorStack.push(this.errorMessage);
-  //   setInterval(() => {
-  //     this.errorStack.pop();
-  //   }, 8000);
-  // }
-
-  onSubmit(formData: LoginData) {
-    
-    // this.errorMessage = null;
-    // this.validateUser(formData);
-
-    this.isFormSubmmited = true;
-    
+          }
+        } 
+      },
+      complete: () => {
+        this.isFormSubmmited = true;
+      },
+    });
   }
 
 }

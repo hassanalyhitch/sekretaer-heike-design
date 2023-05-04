@@ -3,6 +3,8 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LoginService } from './login.service';
+import { environment } from '../../environments/environment';
+
 
 @Injectable({ providedIn: 'root' })
 
@@ -12,7 +14,7 @@ export class BranchService {
     
     getBranches(){
         
-        let url = 'https://testapi.maxpool.de/api/v1/masterbranches';
+        let url = environment.baseUrl + '/api/v1/masterbranches';
         
         return this.http.get(url,{
            headers:new HttpHeaders({
@@ -43,7 +45,7 @@ export class BranchService {
 
     getCompany(Branch2MasterId){
         
-        let url = 'https://testapi.maxpool.de/api/v1/masterbranches/'+ Branch2MasterId +'/companies';
+        let url = environment.baseUrl + '/api/v1/masterbranches/'+ Branch2MasterId +'/companies';
         
         return this.http.get(url,{
            headers:new HttpHeaders({
@@ -71,7 +73,8 @@ export class BranchService {
     }
     getProducts(Branch2MasterId){
 
-      let url = 'https://testapi.maxpool.de/api/v1/masterbranches/'+ Branch2MasterId +'/products';
+      let url = environment.baseUrl + '/api/v1/masterbranches/'+ Branch2MasterId +'/products';
+      
       return this.http.get(url,{
         headers:new HttpHeaders({
           'accept': 'application/json',

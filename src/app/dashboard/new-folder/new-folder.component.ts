@@ -25,39 +25,21 @@ export class NewFolderComponent implements OnInit {
 
   ngOnInit() {}
 
-  // onFetchFolders(){
-  //   this.folderService.getFolders().subscribe ({
-  //     next:(resp) =>{
-  //       console.log(resp);
-        
-  //     },
-  //     error:(e) =>{
-  //       console.log(e);
-  //     },
-  //     complete:()=>{
-
-  //     }
-  //   });
-  // }
-
   onSubmit(formData: any) {
-    //console.log(this.newFolderName, this.data.parentFolderId);
+  
 
     this.submitted = true;
 
     //create a sub folder
     if (this.data.parentFolderId > 0){
 
-      //console.log('New Subfolder '+this.newFolderName + ' '+this.data.parentFolderId);
 
       this.folderService.addNewFolder(this.newFolderName, this.data.parentFolderId).subscribe({
         next:(resp)=>{
-          //console.log(resp);
           this.submitted = false;
           this.dialogRef.close(); 
         },
         error:(resp)=>{
-          //console.log(resp);
           this.submitted = false;
 
           //show snackbar with error message
@@ -81,19 +63,13 @@ export class NewFolderComponent implements OnInit {
       
     //create a parent folder
     } else if (this.data.parentFolderId == 0){
-
-      //console.log('New Parent folder '+this.newFolderName + ' '+this.data.parentFolderId);
-
       this.folderService.addNewFolder(this.newFolderName, "0").subscribe({
         next:(resp)=>{
-          //console.log(resp);
           this.submitted = false;
           this.dialogRef.close();
         },
         error:(resp)=>{
-          //console.log(resp);
-          this.submitted = false;
-
+          this.submitted = false;         
           //show snackbar with error message
           this.snackBar.open(this.translate.instant('folder-detail.folder_creation_error'),  this.translate.instant('snack_bar.action_button'),{
             panelClass: ['snack_error'],

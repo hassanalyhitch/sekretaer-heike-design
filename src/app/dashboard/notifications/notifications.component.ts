@@ -1,7 +1,5 @@
 import { LoadingService } from '../../services/loading.service';
-import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { NotificationData } from '../../models/notification.model';
 import { NotificationsService } from '../../services/notification.service';
@@ -44,7 +42,11 @@ export class NotificationsComponent implements OnInit {
       next:(resp)=>{
         
         if(Array.isArray(resp)){
-          resp.sort((a, b) => a.isRead.localeCompare(b.isRead));
+
+          //console.log(resp);
+
+          resp.sort((a, b) => a.isRead.toString().localeCompare(b.isRead.toString()));
+
           for(let item of resp){
             
             let notif: NotificationData = {
@@ -58,14 +60,31 @@ export class NotificationsComponent implements OnInit {
               isRead: item['isRead'],
               links: item['links']
             };
-            this.allNotifsArr.push(notif);
+            
+          //console.log('notifArr Date A '+notif.createdAt);
+
+          if(notif.createdAt.includes('.')){
+            let d1:string = notif.createdAt.split(' ')[0];
+            
+            notif.createdAt = d1.split('.').reverse().toString().replace(/,/g,".") + " " + notif.createdAt.split(' ')[1];
+
           }
+            
+            this.allNotifsArr.push(notif);
+
+           // console.log('Created at -> '+notif.createdAt);
+          }
+
+          
+
+          //this.allNotifsArr[2].createdAt = "2023.04.25 06:07:34";
+          //this.allNotifsArr[3].createdAt = "2023.04.24 05:07:34";
+
         } else{
           //error
         }
       },
       complete:()=>{
-        // console.table(this.allNotifsArr);
         this.loadingService.emitIsLoading(false);
       }
     });
@@ -74,7 +93,6 @@ export class NotificationsComponent implements OnInit {
   }
 
   filterSearch(searchValue:string){
-    console.log(searchValue);
     if(searchValue != undefined && searchValue != ""){
       let searchResult = this.allNotifsArr.filter((obj) => {
         if( obj.infoHeadline != null && obj.infoHeadline.toLowerCase().includes(searchValue.toLowerCase())
@@ -89,7 +107,6 @@ export class NotificationsComponent implements OnInit {
   }
 
   sortByType(){
-    // console.log("sortByType");
     if(this.sortTypeByAsc){
       this.allNotifsArr.sort((a, b) => {
         if(a.links === null && b.links === null){
@@ -111,31 +128,38 @@ export class NotificationsComponent implements OnInit {
   }
 
   sortByTitle(){
-    // console.log("sortByTitle");
+    console.log('before sorting ',this.sortTitleByAsc);
+    console.table(this.allNotifsArr);
+
     if(this.sortTitleByAsc){
       this.allNotifsArr.sort((a, b) => {
-        if(a.infoHeadline === null && b.infoHeadline === null){
+       
+        if(a.infoHeadline !== null && b.infoHeadline !== null) {
+          return a.infoHeadline.toLowerCase().localeCompare(b.infoHeadline.toLowerCase());
+        } else if(a.infoHeadline === null && b.infoHeadline === null){
           return 0;
         } else if(a.infoHeadline === null && b.infoHeadline !== null){
           return 1;
         } else if(a.infoHeadline !== null && b.infoHeadline === null){
           return -1;
-        } else {
-          return a.infoHeadline[0].localeCompare(b.infoHeadline[0]);
-        }
+        } 
       });
       this.sortTitleByAsc = !this.sortTitleByAsc;
+      console.log('after sorting ',this.sortTitleByAsc);
+      console.table(this.allNotifsArr);
     } else {
       this.allNotifsArr.reverse();
       this.sortTitleByAsc = !this.sortTitleByAsc;
+      console.log('Reverse array',this.sortTitleByAsc);
+      console.table(this.allNotifsArr);
 
     }
   }
 
   sortByDate(){
-    // console.log("sortByDate");
     if(this.sortDateByAsc){
-      this.allNotifsArr.sort((a, b) => {  
+      this.allNotifsArr = this.allNotifsArr.sort((a, b) => { 
+
         try{
 
           let dateA = new Date(a.createdAt);
@@ -154,13 +178,16 @@ export class NotificationsComponent implements OnInit {
             return 0;
           }
         } catch(e){
-          console.log(e);
         }
         
     });
+
+    console.table(this.allNotifsArr);
+
       this.sortDateByAsc = !this.sortDateByAsc;
     } else {
       this.allNotifsArr.reverse();
+      console.table(this.allNotifsArr);
       this.sortDateByAsc = !this.sortDateByAsc;
 
     }

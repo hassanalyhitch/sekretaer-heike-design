@@ -4,10 +4,12 @@
     <div class="mb-auto p-2 w-100 d-flex justify-content-center">
       <img class="icon-left" [src]="src_link_for_icon_left">
     </div>
+
     <div class="">
       <div class="w-100 p-2" data-bs-toggle="dropdown" aria-expanded="false" >
         <img class="p-2" src="/assets/icon_filter.svg">
       </div>
+
       <ul class="dropdown-menu shadow">
         <li><span class="dropdown-item" href="" (click)="addNewDocument(contractItem)" >{{ 'contract_detail.fav_item_insurance_side_menu_option_1' | translate }}</span></li>
         <li><span class="dropdown-item" href="" *ngIf="contractItem.details.isFav=='0'" (click)="markFav(contractItem)" >{{ 'contract_detail.fav_item_insurance_side_menu_option_2' | translate }}</span></li>
@@ -24,28 +26,27 @@
       <span class="company px-2">{{contractItem.details.Company | shortenText: 20}}</span>
   
       <div class="d-flex align-items-end justify-content-between w-100 mt-auto py-1 ">
-        <div class="date d-flex align-items-end px-1">
-          <i class="material-icons ">access_time</i>
-          <span class="mx-1">{{contractItem.details.EndDate | formatDate}}</span>
-        </div>
-        <div class="price ml-auto px-1">
-          <span class="price">{{ contractItem.details.YearlyPayment | currencyFormat}}</span>
-          <span> / {{ 'contract_detail.contract_yearly_payment_label' | translate }}</span> 
-        </div>
+          <div class="date d-flex align-items-end px-1">
+            <i class="material-icons ">access_time</i>
+            <span class="mx-1">{{contractItem.details.EndDate | formatDate}}</span>
+          </div>
+
+          <div class="price ml-auto px-1">
+            <span class="price">{{ contractItem.details.YearlyPayment | currencyFormat}}</span>
+            <span> / {{ 'contract_detail.contract_yearly_payment_label' | translate }}</span> 
+          </div>
       </div>
   
       <div class="small-picture">
         <img class="w-100 img-responsive" [src]="src_link_for_small_picture" alt="small-picture">
         
         <div class=" fav-btn d-flex align-items-center justify-content-center"
-         [ngClass]="{'isFav': contractItem.details.isFav == '1', 'notFav': contractItem.details.isFav == '0'}" >
+        [ngClass]="{'isFav': contractItem.details.isFav == '1', 'notFav': contractItem.details.isFav == '0'}" >
           <i class="material-icons">star</i>
         </div>
       </div>
-  
-  
+
     </div>
-  
-  </div>
   </div>
   
+</div>

@@ -84,6 +84,10 @@ import { ChangeThemeComponent } from './change-theme/change-theme.component';
 import { NewPasswordComponent } from './dashboard/settings/change-password/new-password/new-password.component';
 import { ResetSuccessfulComponent } from './dashboard/settings/change-password/reset-successful/reset-successful.component';
 import { ChangePushNotificationsComponent } from './change-push-notifications/change-push-notifications.component';
+import { EditSmallPictureComponent } from './dashboard/edit-small-picture/edit-small-picture.component';
+import { AuthGuardGuard } from './auth-guard.guard';
+import { LoggedInGuard } from './logged-in.guard';
+import { ContractCategoryComponent } from './dashboard/overview/contract-category/contract-category.component';
 
 
 // AoT requires an exported function for factories
@@ -101,39 +105,49 @@ const appRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   {
     path: 'dashboard',
+    canActivate: [AuthGuardGuard],
+    component: DashboardComponent,
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', component: HomeComponent },
-      { path: 'overview', component: OverviewComponent },
-      { path: 'broker', component: BrokerComponent },
-      { path: 'favourite', component: FavouriteComponent },
-      { path: 'settings', component: SettingsComponent }
+      { path: 'home',canActivate: [AuthGuardGuard], component: HomeComponent },
+      { path: 'overview',canActivate: [AuthGuardGuard], component: OverviewComponent },
+      { path: 'broker',canActivate: [AuthGuardGuard], component: BrokerComponent },
+      { path: 'favourite',canActivate: [AuthGuardGuard], component: FavouriteComponent },
+      { path: 'settings',canActivate: [AuthGuardGuard], component: SettingsComponent },
+      { path: 'home/contract-detail',canActivate: [AuthGuardGuard], component:ContractDetailComponent },
+      { path: 'overview/contract-detail',canActivate: [AuthGuardGuard], component:ContractDetailComponent },
+      { path: 'overview/folder-detail',canActivate: [AuthGuardGuard], component:FolderDetailComponent },
+      { path: 'home/notifications',canActivate: [AuthGuardGuard], component:NotificationsComponent },
+      { path: 'home/notifications/notification-detail',canActivate: [AuthGuardGuard], component:NotificationDetailComponent },
+      { path: 'favourite/contract-detail',canActivate: [AuthGuardGuard], component:ContractDetailComponent },
+      { path: 'home/contract-detail/fileview',canActivate: [AuthGuardGuard], component: FileviewComponent },
+      { path: 'home/adddocument',canActivate: [AuthGuardGuard], component:AddPageComponent },
+      { path: 'home/chat',canActivate: [AuthGuardGuard], component:ChatComponent },  
+      { path: 'home/search',canActivate: [AuthGuardGuard], component:SearchPageComponent },  
+      { path: 'overview/new-contract',canActivate: [AuthGuardGuard],component:NewContractComponent },
+      { path: 'settings/my-data',canActivate: [AuthGuardGuard],component:MyDataComponent },
+      { path: 'settings/change-password',canActivate: [AuthGuardGuard], canDeactivate: [AuthGuardGuard], component:ChangePasswordComponent},
+      { path: 'settings/new-password', canActivate: [AuthGuardGuard], canDeactivate: [AuthGuardGuard], component:NewPasswordComponent},
+      { path: 'settings/password-reset-successful',canActivate: [AuthGuardGuard],component:ResetSuccessfulComponent},
+      { path: 'settings/privacy-policy',canActivate: [AuthGuardGuard], component:PrivacyPolicyComponent },
+      { path: 'settings/terms-and-conditions',canActivate: [AuthGuardGuard], component:TermsConditionsComponent },
+      { path: 'settings/change-theme',canActivate: [AuthGuardGuard], component:ChangeThemeComponent },
+      { path: 'settings/change-language',canActivate: [AuthGuardGuard], component:ChangeLanguageComponent },
+      { path: 'settings/change-push-notifications',canActivate: [AuthGuardGuard], component:ChangePushNotificationsComponent },
     ],
   },
-  { path: 'dashboard/home/contract-detail', component:ContractDetailComponent },
-  { path: 'dashboard/overview/contract-detail', component:ContractDetailComponent },
-  { path: 'dashboard/overview/folder-detail', component:FolderDetailComponent },
-  { path: 'dashboard/home/notifications', component:NotificationsComponent },
-  { path: 'dashboard/home/notifications/notification-detail', component:NotificationDetailComponent },
-  { path: 'dashboard/favourite/contract-detail', component:ContractDetailComponent },
-  { path: 'dashboard/home/contract-detail/fileview', component: FileviewComponent },
-  { path: 'dashboard/home/adddocument', component:AddPageComponent },
-  { path: 'dashboard/home/chat', component:ChatComponent },  
-  { path: 'dashboard/home/search', component:SearchPageComponent },  
-  { path: 'dashboard/overview/new-contract',component:NewContractComponent },
-  { path: 'dashboard/settings/my-data',component:MyDataComponent },
-  { path: 'dashboard/settings/change-password', component:ChangePasswordComponent},
-  { path: 'dashboard/settings/new-password',component:NewPasswordComponent},
-  { path: 'dashboard/settings/password-reset-successful',component:ResetSuccessfulComponent},
-  { path: 'dashboard/settings/privacy-policy', component:PrivacyPolicyComponent },
-  { path: 'dashboard/settings/terms-and-conditions', component:TermsConditionsComponent },
-  { path: 'dashboard/settings/change-theme', component:ChangeThemeComponent },
-  { path: 'dashboard/settings/change-language', component:ChangeLanguageComponent },
-  { path: 'dashboard/settings/change-push-notifications', component:ChangePushNotificationsComponent },
+  { path: 'login', component:LoginComponent, canActivate: [LoggedInGuard]},
   { path: 'privacy-policy',component:PrivacyPolicyComponent },
   { path: 'terms-and-conditions', component:TermsConditionsComponent },
   { path: 'forgot-password', component:ForgotPasswordComponent },
   { path: 'forgot-password-email-sent', component:ForgotPasswordEmailSentComponent },
+  { 
+    path: 'new-password',component:NewPasswordComponent,
+    pathMatch: 'prefix',
+    children: [{
+      path: '**', component: NewPasswordComponent
+    }]
+  },
   { path: '**', redirectTo: 'dashboard' }
 
 ];
@@ -218,7 +232,9 @@ const appRoutes: Routes = [
     ChangeThemeComponent,
     NewPasswordComponent,
     ResetSuccessfulComponent,
-    ChangePushNotificationsComponent
+    ChangePushNotificationsComponent,
+    EditSmallPictureComponent,
+    ContractCategoryComponent
    ],
   bootstrap:    [ AppComponent ],
   providers: [

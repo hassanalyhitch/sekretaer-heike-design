@@ -1,11 +1,8 @@
-import { Observable } from 'rxjs';
 import {AfterViewInit,Component, ElementRef, OnInit,QueryList,ViewChild,ViewChildren} from "@angular/core";
 import { Router } from "@angular/router";
 import { ContractsService } from "../../services/contracts.service";
-import { formatDate } from "@angular/common";
 import { ContractData } from "../../models/contract.model";
 import { NotificationsService } from "../../services/notification.service";
-import { LoginService } from "../../services/login.service";
 import { LoadingService } from '../../services/loading.service';
 import { BrokerService } from '../../services/broker.service';
 import { BrokerData } from '../../models/broker.model';
@@ -18,17 +15,17 @@ import { FolderData } from '../..//models/folder.model';
   styleUrls: ["./home.component.css"],
 })
 export class HomeComponent implements OnInit,AfterViewInit{
-  favArr: ContractData[];
-  allContractsArr: ContractData[] = [];
+  
   notifCount: number = 0;
+
   zeroNotifCount:boolean = false;
   isNotificationCountText: boolean = false;
   
   telto: string = "tel:";
   brokerNumber: string = "";
-  //chatCheck: number = 0;
-  //insuranceCheck: number = 0;
-  //isChatFabEnabled: boolean = false;
+ 
+  favArr: ContractData[];
+  allContractsArr: ContractData[] = [];
 
   favFoldersArr: FolderData[] = [];
   allFoldersArr: FolderData[] = [];
@@ -64,7 +61,6 @@ export class HomeComponent implements OnInit,AfterViewInit{
            }
         });
 
-        console.log(this.favArr.length);
 
         //all favorite folders
         this.folderService.getFolders().subscribe({
@@ -90,7 +86,6 @@ export class HomeComponent implements OnInit,AfterViewInit{
             this.brokerNumber = resp.myBroker.tel1;
             this.telto = this.telto + this.brokerNumber;
     
-            console.log(this.telto);
 
             this.notificationService.getUnreadNotifications().subscribe({
               next: () => {
@@ -98,10 +93,6 @@ export class HomeComponent implements OnInit,AfterViewInit{
                 if(this.notifCount >= 0 && this.notifCount <= 99){
         
                   this.isNotificationCountText = false;
-        
-                  // document
-                  // .getElementById("notif")
-                  // .setAttribute("notification-count", this.notifCount + "");
         
                 } else if(this.notifCount > 99){
         
@@ -127,40 +118,12 @@ export class HomeComponent implements OnInit,AfterViewInit{
 
   }
 
-  refresh(){
-
-    this.favArr = [];
-    this.contractService.getContracts().subscribe({
-      next: () => {
-        this.allContractsArr = this.contractService.userContractsArr;
-        this.favArr.length = 0;
-        this.allContractsArr.forEach((contract) => {
-          if (contract.details.isFav === 1 || contract.details.isFav === "1") {
-            this.favArr.push(contract);
-           }
-        });
-
-        console.log(this.favArr.length);
-
-        //all favorite folders
-        this.folderService.getFolders().subscribe({
-          next: (resp)=>{
-
-            this.allFoldersArr = this.folderService.userFolderArr;
-            this.allFoldersArr.forEach((folder)=>{
-              if(folder.isFavorite === 1 ){
-                this.favFoldersArr.push(folder);
-              }
-            
-            });
-                    
-          },
-          complete:()=>{
-            
-          }
-        });
+  refresh(id:number){
+    for(let i of this.favArr){
+      if(i.id == id ){
+        this.favArr = this.favArr.filter(item => item !== i);
       }
-    })
+    }
   }
 
   ngAfterViewInit(){
@@ -180,7 +143,6 @@ export class HomeComponent implements OnInit,AfterViewInit{
           let target = element.nativeElement as HTMLElement;
           cardWidth = target.clientWidth;
 
-          console.log("Home Component: Fav Folder Array count "+this.favFoldersArr.length);
 
           favArrCount = this.favArr.length + this.favFoldersArr.length;
 
@@ -188,7 +150,6 @@ export class HomeComponent implements OnInit,AfterViewInit{
           globalThis.lineObjectArr.push({isActive: false, startsFrom: cardstart, endsAt: cardend});
           cardstart = cardend+1;
 
-          
           //reset scroll
           globalThis.lineObjectArr[0].isActive = true;
           document.getElementById("fav-wrapper").scrollTo({
@@ -197,50 +158,44 @@ export class HomeComponent implements OnInit,AfterViewInit{
             behavior: 'smooth'
           });
 
-          console.log(globalThis.lineObjectArr);
         });
 
       }
     });
 
     document.getElementById("fav-wrapper").addEventListener('scroll', function (event) {
-      // Set starting position
-    if (!start) {
-      start = document.getElementById("fav-wrapper").scrollWidth;
-    }
+        // Set starting position
+      if (!start) {
+        start = document.getElementById("fav-wrapper").scrollWidth;
+      }
 
-    // Clear our timeout throughout the scroll
-    window.clearTimeout(isScrolling);
+      // Clear our timeout throughout the scroll
+      window.clearTimeout(isScrolling);
 
-    // Set a timeout to run after scrolling ends to avoid infinity loops
-    isScrolling = setTimeout(function() {
+      // Set a timeout to run after scrolling ends to avoid infinity loops
+      isScrolling = setTimeout(function() {
 
-      // Calculate distance
-      const box = document.getElementById("fav-wrapper");
-      
-      console.log("scrolled by => "+box.scrollLeft);
-      console.log("scroll width => "+box.scrollWidth);
-      console.log("~'screen width' => "+box.clientWidth);
-      console.log(box.scrollWidth);
+        // Calculate distance
+        const box = document.getElementById("fav-wrapper");
+        
 
-      distance = box.scrollLeft;
-      totalScrollWidth = box.scrollWidth;
-      // Run the callback to set active line
-      scroll_callback(distance, totalScrollWidth);
+        distance = box.scrollLeft;
+        totalScrollWidth = box.scrollWidth;
+        // Run the callback to set active line
+        scroll_callback(distance, totalScrollWidth);
 
-      // Reset calculations
-      start = null;
-      end = null;
-      distance = null;
+        // Reset calculations
+        start = null;
+        end = null;
+        distance = null;
 
-    }, 66);
+      }, 66);
 
   }, false);
 
   function scroll_callback(distance, totalScrollWidth){
     
     distance = distance + 16; //plus 16 for margins
-    console.log("scroll distance => "+distance);
     for(let line of globalThis.lineObjectArr){
       line.isActive = false;
     }
@@ -254,19 +209,19 @@ export class HomeComponent implements OnInit,AfterViewInit{
   
   }
 
-
   onFavContractClick(favItem) {
     let clickedContract: ContractData = this.favArr[favItem];
-    // console.log(clickedContract);
     this.contractService.emitSelectedFolder(clickedContract);
     this.router.navigate([
       "dashboard/home/contract-detail",
       { id: clickedContract.details.Amsidnr },
     ]);
   }
+
   favArrHasNoContent() {
-    return this.favArr.length < 1 ? true : false;
+    return this.favArr.length < 1 && this.favFoldersArr.length < 1;
   }
+
   onAddPage() {
     this.router.navigate(["dashboard/home/adddocument"]);
   }
@@ -302,7 +257,6 @@ export class HomeComponent implements OnInit,AfterViewInit{
   }
 
   onFolderCardClick(clickedFolder){
-
     this.folderService.emitSelectedFolder(clickedFolder);
     this.router.navigate(['dashboard/overview/folder-detail', { id: clickedFolder.id }]);
   }

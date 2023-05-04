@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable, Observer, tap } from "rxjs";
 import { NotificationData } from "../models/notification.model";
 import { LoginService } from "./login.service";
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationsService {
@@ -49,7 +50,7 @@ export class NotificationsService {
   }
 
   getNotifications() {
-    return this.http.get('https://testapi.maxpool.de/api/v1/sekretaer/notifications',{
+    return this.http.get(environment.baseUrl + '/api/v1/sekretaer/notifications',{
           headers: new HttpHeaders({
                   'accept': 'application/json',
                   'Content-Type': 'application/json'
@@ -76,7 +77,7 @@ export class NotificationsService {
   }
 
   getUnreadNotifications() {
-    return this.http.get('https://testapi.maxpool.de/api/v1/sekretaer/notifications/unread',{
+    return this.http.get(environment.baseUrl + '/api/v1/sekretaer/notifications/unread',{
           headers: new HttpHeaders({
                   'accept': 'application/json',
                   'Content-Type': 'application/json'
@@ -104,7 +105,7 @@ export class NotificationsService {
   
   markAsRead(notificationId){
 
-    let url ='https://testapi.maxpool.de/api/v1/sekretaer/notifications/'+notificationId+'/mark/read';
+    let url = environment.baseUrl + '/api/v1/sekretaer/notifications/'+notificationId+'/mark/read';
 
     return this.http.put(url, {
       headers: new HttpHeaders({

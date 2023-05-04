@@ -1,6 +1,4 @@
-
 <div class="col-md-12 col-12 px-1">
-
   <div class="d-flex flex-column w-100">
 
     <div class="position-relative">
@@ -13,24 +11,26 @@
 
     <div class="align-items-center w-100">
       {{ 'rename_contract.sub_title_name' | translate }}:<br />
-      <strong>{{ documentName }}</strong>
+      <strong>{{ documentName | shortenText: 20 }}</strong>
     </div>
+
     <form (ngSubmit)= "onSubmit(saveForm.value)" class="d-flex flex-column mt-4" #saveForm="ngForm" > 
-      <div class="material-textfield mb-1">
-        <input placeholder=" " type="text" [(ngModel)]="newContractName" name="name" ngModel required/>
-        <label>{{ 'rename_contract.text_input_label' | translate }}</label>
-      </div>
-      <div class="mt-5 w-100">
-        <button
-          id="save-btn"
-          class="btn btn-login w-100 py-2"
-          [disabled]="(!saveForm.valid) || submitted"
-          type="submit"
-          style="font-size:20px;">
-            <span *ngIf="submitted" class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status"></span>
-            <span *ngIf="!submitted">{{ 'rename_contract.btn_save_label' | translate }}</span>
-        </button>
-      </div>
+        <div class="material-textfield mb-1">
+          <input placeholder=" " type="text" [(ngModel)]="newContractName" name="name" ngModel required/>
+          <label>{{ 'rename_contract.text_input_label' | translate }}</label>
+        </div>
+        
+        <div class="mt-5 w-100">
+          <button
+            id="save-btn"
+            class="btn btn-login w-100 py-2"
+            [disabled]="(!saveForm.valid) || submitted"
+            type="submit"
+            style="font-size:20px;">
+              <span *ngIf="submitted" class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status"></span>
+              <span *ngIf="!submitted">{{ 'rename_contract.btn_save_label' | translate }}</span>
+          </button>
+        </div>
       </form>
   </div>
 </div>

@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import { AuthLogin } from '../models/auth_login.model';
 import { LoginData } from '../models/login.model';
 import { SettingsService } from './settings.service';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class LoginService {
@@ -14,13 +15,15 @@ export class LoginService {
   public themeColor: string;
   public chatCheck: number;
   public insuranceCheck: number;
+  public passwordReset: boolean;
 
   authenticatedObs: Observable<boolean>;
   observer: Observer<boolean>;
-  isAuthenticated: boolean = false;
+  public isAuthenticated: boolean = false;
 
   constructor(
     private http: HttpClient,
+    private route: Router,
     private settingsService: SettingsService
   ) {
     this.authenticatedObs = new Observable((observer: Observer<boolean>) => {
@@ -73,7 +76,15 @@ export class LoginService {
   }
 
   emitAuthenticated(isValid: boolean) {
+    console.log("emitAuthenticated in login service "+isValid);
     this.observer.next(isValid);
+    console.log("Auth Status "+this.isAuthenticated);
+    
+    if(!isValid){
+      this.isAuthenticated = isValid;
+      console.log("emitAuthenticated 2"+isValid);
+      this.route.navigate(['login']);
+    }
   }
 
   login(data: LoginData) {
@@ -89,11 +100,13 @@ export class LoginService {
         tap((resp: AuthLogin) => {
           let now = new Date();
 
+          this.isAuthenticated = true;
           this.authToken = resp.token;
           this.chatCheck = resp.config.chat;
           this.themeColor = resp.config.colorSchema; //api theme color;
           this.lang = resp.lang;
           this.insuranceCheck = resp.config.insuranceCheck;
+          this.passwordReset = resp.config.passwordReset;
 
           this.settingsService.setCurrentTheme(this.themeColor);
           this.settingsService.setCurrentLanguage(this.lang); 

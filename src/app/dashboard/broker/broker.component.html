@@ -1,11 +1,11 @@
 <div class="content-wrapper w-100 ">
   <div class="_content d-flex flex-column w-100 h-100 ">
 
-  <div class="d-flex justify-content-center mb-2 px-3 pt-3">
-    <strong class="section-title align-self-center p-2">{{ 'broker.title' | translate }}</strong>
-  </div>
+    <div class="d-flex justify-content-center mb-2 px-3 pt-3">
+      <strong class="section-title align-self-center p-2">{{ 'broker.title' | translate }}</strong>
+    </div>
   
-  <div class="section-broker d-flex flex-column px-2 w-100 h-100">
+    <div class="section-broker d-flex flex-column px-2 w-100 h-100">
 
     <div class="broker-icon d-flex justify-content-center align-self-center bg-white">
       <img class="broker-img align-self-center mt-1" src="/assets/icon_broker_round_default.svg">
@@ -13,56 +13,55 @@
 
     <div class="d-flex broker-card shadow bg-white mx-2">
 
-      <div class=" d-flex flex-column pt-4 mt-5 mx-2">
+        <div class=" d-flex flex-column pt-4 mt-5 mx-2">
+          <table>
+            <tbody>
+              <tr>
+                <td><span class="text-title">{{ 'broker.inbox_label' | translate }}</span></td>
+                <td><span class="text-content mx-2">{{brokerName}}</span></td>
+              </tr>
 
-        <table>
-          <tbody>
+              <tr>
+                <td><span class="text-title">{{ 'broker.call_label' | translate }}</span></td>
+                <td>
+                  <div class="text-content mx-2"
+                    matTooltip="Click to make Phone Call"
+                    matTooltipPosition="right">
+                    <span itemprop="telephone">
+                      <a [href]="telto" class="tel">
+                        {{brokerNumber}}
+                      </a>
+                    </span>
+                  </div>
+                </td>
+              </tr>
 
-            <tr>
-              <td><span class="text-title">{{ 'broker.inbox_label' | translate }}</span></td>
-              <td><span class="text-content mx-2">{{brokerName}}</span></td>
-            </tr>
+              <tr>
+                <td><span class="text-title">{{ 'broker.email_label' | translate }}</span></td>
+                <td>
+                  <div 
+                    class="text-content mx-2" 
+                    matTooltip="Click to send Email"
+                    matTooltipPosition="right">
+                      <a [href]="mailto" class="email">
+                        {{brokerEmail}}
+                      </a>   
+                  </div>
+                </td>
+              </tr>  
+            </tbody>
+          </table>
 
-            <tr>
-              <td><span class="text-title">{{ 'broker.call_label' | translate }}</span></td>
-              <td>
-                <div class="text-content mx-2"
-                  matTooltip="Click to make Phone Call"
-                  matTooltipPosition="right">
-                  <span itemprop="telephone">
-                    <a [href]="telto" class="tel">
-                      {{brokerNumber}}
-                    </a>
-                  </span>
-                </div>
-              </td>
-            </tr>
+          <div class="d-flex mt-4">
+            <span class="grid-child-element text-content">{{brokerStreet}}</span>
+          </div>
+          
+          <div class="d-flex mt-2">
+            <span class="grid-child-element text-content">{{brokerZipCode}}</span>
+            <span class="grid-child-element text-content broker-city">{{brokerCity}}</span>
+          </div>
 
-            <tr>
-              <td><span class="text-title">{{ 'broker.email_label' | translate }}</span></td>
-              <td>
-                <div 
-                  class="text-content mx-2" 
-                  matTooltip="Click to send Email"
-                  matTooltipPosition="right">
-                    <a [href]="mailto" class="email">
-                      {{brokerEmail}}
-                    </a>   
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div class="d-flex mt-4">
-          <span class="grid-child-element text-content">{{brokerStreet}}</span>
         </div>
-        <div class="d-flex mt-2">
-          <span class="grid-child-element text-content">{{brokerZipCode}}</span>
-          <span class="grid-child-element text-content broker-city">{{brokerCity}}</span>
-        </div>
-
-      </div>
 
     </div>
 
@@ -76,6 +75,6 @@
       <app-home-fab-icons fab_location="broker_page" broker_email={{brokerEmail}} > </app-home-fab-icons>
     </div>
 
-  </div>
+    </div>
   </div>
 </div>

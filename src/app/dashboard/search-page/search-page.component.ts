@@ -215,26 +215,26 @@ export class SearchPageComponent implements OnInit {
 
       if( this.contractsResArr.length > 0 ){
         this.no_contracts_found = false;
-        // console.log('contracts size -> '+this.contractsResArr.length);
+
       } else if( this.contractsResArr.length == 0 ){
         this.no_contracts_found = true;
-        // console.log('contracts size -> '+this.contractsResArr.length);
+  
       }
 
       if( this.foldersResArr.length > 0 ) {
         this.no_folders_found = false;
-        // console.log('folders size -> '+this.foldersResArr.length);
+        
       } else if( this.foldersResArr.length == 0 ){
         this.no_folders_found = true;
-        // console.log('folders size -> '+this.foldersResArr.length);
+    
       } 
       
       if( this.documentsResArr.length > 0 ) {
         this.no_documents_found = false;
-        // console.log('Documents size -> '+this.documentsResArr.length);
+ 
       } else if( this.documentsResArr.length == 0 ){
         this.no_documents_found = true;
-        // console.log('Documents size -> '+this.documentsResArr.length);
+
       }
 
     }
@@ -243,10 +243,10 @@ export class SearchPageComponent implements OnInit {
 
       if( this.foldersResArr.length > 0 ) {
         this.no_folders_found = false;
-        // console.log('folders size -> '+this.foldersResArr.length);
+
       } else if( this.foldersResArr.length == 0 ) {
         this.no_folders_found = true;
-        // console.log('folders size -> '+this.foldersResArr.length);
+
       }
     }
 
@@ -254,10 +254,10 @@ export class SearchPageComponent implements OnInit {
 
       if( this.contractsResArr.length > 0 ){
         this.no_contracts_found = false;
-        // console.log('contracts size -> '+this.contractsResArr.length);
+       
       } else if( this.contractsResArr.length == 0 ) {
         this.no_contracts_found = true;
-        // console.log('contracts size -> '+this.contractsResArr.length);
+      
       }
 
     }
@@ -285,8 +285,7 @@ export class SearchPageComponent implements OnInit {
   
   onSwipe(evt, doc: DocumentData) {
     const swipeDirection = Math.abs(evt.deltaX) > 40 ? (evt.deltaX > 0 ? 'right' : 'left'):'';
-    
-    console.log('swiped '+swipeDirection);
+
     switch(swipeDirection){
       case 'left':{
         doc.swipedLeft = true;
@@ -302,7 +301,6 @@ export class SearchPageComponent implements OnInit {
 
   onDocClick(doc: DocumentData){
 
-    console.log('tap !');
 
     if(!doc.swipedLeft){
       
@@ -313,56 +311,13 @@ export class SearchPageComponent implements OnInit {
       panelClass:['snack'],
     });
   
-    // -------------------------------------------------------------------------------------------//
-    //                 downloading using blob                                                     //
-    // -------------------------------------------------------------------------------------------//
-    // this.downloadService.getDownloadFile(doc.systemId, doc.docid).subscribe({
-    //   next:(resp:any)=>{
-        
-    //   // const keys = resp.headers.keys();
-    //   // var headers = keys.map(key =>
-    //   //     `${key}=>: ${resp.headers.get(key)}`
-    //   //   );
-
-    //   let nameWithExtension = resp.headers.get('content-disposition').split("=")[1];
-    //   console.log(nameWithExtension);
-
-    //     try{
-    //       var mimetype = "application/octetstream" //hacky approach that browsers seem to accept.
-    //       var file = new File([resp.body], doc.name,{type: mimetype});
-    //       const url = window.URL.createObjectURL(file);
-
-    //       const link = document.createElement('a');
-    //       link.setAttribute('target', '_blank');
-    //       link.setAttribute('href', url);
-    //       link.setAttribute('download', nameWithExtension);
-    //       document.body.appendChild(link);
-    //       link.click();
-    //       link.remove();
-          
-    //       URL.revokeObjectURL(url);
-
-    //     } catch(e){
-    //       console.log(e);
-    //     }
-    //   },
-    //   error: (resp) => {
-    //     // console.log(resp);
-    //     // console.log(contract.details.favoriteId);
-    //     this.snackbar.open("Download request failed.",this.translate.instant('snack_bar.action_button'),{
-    //       panelClass:['snack_error'],
-    //       duration:1500,
-    //     })
-    //   }
-    // });
-
-
+ 
     // -------------------------------------------------------------------------------------------//
     //                 downloading using base64                                                     //
     // -------------------------------------------------------------------------------------------//
     this.downloadService.getBase64DownloadFile(doc.systemId, doc.docid).subscribe({
       next:(resp:any)=>{
-        console.log(resp.body);
+      
         //use of application/octetstream is a hacky approach that browsers seem to accept.
         let base64String = "data:application/octetstream;base64," + resp.body.document;
         
@@ -375,7 +330,6 @@ export class SearchPageComponent implements OnInit {
         link.remove();
       },
       error: (resp) => {
-        console.log(resp);
         this.snackbar.open("Download request failed.",this.translate.instant('snack_bar.action_button'),{
           panelClass:['snack_error'],
           duration:1500,
@@ -386,7 +340,6 @@ export class SearchPageComponent implements OnInit {
 
   renameFileModal(file) {
     const dialogConfig = new MatDialogConfig();
-    // let passdata:string = '{"fileName": "'+this.file.name+'","fileUrl": "'+this.file.fileUrl+'"}';
     let passdata:string = '{"docName": "'+file.name+'","docid": "'+file.docid+'","systemId": "'+file.systemId+'"}';
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
@@ -394,7 +347,7 @@ export class SearchPageComponent implements OnInit {
     dialogConfig.width = '350px';
     dialogConfig.panelClass = 'bg-dialog-folder';
     dialogConfig.data = passdata;
-    // https://material.angular.io/components/dialog/overview
+    
     const renameFileDialog = this.matDialog.open(RenameModalComponent, dialogConfig);
 
     this.matDialog.getDialogById('rename-document-component').afterClosed().subscribe({

@@ -26,53 +26,11 @@
 
       <div class="w-100 d-flex flex-wrap p-3 justify-content-center">
 
-        <div class="folders w-100 d-flex align-items-center" *ngIf="templateContractArrLength < 1 ">
-          <p class="no-content-message text-center m-auto">
-            {{ 'overview.no_contracts_found' | translate }}
-          </p>
+        <div class="contracts w-100 d-flex flex-column align-items-center" *ngIf="contractCategory.length > 1 ">
+          <app-contract-category *ngFor="let group of contractCategory" class="w-100" [contractArr]="group" [showTitle]="true" [groupTitle]="group[0].details.BranchSekretaer" ></app-contract-category>
         </div>
-
-        <div class="cards bg- w-100 d-flex flex-column align-items-center mt-1" id="cards" *ngIf="templateContractArrLength>0" [ngClass]="{'transition':!collapsed}">
-        
-
-          <div class="w-100 d-flex a_card card-1" (swipe)="onContractSwipe($event,allContractsArr[2])" >
-            <app-fav-item class="col-12 m-1" [ngClass]="{'swipedLeft':allContractsArr[2].swipedLeft}" [collapsed]="collapsed" [contractItem]=allContractsArr[2]  *ngIf="showCard1" ></app-fav-item>
-              <div class="edit-rename d-flex flex-column p-2 align-self-center justify-content-center align-items-center"
-                  [ngClass]="{'d-none':!allContractsArr[2].swipedLeft}">
-                  <i class="material-icons contractIcons mb-1"  (click) ="renameContract(allContractsArr[2])">mode_edit</i>
-                  <i  class="material-icons contractIcons d-flex justify-content-center"(click)="addContractDoc(allContractsArr[2])">add</i>
-              </div>
-          </div>
-
-        
-
-          <div class="w-100 d-flex a_card card-2"(swipe)="onContractSwipe($event,allContractsArr[1])">
-                <app-fav-item class="col-12 m-1" [ngClass]="{'swipedLeft':allContractsArr[1].swipedLeft}" [collapsed]="collapsed" [contractItem]=allContractsArr[1]  *ngIf="showCard2"></app-fav-item>
-                <div class="edit-rename d-flex flex-column p-2 align-self-center justify-content-center align-items-center"
-                [ngClass]="{'d-none':!allContractsArr[1].swipedLeft}">
-                  <i class="material-icons contractIcons mb-1"  (click) ="renameContract(allContractsArr[1])">mode_edit</i>
-                  <i  class="material-icons contractIcons d-flex justify-content-center" (click)="addContractDoc(allContractsArr[1])" >add</i>
-                </div>
-          </div>
-
-          <div class="w-100 d-flex a_card card-3"(swipe)="onContractSwipe($event,allContractsArr[0])">
-            <app-fav-item #defaultContractCard class="col-12 m-1" [ngClass]="{'swipedLeft':allContractsArr[0].swipedLeft}" [collapsed]="collapsed" [contractItem]=allContractsArr[0] (click)="collapsed ? onDefaultInsuranceCardClick():false" *ngIf="showCard3"></app-fav-item>
-            <div class="edit-rename d-flex flex-column p-2 align-self-center justify-content-center align-items-center"
-            [ngClass]="{'d-none':!allContractsArr[0].swipedLeft}">
-              <i class="material-icons contractIcons mb-1"  (click) ="renameContract(allContractsArr[0])">mode_edit</i>
-              <i  class="material-icons contractIcons d-flex justify-content-center" (click)="addContractDoc(allContractsArr[0])">add</i>
-            </div>
-          </div>
-        </div>
-        
-        <div class="w-100 d-flex flex-column align-items-center extra-cards" id="extra-cards" [ngClass]="{'show':!collapsed}">
-          <div class="contractsubset d-flex" *ngFor="let item of subsetArr;let i = index">
-            <app-fav-item class="col-12 m-1" [ngClass]="{'swipedLeft':item.swipedLeft}" [collapsed]="collapsed" [contractItem]=item (swipe)="onContractSwipe($event,item)" ></app-fav-item>
-            <div class="edit-rename d-flex flex-column p-2 align-self-center justify-content-center align-items-center"  [ngClass]="{'d-none':!item.swipedLeft}">
-              <i class="material-icons mb-1 contractIcons"   (click) ="renameContract(item)">mode_edit</i>
-              <i  class="material-icons contractIcons d-flex justify-content-center" (click) = "addContractDoc(item)">add</i>
-            </div>
-          </div>
+        <div class="contracts w-100 d-flex flex-column align-items-center" *ngIf="contractCategory.length == 1 ">
+          <app-contract-category *ngFor="let group of contractCategory" class="w-100" [contractArr]="group" [showTitle]="false"></app-contract-category>
         </div>
 
       </div>
@@ -112,7 +70,7 @@
             </p>
           </div>
               
-        <div class="folders w-100 d-flex flex-column align-items-center mt-1 bg-" id="folders" *ngIf="templateFolderArrLength > 0" [ngClass]="{'transition':!collapsedFolders}">
+          <div class="folders w-100 d-flex flex-column align-items-center mt-1 bg-" id="folders" *ngIf="templateFolderArrLength > 0" [ngClass]="{'transition':!collapsedFolders}">
             <div class="w-100 d-flex a_card card-1"(swipe)="onFolderSwipe($event,foldersArr[2])" *ngIf="showFolderCard1" >
               <app-folder-card class=" col-12 m-1"  [ngClass]="{'swipedLeft':foldersArr[2].swipedLeft}" [folder]=foldersArr[2] (tap)="onFolderCardClick(foldersArr[2])"  ></app-folder-card>
               <div class="edit-rename d-flex flex-column p-2 align-self-center justify-content-center align-items-center" 
@@ -162,6 +120,7 @@
         </div>
     
       </div>
+
     </div>
   </div>
 </div>

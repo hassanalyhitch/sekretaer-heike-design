@@ -23,15 +23,17 @@
           {{notification.infoText}}
         </div>
       </div>
-        
-      <div class="shadow d-flex align-items-center justify-content-between notif-action p-2 m-2 mt-3" *ngIf="contains('vamsidnr')">{{ 'notifications.notification_item.open_contract' | translate }}
-      <i class="material-icons p-2 ">arrow_forward_ios</i></div>
-          
-      <div class="shadow d-flex align-items-center justify-content-between notif-action p-2 m-2 mt-3" *ngIf="contains('dms')">{{ 'notifications.notification_item.open_document' | translate }}
-      <i class="material-icons p-2 ">arrow_forward_ios</i></div>
-          
-      <div class="shadow d-flex align-items-center justify-content-between notif-action p-2 m-2 mt-3" *ngIf="contains('docid')">{{ 'notifications.notification_item.open_document' | translate }}
-      <i class="material-icons p-2 ">arrow_forward_ios</i></div>
+
+      <div *ngFor="let link of notification.links; let i=index">
+        <div class="shadow d-flex align-items-center justify-content-between notif-action p-2 m-2 mt-3" *ngIf="link.assocType == 'vamsidnr'" (click)="onContractOpen(link.assocId)">{{ 'notifications.notification_item.open_contract' | translate }}
+        <i class="material-icons p-2 ">arrow_forward_ios</i></div>
+            
+        <div class="shadow d-flex align-items-center justify-content-between notif-action p-2 m-2 mt-3" *ngIf="link.assocType == 'dms'" (click)="onDocumentClick(link.assocType,link.assocId)">{{ 'notifications.notification_item.open_document' | translate }}
+        <i class="material-icons p-2 ">arrow_forward_ios</i></div>
+            
+        <div class="shadow d-flex align-items-center justify-content-between notif-action p-2 m-2 mt-3" *ngIf="link.assocType == 'docid'">{{ 'notifications.notification_item.open_document' | translate }}
+        <i class="material-icons p-2 ">arrow_forward_ios</i></div>
+      </div>
           
       <div class="d-flex mb-2 p-2 m-2 pt-3 " style="cursor:pointer;" backButton>
         <div class="d-flex" >

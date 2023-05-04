@@ -1,5 +1,4 @@
 <div class="col-md-12 col-12 px-1">
-
   <div class="d-flex flex-column w-100">
 
     <div class="position-relative">
@@ -14,7 +13,7 @@
 
     <div class="align-items-center w-100">
       {{ 'rename_folder.sub_title_name' | translate }}:<br />
-      <strong>{{ documentName }}</strong>
+      <strong>{{ documentName | shortenText: 20 }}</strong>
     </div>
 
     <form (ngSubmit)= "onSubmit(saveForm.value)" class="d-flex flex-column mt-4" #saveForm="ngForm" > 
@@ -22,6 +21,7 @@
         <input placeholder=" " type="text" [(ngModel)]="newFolderName" name="name" ngModel required/>
         <label>{{ 'rename_folder.text_input_label' | translate }}</label>
       </div>
+      
       <div class="mt-5 w-100">
         <button
           id="save-btn"
@@ -33,7 +33,7 @@
             <span *ngIf="!submitted">{{ 'rename_folder.btn_save_label' | translate }}</span>
         </button>
       </div>
-      </form>
+    </form>
   </div>
 </div>
 

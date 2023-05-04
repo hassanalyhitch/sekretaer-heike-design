@@ -1,19 +1,13 @@
-import { Component, EventEmitter, OnDestroy, OnInit,Input, ViewChild, ElementRef, Injectable,DoCheck, SimpleChanges, Inject } from '@angular/core';
-import { Router,Event, ActivatedRoute } from '@angular/router';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { FileNameData } from './../../models/file-name.model';
+import { Component, OnDestroy, OnInit,Input, ViewChild, ElementRef,DoCheck, Inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FolderData } from '../../models/folder.model';
 import { ContractsService } from '../../services/contracts.service';
 import { FoldersService } from '../../services/folder.service';
-import { HttpClient } from '@angular/common/http';
 import { FileUploadService } from '../../services/file-upload.service';
 import { UploadFileData } from '../../models/upload-file.model';
-import { FormGroup,FormBuilder,AbstractControl,Validators, FormControl, NgForm } from '@angular/forms';
-import { formatDate } from '@angular/common';
+import {  NgForm } from '@angular/forms';
 import { FileSizePipe } from '../../pipes/filesize.pipe';
-import { ThisReceiver } from '@angular/compiler';
-import { FileNameData } from '../../models/file-name.model';
-import { Location } from '@angular/common';
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -45,85 +39,30 @@ export const MY_DATE_FORMATS = {
 })
 
 export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
-  selectedFile:File;
-  fileName:string ="No file chosen";
-  showFileName:boolean =false;
-  count:number = 0;
-  fileUploader:any;
-  fileDoc:any;
 
-  form:FormGroup;
+  TAGS:string = 'AddPageModalComponent';
+
+
+  showFileName:boolean =false;
   submitted: boolean = false;
   dropDownIsHidden:boolean= true;
-  selectedItems = [];
-  dropDownList = [];
- 
-  @ViewChild("selectFile",{static:true}) selectFile:ElementRef;
-  @ViewChild("addPageForm",{static:true}) addPageForm:NgForm;
-  dropdownSettings = {};
-  @Input() index:String;
-  folders:FolderData =<FolderData>{
-  id : "",
-  loginId : "",
-  customerAmsidnr : "",
-  ownerFolderId : "",
-  folderName : "",
-  createTime :"",
-  createdAt : "",
-  subFolders : [],
-
-  isSelected:false
-  };
-
-
-  folderSub:Subscription;
-  folderArr: any[] = [];
-  contractArr: any[] = [];
-  dataArr: {
-    id: String,
-    customerAmsidnr: string,
-    dataName : string,
-    type: string
-  }[] = [];
-    
-
-  shortLink: string = "";
-  loading: boolean = false; // Flag variable
-  file: File = null;
   successResponse:boolean = true;
-  postResponse:any;
-  uploadFileArr: UploadFileData [] =[];
-  
-  dateFormat ="yyyy-MM-dd";
-  language="en";
-  dropDownForm:FormGroup;
+  loading: boolean = false; // Flag variable
   dropdownDisabled:boolean = false;
-  
-
-   
-  typeSelected:string='';
-  myItems =[];
-  pickdate:any;
-
-  broker_icon_link: string;
-  selected_theme:   string;
+  enableShareWithBrokerIcon: boolean;
+  addOnBlur:boolean = true;
 
   shareWithBroker:  boolean;
   broker_blue_logo: boolean;
   broker_pink_logo: boolean;
 
-  doneIcon: string = "../assets/icons8-done-30.png";
-  chips: string[] = [];
-  separatorKeysCodes: number[] = [ENTER, COMMA ,SPACE];
-  addOnBlur = true;
 
-  dataObj:{
-    contractName: string,
-    contractId: string,
-    document_type: string,
-    folderName: string,
-    folderId: string
-  };
+  documentName:string;
+  broker_icon_link: string;
+  selected_theme:   string;
+  shortLink: string = "";
+  typeSelected:string='';
+  doneIcon: string = "../assets/icons8-done-30.png";
 
   fromModalInput_contract_name: string;
   fromModalInput_contract_id: string;
@@ -133,24 +72,73 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
   fromModalInput_folder_name: string;
   fromModalInput_folder_id: string;
 
-  enableShareWithBrokerIcon: boolean;
+  @Input() index:String;
+
+  dropdownSettings = {};
+
+  dataObj:{
+    contractName: string,
+    contractId: string,
+    document_type: string,
+    folderName: string,
+    folderId: string
+  };
+
+  folders:FolderData =<FolderData>{
+    id : "",
+    loginId : "",
+    customerAmsidnr : "",
+    ownerFolderId : "",
+    folderName : "",
+    createTime :"",
+    createdAt : "",
+    subFolders : [],
+
+    isSelected:false
+  };
+
+  dataArr: {
+    id: String,
+    customerAmsidnr: string,
+    dataName : string,
+    type: string
+  }[] = [];
+
+  uploadFileArr: UploadFileData [] =[];
+  folderArr: any[] = [];
+  contractArr: any[] = [];
+  selectedItems = [];
+  dropDownList = [];
+  myItems =[];
+  chips: string[] = [];
+  separatorKeysCodes: number[] = [ENTER, COMMA ,SPACE];
+
+    
+  folderSub:Subscription;
+
+  file: File = null;
+  
+  postResponse:any;
+  
+  language="en";
 
   none:any = "none";
+
+  selectedFile:File;
+  fileName:string ="No file chosen";
+  count:number = 0;
+
+
+  @ViewChild("selectFile",{static:true}) selectFile:ElementRef;
+  @ViewChild("addPageForm",{static:true}) addPageForm:NgForm;
   
 
   constructor( 
     @Inject(MAT_DIALOG_DATA)public data:any,
-    private route:ActivatedRoute, 
-    private router:Router,
     private folderService:FoldersService,
     private contractService:ContractsService,
-    private http:HttpClient,
     private fileUploadService: FileUploadService,
-    private httpClient:HttpClient,
-    private formBuilder:FormBuilder,
     private fileSizePipe:FileSizePipe,
-    private builder:FormBuilder,
-    private location:Location,
     private _snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<AddPageModalComponent>,
     private translate:TranslateService ) { 
@@ -218,8 +206,8 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
       defaultOpen:false,
     };
 
-    //-----------------------------------START NEW CODE ---------------------------------------
-
+   
+  // condition for shareWithBroker button
     if(this.fromModalInput_document_type == 'folder'){
 
       let selectedItem = {
@@ -236,7 +224,6 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
 
       this.dataArr.push(folder);
       
-      console.log('folder modal' + JSON.stringify(folder));
       
       this.selectedItems.push(selectedItem);
       this.typeSelected = 'folder';
@@ -258,8 +245,6 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
 
       this.dataArr.push(contract);
 
-      console.log('contract modal' + JSON.stringify(contract));
-
       this.selectedItems.push(selectedItem);
       this.typeSelected ='contract';
 
@@ -267,76 +252,25 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
 
     }
 
-    //--------------------------------------------END NEW CODE------------------------------
-   
-    this.form =this.formBuilder.group({
-      // namefile:['',Validators.required],
-      // date:['',Validators.required],
-      // file: new FormControl(),
-      // myItems: [this.selectedItems],
-      // today:new FormControl(this.formatFormDate(new Date()))
-    });
-
-    // this.form = new FormGroup({
-    //   fileupload: new FormControl(),
-    //   nametags: new FormControl(),
-    //   date: new FormControl()
-    // });
-
-
   }
 
-  uploadFolderDocument(fileData:FileNameData, folder_Id: string){
+  uploadFolderDocument(fileData:FileNameData, folder_Id: string,editedDocName:string){
 
-    //console.log(fileData);
+    let tags:string = '';
+    for(let tag of this.chips){
+      tags += tag + " ";
+    }
 
-    //console.log('addNewFile selected f->'+folder_Id);
+    editedDocName = this.documentName;
 
-    this.fileUploadService.addFolderFile(fileData,folder_Id).subscribe({
-      next:(resp)=>{
-        //console.log(resp);
-        this.submitted = false;
-      },
-      error:(e)=>{
-        this.submitted = false;
-
-        //show snackbar with error message
-        this._snackBar.open(this.translate.instant('add_document.file_upload_error'), this.translate.instant('snack_bar.action_button'),{
-          panelClass: ['snack_error'],
-           duration: 8000,
-        });
-
-        //close dialog
-        this.closeDialog();
-
-      },
-      complete:()=>{
-        this.submitted = false;
-        
-        //show snackbar with success message
-        this._snackBar.open(this.translate.instant('add_document.file_upload_success'), this.translate.instant('snack_bar.action_button'),{
-          panelClass: ['snack_success'],
-          duration: 8000,
-        });
-
-       //close dialog
-       this.closeDialog();
-
-      }
-    })
-
-  }
-
-  addContractDocument(fileData:FileNameData,contractId:string){
-
-    this.fileUploadService.addContractFile(fileData,contractId).subscribe({
-      next:(resp)=>{
-        this.submitted = false;
-        console.log('success');
-      },
-      error:(e)=>{
-        this.submitted = false;
-
+    if (this.file && this.documentName){
+      this.fileUploadService.addFolderFile(fileData,folder_Id,tags,editedDocName).subscribe({
+        next:(resp)=>{
+          this.submitted = false;
+        },
+        error:(e)=>{
+          this.submitted = false;
+  
           //show snackbar with error message
           this._snackBar.open(this.translate.instant('add_document.file_upload_error'), this.translate.instant('snack_bar.action_button'),{
             panelClass: ['snack_error'],
@@ -345,11 +279,11 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
   
           //close dialog
           this.closeDialog();
-        
-      },
-      complete:()=>{
-        this.submitted = false;
-
+  
+        },
+        complete:()=>{
+          this.submitted = false;
+          
           //show snackbar with success message
           this._snackBar.open(this.translate.instant('add_document.file_upload_success'), this.translate.instant('snack_bar.action_button'),{
             panelClass: ['snack_success'],
@@ -359,10 +293,56 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
          //close dialog
          this.closeDialog();
   
-      }
+        }
+      });
+    }
+  }
 
-    })
 
+  
+  addContractDocument(fileData:FileNameData,contractId:string,editedDocName:string){
+
+    let tags:string = '';
+    for(let tag of this.chips){
+      tags += tag + " ";
+    }
+
+    editedDocName = this.documentName;
+
+    if (this.file && this.documentName){
+      this.fileUploadService.addContractFile(fileData,contractId,tags,editedDocName).subscribe({
+        next:(resp)=>{
+          this.submitted = false;
+        },
+        error:(e)=>{
+          this.submitted = false;
+  
+            //show snackbar with error message
+            this._snackBar.open(this.translate.instant('add_document.file_upload_error'), this.translate.instant('snack_bar.action_button'),{
+              panelClass: ['snack_error'],
+               duration: 8000,
+            });
+    
+            //close dialog
+            this.closeDialog();
+          
+        },
+        complete:()=>{
+          this.submitted = false;
+  
+            //show snackbar with success message
+            this._snackBar.open(this.translate.instant('add_document.file_upload_success'), this.translate.instant('snack_bar.action_button'),{
+              panelClass: ['snack_success'],
+              duration: 8000,
+            });
+    
+           //close dialog
+           this.closeDialog();
+    
+        }
+  
+      });
+    }
   }
 
   getDropdownData(){
@@ -374,7 +354,6 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
           for(let item of resp){
 
             if(item['id'] === undefined || item['id'] === null){
-              console.log('problems');
             }
             //
             let folder: any = {
@@ -382,14 +361,11 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
               customerAmsidnr:  item['customerAmsidnr'],
               dataName : item['folderName'],
               type: 'folder'
-
-              
+  
             };
-            this.folderArr.push(folder);
-            
+              this.folderArr.push(folder);   
           }
-          // console.log(this.dataArr.length);
-          
+         
           this.dataArr = this.folderArr;
 
           this.contractService.getContracts().subscribe({
@@ -399,7 +375,7 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
                 for(let cont of res){
 
                   if(cont['Amsidnr'] === undefined || cont['Amsidnr'] === null){
-                    console.log('problems');
+
                   }
                   //
                   let contract: any = {
@@ -412,16 +388,14 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
                   this.contractArr.push(contract);
                   
                 } 
-                // this.dataArr.push(this.contractArr);
+              
               this.dataArr = this.dataArr.concat(this.contractArr);
-                console.log(this.dataArr.length);
-                // console.table(this.dataArr);
+               
               }
 
             },
             complete:()=>{
               
-            
             }
 
           });
@@ -439,18 +413,13 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
  
   onItemSelected(selectedItem:any){
 
-    console.log(selectedItem);
-
     this.selectedItems.push(selectedItem);
 
     let dropDownElement = document.getElementsByClassName('dropdown-list')[0] as HTMLElement;
     this.dropDownIsHidden = (dropDownElement.hidden);
 
-    console.log(this.selectedItems);
-    
     if(this.selectedItems != undefined && this.selectedItems.length>0){
       dropDownElement.hidden = true;
-      console.log('hide it !');
     }
 
     if (this.selectedItems.length>0){
@@ -463,108 +432,37 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
 
   }
 
-  // get f():{[key:string]:AbstractControl}{
-  //   return this.form.controls;
-  // }
 
-  // onChange(event){
-  //   this.file = event.target.files[0];
-  // }
- 
- 
-//  onSubmit(fileData:FileNameData){
-//   fileData.doc_file = this.file;
+ onSubmit(){
 
-//   this.submitted = true;
-  
-//   switch (this.typeSelected){
-//     case 'folder':{
-//      this.addNewFile(fileData,this.selectedItems[0].id)
-    
-    
-//       break;
-//     }
-//     case 'contract':{
-//       break;
-//     }
-//   }
-
-//   console.table(fileData);
-
-//   console.table(this.typeSelected);
-
-//   console.log('folder id -> ' +this.selectedItems[0].id);
-
-//  }
-
- onSubmit(fileData:FileNameData){
-
-  fileData.doc_file = this.file;
-
-  console.table(fileData);
-
-  //console.log("Document Upload Type ->"+this.typeSelected);
-
-  switch (this.typeSelected){
-    case 'folder':{
-
-      // Upload to folders
-      console.log('folder id -> ' +this.selectedItems[0].id);
-
-      this.submitted = true;
-
-      this.uploadFolderDocument(fileData,this.selectedItems[0].id);
-    
-      break;
+    let fileData:FileNameData = {
+        doc_file:this.uploadFileArr[0].doc_file
     }
-    case 'contract':{
-      console.log(' contract id -> ' +this.selectedItems[0].id);
-      this.submitted = true;
 
-      this.addContractDocument(fileData,this.selectedItems[0].id);
+    let editedDocName = this.documentName;
 
-      break;
+    switch (this.typeSelected){
+      case 'folder':{
+
+        // Upload to folders
+        this.submitted = true;
+
+        this.uploadFolderDocument(fileData,this.selectedItems[0].id,editedDocName);
+      
+        break;
+      }
+      case 'contract':{
+        // Upload to contracts
+
+        this.submitted = true;
+
+        this.addContractDocument(fileData,this.selectedItems[0].id,editedDocName);
+
+        break;
+      }
     }
-  }
 
  }
-
-  // getFileName(event){
-  //   this.file = event.target.files[0];
-  //   this.showFileName = true;
-  //   console.log(this.showFileName);
-  //   console.log(this.file);
-
-  //   let _file:UploadFileData ={
-  //     doc_file:this.file,
-  //     fileId : this.uploadFileArr.length +"",
-  //     fileName :this.file.name,
-
-
-  //     fileSize :this.fileSizePipe.transform(this.file.size,'MB'),
-      
-  //     fileType:this.file.type
-     
-  //   }
-  //  if (this.file.type =='application/pdf' || this.file.type =='!application/pdf') {
-  //   // console.log('File is pdf');
-  //  }else if(this.file.type =='image/jpeg' || this.file.type =='!image/jpeg'){
-  //   // console.log('File is jpeg');
-  //  }
-
-  //  else{
-  //   // alert("file type should be pdf")
-  //   this._snackBar.open(this.translate.instant('add_document.file_type_alert'),this.translate.instant('snack_bar.action_button'),{
-  //     panelClass:['snack_fileType'],
-  //     duration:1800,
-  //   })
-  //   return;
-  // }
-   
-  //   this.uploadFileArr = [];
-  //   this.uploadFileArr.push(_file);
-  //   this.selectFile.nativeElement.value = null;
-  // }
 
   getFileName(event){
 
@@ -577,25 +475,19 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
       let _file:UploadFileData ={
         doc_file:this.file,
         fileId : this.uploadFileArr.length +"",
-        fileName :this.file.name,
-
-        fileSize :this.fileSizePipe.transform(this.file.size,'MB'),
-        
+        fileName :this.documentName,
+        fileSize :this.fileSizePipe.transform(this.file.size,'MB'),      
         fileType:this.file.type
-      
       }
 
-      //this.submitted = true;
-      //this.isDocumentValuesValid = true;
+      
       this.uploadFileArr = [];
       this.uploadFileArr.push(_file);
       this.selectFile.nativeElement.value = null;
 
     } else{
-
       //Reset data
-      //this.submitted = false;
-      //this.isDocumentValuesValid = false;
+
       this.uploadFileArr = [];
       this.selectFile.nativeElement.value = null;
 
@@ -610,19 +502,16 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
 
     }
 
+    
   }
 
-
-
   removeFile(obj){
-    console.log (obj);
-    console.log(this.selectFile.nativeElement.files)
-    let removeIndex = obj.fileId;
-    this.uploadFileArr = this.uploadFileArr.filter(function(value, index, arr){
-    console.log(value);
-    return (value.fileName != obj.fileName && value.fileId != obj.docid);
-    });
+    this.uploadFileArr.pop();
+   
 
+    if(this.uploadFileArr.length == 0){
+      this.submitted = false;
+    }
   }
   
   onShareWithBroker(){
@@ -673,7 +562,6 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
 
   ngDoCheck():void{
 
-    // console.log('selectedItems.length> '+this.selectedItems.length);
     if (this.selectedItems.length>0){
       for(let x=0;x<this.dataArr.length;x++){
         if(this.selectedItems[0].id == this.dataArr[x].id){
@@ -685,7 +573,7 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
   }
 
   ngOnDestroy(){
-    // this.folderSub.unsubscribe();
+   
   }
 
   onFileUpload(event){
@@ -704,7 +592,6 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
       event.chipInput!.clear();
     }
   }
-
 
   removeChip(chip: string): void {
     const index = this.chips.indexOf(chip);

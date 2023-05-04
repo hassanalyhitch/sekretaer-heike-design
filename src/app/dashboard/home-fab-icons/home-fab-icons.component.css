@@ -3,9 +3,11 @@
 .section-quicklinks{
     padding-right: 0.85rem;
 }
+
 ._content{
     font-family: oscine, sans-serif;
 }
+
 .fab-label{
     font-size: 11px !important;
     bottom: -28px;
@@ -23,6 +25,7 @@
     position: relative;
     cursor: pointer;
 }
+
 .home-fab{
     height: 60px;
     width: 60px;

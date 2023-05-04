@@ -78,6 +78,12 @@
   position: relative;
   z-index: 15;
 }
+.contracts{
+  min-height: 230px;
+  width: 100%;
+  position: relative;
+}
+
 .folders{
   min-height: 230px;
   height: 230px;
@@ -90,19 +96,16 @@
   transition: all 0.2s cubic-bezier(0.63, 0.15, 0.03, 1.12);
 }
 .card-1{
-  // z-index: 8;
   transform: translateY(30px);
   transition-delay: 0.2s;
   opacity: 0.5;
 }
 .card-2{
-  // z-index: 9;
   transform: translateY(15px);
   transition-delay: 0.1s;
   opacity: 1;
 }
 .card-3{
-  // z-index: 10;
   transform: translateY(0px);
 }
 .cards.transition .card-2{
@@ -147,12 +150,15 @@ app-folder-card{
 .extra-folders.show{
   display: flex !important;
 }
+
 .section-folder{
   background-color: white;
   border-radius: 0px 45px 0px 0px;
   box-shadow: 0px 0px 3px #0000001a;
   padding-bottom:30px;
+  position: relative;
 }
+
 .dropdown-item{
   cursor: pointer;
 }

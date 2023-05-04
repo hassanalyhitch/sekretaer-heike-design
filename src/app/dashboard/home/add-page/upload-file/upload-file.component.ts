@@ -15,6 +15,7 @@ export class UploadFileComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
   onDeleteFile(docid, fileName){
     this.deleteFile.emit({docid,fileName});
     }

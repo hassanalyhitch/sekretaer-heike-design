@@ -29,7 +29,7 @@ export class BackNavigationService {
     //clear history
     this.history.length = 0;
     //set auth to false
-    this.loginService.emitAuthenticated(false);
+    this.loginService.isAuthenticated = false;
     //navigate to home
     this.router.navigateByUrl('');
   }

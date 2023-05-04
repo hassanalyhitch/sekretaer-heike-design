@@ -25,19 +25,17 @@ export class DashboardComponent implements OnInit {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         if (position) {
-          console.log("Latitude: " + position.coords.latitude +
-            "Longitude: " + position.coords.longitude);
           this.lat = position.coords.latitude;
           this.lng = position.coords.longitude;
           this.whereIsThis(this.lat, this.lng).subscribe({
             next:(resp:any)=>{
-              this.snackbar.open("You are accessing from "+resp.display_name,this.translate.instant('snack_bar.action_button'),{
-                duration:10000,
-                panelClass:['snack'],
-              });
+              // this.snackbar.open("You are accessing from "+resp.display_name,this.translate.instant('snack_bar.action_button'),{
+              //   duration:10000,
+              //   panelClass:['snack'],
+              // });
             },
             error:(resp)=>{
-              console.log(resp);
+             
             }
           });
         }

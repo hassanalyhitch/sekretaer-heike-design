@@ -11,49 +11,22 @@
     <strong class="section-title align-self-center p-2 m-2">{{ 'overview.new_folder_dialog.title' | translate }}</strong>
     
     <form (ngSubmit)="onSubmit(saveForm.value)" class="d-flex flex-column " #saveForm="ngForm" > 
-      <!-- <div class="material-textfield mb-1">
+      
+      <div class="material-textfield mb-1">
         <input placeholder=" " type="text" [(ngModel)]="newFolderName" name="newFolderName" ngModel required/>
         <label>{{ 'overview.new_folder_dialog.text_input_label' | translate }}</label>
       </div>
-      <div class="mt-5 w-100">
-        <button
-          id="save-btn"
-          class="btn btn-login w-100 py-2"
-          [disabled]="!saveForm.valid"
-          type="submit"
-          style="font-size:20px;"
-        >
-        {{ 'overview.new_folder_dialog.btn_save_label' | translate }}
-        </button>
-      </div> -->
-      <!-- <div class="close-button position-relative" (click)="closeWindow()">
-        <div class="position-absolute top-0 end-0"><img src="\assets\icons8-close-24.png"/></div></div> -->
-    
-        <div class="material-textfield mb-1">
-          <input placeholder=" " type="text" [(ngModel)]="newFolderName" name="newFolderName" ngModel required/>
-          <label>{{ 'overview.new_folder_dialog.text_input_label' | translate }}</label>
-        </div>
-    
-        <!-- <img  class="switch" src="\assets\icons8-plus-math-22.png"> -->
-      <!-- <span class="pt-2 pb-1">CLASSIFY:</span> -->
-        <!-- <div class="btn-categories">A-Z <img class="switch"src="\assets\switch.svg"(click)="onFetchFolders()"></div>
-        <div class="btn-categories">Date<img class="switch"src="\assets\switch.svg"></div>
-        <div class="btn-categories">etc...<img class="switch" src="\assets\switch.svg"></div> -->
-      <!-- <div class="d-flex search-btn">
-        <img src="\assets\icons8-search-24.png">
-        <input class="search-box" type="search" name="focus" placeholder="Search..." id="search-input" value="">
-      </div> -->
 
       <div class="w-100">
-        <button
-        id="save-btn"
-        class="btn btn-login w-100 py-2"
-        [disabled]="(!saveForm.valid) || submitted"
-        type="submit"
-        style="font-size:20px;margin-top:20px;">
-          <span *ngIf="submitted" class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status"></span>
-          <span *ngIf="!submitted">{{ 'overview.new_folder_dialog.btn_save_label' | translate }}</span>
-        </button>
+          <button
+            id="save-btn"
+            class="btn btn-login w-100 py-2"
+            [disabled]="(!saveForm.valid) || submitted"
+            type="submit"
+            style="font-size:20px;margin-top:20px;">
+            <span *ngIf="submitted" class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status"></span>
+            <span *ngIf="!submitted">{{ 'overview.new_folder_dialog.btn_save_label' | translate }}</span>
+          </button>
       </div>
       
     </form>

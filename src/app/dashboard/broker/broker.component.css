@@ -18,11 +18,7 @@
 }
 
 .section-broker{
-  /* min-height: 280px;
-  height: inherit; */
-  /* position: relative; */
   overflow-y: scroll;
-  /* overflow-x: hidden; */
 }
 
 .home-icon-fabs{
@@ -131,7 +127,6 @@
   margin: 0px 5px; 
 }
 
-/* For Medium Mobile (375px) */
 @media screen and (max-width: 375px){
 
   .text-title{

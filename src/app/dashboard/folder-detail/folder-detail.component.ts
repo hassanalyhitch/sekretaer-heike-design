@@ -13,6 +13,7 @@ import { RenameModalComponent } from '../rename-modal/rename-modal.component';
 import { DownloadService } from '../../services/download-file.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AddPageModalComponent } from '../add-page-modal/add-page-modal.component';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-folder-detail',
@@ -22,23 +23,24 @@ import { AddPageModalComponent } from '../add-page-modal/add-page-modal.componen
 export class FolderDetailComponent implements OnInit, OnDestroy {
 
  folder:FolderData; 
+ mainFolder: FolderData;
 
   parentNav: string = '';
   currentNav: string = '';
-  mainFolder: FolderData;
-  parentFolder: FolderData;
-  hasParent: boolean = false;
-  routeListener: Subscription;
-  visitedFolderArray:FolderData[] = [];
-
-  docArr: DocumentData[] = [];
-  folderSub:Subscription;
-  sortDocDateByAsc:boolean =true;
-
-  sortSubFolderDate:boolean =true;
-  subFoldersArr:FolderData[] = [];
-
   selected_folder_id: string = '';
+
+  visitedFolderArray:FolderData[] = [];
+  docArr: DocumentData[] = [];
+  subFoldersArr:FolderData[] = [];
+  parentFolder: FolderData;
+
+  sortDocDateByAsc:boolean =true;
+  sortSubFolderDate:boolean =true;
+  hasParent: boolean = false;
+
+
+  folderSub:Subscription;
+  routeListener: Subscription;
 
   constructor(
     private router:Router, 
@@ -48,9 +50,10 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     private translate:TranslateService, 
     private _location: Location,
     private downloadService: DownloadService,
-    private snackbar:MatSnackBar
-    ) { 
-
+    private snackbar:MatSnackBar,
+    private loadingService:LoadingService
+    ) {
+      this.loadingService.emitIsLoading(true); 
     }
 
   ngOnInit() {
@@ -62,10 +65,12 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
         .subscribe({
           next:() =>{
 
-            this.folder = this.folderService.selectedFolder
+            this.folder = this.folderService.selectedFolder;
 
           },
-          complete:()=>{},
+          complete:()=>{
+            this.loadingService.emitIsLoading(false);
+          },
         });
 
     this.routeListener = this.router.events.subscribe((event: Event) => {
@@ -88,9 +93,7 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
                   this.parentNav = this.visitedFolderArray[x].folderName;
                 }
               }
-
               //http request here
-
             }
           }
         } 
@@ -111,13 +114,13 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     // --------------------------------------------------
 
     //sort documents by date
-    this.sortByDocDate();
+    this.sortDocumentsByDateOnly();
+    this.folder.docs.reverse();
     
   }
 
   ngOnDestroy(){
     this.hasParent = false;
-    console.log('hasParent -> '+this.hasParent);
     this.routeListener.unsubscribe();
     this.folderSub.unsubscribe();
     this.visitedFolderArray = [];
@@ -125,7 +128,6 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
   
   onFolderCardClick(clickedFolder: FolderData){
     this.folderService.emitSelectedFolder(clickedFolder);
-
     this.visitedFolderArray.push(clickedFolder);
     this.parentFolder = this.folder;
     this.hasParent = true;
@@ -138,15 +140,14 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
   }
 
   markFav(folder: FolderData){
+   // console.log('Mark Favourite '+folder.id);
+
     this.folderService.makeFolderFavourite(folder.id).subscribe({
       next:(resp:any)=>{
-        console.log(resp);
         this.folder.favoriteId = resp.id;
         this.folder.isFavorite = 1;
       },
       error:(resp)=>{
-        console.log(resp);
-        console.log(folder.customerAmsidnr);
         this.snackbar.open(this.translate.instant('folder-detail.mark_fav_error'),this.translate.instant('snack_bar.action_button'),{
           panelClass:['snack_error'],
           duration:1500,
@@ -162,14 +163,13 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
   }
 
   unmarkFav(folder: FolderData){
+   // console.log('Un Favourite '+folder.favoriteId);
+
     this.folderService.deleteFolderFavourite(folder.favoriteId).subscribe({
       next:(resp:any)=>{
-        console.log(resp);
         this.folder.isFavorite = 0;
       },
       error:(resp)=>{
-        console.log(resp);
-        console.log(folder.favoriteId);
         this.snackbar.open(this.translate.instant('folder-detail.unmark_fav_error'),this.translate.instant('snack_bar.action_button'),{
           panelClass:['snack_error'],
           duration:1500,
@@ -190,17 +190,14 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     
   openModal(folder: FolderData) {
     const dialogConfig = new MatDialogConfig();
-    // let passdata:string = '{"fileName": "'+this.file.name+'","fileUrl": "'+this.file.fileUrl+'"}';
     let passdata:string = '{"folderName": "'+folder.folderName+'","folderId": "'+folder.id+'"}';
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = 'renamefolder-modal-component';
-    //dialogConfig.height = '350px';
     dialogConfig.width = '350px';
     dialogConfig.data = passdata;
 
     dialogConfig.panelClass = 'bg-dialog-folder';
-    // https://material.angular.io/components/dialog/overview
     const modalDialog = this.matDialog.open(RenameFolderComponent, dialogConfig);
     
     this.matDialog.getDialogById('renamefolder-modal-component').afterClosed().subscribe({
@@ -226,7 +223,6 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = 'newfolder-modal-component';
-    //dialogConfig.height = '400px';
     dialogConfig.width = '350px';
     dialogConfig.data = passdata;
     dialogConfig.panelClass = 'bg-dialog-folder';
@@ -253,12 +249,10 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = 'rename-doc-component';
-    // dialogConfig.height = '80%';
     dialogConfig.width = '350px';
     dialogConfig.panelClass = 'bg-dialog-folder';
     dialogConfig.data = passdata;
 
-    // https://material.angular.io/components/dialog/overview
     const renameFileDialog = this.matDialog.open(RenameModalComponent, dialogConfig);
 
     this.matDialog.getDialogById('rename-doc-component').afterClosed().subscribe({
@@ -296,84 +290,6 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
       }
     }
   }
-
-  // onClick(doc: DocumentData){
-  //   console.log('tap !');
-    
-  //   this.snackbar.open("Download requested. Please wait.", this.translate.instant('snack_bar.action_button'),{
-  //     duration:5000,
-  //     panelClass:['snack'],
-  //   });
-  //   // -------------------------------------------------------------------------------------------//
-  //   //                 downloading using blob                                                     //
-  //   // -------------------------------------------------------------------------------------------//
-  //   // this.downloadService.getDownloadFile(doc.systemId, doc.docid).subscribe({
-  //   //   next:(resp:any)=>{
-        
-  //   //   // const keys = resp.headers.keys();
-  //   //   // var headers = keys.map(key =>
-  //   //   //     `${key}=>: ${resp.headers.get(key)}`
-  //   //   //   );
-
-  //   //   let nameWithExtension = resp.headers.get('content-disposition').split("=")[1];
-  //   //   console.log(nameWithExtension);
-
-  //   //     try{
-  //   //       var mimetype = "application/octetstream" //hacky approach that browsers seem to accept.
-  //   //       var file = new File([resp.body], doc.name,{type: mimetype});
-  //   //       const url = window.URL.createObjectURL(file);
-
-  //   //       const link = document.createElement('a');
-  //   //       link.setAttribute('target', '_blank');
-  //   //       link.setAttribute('href', url);
-  //   //       link.setAttribute('download', nameWithExtension);
-  //   //       document.body.appendChild(link);
-  //   //       link.click();
-  //   //       link.remove();
-          
-  //   //       URL.revokeObjectURL(url);
-
-  //   //     } catch(e){
-  //   //       console.log(e);
-  //   //     }
-  //   //   },
-  //   //   error: (resp) => {
-  //   //     // console.log(resp);
-  //   //     // console.log(contract.details.favoriteId);
-  //   //     this.snackbar.open("Download request failed.",this.translate.instant('snack_bar.action_button'),{
-  //   //       panelClass:['snack_error'],
-  //   //       duration:1500,
-  //   //     })
-  //   //   }
-  //   // });
-
-
-  //   // -------------------------------------------------------------------------------------------//
-  //   //                 downloading using base64                                                     //
-  //   // -------------------------------------------------------------------------------------------//
-  //   this.downloadService.getBase64DownloadFile(doc.systemId, doc.docid).subscribe({
-  //     next:(resp:any)=>{
-  //       console.log(resp.body);
-  //       //use of application/octetstream is a hacky approach that browsers seem to accept.
-  //       let base64String = "data:application/octetstream;base64," + resp.body.document;
-        
-  //       const link = document.createElement('a');
-  //       link.setAttribute('target', '_blank');
-  //       link.setAttribute('href', resp.url.split("/api")[0]+resp.body.linkToDoc);
-  //       link.setAttribute('download', resp.body.name+'.'+resp.body.extension);
-  //       document.body.appendChild(link);
-  //       link.click();
-  //       link.remove();
-  //     },
-  //     error: (resp) => {
-  //       console.log(resp);
-  //       this.snackbar.open("Download request failed.",this.translate.instant('snack_bar.action_button'),{
-  //         panelClass:['snack_error'],
-  //         duration:1500,
-  //       })
-  //     }
-  //   });
-  // }
 
   sortByDocDate(){
     if(this.sortDocDateByAsc){
@@ -431,18 +347,13 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     const dialogConfig = new MatDialogConfig();
 
     let passdata:string = '{ "folderName": "'+folder.folderName+'","folderId": "'+folder.id+'","document_type":"folder" }';
-
-    // let passdata:string = '{"folderName": "'+folder.folderName+'","folderId": "'+folder.id+'"}';
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = 'add-document-modal-component';
-    //dialogConfig.height = '350px';
     dialogConfig.width = '400px';
-    
     dialogConfig.data = passdata;
 
     dialogConfig.panelClass = 'bg-dialog-folder';
-    // https://material.angular.io/components/dialog/overview
     const modalDialog = this.matDialog.open(AddPageModalComponent, dialogConfig);
     
     this.matDialog.getDialogById('add-document-modal-component').afterClosed().subscribe({
@@ -481,17 +392,14 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
 
   renameSubFolder(subfolder:FolderData){
     const dialogConfig = new MatDialogConfig();
-    // let passdata:string = '{"fileName": "'+this.file.name+'","fileUrl": "'+this.file.fileUrl+'"}';
     let passdata:string = '{"folderName": "'+subfolder.folderName+'","folderId": "'+subfolder.id+'"}';
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = 'renamefolder-modal-component';
-    //dialogConfig.height = '350px';
     dialogConfig.width = '350px';
     dialogConfig.data = passdata;
 
     dialogConfig.panelClass = 'bg-dialog-folder';
-    // https://material.angular.io/components/dialog/overview
     const modalDialog = this.matDialog.open(RenameFolderComponent, dialogConfig);
     
     this.matDialog.getDialogById('renamefolder-modal-component').afterClosed().subscribe({
@@ -508,6 +416,27 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
         console.log(resp);
       }
     });
+  }
+
+  sortDocumentsByDateOnly(){
+    this.folder.docs.sort((a, b) => {  
+      try{
+
+        let dateA = new Date(a.createdAt);
+        let dateB = new Date(b.createdAt);
+
+        if ((dateA instanceof Date && !isNaN(dateA.getTime()))&&(dateB instanceof Date && !isNaN(dateB.getTime()))) {
+          //valid date object
+          return dateA >= dateB ? 1 : -1; 
+        } else {
+          console.log("invalid date");
+        }
+      } catch(e){
+        console.log(e);
+      }
+      
+  });
+
   }
 
 

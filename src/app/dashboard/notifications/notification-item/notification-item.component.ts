@@ -25,7 +25,9 @@ export class NotificationItemComponent implements OnInit {
     private router: Router,private notificationService: NotificationsService, private matDialog: MatDialog) { }
 
   ngOnInit() {
-    
+
+    //console.log(this.notification.isRead);
+
     if(this.notification.links != null && this.notification.links.length > 0){
 
       for(let i=0; i<this.notification.links.length; i++){
@@ -67,8 +69,17 @@ export class NotificationItemComponent implements OnInit {
   }
 
   dateEngine(a_date){
+    //console.log(a_date);
+
+    // if(a_date.includes('.')){
+    //   let d1:string = a_date.split(' ')[0];
+      
+    //   a_date = d1.split('.').reverse().toString().replace(",",".") + " " + a_date.split(' ')[1];
+    // }
+
+
     a_date = new Date(a_date);
-    const today = new Date
+    const today = new Date;
     const yesterday = new Date; 
     yesterday.setDate(today.getDate() - 1);
 
@@ -87,9 +98,13 @@ export class NotificationItemComponent implements OnInit {
       // format date 
         try{
           a_date = formatDate(a_date, "dd.MM.YYYY","en");
+
+          //console.log(a_date);
+
           return a_date;
         } catch(e:any){
-          
+
+        //  console.log(a_date);
           return a_date;
         }
     }
@@ -134,11 +149,11 @@ export class NotificationItemComponent implements OnInit {
     dialogConfig.height = '90%';
     dialogConfig.width = '90%';
     dialogConfig.data = passdata;
-    // https://material.angular.io/components/dialog/overview
+    
     const modalDialog = this.matDialog.open(NotificationModalComponent, dialogConfig);
   }
 
-  //emeit selected notification, and navigate to notification-detail
+  //emit selected notification, and navigate to notification-detail
   onNotificationClick(notification: NotificationData){
     this.notificationService.emitSelectedNotification(notification);
     this.router.navigate(["dashboard/home/notifications/notification-detail"]);

@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { tap } from 'rxjs';
 import { LoginService } from './login.service';
+import { environment } from '../../environments/environment';
+
 @Injectable({ providedIn: 'root' })
 
 export class CustomerService {
@@ -48,7 +50,7 @@ export class CustomerService {
 
     getCustomerData(){
         
-        let url = 'https://testapi.maxpool.de/api/v1/customers';
+        let url = environment.baseUrl + '/api/v1/customers';
         
         return this.http.get(url,{
            headers:new HttpHeaders({

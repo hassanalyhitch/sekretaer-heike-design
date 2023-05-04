@@ -39,7 +39,6 @@
 }
 
 .section-home {
-  /* min-height: 300px; */
   height: inherit;
   position: relative;
   overflow-y: scroll;

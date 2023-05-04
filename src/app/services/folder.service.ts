@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Observer, Subscription, tap } from 'rxjs';
 import { FolderData } from '../models/folder.model';
 import { LoginService } from './login.service';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({ providedIn: 'root' })
@@ -18,7 +19,7 @@ export class FoldersService {
     createdAt :  "",
     subFolders : [],
     isFavorite: 0,
-    favoriteId: "",
+    favoriteId: 0,
 
     isSelected:false
   };
@@ -43,7 +44,7 @@ export class FoldersService {
  
   getFolders() {
     return this.http.get(
-        'https://testapi.maxpool.de/api/v1/sekretaer/myfolders',
+      environment.baseUrl + '/api/v1/sekretaer/myfolders',
         {
             headers: new HttpHeaders({
                     'accept': 'application/json',
@@ -100,7 +101,7 @@ export class FoldersService {
   }
 
   getFolderDetails(id:string){
-    let url =  'https://testapi.maxpool.de/api/v1/sekretaer/myfolders/' + id;
+    let url =  environment.baseUrl + '/api/v1/sekretaer/myfolders/' + id;
     return this.http.get(
       url,
       {
@@ -145,7 +146,7 @@ export class FoldersService {
   makeFolderFavourite(folderId){
     let data = '{"type": "folder","item_identifier": "'+folderId+'"}';
 
-    return this.http.post('https://testapi.maxpool.de/api/v1/sekretaer/favorites', data, {
+    return this.http.post(environment.baseUrl + '/api/v1/sekretaer/favorites', data, {
       headers: new HttpHeaders({
         'accept': 'application/json',
         'Content-Type': 'application/json',
@@ -170,7 +171,7 @@ export class FoldersService {
   }
 
   deleteFolderFavourite(favId){
-    let url = 'https://testapi.maxpool.de/api/v1/sekretaer/favorites/'+favId;
+    let url = environment.baseUrl + '/api/v1/sekretaer/favorites/'+favId;
     return this.http.delete(url, {
       headers: new HttpHeaders({
         'accept': 'application/json',
@@ -197,7 +198,7 @@ export class FoldersService {
   
   rename(folderId, data) {
 
-    let url = 'https://testapi.maxpool.de/api/v1/sekretaer/myfolders/'+folderId;
+    let url = environment.baseUrl + '/api/v1/sekretaer/myfolders/'+folderId;
 
     return this.http.put(url, data, {
       headers: new HttpHeaders({
@@ -244,7 +245,7 @@ export class FoldersService {
 
     let data = '{"parentFolderId": "'+parentFolderId+'", "name": "'+folderName+'" }' ;
 
-    let url = 'https://testapi.maxpool.de/api/v1/sekretaer/myfolders';
+    let url = environment.baseUrl + '/api/v1/sekretaer/myfolders';
 
     return this.http.post(url, data, {
       headers: new HttpHeaders({

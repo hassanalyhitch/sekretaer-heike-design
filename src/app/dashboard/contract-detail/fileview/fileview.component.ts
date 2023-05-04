@@ -21,10 +21,9 @@ export class FileviewComponent implements OnInit {
 
     this.linkToDoc = this.route.snapshot.paramMap.get('id');
 
-    // this.fileName = this.dataObj.fileName;
     this.fileurl = this.fileurl + this.baseUrl+this.linkToDoc;
     this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.fileurl)
-    console.log(this.safeUrl);}
+    }
 
   ngOnInit() {
     document.getElementById('embedView').addEventListener("load",()=>{

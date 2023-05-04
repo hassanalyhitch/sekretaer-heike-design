@@ -5,17 +5,14 @@ import { ContractsService } from './../../../services/contracts.service';
 import { UploadFileData } from './../../../models/upload-file.model';
 import { FileSizePipe } from './../../../pipes/filesize.pipe';
 import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
-import { FormGroup,FormBuilder,Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { BranchData } from '../../../models/branch.model';
 import { BranchService } from '../../../services/branch.service';
 import { CompanyData } from '../../../models/company.model';
 import { ProductData } from '../../../models/products.model';
-import { CompanyService } from '../../../services/company.service';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import {FormControl} from '@angular/forms';
-import {Observable} from 'rxjs';
 import { Location } from '@angular/common';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { MultiSelectComponent } from 'ng-multiselect-dropdown';
 
 
 export const MY_DATE_FORMATS = {
@@ -41,6 +38,8 @@ export const MY_DATE_FORMATS = {
 })
 
 export class NewContractComponent implements OnInit {
+
+  TAG:string = 'NewContractComponent  ';
 
   dataArr: {
     Branch2MasterId:string;
@@ -78,7 +77,7 @@ export class NewContractComponent implements OnInit {
   selectedBranches: any;
   selectedCompanies: any;
   selectedProducts: any;
-  // ------------------------------
+
 
   show: boolean = false;
   formGroup: FormGroup;
@@ -104,6 +103,9 @@ export class NewContractComponent implements OnInit {
   @ViewChild("selectFile",{static:true}) selectFile:ElementRef;
   @ViewChild("startDate",{static:true}) startDate:ElementRef<HTMLInputElement>;
   @ViewChild("endDate",{static:true}) endDate:ElementRef<HTMLInputElement>;
+  @ViewChild('companyOptions',)companyOptions:MultiSelectComponent;
+  @ViewChild('productOptions') productOptions: MultiSelectComponent;
+
 
   branchSettings = {}; 
   companySettings = {};
@@ -111,7 +113,7 @@ export class NewContractComponent implements OnInit {
 
   none:any = "none";
 
-  submitted: boolean = false;
+  submitted:boolean = false;
   amount:any;
   PaymentMethod:any;
   StatusReason:any;
@@ -243,7 +245,7 @@ export class NewContractComponent implements OnInit {
     showSelectedItemsAtTop:true,
   };
 
-    console.log(this.optionSelected);
+   
     this.branchService.getBranches().subscribe({
       next:(resp)=> {
        
@@ -275,13 +277,13 @@ export class NewContractComponent implements OnInit {
 
         this.dataArr = this.branches;
         this.sortBranches();
-        console.log(this.dataArr);
+        
       },
       error:(e)=>{
-        console.log(e);
+        
       },
       complete:()=>{
-        //console.info('complete')
+      
       }
     });
 
@@ -305,55 +307,8 @@ export class NewContractComponent implements OnInit {
 
   }
 
-      
-
-      // getBranchOptions(){
-      //   this.branchService.getBranchName().subscribe(  {
-      //   next:(resp) =>{
-      //     this.branches =[];
-      //   if (Array.isArray(resp)){
-
-      //     let index:number =0;
-
-      //     for(let item of resp){
-      //       if (item['name'] == null){
-      //         item['name']= '';
-      //       }
-              
-  
-      //       let branch:BranchData ={
-      //         Branch2MasterId:item['Branch2MasterId'],
-      //         displayNameMAXOFFICE:item ['displayNameMAXOFFICE'],
-      //         displayNameSEKRETAER:item ['displayNameSEKRETAER'],
-      //         displayNameDIMAS:item['displayNameDIMAS'],
-      //         name:item['name'],
-      //         displayName:item['displayName']
-      //       };
-      //       this.branches.push(branch);
-
-      //       index ++;
-      //     }
-
-      //   }
-
-      //   this.dataArr = this.branches;
-      //   console.log(this.dataArr);
-      // },
-      // error:(e)=>{
-      //   console.log(e);
-      // },
-      // complete:()=>{
-      //   //console.info('complete')
-      // }
-      //   }
-      //   );
-      // }
-
-   
-
 
   onBranchSelected(item:any){
-    console.log('----------------------------------------------------------------------------------------------');
     this.branchService.getCompany(item.Branch2MasterId).subscribe({
       next:(resp)=> {
        
@@ -375,14 +330,12 @@ export class NewContractComponent implements OnInit {
         }
         this.companyArr = this.companies;
         this.sortCompanies();
-        console.log(this.companyArr);
-        //this.branches = resp;
       },
       error:(e)=>{
-        console.log(e);
+   
       },
       complete:()=>{
-        //console.info('complete')
+       
       }
     });
     this.branchService.getProducts(item.Branch2MasterId).subscribe({
@@ -407,11 +360,11 @@ export class NewContractComponent implements OnInit {
         }
         this.productArr = this.products;
         this.sortProducts();
-        console.log(this.productArr);
+       
 
       },
       error:(e)=>{
-        console.log(e);
+        
       },
       complete:()=>{
 
@@ -421,20 +374,29 @@ export class NewContractComponent implements OnInit {
     });
    
   }
-  onCompanySelected(item:any){
-    console.log(item);
+  onBranchesDeselected(item:any){
+      this.selectedBranches = [];
+      this.selectedCompanies = [];
+      this.selectedProducts = [];
+      this.companyArr = [];
+      this.productArr =[];
   }
-
+  
+  onCompanySelected(item:any){
+  
+  }
+  
   onProductSelected(item:any){
     this.selectedProducts[0] = item;
-    console.log(item);
+   
   }
+
   onPaymentMethodSelected(item:any){
-    console.log(item);
+ 
   }
 
   onStatusReasonSelected(item:any){
-    console.log(item);
+
   }
 
   showContracts(){
@@ -462,10 +424,8 @@ export class NewContractComponent implements OnInit {
     this.contractService.addNewContract(formData).subscribe({
      next:(resp)=>{
        this.submitted = false;
-       console.log(resp);
      },
      error:(resp) =>{
-       console.log(resp);
        this.submitted = false;
 
           //show snackbar with error message
@@ -496,16 +456,18 @@ export class NewContractComponent implements OnInit {
        
      }
     });
+
+
+    
    }
 
   onOptionSelected(option:boolean){
     this.optionSelected = option;
-    console.log(this.optionSelected);
   }
 
   getFile(event){
     this.file = event.target.files[0];
-   console.log(this.file);
+  
 
    let _file:UploadFileData ={
     doc_file:this.file,
@@ -516,18 +478,19 @@ export class NewContractComponent implements OnInit {
     
    fileType  :this.file.type
    }
-  //  this.uploadFileArr =[];
+   this.uploadFileArr =[];
    this.uploadFileArr.push(_file);
+
    this.selectFile.nativeElement.value = null;
 
-   if(this.uploadFileArr.length>0){
-    this.show = true;
-  } else {
-    this.show = false;
   }
-  }
-  deleteFile(event){
+  removeFile(obj){
+    this.uploadFileArr.pop();
    
+
+    if(this.uploadFileArr.length == 0){
+      this.submitted = false;
+    }
   }
 
   onBackNavClick(){
@@ -552,17 +515,6 @@ export class NewContractComponent implements OnInit {
     }
   }
 
- 
-  removeFile(obj){
-    console.log (obj);
-    console.log(this.selectFile.nativeElement.files)
-    let removeIndex = obj.fileId;
-    this.uploadFileArr = this.uploadFileArr.filter(function(value, index, arr){
-    console.log(value);
-    return (value.fileName != obj.fileName && value.fileId != obj.docid);
-    });
-
-  }
 
   sortBranches(){
     this.branches.sort((a:BranchData, b:BranchData) =>{

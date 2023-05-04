@@ -1,0 +1,63 @@
+<div class="col-md-12 col-12 px-1">
+  <div class="d-flex flex-column w-100">
+    
+    <div class="position-relative">
+      <div class="close-btn position-absolute top-0 end-0" (click)="closeDialog()">
+        <i class="material-icons">clear</i>
+      </div>
+    </div>
+
+    <strong class="text-title align-self-center p-2 m-2">
+      {{ 'contract_detail.update_small_picture_dialog_title' | translate }}
+    </strong>
+
+    <form (ngSubmit)="onSubmit(editSmallPictureForm.value)" #editSmallPictureForm="ngForm" 
+      class="d-flex flex-column">
+
+      <div>
+          <div class="small-picture-container selectDocument mt-3">
+            <img [src]="small_picture_src_link" alt="small-picture" width="300px">
+            <div class="small-picture-content">
+              <label for="selectFile">
+                <span>{{ 'contract_detail.update_small_picture' | translate }}</span>
+              </label>
+            </div>
+          </div>
+          
+          <input 
+            class="d-none" 
+            type="file" 
+            accept=".jpeg,.jpg"
+            #selectFile  
+            (change)="getFileName($event)" 
+            id="selectFile" 
+            name="file"
+            ngModel
+            required/>
+      </div>
+
+      <div class="mt-1 w-100">
+        <button
+          id="save-btn"
+          class="btn btn-update-small-pic w-100 py-2"
+          [disabled]="(!editSmallPictureForm.valid) || submitted"
+          type="submit">
+            <span *ngIf="submitted" class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status"></span>
+            <span *ngIf="!submitted">{{ 'contract_detail.btn_update_small_picture_label' | translate }}</span>
+        </button>
+      </div>
+    </form>
+
+    <div class="mt-1 mb-1 w-100">
+      <button
+        (click)="deleteSmallPicture(contract_id)"
+        [disabled]="small_picture_deleted"
+        class="btn btn-delete-small-pic w-100 py-2">
+          <span *ngIf="small_picture_deleted" class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status"></span>
+          <span *ngIf="!small_picture_deleted">{{ 'contract_detail.btn_delete_small_picture_label' | translate }}</span>
+      </button>
+    </div>
+
+  </div>
+</div>
+

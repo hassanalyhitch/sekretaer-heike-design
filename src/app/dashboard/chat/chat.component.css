@@ -11,7 +11,6 @@
   border-radius: 45px 0px 0px 0px;
   overflow-y: scroll;
   overflow-x: hidden;
-  /* padding-bottom: 60px; */
   font-family: oscine, sans-serif;
 }
 
@@ -21,14 +20,12 @@
   letter-spacing: 2.5px;
 }
 .section-chat{
-  /* min-height: 275px; */
   height: inherit;
   position: relative;
   overflow-y: scroll;
   overflow-x: hidden;
 }
-/* -------------------------------------------------------------------------------- */
-/* -------------------------------------------------------------------------------- */
+
 
 *,
 *::before,
@@ -37,7 +34,6 @@
   margin:0;
   padding:0;
 }
-
 
 ::selection{
   background:hsl(0, 0%, 0%);
@@ -82,8 +78,6 @@ img{
   margin-bottom: 80px;
   padding-top: 80px;
 }
-
-
 
 .chat-texts{
   padding:0.5rem;
@@ -189,7 +183,6 @@ img{
   height: 100%;
 }
 
-
 .smiley, 
 .attachment{
   width:20px;
@@ -236,13 +229,6 @@ button:hover .send-icon{
   transform: rotate(-0.1turn); /* Rotate if mouse is hovered */
 }
 
-
-
-/* -------------------------------------------------------------------------------- */
-/* -------------------------------------------------------------------------------- */
-
-
-
 ::-webkit-scrollbar {
   width: 0px;
   height: 0px;
@@ -259,5 +245,4 @@ button:hover .send-icon{
 /* for mozilla */
 *{
   scrollbar-width: none !important;
-
 }

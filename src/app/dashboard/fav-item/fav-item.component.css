@@ -4,7 +4,6 @@
   background-color: #ffffff !important;
 }
 .fav-item{
-  /* width: 319px; */
   height: 175px;
 }
 ._content{
@@ -22,8 +21,8 @@
   border-radius: 0px 0px 15px 0px;
   height: 100%;
   color: white;
-
 }
+
 ._content{
   position: relative;
   margin: 0px !important;
@@ -37,6 +36,7 @@
   border-radius: 0px 0px 0px 12px;
   background-color: #f2f2f2;
 }
+
 .small-picture img {
   object-fit: cover; /* Do not scale the image */
   object-position: center; /* Center the image within the element */
@@ -44,6 +44,7 @@
   width: 100%;
   height: 100%;
 }
+
 .fav-btn{
   position: absolute;
   top: 4px;

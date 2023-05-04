@@ -5,6 +5,7 @@
             <img *ngIf="isPDF" class="doc-icon" src="/assets/icon_pdf.svg" alt="">
             <img *ngIf="isJPEG" class="doc-icon" src="/assets/icon_jpg.svg" alt="">
         </div>
+        
         <div class="d-flex justify-content- w-100 bg-">
             <div class="d-flex w-100 flex-column _content bg-" (click)="onDocumentClick(doc)">
                 <span class="fw-bold px-2 mt-3 mb-1">{{doc.name | shortenText: 20 }}</span>

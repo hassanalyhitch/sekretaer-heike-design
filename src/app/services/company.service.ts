@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { tap } from 'rxjs';
 import { LoginService } from './login.service';
+import { environment } from '../../environments/environment';
+
 @Injectable({ providedIn: 'root' })
 
 export class CompanyService {
@@ -10,7 +12,7 @@ export class CompanyService {
 
     getCompany(Branch2MasterId){
         
-        let url = 'https://testapi.maxpool.de/api/v1/masterbranches/'+ Branch2MasterId +'/companies';
+        let url = environment.baseUrl + '/api/v1/masterbranches/'+ Branch2MasterId +'/companies';
         
         return this.http.get(url,{
            headers:new HttpHeaders({

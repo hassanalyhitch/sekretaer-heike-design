@@ -91,8 +91,12 @@ export class LoginComponent implements OnInit {
           this.authenticated.emit(true);
           this.lang.emit(this.loginService.lang);
 
-          //reset route
-          // this.router.navigateByUrl('/insurance');
+          if(this.loginService.passwordReset){
+            this.router.navigate(['dashboard/settings/change-password']);
+          } else {
+            this.router.navigate(['dashboard']);
+          }
+
         }
       },
       error: (e) => {
@@ -135,18 +139,15 @@ export class LoginComponent implements OnInit {
   }
 
   onPolicySelected() { 
-    this.privacy_policy = true;
-    this.onShowPrivacyPolicy.emit(this.privacy_policy); 
+    this.router.navigate(['privacy-policy']); 
   }
 
   onTermsAndConditionSelected() { 
-    this.terms_and_conditions = true;
-    this.onShowTermsAndConditions.emit(this.terms_and_conditions); 
+    this.router.navigate(['terms-and-conditions']); 
   }
 
   onForgotPasswordSelected(){
-    this.forgot_password = true;
-    this.onShowForgotPassword.emit(this.forgot_password);
+    this.router.navigate(['forgot-password']);
   }
   
 }

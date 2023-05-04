@@ -28,6 +28,8 @@ export class OverviewComponent implements OnInit {
   templateFolderArrLength: number = 0;
   defaultContractReturnVal: boolean = true;
 
+  contractCategory:any[][] = [];
+
   foldersArr: FolderData[] = [{
     id :  "",
     loginId :  "",
@@ -39,7 +41,7 @@ export class OverviewComponent implements OnInit {
     subFolders : [],
     docs: [],
     isFavorite: 0,
-    favoriteId: "",
+    favoriteId: 0,
     isSelected:false,
     swipedLeft: false
   },
@@ -54,7 +56,7 @@ export class OverviewComponent implements OnInit {
     subFolders : [],
     docs: [],
     isFavorite: 0,
-    favoriteId: "",
+    favoriteId: 0,
     isSelected:false,
     swipedLeft: false
   },
@@ -69,7 +71,7 @@ export class OverviewComponent implements OnInit {
     subFolders : [],
     docs: [],
     isFavorite: 0,
-    favoriteId: "",
+    favoriteId: 0,
     isSelected:false,
     swipedLeft: false
   }
@@ -127,6 +129,7 @@ export class OverviewComponent implements OnInit {
       id: 0,
       details: {
         Amsidnr: "",
+        BranchSekretaer: '',
         CustomerAmsidnr: "",
         InsuranceId: "",
         ContractNumber: "",
@@ -153,6 +156,7 @@ export class OverviewComponent implements OnInit {
       id: 0,
       details: {
         Amsidnr: "",
+        BranchSekretaer: '',
         CustomerAmsidnr: "",
         InsuranceId: "",
         ContractNumber: "",
@@ -179,6 +183,7 @@ export class OverviewComponent implements OnInit {
       id: 0,
       details: {
         Amsidnr: "",
+        BranchSekretaer: '',
         CustomerAmsidnr: "",
         InsuranceId: "",
         ContractNumber: "",
@@ -216,48 +221,34 @@ export class OverviewComponent implements OnInit {
           this.collapsed = false;
         }
 
-        this.subsetArr = [];
+        this.contractCategory.length = 0;
 
-        if(this.contractService.userContractsArr.length>3){
-          this.showCard1 = true;
-          this.showCard2 = true;
-          this.showCard3 = true;
-          for(let i=3; i<this.contractService.userContractsArr.length; i++){
-            this.subsetArr.push(this.contractService.userContractsArr[i]);
+        if(this.contractService.userContractsArr.length>5){
+          //sort all arr by BranchSekretaer
+          this.allContractsArr.sort((a,b) =>a.details.BranchSekretaer.localeCompare(b.details.BranchSekretaer));
+          console.table(this.allContractsArr);
+          let category = "";
+
+          for(let i=0; i<this.allContractsArr.length; i++){
+            let branchSekretaer = this.allContractsArr[i].details.BranchSekretaer;
+
+            if(category != branchSekretaer){
+              category = branchSekretaer;
+              this.contractCategory.push([]);
+              if(this.contractCategory.length == 0){
+                this.contractCategory[0].push(this.allContractsArr[i]);
+              }else{
+                this.contractCategory[this.contractCategory.length - 1].push(this.allContractsArr[i]);
+              }
+            } else {
+              this.contractCategory[this.contractCategory.length - 1].push(this.allContractsArr[i]);
+            }
           }
+
+          console.log(this.contractCategory);
         } else {
-          this.allContractsArr.length>0 ? this.showCard3 = true: this.showCard3 = false;
-          this.allContractsArr.length>1 ? this.showCard2 = true: this.showCard2 = false;
-          this.allContractsArr.length>2 ? this.showCard1 = true: this.showCard1 = false;
-          let emptyContract: ContractData = {
-            id: 0,
-            details: {
-              Amsidnr: "",
-              CustomerAmsidnr: "",
-              InsuranceId: "",
-              ContractNumber: "",
-              Company: "",
-              StartDate: "",
-              EndDate: "",
-              YearlyPayment: "",
-              Paymethod: "",
-              Branch: "",
-              Risk: "",
-              docs: [],
-              name: "",
-              productSek: "",
-              tarif: "",
-              isFav: 1,
-              favoriteId: "",
-              iconLeft:   "",
-              ownPicture: ""
-            },
-            isSelected: false,
-            swipedLeft: false
-          }
-          this.allContractsArr.push(emptyContract);
-          this.allContractsArr.push(emptyContract);
-          this.allContractsArr.push(emptyContract);
+
+          this.contractCategory[0] = this.allContractsArr;
         }
 
       },
@@ -299,7 +290,7 @@ export class OverviewComponent implements OnInit {
                 subFolders : [],
                 docs: [],
                 isFavorite: 0,
-                favoriteId: "",
+                favoriteId: 0,
                 isSelected:false,
                 swipedLeft: false
               }
@@ -335,17 +326,12 @@ export class OverviewComponent implements OnInit {
   collapse(){
     
     if(this.templateContractArrLength > 1){
-      
-      if(!this.collapsed){
-
-        document.getElementById("cards").setAttribute("style","min-height:230px;height:230px;");
-        document.getElementById("extra-cards").setAttribute("style","transition: opacity 0s;");
-        setTimeout(()=>{this.collapsed = true;},200);
-      }
+      this.contractService.resetAllObs();
 
     }
     
   }
+
   collapseFolders(){
 
     if(this.templateFolderArrLength > 1){
@@ -512,12 +498,11 @@ export class OverviewComponent implements OnInit {
               //valid date object
               return dateA >= dateB ? 1 : -1; 
             } else {
-              console.log("invalid date");
+            
             }
           }
           catch(e){
-            console.log(e);
-            
+              
           }
         });
         this.subsetArr =[];
@@ -611,11 +596,11 @@ export class OverviewComponent implements OnInit {
                 //valid date object
                 return dateA >= dateB ? 1 : -1; 
               } else {
-                console.log("invalid date");
+               
               }
             }
             catch(e){
-              console.log(e);
+              
             }
            });
            this.folderSubsetArr = [];
@@ -671,7 +656,6 @@ export class OverviewComponent implements OnInit {
   onFolderSwipe(evt,folder:FolderData){
     const swipeDirection = Math.abs(evt.deltaX) > 40 ? (evt.deltaX > 0 ? 'right' : 'left'):'';
 
-    console.log('swiped '+swipeDirection);
     switch(swipeDirection){
       case 'left':{
         if(!this.collapsedFolders){
@@ -707,18 +691,18 @@ export class OverviewComponent implements OnInit {
       next:()=>{
         this.folderService.getFolderDetails(folder.id).subscribe({
           next:(resp:any) =>{
-            //console.log('folder-details');
+           
 
             //refresh folders list
             this._init();
-            // this.folder = this.folderService.selectedFolder;
+           
             
           },
           complete:()=>{},
         });
       },
       error:(resp)=>{
-        console.log(resp);
+      
       }
     });
   }
@@ -730,12 +714,11 @@ export class OverviewComponent implements OnInit {
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = 'add-document-modal-component';
-    //dialogConfig.height = '350px';
     dialogConfig.width = '400px';
     dialogConfig.data = passdata;
 
     dialogConfig.panelClass = 'bg-dialog-folder';
-    // https://material.angular.io/components/dialog/overview
+    
     const modalDialog = this.matDialog.open(AddPageModalComponent, dialogConfig);
 
     this.matDialog.getDialogById('add-document-modal-component').afterClosed().subscribe({
@@ -751,7 +734,7 @@ export class OverviewComponent implements OnInit {
         });
       },
       error:(resp)=>{
-        console.log(resp);
+        
       }
     });
 
@@ -761,7 +744,7 @@ export class OverviewComponent implements OnInit {
   onContractSwipe(evt,contract:ContractData){
     const swipeDirection = Math.abs(evt.deltaX) > 40 ? (evt.deltaX > 0 ? 'right' : 'left'):'';
 
-    console.log('swiped '+swipeDirection);
+   
     switch(swipeDirection){
       case 'left':{
         if(!this.collapsed){
@@ -827,33 +810,23 @@ export class OverviewComponent implements OnInit {
 
     let passdata:string = '{"contractName": "'+contract.details.name+'","contractId": "'+contract.details.Amsidnr+'","document_type":"contract" }';
 
-    console.log("from fav item ->"+passdata);
 
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = 'add-document-modal-component';
-    //dialogConfig.height = '350px';
     dialogConfig.width = '400px';
     dialogConfig.data = passdata;
 
     dialogConfig.panelClass = 'bg-dialog-folder';
-    // https://material.angular.io/components/dialog/overview
+
     const modalDialog = this.matDialog.open(AddPageModalComponent, dialogConfig);
     
     this.matDialog.getDialogById('add-document-modal-component').afterClosed().subscribe({
       next:()=>{
-
-        // this.contractService.getContractDetails(this.contract.details.Amsidnr).subscribe({
-        //   next:(resp:any) =>{
-        //     console.log('contract-details');
-        //     this.contract = this.contractService.selectedContract;
-        //   },
-        //   complete:()=>{},
-        // });
-
+        
       },
       error:(resp)=>{
-        console.log(resp);
+        
       }
     });
   }

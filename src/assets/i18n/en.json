@@ -87,7 +87,12 @@
     "unshared_with_broker" : "Document not shared with Broker",
     "document_download_request" : "Download requested. Please wait.",
     "document_download_failed" : "Download request failed.",
-    "no_documents_found": "No Documents Found"
+    "no_documents_found": "No Documents Found",
+    "edit_small_picture" : "Edit Small Picture",
+    "update_small_picture": "Add / Change",
+    "btn_update_small_picture_label": "Save",
+    "btn_delete_small_picture_label": "Delete",
+    "update_small_picture_dialog_title": "Change Small Picture"
   },
   "login": {
     "title_login": "Let's Login",
@@ -104,7 +109,7 @@
     "privacy_policy": "Privacy Policy",
     "terms": "Terms & Conditions",
     "email": "Email",
-    "forgot_password_input_lable" : "Email or Username",
+    "forgot_password_input_lable" : "Email",
     "btn_back_to_login" : "BACK TO LOGIN",
     "title_email_sent" : "Fast geschafft.",
     "content_email_sent_1" : "We have sent you an email.",
@@ -259,7 +264,10 @@
     "document_rename_error": "Document Rename Failed",
     "document_rename_success" : "Document Rename Successfully",
     "share_with_broker" : "Share With Broker",
-    "un_share_with_broker" : "Don't Share With Broker"
+    "un_share_with_broker" : "Don't Share With Broker",
+    "btn_delete_doc_label" : "Delete Document",
+    "document_delete_error": "Document Delete Failed",
+    "document_delete_success" : "Document Deleted Successfully"
   },
   "my-data":{
     "page_sub_title_1":"your data",
@@ -288,7 +296,8 @@
   "sub_title_2" :"Your New Password",
   "placeholder_1":"New Password",
   "placeholder_2":"Repeat New Password",
-  "submit_btn":"CONFIRM"
+  "submit_btn":"CONFIRM",
+  "password_unconfirmed":"Passwords did not Match"
  },
 "reset-successful":{
   "sub_title_1":"Thank you very much",

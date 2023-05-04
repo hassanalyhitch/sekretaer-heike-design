@@ -16,6 +16,7 @@ export class RenameContractComponent implements OnInit {
     contractName: string,
     contractId: string
   };
+
   documentName: string = "";
   newContractName: string= "";
 
@@ -40,17 +41,13 @@ export class RenameContractComponent implements OnInit {
 
     this.submitted = true;
 
-    //console.log(formData);
-
     this.renameService.rename(this.dataObj.contractId , formData).subscribe({
       next:(resp)=>{
-        //console.log(resp);
         this.submitted = false;
       },
       error:(e)=>{
-
         this.submitted = false;
-    
+
         //show snackbar with error message
         this.snackBar.open(this.translate.instant('rename_contract.contract_rename_error'), this.translate.instant('snack_bar.action_button'),{
           panelClass: ['snack_error'],

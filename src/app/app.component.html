@@ -1,20 +1,8 @@
 <div class="main d-flex flex-column w-100 ">
   <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4 col-xxl-4 col-12 align-self-center shadow">
 
-    <app-login 
-      (auth)="authenticated = $event" 
-      *ngIf="!authenticated && !show_privacy_policy && !show_terms_and_conditions && !show_forgot_password"
-      (onShowPrivacyPolicy)="showPrivacyPolicy($event)"
-      (onShowTermsAndConditions)="showTerms($event)"
-      (onShowForgotPassword)="showForgotPassword($event)" 
-      (lang)="setLang($event)" >
-    </app-login>
-
-    <app-dashboard *ngIf="authenticated"></app-dashboard>
-
-    <div *ngIf="!authenticated && show_privacy_policy || !authenticated && show_terms_and_conditions || !authenticated && show_forgot_password">
-      <router-outlet></router-outlet>
-    </div>
+    <router-outlet></router-outlet>
+    
     <div *ngIf="showOverlay" class="position-absolute top-0 start-0 bottom-0 end-0 w-100 h-100">
       <app-loading></app-loading>
     </div>

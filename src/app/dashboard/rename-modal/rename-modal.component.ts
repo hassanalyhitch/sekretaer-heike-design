@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { RenameDocumentService } from '../../services/rename-doc.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
+import { DeleteDocumentService } from 'src/app/services/delete-document.service';
 
 @Component({
   selector: 'app-rename-modal',
@@ -19,6 +20,8 @@ export class RenameModalComponent implements OnInit {
     fromLocation: string
   };
 
+  document_system_id: string;
+  document_id: string;
   documentName: string;
   newDocName: string;
   share_with_broker_logo_link: string;
@@ -29,12 +32,14 @@ export class RenameModalComponent implements OnInit {
   shareWithBroker: boolean;
   submitted: boolean;
   enableShareWithBrokerIcon: boolean;
+  document_deleted: boolean;
 
   constructor(
     @Inject(MAT_DIALOG_DATA)public data:any, 
     private renameDocService: RenameDocumentService, 
     private snackBar: MatSnackBar,
     private translate:TranslateService,
+    private deleteDocService: DeleteDocumentService,
     private dialogRef: MatDialogRef<RenameModalComponent>) { 
 
     this.broker_blue_logo = false;
@@ -42,6 +47,7 @@ export class RenameModalComponent implements OnInit {
     this.shareWithBroker  = false;
     this.submitted        = false;
     this.enableShareWithBrokerIcon = false;
+    this.document_deleted = false;
 
     this.selected_theme              = "";
     this.share_with_broker_logo_link = "../assets/icon_broker_round_default.svg";
@@ -53,6 +59,8 @@ export class RenameModalComponent implements OnInit {
   ngOnInit() {
     this.dataObj = JSON.parse(this.data);
     this.documentName = this.dataObj.docName;
+    this.document_id = this.dataObj.docid;
+    this.document_system_id = this.dataObj.systemId;
 
     if(this.dataObj.fromLocation == "folder"){
       this.enableShareWithBrokerIcon = false;
@@ -169,6 +177,50 @@ export class RenameModalComponent implements OnInit {
       );
 
     }
+
+  }
+
+  deleteDocument(doc_id: string, doc_system_id: string){
+
+    this.document_deleted = true;
+
+    this.deleteDocService.deleteDocument(doc_system_id, doc_id).subscribe({
+      next:(resp)=>{
+        this.document_deleted = false;
+      },
+      error:(e)=>{
+
+        this.document_deleted = false;
+    
+        //show snackbar with error message
+        this.snackBar.open(
+          this.translate.instant('rename_document.document_delete_error'),  
+          this.translate.instant('snack_bar.action_button'),{
+            panelClass: ['snack_error'],
+            duration: 8000,
+        });
+
+        //close dialog
+        this.dialogRef.close();
+        
+      },
+      complete:()=>{
+
+        this.document_deleted = false;
+
+        //show snackbar with success message
+        this.snackBar.open(
+          this.translate.instant('rename_document.document_delete_success'), 
+          this.translate.instant('snack_bar.action_button'),{
+            panelClass: ['snack_success'],
+            duration: 8000,
+        });
+
+        //close dialog
+        this.dialogRef.close();
+        
+      }
+    });
 
   }
 

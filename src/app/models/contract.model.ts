@@ -4,6 +4,7 @@ export interface ContractData {
   id: number,
   details: {
     Amsidnr: string,
+    BranchSekretaer: string,
     CustomerAmsidnr: string,
     InsuranceId: string,
     ContractNumber: string,
@@ -19,7 +20,7 @@ export interface ContractData {
     productSek: string,
     tarif: string,
     isFav: any
-    favoriteId: string,
+    favoriteId?: string,
     iconLeft:   string,
     ownPicture: string
   },

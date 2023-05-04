@@ -7,19 +7,16 @@
   </div>
   
   <div class="w-100 p-2 m-2 title bg-white">
-    <!-- {{ 'notifications.notification_modal.title' | translate }} -->
     {{notification.infoHeadline}}
   </div>
 
   <div class="w-100 p-2 m-2 bg-white">
-    <!-- {{ 'notifications.notification_modal.content' | translate }} -->
     {{notification.infoText}}
   </div>
 
     
   <div class="mt-auto m-2" [ngClass]="{'d-none': (contains('info') && notification.isRead === '1')||(contains('chat') && notification.isRead === '1')}" >
         
-      
     <div class=" notif-action mx-auto  mt-3" *ngIf="contains('vamsidnr')">{{ 'notifications.notification_item.open_contract' | translate }}</div>
         
     <div class=" notif-action mx-auto  mt-3" *ngIf="contains('dms')">{{ 'notifications.notification_item.open_document' | translate }}</div>

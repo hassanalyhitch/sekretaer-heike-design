@@ -3,9 +3,10 @@ import { FileUploadService } from './file-upload.service';
 import { formatDate } from '@angular/common';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Observer, Subscription, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Observer, Subscription, tap } from 'rxjs';
 import { ContractData } from '../models/contract.model';
 import { LoginService } from './login.service';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({ providedIn: 'root' })
@@ -41,13 +42,36 @@ export class ContractsService {
   selectObservable: Observable<ContractData>;
   userContractsArr: ContractData[] = []; 
 
+  private collapsers: any[] = [];
 
   constructor(private http: HttpClient, private loginService: LoginService,private fileUploadService:FileUploadService ) {
+
     this.selectObservable = new Observable((observer: Observer<ContractData>)=>{
       this.observer = observer;
       this.observer.next(this.selectedContract);
     });
+
     this._init();
+  }
+
+  registerObs(){
+    const collapseObservable = new BehaviorSubject<boolean>(true);
+    this.collapsers.push(collapseObservable);
+
+    return collapseObservable;
+  }
+
+  unregister(collapseObservable): void {
+    const index = this.collapsers.indexOf(collapseObservable);
+    if (index > -1) {
+      this.collapsers.splice(index, 1);
+    }
+  }
+  
+  resetAllObs() {
+    this.collapsers.forEach((collapseObservable) => {
+      collapseObservable.next(true);
+    });
   }
 
   _init(){
@@ -73,7 +97,7 @@ export class ContractsService {
 
 
   getContracts() {
-    return this.http.get('https://testapi.maxpool.de/api/v1/contracts',{
+    return this.http.get(environment.baseUrl + '/api/v1/contracts',{
             headers: new HttpHeaders({
                     'accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -96,6 +120,7 @@ export class ContractsService {
                     id: index,
                     details: {
                       Amsidnr:         item['Amsidnr'],
+                      BranchSekretaer: item['BranchSekretaer'],
                       CustomerAmsidnr: item['CustomerAmsidnr'],
                       InsuranceId:     item['Contractnumber'],
                       ContractNumber:  item['Contractnumber'],
@@ -133,8 +158,12 @@ export class ContractsService {
             error:(error: any)=>{
 
               if(error instanceof HttpErrorResponse){
+                console.log(error.status);
+
                 //Invalid Token or Unauthorised request
                 if(error.status == 401){
+                  // this.loginService.isAuthenticated = false;
+
                   this.loginService.emitAuthenticated(false);
                 }
               }
@@ -144,7 +173,7 @@ export class ContractsService {
     }
 
   getContractDetails(Amsidnr: string){
-    let url = 'https://testapi.maxpool.de/api/v1/contracts/'+Amsidnr;
+    let url = environment.baseUrl + '/api/v1/contracts/'+Amsidnr;
     
     return this.http.get(
       url,
@@ -160,6 +189,7 @@ export class ContractsService {
               id:                resp['Amsidnr'],
               details: {
                 Amsidnr:         resp['Amsidnr'],
+                BranchSekretaer: resp['BranchSekretaer'],
                 CustomerAmsidnr: resp['CustomerAmsidnr'],
                 InsuranceId:     resp['Contractnumber'],
                 ContractNumber:  resp['Contractnumber'],
@@ -200,7 +230,7 @@ export class ContractsService {
   makeContractFavourite(contractId){
     let data = '{"type": "contract","item_identifier": "'+contractId+'"}';
 
-    return this.http.post('https://testapi.maxpool.de/api/v1/sekretaer/favorites', data, {
+    return this.http.post(environment.baseUrl + '/api/v1/sekretaer/favorites', data, {
       headers: new HttpHeaders({
         'accept': 'application/json',
         'Content-Type': 'application/json',
@@ -225,7 +255,7 @@ export class ContractsService {
   }
 
   deleteContractFavourite(contractId){
-    let url = 'https://testapi.maxpool.de/api/v1/sekretaer/favorites/'+contractId;
+    let url = environment.baseUrl + '/api/v1/sekretaer/favorites/'+contractId;
     return this.http.delete(url, {
       headers: new HttpHeaders({
         'accept': 'application/json',
@@ -253,7 +283,7 @@ export class ContractsService {
 
   addNewContract(formData:FormData){
   
-    let url = 'https://testapi.maxpool.de/api/v1/contracts';
+    let url = environment.baseUrl + '/api/v1/contracts';
 
   
     let document:FileNameData = {doc_file:null};
@@ -281,6 +311,7 @@ export class ContractsService {
             id:                resp['Amsidnr'],
             details: {
               Amsidnr:         resp['Amsidnr'],
+              BranchSekretaer: resp['BranchSekretaer'],
               CustomerAmsidnr: resp['CustomerAmsidnr'],
               InsuranceId:     resp['Contractnumber'],
               ContractNumber:  resp['Contractnumber'],

@@ -14,7 +14,7 @@
 
     <div class="align-items-center w-100">
       {{ 'rename_document.sub_title' | translate }}:<br />
-      <strong>{{ documentName }}</strong>
+      <strong>{{ documentName | shortenText: 20 }}</strong>
     </div>
 
     <form (ngSubmit)= "onSubmit(saveForm.value)" class="d-flex flex-column mt-4" #saveForm="ngForm" > 
@@ -43,7 +43,19 @@
             <span *ngIf="!submitted">{{ 'rename_document.btn_save_label' | translate }}</span>
         </button>
       </div>
-      </form>
+    </form>
+
+    <div class="mt-4 mb-1 w-100">
+      <button
+        (click)="deleteDocument(document_id,document_system_id)"
+        [disabled]="document_deleted"
+        class="btn btn-delete-doc w-100 py-2"
+        style="font-size:20px;">
+          <span *ngIf="document_deleted" class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status"></span>
+          <span *ngIf="!document_deleted">{{ 'rename_document.btn_delete_doc_label' | translate }}</span>
+      </button>
+    </div>
+
   </div>
 </div>
 
