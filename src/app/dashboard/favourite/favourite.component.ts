@@ -40,7 +40,7 @@ export class FavouriteComponent implements OnInit, OnChanges {
           }
           
         });
-        console.log(this.favContractArr.length);
+        
       },
       complete:()=>{
         
@@ -67,7 +67,7 @@ export class FavouriteComponent implements OnInit, OnChanges {
 
   onFavContractClick(favItem){
     let clickedContract: ContractData = this.favContractArr[favItem];
-    this.contractService.emitSelectedFolder(clickedContract);
+    this.contractService.emitSelectedContract(clickedContract);
     this.router.navigate(['dashboard/favourite/contract-detail', { id: clickedContract.details.Amsidnr }]);
   }
 

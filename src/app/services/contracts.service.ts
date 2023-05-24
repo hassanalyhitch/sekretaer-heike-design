@@ -81,7 +81,7 @@ export class ContractsService {
 
       },
       error: (e) => {
-        console.log('Error in fetching contracts ->'+e);
+        //console.log('Error in fetching contracts ->'+e);
         
       },
       complete: () => {
@@ -90,7 +90,7 @@ export class ContractsService {
     });
   }
 
-  emitSelectedFolder(contract:ContractData){
+  emitSelectedContract(contract:ContractData){
     this.selectedContract = contract;
     // this.observer.next(contract);
   }
@@ -107,8 +107,6 @@ export class ContractsService {
             next:(resp)=>{
               this.userContractsArr = [];
               
-              // console.log("Contract service => "+resp);
-              // console.table(resp);
               if(Array.isArray(resp)){
                 let index: number = 0;
       
@@ -148,7 +146,12 @@ export class ContractsService {
                   index++;
                 }
                 
-      
+                //sort by BranchSekretaer
+                this.userContractsArr.sort((a,b) =>a.details.BranchSekretaer.localeCompare(b.details.BranchSekretaer));
+
+                //remove duplicate contracts from list
+                this.userContractsArr = this.removeDuplicates(this.userContractsArr);
+
              } else {
               //invalid token
       
@@ -158,7 +161,7 @@ export class ContractsService {
             error:(error: any)=>{
 
               if(error instanceof HttpErrorResponse){
-                console.log(error.status);
+                //console.log(error.status);
 
                 //Invalid Token or Unauthorised request
                 if(error.status == 401){
@@ -170,6 +173,23 @@ export class ContractsService {
 
             }
           }));
+    }
+
+    removeDuplicates(arr) {
+      let unique = [];
+      let contractExists: boolean = false;
+      arr.forEach(element => {
+          contractExists = false;
+          for(let i=0; i<unique.length; i++ ){
+              if(unique[i].details.Amsidnr == element.details.Amsidnr){
+                contractExists = true;
+              }
+          }
+          if(!contractExists){
+            unique.push(element);
+          }
+      });
+      return unique;
     }
 
   getContractDetails(Amsidnr: string){
@@ -296,7 +316,7 @@ export class ContractsService {
     });
     
     document.doc_file = postData.File;
-    console.log(this.TAG + postData.File);
+    //console.log(this.TAG + postData.File);
 
     return this.http.post(url , postData, {
       headers:new HttpHeaders({
@@ -337,10 +357,10 @@ export class ContractsService {
           // this.emitSelectedFolder(contract);
           if (document !== null && document !== undefined){
             
-            console.log(this.TAG + document);
+            //console.log(this.TAG + document);
             this.fileUploadService.addContractFile(document,contract.details.Amsidnr).subscribe({
               next:(resp)=>{
-                console.log(resp);
+                //console.log(resp);
   
               },
               error:()=>{

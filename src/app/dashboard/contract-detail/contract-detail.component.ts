@@ -8,7 +8,7 @@ import {
   ElementRef,
 } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Event, NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { ContractData } from '../../models/contract.model';
@@ -66,6 +66,19 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     isSelected: false,
   };
 
+  previousContractId: string;
+  nextContractId: string;
+
+  previousContract: ContractData;
+  nextContract: ContractData;
+
+  isFirstItem: boolean = false;
+  isLastItem: boolean = false;
+
+  allContracts: ContractData[];
+
+  contractDetailSub: Subscription;
+
   @ViewChildren('documentItem') documentItemList: QueryList<ElementRef>;
 
   constructor(
@@ -80,10 +93,76 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     private loadingService:LoadingService
   ) {
     this.loadingService.emitIsLoading(true);
+
+    this.previousContractId = '';
+    this.nextContractId = '';
+    this.allContracts = [];
+
+    this.isFirstItem = false;
+    this.isLastItem = false;
   }
 
   ngOnInit() {
+
+    this.contractDetailSub = this.router.events.subscribe((event: Event) => {
+
+      if (event instanceof NavigationEnd) {
+        this.loadingService.emitIsLoading(true);
+        this._init();
+      }
+    });
+
+    this._init();
+
+  }
+
+  _init(){
     this.contract_id = this.route.snapshot.paramMap.get('id');
+    
+    this.allContracts = this.contractService.userContractsArr;
+
+    for(let i = 0; i < this.allContracts.length; i++){
+      
+      //check if contract is first item
+      if(i == 0 && this.contract_id == this.allContracts[i].details.Amsidnr){
+        this.isFirstItem = true;
+      }
+      
+      //check if contract is the last item
+      if((this.allContracts.length - 1) == i && this.contract_id == this.allContracts[i].details.Amsidnr){
+        this.isLastItem = true;
+      }
+
+    }
+
+    //check if next contract exists
+    if(!this.isLastItem){
+      
+      for(let contractItem of this.allContracts ){
+        
+        if(contractItem.details.Amsidnr == this.contract_id && this.allContracts.length > 1){
+          this.nextContractId = this.allContracts[this.allContracts.indexOf(contractItem)+1].details.Amsidnr;
+          //console.log('indeOf next contract ',this.allContracts.indexOf(contractItem)+1);
+        }
+      }
+      //console.log('current contract id ', this.contract_id);
+      //console.log('NEXT CONTRACT: contract id ', this.nextContractId);
+      //console.log('');
+    }
+
+    //check if previous contract exists
+    if(!this.isFirstItem){
+      for(let contractItem of this.allContracts ){
+        if(contractItem.details.Amsidnr == this.contract_id && this.allContracts.length > 1){
+          this.previousContractId = this.allContracts[this.allContracts.indexOf(contractItem)-1].details.Amsidnr;
+          //console.log('indeOf prev contract ',this.allContracts.indexOf(contractItem)-1);
+        }
+      }
+      //console.log('current contract id ', this.contract_id);
+      //console.log('PREV CONTRACT: contract id ', this.previousContractId);
+      //console.log('');
+    }
+    
 
     this.contractService
       .getContractDetails(this.contract_id)
@@ -100,6 +179,11 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
             this.src_link_for_small_picture = "../assets/default_small_picture.svg";
           }
 
+          //reset documents array to empty
+          if(this.docArr.length > 0){
+            this.docArr = [];
+          }
+
           if (resp.hasOwnProperty('docs')) {
             for (let i = 0; i < resp.docs.length; i++) {
               this.docArr.push(resp.docs[i]);
@@ -114,8 +198,43 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
       });
   }
 
+  onContractSwipe(evt) {
+    const swipeDirection = Math.abs(evt.deltaX) > 40 ? (evt.deltaX > 0 ? 'right' : 'left'):'';
+
+    switch(swipeDirection){
+      case 'left':{
+        //console.log('contract swiped left ',this.nextContractId);
+        //console.log('is last item ',this.isLastItem);
+        //console.log(' ');
+        //next contract
+        if(!this.isLastItem && this.nextContractId != ''){
+          this.router.navigate(['dashboard/overview/contract-detail', 
+            { 
+              id: this.nextContractId
+            }
+          ]);
+        }
+        break;
+      }
+      case 'right':{
+        //console.log('contract swiped right ',this.previousContractId);
+        //console.log('is first item ',this.isFirstItem);
+        //console.log('');
+        //previous contract
+        if(!this.isFirstItem && this.previousContractId != ''){
+          this.router.navigate(['dashboard/overview/contract-detail', 
+            { 
+              id: this.previousContractId
+            }
+          ]);
+        } 
+        break;
+      }
+    }
+  }
+
   ngOnDestroy() {
-   
+   this.contractDetailSub.unsubscribe();
   }
 
   openModal(file) {

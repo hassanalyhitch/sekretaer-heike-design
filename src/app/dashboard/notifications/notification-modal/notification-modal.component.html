@@ -17,13 +17,13 @@
     
   <div class="mt-auto m-2" [ngClass]="{'d-none': (contains('info') && notification.isRead === '1')||(contains('chat') && notification.isRead === '1')}" >
         
-    <div class=" notif-action mx-auto  mt-3" *ngIf="contains('vamsidnr')">{{ 'notifications.notification_item.open_contract' | translate }}</div>
+    <div class=" notif-action mx-auto  mt-3" *ngIf="contains('vamsidnr')">{{ 'notification_modal.open_contract' | translate }}</div>
         
-    <div class=" notif-action mx-auto  mt-3" *ngIf="contains('dms')">{{ 'notifications.notification_item.open_document' | translate }}</div>
+    <div class=" notif-action mx-auto  mt-3" *ngIf="contains('dms')">{{ 'notification_modal.open_document' | translate }}</div>
         
-    <div class=" notif-action mx-auto  mt-3" *ngIf="contains('docid')">{{ 'notifications.notification_item.open_document' | translate }}</div>
+    <div class=" notif-action mx-auto  mt-3" *ngIf="contains('docid')">{{ 'notification_modal.open_document' | translate }}</div>
         
-    <div class=" notif-action mx-auto  mt-3" *ngIf="notification.isRead === '0'" (click)="markAsRead(notification.notificationId)" >{{ 'notifications.notification_item.mark_as_read' | translate }}</div>
+    <div class=" notif-action mx-auto  mt-3" *ngIf="notification.isRead === '0'" (click)="markAsRead(notification.notificationId)" >{{ 'notification_modal.mark_as_read' | translate }}</div>
     
   </div>
 </div>

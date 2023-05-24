@@ -31,6 +31,7 @@
                 class="file-input d-none" 
                 type="file" 
                 accept=".pdf,.jpeg,.jpg"
+                capture="camera"
                 #selectFile  
                 (change)="getFileName($event)" 
                 id="selectFile" 
@@ -41,7 +42,11 @@
               <app-upload-file class="fileUpload"*ngFor="let uploadFile of uploadFileArr" [uploadFile]="uploadFile" (deleteFile)="removeFile($event)"></app-upload-file>
           </div>
 
-          <input class="fileUpload" type="text" placeholder="Document Name" [(ngModel)]="documentName" required/>
+          <input 
+            class="fileUpload" 
+            type="text" 
+            placeholder = "{{'add_document.placeholder_document_name' | translate }}"
+            [(ngModel)]="documentName" required/>
 
           <div class="fileUpload">
             <mat-chip-list #chipList class="chipList">
@@ -50,7 +55,8 @@
                 <mat-icon matChipRemove class="removeChip">cancel</mat-icon>
               </mat-chip>
             </mat-chip-list>
-            <input  placeholder="Tags" matInput [matChipInputFor]="chipList"
+            
+            <input  placeholder="{{'add_document.tags' | translate }}" matInput [matChipInputFor]="chipList"
                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                   [matChipInputAddOnBlur]="addOnBlur"
                   (matChipInputTokenEnd)="add($event)"
@@ -59,11 +65,9 @@
 
               <p class="assignment">{{ 'add_document.sub_title_2' | translate }}</p>
 
-            
-
             <mat-form-field class="example-full-width" [appearance]="none">
                 <input matInput [matDatepicker]="pickerDate"
-                placeholder="Date" disabled>
+                placeholder="{{'add_document.date' | translate }}" disabled>
                 <mat-datepicker-toggle matIconSuffix [for]="pickerDate" [disabled]="false">
                     <mat-icon class="dateIcon" matDatepickerToggleIcon>arrow_drop_down</mat-icon>
                 </mat-datepicker-toggle>
@@ -102,11 +106,9 @@
                 <span *ngIf="submitted" class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role=""></span>
                 <span *ngIf="!submitted">{{ 'add_document.submit_button_label' | translate }}</span>
             </button>
-            
-              
+                
       </form>
     </div>
-    
     
   </div> 
 </div>

@@ -13,7 +13,7 @@ import { RenameModalComponent } from '../rename-modal/rename-modal.component';
 import { DownloadService } from '../../services/download-file.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AddPageModalComponent } from '../add-page-modal/add-page-modal.component';
-import { LoadingService } from 'src/app/services/loading.service';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-folder-detail',
@@ -204,14 +204,14 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
       next:()=>{
         this.folderService.getFolderDetails(this.folder.id).subscribe({
           next:(resp:any) =>{
-            console.log('folder-details');
+            //console.log('folder-details');
             this.folder = this.folderService.selectedFolder;
           },
           complete:()=>{},
         });
       },
       error:(resp)=>{
-        console.log(resp);
+        //console.log(resp);
       }
     });
   }
@@ -277,7 +277,7 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
   onSwipe(evt, doc: DocumentData) {
     const swipeDirection = Math.abs(evt.deltaX) > 40 ? (evt.deltaX > 0 ? 'right' : 'left'):'';
     
-    console.log('swiped '+swipeDirection);
+    //console.log('swiped '+swipeDirection);
     switch(swipeDirection){
       case 'left':{
         doc.swipedLeft = true;
@@ -306,7 +306,7 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
             console.log("invalid date");
           }
         } catch(e){
-          console.log(e);
+          //console.log(e);
         }
         
     });
@@ -332,7 +332,7 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
           }
         }
         catch(e){
-          console.log(e);
+          //console.log(e);
         }
       });
       this.sortSubFolderDate = !this.sortSubFolderDate;
@@ -360,14 +360,14 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
       next:()=>{
         this.folderService.getFolderDetails(this.folder.id).subscribe({
           next:(resp:any) =>{
-            console.log('folder-details');
+            //console.log('folder-details');
             this.folder = this.folderService.selectedFolder;
           },
           complete:()=>{},
         });
       },
       error:(resp)=>{
-        console.log(resp);
+        //console.log(resp);
       }
     });
   }
@@ -375,7 +375,7 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
   onSubFolderSwipe(evt,subfolder:FolderData){
     const swipeDirection = Math.abs(evt.deltaX) > 40 ? (evt.deltaX > 0 ? 'right' : 'left'):'';
     
-    console.log('swiped '+swipeDirection);
+    //console.log('swiped '+swipeDirection);
     switch(swipeDirection){
       case 'left':{
         subfolder.swipedLeft = true;
@@ -406,14 +406,14 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
       next:()=>{
         this.folderService.getFolderDetails(this.folder.id).subscribe({
           next:(resp:any) =>{
-            console.log('folder-details');
+            //console.log('folder-details');
             this.folder = this.folderService.selectedFolder;
           },
           complete:()=>{},
         });
       },
       error:(resp)=>{
-        console.log(resp);
+        //console.log(resp);
       }
     });
   }
@@ -429,10 +429,10 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
           //valid date object
           return dateA >= dateB ? 1 : -1; 
         } else {
-          console.log("invalid date");
+          //console.log("invalid date");
         }
       } catch(e){
-        console.log(e);
+        //console.log(e);
       }
       
   });

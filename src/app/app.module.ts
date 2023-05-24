@@ -15,13 +15,11 @@ import { MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatSelectModule} from '@angular/material/select';
 import { MatInputModule} from '@angular/material/input';
-import {MatDatepickerModule}from '@angular/material/datepicker';
+import { MatDatepickerModule }from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule} from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MomentDateModule } from '@angular/material-moment-adapter';
-
-
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -43,7 +41,6 @@ import { ContractDetailComponent } from './dashboard/contract-detail/contract-de
 import { DocumentItemComponent } from './dashboard/document-item/document-item.component';
 import { ShortenTextPipe } from './pipes/shorten-text.pipe';
 import { CurrencyFormatPipe } from './pipes/currency-format.pipe';
-import { FileviewComponent } from './dashboard/contract-detail/fileview/fileview.component';
 import { OverviewComponent } from './dashboard/overview/overview.component';
 import { FolderCardComponent } from './dashboard/folder-card/folder-card.component';
 import { FavouriteComponent } from './dashboard/favourite/favourite.component';
@@ -120,7 +117,6 @@ const appRoutes: Routes = [
       { path: 'home/notifications',canActivate: [AuthGuardGuard], component:NotificationsComponent },
       { path: 'home/notifications/notification-detail',canActivate: [AuthGuardGuard], component:NotificationDetailComponent },
       { path: 'favourite/contract-detail',canActivate: [AuthGuardGuard], component:ContractDetailComponent },
-      { path: 'home/contract-detail/fileview',canActivate: [AuthGuardGuard], component: FileviewComponent },
       { path: 'home/adddocument',canActivate: [AuthGuardGuard], component:AddPageComponent },
       { path: 'home/chat',canActivate: [AuthGuardGuard], component:ChatComponent },  
       { path: 'home/search',canActivate: [AuthGuardGuard], component:SearchPageComponent },  
@@ -196,7 +192,6 @@ const appRoutes: Routes = [
     DocumentItemComponent,
     ShortenTextPipe,
     CurrencyFormatPipe,
-    FileviewComponent,
     OverviewComponent,
     FolderCardComponent,
     FavouriteComponent,

@@ -48,7 +48,7 @@ export class SettingsService {
     this.theme = localStorage.getItem('theme_selected');
 
     if(!this.theme){
-      return "pink";
+      return "default";
     } else {
       return this.theme;
     }

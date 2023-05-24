@@ -11,6 +11,7 @@ import { ContractsService } from '../../services/contracts.service';
 import { DownloadService } from '../../services/download-file.service';
 import { FoldersService } from '../../services/folder.service';
 import { RenameModalComponent } from '../rename-modal/rename-modal.component';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-search-page',
@@ -278,7 +279,7 @@ export class SearchPageComponent implements OnInit {
   
   onContractClick(clickedContract){
     
-    this.contractService.emitSelectedFolder(clickedContract);
+    this.contractService.emitSelectedContract(clickedContract);
     this.router.navigate(['dashboard/overview/contract-detail', { id: clickedContract.details.Amsidnr }]);
     
   }
@@ -306,7 +307,9 @@ export class SearchPageComponent implements OnInit {
       
     }
     
-    this.snackbar.open("Download requested. Please wait.", this.translate.instant('snack_bar.action_button'),{
+    this.snackbar.open(
+      this.translate.instant('search.document_download_request'), 
+      this.translate.instant('snack_bar.action_button'),{
       duration:5000,
       panelClass:['snack'],
     });
@@ -319,18 +322,25 @@ export class SearchPageComponent implements OnInit {
       next:(resp:any)=>{
       
         //use of application/octetstream is a hacky approach that browsers seem to accept.
-        let base64String = "data:application/octetstream;base64," + resp.body.document;
+        //let base64String = "data:application/octetstream;base64," + resp.body.document;
         
         const link = document.createElement('a');
+        
         link.setAttribute('target', '_blank');
-        link.setAttribute('href', resp.url.split("/api")[0]+resp.body.linkToDoc);
+
+        link.setAttribute('href', environment.baseUrl+resp.body.linkToDoc);
+
         link.setAttribute('download', resp.body.name+'.'+resp.body.extension);
+        
         document.body.appendChild(link);
         link.click();
         link.remove();
+
       },
       error: (resp) => {
-        this.snackbar.open("Download request failed.",this.translate.instant('snack_bar.action_button'),{
+        this.snackbar.open(
+          this.translate.instant('search.document_download_failed'),
+          this.translate.instant('snack_bar.action_button'),{
           panelClass:['snack_error'],
           duration:1500,
         })

@@ -8,13 +8,13 @@
       </div>
     </div>
 
-    <strong class="section-title align-self-center p-2 m-2">{{ 'overview.new_folder_dialog.title' | translate }}</strong>
+    <strong class="section-title align-self-center p-2 m-2">{{ 'new_folder_dialog.title' | translate }}</strong>
     
     <form (ngSubmit)="onSubmit(saveForm.value)" class="d-flex flex-column " #saveForm="ngForm" > 
       
       <div class="material-textfield mb-1">
         <input placeholder=" " type="text" [(ngModel)]="newFolderName" name="newFolderName" ngModel required/>
-        <label>{{ 'overview.new_folder_dialog.text_input_label' | translate }}</label>
+        <label>{{ 'new_folder_dialog.text_input_label' | translate }}</label>
       </div>
 
       <div class="w-100">
@@ -25,7 +25,7 @@
             type="submit"
             style="font-size:20px;margin-top:20px;">
             <span *ngIf="submitted" class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status"></span>
-            <span *ngIf="!submitted">{{ 'overview.new_folder_dialog.btn_save_label' | translate }}</span>
+            <span *ngIf="!submitted">{{ 'new_folder_dialog.btn_save_label' | translate }}</span>
           </button>
       </div>
       

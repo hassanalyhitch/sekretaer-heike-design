@@ -8,7 +8,7 @@
     </div>
 
     <strong class="text-title align-self-center p-2 m-2">
-      {{ 'contract_detail.update_small_picture_dialog_title' | translate }}
+      {{ 'edit_small_picture.update_small_picture_dialog_title' | translate }}
     </strong>
 
     <form (ngSubmit)="onSubmit(editSmallPictureForm.value)" #editSmallPictureForm="ngForm" 
@@ -19,7 +19,7 @@
             <img [src]="small_picture_src_link" alt="small-picture" width="300px">
             <div class="small-picture-content">
               <label for="selectFile">
-                <span>{{ 'contract_detail.update_small_picture' | translate }}</span>
+                <span>{{ 'edit_small_picture.update_small_picture' | translate }}</span>
               </label>
             </div>
           </div>
@@ -43,7 +43,7 @@
           [disabled]="(!editSmallPictureForm.valid) || submitted"
           type="submit">
             <span *ngIf="submitted" class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status"></span>
-            <span *ngIf="!submitted">{{ 'contract_detail.btn_update_small_picture_label' | translate }}</span>
+            <span *ngIf="!submitted">{{ 'edit_small_picture.btn_update_small_picture_label' | translate }}</span>
         </button>
       </div>
     </form>
@@ -54,7 +54,7 @@
         [disabled]="small_picture_deleted"
         class="btn btn-delete-small-pic w-100 py-2">
           <span *ngIf="small_picture_deleted" class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status"></span>
-          <span *ngIf="!small_picture_deleted">{{ 'contract_detail.btn_delete_small_picture_label' | translate }}</span>
+          <span *ngIf="!small_picture_deleted">{{ 'edit_small_picture.btn_delete_small_picture_label' | translate }}</span>
       </button>
     </div>
 

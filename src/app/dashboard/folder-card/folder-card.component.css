@@ -13,6 +13,7 @@
   border-top: solid 4px var(--primaryColorDark);
   border-top-right-radius: 15px;
   font-family: oscine, sans-serif;
+  height: 155px;
 }
 
 .folder-top{
@@ -107,4 +108,8 @@
 .folder-documents{
   font-size: 12px;
   font-weight: bold;
+}
+
+.folder-card{
+  height: 175px;
 }

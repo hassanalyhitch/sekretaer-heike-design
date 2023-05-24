@@ -38,7 +38,7 @@ export class FileUploadService {
         postData[key] = value;
 
       });
-      console.log(postData);
+      //console.log(postData);
 
       return this.http.post(url,formData,{
         headers: new HttpHeaders({
@@ -66,7 +66,7 @@ export class FileUploadService {
 
     addContractFile(data:FileNameData,contractId:string,tags:string ='',editedName:string = '') {
 
-      console.log(this.TAG + data);
+      //console.log(this.TAG + data);
       let url = environment.baseUrl + '/api/v1/dms/upload'
 
       let formData:FormData = new FormData();
@@ -79,7 +79,7 @@ export class FileUploadService {
       formData.append("agent","");
       formData.append("folder","");
 
-      console.log(this.TAG + formData);
+      //console.log(this.TAG + formData);
       
 
       return this.http.post(url,formData,{

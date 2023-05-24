@@ -31,8 +31,8 @@ export class ChangeLanguageComponent implements OnInit {
     this.translateService.use(this.loginService.lang);
 
     this.languages =  [
-      {name: this.translateService.instant('settings.language_de') ,symbol: "de", selected : false},
-      {name: this.translateService.instant('settings.language_en') , symbol: "en", selected: false}
+      {name: this.translateService.instant('change-language.language_de') ,symbol: "de", selected : false},
+      {name: this.translateService.instant('change-language.language_en') , symbol: "en", selected: false}
     ];
 
     for(let i = 0; i<this.languages.length; i++){
@@ -53,7 +53,7 @@ export class ChangeLanguageComponent implements OnInit {
 
         //show snackbar with success message
         this.snackBar.open(
-          this.translateService.instant('settings.language_changed_ok'), 
+          this.translateService.instant('change-language.language_changed_ok'), 
           this.translateService.instant('snack_bar.action_button'),
           { panelClass: ['snack_success'], duration: 5000 }
         );

@@ -3,7 +3,7 @@ import { NotificationData } from '../../../models/notification.model';
 import { NotificationsService } from '../../../services/notification.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
-import { DownloadService } from 'src/app/services/download-file.service';
+import { DownloadService } from '../../../services/download-file.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -48,7 +48,9 @@ export class NotificationDetailComponent implements OnInit {
 
     //console.log('tap !');
 
-    this.snackbar.open("Download requested. Please wait.", this.translate.instant('snack_bar.action_button'),{
+    this.snackbar.open(
+      this.translate.instant('notification-detail.document_download_request'), 
+      this.translate.instant('snack_bar.action_button'),{
       duration:5000,
       panelClass:['snack'],
     });
@@ -69,8 +71,10 @@ export class NotificationDetailComponent implements OnInit {
         
       },
       error: (resp) => {
-        console.log(resp);
-        this.snackbar.open("Download request failed.",this.translate.instant('snack_bar.action_button'),{
+        //console.log(resp);
+        this.snackbar.open(
+          this.translate.instant('notification-detail.document_download_failed'),
+          this.translate.instant('snack_bar.action_button'),{
           panelClass:['snack_error'],
           duration:1500,
         })

@@ -76,7 +76,7 @@ export class HomeComponent implements OnInit,AfterViewInit{
                     
           },
           complete:()=>{
-            
+            this.loadingService.emitIsLoading(false);
           }
         });
 
@@ -103,9 +103,7 @@ export class HomeComponent implements OnInit,AfterViewInit{
                 }
                 
               },
-              complete:()=>{
-                this.loadingService.emitIsLoading(false);
-              }
+              complete:()=>{}
             });
 
           },
@@ -211,7 +209,7 @@ export class HomeComponent implements OnInit,AfterViewInit{
 
   onFavContractClick(favItem) {
     let clickedContract: ContractData = this.favArr[favItem];
-    this.contractService.emitSelectedFolder(clickedContract);
+    this.contractService.emitSelectedContract(clickedContract);
     this.router.navigate([
       "dashboard/home/contract-detail",
       { id: clickedContract.details.Amsidnr },

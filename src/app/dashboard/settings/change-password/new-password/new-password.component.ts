@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PasswordService } from './../../../../services/password.service';
-import { LoginService } from 'src/app/services/login.service';
+import { LoginService } from '../../../../services/login.service';
 
 
 @Component({

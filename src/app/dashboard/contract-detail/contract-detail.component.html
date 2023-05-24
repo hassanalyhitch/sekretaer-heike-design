@@ -30,7 +30,7 @@
     <!-- Main content -->
     <div class="section-content">
 
-      <div class="bg-white shadow-sm w-100 d-flex fav-item">
+      <div class="bg-white shadow-sm w-100 d-flex fav-item" (swipe)="onContractSwipe($event)">
         <div class="d-flex w-100 ">
 
           <div class="d-flex flex-column _card-content w-100">
@@ -87,7 +87,7 @@
 
         <div class="ms-auto p-2 bd-highlight" (click)="sortByDate()" style="cursor:pointer;">
           <span class="text-muted">
-            {{ 'folder-detail.date_filter_label' | translate }}
+            {{ 'contract_detail.date_filter_label' | translate }}
             <img class="filter-icon" src="/assets/icon_date_filter.svg">
           </span>
         </div>

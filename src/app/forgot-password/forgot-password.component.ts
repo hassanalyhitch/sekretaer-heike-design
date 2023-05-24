@@ -37,7 +37,7 @@ export class ForgotPasswordComponent implements OnInit {
     
         this.app_logo_link_src = "../assets/sekretaer_pink_logo.svg";
 
-      } else if(this.selected_theme == 'pink'){
+      } else if(this.selected_theme == 'default'){
         //use pink logo
         this.app_logo_link_src = "../assets/sekretaer_pink_logo.svg";
   

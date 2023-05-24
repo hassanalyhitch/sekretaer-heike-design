@@ -2,9 +2,9 @@ import { Component, ElementRef, Inject, OnInit, SecurityContext, ViewChild } fro
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
-import { FileNameData } from 'src/app/models/file-name.model';
-import { UploadFileData } from 'src/app/models/upload-file.model';
-import { FileSizePipe } from 'src/app/pipes/filesize.pipe';
+import { FileNameData } from '../../models/file-name.model';
+import { UploadFileData } from '../../models/upload-file.model';
+import { FileSizePipe } from '../../pipes/filesize.pipe';
 
 @Component({
   selector: 'app-edit-small-picture',
@@ -63,8 +63,6 @@ export class EditSmallPictureComponent implements OnInit {
 
     fileData.doc_file = this.file;
   
-    console.table(fileData);
-
     this.closeDialog();
      
   }
@@ -79,9 +77,9 @@ export class EditSmallPictureComponent implements OnInit {
         const reader = new FileReader();
 
         reader.onloadend = () => {
-            console.log(reader.result);
+            
             this.small_picture_src_link = reader.result.toString();
-            // Logs data:<type>;base64,wL2dvYWwgbW9yZ...
+            
         };
 
         reader.readAsDataURL(this.file);
@@ -110,7 +108,7 @@ export class EditSmallPictureComponent implements OnInit {
   
         //The file not PDF or JPEG
         this._snackBar.open(
-          this.translate.instant('add_document.file_type_alert'),
+          this.translate.instant('edit_small_picture.file_type_alert'),
           this.translate.instant('snack_bar.action_button'),
           {
             panelClass:['snack_fileType'],
@@ -121,7 +119,7 @@ export class EditSmallPictureComponent implements OnInit {
   
     }
     deleteSmallPicture(contract_id: string){
-      console.log("Delete Small Picture Called: Contract Id ->"+contract_id);
+      
       this.closeDialog();
     }
 

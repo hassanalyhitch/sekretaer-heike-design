@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ContractData } from 'src/app/models/contract.model';
+import { ContractData } from '../../../models/contract.model';
 import { RenameContractComponent } from '../../rename-contract/rename-contract.component';
-import { ContractsService } from 'src/app/services/contracts.service';
-import { FoldersService } from 'src/app/services/folder.service';
+import { ContractsService } from '../../../services/contracts.service';
+import { FoldersService } from '../../../services/folder.service';
 import { AddPageModalComponent } from '../../add-page-modal/add-page-modal.component';
 import { Subscription } from 'rxjs';
 
@@ -114,12 +114,12 @@ export class ContractCategoryComponent implements OnInit, AfterViewInit {
 
   collapse(){
     
-    console.log("contractcategory this.collapsed called 1");
+    //console.log("contractcategory this.collapsed called 1");
     if(this.templateContractArrLength > 1){
-      console.log("contractcategory this.collapsed called 2");
+      //console.log("contractcategory this.collapsed called 2");
       
       if(!this.collapsed){
-        console.log("contractcategory this.collapsed called 3");
+        //console.log("contractcategory this.collapsed called 3");
 
         this.cardsRef.nativeElement.setAttribute("style","min-height:230px;height:230px;");
         
@@ -184,7 +184,7 @@ export class ContractCategoryComponent implements OnInit, AfterViewInit {
               contract.details.name = resp.name;
 
               //refresh contract list
-              //this._init();
+              this._init();
 
             },
           });

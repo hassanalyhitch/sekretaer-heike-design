@@ -27,8 +27,8 @@ export class ChangeThemeComponent implements OnInit {
   ngOnInit(): void {
 
     this.colors =  [
-      {uiname: this.translateService.instant('settings.theme_pink'), name: "default" , selected : false},
-      {uiname: this.translateService.instant('settings.theme_blue') ,name : "blue", selected: false}
+      {uiname: this.translateService.instant('change-theme.theme_pink'), name: "default" , selected : false},
+      {uiname: this.translateService.instant('change-theme.theme_blue') ,name : "blue", selected: false}
     ];
     
     for(let i = 0; i<this.colors.length; i++){
@@ -48,7 +48,7 @@ export class ChangeThemeComponent implements OnInit {
 
         //show snackbar with success message
         this.snackBar.open(
-          this.translateService.instant('settings.theme_changed_ok'), 
+          this.translateService.instant('change-theme.theme_changed_ok'), 
           this.translateService.instant('snack_bar.action_button'),
           { panelClass: ['snack_success'], duration: 5000 }
         );

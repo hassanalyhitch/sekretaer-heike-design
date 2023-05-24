@@ -2,8 +2,8 @@ import { NgForm } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-import { PasswordService } from 'src/app/services/password.service';
-import { LoginService } from 'src/app/services/login.service';
+import { PasswordService } from '../../../services/password.service';
+import { LoginService } from '../../../services/login.service';
 
 
 @Component({

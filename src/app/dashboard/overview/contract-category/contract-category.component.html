@@ -1,13 +1,11 @@
-<div class="w-100 m-2 d-flex justify-content-between"  style="cursor:pointer;" *ngIf="showTitle">
+<div class="w-100 m-2 d-flex justify-content-between" style="cursor:pointer;" *ngIf="showTitle" (click)="collapsed ? onDefaultInsuranceCardClick():collapse()" >
   <div class="p-2">
-    <span class="section-title align-self-center" (click)="collapsed ? onDefaultInsuranceCardClick():collapse()">
+    <span class="section-title align-self-center">
       {{ groupTitle }}
     </span>
   </div>
   <div class="p-2 d-flex justify-content-center">
-    <span class="" (click)="collapse()" *ngIf="!collapsed && templateContractArrLength>1" > Collapse group </span>
     <i class="material-icons" *ngIf="!collapsed && templateContractArrLength>1" >arrow_drop_up</i>
-    <span class="" (click)="onDefaultInsuranceCardClick()" *ngIf="collapsed" > Expand group </span>
     <i class="material-icons" *ngIf="collapsed" > arrow_drop_down </i>
   </div>
 </div>

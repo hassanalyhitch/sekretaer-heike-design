@@ -1,4 +1,4 @@
-<div class="w-100 folder-bg-transparent">
+<div class="w-100 folder-bg-transparent folder-card">
   <div class="folder-top shadow-sm">
     <span></span>
   </div>
@@ -22,7 +22,7 @@
 
       <br/>
 
-      <div class="d-flex justify-content-start ms-2">
+      <div class="d-flex justify-content-start ms-2 mt-4">
         <div class="p-2">
           <div class="d-flex flex-column">
             <div class="updated-on-label">Updated On:</div>
@@ -30,8 +30,8 @@
           </div>
         </div>
         <div class="ms-auto p-2">
-          <div class="folder-documents">{{ folder.docs.length }} Documents</div>
-          <div class="folder-documents">{{ folder.subFolders.length }} Sub-Folders</div>
+          <div class="folder-documents">{{ folder.docs.length }} {{ 'folder_card.documents' | translate }}</div>
+          <div class="folder-documents">{{ folder.subFolders.length }} {{ 'folder_card.sub_folders' | translate }}</div>
         </div>
       </div>
       

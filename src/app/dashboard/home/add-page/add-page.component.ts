@@ -512,7 +512,7 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
 
       // display snackbar message
       this._snackBar.open(
-        this.translate.instant('contract_detail.shared_with_broker'),
+        this.translate.instant('add_document.share_with_broker'),
         this.translate.instant('snack_bar.action_button'),{
           duration: 8000,
           panelClass:['snack_success'],
@@ -525,7 +525,7 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
 
       // display snackbar message
       this._snackBar.open(
-        this.translate.instant('contract_detail.shared_with_broker'),
+        this.translate.instant('add_document.share_with_broker'),
         this.translate.instant('snack_bar.action_button'),{
           duration: 8000,
           panelClass:['snack_success'],
@@ -538,7 +538,7 @@ export class AddPageComponent implements OnInit, OnDestroy,DoCheck {
 
       // display snackbar message
       this._snackBar.open(
-        this.translate.instant('contract_detail.unshared_with_broker'),
+        this.translate.instant('add_document.un_share_with_broker'),
         this.translate.instant('snack_bar.action_button'),{
           duration: 8000,
           panelClass:['snack_error'],

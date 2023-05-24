@@ -128,8 +128,8 @@ export class NotificationsComponent implements OnInit {
   }
 
   sortByTitle(){
-    console.log('before sorting ',this.sortTitleByAsc);
-    console.table(this.allNotifsArr);
+    //console.log('before sorting ',this.sortTitleByAsc);
+    //console.table(this.allNotifsArr);
 
     if(this.sortTitleByAsc){
       this.allNotifsArr.sort((a, b) => {
@@ -145,13 +145,13 @@ export class NotificationsComponent implements OnInit {
         } 
       });
       this.sortTitleByAsc = !this.sortTitleByAsc;
-      console.log('after sorting ',this.sortTitleByAsc);
-      console.table(this.allNotifsArr);
+      //console.log('after sorting ',this.sortTitleByAsc);
+      //console.table(this.allNotifsArr);
     } else {
       this.allNotifsArr.reverse();
       this.sortTitleByAsc = !this.sortTitleByAsc;
-      console.log('Reverse array',this.sortTitleByAsc);
-      console.table(this.allNotifsArr);
+      //console.log('Reverse array',this.sortTitleByAsc);
+      //console.table(this.allNotifsArr);
 
     }
   }
@@ -182,12 +182,12 @@ export class NotificationsComponent implements OnInit {
         
     });
 
-    console.table(this.allNotifsArr);
+    //console.table(this.allNotifsArr);
 
       this.sortDateByAsc = !this.sortDateByAsc;
     } else {
       this.allNotifsArr.reverse();
-      console.table(this.allNotifsArr);
+      //console.table(this.allNotifsArr);
       this.sortDateByAsc = !this.sortDateByAsc;
 
     }

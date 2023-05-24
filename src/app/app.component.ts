@@ -35,7 +35,7 @@ export class AppComponent  implements OnInit{
     translate.setDefaultLang('en');
 
     const browserLang = translate.getBrowserLang();
-    console.log(browserLang);
+    //console.log(browserLang);
     translate.use(browserLang.match(/en|de/) ? browserLang : 'en');
 
     this.settingsService.currentSettings();

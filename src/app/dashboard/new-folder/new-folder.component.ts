@@ -43,7 +43,7 @@ export class NewFolderComponent implements OnInit {
           this.submitted = false;
 
           //show snackbar with error message
-          this.snackBar.open(this.translate.instant('folder-detail.sub_folder_creation_error'), this.translate.instant('snack_bar.action_button'),{
+          this.snackBar.open(this.translate.instant('new_folder_dialog.sub_folder_creation_error'), this.translate.instant('snack_bar.action_button'),{
             panelClass: ['snack_error'],
              duration:5000,
           });
@@ -53,7 +53,7 @@ export class NewFolderComponent implements OnInit {
           this.submitted = false;
 
           //show snackbar with success message
-          this.snackBar.open(this.translate.instant('folder-detail.sub_folder_creation_success'), this.translate.instant('snack_bar.action_button'),{
+          this.snackBar.open(this.translate.instant('new_folder_dialog.sub_folder_creation_success'), this.translate.instant('snack_bar.action_button'),{
             panelClass: ['snack_success'],
             duration:5000,
           });
@@ -71,7 +71,7 @@ export class NewFolderComponent implements OnInit {
         error:(resp)=>{
           this.submitted = false;         
           //show snackbar with error message
-          this.snackBar.open(this.translate.instant('folder-detail.folder_creation_error'),  this.translate.instant('snack_bar.action_button'),{
+          this.snackBar.open(this.translate.instant('new_folder_dialog.folder_creation_error'),  this.translate.instant('snack_bar.action_button'),{
             panelClass: ['snack_error'],
              duration:5000,
           });
@@ -81,7 +81,7 @@ export class NewFolderComponent implements OnInit {
           this.submitted = false;
 
           //show snackbar with success message
-          this.snackBar.open(this.translate.instant('folder-detail.folder_creation_success'), this.translate.instant('snack_bar.action_button'),{
+          this.snackBar.open(this.translate.instant('new_folder_dialog.folder_creation_success'), this.translate.instant('snack_bar.action_button'),{
             panelClass: ['snack_success'],
             duration:5000,
           });

@@ -21,7 +21,7 @@ export class NotificationModalComponent implements OnInit {
 
   ngOnInit() {
     this.notification = JSON.parse(this.data);
-    console.log(this.notification);
+    //console.log(this.notification);
   }
   
   onCloseModal(){

@@ -34,7 +34,7 @@ export class LoginService {
   }
 
   cacheOps() {
-    console.log("cacheOps");
+    //console.log("cacheOps");
     let now = new Date();
     let lastCache = localStorage.getItem('lastCache');
 
@@ -44,11 +44,11 @@ export class LoginService {
       cacheExpiry.setHours(cacheDateTime.getHours() + 1);
 
       if (cacheExpiry > now) {
-        console.log('Not expired.');
-        console.log('Will expire on => '+cacheExpiry);
+        //console.log('Not expired.');
+        //console.log('Will expire on => '+cacheExpiry);
       } else {
-        console.log('Expired. Clear Cache.');
-        console.log('Already expired on => '+cacheExpiry);
+        //console.log('Expired. Clear Cache.');
+        //console.log('Already expired on => '+cacheExpiry);
         
         try{
 
@@ -58,7 +58,7 @@ export class LoginService {
   
           const deleteOldCaches = async () => {
             const keyList = await caches.keys();
-            console.log(keyList);
+            //console.log(keyList);
             await Promise.all(keyList.map(deleteCache));
           };
   
@@ -67,7 +67,7 @@ export class LoginService {
           location.reload();
           
         } catch(e:any){
-          console.log(e);
+          //console.log(e);
         }
         
       }
@@ -76,13 +76,13 @@ export class LoginService {
   }
 
   emitAuthenticated(isValid: boolean) {
-    console.log("emitAuthenticated in login service "+isValid);
+    //console.log("emitAuthenticated in login service "+isValid);
     this.observer.next(isValid);
-    console.log("Auth Status "+this.isAuthenticated);
+    //console.log("Auth Status "+this.isAuthenticated);
     
     if(!isValid){
       this.isAuthenticated = isValid;
-      console.log("emitAuthenticated 2"+isValid);
+      //console.log("emitAuthenticated 2"+isValid);
       this.route.navigate(['login']);
     }
   }

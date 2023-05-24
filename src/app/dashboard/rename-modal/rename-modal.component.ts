@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { RenameDocumentService } from '../../services/rename-doc.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
-import { DeleteDocumentService } from 'src/app/services/delete-document.service';
+import { DeleteDocumentService } from '../../services/delete-document.service';
 
 @Component({
   selector: 'app-rename-modal',
@@ -74,7 +74,7 @@ export class RenameModalComponent implements OnInit {
       //use default pink logo
       this.broker_pink_logo = true;
 
-    } else if(this.selected_theme == 'pink'){
+    } else if(this.selected_theme == 'default'){
       //use pink logo
       this.broker_pink_logo = true;
 
@@ -100,7 +100,7 @@ export class RenameModalComponent implements OnInit {
     
         //show snackbar with error message
         this.snackBar.open(
-          this.translate.instant('rename_document.document_rename_error'),  
+          this.translate.instant('rename_document_modal.document_rename_error'),  
           this.translate.instant('snack_bar.action_button'),{
             panelClass: ['snack_error'],
             duration: 8000,
@@ -116,7 +116,7 @@ export class RenameModalComponent implements OnInit {
 
         //show snackbar with success message
        this.snackBar.open(
-        this.translate.instant('rename_document.document_rename_success'), 
+        this.translate.instant('rename_document_modal.document_rename_success'), 
         this.translate.instant('snack_bar.action_button'),{
           panelClass: ['snack_success'],
           duration: 8000,
@@ -143,7 +143,7 @@ export class RenameModalComponent implements OnInit {
 
       // display snackbar message
       this.snackBar.open(
-        this.translate.instant('contract_detail.shared_with_broker'),
+        this.translate.instant('rename_document_modal.share_with_broker'),
         this.translate.instant('snack_bar.action_button'),{
           duration: 8000,
           panelClass:['snack_success'],
@@ -156,7 +156,7 @@ export class RenameModalComponent implements OnInit {
 
       // display snackbar message
       this.snackBar.open(
-        this.translate.instant('contract_detail.shared_with_broker'),
+        this.translate.instant('rename_document_modal.share_with_broker'),
         this.translate.instant('snack_bar.action_button'),{
           duration: 8000,
           panelClass:['snack_success'],
@@ -169,7 +169,7 @@ export class RenameModalComponent implements OnInit {
 
       // display snackbar message
       this.snackBar.open(
-        this.translate.instant('contract_detail.unshared_with_broker'),
+        this.translate.instant('rename_document_modal.un_share_with_broker'),
         this.translate.instant('snack_bar.action_button'),{
           duration: 8000,
           panelClass:['snack_error'],
@@ -194,7 +194,7 @@ export class RenameModalComponent implements OnInit {
     
         //show snackbar with error message
         this.snackBar.open(
-          this.translate.instant('rename_document.document_delete_error'),  
+          this.translate.instant('rename_document_modal.document_delete_error'),  
           this.translate.instant('snack_bar.action_button'),{
             panelClass: ['snack_error'],
             duration: 8000,
@@ -210,7 +210,7 @@ export class RenameModalComponent implements OnInit {
 
         //show snackbar with success message
         this.snackBar.open(
-          this.translate.instant('rename_document.document_delete_success'), 
+          this.translate.instant('rename_document_modal.document_delete_success'), 
           this.translate.instant('snack_bar.action_button'),{
             panelClass: ['snack_success'],
             duration: 8000,

@@ -9,26 +9,26 @@
     </div>
 
     <strong class="text-title align-self-center p-2 m-2">
-      {{ 'rename_document.title' | translate }}
+      {{ 'rename_document_modal.title' | translate }}
     </strong>
 
     <div class="align-items-center w-100">
-      {{ 'rename_document.sub_title' | translate }}:<br />
+      {{ 'rename_document_modal.sub_title' | translate }}:<br />
       <strong>{{ documentName | shortenText: 20 }}</strong>
     </div>
 
     <form (ngSubmit)= "onSubmit(saveForm.value)" class="d-flex flex-column mt-4" #saveForm="ngForm" > 
       <div class="material-textfield mb-1">
         <input placeholder=" " type="text" [(ngModel)]="newDocName" name="name" ngModel required/>
-        <label>{{ 'rename_document.text_input_label' | translate }}</label>
+        <label>{{ 'rename_document_modal.text_input_label' | translate }}</label>
       </div>
 
       <div class="d-flex flex-row share" *ngIf="enableShareWithBrokerIcon">
         <span class="broker-btn" (click)="onShareWithBroker()">
           <img class="broker-icon" [src]="share_with_broker_logo_link">
         </span>
-        <p class="m-2" *ngIf="!shareWithBroker" (click)="onShareWithBroker()">{{ 'rename_document.share_with_broker' | translate }}</p>
-        <p class="m-2" *ngIf="shareWithBroker" (click)="onShareWithBroker()">{{ 'rename_document.un_share_with_broker' | translate }}</p>
+        <p class="m-2" *ngIf="!shareWithBroker" (click)="onShareWithBroker()">{{ 'rename_document_modal.share_with_broker' | translate }}</p>
+        <p class="m-2" *ngIf="shareWithBroker" (click)="onShareWithBroker()">{{ 'rename_document_modal.un_share_with_broker' | translate }}</p>
       </div>
 
       <div class="mt-5 w-100">
@@ -40,7 +40,7 @@
           style="font-size:20px;"
           >
             <span *ngIf="submitted" class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status"></span>
-            <span *ngIf="!submitted">{{ 'rename_document.btn_save_label' | translate }}</span>
+            <span *ngIf="!submitted">{{ 'rename_document_modal.btn_save_label' | translate }}</span>
         </button>
       </div>
     </form>
@@ -52,7 +52,7 @@
         class="btn btn-delete-doc w-100 py-2"
         style="font-size:20px;">
           <span *ngIf="document_deleted" class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status"></span>
-          <span *ngIf="!document_deleted">{{ 'rename_document.btn_delete_doc_label' | translate }}</span>
+          <span *ngIf="!document_deleted">{{ 'rename_document_modal.btn_delete_doc_label' | translate }}</span>
       </button>
     </div>
 

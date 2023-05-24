@@ -11,10 +11,10 @@
       </div>
 
       <ul class="dropdown-menu shadow">
-        <li><span class="dropdown-item" href="" (click)="addNewDocument(contractItem)" >{{ 'contract_detail.fav_item_insurance_side_menu_option_1' | translate }}</span></li>
-        <li><span class="dropdown-item" href="" *ngIf="contractItem.details.isFav=='0'" (click)="markFav(contractItem)" >{{ 'contract_detail.fav_item_insurance_side_menu_option_2' | translate }}</span></li>
-        <li><span class="dropdown-item" href="" *ngIf="contractItem.details.isFav=='1'" (click)="unmarkFav(contractItem)" >{{ 'contract_detail.fav_item_insurance_side_menu_option_3' | translate }}</span></li>
-        <li><span class="dropdown-item" href="" (click)="openRenameContractModal(contractItem)" >{{ 'contract_detail.fav_item_insurance_side_menu_option_4' | translate }}</span></li>    
+        <li><span class="dropdown-item" href="" (click)="addNewDocument(contractItem)" >{{ 'fav_item.side_menu_option_1' | translate }}</span></li>
+        <li><span class="dropdown-item" href="" *ngIf="contractItem.details.isFav=='0'" (click)="markFav(contractItem)" >{{ 'fav_item.side_menu_option_2' | translate }}</span></li>
+        <li><span class="dropdown-item" href="" *ngIf="contractItem.details.isFav=='1'" (click)="unmarkFav(contractItem)" >{{ 'fav_item.side_menu_option_3' | translate }}</span></li>
+        <li><span class="dropdown-item" href="" (click)="openRenameContractModal(contractItem)" >{{ 'fav_item.side_menu_option_4' | translate }}</span></li>    
       </ul>
     </div>
   </div>
@@ -33,7 +33,7 @@
 
           <div class="price ml-auto px-1">
             <span class="price">{{ contractItem.details.YearlyPayment | currencyFormat}}</span>
-            <span> / {{ 'contract_detail.contract_yearly_payment_label' | translate }}</span> 
+            <span> / {{ 'fav_item.contract_yearly_payment_label' | translate }}</span> 
           </div>
       </div>
   

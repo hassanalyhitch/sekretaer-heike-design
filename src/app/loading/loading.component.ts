@@ -23,7 +23,7 @@ export class LoadingComponent implements OnInit {
     
         this.app_loading_logo_link_src = "../assets/icon_loading_logo_pink.svg";
 
-      } else if(this.selected_theme == 'pink'){
+      } else if(this.selected_theme == 'default'){
         //use pink logo
         this.app_loading_logo_link_src = "../assets/icon_loading_logo_pink.svg";
   

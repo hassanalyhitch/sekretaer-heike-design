@@ -4,7 +4,7 @@
     <div class="d-flex justify-content-center mb-1 pt-3">
       <div class="p-2">
         <span class="section-title align-self-center">
-          <strong class="section-title align-self-center mt-4 ">{{ 'notifications.title' | translate }}</strong>
+          <strong class="section-title align-self-center mt-4 ">{{ 'notification-detail.title' | translate }}</strong>
         </span>
       </div>
     </div>
@@ -12,7 +12,7 @@
     <div class="col-12 w-sm-100 d-flex flex-column">
     
       <div class="w-100 px-2 mx-2 mb-1 title message_from ">
-      {{ 'notifications.notification_item.open_contract' | translate }} {{notification.createdAt}}
+      {{ 'notification-detail.created_at' | translate }} {{notification.createdAt}}
       </div>
 
       <div class="w-100 p-2 m-2 ">
@@ -25,13 +25,13 @@
       </div>
 
       <div *ngFor="let link of notification.links; let i=index">
-        <div class="shadow d-flex align-items-center justify-content-between notif-action p-2 m-2 mt-3" *ngIf="link.assocType == 'vamsidnr'" (click)="onContractOpen(link.assocId)">{{ 'notifications.notification_item.open_contract' | translate }}
+        <div class="shadow d-flex align-items-center justify-content-between notif-action p-2 m-2 mt-3" *ngIf="link.assocType == 'vamsidnr'" (click)="onContractOpen(link.assocId)">{{ 'notification-detail.open_contract' | translate }}
         <i class="material-icons p-2 ">arrow_forward_ios</i></div>
             
-        <div class="shadow d-flex align-items-center justify-content-between notif-action p-2 m-2 mt-3" *ngIf="link.assocType == 'dms'" (click)="onDocumentClick(link.assocType,link.assocId)">{{ 'notifications.notification_item.open_document' | translate }}
+        <div class="shadow d-flex align-items-center justify-content-between notif-action p-2 m-2 mt-3" *ngIf="link.assocType == 'dms'" (click)="onDocumentClick(link.assocType,link.assocId)">{{ 'notification-detail.open_document' | translate }}
         <i class="material-icons p-2 ">arrow_forward_ios</i></div>
             
-        <div class="shadow d-flex align-items-center justify-content-between notif-action p-2 m-2 mt-3" *ngIf="link.assocType == 'docid'">{{ 'notifications.notification_item.open_document' | translate }}
+        <div class="shadow d-flex align-items-center justify-content-between notif-action p-2 m-2 mt-3" *ngIf="link.assocType == 'docid'">{{ 'notification-detail.open_document' | translate }}
         <i class="material-icons p-2 ">arrow_forward_ios</i></div>
       </div>
           
@@ -41,7 +41,7 @@
         </div>
         <div class="py-2">
           <span class="section-title align-self-center">
-            Go back
+            {{ 'notification-detail.go_back' | translate }}
           </span>
         </div>
       </div>

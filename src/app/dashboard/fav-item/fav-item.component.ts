@@ -147,7 +147,7 @@ export class FavItemComponent implements OnInit {
           this.contractItem.details.favoriteId = resp.id;
         },
         error: (resp) => {
-          this.snackbar.open(this.translate.instant('contract_detail.mark_fav_error'),this.translate.instant('snack_bar.action_button'),{
+          this.snackbar.open(this.translate.instant('fav_item.mark_fav_error'),this.translate.instant('snack_bar.action_button'),{
             duration:1500,
             panelClass:['snack_error'],
           });
@@ -155,7 +155,7 @@ export class FavItemComponent implements OnInit {
         complete:()=>{
           this.contractItem.details.isFav = 1;
 
-          this.snackbar.open(this.translate.instant('contract_detail.mark_fav_success'),this.translate.instant('snack_bar.action_button'),{
+          this.snackbar.open(this.translate.instant('fav_item.mark_fav_success'),this.translate.instant('snack_bar.action_button'),{
             duration:1500,
             panelClass:['snack_success'],
           });
@@ -173,13 +173,13 @@ export class FavItemComponent implements OnInit {
           this.contractItem.details.isFav = 0;
         },
         error: (resp) => {
-          this.snackbar.open(this.translate.instant('contract_detail.unmark_fav_error'),this.translate.instant('snack_bar.action_button'),{
+          this.snackbar.open(this.translate.instant('fav_item.unmark_fav_error'),this.translate.instant('snack_bar.action_button'),{
             panelClass:['snack_error'],
             duration:1500,
           })
         },
         complete:()=>{
-          this.snackbar.open(this.translate.instant('contract_detail.unmark_fav_success'),this.translate.instant('snack_bar.action_button'),{
+          this.snackbar.open(this.translate.instant('fav_item.unmark_fav_success'),this.translate.instant('snack_bar.action_button'),{
             panelClass:['snack_success'],
             duration:1500,
           });
@@ -192,7 +192,7 @@ export class FavItemComponent implements OnInit {
   onContractClick(clickedContract) {
 
     if(!this.collapsed){
-      this.contractService.emitSelectedFolder(clickedContract);
+      this.contractService.emitSelectedContract(clickedContract);
       this.router.navigate([
         "dashboard/home/contract-detail",
         { id: clickedContract.details.Amsidnr },
@@ -221,7 +221,7 @@ export class FavItemComponent implements OnInit {
       next:()=>{
       },
       error:(resp)=>{
-        console.log(resp);
+        //console.log(resp);
       }
     });
   }

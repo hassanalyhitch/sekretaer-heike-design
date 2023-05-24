@@ -147,7 +147,7 @@ export class NewContractComponent implements OnInit {
       //use default pink logo
       this.broker_pink_logo = true;
 
-    } else if(this.selected_theme == 'pink'){
+    } else if(this.selected_theme == 'default'){
       //use pink logo
       this.broker_pink_logo = true;
 
@@ -456,8 +456,6 @@ export class NewContractComponent implements OnInit {
        
      }
     });
-
-
     
    }
 
@@ -466,24 +464,45 @@ export class NewContractComponent implements OnInit {
   }
 
   getFile(event){
-    this.file = event.target.files[0];
-  
-
-   let _file:UploadFileData ={
-    doc_file:this.file,
-    fileName :this.file.name,
-    fileId : this.uploadFileArr.length +"",
-
-    fileSize :this.fileSizePipe.transform(this.file.size,'MB'),
     
-   fileType  :this.file.type
-   }
-   this.uploadFileArr =[];
-   this.uploadFileArr.push(_file);
+  //new code 
+   this.file = event.target.files[0];
+    
+    if (this.file.type =='application/pdf' || this.file.type =='image/jpeg') {
 
-   this.selectFile.nativeElement.value = null;
+      let _file:UploadFileData ={
+        doc_file:this.file,
+        fileId : this.uploadFileArr.length +"",
+        fileName : this.file.name,
+        fileSize :this.fileSizePipe.transform(this.file.size,'MB'),      
+        fileType:this.file.type
+      }
+
+      
+      this.uploadFileArr = [];
+      this.uploadFileArr.push(_file);
+      this.selectFile.nativeElement.value = null;
+
+    } else{
+      //Reset data
+
+      this.uploadFileArr = [];
+      this.selectFile.nativeElement.value = null;
+
+      //The file not PDF or JPEG
+      this._snackBar.open(
+        this.translate.instant('add_document.file_type_alert'),
+        this.translate.instant('snack_bar.action_button'),
+        {
+          panelClass:['snack_fileType'],
+          duration: 8000,
+        });
+
+    }
 
   }
+
+
   removeFile(obj){
     this.uploadFileArr.pop();
    

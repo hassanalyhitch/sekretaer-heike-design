@@ -222,11 +222,13 @@ export class OverviewComponent implements OnInit {
         }
 
         this.contractCategory.length = 0;
+        
+        //sort all arr by BranchSekretaer
+        this.allContractsArr.sort((a,b) =>a.details.BranchSekretaer.localeCompare(b.details.BranchSekretaer));
+        this.contractService.userContractsArr = this.allContractsArr;
 
         if(this.contractService.userContractsArr.length>5){
-          //sort all arr by BranchSekretaer
-          this.allContractsArr.sort((a,b) =>a.details.BranchSekretaer.localeCompare(b.details.BranchSekretaer));
-          console.table(this.allContractsArr);
+          //console.table(this.allContractsArr);
           let category = "";
 
           for(let i=0; i<this.allContractsArr.length; i++){
@@ -245,7 +247,7 @@ export class OverviewComponent implements OnInit {
             }
           }
 
-          console.log(this.contractCategory);
+          //console.log(this.contractCategory);
         } else {
 
           this.contractCategory[0] = this.allContractsArr;
@@ -313,8 +315,13 @@ export class OverviewComponent implements OnInit {
 
   onCardClick(clickedContract){
     
-    this.contractService.emitSelectedFolder(clickedContract);
-    this.router.navigate(['dashboard/overview/contract-detail', { id: clickedContract.details.Amsidnr }]);
+    this.contractService.emitSelectedContract(clickedContract);
+    this.router.navigate(
+      ['dashboard/overview/contract-detail', 
+        { 
+          id: clickedContract.details.Amsidnr
+        }
+      ]);
     
   }
   onFolderCardClick(clickedFolder){

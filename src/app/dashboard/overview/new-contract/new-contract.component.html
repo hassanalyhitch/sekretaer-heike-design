@@ -99,7 +99,7 @@
 
                 <div class="fileUpload ">
                     <ng-multiselect-dropdown
-                    placeholder = 'Status Reason'
+                    placeholder="{{ 'new-contract.status_reason' | translate }}"
                     [settings]="statusReasonSettings"
                     (onSelect)="onStatusReasonSelected($event)"
                     [data]="statusReasonList"
@@ -121,10 +121,10 @@
                     
 
                 <div class="risk">
-                    <input type="text" placeholder="Risk" ngModel name="Risk" required/>
+                    <input type="text" placeholder="{{'new-contract.risk' | translate }}" ngModel name="Risk" required/>
                 </div>
 
-                <input class="risk" type="text" placeholder="Insurance Number(optional)" ngModel name="insuranceNumber"/>
+                <input class="risk" type="text" placeholder="{{'new-contract.insurance_number' | translate }}" ngModel name="insuranceNumber"/>
                 
                 <p class="subtitle_section">{{'new-contract.sub_title_3' | translate }}:</p>
 
@@ -140,7 +140,7 @@
                                 id="selectFile"
                                 (change)="getFile($event)"
                                 type="file"
-                                accept="application/pdf"
+                                accept=".pdf,.jpeg,.jpg"
                                 ngModel
                                 required
                                 name="File"

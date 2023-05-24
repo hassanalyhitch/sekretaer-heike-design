@@ -7,7 +7,6 @@
     "search_fab": "Search",
     "chat_fab": "Chat",
     "mail_fab": "My Broker",
-    "insurance_check_fab": "Insurance Check",
     "service_card_add_title": "Add",
     "service_card_add_sub_title": "(a document, a picture, etc)",
     "service_card_inbox_sub_title":"View",
@@ -21,31 +20,6 @@
     "no_contracts_found": "No Contracts Found",
     "title_my_sekretar": "MY SEKRETÄR",
     "title_my_folders": "MY FOLDERS",
-    "new_contract": {
-      "title_new_contract": "NEW CONTRACT",
-      "title_select_branch": "Please Select Branch",
-      "title_select_company": "Please Select Company",
-      "title_dialog": "Did you wish for your broker to take care of this?",
-      "dialog_btn_yes": "Yes",
-      "dialog_btn_no": "No",
-      "text_input_label_begin_date": "Begin Date",
-      "text_input_label_end_date": "End Date",
-      "text_input_label_payment_method": "Payment Method",
-      "text_input_label_amount" : "Amount",
-      "text_input_label_risk" : "Risk",
-      "text_input_label_contract_number": "Contract Number",
-      "submit_button_label": "Submit"
-    },
-    "new_folder_dialog": {
-      "title": "NEW FOLDER",
-      "text_input_label": "Name",
-      "btn_save_label": "SAVE"
-    },
-    "new_sub_folder_dialog": {
-      "title": "NEW SUB FOLDER",
-      "text_input_label": "Folder Name",
-      "btn_save_label": "SAVE"
-    },
     "folder_menu": {
       "title_new_folder"   : "Add New Folder",
       "sort_by_date"       : "Sort by Date",
@@ -59,65 +33,92 @@
       "search"             : "Search Contracts"
     }
   },
+  "new_folder_dialog": {
+    "title": "NEW FOLDER",
+    "text_input_label": "Name",
+    "btn_save_label": "SAVE",
+    "sub_folder_creation_error" : "Sub-Folder Creation Failed",
+    "sub_folder_creation_success" : "Sub-Folder Created Successfully",
+    "folder_creation_error" : "Folder Creation Failed",
+    "folder_creation_success" : "Folder Created Successfully"
+  },
   "contract_detail": {
     "title_main" : "INSURANCE DETAILS",
     "title_documents": "Insurance documents",
-    "title_add_new_document": "Add new Document",
     "contract_tariff_label": "Tariff",
     "contract_number_label": "Contract Number",
     "contract_start_date_label": "Start",
     "contract_end_date_label": "End",
     "contract_yearly_payment_label": "Year",
-    "contract_monthly_payment_label" : "Month",
     "insurance_side_menu_item_1": "Mark as Favourite",
     "insurance_side_menu_item_2": "Unmark as Favourite",
     "insurance_side_menu_item_3": "Rename",
     "insurance_side_menu_item_4": "Add New Document",
-    "document_side_menu_item_1" : "Open Document",
-    "document_side_menu_item_2" : "Rename Document",
     "mark_fav_success":"Successfully marked as Favourite",
     "mark_fav_error":"Failed to mark as Favourite",
     "unmark_fav_success":"Unmarked as Favourite",
     "unmark_fav_error":"Failed to unmark as Favourite",
-    "fav_item_insurance_side_menu_option_1" : "Add New Document",
-    "fav_item_insurance_side_menu_option_2" : "Mark as Favourite",
-    "fav_item_insurance_side_menu_option_3" : "Unmark as Favourite",
-    "fav_item_insurance_side_menu_option_4" : "Rename Contract",
+    "no_documents_found": "No Documents Found",
+    "date_filter_label": "Date"
+  },
+  "fav_item" : {
+    "contract_yearly_payment_label": "Year",
+    "side_menu_option_1":"Add New Document",
+    "side_menu_option_2":"Mark as Favourite",
+    "side_menu_option_3":"Unmark as Favourite",
+    "side_menu_option_4":"Rename",
+    "mark_fav_success":"Successfully marked as Favourite",
+    "mark_fav_error":"Failed to mark as Favourite",
+    "unmark_fav_success":"Unmarked as Favourite",
+    "unmark_fav_error":"Failed to unmark as Favourite"
+  },
+  "document_item" : {
     "shared_with_broker" : "Document shared with Broker",
     "unshared_with_broker" : "Document not shared with Broker",
     "document_download_request" : "Download requested. Please wait.",
-    "document_download_failed" : "Download request failed.",
-    "no_documents_found": "No Documents Found",
-    "edit_small_picture" : "Edit Small Picture",
+    "document_download_failed" : "Download request failed."
+  },
+  "folder_card" : {
+    "documents" : "Documents",
+    "sub_folders" : "Sub-Folders"
+  },
+  "sub_folder_card" : {
+    "documents" : "Documents",
+    "sub_folders" : "Sub-Folders"
+  },
+  "edit_small_picture" : {
+    "file_type_alert": "Only JPEG and PNG Image is accepted",
+    "update_small_picture_dialog_title": "Change Small Picture",
     "update_small_picture": "Add / Change",
     "btn_update_small_picture_label": "Save",
-    "btn_delete_small_picture_label": "Delete",
-    "update_small_picture_dialog_title": "Change Small Picture"
+    "btn_delete_small_picture_label": "Delete"
   },
   "login": {
     "title_login": "Let's Login",
-    "title_forgot_password_1" : "Forgot Password?",
-    "title_forgot_password_2" : "Don't Worry.",
-    "title_forgot_password_3" : "It Happens to the rest of us.",
-    "content_forgot_password" : "Please enter your email address or your username and we will send you a link to reset your password",
     "btn_login": "LOG IN",
-    "btn_reset_password": "RESET PASSWORD",
-    "btn_back": "BACK",
     "username": "Username",
     "password": "Password",
     "forgot_password": "Forgot your Password?",
     "privacy_policy": "Privacy Policy",
     "terms": "Terms & Conditions",
-    "email": "Email",
-    "forgot_password_input_lable" : "Email",
-    "btn_back_to_login" : "BACK TO LOGIN",
-    "title_email_sent" : "Fast geschafft.",
-    "content_email_sent_1" : "We have sent you an email.",
-    "content_email_sent_2" : "Please check your inbox or your spam folder",
     "wrong_credentials_used": "Incorrect Username or Password",
     "connection_error" : "Failed to Connect"
   },
-  "settings":{
+  "forgot_password": {
+    "title_forgot_password_1" : "Forgot Password?",
+    "title_forgot_password_2" : "Don't Worry.",
+    "title_forgot_password_3" : "It Happens to the rest of us.",
+    "content_forgot_password" : "Please enter your email address or your username and we will send you a link to reset your password",
+    "forgot_password_input_lable" : "Email",
+    "btn_reset_password": "RESET PASSWORD"
+  },
+  "forgot_password_email_sent": {
+    "btn_back_to_login" : "BACK TO LOGIN",
+    "title_email_sent" : "Email Sent",
+    "content_email_sent_1" : "We have sent you an email.",
+    "content_email_sent_2" : "Please check your inbox or your spam folder"
+  },
+  "settings": {
     "main_title":"SETTINGS",
     "sub_title_1": "PERSONAL DETAILS",
     "sub_title_1_a": "My Data",
@@ -129,21 +130,24 @@
     "sub_title_3": "OFFICIAL",
     "sub_title_3_a": "Terms & Conditions",
     "sub_title_3_b": "Privacy Policy",
-    "logout": "Log Out",
+    "logout": "Log Out"
+  },
+  "change-push-notifications": {
+    "main_title":"SETTINGS",
     "go_back": "Go Back",
-    "change_language_title": "Change Language",
-    "change_theme_title": "Change Theme",
-    "language_en": "English",
-    "language_de": "Deutsch",
-    "theme_pink": "Pink",
-    "theme_blue": "Blue",
-    "language_changed_ok" : "Language Changed Successfully",
-    "theme_changed_ok" : "Theme Color Changed Successfully",
     "change_push_notifications_title": "Manage Push Notifications",
     "manage_push_notification_option_1": "New Document",
     "manage_push_notification_option_2": "Insurance Offers",
     "manage_push_notification_option_3": "Insurance Change Information",
     "manage_push_notification_option_4": "Information From Broker"
+  },
+  "change-language": {
+    "main_title":"SETTINGS",
+    "change_language_title": "Change Language",
+    "go_back": "Go Back",
+    "language_en": "English",
+    "language_de": "Deutsch",
+    "language_changed_ok" : "Language Changed Successfully"
   },
   "folder-detail":{
     "subfolder":"My Sub-Folders",
@@ -152,15 +156,9 @@
     "folder_side_menu_item_1": "Mark as Favourite",
     "folder_side_menu_item_2": "Unmark as Favourite",
     "folder_side_menu_item_3": "Rename",
-    "created_on": "Created On",
     "documents": "My Documents",
-    "sub_folders": "Sub-folders",
     "add_subfolder" : "Add Sub-Folder",
     "add_new_document": "Add new Document",
-    "sub_folder_creation_error" : "Sub-Folder Creation Failed",
-    "sub_folder_creation_success" : "Sub-Folder Created Successfully",
-    "folder_creation_error" : "Folder Creation Failed",
-    "folder_creation_success" : "Folder Created Successfully",
     "mark_fav_success":"Successfully marked as Favourite",
     "mark_fav_error":"Failed to mark as Favourite",
     "unmark_fav_success":"Unmarked as Favourite",
@@ -188,22 +186,21 @@
     "mark_all_as_read": "Mark all as Read",
     "sort_type":"Type",
     "sort_name":"Title",
-    "sort_date":"Date",
-    "notification_item": {
-      "open_contract":"Open Contract",
-      "open_document": "Open Document",
-      "mark_as_read": "Mark as Read"
-    },
-    "notification_modal": {
-      "title": "Notification Title",
-      "content": "Notification content",
-      "mark_as_read": "Mark as Read"
-    },
-    "notification-detail":{
-      "title": "NOTIFICATIONS",
-      "back": "Go back",
-      "from": "Message from"
-    }
+    "sort_date":"Date"
+  },
+  "notification_modal": {
+    "open_contract":"Open Contract",
+    "open_document": "Open Document",
+    "mark_as_read": "Mark as Read"
+  },
+  "notification-detail":{
+    "title": "NOTIFICATIONS",
+    "open_contract":"Open Contract",
+    "open_document": "Open Document",
+    "go_back": "Go back",
+    "created_at": "Created On",
+    "document_download_request" : "Download requested. Please wait.",
+    "document_download_failed" : "Download request failed."
   },
   "rename_contract": {
     "title" : "Rename Document",
@@ -232,7 +229,10 @@
     "file_upload_success": "File Upload Successfully",
     "file_type_alert": "Only PDF Document and JPEG Image is accepted",
     "share_with_broker" : "Share With Broker",
-    "un_share_with_broker" : "Don't Share With Broker"
+    "un_share_with_broker" : "Don't Share With Broker",
+    "placeholder_document_name" : "Document Name",
+    "tags" : "Tags",
+    "date": "Date"
   },
   "search":{
     "title_main":"SEARCH",
@@ -245,18 +245,14 @@
     "search_only_documents_message" : "Search Documents",
     "no_folders_found": "No Matching Folders Found",
     "no_documents_found" : "No Matching Documents Found",
-    "no_insurance_contracts_found" : "No Matching Insurance Contracts Found"
-  },
-  "privacy_policy":{
-    "title" : "Privacy Policy"
-  },
-  "terms_conditions":{
-    "title" : "Terms & Conditions"
+    "no_insurance_contracts_found" : "No Matching Insurance Contracts Found",
+    "document_download_request" : "Download requested. Please wait.",
+    "document_download_failed" : "Download request failed."
   },
   "snack_bar" : {
     "action_button": "Dismiss"
   },
-  "rename_document": {
+  "rename_document_modal": {
     "title" : "Rename Document",
     "sub_title": "Document Name",
     "text_input_label": "New Document Name",
@@ -269,7 +265,8 @@
     "document_delete_error": "Document Delete Failed",
     "document_delete_success" : "Document Deleted Successfully"
   },
-  "my-data":{
+  "my-data": {
+    "main_title": "SETTINGS",
     "page_sub_title_1":"your data",
     "page_sub_title_2":"Personal Details",
     "title_first_name":"First Name",
@@ -279,8 +276,7 @@
     "title_number":"Number",
     "title_postalCode":"Postal Code",
     "title_street":"Street",
-    "save_btn":"SAVE",
-    "back_btn":"Back"
+    "go_back":"Go Back"
  },
  "change-password":{
   "page_title":"SETTINGS",
@@ -289,19 +285,32 @@
   "sub_title_3":"Your Current password",
   "field_placeholder":"Current Password",
   "submit_btn":"PROCEED",
-  "back_btn":"Back"
+  "go_back":"Go Back"
 },
 "new-password":{
+  "page_title" :"SETTINGS",
   "sub_title_1":"Please enter",
   "sub_title_2" :"Your New Password",
+  "sub_title_3" : "Change your password",
   "placeholder_1":"New Password",
   "placeholder_2":"Repeat New Password",
   "submit_btn":"CONFIRM",
-  "password_unconfirmed":"Passwords did not Match"
+  "password_unconfirmed":"Passwords did not Match",
+  "go_back": "Go Back"
+ },
+ "change-theme" : {
+  "main_title":"SETTINGS",
+  "theme_pink": "Pink",
+  "theme_blue": "Blue",
+  "theme_changed_ok" : "Theme Color Changed Successfully",
+  "go_back": "Go Back",
+  "change_theme_title": "Change Theme"
  },
 "reset-successful":{
+  "page_title": "SETTINGS",
   "sub_title_1":"Thank you very much",
   "sub_title_2":"You have successfully reset your password",
+  "sub_title_3":"change your password",
   "btn_1":"BACK TO HOMEPAGE",
   "btn_2":"Back to Settings"
  },
@@ -322,7 +331,10 @@
   "submit_btn":"SAVE INSURANCE",
   "back_btn":"Back",
   "create_new_contract_error":"Failed to create new contract",
-  "create_new_contract_success":"New Contact created successfully"
+  "create_new_contract_success":"New Contact created successfully",
+  "status_reason": "Status Reason",
+  "risk" : "Risk",
+  "insurance_number": "Insurance Number(optional)"
  },
  "privacy_policy_and_terms_content": {
   "a1_title" : "A. Terms and Conditions",
@@ -476,4 +488,3 @@
     "phoenix_digital_address_6" : "Fest- und Mobilfunknetz)"
   }
 }
-

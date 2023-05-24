@@ -43,7 +43,6 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
   TAGS:string = 'AddPageModalComponent';
 
 
-  showFileName:boolean =false;
   submitted: boolean = false;
   dropDownIsHidden:boolean= true;
   successResponse:boolean = true;
@@ -177,7 +176,7 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
       //use default pink logo
       this.broker_pink_logo = true;
 
-    } else if(this.selected_theme == 'pink'){
+    } else if(this.selected_theme == 'default'){
       //use pink logo
       this.broker_pink_logo = true;
 
@@ -470,8 +469,6 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
     
     if (this.file.type =='application/pdf' || this.file.type =='image/jpeg') {
 
-      this.showFileName = true;
-
       let _file:UploadFileData ={
         doc_file:this.file,
         fileId : this.uploadFileArr.length +"",
@@ -523,7 +520,7 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
 
       // display snackbar message
       this._snackBar.open(
-        this.translate.instant('contract_detail.shared_with_broker'),
+        this.translate.instant('add_document.share_with_broker'),
         this.translate.instant('snack_bar.action_button'),{
           duration: 8000,
           panelClass:['snack_success'],
@@ -536,7 +533,7 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
 
       // display snackbar message
       this._snackBar.open(
-        this.translate.instant('contract_detail.shared_with_broker'),
+        this.translate.instant('add_document.share_with_broker'),
         this.translate.instant('snack_bar.action_button'),{
           duration: 8000,
           panelClass:['snack_success'],
@@ -549,7 +546,7 @@ export class AddPageModalComponent implements OnInit, OnDestroy,DoCheck {
 
       // display snackbar message
       this._snackBar.open(
-        this.translate.instant('contract_detail.unshared_with_broker'),
+        this.translate.instant('add_document.un_share_with_broker'),
         this.translate.instant('snack_bar.action_button'),{
           duration: 8000,
           panelClass:['snack_error'],
