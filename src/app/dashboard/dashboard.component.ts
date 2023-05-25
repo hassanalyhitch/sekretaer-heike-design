@@ -13,6 +13,8 @@ export class DashboardComponent implements OnInit {
   public lat;
   public lng;
 
+  notMobile = false;
+
   constructor(private http:HttpClient,
     private snackbar:MatSnackBar,
     private translate: TranslateService) { }

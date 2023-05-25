@@ -1,6 +1,7 @@
 .bottom-nav{
-  height:60px;
-  background-color: #2C262D;
+  height:100%;
+  width: 100%;
+  /* background-color: #2C262D; */
   color: white;
   border-radius: 0px 25px 0px 0px;
 }
@@ -12,4 +13,12 @@
 .bottom-nav a.active {
   text-decoration: none;
   color: var(--primaryIconColor);
+}
+
+._nav-item{
+  margin-top: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
