@@ -10,7 +10,7 @@ import {
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Event, NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 import { ContractData } from '../../models/contract.model';
 import { DocumentData } from '../../models/document.model';
 import { ContractsService } from '../../services/contracts.service';
@@ -22,6 +22,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AddPageModalComponent } from '../add-page-modal/add-page-modal.component';
 import { LoadingService } from '../../services/loading.service';
 import { EditSmallPictureComponent } from '../edit-small-picture/edit-small-picture.component';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-contract-detail',
@@ -81,6 +82,22 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
 
   @ViewChildren('documentItem') documentItemList: QueryList<ElementRef>;
 
+  //screen layout changes
+  destroyed = new Subject<void>();
+  currentScreenSize: string;
+
+  isMobileView: boolean;
+  isDesktopView: boolean;
+
+  // Create a map to display breakpoint names for layout changes.
+  displayNameMap = new Map([
+    [Breakpoints.XSmall, 'XSmall'],
+    [Breakpoints.Small, 'Small'],
+    [Breakpoints.Medium, 'Medium'],
+    [Breakpoints.Large, 'Large'],
+    [Breakpoints.XLarge, 'XLarge'],
+  ]);
+
   constructor(
     private route: ActivatedRoute,
     private matDialog: MatDialog,
@@ -90,7 +107,8 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     private _location: Location,
     private downloadService: DownloadService,
     private snackbar:MatSnackBar,
-    private loadingService:LoadingService
+    private loadingService:LoadingService,
+    private breakpointObserver: BreakpointObserver,
   ) {
     this.loadingService.emitIsLoading(true);
 
@@ -100,6 +118,9 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
 
     this.isFirstItem = false;
     this.isLastItem = false;
+
+    this.isMobileView = false;
+    this.isDesktopView = false;
   }
 
   ngOnInit() {
@@ -113,6 +134,53 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     });
 
     this._init();
+
+    //-------------------screen changes-----------------
+    this.breakpointObserver
+    .observe([
+      Breakpoints.XSmall,
+      Breakpoints.Small,
+      Breakpoints.Medium,
+      Breakpoints.Large,
+      Breakpoints.XLarge,
+    ])
+    .pipe(takeUntil(this.destroyed))
+    .subscribe(result => {
+      for (const query of Object.keys(result.breakpoints)) {
+        if (result.breakpoints[query]) {
+
+        this.currentScreenSize = this.displayNameMap.get(query) ?? 'Unknown';
+
+        if(this.displayNameMap.get(query) == 'XSmall'){
+
+          this.isMobileView = true;
+          this.isDesktopView = false;
+    
+        } else if(this.displayNameMap.get(query) == 'Small'){
+    
+          this.isMobileView = true;
+          this.isDesktopView = false;
+    
+        } else if(this.displayNameMap.get(query) == 'Medium'){
+    
+          this.isMobileView = false;
+          this.isDesktopView = true;
+    
+        } else if(this.displayNameMap.get(query) == 'Large'){
+    
+          this.isMobileView = false;
+          this.isDesktopView = true;
+          
+        } else if(this.displayNameMap.get(query) == 'XLarge'){
+    
+          this.isMobileView = false;
+          this.isDesktopView = true;
+          
+        }
+    
+        }
+      }
+    });
 
   }
 
@@ -234,8 +302,10 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-   this.contractDetailSub.unsubscribe();
-  }
+    this.contractDetailSub.unsubscribe();
+    this.destroyed.next();
+    this.destroyed.complete();
+  } 
 
   openModal(file) {
     const dialogConfig = new MatDialogConfig();

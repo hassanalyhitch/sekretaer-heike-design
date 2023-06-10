@@ -17,8 +17,7 @@ export class FileUploadService {
     // Returns an observable
     addFolderFile(data:FileNameData,folderId:string,tags:string = '',editedName:string ='') {
 
-      // console.log(data.doc_file);
-    
+      
       let url = environment.baseUrl + '/api/v1/dms/upload';
 
       let formData = new FormData();
@@ -54,7 +53,7 @@ export class FileUploadService {
             if(error instanceof HttpErrorResponse){
               //Invalid Token or Unauthorised request
               if(error.status == 401){
-                this.loginService.emitAuthenticated(false);
+                this.loginService.resetAuthToken();
               }
             }
             
@@ -79,9 +78,7 @@ export class FileUploadService {
       formData.append("agent","");
       formData.append("folder","");
 
-      //console.log(this.TAG + formData);
       
-
       return this.http.post(url,formData,{
         headers:new HttpHeaders({
           'Accept':'application/json',
@@ -95,7 +92,7 @@ export class FileUploadService {
             if(error instanceof HttpErrorResponse){
                //Invalid Token or Unauthorised request
                if(error.status == 401){
-                this.loginService.emitAuthenticated(false);
+                this.loginService.resetAuthToken();
               }
             }
           }

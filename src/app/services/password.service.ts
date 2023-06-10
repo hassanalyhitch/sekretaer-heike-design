@@ -9,7 +9,7 @@ import { environment } from '../../environments/environment';
 })
 export class PasswordService {
   
-  TAG:string = 'PasswordService  ';
+  //TAG:string = 'PasswordService  ';
 
   oldPassword:string = '';
 
@@ -32,7 +32,7 @@ export class PasswordService {
             if(error instanceof HttpErrorResponse){
               //Invalid Token or Unauthorised request
               if(error.status == 401){
-                this.loginService.emitAuthenticated(false);
+                this.loginService.resetAuthToken();
               }
             }
           }
@@ -59,7 +59,7 @@ export class PasswordService {
             if(error instanceof HttpErrorResponse){
               //Invalid Token or Unauthorised request
               if(error.status == 401){
-                this.loginService.emitAuthenticated(false);
+                this.loginService.resetAuthToken();
               }
             }
           }

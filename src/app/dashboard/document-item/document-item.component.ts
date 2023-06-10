@@ -4,6 +4,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { DownloadService } from '../../services/download-file.service';
 import { DocumentData } from '../../models/document.model';
 import { environment } from '../../../environments/environment';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-document-item',
@@ -27,10 +30,29 @@ export class DocumentItemComponent implements OnInit {
   isPDF: boolean;
   isJPEG: boolean;
 
+  //screen layout changes
+  destroyed = new Subject<void>();
+  currentScreenSize: string;
+
+  isMobileView: boolean;
+  isDesktopView: boolean;
+
+  // Create a map to display breakpoint names for layout changes.
+  displayNameMap = new Map([
+    [Breakpoints.XSmall, 'XSmall'],
+    [Breakpoints.Small, 'Small'],
+    [Breakpoints.Medium, 'Medium'],
+    [Breakpoints.Large, 'Large'],
+    [Breakpoints.XLarge, 'XLarge'],
+  ]);
+
   constructor(
-    private snackbar:MatSnackBar,
+    private snackbar: MatSnackBar,
     private translate: TranslateService,
     private downloadService: DownloadService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private breakpointObserver: BreakpointObserver
   ) { 
 
     this.broker_icon_link = "../assets/icon_broker_simple_default.svg"; // default broker icon
@@ -42,9 +64,59 @@ export class DocumentItemComponent implements OnInit {
     this.isDocument = false;
     this.isPDF = false;
     this.isJPEG = false;
+
+    this.isMobileView = false;
+    this.isDesktopView = false; 
   }
 
   ngOnInit() {
+
+    //-------------------screen changes-----------------
+    this.breakpointObserver
+    .observe([
+      Breakpoints.XSmall,
+      Breakpoints.Small,
+      Breakpoints.Medium,
+      Breakpoints.Large,
+      Breakpoints.XLarge,
+    ])
+    .pipe(takeUntil(this.destroyed))
+    .subscribe(result => {
+      for (const query of Object.keys(result.breakpoints)) {
+        if (result.breakpoints[query]) {
+
+        this.currentScreenSize = this.displayNameMap.get(query) ?? 'Unknown';
+
+        if(this.displayNameMap.get(query) == 'XSmall'){
+
+          this.isMobileView = true;
+          this.isDesktopView = false;
+    
+        } else if(this.displayNameMap.get(query) == 'Small'){
+    
+          this.isMobileView = true;
+          this.isDesktopView = false;
+    
+        } else if(this.displayNameMap.get(query) == 'Medium'){
+    
+          this.isMobileView = false;
+          this.isDesktopView = true;
+    
+        } else if(this.displayNameMap.get(query) == 'Large'){
+    
+          this.isMobileView = false;
+          this.isDesktopView = true;
+          
+        } else if(this.displayNameMap.get(query) == 'XLarge'){
+    
+          this.isMobileView = false;
+          this.isDesktopView = true;
+          
+        }
+    
+        }
+      }
+    });
 
     if(this.from_location == "contract_details"){
       this.enableSharedWithBrokerIcon = true;
@@ -86,38 +158,90 @@ export class DocumentItemComponent implements OnInit {
   }
 
   onDocumentClick(doc: DocumentData){
+
+    if(doc.extension == "jpg" || doc.extension == "jpeg" || doc.extension == "pdf" ){
+
+      
+      if(this.router.url.includes('home')){
+
+        if(this.isMobileView){
+
+          this.router.navigate([
+            'dashboard/home/fileview', 
+            { id: doc.docid , extension:doc.extension, url:doc.linkToDoc, docName:doc.name, sys:doc.systemId}],
+            { skipLocationChange: false });
+
+        } else {
+
+          this.router.navigate([
+            'dashboard/home/',
+            { outlets: { 'desktop': ['fileview', { id: doc.docid , extension:doc.extension, url:doc.linkToDoc, docName:doc.name, sys:doc.systemId}] } }
+          ]);
+
+        }
+
+      } else if(this.router.url.includes('overview')){
+
+        if(this.isMobileView){
+
+          this.router.navigate([
+            'dashboard/overview/fileview', 
+            { id: doc.docid , extension:doc.extension, url:doc.linkToDoc, docName:doc.name, sys:doc.systemId}],
+            { skipLocationChange: false });
+
+        } else {
+
+          this.router.navigate([
+            'dashboard/overview/',
+            { outlets: { 'desktop': ['fileview', { id: doc.docid , extension:doc.extension, url:doc.linkToDoc, docName:doc.name, sys:doc.systemId}] } }
+          ]);
+
+        }
+
+      } else if(this.router.url.includes('favourite')){
+
+        this.router.navigate([
+          'dashboard/favourite/fileview', 
+          { id: doc.docid , extension:doc.extension, url:doc.linkToDoc, docName:doc.name, sys:doc.systemId}],
+          { skipLocationChange: false });
+      } 
+        
+    }
+    else if(doc.extension == "zip"){
+      this.snackbar.open(
+        this.translate.instant('document_item.document_download_request'), 
+        this.translate.instant('snack_bar.action_button'),{
+        duration:5000,
+        panelClass:['snack'],
+      });
+      
+      this.downloadService.getBase64DownloadFile(doc.systemId, doc.docid).subscribe({
+        next:(resp:any)=>{
+          const link = document.createElement('a');
+          link.setAttribute('target', '_blank');
   
-    this.snackbar.open(
-      this.translate.instant('document_item.document_download_request'), 
-      this.translate.instant('snack_bar.action_button'),{
-      duration:5000,
-      panelClass:['snack'],
-    });
-    
-    this.downloadService.getBase64DownloadFile(doc.systemId, doc.docid).subscribe({
-      next:(resp:any)=>{
-        const link = document.createElement('a');
-        link.setAttribute('target', '_blank');
-
-        link.setAttribute('href', environment.baseUrl+resp.body.linkToDoc);
-
-        link.setAttribute('download', resp.body.name+'.'+resp.body.extension);
-        
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-        
-      },
-      error: (resp) => {
-        
-        this.snackbar.open(
-          this.translate.instant('document_item.document_download_failed'),
-          this.translate.instant('snack_bar.action_button'),{
-          panelClass:['snack_error'],
-          duration:1500,
-        })
-      }
-    });
+          link.setAttribute('href', environment.baseUrl+resp.body.linkToDoc);
+  
+          link.setAttribute('download', resp.body.name+'.'+resp.body.extension);
+          
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+          
+        },
+        error: (resp) => {
+          
+          this.snackbar.open(
+            this.translate.instant('document_item.document_download_failed'),
+            this.translate.instant('snack_bar.action_button'),{
+            panelClass:['snack_error'],
+            duration:1500,
+          })
+        }
+      });
+    }
+  
+   
   }
 
   onShareWithBroker(){
@@ -180,6 +304,11 @@ export class DocumentItemComponent implements OnInit {
       
     }
     
+  }
+
+  ngOnDestroy(){
+    this.destroyed.next();
+    this.destroyed.complete();
   }
 
 }

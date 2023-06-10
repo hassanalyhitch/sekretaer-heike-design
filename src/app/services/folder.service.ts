@@ -92,7 +92,7 @@ export class FoldersService {
               if(error instanceof HttpErrorResponse){
                 //Invalid Token or Unauthorised request
                 if(error.status == 401){
-                  this.loginService.emitAuthenticated(false);
+                  this.loginService.resetAuthToken();
                 }
               }
               
@@ -135,7 +135,7 @@ export class FoldersService {
             if(error instanceof HttpErrorResponse){
               //Invalid Token or Unauthorised request
               if(error.status == 401){
-                this.loginService.emitAuthenticated(false);
+                this.loginService.resetAuthToken();
               }
             }
   
@@ -161,7 +161,7 @@ export class FoldersService {
           if(error instanceof HttpErrorResponse){
             //Invalid Token or Unauthorised request
             if(error.status == 401){
-              this.loginService.emitAuthenticated(false);
+              this.loginService.resetAuthToken();
             }
           }
 
@@ -187,7 +187,7 @@ export class FoldersService {
           if(error instanceof HttpErrorResponse){
             //Invalid Token or Unauthorised request
             if(error.status == 401){
-              this.loginService.emitAuthenticated(false);
+              this.loginService.resetAuthToken();
             }
           }
 
@@ -208,8 +208,6 @@ export class FoldersService {
     }).pipe(
       tap({
         next:(resp)=>{
-
-          //console.log('from rename folder service ->'+resp);
 
           let folder: FolderData = {
             id: resp['id'],
@@ -232,7 +230,7 @@ export class FoldersService {
           if(error instanceof HttpErrorResponse){
             //Invalid Token or Unauthorised request
             if(error.status == 401){
-              this.loginService.emitAuthenticated(false);
+              this.loginService.resetAuthToken();
             }
           }
 
@@ -256,8 +254,6 @@ export class FoldersService {
       tap({
         next:(resp)=>{
 
-          //console.log('from add new folder service ->'+resp);
-
           let folder: FolderData = {
             id: resp['id'],
             loginId : resp['loginId'],
@@ -281,7 +277,7 @@ export class FoldersService {
           if(error instanceof HttpErrorResponse){
             //Invalid Token or Unauthorised request
             if(error.status == 401){
-              this.loginService.emitAuthenticated(false);
+              this.loginService.resetAuthToken();
             }
           }
 

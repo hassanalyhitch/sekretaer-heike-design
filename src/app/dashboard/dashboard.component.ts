@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient,HttpErrorResponse,HttpHeaders} from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,14 +15,83 @@ export class DashboardComponent implements OnInit {
   public lat;
   public lng;
 
-  notMobile = false;
+  destroyed = new Subject<void>();
+  currentScreenSize: string;
+
+  isMobileView: boolean;
+  isDesktopView: boolean;
+
+  // Create a map to display breakpoint names for demonstration purposes.
+  displayNameMap = new Map([
+    [Breakpoints.XSmall, 'XSmall'],
+    [Breakpoints.Small, 'Small'],
+    [Breakpoints.Medium, 'Medium'],
+    [Breakpoints.Large, 'Large'],
+    [Breakpoints.XLarge, 'XLarge'],
+  ]);
 
   constructor(private http:HttpClient,
     private snackbar:MatSnackBar,
+    private breakpointObserver: BreakpointObserver,
     private translate: TranslateService) { }
 
   ngOnInit() {
+
     this.getLocation();
+
+    //-------------------screen changes-----------------
+    this.breakpointObserver
+    .observe([
+      Breakpoints.XSmall,
+      Breakpoints.Small,
+      Breakpoints.Medium,
+      Breakpoints.Large,
+      Breakpoints.XLarge,
+    ])
+    .pipe(takeUntil(this.destroyed))
+    .subscribe(result => {
+      for (const query of Object.keys(result.breakpoints)) {
+        if (result.breakpoints[query]) {
+
+        this.currentScreenSize = this.displayNameMap.get(query) ?? 'Unknown';
+
+        if(this.displayNameMap.get(query) == 'XSmall'){
+
+          this.isMobileView = true;
+          this.isDesktopView = false;
+    
+        } else if(this.displayNameMap.get(query) == 'Small'){
+    
+          this.isMobileView = true;
+          this.isDesktopView = false;
+    
+        } else if(this.displayNameMap.get(query) == 'Medium'){
+    
+          this.isMobileView = false;
+          this.isDesktopView = true;
+    
+        } else if(this.displayNameMap.get(query) == 'Large'){
+    
+          this.isMobileView = false;
+          this.isDesktopView = true;
+          
+        } else if(this.displayNameMap.get(query) == 'XLarge'){
+    
+          this.isMobileView = false;
+          this.isDesktopView = true;
+          
+        }
+    
+        }
+      }
+    });
+
+  }
+
+
+  ngOnDestroy() {
+    this.destroyed.next();
+    this.destroyed.complete();
   }
 
   getLocation() {

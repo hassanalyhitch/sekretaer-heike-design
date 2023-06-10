@@ -58,6 +58,6 @@ export class HomeFabIconsComponent implements OnInit {
   }
 
   onSearchClick(){
-    this.router.navigate(['dashboard/home/search', {searchType:'all'}]);
+    this.router.navigate(['dashboard/search', {searchType:'all'}]);
   }
 }

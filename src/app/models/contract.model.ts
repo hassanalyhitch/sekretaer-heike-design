@@ -18,7 +18,7 @@ export interface ContractData {
     docs: DocumentData[],
     name: string,
     productSek: string,
-    tarif: string,
+    tarif?: string,
     isFav: any
     favoriteId?: string,
     iconLeft:   string,

@@ -221,3 +221,19 @@ app-document-item{
   font-size: 17px;
   font-weight: bold;
 }
+
+.desktop-content {
+  font-family: oscine, sans-serif;
+  background-color: #F2F2F2;
+  border-radius: 45px 0px 0px 0px;
+  height: inherit;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.desktop-content-wrapper{
+  height: 92vh;
+  background-color: #F2F2F2;
+  margin-top: 0px !important;
+  padding: 0px !important;
+}

@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit,ViewChildren,QueryList,ElementRef } from '@angular/core';
 import { NavigationEnd, Router, Event, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 import { FolderData } from '../../models/folder.model';
 import { FoldersService } from '../../services/folder.service';
 import { Location } from '@angular/common';
@@ -14,6 +14,7 @@ import { DownloadService } from '../../services/download-file.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AddPageModalComponent } from '../add-page-modal/add-page-modal.component';
 import { LoadingService } from '../../services/loading.service';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-folder-detail',
@@ -22,8 +23,8 @@ import { LoadingService } from '../../services/loading.service';
 })
 export class FolderDetailComponent implements OnInit, OnDestroy {
 
- folder:FolderData; 
- mainFolder: FolderData;
+  folder:FolderData; 
+  mainFolder: FolderData;
 
   parentNav: string = '';
   currentNav: string = '';
@@ -38,6 +39,21 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
   sortSubFolderDate:boolean =true;
   hasParent: boolean = false;
 
+  //screen layout changes
+  destroyed = new Subject<void>();
+  currentScreenSize: string;
+
+  isMobileView: boolean;
+  isDesktopView: boolean;
+
+  // Create a map to display breakpoint names for layout changes.
+  displayNameMap = new Map([
+    [Breakpoints.XSmall, 'XSmall'],
+    [Breakpoints.Small, 'Small'],
+    [Breakpoints.Medium, 'Medium'],
+    [Breakpoints.Large, 'Large'],
+    [Breakpoints.XLarge, 'XLarge'],
+  ]);
 
   folderSub:Subscription;
   routeListener: Subscription;
@@ -51,12 +67,62 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     private _location: Location,
     private downloadService: DownloadService,
     private snackbar:MatSnackBar,
-    private loadingService:LoadingService
+    private loadingService:LoadingService,
+    private breakpointObserver: BreakpointObserver,
     ) {
-      this.loadingService.emitIsLoading(true); 
+      this.loadingService.emitIsLoading(true);
+      this.isMobileView = false;
+      this.isDesktopView = false; 
     }
 
   ngOnInit() {
+
+     //-------------------screen changes-----------------
+     this.breakpointObserver
+     .observe([
+       Breakpoints.XSmall,
+       Breakpoints.Small,
+       Breakpoints.Medium,
+       Breakpoints.Large,
+       Breakpoints.XLarge,
+     ])
+     .pipe(takeUntil(this.destroyed))
+     .subscribe(result => {
+       for (const query of Object.keys(result.breakpoints)) {
+         if (result.breakpoints[query]) {
+ 
+         this.currentScreenSize = this.displayNameMap.get(query) ?? 'Unknown';
+ 
+         if(this.displayNameMap.get(query) == 'XSmall'){
+ 
+           this.isMobileView = true;
+           this.isDesktopView = false;
+     
+         } else if(this.displayNameMap.get(query) == 'Small'){
+     
+           this.isMobileView = true;
+           this.isDesktopView = false;
+     
+         } else if(this.displayNameMap.get(query) == 'Medium'){
+     
+           this.isMobileView = false;
+           this.isDesktopView = true;
+     
+         } else if(this.displayNameMap.get(query) == 'Large'){
+     
+           this.isMobileView = false;
+           this.isDesktopView = true;
+           
+         } else if(this.displayNameMap.get(query) == 'XLarge'){
+     
+           this.isMobileView = false;
+           this.isDesktopView = true;
+           
+         }
+     
+         }
+       }
+     });
 
     this.selected_folder_id = this.route.snapshot.paramMap.get('id');
 
@@ -124,6 +190,8 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     this.routeListener.unsubscribe();
     this.folderSub.unsubscribe();
     this.visitedFolderArray = [];
+    this.destroyed.next();
+    this.destroyed.complete();
   }
   
   onFolderCardClick(clickedFolder: FolderData){
@@ -132,7 +200,43 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
     this.parentFolder = this.folder;
     this.hasParent = true;
 
-    this.router.navigate(['/dashboard/overview/folder-detail', { id: clickedFolder.id }]);
+    if(this.router.url.includes('home')){
+
+      if(this.isMobileView){
+        this.router.navigate([
+          "/dashboard/home/folder-detail",
+          { id: clickedFolder.id },
+        ]);
+
+      } else {
+        this.router.navigate([
+          '/dashboard/home/', 
+          { outlets: { 'desktop': ['folder-detail', { id: clickedFolder.id }] } }
+        ]);
+      }
+
+    } else if (this.router.url.includes('overview')){
+
+      if(this.isMobileView){
+        this.router.navigate([
+          "/dashboard/overview/folder-detail",
+          { id: clickedFolder.id },
+        ]);
+
+      } else {
+        this.router.navigate([
+          '/dashboard/overview/', 
+          { outlets: { 'desktop': ['folder-detail', { id: clickedFolder.id }] } }
+        ]);
+      }
+
+    } else if (this.router.url.includes('favourite')){
+      this.router.navigate([
+        "/dashboard/favourite/folder-detail",
+        { id: clickedFolder.id },
+      ]);
+    }
+
   }
 
   onBackNavClick(){
@@ -140,8 +244,7 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
   }
 
   markFav(folder: FolderData){
-   // console.log('Mark Favourite '+folder.id);
-
+  
     this.folderService.makeFolderFavourite(folder.id).subscribe({
       next:(resp:any)=>{
         this.folder.favoriteId = resp.id;
@@ -163,8 +266,7 @@ export class FolderDetailComponent implements OnInit, OnDestroy {
   }
 
   unmarkFav(folder: FolderData){
-   // console.log('Un Favourite '+folder.favoriteId);
-
+   
     this.folderService.deleteFolderFavourite(folder.favoriteId).subscribe({
       next:(resp:any)=>{
         this.folder.isFavorite = 0;

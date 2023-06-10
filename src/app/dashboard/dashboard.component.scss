@@ -2,6 +2,17 @@
 @import "~bootstrap/scss/bootstrap.scss";
 @import "../../styles.scss";
 
+// desktop
+.desktop-main {
+  height: 100vh;
+  padding-top: 4rem;
+} 
+
+.desktop{
+  background-color: #F2F2F2;
+  background-image: linear-gradient(to right, var(--primaryColor) 100% , #F2F2F2 100%);
+}
+
 .main-wrapper{
   font-family: oscine, sans-serif;
   height: 100vh;

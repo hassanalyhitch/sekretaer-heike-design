@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, CanDeactivate, CanLoad, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LoginService } from './services/login.service';
+import { SettingsService } from './services/settings.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +11,15 @@ export class AuthGuardGuard implements CanActivate, CanActivateChild, CanDeactiv
 
   constructor(
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    private settingsService:SettingsService
   ){}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
-      if(this.loginService.isAuthenticated){
+      if(this.settingsService.getAuthToken() != ''){
         return true;
       } else {
         this.router.navigate(['login']);

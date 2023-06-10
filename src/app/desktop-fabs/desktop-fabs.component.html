@@ -1,0 +1,57 @@
+<div class="_content d-flex flex-row w-100">
+
+    <div class="d-flex flex-column mx-2" (click)="onSearchClick()">
+        <div  class="quick-fab d-flex pr-3 justify-content-center align-items-center"
+            matTooltip='{{ "desktop-fab.search-toolTip" | translate }}'
+            matTooltipPosition="below">
+            <i class="material-icons align-self-center">search</i>
+        </div>
+    </div>
+    
+    <div *ngIf="isChatFabEnabled"
+        class="d-flex mx-2 text-center justify-content-center chat-quicky"
+        chat-unread="0"
+        (click)="onChatClick()"
+        >
+        <div  class="quick-fab d-flex justify-content-center align-items-center"
+            matTooltip='{{ "desktop-fab.chat-toolTip" | translate }}'
+            matTooltipPosition="below">
+            <img class="align-self-center" src="/assets/icon_chart_new.svg">
+        </div>
+    </div>
+
+    <div *ngIf="!isChatFabEnabled && isSendEmailToBrokerFabEnabled"
+        class="d-flex flex-column mx-2 justify-content-center align-items-center">
+        <div  class="quick-fab d-flex justify-content-center align-items-center"
+            matTooltip='{{ "desktop-fab.mail-toolTip" | translate }}'
+            matTooltipPosition="below">
+            <a href="mailto:{{broker_email}}" class="email">
+                <img class="align-self-center" src="/assets/icon_mail.svg">
+            </a>
+        </div>
+    </div>
+
+    <div *ngIf="!isChatFabEnabled && !isSendEmailToBrokerFabEnabled"
+        class="d-flex flex-column mx-2 justify-content-center align-items-center"
+        (click)="onOpenBrokerPage()">
+        <div  class="quick-fab d-flex justify-content-center align-items-center"
+            matTooltip='{{ "desktop-fab.broker-toolTip" | translate }}'
+            matTooltipPosition="below">
+            <img class="align-self-center" class="email" src="/assets/icon_mail.svg">
+        </div>
+    </div>
+
+    <div class="home-fab mx-2 disabled d-flex justify-content-center align-items-center">
+        <i class="material-icons d-none">search</i>
+    </div>
+
+    <div class="home-fab mx-2 disabled d-flex justify-content-center align-items-center">
+        <i class="material-icons d-none">search</i>
+    </div>
+
+    <div class="home-fab mx-2 disabled d-flex justify-content-center align-items-center">
+        <i class="material-icons d-none">search</i>
+    </div>
+
+</div>
+

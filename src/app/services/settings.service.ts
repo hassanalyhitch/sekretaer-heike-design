@@ -8,10 +8,25 @@ export class SettingsService {
 
   theme: string;
   language: string;
+  authToken:string;
 
   constructor(private translateService: TranslateService) {
 
     this.switchTheme(this.getCurrentTheme());
+
+  }
+  setAuthToken(authToken:string){
+    localStorage.setItem('token',authToken);
+  }
+
+  getAuthToken(){
+    this.authToken = localStorage.getItem('token');
+
+    if(!this.authToken){
+      return '';
+    } else {
+      return this.authToken;
+    }
 
   }
 

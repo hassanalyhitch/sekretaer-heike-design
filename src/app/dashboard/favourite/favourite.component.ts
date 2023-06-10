@@ -73,7 +73,7 @@ export class FavouriteComponent implements OnInit, OnChanges {
 
   onFolderCardClick(clickedFolder){
     this.folderService.emitSelectedFolder(clickedFolder);
-    this.router.navigate(['dashboard/overview/folder-detail', { id: clickedFolder.id }]);
+    this.router.navigate(['dashboard/favourite/folder-detail', { id: clickedFolder.id }]);
   }
 
   favArrHasNoContent(){

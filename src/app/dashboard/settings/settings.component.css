@@ -9,10 +9,9 @@
 ._content{
   background-color: #F2F2F2;
   border-radius: 45px 0px 0px 0px;
-  height: inherit;
+  height: 100vh;
   overflow-y: scroll;
   overflow-x: hidden;
-  padding-bottom: 60px;
 }
 
 .section-settings{
@@ -21,7 +20,7 @@
   position: relative;
   overflow-y: scroll;
   overflow-x: hidden;
-  padding-bottom: 40px;
+  padding-bottom: 120px;
   }
 
 .fav-wrapper{

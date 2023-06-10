@@ -7,5 +7,5 @@ export interface DocumentData {
   systemId: string;
   swipedLeft?:boolean;
   extension: string;
-  sharedWithBroker: number;
+  sharedWithBroker?: number;
 }

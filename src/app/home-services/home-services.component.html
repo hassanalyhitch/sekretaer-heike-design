@@ -1,0 +1,102 @@
+<div class="d-flex flex-column w-100 h-100">
+    <div class="section-service d-flex flex-column mt-1 px-3 pt-3 w-100 h-100 justify-content-between">
+
+      <div class="d-flex justify-content-between mb-2 px-3">
+
+        <div class="d-flex"></div>
+  
+        <div class="p-2">
+          <span class="section-title align-self-center">{{ "home.title_service" | translate }}</span>
+        </div>
+  
+        <div class="p-2">
+          <div class="ml-auto btn-group dropstart justify-content-center align-self-center">
+            <img alt="filter icom" class="filter-icon" src="/assets/icon_filter_dark.svg">
+          </div>
+        </div>
+  
+      </div>
+
+      <!-- new grid -->
+      <div class="container mb-4">
+        <div class="row g-2">
+          <div class="col-6">
+            <div class="p-3 bg-white add_page-card" (click)="onAddPage()">
+              <img alt="service icom" class="service-icon" src="\assets\Gruppe 230.svg">
+              <div class="d-flex flex-column ">
+                <span class="mt-4 fw-bold card-text-title">
+                  {{ "home.service_card_add_title" | translate }}
+                </span>
+                <div class="d-flex align-items-center">
+                  <span class="card-text-subtitle">
+                    {{ "home.service_card_add_sub_title" | translate }}
+                    <i class="material-icons">chevron_right</i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="p-3 bg-white inbox-card" (click)="onNotifClick()">
+
+                <span *ngIf="isNotificationCountText" class="position-absolute top-0 end-0 text-center bg-new-notify-icon">
+                  99+
+                  <span class="visually-hidden">unread messages</span>
+                </span>
+
+                <span *ngIf="!isNotificationCountText" class="position-absolute top-0 end-0 text-center bg-new-notify-icon" [ngClass]="{'d-none':zeroNotifCount}">
+                  {{ notifCount }}
+                  <span class="visually-hidden">unread messages</span>
+                </span>
+
+              <img alt="service icom" class="service-icon" src="\assets\icon_mail.svg">
+              <div class="d-flex flex-column mt-4 position-relative" >
+                <span class="fw-bold card-text-title ">
+                  {{ "home.service_card_notifications" | translate }}
+                </span>
+                <div class="d-flex align-items-center">
+                  <span class="card-text-subtitle"> 
+                    {{ "home.service_card_inbox_sub_title" | translate }}
+                    <i class="material-icons">chevron_right</i>
+                  </span>
+                </div>
+              
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="px-3 py-1 claim-card disabled">
+              <img alt="service icom" class="service-icon" src="\assets\Gruppe 239.svg">
+              <div class="d-flex flex-column">
+                <span class="mt-4 fw-bold card-text-title">{{ "home.service_card_notification_of_claim" | translate }}</span>
+                <div class="d-flex align-items-center">
+                  <span class="card-text-subtitle">
+                    {{"home.service_card_file_submit_sub_title" | translate }}
+                    <i class="material-icons">chevron_right</i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <a [href]="telto" class="tel">
+              <div class="p-3 bg-white broker-card">
+                <img alt="service icom" class="service-icon" src="\assets\Gruppe 241.svg">
+                <div class="d-flex flex-column">
+                  <span class="mt-4 fw-bold card-text-title">{{"home.service_card_call_your_broker" | translate}}</span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <div></div>
+
+      <!-- end of new grid -->
+    </div>
+</div>

@@ -1,12 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ContractsService } from '../../services/contracts.service';
 import { ContractData } from '../../models/contract.model';
 import { RenameContractComponent } from '../rename-contract/rename-contract.component';
 import { AddPageModalComponent } from '../add-page-modal/add-page-modal.component';
+import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-fav-item',
@@ -14,6 +16,22 @@ import { AddPageModalComponent } from '../add-page-modal/add-page-modal.componen
   styleUrls: ['./fav-item.component.css']
 })
 export class FavItemComponent implements OnInit {
+
+  //screen layout changes
+  destroyed = new Subject<void>();
+  currentScreenSize: string;
+
+  isMobileView: boolean;
+  isDesktopView: boolean;
+
+  // Create a map to display breakpoint names for layout changes.
+  displayNameMap = new Map([
+    [Breakpoints.XSmall, 'XSmall'],
+    [Breakpoints.Small, 'Small'],
+    [Breakpoints.Medium, 'Medium'],
+    [Breakpoints.Large, 'Large'],
+    [Breakpoints.XLarge, 'XLarge'],
+  ]);
 
   @Input() contractItem: ContractData = <ContractData>{
     id: 0,
@@ -52,13 +70,64 @@ export class FavItemComponent implements OnInit {
     private router: Router,
     private translate: TranslateService,
     private contractService: ContractsService,
-    private snackbar:MatSnackBar
+    private snackbar:MatSnackBar,
+    private breakpointObserver: BreakpointObserver,
+    private route: ActivatedRoute,
   ){
 
+    this.isMobileView = false;
+    this.isDesktopView = false;
     this.src_link_for_icon_left = "../assets/icon_allgemein.svg"; //default logo for icon left
   }
 
   ngOnInit() {
+
+    //-------------------screen changes-----------------
+    this.breakpointObserver
+    .observe([
+      Breakpoints.XSmall,
+      Breakpoints.Small,
+      Breakpoints.Medium,
+      Breakpoints.Large,
+      Breakpoints.XLarge,
+    ])
+    .pipe(takeUntil(this.destroyed))
+    .subscribe(result => {
+      for (const query of Object.keys(result.breakpoints)) {
+        if (result.breakpoints[query]) {
+
+        this.currentScreenSize = this.displayNameMap.get(query) ?? 'Unknown';
+
+        if(this.displayNameMap.get(query) == 'XSmall'){
+
+          this.isMobileView = true;
+          this.isDesktopView = false;
+    
+        } else if(this.displayNameMap.get(query) == 'Small'){
+    
+          this.isMobileView = true;
+          this.isDesktopView = false;
+    
+        } else if(this.displayNameMap.get(query) == 'Medium'){
+    
+          this.isMobileView = false;
+          this.isDesktopView = true;
+    
+        } else if(this.displayNameMap.get(query) == 'Large'){
+    
+          this.isMobileView = false;
+          this.isDesktopView = true;
+          
+        } else if(this.displayNameMap.get(query) == 'XLarge'){
+    
+          this.isMobileView = false;
+          this.isDesktopView = true;
+          
+        }
+    
+        }
+      }
+    });
 
     if(this.contractItem.details.ownPicture.includes('data:image')){
 
@@ -193,10 +262,45 @@ export class FavItemComponent implements OnInit {
 
     if(!this.collapsed){
       this.contractService.emitSelectedContract(clickedContract);
-      this.router.navigate([
-        "dashboard/home/contract-detail",
-        { id: clickedContract.details.Amsidnr },
-      ]);
+
+      if(this.router.url.includes('home')){
+
+          if(this.isMobileView){
+            this.router.navigate([
+              "dashboard/home/contract-detail",
+              { id: clickedContract.details.Amsidnr },
+            ]);
+
+          } else {
+            this.router.navigate([
+              '/dashboard/home/', 
+              { outlets: { 'desktop': ['contract-detail', {id: clickedContract.details.Amsidnr}] } }
+            ]);
+          }
+
+      } else if(this.router.url.includes('overview')) {
+
+        if(this.isMobileView){
+          this.router.navigate([
+            "dashboard/overview/contract-detail",
+            { id: clickedContract.details.Amsidnr },
+          ]);
+        } else {
+          this.router.navigate([
+            '/dashboard/overview/', 
+            { outlets: { 'desktop': ['contract-detail', {id: clickedContract.details.Amsidnr}] } }
+          ]);
+        }
+
+      } else if(this.router.url.includes('favourite')) {
+        if(this.isMobileView){
+          this.router.navigate([
+            "dashboard/favourite/contract-detail",
+            { id: clickedContract.details.Amsidnr },
+          ]);
+        }
+      }
+
     }
 
     return false;
@@ -224,6 +328,11 @@ export class FavItemComponent implements OnInit {
         //console.log(resp);
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.destroyed.next();
+    this.destroyed.complete();
   }
 
 }

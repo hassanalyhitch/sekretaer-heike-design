@@ -1,33 +1,38 @@
 <div class="main-wrapper w-100 d-flex flex-column">
-  <div class="header-wrapper">
-    <div class="header-content d-flex w-100 justify-content-start p-2">
-      <div
-        class="logo-container d-flex justify-content-center align-items-center"
-      >
+
+  <div class="header-wrapper ">
+    <div class="header-content d-flex w-100 justify-content-between p-2 ">
+      <div class="logo-container d-flex justify-content-center align-items-center">
         <img
           src="../assets/logo_negative.svg"
           alt="sekretaer_logo"
-          class="app-logo"
+          class="app-logo "
         />
       </div>
+
+      <div *ngIf="isDesktopView" class="">
+        <app-desktop-fabs fab_location="home_page"></app-desktop-fabs>
+      </div>
     </div>
+    
+
   </div>
 
-  <div class="d-none d-md-flex col-12">
-    <!-- <div class="col-1">
-
-    </div> -->
-    <app-bottom-nav style="width:4%; height:100%;"></app-bottom-nav>
-    <div class="col-11" style="width:96% !important;">
+  <div *ngIf="isDesktopView" class="d-flex " style="position: relative;">
+    <div class="col-12" style="padding-left: 60px;">
       <router-outlet></router-outlet>
     </div>
+    <div style="z-index: 10; width: 60px; position: absolute; left: 0px; height: 100%;">
+      <app-desktop-nav class="w-100"></app-desktop-nav>
+    </div>
   </div>
 
-  <div class="d-flex d-md-none" *ngIf="notMobile">
+  <div *ngIf="isMobileView">
     <router-outlet></router-outlet>
   </div>
 
-  <div class="d-flex bottom-links w-100 d-md-none">
-    <app-bottom-nav class="w-100"></app-bottom-nav>
+  <div class="d-flex bottom-links w-100 " *ngIf="isMobileView">
+    <app-bottom-nav class="w-100" ></app-bottom-nav>
   </div>
+
 </div>

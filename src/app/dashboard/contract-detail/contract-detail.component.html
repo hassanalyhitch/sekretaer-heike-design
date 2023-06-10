@@ -1,18 +1,19 @@
-<div class="content-wrapper w-100 ">
-  <div class="_content d-flex flex-column w-100 h-100 px-2">
+<div [ngClass]="isDesktopView ? 'desktop-content-wrapper w-100' : 'content-wrapper w-100'">
 
+  <div [ngClass]="isDesktopView ? 'desktop-content d-flex flex-column w-100 h-100 px-2' : '_content d-flex flex-column w-100 h-100 px-2'">
+  
     <!-- Top bar content -->
     <div class="d-flex justify-content-between mb-2 pt-3">
       <div class="d-flex back-btn" (click)="onBackNavClick()">
         <i class="material-icons p-2 back-btn">arrow_back_ios</i>
       </div>
-
+  
       <div class="p-2">
         <span class="section-title align-self-center ">
           {{ 'contract_detail.title_main' | translate }}
         </span>
       </div>
-
+  
       <div class="p-2">
         <div class="ml-auto btn-group dropstart align-self-center">
           <img class="filter-icon py-1" data-bs-toggle="dropdown" aria-expanded="false" src="/assets/icon_filter_dark.svg">
@@ -24,25 +25,25 @@
           </ul>
         </div>
       </div>
-
+  
     </div>
-
+  
     <!-- Main content -->
     <div class="section-content">
-
+  
       <div class="bg-white shadow-sm w-100 d-flex fav-item" (swipe)="onContractSwipe($event)">
         <div class="d-flex w-100 ">
-
+  
           <div class="d-flex flex-column _card-content w-100">
             <span class="risk px-2 mt-3 mb-1">{{contract.details.name}}</span>
             <span class="branch mt-3 px-2 ">{{contract.details.productSek}}</span>
             <span class="company px-2">{{contract.details.Company}}</span> 
-
+  
             <div class="d-flex align-items-end px-2" *ngIf="showTariffInfo()">
               <span class="type mt-3 text-muted">{{ 'contract_detail.contract_tariff_label' | translate }}:</span>
               <span class="mx-1 fw-bold">{{contract.details.tarif }}</span>
             </div>
-
+  
             <div class="d-flex align-items-end px-2">
               <span class="type text-muted">{{ 'contract_detail.contract_number_label' | translate }}:</span>
               <span class="mx-1 fw-bold">{{contract.details.ContractNumber}}</span>
@@ -53,13 +54,13 @@
                 <span class="text-muted">{{ 'contract_detail.contract_start_date_label' | translate }}: </span>
                 <span class="mx-2 fw-bold">{{contract.details.StartDate | formatDate}}</span>
               </div>
-
+  
               <div class="date ml-auto px-1">
                 <span class="text-muted">{{ 'contract_detail.contract_end_date_label' | translate }}: </span>
                 <span class="mx-2 fw-bold">{{contract.details.EndDate | formatDate}}</span>
               </div>
             </div>
-
+  
             <div class="price align-self-end px-2 my-2">
               <span class="amount">{{contract.details.YearlyPayment | currencyFormat}}</span>
               <span> / {{ 'contract_detail.contract_yearly_payment_label' | translate }}</span>
@@ -79,27 +80,27 @@
       
         </div>
       </div>
-
+  
       <div class="d-flex bd-highlight mb-2 mt-5">
         <div class="p-2 bd-highlight">
           <p class="text-muted">{{ 'contract_detail.title_documents' | translate }}</p>
         </div>
-
+  
         <div class="ms-auto p-2 bd-highlight" (click)="sortByDate()" style="cursor:pointer;">
           <span class="text-muted">
             {{ 'contract_detail.date_filter_label' | translate }}
             <img class="filter-icon" src="/assets/icon_date_filter.svg">
           </span>
         </div>
-
+  
       </div>
-
+  
       <div *ngIf="docArr.length == 0" class="w-100 d-flex align-items-center">
         <p class="no-content-message text-center m-auto">
           {{ 'contract_detail.no_documents_found' | translate }}
         </p>
       </div>
-
+  
       <div *ngIf="docArr.length > 0">
         <div class="d-flex my-2 documentItem" *ngFor="let doc of docArr; let i = index"  (swipe)="onSwipe($event, doc)">
     
@@ -117,7 +118,8 @@
           </div>
         </div>
       </div>
-
-  </div>
   
-</div>
+    </div>
+  
+  </div>
+  </div>

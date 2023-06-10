@@ -29,7 +29,7 @@ export class CompanyService {
                   if(error instanceof HttpErrorResponse){
                     //Invalid Token or Unauthorised request
                     if(error.status == 401){
-                      this.loginService.emitAuthenticated(false);
+                      this.loginService.resetAuthToken();
                     }
                   }
                   

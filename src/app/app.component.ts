@@ -1,34 +1,45 @@
-import { LoadingService } from './services/loading.service';
-import { Component, Input, OnInit, VERSION } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Component, Input, OnInit, VERSION, OnDestroy} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { LoginService } from './services/login.service';
 import { SettingsService } from './services/settings.service';
+
+//new code
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import { LoadingService } from './services/loading.service';
 
 @Component({
   selector: 'my-sekretaer',
   templateUrl: './app.component.html',
   styleUrls: [ './app.component.css' ]
 })
-export class AppComponent  implements OnInit{
+
+export class AppComponent  implements OnInit, OnDestroy{
+
+  destroyed = new Subject<void>();
+  currentScreenSize: string;
+
+  // Create a map to display breakpoint names for demonstration purposes.
+  displayNameMap = new Map([
+    [Breakpoints.XSmall, 'XSmall'],
+    [Breakpoints.Small, 'Small'],
+    [Breakpoints.Medium, 'Medium'],
+    [Breakpoints.Large, 'Large'],
+    [Breakpoints.XLarge, 'XLarge'],
+  ]);
+
+  //--------------------new code------------------------------------- 
   
-  @Input() authenticated: boolean = false;
-  lang: string = 'en';
-  show_privacy_policy: boolean = false;
-  show_terms_and_conditions: boolean = false;
-  show_forgot_password: boolean = false;
+  isMobileView: boolean;
+  isDesktopView: boolean;
 
-  showOverlay:boolean=false;
-
-  current_theme: string;
+  showOverlay: boolean = false;
 
   constructor(
-    private translate: TranslateService, 
-    private router: Router, 
-    private activatedRoute: ActivatedRoute, 
-    private loginService: LoginService,
     private loadingService:LoadingService,
-    private settingsService: SettingsService
+    private translate: TranslateService, 
+    private settingsService: SettingsService,
+    private breakpointObserver: BreakpointObserver
   ){
 
     //Translator
@@ -42,58 +53,70 @@ export class AppComponent  implements OnInit{
 
     translate.use(this.settingsService.getCurrentLanguage());
 
+    this.isMobileView = false;
+    this.isDesktopView = false;
+
   }
 
   ngOnInit(): void {
-
-    this.router.events.subscribe(event => {
-      if(event instanceof NavigationEnd) {
-        // do something...
-        if(this.router.url != "/privacy-policy"){
-          this.show_privacy_policy = false;
-        } 
-        if(this.router.url != "/terms-and-conditions"){
-          this.show_terms_and_conditions = false;
-        }
-        if(this.router.url != "/forgot-password"){
-          this.show_forgot_password = false;
-        }
-      }
-    });
-
-    this.loginService.authenticatedObs.subscribe({
-      next:(resp)=>{
-        if(resp === false){
-          this.authenticated = false;
-        }
-        
-      }
-    });
 
     this.loadingService.loadingObs.subscribe({
       next:(resp) =>{
         this.showOverlay = resp;
       }
     });
+
+     //--------------------------new code---------------------------
+     this.breakpointObserver
+     .observe([
+       Breakpoints.XSmall,
+       Breakpoints.Small,
+       Breakpoints.Medium,
+       Breakpoints.Large,
+       Breakpoints.XLarge,
+      ])
+     .pipe(takeUntil(this.destroyed))
+     .subscribe(result => {
+       for (const query of Object.keys(result.breakpoints)) {
+         if (result.breakpoints[query]) {
+
+          this.currentScreenSize = this.displayNameMap.get(query) ?? 'Unknown';
+
+          if(this.displayNameMap.get(query) == 'XSmall'){
+
+            this.isMobileView = true;
+            this.isDesktopView = false;
+      
+          } else if(this.displayNameMap.get(query) == 'Small'){
+      
+            this.isMobileView = true;
+            this.isDesktopView = false;
+      
+          } else if(this.displayNameMap.get(query) == 'Medium'){
+      
+            this.isMobileView = false;
+            this.isDesktopView = true;
+      
+          } else if(this.displayNameMap.get(query) == 'Large'){
+      
+            this.isMobileView = false;
+            this.isDesktopView = true;
+            
+          } else if(this.displayNameMap.get(query) == 'XLarge'){
+      
+            this.isMobileView = false;
+            this.isDesktopView = true;
+            
+          }
+      
+         }
+       }
+     });
   }
 
-  showPrivacyPolicy(event){
-    this.show_privacy_policy = event;
-    this.router.navigate(['privacy-policy']);
+  ngOnDestroy() {
+    this.destroyed.next();
+    this.destroyed.complete();
   }
 
-  showTerms(event){
-    this.show_terms_and_conditions = event;
-    this.router.navigate(['terms-and-conditions']);
-  }
-
-  showForgotPassword(event){
-    this.show_forgot_password = event;
-    this.router.navigate(['forgot-password']);
-  }
-
-  setLang(lang: string){
-    this.lang = lang;
-    this.translate.use(lang);
-  }
 }

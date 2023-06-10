@@ -6,6 +6,7 @@ import {
   EventEmitter,
   ViewChild,
   Input,
+  OnDestroy,
 } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
@@ -14,13 +15,16 @@ import { LoadingService } from "../services/loading.service";
 import { LoginService } from "../services/login.service";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { TranslateService } from "@ngx-translate/core";
+import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
+import { Subject, takeUntil } from "rxjs";
 
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.css"],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit , OnDestroy {
+  
   userInput = {};
   buttonDisabled = true;
 
@@ -49,19 +53,39 @@ export class LoginComponent implements OnInit {
 
   showPassword:boolean;
 
+  destroyed = new Subject<void>();
+  currentScreenSize: string;
+
+  // Create a map to display breakpoint names for demonstration purposes.
+  displayNameMap = new Map([
+    [Breakpoints.XSmall, 'XSmall'],
+    [Breakpoints.Small, 'Small'],
+    [Breakpoints.Medium, 'Medium'],
+    [Breakpoints.Large, 'Large'],
+    [Breakpoints.XLarge, 'XLarge'],
+  ]);
+
+  //--------------------new code------------------------------------- 
+  
+  isMobileView: boolean;
+  isDesktopView: boolean;
+
   constructor(
     private http: HttpClient,
     private router: Router,
     private loginService: LoginService,
     private loadingService:LoadingService,
     private translate: TranslateService,
+    private breakpointObserver: BreakpointObserver,
     private snackBar: MatSnackBar ){
       this.loadingService.emitIsLoading(false);
 
       this.app_logo_link_src = "../assets/sekretaer_pink_logo.svg"; //default logo 
       this.selected_theme    = "";
       
-      this.showPassword = false; 
+      this.showPassword = false;
+      this.isMobileView = false;
+      this.isDesktopView = false; 
     }
 
     ngOnInit() {
@@ -81,6 +105,53 @@ export class LoginComponent implements OnInit {
         this.app_logo_link_src = "../assets/sekretar_blue_logo.svg";
         
       }
+
+    this.breakpointObserver
+     .observe([
+       Breakpoints.XSmall,
+       Breakpoints.Small,
+       Breakpoints.Medium,
+       Breakpoints.Large,
+       Breakpoints.XLarge,
+      ])
+     .pipe(takeUntil(this.destroyed))
+     .subscribe(result => {
+       for (const query of Object.keys(result.breakpoints)) {
+         if (result.breakpoints[query]) {
+
+          this.currentScreenSize = this.displayNameMap.get(query) ?? 'Unknown';
+
+          if(this.displayNameMap.get(query) == 'XSmall'){
+
+            this.isMobileView = true;
+            this.isDesktopView = false;
+      
+          } else if(this.displayNameMap.get(query) == 'Small'){
+      
+            this.isMobileView = true;
+            this.isDesktopView = false;
+      
+          } else if(this.displayNameMap.get(query) == 'Medium'){
+      
+            this.isMobileView = false;
+            this.isDesktopView = true;
+      
+          } else if(this.displayNameMap.get(query) == 'Large'){
+      
+            this.isMobileView = false;
+            this.isDesktopView = true;
+            
+          } else if(this.displayNameMap.get(query) == 'XLarge'){
+      
+            this.isMobileView = false;
+            this.isDesktopView = true;
+            
+          }
+      
+         }
+       }
+     });
+
     }
 
   validateUser(formData: LoginData) {
@@ -148,6 +219,11 @@ export class LoginComponent implements OnInit {
 
   onForgotPasswordSelected(){
     this.router.navigate(['forgot-password']);
+  }
+
+  ngOnDestroy() {
+    this.destroyed.next();
+    this.destroyed.complete();
   }
   
 }

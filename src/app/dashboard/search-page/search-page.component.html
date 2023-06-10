@@ -1,5 +1,5 @@
 <div class="content-wrapper w-100 ">
-  <div class="_content d-flex flex-column align-items-center w-100 h-100 bg-">
+  <div class="_content d-flex flex-column align-items-center w-100">
 
     <div class="d-flex justify-content-between w-100 mb-2 px-3 pt-3">
         <div class="d-flex justify-content-center align-items-center" backButton>
@@ -18,11 +18,16 @@
     <div class="search_input_container d-flex w-100 bg-- mb-2">
       <div class="_input_group w-100 d-flex m- bg-" >
         <i class="material-icons p-2">search</i>
-        <input type="text " class="search_input w-100" [(ngModel)]="searchedValue" (ngModelChange)="filterSearch(searchedValue)" placeholder="Search" />
+        <input type="text " class="search_input w-100" [(ngModel)]="searchedValue" (ngModelChange)="this.searchQueryUpdate.next($event)" placeholder="Search" />
       </div>
+
+      <div class="loading-spinner" *ngIf="isSpinnerLoading && searchedValue != ''">
+        <mat-spinner  [diameter]='40' ></mat-spinner>
+      </div>
+
     </div>
 
-    <div class="search-content w-100 d-flex flex-column align-items-center p-3">
+    <div class="search-content w-100 d-flex flex-column align-items-center px-3 pt-3">
 
       <!-- insurances -->
       <div class="d-flex flex-column w-100 px-3 bg-" *ngIf="contractsResArr.length>0" >
@@ -62,7 +67,7 @@
         </div>
       </div>
 
-      <p class="search-message text-center m-auto" *ngIf="searchedValue != '' && no_documents_found">
+      <p class="search-message text-center m-auto mb-3" *ngIf="searchedValue != '' && no_documents_found">
         {{ 'search.no_documents_found' | translate }}
       </p>
 

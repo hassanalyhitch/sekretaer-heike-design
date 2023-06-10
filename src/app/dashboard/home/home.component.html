@@ -1,7 +1,87 @@
 <div class="content-wrapper w-100">
-  <div class="_content d-flex flex-column w-100 h-100">
 
-    <div class="d-flex justify-content-between mb-2 px-4 pt-3 w-100">
+  <!-- desktop view content -->
+  <div *ngIf="isDesktopView">
+
+    <div class="desktop-content d-flex flex-column w-100 h-100">
+
+      <div class="section-home">
+        <div class="d-flex justify-content-between">
+
+          <!-- favourite section -->
+          <div style="width: 30%; height: 100vh; overflow-x: hidden; overflow-y: hidden; box-shadow: 0px 0px 3px #0000001a;">
+
+            <div *ngIf="!favArrHasNoContent()">
+              <div class="d-flex justify-content-between mb-1 px-4 py-2 w-100">
+                <div class="d-flex"></div>
+        
+                <div class="p-2">
+                  <span class="section-title align-self-center">{{ "home.title_home" | translate }}</span>
+                </div>
+                
+                <div class="p-2">
+                  <div class="ml-auto btn-group dropstart align-self-center">
+                      <img alt="filter icom" class="filter-icon" data-bs-toggle="dropdown" aria-expanded="false" src="/assets/icon_filter_dark.svg">
+                      <ul class="dropdown-menu shadow">
+                        <li><span class="dropdown-item" (click)="onAddPage()"> {{ "home.service_card_add_title" | translate }}</span></li>
+                        <li><span class="dropdown-item" (click)="onNotifClick()">{{ "home.service_card_notifications" | translate }}</span></li>
+                        <li><a [href]="telto" class="dropdown-item">{{"home.service_card_call_your_broker" | translate}}</a></li>
+                        <li><span class="dropdown-item">{{ "home.service_card_notification_of_claim" | translate }}</span></li>
+                      </ul>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- favourite items -->
+            <div class="d-flex justify-content-center m-4 w-100" *ngIf="favArrHasNoContent()">
+              {{ "home.message_no_favourite_contracts" | translate }}
+            </div>
+
+            <div class="d-flex flex-column w-100 px-3" 
+                  style="height: 100%; overflow-y: scroll; padding-bottom: 125px;"
+                *ngIf="!favArrHasNoContent()">
+
+              <div class="py-2" *ngFor="let favItem of favArr; let index = index">
+                <app-fav-item 
+                  [contractItem]="favItem"
+                  (favoriteEvent)="refresh($event)" >
+                </app-fav-item>
+              </div>
+    
+              <div class="py-2" *ngFor="let favFolderitem of favFoldersArr">
+                <app-folder-card   
+                  (click)="onFolderCardClick(favFolderitem)"
+                  [folder]="favFolderitem">
+                </app-folder-card>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- services section -->
+          <div style="width: 70%; height: 100vh; overflow-x: hidden; overflow-y: hidden;">
+
+            <router-outlet name="desktop"></router-outlet>
+            
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- mobile view content -->
+  <div *ngIf="isMobileView">
+
+    <div class="_content d-flex flex-column w-100 h-100" >
+
+      <!-- top title -->
+      <div class="d-flex justify-content-between mb-2 px-4 pt-3 w-100">
         <div class="d-flex"></div>
 
         <div class="p-2">
@@ -19,162 +99,166 @@
               </ul>
           </div>
         </div>
-    </div>
+      </div>
 
-    <div class="section-home">
-      <!-- favourite items -->
-      <div class="fav-wrapper d-flex flex-nowrap pb-4" id="fav-wrapper">
+      <!-- content -->
+      <div class="section-home">
+        <!-- favourite items -->
+        <div class="fav-wrapper d-flex flex-nowrap pb-4" id="fav-wrapper">
 
-        <div class="d-flex justify-content-center m-4 w-100" *ngIf="favArrHasNoContent()">
-          {{ "home.message_no_favourite_contracts" | translate }}
+          <div class="d-flex justify-content-center m-4 w-100" *ngIf="favArrHasNoContent()">
+            {{ "home.message_no_favourite_contracts" | translate }}
+          </div>
+
+          <div class="d-flex flex-row w-100 px-3" *ngIf="!favArrHasNoContent()">
+            <div
+            class="col-12 px-1"
+            #contracts 
+            *ngFor="let favItem of favArr; let index = index">
+
+            <app-fav-item 
+              [contractItem]="favItem"
+              (favoriteEvent)="refresh($event)" >
+            </app-fav-item>
+            </div>
+
+            <div
+            *ngFor="let favFolderitem of favFoldersArr"
+            class="col-12 px-1"
+            #contracts >
+
+              <app-folder-card   
+                (click)="onFolderCardClick(favFolderitem)"
+                [folder]="favFolderitem">
+              </app-folder-card>
+            </div>
+          </div>
+
+        </div>
+        
+        <!-- see more link-->
+        <div class="d-flex flex-row px-3 justify-content-between see-more">
+          <a class="see-more px-2" (click)="openFavouritesPage()">{{ "home.title_see_more" | translate }} > </a>
+            <!-- indicators -->
+            <div class="d-flex align-self-center line_container">
+              <div class="m-1 border flex-fill line_item"
+                *ngFor="let line of lineObjectArr;let index = index"
+                (click)="scrollToContract(index)"
+                [ngClass]="{'isActive':line.isActive}">
+              </div>
+            </div>
         </div>
 
-        <div class="d-flex flex-row w-100 px-3" *ngIf="!favArrHasNoContent()">
-          <div
-          class="col-12 px-1"
-          #contracts 
-          *ngFor="let favItem of favArr; let index = index">
-
-          <app-fav-item 
-            [contractItem]="favItem"
-            (favoriteEvent)="refresh($event)" >
-          </app-fav-item>
-          </div>
-
-          <div
-          *ngFor="let favFolderitem of favFoldersArr"
-          class="col-12 px-1"
-          #contracts >
-
-            <app-folder-card   
-              (click)="onFolderCardClick(favFolderitem)"
-              [folder]="favFolderitem">
-            </app-folder-card>
-          </div>
+        <!-- Home icons fabs for mobile and small screens-->
+        <div class="d-flex col-12 px-3 home-icon-fabs">
+          <app-home-fab-icons fab_location="home_page"> </app-home-fab-icons>
         </div>
 
-      </div>
-      
-      <!-- see more link-->
-      <div class="d-flex flex-row px-3 justify-content-between see-more">
-        <a class="see-more px-2" (click)="openFavouritesPage()">{{ "home.title_see_more" | translate }} > </a>
-          <!-- indicators -->
-          <div class="d-flex align-self-center line_container">
-            <div class="m-1 border flex-fill line_item"
-              *ngFor="let line of lineObjectArr;let index = index"
-              (click)="scrollToContract(index)"
-              [ngClass]="{'isActive':line.isActive}">
-            </div>
-          </div>
-      </div>
-  
-      <!-- Home icons fabs for mobile and small screens-->
-      <div class="d-flex col-12 px-3 home-icon-fabs">
-        <app-home-fab-icons fab_location="home_page"> </app-home-fab-icons>
-      </div>
+        <div class="d-flex flex-column w-100 ">
+          <div class="section-service d-flex flex-column mt-1 px-3 pt-3 w-100 h-100">
 
-      <div class="d-flex flex-column w-100 ">
-        <div class="section-service d-flex flex-column mt-1 px-3 pt-3 w-100 h-100">
+            <div class="d-flex justify-content-between mb-2 px-3">
 
-          <div class="d-flex justify-content-between mb-2 px-3">
-
-            <div class="d-flex"></div>
-      
-            <div class="p-2">
-              <span class="section-title align-self-center">{{ "home.title_service" | translate }}</span>
-            </div>
-      
-            <div class="p-2">
-              <div class="ml-auto btn-group dropstart justify-content-center align-self-center">
-                <img alt="filter icom" class="filter-icon" src="/assets/icon_filter_dark.svg">
+              <div class="d-flex"></div>
+        
+              <div class="p-2">
+                <span class="section-title align-self-center">{{ "home.title_service" | translate }}</span>
               </div>
+        
+              <div class="p-2">
+                <div class="ml-auto btn-group dropstart justify-content-center align-self-center">
+                  <img alt="filter icom" class="filter-icon" src="/assets/icon_filter_dark.svg">
+                </div>
+              </div>
+        
             </div>
-      
-          </div>
 
-          <!-- new grid -->
-          <div class="container mb-4">
-            <div class="row g-2">
-              <div class="col-6">
-                <div class="p-3 bg-white add_page-card" (click)="onAddPage()">
-                  <img alt="service icom" class="service-icon" src="\assets\Gruppe 230.svg">
-                  <div class="d-flex flex-column ">
-                    <span class="mt-4 fw-bold card-text-title">
-                      {{ "home.service_card_add_title" | translate }}
-                    </span>
-                    <div class="d-flex align-items-center">
-                      <span class="card-text-subtitle">
-                        {{ "home.service_card_add_sub_title" | translate }}
-                        <i class="material-icons">chevron_right</i>
+            <!-- new grid -->
+            <div class="container mb-4">
+              <div class="row g-2">
+                <div class="col-6">
+                  <div class="p-3 bg-white add_page-card" (click)="onAddPage()">
+                    <img alt="service icom" class="service-icon" src="\assets\Gruppe 230.svg">
+                    <div class="d-flex flex-column ">
+                      <span class="mt-4 fw-bold card-text-title">
+                        {{ "home.service_card_add_title" | translate }}
                       </span>
+                      <div class="d-flex align-items-center">
+                        <span class="card-text-subtitle">
+                          {{ "home.service_card_add_sub_title" | translate }}
+                          <i class="material-icons">chevron_right</i>
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="col-6">
-                <div class="p-3 bg-white inbox-card" (click)="onNotifClick()">
+                <div class="col-6">
+                  <div class="p-3 bg-white inbox-card" (click)="onNotifClick()">
 
-                    <span *ngIf="isNotificationCountText" class="position-absolute top-0 end-0 text-center bg-new-notify-icon">
-                      99+
-                      <span class="visually-hidden">unread messages</span>
-                    </span>
-
-                    <span *ngIf="!isNotificationCountText" class="position-absolute top-0 end-0 text-center bg-new-notify-icon" [ngClass]="{'d-none':zeroNotifCount}">
-                      {{ notifCount }}
-                      <span class="visually-hidden">unread messages</span>
-                    </span>
-
-                  <img alt="service icom" class="service-icon" src="\assets\icon_mail.svg">
-                  <div class="d-flex flex-column mt-4 position-relative" >
-                    <span class="fw-bold card-text-title ">
-                      {{ "home.service_card_notifications" | translate }}
-                    </span>
-                    <div class="d-flex align-items-center">
-                      <span class="card-text-subtitle"> 
-                        {{ "home.service_card_inbox_sub_title" | translate }}
-                        <i class="material-icons">chevron_right</i>
+                      <span *ngIf="isNotificationCountText" class="position-absolute top-0 end-0 text-center bg-new-notify-icon">
+                        99+
+                        <span class="visually-hidden">unread messages</span>
                       </span>
-                    </div>
-                  
-                  </div>
-                </div>
-              </div>
 
-              <div class="col-6">
-                <div class="px-3 py-1 claim-card disabled">
-                  <img alt="service icom" class="service-icon" src="\assets\Gruppe 239.svg">
-                  <div class="d-flex flex-column">
-                    <span class="mt-4 fw-bold card-text-title">{{ "home.service_card_notification_of_claim" | translate }}</span>
-                    <div class="d-flex align-items-center">
-                      <span class="card-text-subtitle">
-                        {{"home.service_card_file_submit_sub_title" | translate }}
-                        <i class="material-icons">chevron_right</i>
+                      <span *ngIf="!isNotificationCountText" class="position-absolute top-0 end-0 text-center bg-new-notify-icon" [ngClass]="{'d-none':zeroNotifCount}">
+                        {{ notifCount }}
+                        <span class="visually-hidden">unread messages</span>
                       </span>
+
+                    <img alt="service icom" class="service-icon" src="\assets\icon_mail.svg">
+                    <div class="d-flex flex-column mt-4 position-relative" >
+                      <span class="fw-bold card-text-title ">
+                        {{ "home.service_card_notifications" | translate }}
+                      </span>
+                      <div class="d-flex align-items-center">
+                        <span class="card-text-subtitle"> 
+                          {{ "home.service_card_inbox_sub_title" | translate }}
+                          <i class="material-icons">chevron_right</i>
+                        </span>
+                      </div>
+                    
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="col-6">
-                <a [href]="telto" class="tel">
-                  <div class="p-3 bg-white broker-card">
-                    <img alt="service icom" class="service-icon" src="\assets\Gruppe 241.svg">
+                <div class="col-6">
+                  <div class="px-3 py-1 claim-card disabled">
+                    <img alt="service icom" class="service-icon" src="\assets\Gruppe 239.svg">
                     <div class="d-flex flex-column">
-                      <span class="mt-4 fw-bold card-text-title">{{"home.service_card_call_your_broker" | translate}}</span>
+                      <span class="mt-4 fw-bold card-text-title">{{ "home.service_card_notification_of_claim" | translate }}</span>
+                      <div class="d-flex align-items-center">
+                        <span class="card-text-subtitle">
+                          {{"home.service_card_file_submit_sub_title" | translate }}
+                          <i class="material-icons">chevron_right</i>
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </a>
+                </div>
+
+                <div class="col-6">
+                  <a [href]="telto" class="tel">
+                    <div class="p-3 bg-white broker-card">
+                      <img alt="service icom" class="service-icon" src="\assets\Gruppe 241.svg">
+                      <div class="d-flex flex-column">
+                        <span class="mt-4 fw-bold card-text-title">{{"home.service_card_call_your_broker" | translate}}</span>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
               </div>
-
             </div>
-          </div>
 
-          <!-- end of new grid -->
+            <!-- end of new grid -->
+          </div>
         </div>
       </div>
+
     </div>
 
   </div>
+
 </div>
 

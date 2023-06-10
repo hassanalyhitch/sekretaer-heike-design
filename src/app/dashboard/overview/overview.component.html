@@ -1,5 +1,152 @@
-<div class="content-wrapper w-100 ">
-  <div class="_content d-flex flex-column w-100 h-100 bg-">
+
+<div *ngIf="isDesktopView">
+  <div class="desktop-wrapper w-100">
+    <div class="desktop-content d-flex flex-column w-100 h-100">
+      <div class="section-home">
+        <div class="d-flex justify-content-between">
+
+          <div style="width: 30%; 
+                      height: 100vh; 
+                      overflow-x: hidden; 
+                      overflow-y: hidden; 
+                      box-shadow: 0px 0px 3px #0000001a;">
+
+              <!-- new top line -->
+            <div class="d-flex justify-content-between px-4 pt-3">
+              <div class="d-flex"></div>
+              <div class="p-2">
+                <span class="section-title align-self-center" (click)="collapse()">
+                  {{ "overview.title_my_sekretar" | translate }}
+                </span>
+              </div>
+              <div class="p-2">
+                <div class="ml-auto btn-group dropstart align-self-center">
+                  <img class="filter-icon" data-bs-toggle="dropdown" aria-expanded="false" src="/assets/icon_filter_dark.svg">
+                  <ul class="dropdown-menu shadow">
+                    <li><span class="dropdown-item" (click)="onAddContract()">{{"overview.contract_menu.title_new_contract" | translate }}</span></li>
+                    <li><span class="dropdown-item" (click)="onSearchContractsClicked()">{{"overview.contract_menu.search" | translate }}</span></li>
+                    <li><span class="dropdown-item" (click)="sortByContractTitle()">{{ "overview.contract_menu.sort_by_a_to_z" | translate }}</span></li>
+                    <li><span class="dropdown-item" (click)="sortByContractDate()">{{ "overview.contract_menu.sort_by_date" | translate }}</span></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="section-insurance w-100 d-flex flex-column align-items-center bg-">
+
+              <div class="w-100 d-flex flex-wrap p-3 justify-content-center">
+
+                <div class="contracts w-100 d-flex flex-column align-items-center" *ngIf="contractCategory.length > 1 ">
+                  <app-contract-category *ngFor="let group of contractCategory" class="w-100" [contractArr]="group" [showTitle]="true" [groupTitle]="group[0].details.BranchSekretaer" ></app-contract-category>
+                </div>
+                <div class="contracts w-100 d-flex flex-column align-items-center" *ngIf="contractCategory.length == 1 ">
+                  <app-contract-category *ngFor="let group of contractCategory" class="w-100" [contractArr]="group" [showTitle]="false"></app-contract-category>
+                </div>
+
+              </div>
+              
+              <div class="section-folder d-flex flex-column p-3 w-100 bg-white" style="margin-bottom: 100px;">
+              
+                <!-- new line -->
+                <div class="d-flex justify-content-between mb-2 px-2 pt-2">
+
+                  <div class="d-flex"></div>
+
+                  <div class="p-2">
+                    <span class="section-title align-self-center" (click)="collapseFolders()">
+                      {{ "overview.title_my_folders" | translate }}
+                    </span>
+                  </div>
+
+                  <div class="p-2">
+                    <div class="ml-auto btn-group dropstart align-self-center">
+                      <img class="filter-icon" data-bs-toggle="dropdown" aria-expanded="false" src="/assets/icon_filter_dark.svg">
+                      <ul class="dropdown-menu shadow">
+                        <li><span class="dropdown-item" (click)="addNewFolder()">{{ "overview.folder_menu.title_new_folder" | translate }}</span></li>
+                        <li><span class="dropdown-item" (click)="onSearchFoldersClicked()">{{ "overview.folder_menu.search" | translate }}</span></li>
+                        <li><span class="dropdown-item" (click)="sortByFolderTitle()">{{ "overview.folder_menu.sort_by_a_to_z" | translate }}</span></li>
+                        <li><span class="dropdown-item" (click)="sortByFolderDate()">{{ "overview.folder_menu.sort_by_date" | translate }}</span></li>
+                      </ul>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="w-100 d-flex flex-wrap py-3 justify-content-center">
+
+                  <div class="folders w-100 d-flex align-items-center" *ngIf="templateFolderArrLength < 1 ">
+                    <p class="no-content-message text-center m-auto">
+                      {{ 'overview.no_folders_found' | translate }}
+                    </p>
+                  </div>
+                      
+                  <div class="folders w-100 d-flex flex-column align-items-center mt-1 bg-" id="folders" *ngIf="templateFolderArrLength > 0" [ngClass]="{'transition':!collapsedFolders}">
+                    <div class="w-100 d-flex a_card card-1"(swipe)="onFolderSwipe($event,foldersArr[2])" *ngIf="showFolderCard1" >
+                      <app-folder-card class=" col-12 m-1"  [ngClass]="{'swipedLeft':foldersArr[2].swipedLeft}" [folder]=foldersArr[2] (tap)="onFolderCardClick(foldersArr[2])"  ></app-folder-card>
+                      <div class="edit-rename d-flex flex-column p-2 align-self-center justify-content-center align-items-center" 
+                          [ngClass]="{'d-none':!foldersArr[2].swipedLeft}"
+                          >
+                            <i class="material-icons folderIcons mb-1"(click) ="renameFolderModal(foldersArr[2])">mode_edit</i>
+                            <i  class="material-icons folderIcons d-flex justify-content-center" (click)=" addFolderDoc(foldersArr[2])">add</i>
+                      </div>
+                    </div>
+
+                    <div class="w-100 d-flex a_card card-2"(swipe)="onFolderSwipe($event,foldersArr[1])" *ngIf="showFolderCard2">
+                      <app-folder-card class=" col-12 m-1"  [ngClass]="{'swipedLeft':foldersArr[1].swipedLeft}" [folder]=foldersArr[1] (tap)="onFolderCardClick(foldersArr[1])"  ></app-folder-card>
+                      <div class="edit-rename d-flex flex-column p-2 align-self-center justify-content-center align-items-center" 
+                          [ngClass]="{'d-none':!foldersArr[1].swipedLeft}"
+                          >
+                            <i class="material-icons folderIcons mb-1"  (click) ="renameFolderModal(foldersArr[1])">mode_edit</i>
+                            <i  class="material-icons folderIcons d-flex justify-content-center" (click)=" addFolderDoc(foldersArr[1])">add</i>
+                      </div>
+                    </div>
+
+                    <div class="w-100 d-flex a_card card-3"(swipe)="onFolderSwipe($event,foldersArr[0])" *ngIf="showFolderCard3" >
+                      <app-folder-card class=" col-12 m-1"  [ngClass]="{'swipedLeft':foldersArr[0].swipedLeft}" [folder]=foldersArr[0] (tap)="onDefaultFolderCardClick()"></app-folder-card>
+                      <div class="edit-rename d-flex flex-column p-2 align-self-center justify-content-center align-items-center" 
+                          [ngClass]="{'d-none':!foldersArr[0].swipedLeft}"
+                          >
+                            <i class="material-icons folderIcons mb-1"  (click) ="renameFolderModal(foldersArr[0])">mode_edit</i>
+                            <i  class="material-icons folderIcons d-flex justify-content-center" (click)=" addFolderDoc(foldersArr[0])">add</i>
+                      </div>
+                    </div>
+
+                </div>
+
+                <div class="w-100 d-flex flex-column  align-items-center extra-folders bg-" id="extra-folders" [ngClass]="{'show':!collapsedFolders}">
+                  <div class="foldersubset d-flex" *ngFor="let item of folderSubsetArr; let i = index">
+                      <app-folder-card class="col-12 m-1" [ngClass]="{'swipedLeft':item.swipedLeft}" [folder]=item  (swipe)="onFolderSwipe($event,item)" (tap)="onFolderCardClick(item)"></app-folder-card>
+
+                      <div class="edit-rename d-flex flex-column p-2 align-self-center justify-content-center align-items-center bg-white" 
+                        [ngClass]="{'d-none':!item.swipedLeft}"
+                      >
+                          <i class="material-icons folderIcons mb-1"   (click) ="renameFolderModal(item)">mode_edit</i>
+                          <i  class="material-icons  folderIcons d-flex justify-content-center" (click) = "addFolderDoc(item)">add</i>
+                      </div>
+                  </div>
+                  
+                </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div style="width: 70%; height: 100vh; overflow-x: hidden; overflow-y: hidden;">
+            <router-outlet name="desktop"></router-outlet>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isMobileView">
+  <div class="content-wrapper w-100">
+    <div class="_content d-flex flex-column w-100 h-100">
 
     <!-- new top line -->
     <div class="d-flex justify-content-between mb-2 px-4 pt-3">
@@ -41,13 +188,13 @@
         <div class="d-flex justify-content-between mb-2 px-2 pt-2">
 
           <div class="d-flex"></div>
-    
+
           <div class="p-2">
             <span class="section-title align-self-center" (click)="collapseFolders()">
               {{ "overview.title_my_folders" | translate }}
             </span>
           </div>
-    
+
           <div class="p-2">
             <div class="ml-auto btn-group dropstart align-self-center">
               <img class="filter-icon" data-bs-toggle="dropdown" aria-expanded="false" src="/assets/icon_filter_dark.svg">
@@ -59,7 +206,7 @@
               </ul>
             </div>
           </div>
-    
+
         </div>
 
         <div class="w-100 d-flex flex-wrap py-3 justify-content-center">
@@ -85,7 +232,7 @@
               <app-folder-card class=" col-12 m-1"  [ngClass]="{'swipedLeft':foldersArr[1].swipedLeft}" [folder]=foldersArr[1] (tap)="onFolderCardClick(foldersArr[1])"  ></app-folder-card>
               <div class="edit-rename d-flex flex-column p-2 align-self-center justify-content-center align-items-center" 
                   [ngClass]="{'d-none':!foldersArr[1].swipedLeft}"
-                 >
+                  >
                     <i class="material-icons folderIcons mb-1"  (click) ="renameFolderModal(foldersArr[1])">mode_edit</i>
                     <i  class="material-icons folderIcons d-flex justify-content-center" (click)=" addFolderDoc(foldersArr[1])">add</i>
               </div>
@@ -95,7 +242,7 @@
               <app-folder-card class=" col-12 m-1"  [ngClass]="{'swipedLeft':foldersArr[0].swipedLeft}" [folder]=foldersArr[0] (tap)="onDefaultFolderCardClick()"></app-folder-card>
               <div class="edit-rename d-flex flex-column p-2 align-self-center justify-content-center align-items-center" 
                   [ngClass]="{'d-none':!foldersArr[0].swipedLeft}"
-                 >
+                  >
                     <i class="material-icons folderIcons mb-1"  (click) ="renameFolderModal(foldersArr[0])">mode_edit</i>
                     <i  class="material-icons folderIcons d-flex justify-content-center" (click)=" addFolderDoc(foldersArr[0])">add</i>
               </div>
@@ -118,9 +265,10 @@
         </div>
 
         </div>
-    
+
       </div>
 
+    </div>
     </div>
   </div>
 </div>

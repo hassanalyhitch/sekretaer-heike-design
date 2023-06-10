@@ -33,7 +33,17 @@
   background-color: #f2f2f2;
   border-radius: 45px 0px 0px 0px;
   height: inherit;
+  position: absolute;
   overflow-y: scroll;
+  overflow-x: hidden;
+  font-family: oscine, sans-serif;
+}
+
+.desktop-content{
+  background-color: #f2f2f2;
+  border-radius: 45px 0px 0px 0px;
+  height: inherit;
+  overflow-y: hidden;
   overflow-x: hidden;
   font-family: oscine, sans-serif;
 }
@@ -42,6 +52,7 @@
   height: inherit;
   position: relative;
   overflow-y: scroll;
+  padding-bottom:60px;
 }
 
 .fav-wrapper {

@@ -1,7 +1,7 @@
 import { LoadingService } from '../../services/loading.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ContractData } from '../../models/contract.model';
 import { FolderData } from '../../models/folder.model';
 import { ContractsService } from '../../services/contracts.service';
@@ -12,6 +12,8 @@ import { RenameFolderComponent } from '../rename-folder/rename-folder.component'
 import { RenameContractComponent } from '../rename-contract/rename-contract.component';
 import { TranslateService } from '@ngx-translate/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
+import { Subject, takeUntil } from "rxjs";
 
 
 @Component({
@@ -110,18 +112,38 @@ export class OverviewComponent implements OnInit {
   ascendFolderDate:FolderData[] =[];
   descendFolderDate:FolderData[] =[];
 
+  //screen layout changes
+  destroyed = new Subject<void>();
+  currentScreenSize: string;
+
+  isMobileView: boolean;
+  isDesktopView: boolean;
+  
+  // Create a map to display breakpoint names for layout changes.
+  displayNameMap = new Map([
+    [Breakpoints.XSmall, 'XSmall'],
+    [Breakpoints.Small, 'Small'],
+    [Breakpoints.Medium, 'Medium'],
+    [Breakpoints.Large, 'Large'],
+    [Breakpoints.XLarge, 'XLarge'],
+  ]);
+
   @ViewChild('defaultContractCard', {static: false, read: ElementRef}) defaultContractCard: ElementRef<HTMLElement>;
 
   constructor(
-    private router:Router, 
+    private router:Router,
+    private route: ActivatedRoute, 
     private contractService: ContractsService, 
     private folderService: FoldersService,
     private matDialog: MatDialog,
     private translate: TranslateService,
     private snackbar:MatSnackBar,
+    private breakpointObserver: BreakpointObserver,
     private loadingService:LoadingService
     ) {
       this.loadingService.emitIsLoading(true);
+      this.isMobileView = false;
+      this.isDesktopView = false;
      }
 
   ngOnInit() {
@@ -206,7 +228,61 @@ export class OverviewComponent implements OnInit {
       isSelected: false,
       swipedLeft: false
     }];
+
     this._init();
+
+    //-------------------screen changes-----------------
+    this.breakpointObserver
+    .observe([
+      Breakpoints.XSmall,
+      Breakpoints.Small,
+      Breakpoints.Medium,
+      Breakpoints.Large,
+      Breakpoints.XLarge,
+    ])
+    .pipe(takeUntil(this.destroyed))
+    .subscribe(result => {
+      for (const query of Object.keys(result.breakpoints)) {
+        if (result.breakpoints[query]) {
+
+        this.currentScreenSize = this.displayNameMap.get(query) ?? 'Unknown';
+
+        if(this.displayNameMap.get(query) == 'XSmall'){
+
+          this.isMobileView = true;
+          this.isDesktopView = false;
+    
+        } else if(this.displayNameMap.get(query) == 'Small'){
+    
+          this.isMobileView = true;
+          this.isDesktopView = false;
+    
+        } else if(this.displayNameMap.get(query) == 'Medium'){
+    
+          this.isMobileView = false;
+          this.isDesktopView = true;
+    
+        } else if(this.displayNameMap.get(query) == 'Large'){
+    
+          this.isMobileView = false;
+          this.isDesktopView = true;
+          
+        } else if(this.displayNameMap.get(query) == 'XLarge'){
+    
+          this.isMobileView = false;
+          this.isDesktopView = true;
+          
+        }
+    
+        }
+      }
+    });
+
+  }
+
+  ngOnDestroy() {
+    this.destroyed.next();
+    this.destroyed.complete();
   }
 
   _init(){
@@ -324,10 +400,27 @@ export class OverviewComponent implements OnInit {
       ]);
     
   }
+
   onFolderCardClick(clickedFolder){
 
     this.folderService.emitSelectedFolder(clickedFolder);
-    this.router.navigate(['dashboard/overview/folder-detail', { id: clickedFolder.id }]);
+
+    if(this.router.url.includes('overview')){
+
+      if(this.isMobileView){
+        this.router.navigate([
+          "/dashboard/overview/folder-detail",
+          { id: clickedFolder.id },
+        ]);
+
+      } else {
+        this.router.navigate([
+          '/dashboard/overview/', 
+          { outlets: { 'desktop': ['folder-detail', { id: clickedFolder.id }] } }
+        ]);
+      }
+
+    }
   }
 
   collapse(){
@@ -394,14 +487,47 @@ export class OverviewComponent implements OnInit {
     if(this.collapsedFolders===false){
 
       this.folderService.emitSelectedFolder(this.foldersArr[0]);
-      this.router.navigate(['dashboard/overview/folder-detail', { id: this.foldersArr[0].id }]);
+
+      if(this.router.url.includes('overview')){
+
+        if(this.isMobileView){
+          this.router.navigate([
+            "/dashboard/overview/folder-detail",
+            { id: this.foldersArr[0].id },
+          ]);
+
+        } else {
+          this.router.navigate([
+            '/dashboard/overview/', 
+            { outlets: { 'desktop': ['folder-detail', { id: this.foldersArr[0].id }] } }
+          ]);
+        }
+
+      }
+
     } else {
 
         
       if(this.showFolderCard3 && !this.showFolderCard2 && !this.showFolderCard1){
         //show detail page
         this.folderService.emitSelectedFolder(this.foldersArr[0]);
-        this.router.navigate(['dashboard/overview/folder-detail', { id: this.foldersArr[0].id }]);
+
+        if(this.router.url.includes('overview')){
+
+          if(this.isMobileView){
+            this.router.navigate([
+              "/dashboard/overview/folder-detail",
+              { id: this.foldersArr[0].id },
+            ]);
+
+          } else {
+            this.router.navigate([
+              '/dashboard/overview/', 
+              { outlets: { 'desktop': ['folder-detail', { id: this.foldersArr[0].id }] } }
+            ]);
+          }
+
+        }
 
       } else if(this.showFolderCard2 && !this.showFolderCard1){
         //expand 2
@@ -642,7 +768,11 @@ export class OverviewComponent implements OnInit {
       });
 
     } else {
-      this.router.navigate(['dashboard/home/search', {searchType:'folders'}]);
+      if(this.isMobileView){
+        this.router.navigate(['dashboard/home/search', {searchType:'folders'}]);
+      } else {
+        this.router.navigate(['dashboard/search', {searchType:'folders'}]);
+      }
     }
   }
 
@@ -656,7 +786,11 @@ export class OverviewComponent implements OnInit {
       });
 
     } else {
-      this.router.navigate(['dashboard/home/search', {searchType:'contracts'}]);
+      if(this.isMobileView){
+        this.router.navigate(['dashboard/home/search', {searchType:'contracts'}]);
+      } else {
+        this.router.navigate(['dashboard/search', {searchType:'contracts'}]);
+      }
     }
   }
 

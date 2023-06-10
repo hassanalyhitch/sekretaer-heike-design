@@ -85,6 +85,12 @@ import { EditSmallPictureComponent } from './dashboard/edit-small-picture/edit-s
 import { AuthGuardGuard } from './auth-guard.guard';
 import { LoggedInGuard } from './logged-in.guard';
 import { ContractCategoryComponent } from './dashboard/overview/contract-category/contract-category.component';
+import { FileviewComponent } from './dashboard/contract-detail/fileview/fileview.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { DesktopNavComponent } from './desktop-nav/desktop-nav.component';
+import { DesktopFabsComponent } from './desktop-fabs/desktop-fabs.component';
+import { HomeServicesComponent } from './home-services/home-services.component';
+import { DesktopOverviewHomeComponent } from './desktop-overview-home/desktop-overview-home.component';
 
 
 // AoT requires an exported function for factories
@@ -106,20 +112,89 @@ const appRoutes: Routes = [
     component: DashboardComponent,
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home',canActivate: [AuthGuardGuard], component: HomeComponent },
-      { path: 'overview',canActivate: [AuthGuardGuard], component: OverviewComponent },
+      
+      { 
+        path: 'home',
+        canActivate: [AuthGuardGuard],
+        canActivateChild: [AuthGuardGuard],
+        component: HomeComponent,
+        children: [
+          { 
+            path: '', 
+            outlet: 'desktop', 
+            component: HomeServicesComponent 
+          },
+          { 
+            path: 'contract-detail', 
+            outlet: 'desktop', 
+            component:ContractDetailComponent 
+          },
+          { 
+            path: 'folder-detail', 
+            outlet: 'desktop', 
+            component: FolderDetailComponent 
+          },
+          { 
+            path: 'fileview',
+            outlet: 'desktop',
+            component: FileviewComponent
+          }
+          
+        ] 
+      },
+
+      { 
+        path: 'overview',
+        canActivate: [AuthGuardGuard],
+        canActivateChild: [AuthGuardGuard], 
+        component: OverviewComponent,
+        children: [
+          {
+            path: '',
+            outlet: 'desktop',
+            component: DesktopOverviewHomeComponent
+          },
+          { 
+            path: 'contract-detail', 
+            outlet: 'desktop', 
+            component: ContractDetailComponent,
+          },
+          { 
+            path: 'folder-detail', 
+            outlet: 'desktop', 
+            component: FolderDetailComponent 
+          },
+          { 
+            path: 'fileview',
+            outlet: 'desktop',
+            component: FileviewComponent
+          }
+        ] 
+      },
+
       { path: 'broker',canActivate: [AuthGuardGuard], component: BrokerComponent },
-      { path: 'favourite',canActivate: [AuthGuardGuard], component: FavouriteComponent },
       { path: 'settings',canActivate: [AuthGuardGuard], component: SettingsComponent },
-      { path: 'home/contract-detail',canActivate: [AuthGuardGuard], component:ContractDetailComponent },
+
       { path: 'overview/contract-detail',canActivate: [AuthGuardGuard], component:ContractDetailComponent },
+      { path: 'overview/fileview',canActivate: [AuthGuardGuard], component:FileviewComponent},
       { path: 'overview/folder-detail',canActivate: [AuthGuardGuard], component:FolderDetailComponent },
+      
       { path: 'home/notifications',canActivate: [AuthGuardGuard], component:NotificationsComponent },
       { path: 'home/notifications/notification-detail',canActivate: [AuthGuardGuard], component:NotificationDetailComponent },
-      { path: 'favourite/contract-detail',canActivate: [AuthGuardGuard], component:ContractDetailComponent },
       { path: 'home/adddocument',canActivate: [AuthGuardGuard], component:AddPageComponent },
       { path: 'home/chat',canActivate: [AuthGuardGuard], component:ChatComponent },  
-      { path: 'home/search',canActivate: [AuthGuardGuard], component:SearchPageComponent },  
+      //{ path: 'home/search',canActivate: [AuthGuardGuard], component:SearchPageComponent },
+      { path: 'search',canActivate: [AuthGuardGuard], component:SearchPageComponent },
+      { path: 'home/contract-detail',canActivate: [AuthGuardGuard], component:ContractDetailComponent },
+      { path: 'home/contract-detail/fileview',canActivate: [AuthGuardGuard], component:FileviewComponent},
+      { path: 'home/fileview',canActivate: [AuthGuardGuard], component:FileviewComponent},
+      { path: 'home/folder-detail',canActivate: [AuthGuardGuard], component:FolderDetailComponent },
+      
+      { path: 'favourite',canActivate: [AuthGuardGuard], component: FavouriteComponent },
+      { path: 'favourite/contract-detail',canActivate: [AuthGuardGuard], component:ContractDetailComponent },
+      { path: 'favourite/folder-detail',canActivate: [AuthGuardGuard], component:FolderDetailComponent },
+      { path: 'favourite/fileview',canActivate: [AuthGuardGuard], component:FileviewComponent},
+        
       { path: 'overview/new-contract',canActivate: [AuthGuardGuard],component:NewContractComponent },
       { path: 'settings/my-data',canActivate: [AuthGuardGuard],component:MyDataComponent },
       { path: 'settings/change-password',canActivate: [AuthGuardGuard], canDeactivate: [AuthGuardGuard], component:ChangePasswordComponent},
@@ -170,6 +245,7 @@ const appRoutes: Routes = [
     MomentDateModule,
     MatChipsModule,
     HammerModule,
+    PdfViewerModule,
     NgMultiSelectDropDownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     TranslateModule.forRoot({
@@ -229,7 +305,12 @@ const appRoutes: Routes = [
     ResetSuccessfulComponent,
     ChangePushNotificationsComponent,
     EditSmallPictureComponent,
-    ContractCategoryComponent
+    ContractCategoryComponent,
+    FileviewComponent,
+    DesktopNavComponent,
+    DesktopFabsComponent,
+    HomeServicesComponent,
+    DesktopOverviewHomeComponent
    ],
   bootstrap:    [ AppComponent ],
   providers: [

@@ -1,4 +1,16 @@
 {
+  "desktop-nav" : {
+    "home": "Home",
+    "insurances": "Insurances",
+    "broker": "Broker",
+    "favourite": "Favourite",
+    "settings": "Settings",
+    "logout": "Logout",
+    "home-toolTip":"Home",
+    "overview-toolTip":"Overview",
+    "broker-toolTip":"Broker",
+    "settings-toolTip":"Settings"
+  },
   "home": {
     "title_home": "FAVORITEN",
     "title_service": "DIENSTLEISTUNGEN",
@@ -16,6 +28,7 @@
     "service_card_call_your_broker": "Makler anrufen"
   },
   "overview": {
+    "select_item_from_list": "Please Select an Item from the list",
     "no_folders_found": "No Folders Found",
     "no_contracts_found": "No Contracts Found",
     "title_my_sekretar": "MEIN SEKRETÄR",
@@ -102,7 +115,10 @@
     "privacy_policy": "Datenschutzbestimmungen",
     "terms": "Nutzungsbedingungen",
     "wrong_credentials_used": "Falscher Benutzername oder Passwort",
-    "connection_error": "Verbindung fehlgeschlagen. Keine aktive Internetverbindung."
+    "connection_error": "Verbindung fehlgeschlagen. Keine aktive Internetverbindung.",
+    "header":"A new dimension in customer care.",
+    "subheader":"The brokerage future has begun.",
+    "catch-phrase":"Easy. Fast. Digital."
   },
   "forgot_password": {
     "title_forgot_password_1" : "Forgot Password?",
@@ -336,6 +352,18 @@
     "risk" : "Risk",
     "insurance_number": "Insurance Number(optional)"
   },
+  "file-view":{
+    "back-toolTip":"Back",
+    "download-toolTip":"Download",
+    "zoomIn-toolTip":"Zoom In",
+    "zoomOut-toolTip":"Zoom Out"
+   },
+   "desktop-fab":{
+    "search-toolTip":"Search",
+    "mail-toolTip":"Mail",
+    "chat-toolTip":"Chat",
+    "broker-toolTip":"Broker"
+   },
   "privacy_policy_and_terms_content": {
     "a1_title": "A. Geschäftsbedingungen",
     "a1_content_intro": "Die nachfolgenden Hinweise und allgemeinen Geschäftsbedingungen (AGB) ergänzen die zwischen dem Makler und seinem Mandanten getroffene Servicevereinbarung. Um seinen Kunden den bestmöglichen Service anbieten zu können, kooperiert der Makler mit der PHÖNIX MAXPOOL Gruppe AG („PHÖNIX MAXPOOL“), die vereinbarungsgemäß verschiedene Bestandteile des Leistungsspektrums im Auftrag und für Rechnung des Maklers ausführt.",

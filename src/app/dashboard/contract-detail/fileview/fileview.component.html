@@ -1,18 +1,107 @@
-<div class="content-wrapper w-100 ">
-  <div class="_content d-flex d-flex flex-column align-items-center w-100 h-100 ">
-    <div class="_spinner " *ngIf="!previewLoaded">
-      <mat-spinner  [diameter]='40' ></mat-spinner>
-    </div>
+<div [ngClass]="isDesktopView ? 'desktop-content-wrapper w-100' : 'content-wrapper w-100'">
 
-    <div class="_fileview w-100 h-100 d-flex flex-column ">
-      <span class=" px-3 mb-3">{{fileName }} </span>
-      <embed
-        [src]="safeUrl" 
-        class="w-100 h-100 "
-        frameborder="0"
-        id="embedView"
-        />
-    </div>
+  <div [ngClass]="isDesktopView ? 'desktop-content d-flex flex-column  w-100 h-100 px-2' : '_content d-flex flex-column  w-100 h-100 px-2'">
 
+      <div class="d-flex justify-content-between mb-2 pt-3">
+
+        <div class="d-flex back-btn" 
+          (click)="onBackNavClick()"
+          matTooltip='{{ "file-view.back-toolTip" | translate }}'
+          matTooltipPosition="right">
+          <i class="material-icons p-2 back-btn">arrow_back_ios</i>
+        </div> 
+
+        <div class="p-2">
+          <span class="section-title align-self-center ">
+            {{fileName | shortenText: 20}}
+          </span>
+        </div>
+
+        <div class="p-2">
+          <div class="download-btn align-self-center" 
+            (click)="onDocumentDownload()"
+            matTooltip='{{ "file-view.download-toolTip" | translate }}'
+            matTooltipPosition="left">
+            <i class="material-icons">download</i>
+          </div>
+        </div>
+
+      </div>
+      
+      <div class="_spinner " *ngIf="!previewLoaded">
+        <mat-spinner  [diameter]='40' ></mat-spinner>
+      </div>
+  
+      <div class="_fileview w-100 h-100 d-flex flex-column align-items-center" *ngIf ="extension == 'pdf'">
+       
+        <pdf-viewer 
+            [src]="fileurl"
+            [render-text]="true"
+            [original-size]="false"
+            id="embedView"
+            class="w-100 h-100"
+            [zoom]="zoom"
+            (on-progress)="onProgress($event)"
+        >
+        </pdf-viewer>
+
+        
+
+        <div class="d-flex zoom-btns">
+            <div class="mx-1">
+              <div class="zoom-out d-flex pr-2 justify-content-center align-items-center" 
+                (click)="minusZoom()"
+                matTooltip='{{ "file-view.zoomOut-toolTip" | translate }}'
+                matTooltipPosition="above">
+                <i class="material-icons align-self-center">remove</i>
+              </div>
+            </div>
+
+            <div class="mx-1">
+              <div class="zoom-in d-flex pr-2 justify-content-center align-items-center" 
+                (click)="plusZoom()"
+                matTooltip='{{ "file-view.zoomIn-toolTip" | translate }}'
+                matTooltipPosition="above">
+                <i class="material-icons align-self-center">add</i>
+              </div>
+            </div>
+        </div>
+
+      </div>
+
+      <div class="_fileview w-100 h-100 d-flex flex-column align-items-center" *ngIf ="extension == 'jpeg' || extension == 'jpg' ">
+
+        <div #zoomContainer class="zoom-container">
+          <img [src]="fileurl"
+          [style.transform]="'scale(' + zoomLevel + ')'"
+          (load)="onFileLoaded($event)" 
+          />
+        </div>
+
+        
+        <div class="d-flex zoom-btns">
+          <div class="mx-1">
+            <div class="zoom-out d-flex pr-2 justify-content-center align-items-center" 
+              (click)="zoomOut()"
+              matTooltip='{{ "file-view.zoomOut-toolTip" | translate }}'
+              matTooltipPosition="above">
+              <i class="material-icons align-self-center">remove</i>
+            </div>
+          </div>
+
+          <div class="mx-1">
+            <div class="zoom-in d-flex pr-2 justify-content-center align-items-center" 
+              (click)="zoomIn()"
+              matTooltip='{{ "file-view.zoomIn-toolTip" | translate }}'
+              matTooltipPosition="above">
+              <i class="material-icons align-self-center">add</i>
+            </div>
+          </div>
+      </div>
+
+      </div>
+  
+    </div>
   </div>
-</div>
+
+  

@@ -12,7 +12,8 @@ import { environment } from '../../environments/environment';
 @Injectable({ providedIn: 'root' })
 export class ContractsService {
 
-  TAG:string = 'ContractsService -> ';
+  //TAG:string = 'ContractsService -> ';
+
   selectedContract: ContractData = <ContractData>{
     id: 0,
     details: {
@@ -167,7 +168,7 @@ export class ContractsService {
                 if(error.status == 401){
                   // this.loginService.isAuthenticated = false;
 
-                  this.loginService.emitAuthenticated(false);
+                  this.loginService.resetAuthToken();
                 }
               }
 
@@ -239,7 +240,7 @@ export class ContractsService {
             if(error instanceof HttpErrorResponse){
               //Invalid Token or Unauthorised request
               if(error.status == 401){
-                this.loginService.emitAuthenticated(false);
+                this.loginService.resetAuthToken();
               }
             }
             
@@ -265,7 +266,7 @@ export class ContractsService {
           if(error instanceof HttpErrorResponse){
             //Invalid Token or Unauthorised request
             if(error.status == 401){
-              this.loginService.emitAuthenticated(false);
+              this.loginService.resetAuthToken();
             }
           }
           
@@ -291,7 +292,7 @@ export class ContractsService {
           if(error instanceof HttpErrorResponse){
             //Invalid Token or Unauthorised request
             if(error.status == 401){
-              this.loginService.emitAuthenticated(false);
+              this.loginService.resetAuthToken();
             }
           }
           
@@ -379,7 +380,7 @@ export class ContractsService {
               //Invalid token or Unauthorised request
 
               if(error.status == 401){
-                this.loginService.emitAuthenticated(false);
+                this.loginService.resetAuthToken();
               }
             }
         }

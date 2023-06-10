@@ -1,5 +1,5 @@
 import {AfterViewInit,Component, ElementRef, OnInit,QueryList,ViewChild,ViewChildren} from "@angular/core";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { ContractsService } from "../../services/contracts.service";
 import { ContractData } from "../../models/contract.model";
 import { NotificationsService } from "../../services/notification.service";
@@ -8,6 +8,8 @@ import { BrokerService } from '../../services/broker.service';
 import { BrokerData } from '../../models/broker.model';
 import { FoldersService } from '../../services/folder.service';
 import { FolderData } from '../..//models/folder.model';
+import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
+import { Subject, takeUntil } from "rxjs";
 
 @Component({
   selector: "app-home",
@@ -29,27 +31,46 @@ export class HomeComponent implements OnInit,AfterViewInit{
 
   favFoldersArr: FolderData[] = [];
   allFoldersArr: FolderData[] = [];
- 
 
-  
+  //screen layout changes
+  destroyed = new Subject<void>();
+  currentScreenSize: string;
+
+  isMobileView: boolean;
+  isDesktopView: boolean;
+
+  // Create a map to display breakpoint names for layout changes.
+  displayNameMap = new Map([
+    [Breakpoints.XSmall, 'XSmall'],
+    [Breakpoints.Small, 'Small'],
+    [Breakpoints.Medium, 'Medium'],
+    [Breakpoints.Large, 'Large'],
+    [Breakpoints.XLarge, 'XLarge'],
+  ]);
+
   @ViewChild("notif", { static: false }) notif: ElementRef<HTMLElement>;
   @ViewChildren("contracts") contracts:QueryList<ElementRef>;
   @ViewChildren("folders") folders:QueryList<ElementRef>;
   lineObjectArr:{isActive: boolean, startsFrom: number, endsAt: number}[] = [];
 
   constructor(
+    private route: ActivatedRoute,
     private router: Router,
     private contractService: ContractsService,
     private notificationService: NotificationsService,
+    private breakpointObserver: BreakpointObserver,
     private loadingService:LoadingService,
     private brokerService:BrokerService,
     private folderService: FoldersService
   ) {
     this.loadingService.emitIsLoading(true);
+    this.isMobileView = false;
+    this.isDesktopView = false;
   }
 
 
   ngOnInit() {
+
     this.favArr = [];
     this.contractService.getContracts().subscribe({
       next: () => {
@@ -114,6 +135,58 @@ export class HomeComponent implements OnInit,AfterViewInit{
       },
     });
 
+    //-------------------screen changes-----------------
+    this.breakpointObserver
+    .observe([
+      Breakpoints.XSmall,
+      Breakpoints.Small,
+      Breakpoints.Medium,
+      Breakpoints.Large,
+      Breakpoints.XLarge,
+    ])
+    .pipe(takeUntil(this.destroyed))
+    .subscribe(result => {
+      for (const query of Object.keys(result.breakpoints)) {
+        if (result.breakpoints[query]) {
+
+        this.currentScreenSize = this.displayNameMap.get(query) ?? 'Unknown';
+
+        if(this.displayNameMap.get(query) == 'XSmall'){
+
+          this.isMobileView = true;
+          this.isDesktopView = false;
+    
+        } else if(this.displayNameMap.get(query) == 'Small'){
+    
+          this.isMobileView = true;
+          this.isDesktopView = false;
+    
+        } else if(this.displayNameMap.get(query) == 'Medium'){
+    
+          this.isMobileView = false;
+          this.isDesktopView = true;
+    
+        } else if(this.displayNameMap.get(query) == 'Large'){
+    
+          this.isMobileView = false;
+          this.isDesktopView = true;
+          
+        } else if(this.displayNameMap.get(query) == 'XLarge'){
+    
+          this.isMobileView = false;
+          this.isDesktopView = true;
+          
+        }
+    
+        }
+      }
+    });
+
+  }
+
+  ngOnDestroy() {
+    this.destroyed.next();
+    this.destroyed.complete();
   }
 
   refresh(id:number){
@@ -161,35 +234,40 @@ export class HomeComponent implements OnInit,AfterViewInit{
       }
     });
 
-    document.getElementById("fav-wrapper").addEventListener('scroll', function (event) {
-        // Set starting position
-      if (!start) {
-        start = document.getElementById("fav-wrapper").scrollWidth;
-      }
+    if(this.isMobileView){
 
-      // Clear our timeout throughout the scroll
-      window.clearTimeout(isScrolling);
+        document.getElementById("fav-wrapper").addEventListener('scroll', function (event) {
+            // Set starting position
+          if (!start) {
+            start = document.getElementById("fav-wrapper").scrollWidth;
+          }
+    
+          // Clear our timeout throughout the scroll
+          window.clearTimeout(isScrolling);
+    
+          // Set a timeout to run after scrolling ends to avoid infinity loops
+          isScrolling = setTimeout(function() {
+    
+            // Calculate distance
+            const box = document.getElementById("fav-wrapper");
+            
+    
+            distance = box.scrollLeft;
+            totalScrollWidth = box.scrollWidth;
+            // Run the callback to set active line
+            scroll_callback(distance, totalScrollWidth);
+    
+            // Reset calculations
+            start = null;
+            end = null;
+            distance = null;
+    
+          }, 66);
+    
+      }, false);
 
-      // Set a timeout to run after scrolling ends to avoid infinity loops
-      isScrolling = setTimeout(function() {
+    }
 
-        // Calculate distance
-        const box = document.getElementById("fav-wrapper");
-        
-
-        distance = box.scrollLeft;
-        totalScrollWidth = box.scrollWidth;
-        // Run the callback to set active line
-        scroll_callback(distance, totalScrollWidth);
-
-        // Reset calculations
-        start = null;
-        end = null;
-        distance = null;
-
-      }, 66);
-
-  }, false);
 
   function scroll_callback(distance, totalScrollWidth){
     
@@ -256,7 +334,22 @@ export class HomeComponent implements OnInit,AfterViewInit{
 
   onFolderCardClick(clickedFolder){
     this.folderService.emitSelectedFolder(clickedFolder);
-    this.router.navigate(['dashboard/overview/folder-detail', { id: clickedFolder.id }]);
+
+    if(this.router.url.includes('home')){
+
+      if(this.isMobileView){
+        this.router.navigate(
+          ['dashboard/home/folder-detail', { id: clickedFolder.id }]);
+
+      } else {
+        this.router.navigate([
+          '/dashboard/home/', 
+          { outlets: { 'desktop': ['folder-detail', { id: clickedFolder.id }] } }
+        ]);
+      }
+
+    }
+
   }
 
 

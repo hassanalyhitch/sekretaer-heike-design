@@ -1,0 +1,102 @@
+@import url('https://use.typekit.net/myb7tas.css');
+
+.section-service {
+    background-color: white;
+    border-radius: 0px 45px 0px 0px;
+    box-shadow: 0px 0px 3px #0000001a;
+    padding-bottom:60px;
+}
+
+.section-title {
+    text-shadow: none;
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 2.5px;
+}
+
+.filter-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.add_page-card{
+    height: 140px;
+    background-color: white;
+    box-shadow: 0 0 20px #00000033;
+    border: solid 1px #f2f2f2;
+    cursor: pointer;
+    border-radius: 20px 0px 0px 0px;
+}
+
+.card-text-title {
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+
+.card-text-subtitle {
+    font-size: 12px;
+}
+
+.claim-card{
+    height: 140px;
+    background-color: white;
+    box-shadow:0 0 20px #00000033;
+    border: solid 1px #f2f2f2;
+    cursor: pointer;
+    border-radius: 0px 0px 0px 20px;
+}
+
+.disabled {
+    box-shadow: none !important;
+    border: none;
+    background-color: #bfbfbf !important;
+}
+
+.service-icon{
+    width: 40px;
+    height: 40px;
+}
+
+.broker-card{
+    height: 140px;
+    background-color: white;
+    box-shadow: 0 0 20px #00000033;
+    border: solid 1px #f2f2f2;
+    cursor: pointer;
+    border-radius: 0px 0px 20px 0px;
+}
+
+.tel{
+    text-decoration: none;
+    color: #000000;
+}
+
+.inbox-card{
+    position: relative;
+    height: 140px;
+    background-color: white;
+    box-shadow: 0 0 20px #00000033;
+    border: solid 1px #f2f2f2;
+    cursor: pointer;
+    border-radius:0px 20px 0px 0px ;
+}
+
+.bg-new-notify-icon {
+    background-color: var(--primaryIconColor);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    box-shadow: 0px 3px 3px #0000001a;
+    color: white;
+    margin: 8px;
+    padding: 5px;
+    font-size: 14px;
+    top: 10px;
+    right: 5px;
+    position: absolute;
+}
+
+.material-icons{
+    line-height: normal !important;
+    font-size: 10px !important; 
+}
