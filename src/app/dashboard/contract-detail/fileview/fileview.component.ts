@@ -196,7 +196,7 @@ export class FileviewComponent implements OnInit {
   updateTransform(): void {
     const container = this.zoomContainer.nativeElement;
     const img = container.querySelector('img');
-    img.style.transform = `scale(${this.zoomLevel})`;
+    img.style.width = ` calc(100% * ${this.zoomLevel})`;
   }
 
   ngOnDestroy() {
