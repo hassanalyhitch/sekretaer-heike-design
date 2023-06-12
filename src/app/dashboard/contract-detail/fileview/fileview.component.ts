@@ -40,6 +40,8 @@ export class FileviewComponent implements OnInit, AfterViewInit {
  isMobileView: boolean;
  isDesktopView: boolean;
 
+ fileNotFound: boolean = false;
+
  // Create a map to display breakpoint names for layout changes.
  displayNameMap = new Map([
    [Breakpoints.XSmall, 'XSmall'],
@@ -72,6 +74,17 @@ export class FileviewComponent implements OnInit, AfterViewInit {
     this.downloadService.getBase64DownloadFile(this.systemId,this.docId).subscribe({
       next:(resp: any) =>{
         this.fileurl = environment.baseUrl+resp.body.linkToDoc;
+        this.downloadService.getDownloadFile(this.systemId,this.docId).subscribe({
+          error:(err)=>{
+            console.log(err);
+            if(err.status == 404){
+              this.fileNotFound = true;
+            }
+          }
+        });
+      },
+      error:(err:any)=>{
+        console.log(err);
       }
     });
 

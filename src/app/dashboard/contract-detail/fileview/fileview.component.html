@@ -36,6 +36,7 @@
       <div class="_fileview w-100 h-100 d-flex flex-column align-items-center" *ngIf ="extension == 'pdf'">
        
         <pdf-viewer 
+            *ngIf="!fileNotFound"
             [src]="fileurl"
             [render-text]="true"
             [original-size]="false"
@@ -46,9 +47,9 @@
         >
         </pdf-viewer>
 
-        
+        <span *ngIf="fileNotFound"> File Not Found </span>
 
-        <div class="d-flex zoom-btns">
+        <div class="d-flex zoom-btns" *ngIf="!fileNotFound" >
             <div class="mx-1">
               <div class="zoom-out d-flex pr-2 justify-content-center align-items-center" 
                 (click)="minusZoom()"
