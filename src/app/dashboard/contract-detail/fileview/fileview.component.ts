@@ -202,25 +202,27 @@ export class FileviewComponent implements OnInit, AfterViewInit {
       }
         let newWidth = parseInt(this.imgWidth) * this.zoomLevel;
         this.img.style.width = `${newWidth}px`;
-        console.log(newWidth, this.zoomLevel);
+        // console.log(newWidth, this.zoomLevel);
     }
     
   }
   
   ngAfterViewInit(){
-    
-    const container = this.zoomContainer.nativeElement;
-    let containerWidth = parseInt(container.clientWidth);
-    this.img = container.querySelector('img');
-    
-    this.img.addEventListener('load', ()=>{
-      let naturalImgWidth = parseInt(this.img.clientWidth);
-      if(naturalImgWidth > containerWidth){
-        this.img.style.width = "100%";
-      }
-      this.imgWidth = this.img.getBoundingClientRect().width;
-      console.log(this.imgWidth);
-    });
+    if(this.zoomContainer){
+      const container = this.zoomContainer.nativeElement;
+      let containerWidth = parseInt(container.clientWidth);
+      this.img = container.querySelector('img');
+      
+      this.img.addEventListener('load', ()=>{
+        let naturalImgWidth = parseInt(this.img.clientWidth);
+        if(naturalImgWidth > containerWidth){
+          this.img.style.width = "100%";
+        }
+        this.imgWidth = this.img.getBoundingClientRect().width;
+        // console.log(this.imgWidth);
+      });
+
+    }
   }
 
   ngOnDestroy() {
