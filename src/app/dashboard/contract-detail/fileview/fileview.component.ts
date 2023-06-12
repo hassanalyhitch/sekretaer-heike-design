@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Location } from '@angular/common';
@@ -15,7 +15,7 @@ import { DownloadService } from '../../../services/download-file.service';
   templateUrl: './fileview.component.html',
   styleUrls: ['./fileview.component.scss']
 })
-export class FileviewComponent implements OnInit {
+export class FileviewComponent implements OnInit, AfterViewInit {
 
  safeUrl: SafeResourceUrl ;
  linkToDoc:string;
@@ -29,7 +29,9 @@ export class FileviewComponent implements OnInit {
 
  zoomLevel = 1;
  @ViewChild('zoomContainer') zoomContainer: ElementRef;
-
+ imgWidth:string = '';
+ img:any;
+ setInitImgWidth:boolean = false;
 
  //screen layout changes
  destroyed = new Subject<void>();
@@ -67,7 +69,6 @@ export class FileviewComponent implements OnInit {
    }
 
   ngOnInit() {
-
     this.downloadService.getBase64DownloadFile(this.systemId,this.docId).subscribe({
       next:(resp: any) =>{
         this.fileurl = environment.baseUrl+resp.body.linkToDoc;
@@ -194,9 +195,32 @@ export class FileviewComponent implements OnInit {
   }
 
   updateTransform(): void {
+    if(this.imgWidth != '' && this.imgWidth != undefined){
+      if(!this.setInitImgWidth){
+        this.imgWidth = this.img.getBoundingClientRect().width;
+        this.setInitImgWidth = true;
+      }
+        let newWidth = parseInt(this.imgWidth) * this.zoomLevel;
+        this.img.style.width = `${newWidth}px`;
+        console.log(newWidth, this.zoomLevel);
+    }
+    
+  }
+  
+  ngAfterViewInit(){
+    
     const container = this.zoomContainer.nativeElement;
-    const img = container.querySelector('img');
-    img.style.width = ` calc(100% * ${this.zoomLevel})`;
+    let containerWidth = parseInt(container.clientWidth);
+    this.img = container.querySelector('img');
+    
+    this.img.addEventListener('load', ()=>{
+      let naturalImgWidth = parseInt(this.img.clientWidth);
+      if(naturalImgWidth > containerWidth){
+        this.img.style.width = "100%";
+      }
+      this.imgWidth = this.img.getBoundingClientRect().width;
+      console.log(this.imgWidth);
+    });
   }
 
   ngOnDestroy() {

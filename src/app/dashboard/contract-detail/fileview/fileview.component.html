@@ -1,3 +1,4 @@
+
 <div [ngClass]="isDesktopView ? 'desktop-content-wrapper w-100' : 'content-wrapper w-100'">
 
   <div [ngClass]="isDesktopView ? 'desktop-content d-flex flex-column  w-100 h-100 px-2' : '_content d-flex flex-column  w-100 h-100 px-2'">
@@ -73,7 +74,6 @@
 
         <div #zoomContainer class="zoom-container">
           <img [src]="fileurl"
-          [style.transform]="'scale(' + zoomLevel + ')'"
           (load)="onFileLoaded($event)" 
           />
         </div>
@@ -105,3 +105,4 @@
   </div>
 
   
+
