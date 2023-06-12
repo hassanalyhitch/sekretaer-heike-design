@@ -34,7 +34,7 @@
         <mat-spinner  [diameter]='40' ></mat-spinner>
       </div>
   
-      <div class="_fileview w-100 h-100 d-flex flex-column align-items-center" *ngIf ="extension == 'pdf'">
+      <div class="_fileview w-100 h-100 d-flex flex-column align-items-center justify-content-center" *ngIf ="extension == 'pdf'">
        
         <pdf-viewer 
             *ngIf="!fileNotFound"
