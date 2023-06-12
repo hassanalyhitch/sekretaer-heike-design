@@ -79,6 +79,7 @@ export class FileviewComponent implements OnInit, AfterViewInit {
             console.log(err);
             if(err.status == 404){
               this.fileNotFound = true;
+              this.previewLoaded = true;
             }
           }
         });

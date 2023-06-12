@@ -20,6 +20,7 @@
 
         <div class="p-2">
           <div class="download-btn align-self-center" 
+            *ngIf="!fileNotFound"
             (click)="onDocumentDownload()"
             matTooltip='{{ "file-view.download-toolTip" | translate }}'
             matTooltipPosition="left">
@@ -47,7 +48,7 @@
         >
         </pdf-viewer>
 
-        <span *ngIf="fileNotFound"> File Not Found </span>
+        <span *ngIf="fileNotFound" style="align-self:center;" > File Not Found </span>
 
         <div class="d-flex zoom-btns" *ngIf="!fileNotFound" >
             <div class="mx-1">
