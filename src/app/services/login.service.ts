@@ -1,16 +1,18 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Observer, tap } from 'rxjs';
-import { environment } from '../../environments/environment';
 import { AuthLogin } from '../models/auth_login.model';
 import { LoginData } from '../models/login.model';
 import { SettingsService } from './settings.service';
 import { Router } from '@angular/router';
+import * as CryptoJS from 'crypto-js';  
+import { environment } from 'src/environments/environment';
+import { LocalforageService } from './localforage.service';
+import * as webauthn from '@passwordless-id/webauthn'
 
 @Injectable({ providedIn: 'root' })
 export class LoginService {
  
-  public lang: string;
   public themeColor: string;
   public chatCheck: number;
   public insuranceCheck: number;
@@ -23,7 +25,8 @@ export class LoginService {
   constructor(
     private http: HttpClient,
     private route: Router,
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
+    private localForage: LocalforageService
   ) {
     
     // this.authenticatedObs = new Observable((observer: Observer<boolean>) => {
@@ -105,15 +108,24 @@ export class LoginService {
           //this.isAuthenticated = true;
           this.chatCheck = resp.config.chat;
           this.themeColor = resp.config.colorSchema; 
-          this.lang = resp.lang;
           this.insuranceCheck = resp.config.insuranceCheck;
           this.passwordReset = resp.config.passwordReset;
 
           this.settingsService.setCurrentTheme(this.themeColor);
-          this.settingsService.setCurrentLanguage(this.lang);
+          this.settingsService.setCurrentLanguage(resp.lang);
           this.settingsService.setAuthToken(resp.token);
 
           localStorage.setItem('lastCache', now.toString());
+
+          let encUserName = CryptoJS.AES.encrypt(data.username, environment.salt_key).toString();
+          let encPassword = CryptoJS.AES.encrypt(data.password, environment.salt_key).toString();
+          
+          // console.log("Your encrypted user name is " + encUserName);
+          // console.log("Your decrypted user name is " + CryptoJS.AES.decrypt(encUserName, environment.salt_key).toString(CryptoJS.enc.Utf8));
+          let storeObj = {};
+          storeObj[encUserName] = encPassword;
+
+          this.localForage.set("_0", storeObj);          
         })
       );
   }

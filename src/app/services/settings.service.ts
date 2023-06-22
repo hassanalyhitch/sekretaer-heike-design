@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { NgForage } from 'ngforage';
+import { LocalforageService } from './localforage.service';
+import * as CryptoJS from 'crypto-js';  
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +14,12 @@ export class SettingsService {
   language: string;
   authToken:string;
 
-  constructor(private translateService: TranslateService) {
+  constructor(private translateService: TranslateService, private localForage: LocalforageService) {
 
     this.switchTheme(this.getCurrentTheme());
-
+    // console.log(this.localForage.listKeys());
   }
+
   setAuthToken(authToken:string){
     localStorage.setItem('token',authToken);
   }
@@ -28,6 +33,21 @@ export class SettingsService {
       return this.authToken;
     }
 
+  }
+
+  setBiometrics(val:string){
+
+    localStorage.setItem('biometrics', val);
+  }
+
+  getBiometrics(){
+    let bioSetting = localStorage.getItem('biometrics');
+
+    if(!bioSetting){
+      return "false";
+    } else {
+      return bioSetting;
+    }
   }
 
   setLanguage(){
@@ -56,7 +76,7 @@ export class SettingsService {
 
     //TODO : SAVE THIS LANG TO API
 
-    this.translateService.use(lang);
+    this.translateService.use(this.getCurrentLanguage());
   }
 
   getCurrentTheme(){

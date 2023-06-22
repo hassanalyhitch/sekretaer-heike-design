@@ -277,3 +277,10 @@ app-fav-item {
 .dropdown-item{
   cursor: pointer;
 }
+
+.no-favourites-found{
+  text-shadow: none;
+  font-size: 17px;
+  font-weight: bold;
+  margin-top: 200px;
+}

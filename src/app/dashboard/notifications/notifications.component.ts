@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationData } from '../../models/notification.model';
 import { NotificationsService } from '../../services/notification.service';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-notifications',
@@ -28,13 +30,81 @@ export class NotificationsComponent implements OnInit {
   descDate:NotificationData[] = [];
   sortDateByAsc:boolean = true;
 
-  constructor(private router:Router, private notifService: NotificationsService,private loadingService:LoadingService) 
+  isMobileView: boolean;
+  isDesktopView: boolean;
+  
+  //screen layout changes
+  destroyed = new Subject<void>();
+  
+  // Create a map to display breakpoint names for layout changes.
+  displayNameMap = new Map([
+    [Breakpoints.XSmall, 'XSmall'],
+    [Breakpoints.Small, 'Small'],
+    [Breakpoints.Medium, 'Medium'],
+    [Breakpoints.Large, 'Large'],
+    [Breakpoints.XLarge, 'XLarge'],
+  ]);
+
+  constructor(
+    private router:Router, 
+    private notifService: NotificationsService,
+    private loadingService:LoadingService,
+    private breakpointObserver: BreakpointObserver) 
   { 
     this.loadingService.emitIsLoading(true);
+    this.isMobileView = false;
+    this.isDesktopView = false;
   }
 
   ngOnInit() {
     this._init();
+
+    //-------------------screen changes-----------------
+    this.breakpointObserver
+    .observe([
+      Breakpoints.XSmall,
+      Breakpoints.Small,
+      Breakpoints.Medium,
+      Breakpoints.Large,
+      Breakpoints.XLarge,
+    ])
+    .pipe(takeUntil(this.destroyed))
+    .subscribe(result => {
+      for (const query of Object.keys(result.breakpoints)) {
+        if (result.breakpoints[query]) {
+
+
+        if(this.displayNameMap.get(query) == 'XSmall'){
+
+          this.isMobileView = true;
+          this.isDesktopView = false;
+    
+        } else if(this.displayNameMap.get(query) == 'Small'){
+    
+          this.isMobileView = true;
+          this.isDesktopView = false;
+    
+        } else if(this.displayNameMap.get(query) == 'Medium'){
+    
+          this.isMobileView = false;
+          this.isDesktopView = true;
+    
+        } else if(this.displayNameMap.get(query) == 'Large'){
+    
+          this.isMobileView = false;
+          this.isDesktopView = true;
+          
+        } else if(this.displayNameMap.get(query) == 'XLarge'){
+    
+          this.isMobileView = false;
+          this.isDesktopView = true;
+          
+        }
+    
+        }
+      }
+    });
+
   }
 
   _init(){
@@ -43,7 +113,6 @@ export class NotificationsComponent implements OnInit {
         
         if(Array.isArray(resp)){
 
-          //console.log(resp);
 
           resp.sort((a, b) => a.isRead.toString().localeCompare(b.isRead.toString()));
 
@@ -61,7 +130,6 @@ export class NotificationsComponent implements OnInit {
               links: item['links']
             };
             
-          //console.log('notifArr Date A '+notif.createdAt);
 
           if(notif.createdAt.includes('.')){
             let d1:string = notif.createdAt.split(' ')[0];
@@ -72,13 +140,8 @@ export class NotificationsComponent implements OnInit {
             
             this.allNotifsArr.push(notif);
 
-           // console.log('Created at -> '+notif.createdAt);
           }
 
-          
-
-          //this.allNotifsArr[2].createdAt = "2023.04.25 06:07:34";
-          //this.allNotifsArr[3].createdAt = "2023.04.24 05:07:34";
 
         } else{
           //error
@@ -128,8 +191,6 @@ export class NotificationsComponent implements OnInit {
   }
 
   sortByTitle(){
-    //console.log('before sorting ',this.sortTitleByAsc);
-    //console.table(this.allNotifsArr);
 
     if(this.sortTitleByAsc){
       this.allNotifsArr.sort((a, b) => {
@@ -145,14 +206,9 @@ export class NotificationsComponent implements OnInit {
         } 
       });
       this.sortTitleByAsc = !this.sortTitleByAsc;
-      //console.log('after sorting ',this.sortTitleByAsc);
-      //console.table(this.allNotifsArr);
     } else {
       this.allNotifsArr.reverse();
       this.sortTitleByAsc = !this.sortTitleByAsc;
-      //console.log('Reverse array',this.sortTitleByAsc);
-      //console.table(this.allNotifsArr);
-
     }
   }
 
@@ -182,15 +238,17 @@ export class NotificationsComponent implements OnInit {
         
     });
 
-    //console.table(this.allNotifsArr);
-
       this.sortDateByAsc = !this.sortDateByAsc;
+
     } else {
       this.allNotifsArr.reverse();
-      //console.table(this.allNotifsArr);
       this.sortDateByAsc = !this.sortDateByAsc;
-
     }
+  }
+
+  ngOnDestroy() {
+    this.destroyed.next();
+    this.destroyed.complete();
   }
 
 }

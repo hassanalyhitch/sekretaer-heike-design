@@ -48,7 +48,7 @@
         >
         </pdf-viewer>
 
-        <span *ngIf="fileNotFound" style="align-self:center;" > File Not Found </span>
+        <span *ngIf="fileNotFound" class="section-title align-self-center">{{ "file-view.file-not-found" | translate }} </span>
 
         <div class="d-flex zoom-btns" *ngIf="!fileNotFound" >
             <div class="mx-1">
@@ -74,14 +74,15 @@
 
       <div class="_fileview w-100 h-100 d-flex flex-column align-items-center" *ngIf ="extension == 'jpeg' || extension == 'jpg' ">
 
-        <div #zoomContainer class="zoom-container">
+        <div #zoomContainer class="zoom-container" *ngIf="!fileNotFound">
           <img [src]="fileurl"
           (load)="onFileLoaded($event)" 
           />
         </div>
 
-        
-        <div class="d-flex zoom-btns">
+        <span *ngIf="fileNotFound" class="section-title align-self-center">{{ "file-view.file-not-found" | translate }} </span>
+
+        <div class="d-flex zoom-btns" *ngIf="!fileNotFound">
           <div class="mx-1">
             <div class="zoom-out d-flex pr-2 justify-content-center align-items-center" 
               (click)="zoomOut()"

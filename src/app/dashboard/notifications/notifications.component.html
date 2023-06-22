@@ -1,7 +1,7 @@
 <div class="content-wrapper w-100 ">
-  <div class="_content d-flex flex-column align-items-center w-100 h-100 bg-">
+  <div class="_content d-flex flex-column align-items-center w-100">
     
-    <strong class="section-title align-self-center mt-4 mb-3">{{ 'notifications.title' | translate }}</strong>
+    <strong class="section-title align-self-center mt-4 mb-2">{{ 'notifications.title' | translate }}</strong>
 
     <div class="w-100 d-flex flex-row justify-content-end py-2 bg-">
       <span class=" mark-as-read ">{{ 'notifications.mark_all_as_read' | translate }}</span>
@@ -28,9 +28,9 @@
         <i class="material-icons align-items-center" style="transform: rotate(90deg);" >code</i>
       </div>
     </div>
-
-    <div class="w-100 d-flex flex-column">
-      <app-notification-item *ngFor="let notif of allNotifsArr; let i = index;" [notification]="notif" ></app-notification-item>
+  
+    <div [ngClass]="isDesktopView ? 'desktop-notifications w-100 d-flex flex-column' : 'mobile-notifications w-100 d-flex flex-column'">
+      <app-notification-item class="mt-1" *ngFor="let notif of allNotifsArr; let i = index;" [notification]="notif" ></app-notification-item>
     </div>
-  </div>
+  
 </div>

@@ -237,3 +237,16 @@ app-folder-card{
   height: inherit;
   position: relative;
 }
+
+.no-content-message{
+  text-shadow: none;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.no-contracts-found{
+  min-height: 230px;
+  width: 100%;
+  height: 230px;
+  position: relative;
+}

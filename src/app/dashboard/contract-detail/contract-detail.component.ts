@@ -84,7 +84,6 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
 
   //screen layout changes
   destroyed = new Subject<void>();
-  currentScreenSize: string;
 
   isMobileView: boolean;
   isDesktopView: boolean;
@@ -97,6 +96,8 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     [Breakpoints.Large, 'Large'],
     [Breakpoints.XLarge, 'XLarge'],
   ]);
+
+  contractNotFound: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -121,6 +122,8 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
 
     this.isMobileView = false;
     this.isDesktopView = false;
+
+    this.contractNotFound = false;
   }
 
   ngOnInit() {
@@ -148,8 +151,6 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     .subscribe(result => {
       for (const query of Object.keys(result.breakpoints)) {
         if (result.breakpoints[query]) {
-
-        this.currentScreenSize = this.displayNameMap.get(query) ?? 'Unknown';
 
         if(this.displayNameMap.get(query) == 'XSmall'){
 
@@ -210,12 +211,10 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
         
         if(contractItem.details.Amsidnr == this.contract_id && this.allContracts.length > 1){
           this.nextContractId = this.allContracts[this.allContracts.indexOf(contractItem)+1].details.Amsidnr;
-          //console.log('indeOf next contract ',this.allContracts.indexOf(contractItem)+1);
+          
         }
       }
-      //console.log('current contract id ', this.contract_id);
-      //console.log('NEXT CONTRACT: contract id ', this.nextContractId);
-      //console.log('');
+     
     }
 
     //check if previous contract exists
@@ -223,12 +222,10 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
       for(let contractItem of this.allContracts ){
         if(contractItem.details.Amsidnr == this.contract_id && this.allContracts.length > 1){
           this.previousContractId = this.allContracts[this.allContracts.indexOf(contractItem)-1].details.Amsidnr;
-          //console.log('indeOf prev contract ',this.allContracts.indexOf(contractItem)-1);
+          
         }
       }
-      //console.log('current contract id ', this.contract_id);
-      //console.log('PREV CONTRACT: contract id ', this.previousContractId);
-      //console.log('');
+      
     }
     
 
@@ -236,6 +233,8 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
       .getContractDetails(this.contract_id)
       .subscribe({
         next: (resp:any) => {
+
+          this.contractNotFound = false;
 
           this.contract = this.contractService.selectedContract;
 
@@ -257,6 +256,24 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
               this.docArr.push(resp.docs[i]);
             }
             this.sortDocumentsInAscendingOrderOnly();
+          }
+
+        },
+        error: (resp) => {
+
+          this.loadingService.emitIsLoading(false);
+
+          if(resp.status == '404'){
+
+            this.contractNotFound = true;
+
+            //reset contract value
+            this.contract = null;
+
+            //reset documents array to empty
+            if(this.docArr.length > 0){
+              this.docArr = [];
+            }
           }
 
         },
@@ -530,6 +547,11 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
         .getContractDetails(this.contract_id)
         .subscribe({
           next: (resp:any) => {
+
+               //reset documents array to empty
+              if(this.docArr.length > 0){
+                this.docArr = [];
+              }
 
             this.contract = this.contractService.selectedContract;
 

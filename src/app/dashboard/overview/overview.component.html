@@ -34,7 +34,7 @@
 
             <div class="section-insurance w-100 d-flex flex-column align-items-center bg-">
 
-              <div class="w-100 d-flex flex-wrap p-3 justify-content-center">
+              <div class="w-100 d-flex flex-wrap p-3 justify-content-center" *ngIf="templateContractArrLength > 0 ">
 
                 <div class="contracts w-100 d-flex flex-column align-items-center" *ngIf="contractCategory.length > 1 ">
                   <app-contract-category *ngFor="let group of contractCategory" class="w-100" [contractArr]="group" [showTitle]="true" [groupTitle]="group[0].details.BranchSekretaer" ></app-contract-category>
@@ -43,6 +43,12 @@
                   <app-contract-category *ngFor="let group of contractCategory" class="w-100" [contractArr]="group" [showTitle]="false"></app-contract-category>
                 </div>
 
+              </div>
+
+              <div class="contracts w-100 d-flex justify-content-center align-items-center" *ngIf="templateContractArrLength < 1 ">
+                <p class="no-content-message text-center m-auto">
+                  {{ 'overview.no_contracts_found' | translate }}
+                </p>
               </div>
               
               <div class="section-folder d-flex flex-column p-3 w-100 bg-white" style="margin-bottom: 100px;">
@@ -171,7 +177,7 @@
 
     <div class="section-insurance w-100 d-flex flex-column align-items-center bg-">
 
-      <div class="w-100 d-flex flex-wrap p-3 justify-content-center">
+      <div class="w-100 d-flex flex-wrap p-3 justify-content-center" *ngIf="templateContractArrLength > 0 ">
 
         <div class="contracts w-100 d-flex flex-column align-items-center" *ngIf="contractCategory.length > 1 ">
           <app-contract-category *ngFor="let group of contractCategory" class="w-100" [contractArr]="group" [showTitle]="true" [groupTitle]="group[0].details.BranchSekretaer" ></app-contract-category>
@@ -180,6 +186,12 @@
           <app-contract-category *ngFor="let group of contractCategory" class="w-100" [contractArr]="group" [showTitle]="false"></app-contract-category>
         </div>
 
+      </div>
+
+      <div class="no-contracts-found w-100 d-flex justify-content-center align-items-center" *ngIf="templateContractArrLength < 1 ">
+        <p class="no-content-message text-center m-auto">
+          {{ 'overview.no_contracts_found' | translate }}
+        </p>
       </div>
       
       <div class="section-folder d-flex flex-column p-3 w-100 bg-white">

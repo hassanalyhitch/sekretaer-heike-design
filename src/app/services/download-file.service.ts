@@ -1,14 +1,15 @@
-import { HttpClient,HttpHeaders} from '@angular/common/http';
+import { HttpClient,HttpErrorResponse,HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Observer, tap } from "rxjs";
+import { tap } from "rxjs";
 import { environment } from '../../environments/environment';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DownloadService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient, private loginService: LoginService) { }
 
   getDownloadFile(systemId:string, fileId:string ){
 
@@ -23,9 +24,15 @@ export class DownloadService {
         }
       ).pipe(
           tap({
-            next:()=>{
-              
-          }
+            next:()=>{},
+            error:(error:any) => {
+              if(error instanceof HttpErrorResponse){
+                //Invalid Token or Unauthorised request
+                if(error.status == 401){
+                  this.loginService.resetAuthToken();
+                }
+              }
+            }
         })
       );
   }
@@ -42,10 +49,16 @@ export class DownloadService {
         }
       ).pipe(
           tap({
-            next:()=>{
-              
-          }
-        })
-      );
+            next:()=>{},
+            error:(error:any) => {
+              if(error instanceof HttpErrorResponse){
+                //Invalid Token or Unauthorised request
+                if(error.status == 401){
+                  this.loginService.resetAuthToken();
+                }
+              }
+            }
+          })
+        );
   }
 }

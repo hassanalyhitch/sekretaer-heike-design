@@ -1,5 +1,5 @@
 <div class="content-wrapper w-100 ">
-  <div class="_content d-flex flex-column w-100 h-100 "
+  <div class="_content d-flex flex-column w-100"
     [ngClass]="{'allowScroll' :dropDownIsHidden, 'disableScroll':!dropDownIsHidden}"
     >
     
@@ -46,7 +46,13 @@
             class="fileUpload" 
             type="text" 
             placeholder = "{{'add_document.placeholder_document_name' | translate }}"
-            [(ngModel)]="documentName" required/>
+            [(ngModel)]="documentName" 
+            #docName = "ngModel"
+            required/>
+
+            <div  *ngIf="documentName =='' && docName.touched">
+              <small>*{{ 'add_document.docNameMsg' | translate }}</small>
+             </div>
 
           <div class="fileUpload">
             <mat-chip-list #chipList class="chipList">
@@ -63,7 +69,7 @@
                   name="tags">
           </div>  
 
-              <p class="assignment">{{ 'add_document.sub_title_2' | translate }}</p>
+          <p class="assignment">{{ 'add_document.sub_title_2' | translate }}:</p>
 
             <mat-form-field class="example-full-width" [appearance]="none">
                 <input matInput [matDatepicker]="pickerDate"
@@ -83,13 +89,17 @@
                       (onSelect)="onItemSelected($event)"
                       name="myItems"
                       [(ngModel)]="selectedItems"
-                      ngModel 
+                      #option = "ngModel"  
                       [disabled]="dropdownDisabled"
                       required
                     >
                   </ng-multiselect-dropdown>
                 </div>
-          </div>
+            </div>
+
+            <div  *ngIf="selectedItems.length < 1 && option.touched">
+              <small>*{{ 'add_document.selectItemMsg' | translate }}</small>
+             </div>
         
           <div class="d-flex flex-row assignment" *ngIf="enableShareWithBrokerIcon">
             <span class="broker-btn" (click)="onShareWithBroker()">

@@ -6,7 +6,7 @@
     </div>
       
     <div class="fav-wrapper w-100 d-flex flex-column align-items-center p-3 bg-">  
-        <div class="d-flex justify-content-center m-4 w-100 bg-" *ngIf="favArrHasNoContent()" >
+        <div class="no-favourites-found d-flex justify-content-center m-4 w-100 bg-" *ngIf="favArrHasNoContent()" >
           {{ 'favourites.no_favourites' | translate }}
         </div>
 

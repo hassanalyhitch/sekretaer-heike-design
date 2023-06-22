@@ -25,18 +25,11 @@ import { SearchService } from '../.././../app/services/search.service';
 export class SearchPageComponent implements OnInit {
 
   searchedValue : string = '';
-
   searchType: string = '';
-
-  no_contracts_found: boolean = false;
-  no_folders_found:   boolean = false;
-  no_documents_found: boolean = false;
 
   contractsArr: ContractData[] = [];
   contractsResArr: ContractData[] = [];
-  foldersArr: FolderData[] = [];
   foldersResArr: FolderData[] = [];
-  documentsArr: DocumentData[] = [];
   documentsResArr: DocumentData[] = [];
 
   //screen layout changes
@@ -45,6 +38,10 @@ export class SearchPageComponent implements OnInit {
   isMobileView: boolean;
   isDesktopView: boolean;
   isSpinnerLoading: boolean = false;
+
+  no_folders_found: boolean;
+  no_contracts_found: boolean;
+  no_documents_found: boolean;
 
   // Create a map to display breakpoint names for layout changes.
   displayNameMap = new Map([
@@ -68,18 +65,36 @@ export class SearchPageComponent implements OnInit {
     private matDialog: MatDialog,
     private translate:TranslateService,
     private snackbar:MatSnackBar,
-    private route:ActivatedRoute) { 
-
+    private route:ActivatedRoute) {
+      
       this.isMobileView = false;
       this.isDesktopView = false;
 
-      // Debounce search.
+      // THIS DOES THE ACTUAL QUERY SEARCH WITH DEBOUNCE
       this.searchQueryUpdate.pipe(
         debounceTime(1000),
         distinctUntilChanged())
         .subscribe(value => {
           this.filterSearch(value);
         });
+ 
+        // THIS ONLY RESETS VALUES IF SEARCH QUERY IS EMPTY
+        // AND DOES NOT INCLUDE DEBOUNCE TIME
+        this.searchQueryUpdate.pipe(
+          distinctUntilChanged())
+          .subscribe(value => {
+             
+            //reset data arrays
+            this.contractsResArr = [];
+            this.foldersResArr = [];
+            this.documentsResArr = [];
+
+            //reset notification titles
+            this.no_folders_found = false;
+            this.no_contracts_found = false;
+            this.no_documents_found = false;
+             
+          });
 
     }
 
@@ -98,8 +113,6 @@ export class SearchPageComponent implements OnInit {
     .subscribe(result => {
       for (const query of Object.keys(result.breakpoints)) {
         if (result.breakpoints[query]) {
-
-        //this.currentScreenSize = this.displayNameMap.get(query) ?? 'Unknown';
 
         if(this.displayNameMap.get(query) == 'XSmall'){
 
@@ -157,347 +170,383 @@ export class SearchPageComponent implements OnInit {
 
     if(this.searchedValue != undefined && this.searchedValue != ""){
 
-      this.contractsResArr = [];
-      this.foldersResArr = [];
-      this.documentsResArr = [];
+      switch (this.route.snapshot.params['searchType']){
+        case "folders": {
+          //searching folders only
 
-      if(this.searchType == 'all'){
+          this.isSpinnerLoading = true;
 
-        this.isSpinnerLoading = true;
+          //searching  folders only
+          this.searchService.getSearchResults(this.lowerCasePipe.transform(searchQuery))
+                            .subscribe({
+                              next:(resp: any)=>{
 
-        this.searchService.getSearchResults(this.lowerCasePipe.transform(searchQuery))
-                          .subscribe({
-                            next:(resp: any)=>{
-
-                              if(Array.isArray(resp)){
-                                
-                                for(let item of resp){
+                                if(Array.isArray(resp)){
                                   
-                                  switch(item.category){
-                                    case 'folder': {
-                                      
-                                      let folder: FolderData = {
-                                        id: item.details['id'],
-                                        loginId : item.details['loginId'],
-                                        customerAmsidnr:  item.details['customerAmsidnr'],
-                                        createdAt:  item.details['createdAt'],         
-                                        ownerFolderId : item.details['ownerFolderId'],
-                                        folderName : item.details['folderName'],
-                                        createTime : item.details['createdAt'],
-                                        subFolders : item.details['subFolders'],
-                                        docs : item.details['docs'],
-                                        isFavorite: item.details['isFavorite'],
-                                        isSelected: false,
-                                        swipedLeft: false
-                                      };
-                                      if('favoriteId' in item){
-                                        folder.favoriteId = item.details['favoriteId'];
-                                      }
-                                      this.foldersResArr.push(folder);
-
-                                      
-
-                                      break;
-                                    } 
-                                    case 'contract': {
-
-                                      let contract: ContractData = {
-                                        id: this.contractsResArr.length +1,
-                                        details: {
-                                          Amsidnr:         item.details['Amsidnr'],
-                                          BranchSekretaer: item.details['BranchSekretaer'],
-                                          CustomerAmsidnr: item.details['CustomerAmsidnr'],
-                                          InsuranceId:     item.details['Contractnumber'],
-                                          ContractNumber:  item.details['Contractnumber'],
-                                          Company:         item.details['CompanyShort'],
-                                          StartDate:       item.details['Begin'],
-                                          EndDate:         item.details['End'],
-                                          YearlyPayment:   item.details['YearlyPayment'],
-                                          Paymethod:       item.details['PaymentMethod'],
-                                          Branch:          item.details['Branch'],
-                                          Risk:            item.details['Risk'],
-                                          docs:            item.details['docs'],
-                                          name:            item['name'],
-                                          productSek:      item.details['ProductSekretaer'],
-                                          tarif:           item.details['tarif'],
-                                          isFav:           0,
-                                          favoriteId:      item.details['favoriteId'],
-                                          iconLeft:        item.details['iconLeft'],
-                                          ownPicture:      item.details['ownPicture']
-                                        },
-                                        isSelected: false,
-                                        swipedLeft: false
-                                      };
-                                      this.contractsResArr.push(contract);
-                                      
-                                      break;
-                                    } 
-                                    case 'dms': {
-
-                                      let document: DocumentData = {
-                                        category:  item.details['category'],
-                                        createdAt: item.details['createdAt'],
-                                        docid:     item.details['docid'],
-                                        linkToDoc: item.details['linkToDoc'],
-                                        name:      item.details['name'],
-                                        systemId:  item.details['systemId'],
-                                        extension: item.details['extension']
-                                      };
-
-                                      this.documentsResArr.push(document);
-                                      
-                                      break;
-                                    } 
-
-                                  }
-                                }
-                              }
-
-                              this.isSpinnerLoading = false;
-
-                              if( this.contractsResArr.length > 0 ){
-                                this.no_contracts_found = false;
-                        
-                              } else if( this.contractsResArr.length == 0 ){
-                                this.no_contracts_found = true;
-                          
-                              }
-                        
-                              if( this.foldersResArr.length > 0 ) {
-                                this.no_folders_found = false;
-                                
-                              } else if( this.foldersResArr.length == 0 ){
-                                this.no_folders_found = true;
-                            
-                              } 
-                              
-                              if( this.documentsResArr.length > 0 ) {
-                                this.no_documents_found = false;
-                          
-                              } else if( this.documentsResArr.length == 0 ){
-                                this.no_documents_found = true;
-                        
-                              }
-                      
-                            },
-                            error:()=>{
-                              
-                              //reset values
-                              this.isSpinnerLoading = false;
-                              this.contractsResArr = [];
-                              this.foldersResArr = [];
-                              this.documentsResArr = [];
-
-                            },
-                            complete:()=>{
-                              this.isSpinnerLoading = false;
-                            }
-                          });
-
-      } else if(this.searchType == 'folders'){
-
-        //searching  folders only
-        this.searchService.getSearchResults(this.lowerCasePipe.transform(searchQuery))
-                          .subscribe({
-                            next:(resp: any)=>{
-
-                              if(Array.isArray(resp)){
-                                
-                                for(let item of resp){
-                                  
-                                  switch(item.category){
-                                    case 'folder': {
-                                      
-                                      let folder: FolderData = {
-                                        id: item.details['id'],
-                                        loginId : item.details['loginId'],
-                                        customerAmsidnr:  item.details['customerAmsidnr'],
-                                        createdAt:  item.details['createdAt'],         
-                                        ownerFolderId : item.details['ownerFolderId'],
-                                        folderName : item.details['folderName'],
-                                        createTime : item.details['createdAt'],
-                                        subFolders : item.details['subFolders'],
-                                        docs : item.details['docs'],
-                                        isFavorite: item.details['isFavorite'],
-                                        isSelected: false,
-                                        swipedLeft: false
-                                      };
-                                      if('favoriteId' in item){
-                                        folder.favoriteId = item.details['favoriteId'];
-                                      }
-                                      this.foldersResArr.push(folder);
-
-                                      break;
-                                    } 
+                                  for(let item of resp){
                                     
+                                    switch(item.category){
+                                      case 'folder': {
+                                        
+                                        let folder: FolderData = {
+                                          id: item.details['id'],
+                                          loginId : item.details['loginId'],
+                                          customerAmsidnr:  item.details['customerAmsidnr'],
+                                          createdAt:  item.details['createdAt'],         
+                                          ownerFolderId : item.details['ownerFolderId'],
+                                          folderName : item.details['folderName'],
+                                          createTime : item.details['createdAt'],
+                                          subFolders : item.details['subFolders'],
+                                          docs : item.details['docs'],
+                                          isFavorite: item.details['isFavorite'],
+                                          isSelected: false,
+                                          swipedLeft: false
+                                        };
+                                        if('favoriteId' in item){
+                                          folder.favoriteId = item.details['favoriteId'];
+                                        }
+                                        this.foldersResArr.push(folder);
 
-                                  }
-                                }
-                              }
-
-                            },
-                            error:()=>{
-                              
-                              //reset values
-                              this.isSpinnerLoading = false;
-                              this.contractsResArr = [];
-                              this.foldersResArr = [];
-                              this.documentsResArr = [];
-
-                            },
-                            complete:()=>{
-                              this.isSpinnerLoading = false;
-                            }
-                          });
-
-        if( this.foldersResArr.length > 0 ) {
-          this.no_folders_found = false;
-  
-        } else if( this.foldersResArr.length == 0 ) {
-          this.no_folders_found = true;
-  
-        }
-
-      } else if(this.searchType == 'contracts'){
-
-        //searching  contracts only
-        this.searchService.getSearchResults(this.lowerCasePipe.transform(searchQuery))
-                          .subscribe({
-                            next:(resp: any)=>{
-
-                              if(Array.isArray(resp)){
-                                
-                                for(let item of resp){
-                                  
-                                  switch(item.category){
-                                     
-                                    case 'contract': {
-
-                                      let contract: ContractData = {
-                                        id: this.contractsResArr.length +1,
-                                        details: {
-                                          Amsidnr:         item.details['Amsidnr'],
-                                          BranchSekretaer: item.details['BranchSekretaer'],
-                                          CustomerAmsidnr: item.details['CustomerAmsidnr'],
-                                          InsuranceId:     item.details['Contractnumber'],
-                                          ContractNumber:  item.details['Contractnumber'],
-                                          Company:         item.details['CompanyShort'],
-                                          StartDate:       item.details['Begin'],
-                                          EndDate:         item.details['End'],
-                                          YearlyPayment:   item.details['YearlyPayment'],
-                                          Paymethod:       item.details['PaymentMethod'],
-                                          Branch:          item.details['Branch'],
-                                          Risk:            item.details['Risk'],
-                                          docs:            item.details['docs'],
-                                          name:            item['name'],
-                                          productSek:      item.details['ProductSekretaer'],
-                                          tarif:           item.details['tarif'],
-                                          isFav:           0,
-                                          favoriteId:      item.details['favoriteId'],
-                                          iconLeft:        item.details['iconLeft'],
-                                          ownPicture:      item.details['ownPicture']
-                                        },
-                                        isSelected: false,
-                                        swipedLeft: false
-                                      };
-                                      this.contractsResArr.push(contract);
+                                        break;
+                                      } 
                                       
-                                      break;
-                                    } 
-                                  
+
+                                    }
                                   }
+
+                                  // console.log('FOLDERS: Folders count -> ',this.foldersResArr.length);
+                                
+                                  if(this.foldersResArr.length == 0){
+                                    this.no_folders_found = true;
+                                  } else {
+                                    this.no_folders_found = false;
+                                  } 
+
                                 }
+
+                                this.isSpinnerLoading = false;
+
+                              },
+                              error:()=>{
+
+                                //reset loading spinnner value
+                                this.isSpinnerLoading = false;
+                                
+                                //reset data arrays
+                                this.foldersResArr = [];
+  
+                                //reset notification titles
+                                this.no_folders_found = false;
+
+                              },
+                              complete:()=>{
+                                this.isSpinnerLoading = false;
                               }
+                            });
 
-                            },
-                            error:()=>{
-                              
-                              //reset values
-                              this.isSpinnerLoading = false;
-                              this.contractsResArr = [];
-                              this.foldersResArr = [];
-                              this.documentsResArr = [];
+          break;
+        }
+        case "contracts" :{
+          //search contracts only
 
-                            },
-                            complete:()=>{
-                              this.isSpinnerLoading = false;
-                            }
-                          });
+          this.isSpinnerLoading = true;
 
-        if( this.contractsResArr.length > 0 ){
-          this.no_contracts_found = false;
+          //searching  contracts only
+          this.searchService.getSearchResults(this.lowerCasePipe.transform(searchQuery))
+                            .subscribe({
+                              next:(resp: any)=>{
+
+                                if(Array.isArray(resp)){
+                                  
+                                  for(let item of resp){
+                                    
+                                    switch(item.category){
+                                      
+                                      case 'contract': {
+
+                                        let contract: ContractData = {
+                                          id: this.contractsResArr.length +1,
+                                          details: {
+                                            Amsidnr:         item.details['Amsidnr'],
+                                            BranchSekretaer: item.details['BranchSekretaer'],
+                                            CustomerAmsidnr: item.details['CustomerAmsidnr'],
+                                            InsuranceId:     item.details['Contractnumber'],
+                                            ContractNumber:  item.details['Contractnumber'],
+                                            Company:         item.details['Company'],
+                                            StartDate:       item.details['Begin'],
+                                            EndDate:         item.details['End'],
+                                            YearlyPayment:   item.details['YearlyPayment'],
+                                            Paymethod:       item.details['PaymentMethod'],
+                                            Branch:          item.details['Branch'],
+                                            Risk:            item.details['Risk'],
+                                            docs:            item.details['docs'],
+                                            name:            item.details['name'],
+                                            productSek:      item.details['ProductSekretaer'],
+                                            tarif:           item.details['tarif'],
+                                            isFav:           0,
+                                            favoriteId:      item.details['favoriteId'],
+                                            iconLeft:        item.details['iconLeft'],
+                                            ownPicture:      item.details['ownPicture']
+                                          },
+                                          isSelected: false,
+                                          swipedLeft: false
+                                        };
+                                        this.contractsResArr.push(contract);
+                                        
+                                        break;
+                                      } 
+                                    
+                                    }
+                                  }
+
+                                  // console.log('CONTRACTS: Contracts count ->',this.contractsResArr.length);
+                                  
+                                  if(this.contractsResArr.length == 0){
+                                    this.no_contracts_found = true;
+                                  } else {
+                                    this.no_contracts_found = false;
+                                  }
+
+                                }
+
+                                this.isSpinnerLoading = false;
+
+                              },
+                              error:()=>{
+
+                                //reset loading spinnner value
+                                this.isSpinnerLoading = false;
+                                
+                                //reset data arrays
+                                this.contractsResArr = [];
+                                
+                                //reset notification titles
+                                this.no_contracts_found = false;
+                                
+                              },
+                              complete:()=>{
+                                this.isSpinnerLoading = false;
+                              }
+                            });
+
+          break;
+        }
+        case "docs" :{
+          //search documents only
+
+          this.isSpinnerLoading = true;
+
+          //searching documents only
+          this.searchService.getSearchResults(this.lowerCasePipe.transform(searchQuery))
+                            .subscribe({
+                              next:(resp: any)=>{
+
+                                if(Array.isArray(resp)){
+                                  
+                                  for(let item of resp){
+                                    
+                                    switch(item.category){
+                                      
+                                      case 'dms': {
+
+                                        let document: DocumentData = {
+                                          category:  item.details['category'],
+                                          createdAt: item.details['createdAt'],
+                                          docid:     item.details['docid'],
+                                          linkToDoc: item.details['linkToDoc'],
+                                          name:      item.details['name'],
+                                          systemId:  item.details['systemId'],
+                                          extension: item.details['extension']
+                                        };
+
+                                        this.documentsResArr.push(document);
+                                        
+                                        break;
+                                      } 
+
+                                    }
+                                  }
+
+                                  // console.log('DOCUMENTS: Documents count ->',this.documentsResArr.length);
+
+                                  if(this.documentsResArr.length == 0){
+                                    this.no_documents_found = true;
+                                  } else {
+                                    this.no_documents_found = false;
+                                  }
+
+                                }
+
+                                this.isSpinnerLoading = false;
+
+                              },
+                              error:()=>{
+
+                                //reset loading spinnner value
+                                this.isSpinnerLoading = false;
+                                
+                                //reset data arrays
+                                this.documentsResArr = [];
+
+                                //reset notification titles
+                                this.no_documents_found = false;
+
+                              },
+                              complete:()=>{
+                                this.isSpinnerLoading = false;
+                              }
+                            });
+
+          break;
+        }
+        default:{
+          // search all content
           
-        } else if( this.contractsResArr.length == 0 ) {
-          this.no_contracts_found = true;
-        
-        }
+          this.isSpinnerLoading = true;
 
-      } else if(this.searchType == 'docs'){
+          this.searchService.getSearchResults(this.lowerCasePipe.transform(searchQuery))
+                            .subscribe({
+                              next:(resp: any)=>{
 
-        //searching documents only
-        this.searchService.getSearchResults(this.lowerCasePipe.transform(searchQuery))
-                          .subscribe({
-                            next:(resp: any)=>{
-
-                              if(Array.isArray(resp)){
-                                
-                                for(let item of resp){
+                                if(Array.isArray(resp)){
                                   
-                                  switch(item.category){
-                                     
-                                    case 'dms': {
+                                  for(let item of resp){
+                                    
+                                    switch(item.category){
+                                      case 'folder': {
+                                        
+                                        let folder: FolderData = {
+                                          id: item.details['id'],
+                                          loginId : item.details['loginId'],
+                                          customerAmsidnr:  item.details['customerAmsidnr'],
+                                          createdAt:  item.details['createdAt'],         
+                                          ownerFolderId : item.details['ownerFolderId'],
+                                          folderName : item.details['folderName'],
+                                          createTime : item.details['createdAt'],
+                                          subFolders : item.details['subFolders'],
+                                          docs : item.details['docs'],
+                                          isFavorite: item.details['isFavorite'],
+                                          isSelected: false,
+                                          swipedLeft: false
+                                        };
+                                        if('favoriteId' in item){
+                                          folder.favoriteId = item.details['favoriteId'];
+                                        }
+                                        this.foldersResArr.push(folder);
 
-                                      let document: DocumentData = {
-                                        category:  item.details['category'],
-                                        createdAt: item.details['createdAt'],
-                                        docid:     item.details['docid'],
-                                        linkToDoc: item.details['linkToDoc'],
-                                        name:      item.details['name'],
-                                        systemId:  item.details['systemId'],
-                                        extension: item.details['extension']
-                                      };
+                                        break;
+                                      } 
+                                      case 'contract': {
 
-                                      this.documentsResArr.push(document);
-                                      
-                                      break;
-                                    } 
+                                        let contract: ContractData = {
+                                          id: this.contractsResArr.length +1,
+                                          details: {
+                                            Amsidnr:         item.details['Amsidnr'],
+                                            BranchSekretaer: item.details['BranchSekretaer'],
+                                            CustomerAmsidnr: item.details['CustomerAmsidnr'],
+                                            InsuranceId:     item.details['Contractnumber'],
+                                            ContractNumber:  item.details['Contractnumber'],
+                                            Company:         item.details['Company'],
+                                            StartDate:       item.details['Begin'],
+                                            EndDate:         item.details['End'],
+                                            YearlyPayment:   item.details['YearlyPayment'],
+                                            Paymethod:       item.details['PaymentMethod'],
+                                            Branch:          item.details['Branch'],
+                                            Risk:            item.details['Risk'],
+                                            docs:            item.details['docs'],
+                                            name:            item.details['name'],
+                                            productSek:      item.details['ProductSekretaer'],
+                                            tarif:           item.details['tarif'],
+                                            isFav:           0,
+                                            favoriteId:      item.details['favoriteId'],
+                                            iconLeft:        item.details['iconLeft'],
+                                            ownPicture:      item.details['ownPicture']
+                                          },
+                                          isSelected: false,
+                                          swipedLeft: false
+                                        };
+                                        this.contractsResArr.push(contract);
 
+                                        break;
+                                      } 
+                                      case 'dms': {
+
+                                        let document: DocumentData = {
+                                          category:  item.details['category'],
+                                          createdAt: item.details['createdAt'],
+                                          docid:     item.details['docid'],
+                                          linkToDoc: item.details['linkToDoc'],
+                                          name:      item.details['name'],
+                                          systemId:  item.details['systemId'],
+                                          extension: item.details['extension']
+                                        };
+
+                                        this.documentsResArr.push(document);
+
+                                        break;
+                                      } 
+
+                                    }
                                   }
+
+                                  // console.log('ALL: Folders count ->',this.foldersResArr.length);
+                                  // console.log('ALL: Contracts count ->',this.contractsResArr.length);
+                                  // console.log('ALL: Documents count ->',this.documentsResArr.length);
+
+                                  if(this.foldersResArr.length == 0){
+                                    this.no_folders_found = true;
+                                  } else {
+                                    this.no_folders_found = false;
+                                  } 
+                                  
+                                  if(this.contractsResArr.length == 0){
+                                    this.no_contracts_found = true;
+                                  } else {
+                                    this.no_contracts_found = false;
+                                  } 
+                                  
+                                  if(this.documentsResArr.length == 0){
+                                    this.no_documents_found = true;
+                                  } else {
+                                    this.no_documents_found = false;
+                                  }
+
+                                  // console.log('no folders found boolean status ->',this.no_folders_found);
+                                  // console.log('no contracts found boolean status ->',this.no_contracts_found);
+                                  // console.log('no documents found boolean status ->',this.no_documents_found);
+
                                 }
+
+                                this.isSpinnerLoading = false;
+
+                              },
+                              error:()=>{
+                                
+                                //reset loading spinnner value
+                                this.isSpinnerLoading = false;
+                                
+                                //reset data arrays
+                                this.contractsResArr = [];
+                                this.foldersResArr = [];
+                                this.documentsResArr = [];
+
+                                //reset notification titles
+                                this.no_folders_found = false;
+                                this.no_contracts_found = false;
+                                this.no_documents_found = false;
+
+                              },
+                              complete:()=>{
+                                this.isSpinnerLoading = false;
                               }
+                            });
 
-                            },
-                            error:()=>{
-
-                              
-                              //reset values
-                              this.isSpinnerLoading = false;
-                              this.contractsResArr = [];
-                              this.foldersResArr = [];
-                              this.documentsResArr = [];
-
-                            },
-                            complete:()=>{
-                              this.isSpinnerLoading = false;
-                            }
-                          });
-
-        if( this.documentsResArr.length > 0 ) {
-          this.no_documents_found = false;
-        } else if( this.documentsResArr.length == 0 ){
-          this.no_documents_found = true;
+          break;
         }
-
       }
 
-    } else if(this.searchedValue == ''){
-      //reset the arrays
-      this.contractsResArr = [];
-      this.foldersResArr = [];
-      this.documentsResArr = [];
-
-    }
-
+    } 
+    
   }
   
   onContractClick(clickedContract){

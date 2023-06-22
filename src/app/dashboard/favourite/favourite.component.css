@@ -65,3 +65,10 @@ app-fav-item, app-folder-card{
   letter-spacing: 2.5px;
   font-weight: bold;
 }
+
+.no-favourites-found{
+  text-shadow: none;
+  font-size: 17px;
+  font-weight: bold;
+  margin-top: 200px;
+}

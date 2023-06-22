@@ -10,7 +10,7 @@
 ._content{
   background-color: #F2F2F2;
   border-radius: 45px 0px 0px 0px;
-  height: inherit;
+  height: 100vh;
   overflow-y: scroll;
   overflow-x: hidden;
   padding-bottom: 60px;
@@ -233,6 +233,10 @@ button[disabled]:hover#sign-in-btn {
   transform: scale(1.7);
 }
 
+.dateIcon:hover{
+  color: var(--primaryColor);
+}
+
 .example-full-width input{
   color:#707070;
 }
@@ -267,5 +271,8 @@ button[disabled]:hover#sign-in-btn {
   min-height: 32px;
   height: 1px;
 }
-
+small{
+  color:var(--primaryColor);
+  margin-left:49px;
+}
 

@@ -17,6 +17,11 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import { TranslateService } from "@ngx-translate/core";
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { Subject, takeUntil } from "rxjs";
+import * as webauthn from '@passwordless-id/webauthn'
+import { environment } from 'src/environments/environment';
+import * as CryptoJS from 'crypto-js';  
+import { LocalforageService } from 'src/app/services/localforage.service';
+import { SettingsService } from "../services/settings.service";
 
 @Component({
   selector: "app-login",
@@ -32,8 +37,9 @@ export class LoginComponent implements OnInit , OnDestroy {
   password = "";
   submitted: boolean = false;
 
-  @Output("auth") authenticated = new EventEmitter<boolean>();
-  @Output() lang = new EventEmitter<string>();
+  //@Output("auth") authenticated = new EventEmitter<boolean>();
+  //@Output() lang = new EventEmitter<string>();
+
   @ViewChild("loginForm", { static: true }) loginForm: NgForm;
 
   errorMessage: string = null;
@@ -56,6 +62,8 @@ export class LoginComponent implements OnInit , OnDestroy {
   destroyed = new Subject<void>();
   currentScreenSize: string;
 
+  bioSetting: boolean = false;
+
   // Create a map to display breakpoint names for demonstration purposes.
   displayNameMap = new Map([
     [Breakpoints.XSmall, 'XSmall'],
@@ -77,7 +85,9 @@ export class LoginComponent implements OnInit , OnDestroy {
     private loadingService:LoadingService,
     private translate: TranslateService,
     private breakpointObserver: BreakpointObserver,
-    private snackBar: MatSnackBar ){
+    private snackBar: MatSnackBar,
+    private localForage: LocalforageService,
+    private settingService: SettingsService ){
       this.loadingService.emitIsLoading(false);
 
       this.app_logo_link_src = "../assets/sekretaer_pink_logo.svg"; //default logo 
@@ -91,6 +101,10 @@ export class LoginComponent implements OnInit , OnDestroy {
     ngOnInit() {
 
       this.selected_theme = localStorage.getItem('theme_selected');
+      let bioVal = this.settingService.getBiometrics();
+      if(bioVal == 'true'){
+        this.bioSetting = true;
+      } 
 
       if(!this.selected_theme){
     
@@ -159,8 +173,9 @@ export class LoginComponent implements OnInit , OnDestroy {
       next: (resp) => {
         this.submitted = false;
         if (resp.hasOwnProperty("token")) {
-          this.authenticated.emit(true);
-          this.lang.emit(this.loginService.lang);
+          
+          //this.authenticated.emit(true);
+          //this.lang.emit(this.loginService.lang);
 
           if(this.loginService.passwordReset){
             this.router.navigate(['dashboard/settings/change-password']);
@@ -200,6 +215,76 @@ export class LoginComponent implements OnInit , OnDestroy {
         // console.info('complete')
       },
     });
+  }
+
+  authenticateBiometric(){
+    this.localForage.listKeys().then((keys)=>{
+      
+      if(keys[1]){
+        this.localForage.get(keys[1]).then((encryptedReg)=>{
+          
+          let biometricRegistration = JSON.parse(CryptoJS.AES.decrypt(encryptedReg, environment.salt_key).toString(CryptoJS.enc.Utf8));
+          // console.log(biometricRegistration.credential.id);
+
+          webauthn.client.authenticate([biometricRegistration.credential.id], environment.challenge, {
+            "authenticatorType": "auto",
+            "userVerification": "required",
+            "timeout": 60000
+          }).then((authCredentials)=>{
+
+            // this whole function should be in the backend BUT I'm trying to make this work without the backend
+            // also the "challenge" is currently stored in the environment file but should be randomized in the backend
+            // and sent to the front-end every time a user requests the login page. 
+            const listOfAllowedOrigins = [
+              "http://localhost:4200",
+              "http://192.168.100.220:1555",
+              "https://angular-ivy-2kmzni.stackblitz.io",
+              "https://apptest.sekretaer-online.de",
+              "https://app.sekretaer-online.de"
+            ];
+            const credentialKey = biometricRegistration.credential;
+          
+            const expected = {
+                challenge: environment.challenge,
+                origin: (origin) => listOfAllowedOrigins.includes(origin),
+                userVerified: true,
+                counter: 0
+            }
+          
+            webauthn.server.verifyAuthentication(authCredentials, credentialKey, expected)
+            .then((valid)=>{
+              // back to frontend
+              // now get username and password and call login API endpoint
+              console.info("  LOG THIS USER IN !!!!");
+
+              this.localForage.get(keys[0]).then((userData)=>{
+
+                let username = CryptoJS.AES.decrypt(Object.keys(userData)[0], environment.salt_key).toString(CryptoJS.enc.Utf8);
+                let password = CryptoJS.AES.decrypt(Object.values(userData)[0], environment.salt_key).toString(CryptoJS.enc.Utf8);
+                let data: LoginData = {
+                  username: username,
+                  password: password,
+                  loginType: 'customer'
+                }
+                
+                this.submitted = true;
+                this.errorMessage = null;
+                console.log(data);
+                this.validateUser(data);
+              });
+            })
+            .catch((err)=>{
+
+              console.error(" DONT LOG THIS USER IN !!!!");
+
+              console.log(err);
+
+            });
+          });
+        });
+      }
+    });
+
   }
 
   onSubmit(formData: LoginData) {

@@ -538,7 +538,7 @@ export class NewContractComponent implements OnInit {
   sortBranches(){
     this.branches.sort((a:BranchData, b:BranchData) =>{
       let branchNameA = a.displayNameSEKRETAER.toUpperCase();
-      let branchNameB = a.displayNameSEKRETAER.toUpperCase();
+      let branchNameB = b.displayNameSEKRETAER.toUpperCase();
     if (branchNameA < branchNameB){
       return -1;
     }else if(branchNameA > branchNameB)

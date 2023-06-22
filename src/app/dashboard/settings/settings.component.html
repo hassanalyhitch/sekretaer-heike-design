@@ -34,6 +34,22 @@
           </li>
         </ul>
 
+        <ul class="w3-ul">
+          <li class="d-flex align-items-center justify-content-between p-2 ">
+            <div class="d-flex align-items-center">
+              <i class="material-icons">fingerprint</i>
+              <span class="ms-3">
+                Use Biometrics on this device for quick login
+              </span>
+            </div>
+              
+            <mat-slide-toggle
+              [checked]="bioSetting"
+              (change)="onBiometricsToggleChange($event)" >
+            </mat-slide-toggle>
+          </li>
+        </ul>
+  
       </div>
 
       <div class="card d-flex flex-column mt-3 mb-2 w-100">

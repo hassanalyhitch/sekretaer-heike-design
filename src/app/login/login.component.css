@@ -344,6 +344,10 @@ input:checked + .slider:before {
   height: 0;
 }
 
+.fingerprint{
+  cursor: pointer;
+}
+
 /* .slider {
   position: absolute;
   cursor: pointer;

@@ -15,7 +15,7 @@
       </div>
   
       <div class="p-2">
-        <div class="ml-auto btn-group dropstart align-self-center">
+        <div class="ml-auto btn-group dropstart align-self-center" *ngIf="!contractNotFound">
           <img class="filter-icon py-1" data-bs-toggle="dropdown" aria-expanded="false" src="/assets/icon_filter_dark.svg">
           <ul class="dropdown-menu shadow">
             <li><span class="dropdown-item" href="" *ngIf="contract.details.isFav=='0'" (click)="markFav(contract)" >{{ 'contract_detail.insurance_side_menu_item_1' | translate }}</span></li>
@@ -31,7 +31,7 @@
     <!-- Main content -->
     <div class="section-content">
   
-      <div class="bg-white shadow-sm w-100 d-flex fav-item" (swipe)="onContractSwipe($event)">
+      <div class="bg-white shadow-sm w-100 d-flex fav-item" (swipe)="onContractSwipe($event)" *ngIf="!contractNotFound">
         <div class="d-flex w-100 ">
   
           <div class="d-flex flex-column _card-content w-100">
@@ -81,7 +81,7 @@
         </div>
       </div>
   
-      <div class="d-flex bd-highlight mb-2 mt-5">
+      <div class="d-flex bd-highlight mb-2 mt-5" *ngIf="!contractNotFound">
         <div class="p-2 bd-highlight">
           <p class="text-muted">{{ 'contract_detail.title_documents' | translate }}</p>
         </div>
@@ -94,8 +94,14 @@
         </div>
   
       </div>
+
+      <div *ngIf="contractNotFound" class="w-100 d-flex align-items-center mt-5">
+        <p class="no-content-message text-center m-auto">
+          {{ 'contract_detail.no_contract_found' | translate }}
+        </p>
+      </div>
   
-      <div *ngIf="docArr.length == 0" class="w-100 d-flex align-items-center">
+      <div *ngIf="docArr.length == 0" class="w-100 d-flex align-items-center mt-5">
         <p class="no-content-message text-center m-auto">
           {{ 'contract_detail.no_documents_found' | translate }}
         </p>

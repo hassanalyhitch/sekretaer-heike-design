@@ -37,7 +37,7 @@
         </div>
       </div>
 
-      <p class="search-message text-center m-auto" *ngIf="searchedValue != '' && no_contracts_found">
+      <p class="search-message text-center m-auto" *ngIf="no_contracts_found">
         {{ 'search.no_insurance_contracts_found' | translate }}
       </p>
 
@@ -49,7 +49,7 @@
         </div>
       </div>
 
-      <p class="search-message text-center m-auto" *ngIf="searchedValue != '' && no_folders_found">
+      <p class="search-message text-center m-auto" *ngIf="no_folders_found">
         {{ 'search.no_folders_found' | translate }}
       </p>
 
@@ -67,7 +67,7 @@
         </div>
       </div>
 
-      <p class="search-message text-center m-auto mb-3" *ngIf="searchedValue != '' && no_documents_found">
+      <p class="search-message text-center m-auto" *ngIf="no_documents_found">
         {{ 'search.no_documents_found' | translate }}
       </p>
 

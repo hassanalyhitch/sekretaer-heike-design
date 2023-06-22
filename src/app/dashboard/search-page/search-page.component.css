@@ -71,12 +71,12 @@ app-fav-item, app-folder-card, app-document-item{
 }
 
 .search-content{
-  min-height: 280px;
+  min-height: 380px;
   height: inherit;
   position: relative;
   overflow-y: scroll;
   overflow-x: hidden;
-  padding-bottom: 60px;
+  padding-bottom: 115px;
 }
 
 .back_btn{

@@ -28,7 +28,7 @@ export class ChangeLanguageComponent implements OnInit {
   ngOnInit(): void {
     // console.log("check lang "+this.loginService.lang);
 
-    this.translateService.use(this.loginService.lang);
+    this.translateService.use(this.settingsService.getCurrentLanguage());
 
     this.languages =  [
       {name: this.translateService.instant('change-language.language_de') ,symbol: "de", selected : false},
@@ -36,7 +36,7 @@ export class ChangeLanguageComponent implements OnInit {
     ];
 
     for(let i = 0; i<this.languages.length; i++){
-      if(this.languages[i].symbol == this.loginService.lang)
+      if(this.languages[i].symbol == this.settingsService.getCurrentLanguage())
         this.languages[i].selected = true; 
     }
   }

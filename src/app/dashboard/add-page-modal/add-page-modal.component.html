@@ -1,5 +1,5 @@
 <div class="content-wrapper w-100 ">
-  <div class="_content d-flex flex-column w-100 h-100 "
+  <div class="_content d-flex flex-column w-100 h-100"
       [ngClass]="{'allowScroll' :dropDownIsHidden, 'disableScroll':!dropDownIsHidden}">
 
       <div class="position-relative">
@@ -38,7 +38,13 @@
                   class="fileUpload" 
                   type="text" 
                   placeholder = "{{'add_document.placeholder_document_name' | translate }}"  
-                  [(ngModel)]="documentName" required/>
+                  [(ngModel)]="documentName"
+                  #docName = "ngModel"
+                  required/>
+
+                  <div  *ngIf="documentName =='' && docName.touched">
+                    <small>*{{ 'add_document.docNameMsg' | translate }}</small>
+                   </div>
                 
                 <div class="fileUpload">
                   <mat-chip-list #chipList class="chipList">

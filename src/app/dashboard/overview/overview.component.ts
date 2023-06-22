@@ -114,7 +114,7 @@ export class OverviewComponent implements OnInit {
 
   //screen layout changes
   destroyed = new Subject<void>();
-  currentScreenSize: string;
+  
 
   isMobileView: boolean;
   isDesktopView: boolean;
@@ -245,7 +245,6 @@ export class OverviewComponent implements OnInit {
       for (const query of Object.keys(result.breakpoints)) {
         if (result.breakpoints[query]) {
 
-        this.currentScreenSize = this.displayNameMap.get(query) ?? 'Unknown';
 
         if(this.displayNameMap.get(query) == 'XSmall'){
 
@@ -769,7 +768,7 @@ export class OverviewComponent implements OnInit {
 
     } else {
       if(this.isMobileView){
-        this.router.navigate(['dashboard/home/search', {searchType:'folders'}]);
+        this.router.navigate(['dashboard/search', {searchType:'folders'}]);
       } else {
         this.router.navigate(['dashboard/search', {searchType:'folders'}]);
       }
@@ -787,7 +786,7 @@ export class OverviewComponent implements OnInit {
 
     } else {
       if(this.isMobileView){
-        this.router.navigate(['dashboard/home/search', {searchType:'contracts'}]);
+        this.router.navigate(['dashboard/search', {searchType:'contracts'}]);
       } else {
         this.router.navigate(['dashboard/search', {searchType:'contracts'}]);
       }

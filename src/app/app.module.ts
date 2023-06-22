@@ -91,6 +91,7 @@ import { DesktopNavComponent } from './desktop-nav/desktop-nav.component';
 import { DesktopFabsComponent } from './desktop-fabs/desktop-fabs.component';
 import { HomeServicesComponent } from './home-services/home-services.component';
 import { DesktopOverviewHomeComponent } from './desktop-overview-home/desktop-overview-home.component';
+import {DEFAULT_CONFIG, NgForageOptions, NgForageConfig, Driver} from 'ngforage';
 
 
 // AoT requires an exported function for factories
@@ -319,6 +320,15 @@ const appRoutes: Routes = [
     {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: MyHammerConfig,
+    },
+    {
+      provide: DEFAULT_CONFIG,
+      useValue: {
+        name: 'Sekretaer',
+        driver: [ // defaults to indexedDB -> webSQL -> localStorage
+          Driver.INDEXED_DB
+        ]
+      } as NgForageOptions
     }
   ]
 })

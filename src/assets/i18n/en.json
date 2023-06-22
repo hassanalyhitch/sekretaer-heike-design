@@ -72,7 +72,8 @@
     "unmark_fav_success":"Unmarked as Favourite",
     "unmark_fav_error":"Failed to unmark as Favourite",
     "no_documents_found": "No Documents Found",
-    "date_filter_label": "Date"
+    "date_filter_label": "Date",
+    "no_contract_found" : "No Contract Found"
   },
   "fav_item" : {
     "contract_yearly_payment_label": "Year",
@@ -216,7 +217,8 @@
     "go_back": "Go back",
     "created_at": "Created On",
     "document_download_request" : "Download requested. Please wait.",
-    "document_download_failed" : "Download request failed."
+    "document_download_failed" : "Download request failed.",
+    "file_not_found": "File not Found"
   },
   "rename_contract": {
     "title" : "Rename Document",
@@ -248,7 +250,9 @@
     "un_share_with_broker" : "Don't Share With Broker",
     "placeholder_document_name" : "Document Name",
     "tags" : "Tags",
-    "date": "Date"
+    "date": "Date",
+    "docNameMsg":"Document Name is required",
+    "selectItemMsg":"Please select a Folder/Contract"
   },
   "search":{
     "title_main":"SEARCH",
@@ -356,7 +360,8 @@
   "back-toolTip":"Back",
   "download-toolTip":"Download",
   "zoomIn-toolTip":"Zoom In",
-  "zoomOut-toolTip":"Zoom Out"
+  "zoomOut-toolTip":"Zoom Out",
+  "file-not-found" :"File not found"
  },
  "desktop-fab":{
   "search-toolTip":"Search",

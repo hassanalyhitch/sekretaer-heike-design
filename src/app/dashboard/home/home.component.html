@@ -35,8 +35,10 @@
             </div>
 
             <!-- favourite items -->
-            <div class="d-flex justify-content-center m-4 w-100" *ngIf="favArrHasNoContent()">
-              {{ "home.message_no_favourite_contracts" | translate }}
+            <div style="margin-top: 337px;" *ngIf="favArrHasNoContent()">
+              <p class="no-favourites-found d-flex justify-content-center text-center m-auto">
+                {{ 'home.message_no_favourite_contracts' | translate }}
+              </p>
             </div>
 
             <div class="d-flex flex-column w-100 px-3" 
@@ -106,7 +108,7 @@
         <!-- favourite items -->
         <div class="fav-wrapper d-flex flex-nowrap pb-4" id="fav-wrapper">
 
-          <div class="d-flex justify-content-center m-4 w-100" *ngIf="favArrHasNoContent()">
+          <div class="no-favourites-found d-flex justify-content-center m-4 w-100" *ngIf="favArrHasNoContent()">
             {{ "home.message_no_favourite_contracts" | translate }}
           </div>
 
