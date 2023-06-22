@@ -231,6 +231,7 @@ export class LoginComponent implements OnInit , OnDestroy {
             "userVerification": "required",
             "timeout": 60000
           }).then((authCredentials)=>{
+            console.log(JSON.parse(authCredentials));
 
             // this whole function should be in the backend BUT I'm trying to make this work without the backend
             // also the "challenge" is currently stored in the environment file but should be randomized in the backend
@@ -250,6 +251,7 @@ export class LoginComponent implements OnInit , OnDestroy {
                 userVerified: true,
                 counter: 0
             }
+            console.log(JSON.stringify(expected));
           
             webauthn.server.verifyAuthentication(authCredentials, credentialKey, expected)
             .then((valid)=>{
@@ -277,7 +279,7 @@ export class LoginComponent implements OnInit , OnDestroy {
 
               console.error(" DONT LOG THIS USER IN !!!!");
 
-              console.log(err);
+              console.log(JSON.parse(err));
 
             });
           });

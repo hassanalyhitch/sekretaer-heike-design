@@ -25,6 +25,7 @@
     "@angular/router": "14.1.0",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
+    "@passwordless-id/webauthn": "^1.2.4",
     "@popperjs/core": "2.11.5",
     "@syncfusion/ej2-inputs": "17.3.21",
     "bootstrap": "5.2.0",
