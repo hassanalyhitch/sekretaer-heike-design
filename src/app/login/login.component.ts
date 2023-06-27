@@ -18,9 +18,9 @@ import { TranslateService } from "@ngx-translate/core";
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { Subject, takeUntil } from "rxjs";
 import * as webauthn from '@passwordless-id/webauthn'
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 import * as CryptoJS from 'crypto-js';  
-import { LocalforageService } from 'src/app/services/localforage.service';
+import { LocalforageService } from '../services/localforage.service';
 import { SettingsService } from "../services/settings.service";
 
 @Component({
@@ -231,7 +231,7 @@ export class LoginComponent implements OnInit , OnDestroy {
             "userVerification": "required",
             "timeout": 60000
           }).then((authCredentials)=>{
-            console.log(JSON.parse(authCredentials));
+            console.log(JSON.stringify(authCredentials));
 
             // this whole function should be in the backend BUT I'm trying to make this work without the backend
             // also the "challenge" is currently stored in the environment file but should be randomized in the backend

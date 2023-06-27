@@ -35,6 +35,7 @@
     "moment": "^2.29.4",
     "ng-multiselect-dropdown": "latest",
     "ng2-pdf-viewer": "^9.1.5",
+    "ngforage": "^8.0.0",
     "pdfjs-dist": "~2.14.305",
     "rfs": "^9.0.6",
     "rxjs": "7.5.6",

@@ -6,7 +6,7 @@ import { LoginData } from '../models/login.model';
 import { SettingsService } from './settings.service';
 import { Router } from '@angular/router';
 import * as CryptoJS from 'crypto-js';  
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 import { LocalforageService } from './localforage.service';
 import * as webauthn from '@passwordless-id/webauthn'
 
