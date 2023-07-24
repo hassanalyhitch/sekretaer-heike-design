@@ -5,7 +5,7 @@ import { ContractsService } from './../../../services/contracts.service';
 import { UploadFileData } from './../../../models/upload-file.model';
 import { FileSizePipe } from './../../../pipes/filesize.pipe';
 import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup,FormControl } from '@angular/forms';
 import { BranchData } from '../../../models/branch.model';
 import { BranchService } from '../../../services/branch.service';
 import { CompanyData } from '../../../models/company.model';
@@ -38,8 +38,6 @@ export const MY_DATE_FORMATS = {
 })
 
 export class NewContractComponent implements OnInit {
-
-  TAG:string = 'NewContractComponent  ';
 
   dataArr: {
     Branch2MasterId:string;
@@ -74,14 +72,29 @@ export class NewContractComponent implements OnInit {
   BrokerForm: FormGroup;
   optionSelected: boolean = true;
   Branch2MasterId: any;
-  selectedBranches: any;
-  selectedCompanies: any;
-  selectedProducts: any;
+  // selectedBranches: any;
+  // selectedCompanies: any;
+  // selectedProducts: any;
+
+  contractForm = new FormGroup({
+    selectedBranches:new FormControl([]),
+    selectedCompanies:new FormControl([]),
+    selectedProducts:new FormControl([]),
+    startDate:new FormControl(''),
+    endDate:new FormControl(''),
+    file:new FormControl(''),
+    amount:new FormControl(''),
+    PaymentMethod:new FormControl(),
+    StatusReason:new FormControl(),
+    Risk:new FormControl(''),
+    insuranceNumber:new FormControl(''),
+    SharedWithBroker:new FormControl('0')
+  })
 
 
   show: boolean = false;
-  formGroup: FormGroup;
-  file: File = null;
+  
+  // file: File = null;
   fileName: string ="No file chosen";
   uploadFileArr: UploadFileData [] =[];
 
@@ -100,9 +113,9 @@ export class NewContractComponent implements OnInit {
   broker_blue_logo: boolean;
   broker_pink_logo: boolean;
   
-  @ViewChild("selectFile",{static:true}) selectFile:ElementRef;
-  @ViewChild("startDate",{static:true}) startDate:ElementRef<HTMLInputElement>;
-  @ViewChild("endDate",{static:true}) endDate:ElementRef<HTMLInputElement>;
+  // @ViewChild("selectFile",{static:true}) selectFile:ElementRef;
+  // @ViewChild("startDate",{static:true}) startDate:ElementRef<HTMLInputElement>;
+  // @ViewChild("endDate",{static:true}) endDate:ElementRef<HTMLInputElement>;
   @ViewChild('companyOptions',)companyOptions:MultiSelectComponent;
   @ViewChild('productOptions') productOptions: MultiSelectComponent;
 
@@ -114,11 +127,11 @@ export class NewContractComponent implements OnInit {
   none:any = "none";
 
   submitted:boolean = false;
-  amount:any;
-  PaymentMethod:any;
-  StatusReason:any;
-  Risk:any;
-  insuranceNumber:any;
+  // amount:any;
+  // PaymentMethod:any;
+  // StatusReason:any;
+  // Risk:any;
+  // insuranceNumber:any;
 
   constructor(
     private branchService:BranchService, 
@@ -375,21 +388,21 @@ export class NewContractComponent implements OnInit {
    
   }
   onBranchesDeselected(item:any){
-      this.selectedBranches = [];
-      this.selectedCompanies = [];
-      this.selectedProducts = [];
+     this.contractForm.value.selectedBranches = [];
+     this.contractForm.value.selectedCompanies = [];
+     this.contractForm.value.selectedProducts = [];
       this.companyArr = [];
       this.productArr =[];
   }
   
-  onCompanySelected(item:any){
+  // onCompanySelected(item:any){
   
-  }
+  // }
   
-  onProductSelected(item:any){
-    this.selectedProducts[0] = item;
+  // onProductSelected(item:any){
+  //   this.selectedProducts[0] = item;
    
-  }
+  // }
 
   onPaymentMethodSelected(item:any){
  
@@ -403,21 +416,25 @@ export class NewContractComponent implements OnInit {
     this.showcontract = this.branchSelected;
   }
   
-  onSubmit(formValue:any){
+  onSubmit(){
 
-    let formData = new FormData();
+    console.log(this.contractForm.value);
  
-    formData.append('CustomerAmsidnr', this.customerService.customerData.Amsidnr) ;
-    formData.append('CompanyShort', this.selectedCompanies[0].MATCHCODE)  ;
-    formData.append('Begin' ,this.startDate.nativeElement.value);
-    formData.append ('End' , this.endDate.nativeElement.value);
-    formData.append('File' , this.file);
-    formData.append('PaymentMethod','' + this.PaymentMethod[0].item_id);
-    formData.append('YearlyPayment', formValue.amount);
-    formData.append('StatusReason','' + this.StatusReason[0].item_id);
-    formData.append('Risk',formValue.Risk);
-    formData.append('Branch2ProductId',this.selectedProducts[0].Branch2ProductId);
-    formData.append('Amsidnr',formValue.insuranceNumber);
+    let formData = new FormData();
+
+    formData.append('CustomerAmsidnr',this.customerService.customerData.Amsidnr);
+    formData.append('CompanyShort',this.contractForm.value.selectedCompanies[0].MATCHCODE);
+    formData.append('Begin',this.contractForm.value.startDate);
+    formData.append('End',this.contractForm.value.endDate);
+    formData.append('File',this.contractForm.value.file);
+    formData.append('PaymentMethod','' + this.contractForm.value.PaymentMethod[0].item_id);
+    formData.append('YearlyPayment', this.contractForm.value.amount);
+    formData.append('StatusReason','' + this.contractForm.value.StatusReason[0].item_id);
+    formData.append('Risk',this.contractForm.value.Risk);
+    formData.append('Branch2ProductId',this.contractForm.value.selectedProducts[0].Branch2ProductId);
+    formData.append('Amsidnr',this.contractForm.value.insuranceNumber);
+    formData.append('SharedWithBroker',this.contractForm.value.SharedWithBroker)
+
  
     this.submitted = true;
  
@@ -463,31 +480,31 @@ export class NewContractComponent implements OnInit {
     this.optionSelected = option;
   }
 
-  getFile(event){
+  getFile(event:any){
     
-  //new code 
-   this.file = event.target.files[0];
+    const file = event.target.files[0];
+   
     
-    if (this.file.type =='application/pdf' || this.file.type =='image/jpeg') {
+    if (file.type =='application/pdf' || file.type =='image/jpeg') {
 
       let _file:UploadFileData ={
-        doc_file:this.file,
+        doc_file:file,
         fileId : this.uploadFileArr.length +"",
-        fileName : this.file.name,
-        fileSize :this.fileSizePipe.transform(this.file.size,'MB'),      
-        fileType:this.file.type
+        fileName : file.name,
+        fileSize :this.fileSizePipe.transform(file.size,'MB'),      
+        fileType:file.type
       }
 
       
       this.uploadFileArr = [];
       this.uploadFileArr.push(_file);
-      this.selectFile.nativeElement.value = null;
+      file.value = '';
 
     } else{
       //Reset data
 
       this.uploadFileArr = [];
-      this.selectFile.nativeElement.value = null;
+      file.value = '';
 
       //The file not PDF or JPEG
       this._snackBar.open(
@@ -523,13 +540,19 @@ export class NewContractComponent implements OnInit {
 
       this.broker_icon_link = "../assets/icon_broker_round_blue.svg";
 
+      this.contractForm.value.SharedWithBroker = '1';
+
     } else if(this.shareWithBroker && this.broker_pink_logo){
 
       this.broker_icon_link = "../assets/icon_broker_round_pink.svg";
 
+      this.contractForm.value.SharedWithBroker = '1';
+
     } else {
 
       this.broker_icon_link = "../assets/icon_broker_round_default.svg";
+
+      this.contractForm.value.SharedWithBroker = '0';
 
     }
   }
@@ -537,8 +560,8 @@ export class NewContractComponent implements OnInit {
 
   sortBranches(){
     this.branches.sort((a:BranchData, b:BranchData) =>{
-      let branchNameA = a.displayNameSEKRETAER.toUpperCase();
-      let branchNameB = b.displayNameSEKRETAER.toUpperCase();
+      let branchNameA = a.displayNameSEKRETAER;
+      let branchNameB = b.displayNameSEKRETAER;
     if (branchNameA < branchNameB){
       return -1;
     }else if(branchNameA > branchNameB)
@@ -552,8 +575,8 @@ export class NewContractComponent implements OnInit {
 
   sortCompanies(){
     this.companies.sort((a:CompanyData,b:CompanyData)=>{
-      let companyNameA = a.displayName.toUpperCase();
-      let companyNameB = b.displayName.toUpperCase();
+      let companyNameA = a.displayName;
+      let companyNameB = b.displayName;
       if (companyNameA < companyNameB){
         return -1;
       }else if (companyNameA > companyNameB){
@@ -566,11 +589,11 @@ export class NewContractComponent implements OnInit {
 
   sortProducts(){
     this.products.sort((a:ProductData,b:ProductData)=>{
-      let productNameA = a.displayNameSEKRETAER.toUpperCase();
-      let productNameB = b.displayNameSEKRETAER.toUpperCase();
+      let productNameA = a.displayNameSEKRETAER;
+      let productNameB = b.displayNameSEKRETAER;
       if (productNameA < productNameB){
         return -1;
-      }else if (productNameA >productNameB){
+      }else if (productNameA > productNameB){
         return 1;
       }else {
         return 0;

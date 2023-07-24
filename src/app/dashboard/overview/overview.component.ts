@@ -169,7 +169,8 @@ export class OverviewComponent implements OnInit {
         isFav: 1,
         favoriteId: "",
         iconLeft:   "",
-        ownPicture: ""
+        ownPicture: "",
+        SharedWithBroker:""
       },
       isSelected: false,
       swipedLeft: false
@@ -196,7 +197,8 @@ export class OverviewComponent implements OnInit {
         isFav: 1,
         favoriteId: "",
         iconLeft:   "",
-        ownPicture: ""
+        ownPicture: "",
+        SharedWithBroker:""
       },
       isSelected: false,
       swipedLeft: false
@@ -223,7 +225,8 @@ export class OverviewComponent implements OnInit {
         isFav: 1,
         favoriteId: "",
         iconLeft:   "",
-        ownPicture: ""
+        ownPicture: "",
+        SharedWithBroker:""
       },
       isSelected: false,
       swipedLeft: false

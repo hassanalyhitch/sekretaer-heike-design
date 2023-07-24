@@ -99,7 +99,8 @@ export class ContractCategoryComponent implements OnInit, AfterViewInit {
             isFav: 1,
             favoriteId: "",
             iconLeft:   "",
-            ownPicture: ""
+            ownPicture: "",
+            SharedWithBroker:""
           },
           isSelected: false,
           swipedLeft: false

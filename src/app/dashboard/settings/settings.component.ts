@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BackNavigationService } from '../../services/back-navigation.service';
 import * as webauthn from '@passwordless-id/webauthn'
-import { environment } from '../../../environments/environment';
+import { environment } from 'src/environments/environment';
 import * as CryptoJS from 'crypto-js';  
-import { LocalforageService } from '../../services/localforage.service';
+import { LocalforageService } from 'src/app/services/localforage.service';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
-import { SettingsService } from '../../services/settings.service';
+import { SettingsService } from 'src/app/services/settings.service';
 
 @Component({
   selector: 'app-settings',
@@ -98,7 +98,7 @@ export class SettingsComponent implements OnInit {
                     challenge: environment.challenge,
                     origin: (origin) => listOfAllowedOrigins.includes(origin)
                   }).then((res)=>{
-                    console.log(JSON.stringify(res));
+                    
                     let biometricRegistrationEnc = CryptoJS.AES.encrypt(JSON.stringify(res), environment.salt_key).toString();
   
                     this.localForage.set("_b", biometricRegistrationEnc);

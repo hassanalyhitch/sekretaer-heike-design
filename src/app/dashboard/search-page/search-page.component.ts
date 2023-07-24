@@ -286,7 +286,8 @@ export class SearchPageComponent implements OnInit {
                                             isFav:           0,
                                             favoriteId:      item.details['favoriteId'],
                                             iconLeft:        item.details['iconLeft'],
-                                            ownPicture:      item.details['ownPicture']
+                                            ownPicture:      item.details['ownPicture'],
+                                            SharedWithBroker: item.details['SharedWithBroker']
                                           },
                                           isSelected: false,
                                           swipedLeft: false
@@ -460,7 +461,8 @@ export class SearchPageComponent implements OnInit {
                                             isFav:           0,
                                             favoriteId:      item.details['favoriteId'],
                                             iconLeft:        item.details['iconLeft'],
-                                            ownPicture:      item.details['ownPicture']
+                                            ownPicture:      item.details['ownPicture'],
+                                            SharedWithBroker:item.details['SharedWithBroker']
                                           },
                                           isSelected: false,
                                           swipedLeft: false

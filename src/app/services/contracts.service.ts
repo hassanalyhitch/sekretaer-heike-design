@@ -35,7 +35,8 @@ export class ContractsService {
       isFav: 0,
       favoriteId:      "",
       iconLeft:        "",
-      ownPicture:      ""
+      ownPicture:      "",
+      SharedWithBroker: ""
     },
     isSelected: false
   };
@@ -137,7 +138,8 @@ export class ContractsService {
                       isFav:           item['isFavorite'],
                       favoriteId:      item['favoriteId'],
                       iconLeft:        item['iconLeft'],
-                      ownPicture:      item['ownPicture']
+                      ownPicture:      item['ownPicture'],
+                      SharedWithBroker:item['SharedWithBroker']
                     },
                     isSelected: false,
                     swipedLeft: false
@@ -228,7 +230,8 @@ export class ContractsService {
                 isFav:           resp['isFavorite'],
                 favoriteId:      resp['favoriteId'],
                 iconLeft:        resp['iconLeft'],
-                ownPicture:      resp['ownPicture']
+                ownPicture:      resp['ownPicture'],
+                SharedWithBroker:resp['SharedWithBroker']
               },
               isSelected:        true
             };
@@ -350,7 +353,9 @@ export class ContractsService {
               isFav:           resp['isFavorite'],
               favoriteId:      resp['favoriteId'],
               iconLeft:        resp['iconLeft'],
-              ownPicture:      resp['ownPicture']
+              ownPicture:      resp['ownPicture'],
+              SharedWithBroker: resp['SharedWithBroker']
+
             },
             isSelected:        true
           };

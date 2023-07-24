@@ -22,7 +22,8 @@ export interface ContractData {
     isFav: any
     favoriteId?: string,
     iconLeft:   string,
-    ownPicture: string
+    ownPicture: string,
+    SharedWithBroker:string
   },
   swipedLeft?:boolean,
   isSelected: boolean
