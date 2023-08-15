@@ -18,9 +18,9 @@ import { TranslateService } from "@ngx-translate/core";
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { Subject, takeUntil } from "rxjs";
 import * as webauthn from '@passwordless-id/webauthn'
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 import * as CryptoJS from 'crypto-js';  
-import { LocalforageService } from 'src/app/services/localforage.service';
+import { LocalforageService } from '../services/localforage.service';
 import { SettingsService } from "../services/settings.service";
 
 @Component({

@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BackNavigationService } from '../../services/back-navigation.service';
 import * as webauthn from '@passwordless-id/webauthn'
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 import * as CryptoJS from 'crypto-js';  
-import { LocalforageService } from 'src/app/services/localforage.service';
+import { LocalforageService } from '../../services/localforage.service';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
-import { SettingsService } from 'src/app/services/settings.service';
+import { SettingsService } from '../../services/settings.service';
 
 @Component({
   selector: 'app-settings',
