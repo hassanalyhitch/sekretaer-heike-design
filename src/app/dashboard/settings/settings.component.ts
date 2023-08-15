@@ -104,6 +104,8 @@ export class SettingsComponent implements OnInit {
                     this.localForage.set("_b", biometricRegistrationEnc);
   
                     this.settingService.setBiometrics('true');
+
+                    console.log(res);
         
                   });
               }

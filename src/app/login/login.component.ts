@@ -224,14 +224,15 @@ export class LoginComponent implements OnInit , OnDestroy {
         this.localForage.get(keys[1]).then((encryptedReg)=>{
           
           let biometricRegistration = JSON.parse(CryptoJS.AES.decrypt(encryptedReg, environment.salt_key).toString(CryptoJS.enc.Utf8));
-          // console.log(biometricRegistration.credential.id);
+          let authCounter = biometricRegistration.authenticator.counter;
+          console.log(authCounter);
 
           webauthn.client.authenticate([biometricRegistration.credential.id], environment.challenge, {
             "authenticatorType": "auto",
             "userVerification": "required",
             "timeout": 60000
           }).then((authCredentials)=>{
-
+            console.log(authCredentials);
             // this whole function should be in the backend BUT I'm trying to make this work without the backend
             // also the "challenge" is currently stored in the environment file but should be randomized in the backend
             // and sent to the front-end every time a user requests the login page. 
@@ -248,7 +249,7 @@ export class LoginComponent implements OnInit , OnDestroy {
                 challenge: environment.challenge,
                 origin: (origin) => listOfAllowedOrigins.includes(origin),
                 userVerified: true,
-                counter: 0
+                counter: authCounter
             }
           
             webauthn.server.verifyAuthentication(authCredentials, credentialKey, expected)
