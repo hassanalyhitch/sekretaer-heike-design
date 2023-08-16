@@ -249,7 +249,7 @@ export class LoginComponent implements OnInit , OnDestroy {
                 challenge: environment.challenge,
                 origin: (origin) => listOfAllowedOrigins.includes(origin),
                 userVerified: true,
-                counter: authCounter
+                counter: 1
             }
           
             webauthn.server.verifyAuthentication(authCredentials, credentialKey, expected)
