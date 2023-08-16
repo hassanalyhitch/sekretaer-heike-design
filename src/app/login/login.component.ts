@@ -224,8 +224,7 @@ export class LoginComponent implements OnInit , OnDestroy {
         this.localForage.get(keys[1]).then((encryptedReg)=>{
           
           let biometricRegistration = JSON.parse(CryptoJS.AES.decrypt(encryptedReg, environment.salt_key).toString(CryptoJS.enc.Utf8));
-          let authCounter = biometricRegistration.authenticator.counter;
-          console.log(authCounter);
+          biometricRegistration.authenticator.counter = 2;
 
           webauthn.client.authenticate([biometricRegistration.credential.id], environment.challenge, {
             "authenticatorType": "auto",
@@ -249,7 +248,7 @@ export class LoginComponent implements OnInit , OnDestroy {
                 challenge: environment.challenge,
                 origin: (origin) => listOfAllowedOrigins.includes(origin),
                 userVerified: true,
-                counter: 1
+                counter: 0
             }
           
             webauthn.server.verifyAuthentication(authCredentials, credentialKey, expected)
