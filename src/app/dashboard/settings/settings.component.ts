@@ -106,6 +106,7 @@ export class SettingsComponent implements OnInit {
                     this.settingService.setBiometrics('true');
 
                     console.log(res);
+                    console.log(res.authenticator.counter);
         
                   });
               }
